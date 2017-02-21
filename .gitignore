@@ -1,0 +1,7 @@
+local_settings.py
+*.pyc
+*.mo
+media/
+.DS_Store
+.env/
+.idea/
