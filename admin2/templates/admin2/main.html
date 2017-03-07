@@ -1,0 +1,76 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %}{% endblock title %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Заявки</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Последние заявки</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <table class="table table-striped projects">
+                                <thead>
+                                <tr>
+                                    <th style="width: 1%">#</th>
+                                    <th style="width: 10%">Дата</th>
+                                    <th style="width: 10%">Источник</th>
+                                    <th style="width: 10%">Имя</th>
+                                    <th style="width: 10%">Телефон</th>
+                                    <th style="width: 10%">Email</th>
+                                    <th>Комментарий</th>
+                                    <th style="width: 5%">
+                                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить все </a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>#</td>
+                                    <td>
+                                        01.01.2015 12:45
+                                    </td>
+                                    <td>
+                                        Главная
+                                    </td>
+                                    <td>
+                                        Вася
+                                    </td>
+                                    <td>
+                                        +380964874353
+                                    </td>
+                                    <td>
+                                        varunok13@gmail.com
+                                    </td>
+                                    <td>Hello edfpsefd sefsfk dfef efk sefkefokef sefo efkfk s sepfksefk sosefk efkefks soerk wp s[fk rfgpkf sfkefkf sep[efkf dpefks ss ekf</td>
+                                    <td>
+                                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}{% endblock js %}

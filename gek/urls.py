@@ -20,8 +20,9 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^superadmin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^admin/', include('admin2.urls', namespace='admin2')),
 ]
 urlpatterns += [
     url(r'^static/(?P<path>.*)$', views.serve),

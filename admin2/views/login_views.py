@@ -15,6 +15,10 @@ from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login)
 # Create your views here.
 
 
+class Admin2MainView(LoginRequiredMixin, TemplateView):
+    template_name = "admin2/loginww.html"
+
+
 @method_decorator(sensitive_post_parameters(), name='dispatch')
 @method_decorator(csrf_protect, name='dispatch')
 @method_decorator(never_cache, name='dispatch')

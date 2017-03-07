@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # own
+    'users',
+    'admin2',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +106,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_URL = '/admin/login/'
+LOGOUT_URL = '/admin/login/'
 
 
 # Internationalization

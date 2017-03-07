@@ -1,0 +1,201 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% block title %}{% endblock title %}</title>
+        <!-- Bootstrap -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="{% static 'css/nprogress.css' %}" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="{% static 'css/flat/green.css' %}" rel="stylesheet">
+
+        <!-- bootstrap-progressbar -->
+        <link href="{% static 'css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+
+        <!-- bootstrap-daterangepicker -->
+        <link href="{% static 'css/daterangepicker.css' %}" rel="stylesheet">
+
+        <!-- Custom Theme Style -->
+        <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+        {% block css %}{% endblock css %}
+
+    </head>
+    <body class="nav-md footer_fixed">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <ul class="nav side-menu">
+                                    <li><a href="#"><i class="fa fa-home"></i> Главная </a></li>
+                                    <li><a><i class="fa fa-edit"></i> Статьи <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="#"><i class="fa fa-pencil"></i>Статьи</a></li>
+                                            <li><a href="#"><i class="fa fa-outdent"></i> Рубрики статей</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-file-text"></i> Страницы </a></li>
+                                    <li><a href="#"><i class="fa fa-suitcase"></i> Услуги </a></li>
+                                    <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>
+                                    <li><a><i class="fa fa-server"></i> Объекты <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="#"><i class="fa fa-home"></i>Квартиры и дома</a></li>
+                                            <li><a href="#"><i class="fa fa-money"></i>Офисы и магазины</a></li>
+                                            <li><a href="#"><i class="fa fa-building-o"></i>Бизнес-центры</a></li>
+                                            <li><a href="#"><i class="fa fa-building"></i>Новострои</a></li>
+                                            <li><a href="#"><i class="fa fa-globe"></i>Земля</a></li>
+                                            <li><a href="#"><i class="fa fa-calendar"></i>Посуточно</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-picture-o"></i> Баннеры </a></li>
+                                    <li><a href="#"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
+                                    <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>
+                                    <li><a href="#"><i class="fa fa-ravelry"></i> SEO </a></li>
+                                    <li><a href="#"><i class="fa fa-lock"></i> Администраторы </a></li>
+                                    <li><a><i class="fa fa-cogs"></i> Настройки сайта <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="#"><i class="fa fa-cog"></i>Параметры</a></li>
+                                            <li><a href="#"><i class="fa fa-map-marker"></i>Районы</a></li>
+                                            <li><a href="#"><i class="fa fa-user"></i>Сотрудники</a></li>
+                                            <li><a href="#"><i class="fa fa-trophy"></i>Награды</a></li>
+                                            <li><a href="#"><i class="fa fa-comment"></i>Отзывы клиентов</a></li>
+                                            <li><a href="#"><i class="fa fa-bar-chart"></i>Счетчики</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-question"></i> Справка </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /sidebar menu -->
+
+                        <!-- /menu footer buttons -->
+                        <div class="sidebar-footer hidden-small">
+                            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Виход" href="login.html">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <!-- /menu footer buttons -->
+                    </div>
+                </div>
+
+                <!-- top navigation -->
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="images/img.jpg" alt="">John Doe
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="javascript:;"> Профиль</a></li>
+                                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Виход</a></li>
+                                    </ul>
+                                </li>
+
+
+                                <li role="presentation" class="dropdown">
+                                    <a href="#" class="dropdown-toggle info-number" >
+                                        Новые заявки
+                                        <i class="fa fa-envelope-o"></i>
+                                        <span class="badge bg-green">6</span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a href="#" class="dropdown-toggle info-number" >
+                                        Франшиза
+                                        <i class="fa fa-check" style="color: green"></i>
+                                        <i class="fa fa-close" style="color: red"></i>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a href="#" class="dropdown-toggle info-number" >
+                                        Записная книжка
+                                        <i class="fa fa-address-book-o"></i>
+
+                                    </a>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a href="#" class="dropdown-toggle info-number" >
+                                        Новая сделка
+                                        <i class="fa fa-handshake-o"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+
+            <!-- page content -->
+            {% block content %}{% endblock content %}
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+              <div class="pull-right">
+                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+              </div>
+              <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+          </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <!-- Bootstrap -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- FastClick -->
+        <script src="{% static 'js/fastclick.js' %}"></script>
+        <!-- NProgress -->
+        <script src="{% static 'js/nprogress.js' %}"></script>
+        <!-- gauge.js -->
+        <script src="{% static 'js/gauge.min.js' %}"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="{% static 'js/bootstrap-progressbar.min.js' %}"></script>
+        <!-- iCheck -->
+        <script src="{% static 'js/icheck.min.js' %}"></script>
+
+        <!-- DateJS -->
+        <script src="{% static 'js/date.js' %}"></script>
+
+        <!-- bootstrap-daterangepicker -->
+        <script src="{% static 'js/moment.min.js' %}"></script>
+        <script src="{% static 'js/daterangepicker.js' %}"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script src="{% static 'js/custom.min.js' %}"></script>
+        {% block js %}{% endblock js %}
+      </body>
+</html>
