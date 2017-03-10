@@ -12,7 +12,7 @@ class SectionsView(LoginRequiredMixin, ListView):
     model = Sections
     # slug_field = 'slug'
     context_object_name = 'sections'
-    template_name = 'admin2/test.html'
+    template_name = 'admin2/sections_list.html'
 
 
 class SectionsDetailView(LoginRequiredMixin, DetailView):

@@ -48,11 +48,11 @@
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <ul class="nav side-menu">
-                                    <li class="{% if request.path == '/admin/' %} active {% endif %}"><a href="#"><i class="fa fa-home"></i> Главная </a></li>
+                                    <li class="{% if request.path == '/admin/' %} active {% endif %}"><a href="{% url 'admin2:main' %}"><i class="fa fa-home"></i> Главная </a></li>
                                     <li><a><i class="fa fa-edit"></i> Статьи <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="#"><i class="fa fa-pencil"></i>Статьи</a></li>
-                                            <li><a href="#"><i class="fa fa-outdent"></i> Рубрики статей</a></li>
+                                            <li><a href="{% url 'admin2:sections' %}"><i class="fa fa-outdent"></i> Рубрики статей</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#"><i class="fa fa-file-text"></i> Страницы </a></li>

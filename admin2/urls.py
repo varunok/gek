@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.conf.urls import url
 
 from admin2.views import login_views, main_views, articles_views
