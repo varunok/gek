@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DeleteView
 
 from common.models import Application
+from common.views import DeleteAjaxMixin
 
 
 class Admin2MainView(LoginRequiredMixin, ListView):
@@ -11,16 +12,8 @@ class Admin2MainView(LoginRequiredMixin, ListView):
     context_object_name = 'applications'
 
 
-class DellApplication(LoginRequiredMixin, DeleteView):
+class DellApplication(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
     model = Application
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
-        return HttpResponse(status=200)
 
 
 class DellAllAplications(DellApplication):

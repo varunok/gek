@@ -8,6 +8,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, U
 
 from admin2.form import SectionUpdateForm
 from articles.models import Sections
+from common.views import DeleteAjaxMixin
 
 
 class SectionsView(LoginRequiredMixin, ListView):
@@ -31,17 +32,9 @@ class SectionsUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('admin2:sections')
 
 
-class SectionsDeleteView(LoginRequiredMixin, DeleteView):
+class SectionsDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
     model = Sections
     slug_field = 'slug'
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
-        return HttpResponse(status=200)
 
 
 class SectionsCreateView(LoginRequiredMixin, CreateView):
