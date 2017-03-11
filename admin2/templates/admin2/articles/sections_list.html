@@ -14,6 +14,13 @@
                 <div class="title_left">
                     <h3>Рубрики</h3>
                 </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            <a href="{% url 'admin2:sections_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -35,15 +42,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for sec in sections %}
+                                {% for section in sections %}
                                     <tr>
-                                        <td>{{ sec.id }}</td>
-                                        <td>{{ sec.created|date:'d.m.Y H:i' }}</td>
-                                        <td>{{ sec.name }}</td>
+                                        <td>{{ section.id }}</td>
+                                        <td>{{ section.created|date:'d.m.Y H:i' }}</td>
+                                        <td>{{ section.name }}</td>
                                         <td>
-                                            <a href="{{ sec.id }}" class="btn btn-danger btn-xs del-sec"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{{ sec.id }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                            <a href="{{ sec.id }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> На сайте </a>
+                                            <a href="{{ section.slug }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
+                                            <a href="{% url 'admin2:sections_update'  section.slug %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                            <a href="{{ section.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -59,4 +66,5 @@
 {% endblock content %}
 
 {% block js %}
+    <script src="{% static 'js/sections.js' %}"></script>
 {% endblock js %}

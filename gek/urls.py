@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^superadmin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^admin/', include('admin2.urls', namespace='admin2')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 urlpatterns += [
     url(r'^static/(?P<path>.*)$', views.serve),

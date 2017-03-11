@@ -21,17 +21,30 @@ urlpatterns = [
         main_views.DellAllAplications.as_view(),
         name='dell_app_all'
     ),
-
     # main articles
     url(
         '^articles/sections/$',
         articles_views.SectionsView.as_view(),
         name='sections'
-    ), # TODO перенести в article
-
+    ),
     url(
         '^articles/sections/(?P<slug>[\w-]+)$',
         articles_views.SectionsDetailView.as_view(),
-        name='detail'
-    ),# TODO перенести в article
+        name='sections_detail'
+    ),
+    url(
+        '^articles/sections/update/(?P<slug>[\w-]+)/$',
+        articles_views.SectionsUpdateView.as_view(),
+        name='sections_update'
+    ),
+    url(
+        '^articles/sections/delete/(?P<slug>[\w-]+)/$',
+        articles_views.SectionsDeleteView.as_view(),
+        name='sections_delete'
+    ),
+    url(
+        '^articles/sections/create/$',
+        articles_views.SectionsCreateView.as_view(),
+        name='sections_create'
+    ),
 ]
