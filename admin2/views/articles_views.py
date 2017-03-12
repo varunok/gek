@@ -7,13 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from admin2.form import SectionUpdateForm
-from articles.models import Sections
+from articles.models import Sections, Articles
 from common.views import DeleteAjaxMixin
 
 
 class SectionsView(LoginRequiredMixin, ListView):
     model = Sections
-    # slug_field = 'slug'
     context_object_name = 'sections'
     template_name = 'admin2/articles/sections_list.html'
 
@@ -43,3 +42,8 @@ class SectionsCreateView(LoginRequiredMixin, CreateView):
     template_name = 'admin2/articles/section_edit.html'
     success_url = reverse_lazy('admin2:sections')
 
+
+class ArticlesView(LoginRequiredMixin, ListView):
+    model = Articles
+    context_object_name = 'articles'
+    template_name = 'admin2/articles/articles_list.html'

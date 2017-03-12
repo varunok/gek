@@ -21,7 +21,8 @@ urlpatterns = [
         main_views.DellAllAplications.as_view(),
         name='dell_app_all'
     ),
-    # main articles
+
+    # sections article, articles_view
     url(
         '^articles/sections/$',
         articles_views.SectionsView.as_view(),
@@ -46,5 +47,12 @@ urlpatterns = [
         '^articles/sections/create/$',
         articles_views.SectionsCreateView.as_view(),
         name='sections_create'
+    ),
+
+    # articles, articles_view
+    url(
+        '^articles/articles/$',
+        articles_views.ArticlesView.as_view(),
+        name='articles'
     ),
 ]
