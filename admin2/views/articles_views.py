@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-from admin2.form import SectionUpdateForm
+from admin2.form import SectionUpdateForm, ArticlesUpdateForm
 from articles.models import Sections, Articles
 from common.views import DeleteAjaxMixin
 
@@ -47,3 +47,30 @@ class ArticlesView(LoginRequiredMixin, ListView):
     model = Articles
     context_object_name = 'articles'
     template_name = 'admin2/articles/articles_list.html'
+
+
+class ArticlesDetailView(LoginRequiredMixin, DetailView):
+    model = Articles
+    slug_field = 'slug'
+    context_object_name = 'article'
+    template_name = 'admin2/test2.html'
+
+
+class ArticlesUpdateView(LoginRequiredMixin, UpdateView):
+    model = Articles
+    form_class = ArticlesUpdateForm
+    context_object_name = 'article'
+    template_name = 'admin2/articles/articles_edit.html'
+    success_url = reverse_lazy('admin2:articles')
+
+
+class ArticlesCreateView(LoginRequiredMixin, CreateView):
+    model = Articles
+    form_class = ArticlesUpdateForm
+    template_name = 'admin2/articles/articles_edit.html'
+    success_url = reverse_lazy('admin2:articles')
+
+
+class ArticlesDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+    model = Articles
+    slug_field = 'slug'

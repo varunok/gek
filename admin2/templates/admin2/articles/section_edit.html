@@ -27,14 +27,26 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить Рубрику
-                                {% if sections.created %}
-                                    <small>Дата создания {{ sections.created }}</small>
-                                {% endif %}
-                            </h2>
+                            <h2>{% if sections.created %}Изменить{% else %}Создать{% endif %}Рубрику</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
+                            {% if sections.created %}
+                                <ul class="stats-overview">
+                                    <li>
+                                        <span class="name"> Дата создания </span>
+                                        <span class="value text-success"> {{ sections.created }} </span>
+                                    </li>
+                                    <li>
+                                        <span class="name"> Дата редактирования </span>
+                                        <span class="value text-success"> {{ sections.updated }} </span>
+                                    </li>
+                                    <li class="hidden-phone">
+                                        <span class="name"> URL </span>
+                                        <span class="value text-success"> <a href="{{ sections.get_absolute_url }}" target="_blank">{{ sections.slug }}</a></span>
+                                    </li>
+                                </ul>
+                            {% endif %}
                             <form class="form-horizontal form-label-left" method="post">
                                 {{ form.media }}
                                 {% csrf_token %}

@@ -5,7 +5,7 @@ from django import forms
 from django.forms.widgets import TextInput, Textarea
 from ckeditor.widgets import CKEditorWidget
 
-from articles.models import Sections
+from articles.models import Sections, Articles
 
 
 class SectionUpdateForm(forms.ModelForm):
@@ -29,3 +29,9 @@ class SectionUpdateForm(forms.ModelForm):
             raise forms.ValidationError("такой URL уже используется.")
         return slug
 
+
+class ArticlesUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Articles
+        fields = '__all__'

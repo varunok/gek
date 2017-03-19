@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # origin
     'ckeditor',
     'ckeditor_uploader',
+    'easy_thumbnails',
+    'solo',
 
     # own
     'users',
@@ -124,7 +126,7 @@ LOGOUT_URL = '/admin/login/'
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -213,6 +215,12 @@ CKEDITOR_CONFIGS = {
                 'elementspath'
             ]),
     }
+}
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'article_image_60': {'size': (60, 60), 'crop': True},
+    },
 }
 
 try:

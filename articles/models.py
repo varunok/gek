@@ -47,6 +47,11 @@ class Sections(models.Model):
         verbose_name='Дата создания',
         auto_now_add=True
     )
+    updated = models.DateTimeField(
+        verbose_name='Дата редактирования',
+        auto_now=True
+    )
+
 
     class Meta:
         verbose_name = 'Рубрика'
@@ -66,9 +71,9 @@ class Sections(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug and not Sections.objects.filter(slug=self.title).exists():
             self.slug = slugify(self.title, allow_unicode=True)
-        elif not Sections.objects.filter(slug=self.name).exists():
+        elif not self.slug and not Sections.objects.filter(slug=self.name).exists():
             self.slug = slugify(self.name, allow_unicode=True)
-        else:
+        elif not self.slug and not self.title and not self.name:
             self.slug = slugify(get_random_string(length=8), allow_unicode=True)
         super(Sections, self).save(*args, **kwargs)
 
@@ -83,6 +88,10 @@ class Articles(models.Model):
     created = models.DateTimeField(
         verbose_name='Дата создания',
         auto_now_add=True
+    )
+    updated = models.DateTimeField(
+        verbose_name='Дата редактирования',
+        auto_now=True
     )
     slug = models.SlugField(
         verbose_name='URL',
@@ -137,9 +146,9 @@ class Articles(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug and not Articles.objects.filter(slug=self.title).exists():
             self.slug = slugify(self.title, allow_unicode=True)
-        elif not Articles.objects.filter(slug=self.heading).exists():
+        elif not self.slug and not Articles.objects.filter(slug=self.heading).exists():
             self.slug = slugify(self.heading, allow_unicode=True)
-        else:
+        elif not self.slug and not self.title and not self.name:
             self.slug = slugify(get_random_string(length=8), allow_unicode=True)
         super(Articles, self).save(*args, **kwargs)
 
