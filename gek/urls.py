@@ -19,7 +19,10 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.staticfiles import views
 
+from common.views import MainView
+
 urlpatterns = [
+    url(r'^$', MainView.as_view(), name='main'),
     url(r'^superadmin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^admin/', include('admin2.urls', namespace='admin2')),

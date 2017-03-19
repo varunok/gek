@@ -8,7 +8,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, U
 
 from admin2.form import SectionUpdateForm, ArticlesUpdateForm
 from articles.models import Sections, Articles
-from common.views import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin
 
 
 class SectionsView(LoginRequiredMixin, ListView):

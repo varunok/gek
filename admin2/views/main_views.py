@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DeleteView
 
 from common.models import Application
-from common.views import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin
 
 
 class Admin2MainView(LoginRequiredMixin, ListView):
