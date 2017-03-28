@@ -66,7 +66,7 @@ class Sections(models.Model):
             return '%s' % self.id
 
     def get_absolute_url(self):
-        return reverse('admin2:sections_detail', args=[self.slug])
+        return reverse('articles:sections_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         if not self.slug and not Sections.objects.filter(slug=self.title).exists():
@@ -132,6 +132,10 @@ class Articles(models.Model):
         upload_to='articles/%Y/%m/%d/',
         blank=True
     )
+    views = models.IntegerField(
+        verbose_name='Просмотры',
+        default=0
+    )
 
     def __unicode__(self):
         if self.slug:
@@ -140,7 +144,7 @@ class Articles(models.Model):
             return '%s' % self.id
 
     def get_absolute_url(self):
-        return reverse('admin2:articles_detail', args=[self.slug])
+        return reverse('articles:article_detail', args=[self.sections.slug, self.slug])
 
     def save(self, *args, **kwargs):
         if not self.slug and not Articles.objects.filter(slug=self.title).exists():
@@ -154,4 +158,4 @@ class Articles(models.Model):
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
-        ordering = 'id',
+        ordering = '-id',

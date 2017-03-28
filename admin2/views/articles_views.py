@@ -17,13 +17,6 @@ class SectionsView(LoginRequiredMixin, ListView):
     template_name = 'admin2/articles/sections_list.html'
 
 
-class SectionsDetailView(LoginRequiredMixin, DetailView):
-    model = Sections
-    slug_field = 'slug'
-    context_object_name = 'section'
-    template_name = 'admin2/test2.html'
-
-
 class SectionsUpdateView(LoginRequiredMixin, UpdateView):
     model = Sections
     form_class = SectionUpdateForm
@@ -47,13 +40,6 @@ class ArticlesView(LoginRequiredMixin, ListView):
     model = Articles
     context_object_name = 'articles'
     template_name = 'admin2/articles/articles_list.html'
-
-
-class ArticlesDetailView(LoginRequiredMixin, DetailView):
-    model = Articles
-    slug_field = 'slug'
-    context_object_name = 'article'
-    template_name = 'admin2/test2.html'
 
 
 class ArticlesUpdateView(LoginRequiredMixin, UpdateView):

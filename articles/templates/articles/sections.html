@@ -25,6 +25,7 @@
 							<div class="view_content" id="add-article">
 								{% include 'articles/include/articles_list.html' %}
 							</div>
+                            <input type="hidden" value="{{ section.id }}" name="section">
                             {% if count_next %}
                                 <div class="load_more read_more">
                                     <a href="#">
@@ -43,12 +44,15 @@
 					<div class="menu_wrap">
 						<ul>
 							<li>
-                                <a href="#" class="active">Все статьи <span class="count">{{ paginator.count }}</span></a>
+                                <a href="{% url 'articles:articles' %}" >Все статьи <span class="count">{{ article_count }}</span></a>
                             </li>
                             {% for section in sections %}
                                 {% if section.articles.count %}
                                     <li>
-                                        <a href="{{ section.get_absolute_url }}">{{ section.name }}<span class="count">{{ section.articles.count }}</span></a>
+                                        <a href="{{ section.get_absolute_url }}" {% if section.slug in request.path %} class="active" {% endif %}>
+                                            {{ section.name }}
+                                            <span class="count">{{ section.articles.count }}</span>
+                                        </a>
                                     </li>
                                 {% endif %}
                             {% endfor %}

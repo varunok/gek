@@ -2,14 +2,20 @@
  * Created by varunok on 28.03.17.
  */
 $(document).ready(function() {
-    $('.menu_wrap').on('click', 'li', function (event) {
+    var page = 2;
+    $(document).on('click', '.load_more', function (event) {
         event.preventDefault();
-        $('.menu_wrap a').removeClass('active');
-        $(this).children('a').addClass('active');
-        var section = $(this).children('input').val();
-        $.get('', {'section': section})
+        _this = $(this);
+        var section = $('input[name="section"]').val();
+        $.get('more_pages', {'page': page, 'section': section})
                 .then(function(response) {
-                    $('#add-section').html(response)
+                    var data = $.parseJSON(response);
+                    $('#add-article').append(data.articles);
+                    page ++;
+                    _this.find('span').text(data.obj);
+                    if(!data.next){
+                        _this.hide()
+                    }
                 }, function(err) {});
     })
 });

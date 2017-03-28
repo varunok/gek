@@ -30,11 +30,6 @@ urlpatterns = [
         name='sections'
     ),
     url(
-        '^articles/sections/(?P<slug>[\w-]+)$',
-        articles_views.SectionsDetailView.as_view(),
-        name='sections_detail'
-    ),
-    url(
         '^articles/sections/update/(?P<slug>[\w-]+)/$',
         articles_views.SectionsUpdateView.as_view(),
         name='sections_update'
@@ -55,11 +50,6 @@ urlpatterns = [
         '^articles/articles/$',
         articles_views.ArticlesView.as_view(),
         name='articles'
-    ),
-    url(
-        '^articles/articles/(?P<slug>[\w-]+)$',
-        articles_views.ArticlesDetailView.as_view(),
-        name='articles_detail'
     ),
     url(
         '^articles/articles/update/(?P<slug>[\w-]+)/$',

@@ -1,27 +1,58 @@
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView
+from django.template.loader import render_to_string
+from django.views.generic import ListView, DetailView
 
 from articles.models import Articles, Sections
+from common.mixins import ViewsCountMixin, DinamicNextMixin
 
 
-class ArticlesSiteView(ListView):
+PAGINATE_ARTICLE = 10
+
+
+class ArticlesSiteView(DinamicNextMixin, ListView):
     model = Articles
     context_object_name = 'articles'
     template_name = 'articles/articles.html'
-    
+    paginate_by = PAGINATE_ARTICLE
+
     def get_context_data(self, **kwargs):
         context = super(ArticlesSiteView, self).get_context_data(**kwargs)
         context['sections'] = Sections.objects.all().order_by('name')
         return context
 
-    def get_queryset(self):
-        queryset = super(ArticlesSiteView, self).get_queryset()
-        section = self.request.GET.get('section')
-        if section:
-            self.template_name = 'articles/include/articles_list.html'
-            if section != '0':
-                queryset = Articles.objects.filter(sections=section)
-        return queryset
 
+
+
+class SectionsDetailView(DetailView):
+    model = Sections
+    slug_field = 'slug'
+    context_object_name = 'section'
+    template_name = 'articles/sections.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SectionsDetailView, self).get_context_data(**kwargs)
+        context['sections'] = Sections.objects.all().order_by('name')
+        context['article_count'] = Articles.objects.count()
+        try:
+            context['articles'] = Articles.objects.filter(sections=self.object)[:PAGINATE_ARTICLE]
+            count_next = Articles.objects.filter(sections=self.object).count() - PAGINATE_ARTICLE
+            context['count_next'] = 0 if count_next <= 0 else count_next
+        except:
+            pass
+        return context
+
+
+class ArticlesDetailView(ViewsCountMixin, DetailView):
+    model = Articles
+    slug_url_kwarg = 'slug_a'
+    context_object_name = 'article'
+    template_name = 'articles/article_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticlesDetailView, self).get_context_data(**kwargs)
+        context['sections'] = Sections.objects.all().order_by('name')
+        context['article_count'] = Articles.objects.count()
+        return context

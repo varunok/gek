@@ -31,6 +31,7 @@ class SectionUpdateForm(forms.ModelForm):
 
 
 class ArticlesUpdateForm(forms.ModelForm):
+    views = forms.IntegerField(required=False)
 
     class Meta:
         model = Articles
