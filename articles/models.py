@@ -6,6 +6,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
+from django.urls import reverse
 
 
 class Sections(models.Model):
@@ -65,7 +66,6 @@ class Sections(models.Model):
             return '%s' % self.id
 
     def get_absolute_url(self):
-        from django.urls import reverse
         return reverse('admin2:sections_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
@@ -140,7 +140,6 @@ class Articles(models.Model):
             return '%s' % self.id
 
     def get_absolute_url(self):
-        from django.urls import reverse
         return reverse('admin2:articles_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
@@ -148,7 +147,7 @@ class Articles(models.Model):
             self.slug = slugify(self.title, allow_unicode=True)
         elif not self.slug and not Articles.objects.filter(slug=self.heading).exists():
             self.slug = slugify(self.heading, allow_unicode=True)
-        elif not self.slug and not self.title and not self.name:
+        elif not self.slug and not self.title and not self.heading:
             self.slug = slugify(get_random_string(length=8), allow_unicode=True)
         super(Articles, self).save(*args, **kwargs)
 
