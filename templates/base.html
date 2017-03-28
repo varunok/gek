@@ -11,9 +11,9 @@
         <meta name="description" content="" />
         <meta property="glyanec:code" content="39eef315143e93d76d452ab02a15ad2f">
         <link rel="stylesheet" type="text/css" href="{% static 'css/social-likes_flat.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}"/>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}"/>
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/png">
         {% block css %}{% endblock css %}
@@ -21,7 +21,7 @@
         <!-- Website development - http://glyanec.net/ -->
     </head>
 
-    <body class="front">
+    <body {% block class_body %}  {% endblock %}>
 
         <div class="wrapper">
 
@@ -53,7 +53,7 @@
                 <div class="block_main_menu">
                     <div class="block_content">
                         <ul class="menu">
-                            <li class="leaf"><a href="/" class="active">Главная</a></li>
+                            <li class="leaf"><a href="{% url 'main' %}" {% if request.path == '/' %} class="active" {% endif %}>Главная</a></li>
                             <li class="leaf expanded"><a href="/">Недвижимость</a>
                                 <ul class="menu_child">
                                     <li>
@@ -76,7 +76,7 @@
                                     <li><a href="#">Одессаоблэнерго</a></li>
                                 </ul>
                             </li>
-                            <li class="leaf"><a href="/">Статьи</a></li>
+                            <li class="leaf"><a href="{% url 'articles:articles' %}" {% if 'articles' in request.path  %} class="active" {% endif %}>Статьи</a></li>
                             <li class="leaf"><a href="/">Доверие</a></li>
                             <li class="leaf"><a href="/">Контакты</a></li>
                         </ul>

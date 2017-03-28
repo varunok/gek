@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView
@@ -8,13 +9,13 @@ from django.views.generic import ListView, DetailView, UpdateView
 from admin2.models import StaticPageModel
 
 
-class StaticPageView(ListView):
+class StaticPageView(LoginRequiredMixin, ListView):
     model = StaticPageModel
     template_name = 'admin2/static_pages/static_pages.html'
     context_object_name = 'pages'
 
 
-class StaticPageDetailView(UpdateView):
+class StaticPageDetailView(LoginRequiredMixin, UpdateView):
     model = StaticPageModel
     template_name = 'admin2/static_pages/static_page_detail.html'
     context_object_name = 'page'

@@ -1,0 +1,16 @@
+{% for article in articles %}
+    <div class="views_row">
+        <div class="field_image">
+            {% if article.image %}
+                <img src="{{ article.image.url }}" alt="">
+            {% endif %}
+        </div>
+        <div class="views_body">
+            <div class="address">{{ article.heading }}</div>
+            <div class="text">{{ article.content|safe|truncatewords:'30' }}</div>
+            <div class="bottom_wrap">
+                <div class="statistics">120</div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
