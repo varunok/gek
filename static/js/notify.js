@@ -34,7 +34,7 @@
     function notify_confirm(id, _this, title, text, fun) {
         (new PNotify({
             title: title || 'Подтверждение',
-            text: 'Вы уверены, что хотите удалить?',
+            text: text || 'Вы уверены, что хотите удалить?',
             icon: 'glyphicon glyphicon-question-sign',
             hide: false,
             styling: 'bootstrap3',

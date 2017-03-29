@@ -221,6 +221,7 @@ CKEDITOR_CONFIGS = {
 THUMBNAIL_ALIASES = {
     '': {
         'article_image_60': {'size': (60, 60), 'crop': True},
+        'admin_avatar_200': {'size': (200, 200), 'crop': True},
     },
 }
 

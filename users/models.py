@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class UserManager(BaseUserManager):
@@ -66,25 +67,21 @@ class User(AbstractUser):
     avatar = models.ImageField(
         verbose_name='Аватар',
         blank=True,
-        null=True,
         upload_to="user/avatar"
     )
     first_name = models.CharField(
         verbose_name='Имя',
         max_length=40,
-        null=True,
         blank=True
     )
     last_name = models.CharField(
         verbose_name='Фамилия',
         max_length=40,
-        null=True,
         blank=True
     )
     middle_name = models.CharField(
         verbose_name='Отчество',
         max_length=40,
-        null=True,
         blank=True
     )
     about_self = models.TextField(
@@ -147,3 +144,6 @@ class User(AbstractUser):
     def get_full_name(self):
         full_name = '%s %s %s' % (self.first_name, self.last_name, self.middle_name)
         return full_name.strip()
+
+    def get_absolute_url(self):
+        return reverse('users:profile', args=[self.id])

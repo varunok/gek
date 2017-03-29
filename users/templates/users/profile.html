@@ -1,0 +1,336 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load thumbnail %}
+{% load admin_tags %}
+
+{% block title %}Профиль администратора{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Профиль</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            <a href="{% url 'users:admins' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> {{ admin.get_group_display }} <small>
+                                {% if admin.id %}
+                                    Последний вход
+                                {% endif %}
+                                {{ admin.last_login }}</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <!-- Current avatar -->
+                                        {% if admin.avatar %}
+                                            <img class="img-responsive avatar-view" id="blah" src="{% if admin.avatar %}{{ admin.avatar|thumbnail_url:'admin_avatar_200' }}{% endif %}" alt="" />
+                                        {% else %}
+                                            <img class="img-responsive avatar-view" src="{% static 'images/admin_user.png' %}" alt="Avatar" title="Change the avatar">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <h3>{{ admin.get_full_name }}</h3>
+                                <ul class="list-unstyled user_data">
+                                    {% if admin.address %}
+                                        <li><i class="fa fa-map-marker user-profile-icon"></i> {{ admin.address|default:'' }}</li>
+                                    {% endif %}
+                                {% if admin.specialization %}
+                                    <li><i class="fa fa-briefcase user-profile-icon"></i> {{ admin.specialization }}</li>
+                                {% endif %}
+                                {% if admin.email %}
+                                    <li class="m-top-xs"><i class="fa fa-envelope"></i> {{ admin.email }}</li>
+                                {% endif %}
+                                </ul>
+                                <br />
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                                                {% if admin.id %}
+                                                    Редактировать
+                                                    {% else %}
+                                                    Создать
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                        {% if admin.id %}
+                                            <li role="presentation" class="">
+                                                <a href="#tab_content2" id="pass-tab" role="tab" data-toggle="tab" aria-expanded="false">
+                                                    Изменить пароль
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                            <form method="post" enctype="multipart/form-data" name="adminForm">
+                                                {% csrf_token %}
+                                                {{ form.errors }}
+{#                                                {{ form.password }}#}
+                                                <div class="item form-group">
+                                                    {% if not admin.id %}
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.password.label }}: <span class="required">*</span></label>
+                                                    {% endif %}
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.password}}
+                                                    </div>
+                                                    {% if form.password.errors %}
+                                                        <span class="error-label">{{ form.password.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    {% if not admin.id %}
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.password2.label }}: <span class="required">*</span></label>
+                                                    {% endif %}
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.password2}}
+                                                    </div>
+                                                    {% if form.password2.errors %}
+                                                        <span class="error-label">{{ form.password2.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.email.label }}: <span class="required">*</span></label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.email|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.email.errors %}
+                                                        <span class="error-label">{{ form.email.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.group.label }}: <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.group|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.group.errors %}
+                                                        <span class="error-label">{{ form.group.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.first_name.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.first_name|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.first_name.errors %}
+                                                        <span class="error-label">{{ form.first_name.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.last_name.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.last_name|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.last_name.errors %}
+                                                        <span class="error-label">{{ form.last_name.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.middle_name.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.middle_name|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.middle_name.errors %}
+                                                        <span class="error-label">{{ form.middle_name.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.address.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.address|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.address.errors %}
+                                                        <span class="error-label">{{ form.address.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.phone.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.phone|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.phone.errors %}
+                                                        <span class="error-label">{{ form.phone.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.skype.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.skype|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.skype.errors %}
+                                                        <span class="error-label">{{ form.skype.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.specialization.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.specialization|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.specialization.errors %}
+                                                        <span class="error-label">{{ form.specialization.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.extra.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.extra|addcss:'form-control col-md-5 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.extra.errors %}
+                                                        <span class="error-label">{{ form.extra.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.about_self.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.about_self|addcss:'form-control col-md-5 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.about_self.errors %}
+                                                        <span class="error-label">{{ form.about_self.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.video.label }}:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        {{ form.video|addcss:'form-control col-md-5 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.video.errors %}
+                                                        <span class="error-label">{{ form.video.errors.as_text }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.avatar.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        <input id="imgInp" name="avatar" type="file">
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Сохранить</button>
+                                                    </div>
+                                                </div>
+                                             </form>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="pass-tab">
+                                            <form method="post" id="changePass">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="admin" value="{{ admin.id }}">
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Пароль:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        <input type="password" class="form-control col-md-5 col-xs-12" name="pass">
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Подтвердить пароль:</label>
+                                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                                        <input type="password" class="form-control col-md-5 col-xs-12" name="pass2">
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <br>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <a id="changePassBtn" href="#" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Сохранить</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/select2.full.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+        $(document).ready(function() {
+            $(document).on('click', '#changePassBtn', function (event) {
+                event.preventDefault();
+                var data = $('#changePass').serialize();
+                $.post('change-pass/', data)
+                    .then(function(response) {
+                        notify_success(0, response);
+                    }, function(err) {
+                        notify_error('Ошибка '+ err.status, err.responseText);
+                    });
+            })
+        });
+    </script>
+{% endblock js %}

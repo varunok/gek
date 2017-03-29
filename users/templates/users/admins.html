@@ -1,0 +1,106 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% block title %}Администраторы{% endblock title %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Администраторы</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            <a href="{% url 'users:admin_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 text-center"></div>
+                                <div class="clearfix"></div>
+                                {% for admin in admins %}
+                                <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+                                            <h4 class="brief"><i>{{ admin.specialization|default:'' }}</i></h4>
+                                            <h5 class="brief"><i>{{ admin.extra|default:'' }}</i></h5>
+                                            <div class="left col-xs-7">
+                                                <h2>{{ admin.get_full_name }}</h2>
+                                                <p><strong>Група: </strong> {{ admin.get_group_display }} </p>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-envelope"></i> Email: {{ admin.email }}</li>
+                                                    <li><i class="fa fa-phone"></i> Телефон: {{ admin.phone|default:'' }}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                {% if admin.avatar %}
+                                                    <img src="{{ admin.avatar|thumbnail_url:'admin_avatar_200' }}" alt="" class="img-circle img-responsive">
+                                                {% else %}
+                                                    <img src="{% static 'images/admin_user.png' %}" alt="" class="img-circle img-responsive">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom text-center">
+                                            <div class="col-xs-12 col-sm-5 emphasis"></div>
+                                            <div class="col-xs-12 col-sm-3 emphasis">
+                                                <a href="{{ admin.id }}" class="btn btn-danger btn-xs del-admin">
+                                                    <i class="fa fa-user"> </i> Удалить
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3 emphasis">
+                                                <a href="{% url 'users:profile' admin.id %}" class="btn btn-primary btn-xs">
+                                                    <i class="fa fa-user"> </i> Просмотр
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static '' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.del-admin', function (event) {
+                event.preventDefault();
+                var id = $(this).attr('href');
+                var _this = $(this).parents('.profile_details');
+                notify_confirm(id, _this, 0, 0, dell_app);
+            });
+
+            function dell_app(id, _this) {
+                $.get('delete/'+id)
+                    .then(function(response) {
+                        _this.fadeOut('slow', function () {
+                           _this.remove();
+                        });
+                        notify_success(0, 'Удалено');
+                    }, function(err) {
+                        notify_error('Ошибка '+ err.status, err.statusText);
+                    });
+            }
+        });
+    </script>
+{% endblock js %}
