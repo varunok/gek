@@ -89,18 +89,6 @@
                 var _this = $(this).parents('.profile_details');
                 notify_confirm(id, _this, 0, 0, dell_app);
             });
-
-            function dell_app(id, _this) {
-                $.get('delete/'+id)
-                    .then(function(response) {
-                        _this.fadeOut('slow', function () {
-                           _this.remove();
-                        });
-                        notify_success(0, 'Удалено');
-                    }, function(err) {
-                        notify_error('Ошибка '+ err.status, err.statusText);
-                    });
-            }
         });
     </script>
 {% endblock js %}

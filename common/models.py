@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 # Create your models here.
@@ -51,3 +53,60 @@ class Application(models.Model):
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
         ordering = ['-created']
+
+
+class Video(models.Model):
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    video = models.TextField(
+        verbose_name='Код видео',
+        blank=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('servicesrieltor',)}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Видео'
+        verbose_name_plural = 'Видео'
+
+    def __unicode__(self):
+        return '{} {}'.format(self.content_type, self.id)
+
+
+class FAQ(models.Model):
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    text = models.TextField(
+        verbose_name='Текст',
+        blank=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('servicesrieltor',)}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ'
+        verbose_name_plural = 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ'
+
+    def __unicode__(self):
+        return '{} {}'.format(self.content_type, self.id)
+
+
+

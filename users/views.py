@@ -15,20 +15,20 @@ from users.forms import UserChangeForm, UserCreationForm
 from users.models import User
 
 
-class AdminsView(ListView):
+class AdminsView(LoginRequiredMixin, ListView):
     model = get_user_model()
     template_name = 'users/admins.html'
     context_object_name = 'admins'
 
 
-class AdminDetail(UpdateView):
+class AdminDetail(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'users/profile.html'
     context_object_name = 'admin'
     pk_url_kwarg = 'id'
     form_class = UserChangeForm
 
-class AdminCreate(CreateView):
+class AdminCreate(LoginRequiredMixin, CreateView):
     model = User
     template_name = 'users/profile.html'
     form_class = UserCreationForm

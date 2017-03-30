@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'admin2',
     'common',
     'articles',
+    'services',
 ]
 
 MIDDLEWARE = [

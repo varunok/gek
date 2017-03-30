@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load base_tag %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -64,10 +65,13 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="leaf expanded"><a href="/">Услуги</a>
+                            <li class="leaf expanded"><a href="{% url 'services:services' %}" {% if 'services' in request.path  %} class="active" {% endif %}>Услуги</a>
                                 <ul class="menu_child">
-                                    <li><a href="#">Риелторсике услуги</a></li>
-                                    <li><a href="#">Установка водомеров</a></li>
+                                    {% service_rieltor_is_active as is_active_rs %}
+                                    {% if is_active_rs %}
+                                        <li><a href="{% url 'services:rieltor_service' %}">Риелторсике услуги</a></li>
+                                    {% endif %}
+                                    <li><a href="#">Установка водомеров </a></li>
                                     <li><a href="#">Установка газовых счетчиков</a></li>
                                     <li><a href="#">Изготовление вывесок</a></li>
                                     <li><a href="#">Кредитование</a></li>

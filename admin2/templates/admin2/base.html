@@ -61,7 +61,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="{% url 'admin2:static_pages' %}"><i class="fa fa-file-text"></i> Страницы </a></li>
-                                    <li><a href="#"><i class="fa fa-suitcase"></i> Услуги </a></li>
+                                    <li><a href="{% url 'admin2:services' %}"><i class="fa fa-suitcase"></i> Услуги </a></li>
                                     <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>
                                     <li><a><i class="fa fa-server"></i> Объекты <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
@@ -209,6 +209,7 @@
         <script src="{% static 'js/custom.min.js' %}"></script>
 
         <script src="{% static 'js/notify.js' %}"></script>
+        <script src="{% static 'js/deletion.js' %}"></script>
 
         {% block js %}{% endblock js %}
     </body>

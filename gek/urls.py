@@ -30,6 +30,7 @@ urlpatterns = [
 
     # SITE
     url(r'^articles/', include('articles.urls', namespace='articles')),
+    url(r'^services/', include('services.urls', namespace='services')),
 ]
 urlpatterns += [
     url(r'^static/(?P<path>.*)$', views.serve),

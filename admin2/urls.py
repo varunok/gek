@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from admin2.views import login_views, main_views, articles_views, static_page_views
+from admin2.views import login_views, main_views, articles_views, static_page_views, services_views
 from admin2.views import settings_views
 
 urlpatterns = [
@@ -89,5 +89,12 @@ urlpatterns = [
         r'status_static_page',
         static_page_views.status_page,
         name='status_static_page'
+    ),
+
+    # SERVICES
+    url(
+        r'^services/$',
+        services_views.ServicesView.as_view(),
+        name='services'
     ),
 ]
