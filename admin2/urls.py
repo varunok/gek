@@ -8,6 +8,7 @@ from admin2.views import settings_views
 urlpatterns = [
     # login views
     url('^login/$', login_views.LoginRememberView.as_view(), name='auth_login'),
+    url('^logout/$', login_views.logout_view, name='auth_logout'),
 
     # main view
     url('^$', main_views.Admin2MainView.as_view(), name='main'),

@@ -11,7 +11,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from users.forms import AuthForm
-from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login)
+from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login, logout)
 # Create your views here.
 
 
@@ -79,3 +79,7 @@ class LoginRememberView(LoginView):
         if not form.cleaned_data['remember']:
             self.request.session.set_expiry(0)
         return HttpResponseRedirect(self.get_safe_redirect_url())
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/admin/')

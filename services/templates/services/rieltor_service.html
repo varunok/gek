@@ -257,26 +257,28 @@
 				<iframe src="https://www.youtube.com/embed/fKMbAxliZpc?ecver=2" width="640" height="360" allowfullscreen></iframe>
 			</div>
 		</div>
-		<div class="block_questions">
-			<div class="block_content">
-				<div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ </div>
-				<div class="view_content">
-                    {% for faq in faqs %}
-                        <div class="views_row">
-                            <div class="qty_text"><div class="item">{{ faq.title }}</div><span></span></div>
-                            <div class="body">{{ faq.text }}</div>
-                        </div>
-                    {% endfor %}
+        {% if faqs %}
+            <div class="block_questions">
+                <div class="block_content">
+                    <div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ </div>
+                    <div class="view_content">
+                        {% for faq in faqs %}
+                            <div class="views_row">
+                                <div class="qty_text"><div class="item">{{ faq.title }}</div><span></span></div>
+                                <div class="body">{{ faq.text }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-			</div>
-		</div>
+            </div>
+        {% endif %}
 		<div class="block block_seo">
 			<div class="block_content">
 				<div class="block_title">Риэлторские услуги в Одессе</div>
 				<div class="view_content">
 					<div class="body">
 						<div class="image">
-							<img src="images/img.png" alt="" class="left">
+							<img src="{% static 'images/img.png' %}" alt="" class="left">
 						</div>
 						<div class="content_body">
 							<p>Еще не знаете, какое помещение в Одессе арендовать или купить под бизнес? Наше агентство недвижимости «GEK» поможет не только с поиском, но и выполнит всю бумажную работу за Вас.</p>
@@ -298,7 +300,7 @@
 			</div>
 		</div>
 	<div class="block region_banner">
-		<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		<div class="field_banner"><img src="{% static 'images/banner_2.png' %}" alt=""></div>
 	</div>
 	</main><!-- .content -->
 {% endblock content %}
