@@ -17,7 +17,7 @@ class StaticPageView(LoginRequiredMixin, ListView):
 
 class StaticPageDetailView(LoginRequiredMixin, UpdateView):
     model = StaticPageModel
-    template_name = 'admin2/static_pages/static_page_detail.html'
+    template_name = 'admin2/static_pages/static_page_edit.html'
     context_object_name = 'page'
     slug_field = 'id'
     fields = '__all__'

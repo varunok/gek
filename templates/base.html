@@ -68,8 +68,9 @@
                             <li class="leaf expanded"><a href="{% url 'services:services' %}" {% if 'services' in request.path  %} class="active" {% endif %}>Услуги</a>
                                 <ul class="menu_child">
                                     {% service_rieltor_is_active as is_active_rs %}
+                                    {% service_rieltor_slug as service_rieltor_slug %}
                                     {% if is_active_rs %}
-                                        <li><a href="{% url 'services:rieltor_service' %}">Риелторсике услуги</a></li>
+                                        <li><a href="{% url 'services:rieltor_service' service_rieltor_slug %}">Риелторсике услуги</a></li>
                                     {% endif %}
                                     <li><a href="#">Установка водомеров </a></li>
                                     <li><a href="#">Установка газовых счетчиков</a></li>

@@ -98,4 +98,14 @@ urlpatterns = [
         services_views.ServicesView.as_view(),
         name='services'
     ),
+    url(
+        r'^services/edit/rieltor_service/$',
+        services_views.RieltorServiceView.as_view(),
+        name='rieltor_service_edit'
+    ),
+    url(
+        r'status_service',
+        services_views.status_service,
+        name='status_service'
+    ),
 ]

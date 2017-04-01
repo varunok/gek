@@ -6,5 +6,5 @@ from services.views import ServicesSiteView, RieltorServiceView
 
 urlpatterns = [
     url('^$', ServicesSiteView.as_view(), name='services'),
-    url('^rieltor-service$', RieltorServiceView.as_view(), name='rieltor_service'),
+    url('^(?P<slug>[\w-]+)', RieltorServiceView.as_view(), name='rieltor_service'),
     ]

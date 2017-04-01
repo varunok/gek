@@ -2,10 +2,13 @@
 from __future__ import unicode_literals
 
 from django import forms
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.forms.widgets import TextInput, Textarea
 from ckeditor.widgets import CKEditorWidget
 
 from articles.models import Sections, Articles
+from common.models import Video
+from services.models import ServicesRieltor
 
 
 class SectionUpdateForm(forms.ModelForm):
@@ -36,3 +39,28 @@ class ArticlesUpdateForm(forms.ModelForm):
     class Meta:
         model = Articles
         fields = '__all__'
+
+
+class RieltorServiceForm(forms.ModelForm):
+    class Meta:
+        model = ServicesRieltor
+        exclude = 'is_enable',
+        fields = '__all__'
+
+
+video_widgets = {
+    'title': TextInput(
+        attrs={
+            'class': 'form-control'
+        }
+    )
+}
+
+
+VideoRieltorServiceSet = generic_inlineformset_factory(
+    Video,
+    can_delete=False,
+    extra=2,
+    min_num=2,
+    max_num=2
+)
