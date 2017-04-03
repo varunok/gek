@@ -49,7 +49,7 @@
                                     <td>{{ rieltor_service }}</td>
                                     <td>
                                         <form class="slideThreeForm" action="">
-                                            <div class="slideThree">
+                                            <div class="slideThree serviceStatus">
                                                 <input type="checkbox"  id="slideThree{{ rieltor_service.uuid }}" name="check" {% if rieltor_service.is_enable %} checked {% endif %} />
                                                 <label  for="slideThree{{ rieltor_service.uuid }}"></label>
                                                 {% csrf_token %}

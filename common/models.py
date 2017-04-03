@@ -71,6 +71,10 @@ class Video(models.Model):
         on_delete=models.CASCADE,
         limit_choices_to={'model__in': ('servicesrieltor',)}
     )
+    is_enable = models.BooleanField(
+        verbose_name='Влючен ли?',
+        default=True
+    )
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 

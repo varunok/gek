@@ -14,6 +14,7 @@ class ServicesSiteView(TemplateView):
 
 class RieltorServiceView(DetailView):
     template_name = 'services/rieltor_service.html'
+    context_object_name = 'service_rieltor'
 
     def get(self, request, *args, **kwargs):
         if not ServicesRieltor.objects.get().is_enable:

@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', MainView.as_view(), name='main'),
     url(r'^superadmin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^common/', include('common.urls', namespace='common')),
     url(r'^admin/', include('admin2.urls', namespace='admin2')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 

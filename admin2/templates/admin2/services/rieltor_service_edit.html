@@ -92,10 +92,10 @@
                                 </li>
                                 <li>
                                     <span class="value text-success">
-                                        <form class="slideThreeForm" action="" style="display: flex">
+                                        <form class="slideThreeForm serviceStatus" action="" style="display: flex">
                                             <div class="slideThree">
-                                                <input type="checkbox"  id="slideThree{{ rieltor_service.uuid }}" name="check" {% if rieltor_service.is_enable %} checked {% endif %} />
-                                                <label class="lab" for="slideThree{{ rieltor_service.uuid }}"></label>
+                                                <input type="checkbox"  id="{{ rieltor_service.uuid }}" name="check" {% if rieltor_service.is_enable %} checked {% endif %} />
+                                                <label class="lab" for="{{ rieltor_service.uuid }}"></label>
                                                 {% csrf_token %}
                                                 <input type="hidden" name="page_id" value="{{ rieltor_service.uuid }}">
                                             </div>
@@ -122,7 +122,7 @@
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
                                                 {% csrf_token %}
                                                 <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.slug.label }}: <span class="required">*</span>
@@ -180,63 +180,172 @@
                                                             {{ rieltor_service.image.url }}
                                                         {% endif %}
                                                         " alt="" width="100%" />
+                                                        {% if rieltor_service.image %}
+                                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input type="hidden" value="{{ content_type }}">
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                                 <div class="ln_solid"></div>
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">
-                                                        <button id="send" type="submit" class="btn btn-success">Сохранить</button>
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="tab_content2" aria-labelledby="video-tab">
-                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
-                                            {% for form in formset %}
-        {{ form }}
-        {% endfor %}
-                                                {{ video_form.management_form }}
-                                                {% for fields in video_form %}
+                                            <div class="row">
+                                                <div class=" col-md-9 col-sm-9 col-xs-12">
+                                                <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="videoForm">
+                                                    {{ video_form.management_form }}
+                                                    <input type="hidden" name="content_type" value="{{ content_type }}">
+                                                    <input type="hidden" name="uuid" value="{{ rieltor_service.uuid }}">
                                                     {% csrf_token %}
-                                                    <h3>Видео №{{ forloop.counter }}</h3>
-                                                    <div class="item form-group">
-                                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.title.label }}:
-                                                        </label>
-                                                        <div class="col-md-7 col-sm-7 col-xs-12">
-                                                            {{ fields.title|addcss:'form-control' }}
+                                                    {% for fields in video_form %}
+                                                        <div hidden>
+                                                            {{ fields.is_enable }}
                                                         </div>
-                                                        {% if fields.title.errors %}
-                                                            <span class="error-label">{{ fields.title.errors }}</span>
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="item form-group">
-                                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.video.label }}</label>
-                                                        <div class="col-md-7 col-sm-7 col-xs-12">
-                                                            {{ fields.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                        <h3>Видео №{{ forloop.counter }}</h3>
+                                                        {{ fields.id }}
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.title.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.title|addcss:'form-control' }}
+                                                            </div>
+                                                            {% if fields.title.errors %}
+                                                                <span class="error-label">{{ fields.title.errors }}</span>
+                                                            {% endif %}
                                                         </div>
-                                                        {% if fields.video.errors %}
-                                                            <span class="error-label">{{ fields.video.errors }}</span>
-                                                        {% endif %}
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.video.label }}</label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                            </div>
+                                                            {% if fields.video.errors %}
+                                                                <span class="error-label">{{ fields.video.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                    {% endfor %}
+                                                    <div class="ln_solid"></div>
+                                                    <div class="form-group" style="float: right">
+                                                        <div class="col-md-12">
+                                                            <button id="send-video" name="save_video" type="submit" class="btn btn-success">Сохранить</button>
+                                                        </div>
                                                     </div>
+                                                </form>
+                                                </div>
+                                                <div class=" col-md-3 col-sm-3 col-xs-12">
+                                                <div class="clearfix" style="margin-top: 80px"></div><br>
+                                                {% for video in video_check %}
+                                                    <div style="text-align: center">
+                                                        <button type="button" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-lg-{{ video.id }}">Просмотр</button>
+                                                        <input type="hidden" class="video-id" value="{{ video.id }}">
+                                                        <div class="modal fade modal-lg-{{ video.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                        <h4 class="modal-title" id="myModalLabel">{{ video.title }}</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>{{ video.video|safe }}</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="value text-success">
+                                                            <form class="statusVideoForm" action="" style="">
+                                                                <div class="slideThree">
+                                                                    <input type="checkbox" class="videoCheck"  id="statusVideo{{ video.id }}" name="check" {% if video.is_enable %} checked {% endif %} />
+                                                                    <label class="lab" for="statusVideo{{ video.id }}"></label>
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="video_id" value="{{ video.id }}">
+                                                                    <input type="hidden" class="loop_video_id" value="{{ forloop.counter0 }}">
+                                                                </div>
+                                                            </form>
+                                                        </span>
+                                                    </div>
+                                                    <div class="clearfix" style="margin-bottom: 140px"></div>
+                                                    <br>
                                                 {% endfor %}
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="tab_content3" aria-labelledby="faq-tab">
+                                            <div class="form-group" style="float: right">
+                                                <div class="col-md-12">
+                                                    <span class="value text-success">
+                                                        <form class="statusFaqForm faqStatus" action="" style="" name="faqStatus">
+                                                            <div class="slideThree">
+                                                                <input type="checkbox" class="faqCheck"  id="statusFaq{{ rieltor_service.uuid }}" name="check" {% if rieltor_service.faq_enable %} checked {% endif %} />
+                                                                <label class="lab" for="statusFaq{{ rieltor_service.uuid }}"></label>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="content_type" value="{{ content_type }}">
+                                                            </div>
+                                                        </form>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <form method="post" enctype="multipart/form-data" name="faqForm" class="faqForm">
+                                                <div class="clearfix"></div><br>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="model_id" value="{{ rieltor_service.id }}">
+                                                <div class="list-faq">
+                                                    {% for faq in faqs %}
+                                                        <div class="faq-quant">
+                                                            <div class="ln_solid"></div>
+                                                            <div class="form-group" style="float: right">
+                                                                <div class="col-md-12">
+                                                                    <button id="delete-faq-{{ faq.id }}"  name="create_faq" type="submit" class="btn btn-warning delete-faq"><i class="fa fa-minus"></i> Удалить</button>
+                                                                    <input type="hidden" name="del-faq" value="{{ faq.id }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="item form-group">
+                                                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Вопрос:</label>
+                                                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                    <input type="text" name="faq-ask-{{ faq.id }}" value="{{ faq.title|default:'' }}" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div><br>
+                                                            <div class="item form-group">
+                                                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Ответ:</label>
+                                                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                    <textarea name="faq-answer-{{ faq.id }}" id="" rows="3" style="width: 100%">{{ faq.text }}</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div><br>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="clearfix"></div><br>
                                                 <div class="ln_solid"></div>
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">
-                                                        <button id="send" name="save_video" type="submit" class="btn btn-success">Сохранить</button>
+                                                        <button id="create_faq" name="create_faq" type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</button>
+                                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="tab_content3" aria-labelledby="faq-tab">
-                                            <form method="post" enctype="multipart/form-data" name="adminForm">
-                                            FAQ
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -248,6 +357,8 @@
 
 {% block js %}
     <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/video_status.js' %}"></script>
+    <script src="{% static 'js/faq_status.js' %}"></script>
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -261,5 +372,6 @@
         $("#imgInp").change(function(){
             readURL(this);
         });
+
     </script>
 {% endblock js %}

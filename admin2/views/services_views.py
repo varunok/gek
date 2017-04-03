@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -32,39 +33,15 @@ class RieltorServiceView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(RieltorServiceView, self).get_context_data(**kwargs)
-        if self.request.POST and 'save_video' in self.request.POST:
-            context['video_form'] = VideoRieltorServiceSet(self.request.POST,
-                                                           instance=ServicesRieltor.objects.get())
-        else:
-            context['video_form'] = VideoRieltorServiceSet(instance=ServicesRieltor.objects.get())
+        context['video_form'] = VideoRieltorServiceSet(instance=ServicesRieltor.objects.get())
+        context['video_check'] = ServicesRieltor.get_solo().videos.all().order_by('id')
+        context['faqs'] = ServicesRieltor.get_solo().fag.all().order_by('id')
+        context['content_type'] = ContentType.objects.get_for_model(ServicesRieltor).id
         return context
-
-    def post(self, request, *args, **kwargs):
-
-        form = self.get_form()
-        if 'save_video' in self.request.POST:
-            # self.object =None
-            form = self.get_form(form_class=VideoRieltorServiceSet)
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-    # def form_valid(self, form):
-    #     if 'save_video' in self.request.POST:
-    #         ctx = self.get_context_data()
-    #         video_form = ctx.get('video_form')
-    #         if video_form.is_valid():
-    #             video_form.save()
-    #             return redirect(self.get_success_url())
-    #         else:
-    #             return self.render_to_response(self.get_context_data(form=video_form))
-    #     else:
-    #         return super(RieltorServiceView, self).form_valid(form)
 
 
 def status_service(request):
-    if request.POST:
+    if request.method == 'POST':
         on = request.POST.get('check')
         page_id = request.POST.get('page_id')
         service = ServicesRieltor.objects.get()

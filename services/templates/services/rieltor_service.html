@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% load video_tag %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="not-front real_services" {% endblock %}
 
 {% block content %}
     <main class="middle">
-		<div class="slider_main slider_notfront">
+		<div class="slider_main slider_notfront"
+             {% if service_rieltor.image %}
+                style="background: url({{ service_rieltor.image.url }}) no-repeat center/cover"
+             {% endif %}>
 			<div class="slider_title">Помощь с поиском коммерческой <br>недвижимости в Одессе!</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item name">
@@ -161,12 +165,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="block block_video">
-			<div class="block_content">
-				<div class="block_title">Выгода работы с агенством недвижимости</div>
-				<iframe src="https://www.youtube.com/embed/fKMbAxliZpc?ecver=2" width="640" height="360" allowfullscreen></iframe>
-			</div>
-		</div>
+        {% if service_rieltor.videos.all.first.is_enable and service_rieltor.videos.all.first.video %}
+            <div class="block block_video">
+                <div class="block_content">
+                    <div class="block_title">{{ service_rieltor.videos.all.first.title }}</div>
+                    {{ service_rieltor.videos.all.first.video|convert_to_frame|safe }}
+                </div>
+            </div>
+        {% endif %}
 		<div class="block block_presentation">
 			<div class="block_content">
 				<div class="block_title">Продажа Вашей недвижимости за 90 дней</div>
@@ -251,13 +257,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="block block_video">
-			<div class="block_content">
-				<div class="block_title">Наши специалисты одни из лучших в городе!</div>
-				<iframe src="https://www.youtube.com/embed/fKMbAxliZpc?ecver=2" width="640" height="360" allowfullscreen></iframe>
-			</div>
-		</div>
-        {% if faqs %}
+		{% if service_rieltor.videos.all.last.is_enable and service_rieltor.videos.all.last.video %}
+            <div class="block block_video">
+                <div class="block_content">
+                    <div class="block_title">{{ service_rieltor.videos.all.last.title }}</div>
+                    {{ service_rieltor.videos.all.last.video|convert_to_frame|safe }}
+                </div>
+            </div>
+        {% endif %}
+        {% if faqs and service_rieltor.faq_enable %}
             <div class="block_questions">
                 <div class="block_content">
                     <div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ </div>

@@ -58,6 +58,10 @@ class ServicesRieltor(SingletonModel):
         verbose_name='Влючен ли?',
         default=True
     )
+    faq_enable = models.BooleanField(
+        verbose_name='Влючен ли FAQ?',
+        default=True
+    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False

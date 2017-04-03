@@ -1,0 +1,22 @@
+<div class="faq-quant">
+    <div class="ln_solid"></div>
+    <div class="form-group" style="float: right">
+        <div class="col-md-12">
+            <button id="delete-faq-0" name="create_faq" type="submit" class="btn btn-warning"><i class="fa fa-minus"></i> Удалить</button>
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Вопрос:</label>
+            <div class="col-md-7 col-sm-7 col-xs-12">
+                <input type="text" name="faq-ask-{{ faq.id }}" value="" class="form-control col-md-7 col-xs-12">
+            </div>
+    </div>
+    <div class="clearfix"></div><br>
+        <div class="item form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Ответ:</label>
+            <div class="col-md-7 col-sm-7 col-xs-12">
+                <textarea name="faq-answer-{{ faq.id }}" id="" rows="3" style="width: 100%"></textarea>
+            </div>
+        </div>
+    <div class="clearfix"></div><br>
+</div>
