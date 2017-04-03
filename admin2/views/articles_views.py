@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-from admin2.form import SectionUpdateForm, ArticlesUpdateForm
+from admin2.forms import SectionUpdateForm, ArticlesUpdateForm
 from articles.models import Sections, Articles
 from common.mixins import DeleteAjaxMixin
 

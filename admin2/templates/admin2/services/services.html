@@ -53,13 +53,31 @@
                                                 <input type="checkbox"  id="slideThree{{ rieltor_service.uuid }}" name="check" {% if rieltor_service.is_enable %} checked {% endif %} />
                                                 <label  for="slideThree{{ rieltor_service.uuid }}"></label>
                                                 {% csrf_token %}
-                                                <input type="hidden" name="page_id" value="{{ rieltor_service.uuid }}">
+                                                <input type="hidden" name="content_type" value="{{ rieltor_service_content_type }}">
                                             </div>
                                         </form>
                                     </td>
                                     <td>
                                         <a href="{% url 'admin2:rieltor_service_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ rieltor_service.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ valuation.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                    <td>{{ valuation }}</td>
+                                    <td>
+                                        <form class="slideThreeForm" action="">
+                                            <div class="slideThree serviceStatus">
+                                                <input type="checkbox"  id="slideThree{{ valuation.uuid }}" name="check" {% if valuation.is_enable %} checked {% endif %} />
+                                                <label  for="slideThree{{ valuation.uuid }}"></label>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="content_type" value="{{ valuation_content_type }}">
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'admin2:valuation_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                        <a href="{{ valuation.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
                                 {% for article in articles %}

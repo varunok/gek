@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.views import View
 from django.views.generic import TemplateView, DeleteView
 
-from admin2.form import VideoRieltorServiceSet
+from admin2.forms import VideoRieltorServiceSet
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ
 

@@ -1,0 +1,13 @@
+<div class="block_questions">
+    <div class="block_content">
+        <div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ </div>
+        <div class="view_content">
+            {% for faq in faqs %}
+                <div class="views_row">
+                    <div class="qty_text"><div class="item">{{ faq.title }}</div><span></span></div>
+                    <div class="body">{{ faq.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

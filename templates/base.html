@@ -72,6 +72,11 @@
                                     {% if is_active_rs %}
                                         <li><a href="{% url 'services:rieltor_service' service_rieltor_slug %}">Риелторсике услуги</a></li>
                                     {% endif %}
+                                    {% valuation_is_active as is_active_valuation %}
+                                    {% valuation_slug as valuation_slug %}
+                                    {% if is_active_valuation %}
+                                        <li><a href="{% url 'services:valuation' valuation_slug %}">Оценка недвижимости</a></li>
+                                    {% endif %}
                                     <li><a href="#">Установка водомеров </a></li>
                                     <li><a href="#">Установка газовых счетчиков</a></li>
                                     <li><a href="#">Изготовление вывесок</a></li>

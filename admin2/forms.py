@@ -48,13 +48,12 @@ class RieltorServiceForm(forms.ModelForm):
         fields = '__all__'
 
 
-video_widgets = {
-    'title': TextInput(
-        attrs={
-            'class': 'form-control'
-        }
-    )
-}
+class ValuationForm(forms.ModelForm):
+    class Meta:
+        model = ServicesRieltor
+        exclude = 'is_enable',
+        fields = '__all__'
+
 
 
 VideoRieltorServiceSet = generic_inlineformset_factory(
@@ -63,4 +62,12 @@ VideoRieltorServiceSet = generic_inlineformset_factory(
     extra=2,
     min_num=2,
     max_num=2
+)
+
+VideoServiceSet = generic_inlineformset_factory(
+    Video,
+    can_delete=False,
+    extra=1,
+    min_num=1,
+    max_num=1
 )

@@ -11,7 +11,7 @@
              {% if service_rieltor.image %}
                 style="background: url({{ service_rieltor.image.url }}) no-repeat center/cover"
              {% endif %}>
-			<div class="slider_title">Помощь с поиском коммерческой <br>недвижимости в Одессе!</div>
+			<div class="slider_title">{{ service_rieltor.title|safe }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item name">
 					<input type="text" placeholder="Введите ваше имя">
@@ -266,19 +266,7 @@
             </div>
         {% endif %}
         {% if faqs and service_rieltor.faq_enable %}
-            <div class="block_questions">
-                <div class="block_content">
-                    <div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ </div>
-                    <div class="view_content">
-                        {% for faq in faqs %}
-                            <div class="views_row">
-                                <div class="qty_text"><div class="item">{{ faq.title }}</div><span></span></div>
-                                <div class="body">{{ faq.text }}</div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+            {% include 'services/include/faqs.html' %}
         {% endif %}
 		<div class="block block_seo">
 			<div class="block_content">

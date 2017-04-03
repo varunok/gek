@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front property_valuation" {% endblock %}
+
+{% block content %}
+    <main class="middle">
+		<div class="slider_main slider_notfront"
+            {% if valuation.image %}
+                style="background: url({{ valuation.image.url }}) no-repeat center/cover"
+             {% endif %}>
+			<div class="slider_title">{{ valuation.title }}</div>
+			<div class="slider_subtitle">Оформление от 1 до 3 дней.</div>
+			<div class="title_text">Отправить заявку прямо сейчас!</div>
+			<form action="#" class="webform_client_form">
+				<div class="form_item name">
+					<input type="text" placeholder="Введите имя">
+				</div>
+				<div class="form_item phone">
+					<input type="text" placeholder="Введите телефон">
+				</div>
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Отправить">
+				</div>
+			</form>
+		</div>
+		<div class="middle_inner">
+			<div class="container">
+				<div id="content">
+					<div class="block_benefits">
+						<div class="block_content">
+							<div class="block_title">
+								Оценка требуется в таких случаях:
+							</div>
+							<div class="view_content">
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/pr_1.png' %}" alt="">
+									</div>
+									<div class="text">Оформления кредита под залог</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/pr_2.png' %}" alt="">
+									</div>
+									<div class="text">Раздел <br>имущества </div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/pr_3.png' %}" alt="">
+									</div>
+									<div class="text">Застраховать <br>имущество</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/pr_4.png' %}" alt="">
+									</div>
+									<div class="text">Заключить сделку <br> купли-продажи, <br>аренды, дарения</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/pr_5.png' %}" alt="">
+									</div>
+									<div class="text">Оценка ущерба <br>собственности</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% if valuation.videos.all.first.is_enable and valuation.videos.all.first.video %}
+                        <div class="block block_video">
+                            <div class="block_content">
+                                <div class="block_title">{{ valuation.videos.all.first.title }}</div>
+                                {{ valuation.videos.all.first.video|convert_to_frame|safe }}
+                            </div>
+                        </div>
+                    {% endif %}
+				</div><!-- #content-->
+			</div>
+		</div>
+		<div class="block block_presentation">
+			<div class="block_content">
+				<div class="block_title">Оценка вашей недвижимости</div>
+				<div class="sub_title">Какие документы нужны?</div>
+				<div class="title_text">Для оценки недвижимости </div>
+				<div class="view_content document">
+					<div class="views_row">Копии документов о праве <br>собственности (свидетельство, договор купли-продажи, дарения, решения <br>суда и т.д.)</div>
+					<div class="views_row">Копия тех-паспорта, <br>изготовленного бюро <br>технической инвентаризации <br>(при наличии)</div>
+					<div class="views_row">Паспорт собственности <br>Идентификационный код <br>собственника</div>
+					<div class="views_row email_row">Пришлите документы на почту <br><a href="mailto:ofis@gek.pd.ua">ofis@gek.pd.ua</a></div>
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_item email">
+							<input type="email" placeholder="Введите вашу почту">
+						</div>
+						<div class="form_item textarea comment">
+							<textarea placeholder="Ваш комментарий"></textarea>
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Отправить заявку на оценку">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="block block_our_advantages">
+			<div class="block_content">
+				<div class="block_title">Наши преимущества:</div>
+				<div class="view_content">
+					<div class="views_row">
+						<div class="field_image">
+							<img src="{% static 'images/adv_1.png' %}" alt="">
+						</div>
+						<div class="title">Выбор оценщика</div>
+						<div class="subtitle">Вы можете выбрать команию</div>
+					</div>
+					<div class="views_row">
+						<div class="field_image">
+							<img src="{% static 'images/adv_2.png' %}" alt="">
+						</div>
+						<div class="title">Оформлении оценки</div>
+						<div class="subtitle">Сроки от 1 до 3 дней</div>
+					</div>
+					<div class="views_row">
+						<div class="field_image">
+							<img src="{% static 'images/adv_2.png' %}" alt="">
+						</div>
+						<div class="title">Низкая цена</div>
+						<div class="subtitle">Получите дополнительную <br>скидку от нашего сервиса</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block_benefits steps">
+			<div class="block_content">
+				<div class="block_title">
+					Этапы работы по оценке недвижимости
+				</div>
+				<div class="view_content">
+					<div class="group">
+						<div class="views_row">
+							<div class="field_img">
+								<img src="{% static 'images/m_1.png' %}" alt="">
+							</div>
+							<div class="text">Консультация <br>и заявка</div>
+						</div>
+						<div class="views_row">
+							<div class="field_img">
+								<img src="{% static 'images/m_2.png' %}" alt="">
+							</div>
+							<div class="text">Договор и <br>предоплата</div>
+						</div>
+						<div class="views_row">
+							<div class="field_img">
+								<img src="{% static 'images/m_3.png' %}" alt="">
+							</div>
+							<div class="text">Передача <br>документов</div>
+						</div>
+					</div>
+					<div class="group">
+						<div class="views_row">
+							<div class="text">Формирование <br>экспертного заключения</div>
+							<div class="field_img">
+								<img src="{% static 'images/m_4.png' %}" alt="">
+							</div>
+						</div>
+						<div class="views_row">
+							<div class="text">Согласование и <br>передача заключения</div>
+							<div class="field_img">
+								<img src="{% static 'images/m_5.png' %}" alt="">
+							</div>
+						</div>
+						<div class="views_row">
+							<div class="text">Конечная <br>оплата</div>
+							<div class="field_img">
+								<img src="{% static 'images/m_6.png' %}" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% if faqs and valuation.faq_enable %}
+            {% include 'services/include/faqs.html' %}
+        {% endif %}
+		<div class="block block_seo">
+			<div class="block_content">
+				<div class="block_title">Риэлторские услуги в Одессе</div>
+				<div class="view_content">
+					<div class="body">
+						<div class="image">
+							<img src="{% static 'images/img.png' %}" alt="" class="left">
+						</div>
+						<div class="content_body">
+							<p>Еще не знаете, какое помещение в Одессе арендовать или купить под бизнес? Наше агентство недвижимости «GEK» поможет не только с поиском, но и выполнит всю бумажную работу за Вас.</p>
+							<p>На нашем сайте Вы найдете:</p>
+							<ul>
+								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+							</ul>
+							<p>Коммерческая недвижимость является привлекательным инвестиционным объектом. Ее приобретают с различными целями – для ведения своего бизнеса, сдачи в аренду или перепродажи. Таким образом, коммерческая недвижимость в Украине является высокодоходным активом, поэтому и данный сектор рынка недвижимости постоянно развивается. Коммерческая недвижимость представляет собой помещения, здания и различные объекты, которые используются для ведения бизнеса и</p>
+							<p>На нашем сайте Вы найдете:</p>
+							<ul>
+								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+							</ul>
+						</div>
+					</div>
+					<div class="read_more"><a href="/">Читать всю статью</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_services">
+			<div class="block_content">
+				<div class="block_title">Услуги агентства недвижимости</div>
+				<div class="view_content">
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/1.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Кредитование</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/2.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/3.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/4.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Инфоксводоканал</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/1.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Кредитование</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/3.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/2.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+					</div>
+					<div class="views_row">
+						<div class="field_image"><a href="/"><img src="{% static 'images/4.png' %}" alt=""></a></div>
+						<div class="field_title"><a href="/">Инфоксводоканал</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="block region_banner">
+		<div class="field_banner"><img src="{% static 'images/banner_2.png' %}" alt=""></div>
+	</div>
+	</main><!-- .content -->
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

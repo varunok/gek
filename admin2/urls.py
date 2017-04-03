@@ -104,11 +104,6 @@ urlpatterns = [
         name='services'
     ),
     url(
-        r'^services/edit/rieltor_service/$',
-        services_views.RieltorServiceView.as_view(),
-        name='rieltor_service_edit'
-    ),
-    url(
         r'status_service',
         services_views.status_service,
         name='status_service'
@@ -147,5 +142,15 @@ urlpatterns = [
         'del-faq/(?P<id>[\w-]+)',
         FAQDeleteView.as_view(),
         name='delete_faq'
+    ),
+    url(
+        r'^services/edit/rieltor_service/$',
+        services_views.RieltorServiceView.as_view(),
+        name='rieltor_service_edit'
+    ),
+    url(
+        r'^services/edit/valuation/$',
+        services_views.ValuationServiceView.as_view(),
+        name='valuation_edit'
     ),
 ]

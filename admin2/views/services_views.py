@@ -8,8 +8,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView
 
-from admin2.form import RieltorServiceForm, VideoRieltorServiceSet
-from services.models import ServicesRieltor
+from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet
+from services.models import ServicesRieltor, Valuation
 
 
 class ServicesView(LoginRequiredMixin, TemplateView):
@@ -17,7 +17,10 @@ class ServicesView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ServicesView, self).get_context_data(**kwargs)
+        context['rieltor_service_content_type'] = ContentType.objects.get_for_model(ServicesRieltor).id
         context['rieltor_service'] = ServicesRieltor.objects.get()
+        context['valuation'] = Valuation.get_solo()
+        context['valuation_content_type'] = ContentType.objects.get_for_model(Valuation).id
         return context
 
 
@@ -40,11 +43,35 @@ class RieltorServiceView(UpdateView):
         return context
 
 
+class ValuationServiceView(UpdateView):
+    model = Valuation
+    form_class = ValuationForm
+    template_name = 'admin2/services/valuation_edit.html'
+    context_object_name = 'valuation'
+    success_url = reverse_lazy('admin2:services')
+
+    def get_object(self, queryset=None):
+        return Valuation.objects.get()
+
+    def get_context_data(self, **kwargs):
+        context = super(ValuationServiceView, self).get_context_data(**kwargs)
+        context['video_form'] = VideoServiceSet(instance=Valuation.objects.get())
+        context['video_check'] = Valuation.get_solo().videos.all().order_by('id')
+        context['faqs'] = Valuation.get_solo().fag.all().order_by('id')
+        context['content_type'] = ContentType.objects.get_for_model(Valuation).id
+        return context
+
+
+
+
+
+
+
 def status_service(request):
     if request.method == 'POST':
         on = request.POST.get('check')
-        page_id = request.POST.get('page_id')
-        service = ServicesRieltor.objects.get()
+        content_type_id = request.POST.get('content_type')
+        service = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
         if on:
             service.is_enable = True
             service.save()

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, TemplateView, DetailView
 
-from services.models import ServicesRieltor
+from services.models import ServicesRieltor, Valuation
 
 
 class ServicesSiteView(TemplateView):
@@ -28,3 +28,21 @@ class RieltorServiceView(DetailView):
 
     def get_object(self, queryset=None):
         return ServicesRieltor.objects.get()
+
+
+class ValuationView(DetailView):
+    template_name = 'services/valuation.html'
+    context_object_name = 'valuation'
+
+    def get(self, request, *args, **kwargs):
+        if not Valuation.objects.get().is_enable:
+            return HttpResponseRedirect('/')
+        return super(ValuationView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ValuationView, self).get_context_data(**kwargs)
+        context['faqs'] = Valuation.objects.get().fag.all().order_by('id')
+        return context
+
+    def get_object(self, queryset=None):
+        return Valuation.objects.get()
