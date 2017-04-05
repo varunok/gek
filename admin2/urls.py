@@ -4,8 +4,8 @@ from django.conf.urls import url
 
 from admin2.views import login_views, main_views, articles_views, static_page_views, services_views
 from admin2.views import settings_views
-from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, status_faq, \
-    delete_image
+from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, \
+    delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView
 
 urlpatterns = [
     # login views
@@ -110,8 +110,13 @@ urlpatterns = [
     ),
     url(
         r'status_faq',
-        status_faq,
+        status_common,
         name='status_faq'
+    ),
+    url(
+        r'status_rep',
+        status_common,
+        name='status_rep'
     ),
     url(
         r'delete-image',
@@ -144,6 +149,26 @@ urlpatterns = [
         name='delete_faq'
     ),
     url(
+        r'create-rep/$',
+        create_rep,
+        name='create_rep'
+    ),
+    url(
+        r'save-rep/$',
+        save_rep,
+        name='save_rep'
+    ),
+    url(
+        'del-rep/(?P<id>[\w-]+)',
+        RepairDeleteView.as_view(),
+        name='delete_rep'
+    ),
+    url(
+        'save-photo/$',
+        SavePhotoView.as_view(),
+        name='delete_rep'
+    ),
+    url(
         r'^services/edit/rieltor_service/$',
         services_views.RieltorServiceView.as_view(),
         name='rieltor_service_edit'
@@ -152,5 +177,10 @@ urlpatterns = [
         r'^services/edit/valuation/$',
         services_views.ValuationServiceView.as_view(),
         name='valuation_edit'
+    ),
+    url(
+        r'^services/edit/repair/$',
+        services_views.RepairServiceView.as_view(),
+        name='repair_edit'
     ),
 ]

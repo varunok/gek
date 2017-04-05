@@ -80,6 +80,24 @@
                                         <a href="{{ valuation.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td><img src="{{ repair.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                    <td>{{ repair }}</td>
+                                    <td>
+                                        <form class="slideThreeForm" action="">
+                                            <div class="slideThree serviceStatus">
+                                                <input type="checkbox"  id="slideThree{{ repair.uuid }}" name="check" {% if repair.is_enable %} checked {% endif %} />
+                                                <label  for="slideThree{{ repair.uuid }}"></label>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="content_type" value="{{ repair_content_type }}">
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'admin2:repair_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                        <a href="{{ repair.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                    </td>
+                                </tr>
                                 {% for article in articles %}
                                     <tr>
                                         <td>{{ article.id }}</td>

@@ -8,6 +8,14 @@ from django.db import models
 # Create your models here.
 
 
+class ModelInService(object):
+    model_in = (
+        'servicesrieltor',
+        'valuation',
+        'repair'
+    )
+
+
 class Application(models.Model):
     HOME = 'home'
     CHOICES_SOURCE = (
@@ -69,7 +77,7 @@ class Video(models.Model):
     content_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE,
-        limit_choices_to={'model__in': ('servicesrieltor',)}
+        limit_choices_to={'model__in': ModelInService.model_in}
     )
     is_enable = models.BooleanField(
         verbose_name='Влючен ли?',
@@ -83,7 +91,7 @@ class Video(models.Model):
         verbose_name_plural = 'Видео'
 
     def __unicode__(self):
-        return '{} {}'.format(self.content_type, self.id)
+        return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
 
 
 class FAQ(models.Model):
@@ -100,7 +108,7 @@ class FAQ(models.Model):
     content_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE,
-        limit_choices_to={'model__in': ('servicesrieltor',)}
+        limit_choices_to={'model__in': ModelInService.model_in}
     )
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
@@ -110,7 +118,64 @@ class FAQ(models.Model):
         verbose_name_plural = 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ'
 
     def __unicode__(self):
-        return '{} {}'.format(self.content_type, self.id)
+        return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
+
+
+class TableRepair(models.Model):
+    name = models.CharField(
+        verbose_name='Наименование работ',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    price = models.CharField(
+        verbose_name='Стоимость',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ModelInService.model_in}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Стоимость ремонта'
+        verbose_name_plural = 'Стоимость ремонта'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.name if self.name else self.id)
+
+
+class Photo(models.Model):
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='photos/%Y/%m/%d/',
+        blank=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ModelInService.model_in}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Фото'
+        verbose_name_plural = 'Фото'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
 
 
 

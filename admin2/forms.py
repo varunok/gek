@@ -7,8 +7,8 @@ from django.forms.widgets import TextInput, Textarea
 from ckeditor.widgets import CKEditorWidget
 
 from articles.models import Sections, Articles
-from common.models import Video
-from services.models import ServicesRieltor
+from common.models import Video, Photo
+from services.models import ServicesRieltor, Repair
 
 
 class SectionUpdateForm(forms.ModelForm):
@@ -55,6 +55,13 @@ class ValuationForm(forms.ModelForm):
         fields = '__all__'
 
 
+class RepairForm(forms.ModelForm):
+    class Meta:
+        model = Repair
+        exclude = 'is_enable',
+        fields = '__all__'
+
+
 
 VideoRieltorServiceSet = generic_inlineformset_factory(
     Video,
@@ -70,4 +77,9 @@ VideoServiceSet = generic_inlineformset_factory(
     extra=1,
     min_num=1,
     max_num=1
+)
+PhotoServiceSet = generic_inlineformset_factory(
+    Photo,
+    can_delete=False,
+    extra=4
 )

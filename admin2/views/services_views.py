@@ -8,8 +8,28 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView
 
-from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet
-from services.models import ServicesRieltor, Valuation
+from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm
+from common.forms import ImageFormSet
+from services.models import ServicesRieltor, Valuation, Repair
+
+
+class ServicesMixin(UpdateView):
+    video_form = None
+
+    def get_object(self, queryset=None):
+        return self.model.objects.get()
+
+    def get_context_data(self, **kwargs):
+        context = super(ServicesMixin, self).get_context_data(**kwargs)
+        context['video_form'] = self.video_form(instance=self.model.objects.get())
+        context['video_check'] = self.model.get_solo().videos.all().order_by('id')
+        try:
+            context['faqs'] = self.model.get_solo().fag.all().order_by('id')
+        except AttributeError:
+            pass
+        context['content_type'] = ContentType.objects.get_for_model(self.model).id
+        return context
+
 
 
 class ServicesView(LoginRequiredMixin, TemplateView):
@@ -21,50 +41,43 @@ class ServicesView(LoginRequiredMixin, TemplateView):
         context['rieltor_service'] = ServicesRieltor.objects.get()
         context['valuation'] = Valuation.get_solo()
         context['valuation_content_type'] = ContentType.objects.get_for_model(Valuation).id
+        context['repair'] = Repair.get_solo()
+        context['repair_content_type'] = ContentType.objects.get_for_model(Repair).id
         return context
 
 
-class RieltorServiceView(UpdateView):
+class RieltorServiceView(ServicesMixin):
     model = ServicesRieltor
     form_class = RieltorServiceForm
     template_name = 'admin2/services/rieltor_service_edit.html'
     context_object_name = 'rieltor_service'
     success_url = reverse_lazy('admin2:services')
-
-    def get_object(self, queryset=None):
-        return ServicesRieltor.objects.get()
-
-    def get_context_data(self, **kwargs):
-        context = super(RieltorServiceView, self).get_context_data(**kwargs)
-        context['video_form'] = VideoRieltorServiceSet(instance=ServicesRieltor.objects.get())
-        context['video_check'] = ServicesRieltor.get_solo().videos.all().order_by('id')
-        context['faqs'] = ServicesRieltor.get_solo().fag.all().order_by('id')
-        context['content_type'] = ContentType.objects.get_for_model(ServicesRieltor).id
-        return context
+    video_form = VideoRieltorServiceSet
 
 
-class ValuationServiceView(UpdateView):
+class ValuationServiceView(ServicesMixin):
     model = Valuation
     form_class = ValuationForm
     template_name = 'admin2/services/valuation_edit.html'
     context_object_name = 'valuation'
     success_url = reverse_lazy('admin2:services')
+    video_form = VideoServiceSet
 
-    def get_object(self, queryset=None):
-        return Valuation.objects.get()
+
+class RepairServiceView(ServicesMixin):
+    model = Repair
+    form_class = RepairForm
+    template_name = 'admin2/services/repair_edit.html'
+    context_object_name = 'repair'
+    success_url = reverse_lazy('admin2:services')
+    video_form = VideoServiceSet
+    image_form = ImageFormSet
 
     def get_context_data(self, **kwargs):
-        context = super(ValuationServiceView, self).get_context_data(**kwargs)
-        context['video_form'] = VideoServiceSet(instance=Valuation.objects.get())
-        context['video_check'] = Valuation.get_solo().videos.all().order_by('id')
-        context['faqs'] = Valuation.get_solo().fag.all().order_by('id')
-        context['content_type'] = ContentType.objects.get_for_model(Valuation).id
+        context = super(RepairServiceView, self).get_context_data(**kwargs)
+        context['repairs_table'] = self.model.objects.get().repairs.all().order_by('id')
+        context['image_form'] = self.image_form()
         return context
-
-
-
-
-
 
 
 def status_service(request):

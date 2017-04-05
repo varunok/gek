@@ -77,6 +77,11 @@
                                     {% if is_active_valuation %}
                                         <li><a href="{% url 'services:valuation' valuation_slug %}">Оценка недвижимости</a></li>
                                     {% endif %}
+                                    {% repair_is_active as is_active_repair %}
+                                    {% repair_slug as repair_slug %}
+                                    {% if is_active_repair %}
+                                        <li><a href="{% url 'services:repair' repair_slug %}">Ремонт помещения</a></li>
+                                    {% endif %}
                                     <li><a href="#">Установка водомеров </a></li>
                                     <li><a href="#">Установка газовых счетчиков</a></li>
                                     <li><a href="#">Изготовление вывесок</a></li>

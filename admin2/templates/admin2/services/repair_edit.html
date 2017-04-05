@@ -1,0 +1,440 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+
+{% block title %}Редактирование {{ repair }}{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/dropzone.min.css' %}">
+    <style>
+        .slideThree {
+            width: 80px;
+            height: 26px;
+            background: #4B5F71;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50px;
+            box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+
+        }
+        .slideThree:after {
+            content: 'OFF';
+            color: #000;
+            position: absolute;
+            right: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+        }
+        .slideThree:before {
+            content: 'ON';
+            color: greenyellow;
+            position: absolute;
+            left: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+        }
+        label.lab {
+            display: block;
+            width: 34px;
+            height: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: 1;
+            background: #fcfff4;
+            background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+        }
+        input[type=checkbox] {
+            visibility: hidden;
+        }
+        input[type=checkbox]:checked + label {
+            left: 43px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ repair }}</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            <a href="{% url 'admin2:services' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Изменить {{ repair }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <ul class="stats-overview">
+                                <li >
+                                    <span class="name"> URL </span>
+                                    <span class="value text-success"> <a href="{{ repair.get_absolute_url }}" target="_blank">{{ repair.slug }}</a></span>
+                                </li>
+                                <li>
+                                    <span class="value text-success">
+                                        <form class="slideThreeForm serviceStatus" action="" style="display: flex">
+                                            <div class="slideThree">
+                                                <input type="checkbox"  id="{{ repair.uuid }}" name="check" {% if repair.is_enable %} checked {% endif %} />
+                                                <label class="lab" for="{{ repair.uuid }}"></label>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="content_type" value="{{ content_type }}">
+                                            </div>
+                                        </form>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="name">  </span>
+                                    <span class="value text-success"> </span>
+                                </li>
+                            </ul>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Редактировать</a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content2" id="video-tab" role="tab" data-toggle="tab" aria-expanded="false">Видео</a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content3" id="faq-tab" role="tab" data-toggle="tab" aria-expanded="false">Таблица цен</a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
+                                        </li>
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
+                                                {% csrf_token %}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.slug.label }}: <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.slug|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.slug.errors %}
+                                                        <span class="error-label">{{ form.slug.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.title|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.title.errors %}
+                                                        <span class="error-label">{{ form.title.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.subtitle.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.subtitle|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.subtitle.errors %}
+                                                        <span class="error-label">{{ form.subtitle.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.help_subtitle.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.help_subtitle|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.help_subtitle.errors %}
+                                                        <span class="error-label">{{ form.help_subtitle.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOTitle.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEOTitle|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEOTitle.errors %}
+                                                        <span class="error-label">{{ form.SEOTitle.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOKeywords.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEOKeywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEOKeywords.errors %}
+                                                        <span class="error-label">{{ form.SEOKeywords.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEODescription.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEODescription|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEODescription.errors %}
+                                                        <span class="error-label">{{ form.SEODescription.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        <input id="imgInp" name="image" type="file">
+                                                        <img id="blah" src="
+                                                        {% if repair.image %}
+                                                            {{ repair.image.url }}
+                                                        {% endif %}
+                                                        " alt="" width="100%" />
+                                                        {% if repair.image %}
+                                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input type="hidden" value="{{ content_type }}">
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="tab_content2" aria-labelledby="video-tab">
+                                            <div class="row">
+                                                <div class=" col-md-9 col-sm-9 col-xs-12">
+                                                <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="videoForm">
+                                                    {{ video_form.management_form }}
+                                                    <input type="hidden" name="content_type" value="{{ content_type }}">
+                                                    <input type="hidden" name="uuid" value="{{ repair.uuid }}">
+                                                    {% csrf_token %}
+                                                    {% for fields in video_form %}
+                                                        <div hidden>
+                                                            {{ fields.is_enable }}
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                        <h3>Видео №{{ forloop.counter }}</h3>
+                                                        {{ fields.id }}
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.title.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.title|addcss:'form-control' }}
+                                                            </div>
+                                                            {% if fields.title.errors %}
+                                                                <span class="error-label">{{ fields.title.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.video.label }}</label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                            </div>
+                                                            {% if fields.video.errors %}
+                                                                <span class="error-label">{{ fields.video.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <br>
+                                                    {% endfor %}
+                                                    <div class="ln_solid"></div>
+                                                    <div class="form-group" style="float: right">
+                                                        <div class="col-md-12">
+                                                            <button id="send-video" name="save_video" type="submit" class="btn btn-success">Сохранить</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                </div>
+                                                <div class=" col-md-3 col-sm-3 col-xs-12">
+                                                <div class="clearfix" style="margin-top: 80px"></div><br>
+                                                {% for video in video_check %}
+                                                    <div style="text-align: center">
+                                                        <button type="button" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-lg-{{ video.id }}">Просмотр</button>
+                                                        <input type="hidden" class="video-id" value="{{ video.id }}">
+                                                        <div class="modal fade modal-lg-{{ video.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                        <h4 class="modal-title" id="myModalLabel">{{ video.title }}</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>{{ video.video|safe }}</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="value text-success">
+                                                            <form class="statusVideoForm" action="" style="">
+                                                                <div class="slideThree">
+                                                                    <input type="checkbox" class="videoCheck"  id="statusVideo{{ video.id }}" name="check" {% if video.is_enable %} checked {% endif %} />
+                                                                    <label class="lab" for="statusVideo{{ video.id }}"></label>
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="video_id" value="{{ video.id }}">
+                                                                    <input type="hidden" class="loop_video_id" value="{{ forloop.counter0 }}">
+                                                                </div>
+                                                            </form>
+                                                        </span>
+                                                    </div>
+                                                    <div class="clearfix" style="margin-bottom: 140px"></div>
+                                                    <br>
+                                                {% endfor %}
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="tab_content3" aria-labelledby="faq-tab">
+                                            <div class="form-group" style="float: right">
+                                                <div class="col-md-12">
+                                                    <span class="value text-success">
+                                                        <form class="statusRepForm repStatus" action="" style="" name="repStatus">
+                                                            <div class="slideThree">
+                                                                <input type="checkbox" class="repCheck"  id="statusRep{{ repair.uuid }}" name="check" {% if repair.repairs_enable %} checked {% endif %} />
+                                                                <label class="lab" for="statusRep{{ repair.uuid }}"></label>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="content_type" value="{{ content_type }}">
+                                                            </div>
+                                                        </form>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <form method="post" enctype="multipart/form-data" name="repForm" class="repForm">
+                                                <div class="clearfix"></div><br>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="model_id" value="{{ repair.id }}">
+                                                <div class="list-rep">
+                                                    {% for rep in repairs_table %}
+                                                        <div class="rep-quant">
+                                                            <div class="ln_solid"></div>
+                                                            <div class="form-group" style="float: right">
+                                                                <div class="col-md-12">
+                                                                    <button id="delete-rep-{{ rep.id }}"  name="create_rep" type="submit" class="btn btn-warning delete-rep"><i class="fa fa-minus"></i> Удалить</button>
+                                                                    <input type="hidden" name="del-rep" value="{{ rep.id }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="item form-group">
+                                                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Наименование работ:</label>
+                                                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                    <input type="text" name="rep-name-{{ rep.id }}" value="{{ rep.name|default:'' }}" class="form-control col-md-7 col-xs-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div><br>
+                                                            <div class="item form-group">
+                                                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Стоимость:</label>
+                                                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                    <input type="text" name="rep-price-{{ rep.id }}" id="" style="width: 100%" value="{{ rep.price }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div><br>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="clearfix"></div><br>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="create_rep" name="create_rep" type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</button>
+                                                        <button id="send-rep" name="save_rep" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="tab_content4" aria-labelledby="galery-tab">
+                                            <form action="" id="galleryForm" class="galleryForm" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {{ image_form.management_form }}
+                                                <input type="hidden" value="{{ content_type }}" name="content_type">
+                                                <input type="hidden" value="{{ repair.id }}" name="object_id">
+                                                <div class="row">
+                                                    <div class=" col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="file" name="image" multiple>
+                                                    </div>
+                                                    <div class=" col-md-6 col-sm-6 col-xs-12">
+                                                        <button id="send_photo" name="send-photo" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                            <div class="ln_solid"></div>
+                                            <div class="row gallery">
+                                                <div class="col-md-55">
+                                                    <div class="thumbnail">
+                                                        <div class="image view view-first" style="height: 180px">
+                                                            <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
+                                                            <div class="mask" style="height: 180px">
+                                                                <p>Your Text</p>
+                                                                <div class="tools tools-bottom" style="margin: 93px 0 0 0">
+                                                                    <a href="#"><i class="fa fa-times"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/dropzone.min.js' %}"></script>
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/video_status.js' %}"></script>
+    <script src="{% static 'js/rep_status.js' %}"></script>
+    <script src="{% static 'js/gallery.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+
+        $(document).ready(function() {
+
+        })
+
+    </script>
+{% endblock js %}
