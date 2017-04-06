@@ -12,7 +12,8 @@ class ModelInService(object):
     model_in = (
         'servicesrieltor',
         'valuation',
-        'repair'
+        'repair',
+        'insurance'
     )
 
 

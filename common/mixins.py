@@ -1,7 +1,7 @@
 from django.db.models import F
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
-from django.views.generic.detail import SingleObjectMixin, BaseDetailView
+from django.views.generic.detail import SingleObjectMixin, BaseDetailView, DetailView
 from django.views.generic.list import BaseListView
 
 
@@ -50,3 +50,26 @@ class DinamicNextMixin(BaseListView):
             })
             return HttpResponse(data)
         return super(DinamicNextMixin, self).get(request, *args, **kwargs)
+
+
+class ServiceSiteMixin(DetailView):
+
+    def get(self, request, *args, **kwargs):
+        if not self.model.objects.get().is_enable:
+            return HttpResponseRedirect('/')
+        return super(ServiceSiteMixin, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ServiceSiteMixin, self).get_context_data(**kwargs)
+        try:
+            context['faqs'] = self.model.objects.get().fag.all().order_by('id')
+        except AttributeError:
+            pass
+        try:
+            context['images'] = self.model.objects.get().images.all().order_by('id')
+        except AttributeError:
+            pass
+        return context
+
+    def get_object(self, queryset=None):
+        return self.model.objects.get()

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load video_tag %}
+{% load thumbnail %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="not-front repair_premises trust" {% endblock %}
@@ -92,32 +93,23 @@
                 </div>
             </div>
         {% endif %}
-		<div class="block_our_works">
-			<div class="block_content">
-				<div class="block_title">Наши работы</div>
-				<div class="view_content">
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/w_0.png' %}" alt=""></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/w_1.png' %}" alt=""></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/w_2.png' %}" alt=""></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/w_2.png' %}" alt=""></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/w_1.png' %}" alt=""></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/w_0.png' %}" alt=""></div>
-					</div>
-				</div>
-				<div class="footnote">*Вы поменяете свое мнение о ремонте после нашей работы!</div>
-			</div>
-		</div>
+        {% with repair.images.all as images %}
+            {% if images %}
+                <div class="block_our_works">
+                    <div class="block_content">
+                        <div class="block_title">Наши работы</div>
+                        <div class="view_content">
+                            {% for image in images %}
+                                <div class="views_row">
+                                    <div class="field_image"><img src="{{ image.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%"></div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="footnote">*Вы поменяете свое мнение о ремонте после нашей работы!</div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
         {% if repair.videos.all.first.is_enable and repair.videos.all.first.video %}
             <div class="block block_video">
                 <div class="block_content">

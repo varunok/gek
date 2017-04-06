@@ -8,7 +8,7 @@ from ckeditor.widgets import CKEditorWidget
 
 from articles.models import Sections, Articles
 from common.models import Video, Photo
-from services.models import ServicesRieltor, Repair
+from services.models import ServicesRieltor, Repair, Insurance
 
 
 class SectionUpdateForm(forms.ModelForm):
@@ -58,6 +58,13 @@ class ValuationForm(forms.ModelForm):
 class RepairForm(forms.ModelForm):
     class Meta:
         model = Repair
+        exclude = 'is_enable',
+        fields = '__all__'
+
+
+class InsuranceForm(forms.ModelForm):
+    class Meta:
+        model = Insurance
         exclude = 'is_enable',
         fields = '__all__'
 

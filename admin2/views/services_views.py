@@ -8,9 +8,9 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView
 
-from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm
-from common.forms import ImageFormSet
-from services.models import ServicesRieltor, Valuation, Repair
+from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm, \
+    InsuranceForm
+from services.models import ServicesRieltor, Valuation, Repair, Insurance
 
 
 class ServicesMixin(UpdateView):
@@ -38,11 +38,13 @@ class ServicesView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ServicesView, self).get_context_data(**kwargs)
         context['rieltor_service_content_type'] = ContentType.objects.get_for_model(ServicesRieltor).id
-        context['rieltor_service'] = ServicesRieltor.objects.get()
+        context['rieltor_service'] = ServicesRieltor.get_solo()
         context['valuation'] = Valuation.get_solo()
         context['valuation_content_type'] = ContentType.objects.get_for_model(Valuation).id
         context['repair'] = Repair.get_solo()
         context['repair_content_type'] = ContentType.objects.get_for_model(Repair).id
+        context['insurence'] = Insurance.get_solo()
+        context['insurence_content_type'] = ContentType.objects.get_for_model(Insurance).id
         return context
 
 
@@ -71,13 +73,20 @@ class RepairServiceView(ServicesMixin):
     context_object_name = 'repair'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
-    image_form = ImageFormSet
 
     def get_context_data(self, **kwargs):
         context = super(RepairServiceView, self).get_context_data(**kwargs)
         context['repairs_table'] = self.model.objects.get().repairs.all().order_by('id')
-        context['image_form'] = self.image_form()
         return context
+
+
+class InsurenceServiceView(ServicesMixin):
+    model = Insurance
+    form_class = InsuranceForm
+    template_name = 'admin2/services/insurence_edit.html'
+    context_object_name = 'insurance'
+    success_url = reverse_lazy('admin2:services')
+    video_form = VideoServiceSet
 
 
 def status_service(request):

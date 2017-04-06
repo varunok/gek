@@ -147,3 +147,8 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('users:profile', args=[self.id])
+
+    def save(self, *args, **kwargs):
+        if self.is_superuser:
+            self.group = self.Group.SA
+        super(User, self).save(*args, **kwargs)

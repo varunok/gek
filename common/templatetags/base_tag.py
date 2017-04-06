@@ -1,6 +1,6 @@
 from django import template
 
-from services.models import ServicesRieltor, Valuation, Repair
+from services.models import ServicesRieltor, Valuation, Repair, Insurance
 
 register = template.Library()
 
@@ -28,3 +28,11 @@ def repair_is_active():
 @register.assignment_tag
 def repair_slug():
     return Repair.objects.get().slug
+
+@register.assignment_tag
+def insurance_is_active():
+    return Insurance.objects.get().is_enable
+
+@register.assignment_tag
+def insurance_slug():
+    return Insurance.objects.get().slug

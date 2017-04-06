@@ -10,7 +10,7 @@ from django.views import View
 from django.views.generic import TemplateView, DeleteView, UpdateView, CreateView
 
 from admin2.forms import VideoRieltorServiceSet
-from common.forms import PhotoForm, ImageFormSet
+from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo
 
@@ -147,30 +147,30 @@ class RepairDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
     model = TableRepair
     pk_url_kwarg = 'id'
 
+
+class DeletePhotoView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+    model = Photo
+    pk_url_kwarg = 'id'
+
+
 class SavePhotoView(View):
     model = Photo
     template_name = 'common/photo_items.html'
-    form_class = ImageFormSet
-    list_callback = []
 
     def post(self, request, *args, **kwargs):
-        # print(self.request.FILES)
-        # for image in self.request.FILES.get('images'):
-        #     print(image)
-            form = self.form_class(self.request.POST, self.request.FILES)
-            if form.is_valid():
-                print(form)
-                form.save()
-                return HttpResponse()
-
-
-
-
-    def form_valid(self, form):
-        self.object = form.save()
-        return HttpResponse(self.object.id)
+        list_callback = []
+        content_type = self.get_content_type()
+        for image in self.request.FILES.getlist('image'):
+            photo = Photo.objects.create(image=image,
+                                 content_type=content_type,
+                                 object_id = self.get_obj_id())
+            list_callback.append(photo)
+        response = render_to_string(self.template_name, {'images': list_callback})
+        return HttpResponse(response)
 
     def get_content_type(self):
         content_type_id = self.request.POST.get('content_type')
         return ContentType.objects.get_for_id(content_type_id)
 
+    def get_obj_id(self):
+        return self.request.POST.get('object_id')

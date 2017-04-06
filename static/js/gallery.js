@@ -3,11 +3,6 @@
  */
 
 $(document).ready(function() {
-    // $('.galleryForm').on('click', '#send_photo', function (event) {
-    //     event.preventDefault();
-    //     var data = $('#galleryForm').serialize();
-    //     $.post('save-photo', data)
-    // })
     $('#galleryForm').submit(function(evt) {
                 evt.preventDefault();
 
@@ -21,11 +16,24 @@ $(document).ready(function() {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-
+                    $('.gallery').append(data);
+                    notify_success(0, 'Сохранено');
                 },
                 error: function(data) {
-
+                    notify_error('Ошибка '+ data.status, data.statusText);
                 }
                 });
             });
+    $(document).on('click', '.del-photo', function (event) {
+        event.preventDefault();
+        _this = $(this);
+        var photo_id = $(this).parent().next().val();
+        $.get('delete-photo/'+photo_id)
+            .then(function(response) {
+                notify_success(response, 'Удалено');
+                _this.parents('.col-md-55').fadeOut();
+            }, function(err) {
+                notify_error('Ошибка '+ err.status, err.statusText);
+            });
+    })
 });

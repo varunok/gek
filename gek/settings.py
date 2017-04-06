@@ -219,10 +219,15 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
+
 THUMBNAIL_ALIASES = {
     '': {
         'article_image_60': {'size': (60, 60), 'crop': True},
         'admin_avatar_200': {'size': (200, 200), 'crop': True},
+        'gallery_image_275': {'size': (275, 185), 'crop': True},
+        'gallery_image_370': {'size': (370, 211), 'crop': True},
+        'gallery_image_570': {'size': (570, 338), 'crop': True},
     },
 }
 
