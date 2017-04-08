@@ -12,7 +12,7 @@ from django.views.generic import TemplateView, DeleteView, UpdateView, CreateVie
 from admin2.forms import VideoRieltorServiceSet
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
-from common.models import Video, FAQ, TableRepair, Photo
+from common.models import Video, FAQ, TableRepair, Photo, TextPacket
 
 
 class MainView(TemplateView):
@@ -51,16 +51,24 @@ def status_video(request):
 def status_common(request):
     if request.method == 'POST':
         on = request.POST.get('check')
+        type_eneble = request.POST.get('type')
+        model_id = request.POST.get('model_id')
         content_type_id = request.POST.get('content_type')
-        model = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
+        model = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=model_id)
         if on:
-            model.faq_enable = True
-            model.repairs_enable = True
+            if type_eneble == 'faqs':
+                model.faq_enable = True
+                model.repairs_enable = True
+            elif type_eneble == 'packet':
+                model.packet_enable = True
             model.save()
             return HttpResponse('Включено')
         else:
-            model.faq_enable = False
-            model.repairs_enable = False
+            if type_eneble == 'faqs':
+                model.faq_enable = False
+                model.repairs_enable = False
+            elif type_eneble == 'packet':
+                model.packet_enable = False
             model.save()
             return HttpResponse('Выключено')
     return HttpResponse(status=500)
@@ -71,6 +79,7 @@ def delete_image(request):
     model = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
     model.image.delete(save=True)
     return HttpResponse('Удалено')
+
 
 class ModalVideo(View):
     pk = 'pk'
@@ -125,7 +134,7 @@ def create_rep(request):
     model_id = request.GET.get('model_id')
     model = ContentType.objects.get_for_id(content_type_id)
     rep = TableRepair.objects.create(content_type=model,
-                             object_id=model_id)
+                                     object_id=model_id)
     context = render_to_string('common/rep_item.html', {'rep': rep})
     return HttpResponse(context)
 
@@ -162,8 +171,8 @@ class SavePhotoView(View):
         content_type = self.get_content_type()
         for image in self.request.FILES.getlist('image'):
             photo = Photo.objects.create(image=image,
-                                 content_type=content_type,
-                                 object_id = self.get_obj_id())
+                                         content_type=content_type,
+                                         object_id=self.get_obj_id())
             list_callback.append(photo)
         response = render_to_string(self.template_name, {'images': list_callback})
         return HttpResponse(response)
@@ -174,3 +183,47 @@ class SavePhotoView(View):
 
     def get_obj_id(self):
         return self.request.POST.get('object_id')
+
+
+def packet_text_save(request):
+    if request.method == 'POST':
+        packet_content_type = request.POST.get('packet_content_type')
+        packet_id = request.POST.get('packet_id')
+        content_type = ContentType.objects.get_for_id(packet_content_type)
+        # packet = packet_model.objects.get(id=packet_id)
+        # print(packet)
+        for item in request.POST:
+            if 'item' in item:
+                item = request.POST.get(item)
+                TextPacket.objects.create(
+                    text=item,
+                    content_type=content_type,
+                    object_id=packet_id)
+        return HttpResponse(status=200)
+    return HttpResponse(status=500)
+
+
+def packet_create(request):
+    if request.method == 'POST':
+        packet_content_type = request.POST.get('packet_content_type')
+        service_content_type = request.POST.get('service_content_type')
+        model_id = request.POST.get('model_id')
+        packet = ContentType.objects.get_for_id(packet_content_type).model_class()
+        service_model = ContentType.objects.get_for_id(service_content_type).model_class().objects.get(id=model_id)
+        packet = packet.objects.create()
+        packet_name = packet.__name_packet__
+        setattr(service_model, packet_name, packet)
+        service_model.save()
+        return render(request, 'common/packet_item.html', {'packet': packet,
+                                                           'packet_content_type': packet_content_type,
+                                                           'color': get_color(packet)})
+    return HttpResponse(status=500)
+
+
+def get_color(packet):
+    if packet.__name_packet__ == 'base_packet':
+        return '#03baf7'
+    if packet.__name_packet__ == 'midle_packet':
+        return '#20ce5d'
+    if packet.__name_packet__ == 'expert_packet':
+        return '#f8bd2f'

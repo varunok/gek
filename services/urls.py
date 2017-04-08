@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from services.views import ServicesSiteView, RieltorServiceView, ValuationView, RepairView, InsuranceView
+from services.views import ServicesSiteView, RieltorServiceView, ValuationView, RepairView, InsuranceView, CleaningView
 
 urlpatterns = [
     url('^$', ServicesSiteView.as_view(), name='services'),
@@ -10,4 +10,5 @@ urlpatterns = [
     url('^valuation/(?P<slug>[\w-]+)/$', ValuationView.as_view(), name='valuation'),
     url('^repair/(?P<slug>[\w-]+)/$', RepairView.as_view(), name='repair'),
     url('^insurance/(?P<slug>[\w-]+)/$', InsuranceView.as_view(), name='insurance'),
+    url('^cleaning/(?P<slug>[\w-]+)/$', CleaningView.as_view(), name='cleaning'),
     ]

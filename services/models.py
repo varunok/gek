@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from solo.models import SingletonModel
 
-from common.models import Video, FAQ, Photo, TableRepair
+from common.models import Video, FAQ, Photo, TableRepair, BasePacket, MidlePacket, ExpertPacket
 
 
 def slug_validator(value):
@@ -202,9 +202,9 @@ class Repair(SingletonModel):
         default=uuid.uuid4,
         editable=False
     )
-    videos = GenericRelation(Video, related_query_name='valuation')
-    repairs = GenericRelation(TableRepair, related_query_name='valuation')
-    images = GenericRelation(Photo, related_query_name='valuation')
+    videos = GenericRelation(Video, related_query_name='repair')
+    repairs = GenericRelation(TableRepair, related_query_name='repair')
+    images = GenericRelation(Photo, related_query_name='repair')
 
     class Meta:
         verbose_name = 'Ремонт помещения'
@@ -261,9 +261,9 @@ class Insurance(SingletonModel):
         default=uuid.uuid4,
         editable=False
     )
-    videos = GenericRelation(Video, related_query_name='valuation')
-    images = GenericRelation(Photo, related_query_name='valuation')
-    fag = GenericRelation(FAQ, related_query_name='valuation')
+    videos = GenericRelation(Video, related_query_name='insurance')
+    images = GenericRelation(Photo, related_query_name='insurance')
+    fag = GenericRelation(FAQ, related_query_name='insurance')
 
     class Meta:
         verbose_name = 'Страхование недвижимости'
@@ -273,3 +273,85 @@ class Insurance(SingletonModel):
 
     def get_absolute_url(self):
         return reverse('services:insurance', args=[self.slug])
+
+
+class Cleaning(SingletonModel):
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Уборка квартир', allow_unicode=True),
+        validators=[slug_validator]
+    )
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Влючен ли?',
+        default=True
+    )
+    packet_enable = models.BooleanField(
+        verbose_name='Влючен ли пакет?',
+        default=True
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False
+    )
+    videos = GenericRelation(Video, related_query_name='cleaning')
+    images = GenericRelation(Photo, related_query_name='cleaning')
+    base_packet = models.OneToOneField(
+        BasePacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет начинающий',
+        related_query_name='cleaning',
+        blank=True,
+        null=True
+    )
+    midle_packet = models.OneToOneField(
+        MidlePacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет Продвинутый',
+        related_query_name='cleaning',
+        blank=True,
+        null=True
+    )
+    expert_packet = models.OneToOneField(
+        ExpertPacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет Эксперт',
+        related_query_name='cleaning',
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = 'Уборка квартир'
+
+    def __unicode__(self):
+        return 'Уборка квартир'
+
+    def get_absolute_url(self):
+        return reverse('services:cleaning', args=[self.slug])

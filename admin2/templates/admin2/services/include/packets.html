@@ -1,0 +1,169 @@
+<div role="tabpanel" class="tab-pane" id="packet_tab_content" aria-labelledby="packet-tab">
+    <div class="form-group" style="float: right">
+        <div class="col-md-12">
+            <span class="value text-success">
+                <form class="statusPacketForm packetStatus" action="" style="" name="packetStatus">
+                    <div class="slideThree">
+                        <input type="checkbox" class="faqCheck"  id="statusPacket{{ service.uuid }}" name="check" {% if service.packet_enable %} checked {% endif %} />
+                        <label class="lab" for="statusPacket{{ service.uuid }}"></label>
+                        {% csrf_token %}
+                        <input type="hidden" name="content_type" value="{{ content_type }}">
+                        <input type="hidden" name="model_id" value="{{ service.id }}">
+                        <input type="hidden" name="type" value="packet">
+                    </div>
+                </form>
+            </span>
+        </div>
+    </div>
+
+        <div class="col-md-12 packets">
+            <!-- price element -->
+            {% if service.base_packet %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="pricing">
+                    <div class="title" style="background-color:#03baf7">
+                        <h1>{{ service.base_packet.title }}</h1>
+                    </div>
+                    <div class="x_content">
+                        <div class="">
+                            <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                    {% for text in service.base_packet.text.all %}
+                                        <li> {{ text.text }} </li>
+                                    {% endfor %}
+                                </ul>
+                                <form action="" class="packetForm" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="packet_content_type" value="{{ base_content_type }}">
+                                    <input type="hidden" name="packet_id" value="{{ service.base_packet.id }}">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="pricing_footer">
+                            <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
+                            <p>
+                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="col-md-4 col-sm-6 col-xs-12 append-packet">
+                    <div class="pricing">
+                    <div class="title" style="background-color:#03baf7">
+                        <form action="" class="packetAddForm" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="packet_content_type" value="{{ base_content_type }}">
+                            <input type="hidden" name="service_content_type" value="{{ content_type }}">
+                            <input type="hidden" name="model_id" value="{{ service.id }}">
+                        </form>
+                        <a href="" style="color:white;" class="add-packet">
+                            <h1>Создать</h1>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- price element -->
+            <!-- price element -->
+            {% if service.midle_packet %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="pricing">
+                    <div class="title" style="background-color:#20ce5d">
+                        <h1>{{ service.midle_packet.title }}</h1>
+                    </div>
+                    <div class="x_content">
+                        <div class="">
+                            <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                    {% for text in service.midle_packet.text.all %}
+                                        <li> {{ text.text }} </li>
+                                    {% endfor %}
+                                </ul>
+                                <form action="" class="packetForm" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="packet_content_type" value="{{ midle_content_type }}">
+                                    <input type="hidden" name="packet_id" value="{{ service.midle_packet.id }}">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="pricing_footer">
+                            <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
+                            <p>
+                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="col-md-4 col-sm-6 col-xs-12 append-packet">
+                    <div class="pricing">
+                    <div class="title" style="background-color:#20ce5d">
+                        <form action="" class="packetAddForm" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="packet_content_type" value="{{ midle_content_type }}">
+                            <input type="hidden" name="service_content_type" value="{{ content_type }}">
+                            <input type="hidden" name="model_id" value="{{ service.id }}">
+                        </form>
+                        <a href="" style="color:white;" class="add-packet">
+                            <h1>Создать</h1>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- price element -->
+            <!-- price element -->
+            {% if service.expert_packet %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="pricing">
+                    <div class="title" style="background-color:#f8bd2f">
+                        <h1>{{ service.expert_packet.title }}</h1>
+                    </div>
+                    <div class="x_content">
+                        <div class="">
+                            <div class="pricing_features">
+                                <ul class="list-unstyled text-left">
+                                    {% for text in service.expert_packet.text.all %}
+                                        <li> {{ text.text }} </li>
+                                    {% endfor %}
+                                </ul>
+                                <form action="" class="packetForm" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="packet_content_type" value="{{ expert_content_type }}">
+                                    <input type="hidden" name="packet_id" value="{{ service.expert_packet.id }}">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="pricing_footer">
+                            <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
+                            <p>
+                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="col-md-4 col-sm-6 col-xs-12 append-packet">
+                    <div class="pricing">
+                    <div class="title" style="background-color:#f8bd2f">
+                        <form action="" class="packetAddForm" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="packet_content_type" value="{{ expert_content_type }}">
+                            <input type="hidden" name="service_content_type" value="{{ content_type }}">
+                            <input type="hidden" name="model_id" value="{{ service.id }}">
+                        </form>
+                        <a href="" style="color:white;" class="add-packet">
+                            <h1>Создать</h1>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- price element -->
+        </div>
+
+</div>

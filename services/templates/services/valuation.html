@@ -11,7 +11,7 @@
             {% if valuation.image %}
                 style="background: url({{ valuation.image.url }}) no-repeat center/cover"
              {% endif %}>
-			<div class="slider_title">{{ valuation.title }}</div>
+			<div class="slider_title">{{ valuation.title|default:'Оценка недвижимости' }}</div>
 			<div class="slider_subtitle">Оформление от 1 до 3 дней.</div>
 			<div class="title_text">Отправить заявку прямо сейчас!</div>
 			<form action="#" class="webform_client_form">

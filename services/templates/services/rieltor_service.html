@@ -11,7 +11,7 @@
              {% if service_rieltor.image %}
                 style="background: url({{ service_rieltor.image.url }}) no-repeat center/cover"
              {% endif %}>
-			<div class="slider_title">{{ service_rieltor.title|safe }}</div>
+			<div class="slider_title">{{ service_rieltor.title|default:'Помощь с поиском коммерческой недвижимости' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item name">
 					<input type="text" placeholder="Введите ваше имя">

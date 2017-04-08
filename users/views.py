@@ -28,14 +28,17 @@ class AdminDetail(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
     form_class = UserChangeForm
 
+
 class AdminCreate(LoginRequiredMixin, CreateView):
     model = User
     template_name = 'users/profile.html'
     form_class = UserCreationForm
 
+
 class AdminDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
     model = User
     pk_url_kwarg = 'id'
+
 
 class ChangePass(View):
     status_404 = 404
@@ -63,11 +66,11 @@ class ChangePass(View):
         pass1 = request.POST.get('pass')
         pass2 = request.POST.get('pass2')
         if not pass1:
-            return {"message":"Не вибран пароль", "status": self.status_404}
+            return {"message": "Не вибран пароль", "status": self.status_404}
         elif not pass2:
-            return {"message":"Нет подтверждения пароля", "status": self.status_404}
+            return {"message": "Нет подтверждения пароля", "status": self.status_404}
         elif pass1 != pass2:
-            return {"message":"Пароли не совпадают", "status": self.status_404}
+            return {"message": "Пароли не совпадают", "status": self.status_404}
 
     def _set_pass(self, pass1):
         user = self._get_user()

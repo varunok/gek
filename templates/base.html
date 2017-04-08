@@ -87,6 +87,11 @@
                                     {% if is_active_insurance %}
                                         <li><a href="{% url 'services:insurance' insurance_slug %}">Страхование недвижимости</a></li>
                                     {% endif %}
+                                    {% cleaning_is_active as is_active_cleaning %}
+                                    {% cleaning_slug as cleaning_slug %}
+                                    {% if is_active_insurance %}
+                                        <li><a href="{% url 'services:cleaning' cleaning_slug %}">Уборка квартир</a></li>
+                                    {% endif %}
                                     <li><a href="#">Установка водомеров </a></li>
                                     <li><a href="#">Установка газовых счетчиков</a></li>
                                     <li><a href="#">Изготовление вывесок</a></li>
@@ -112,7 +117,7 @@
             <div class="footer_top">
                 <div class="region_footer">
                     <div class="logo_wrapper">
-                        <a href="/" class="logo"><img src="images/logo.png" alt=""><span class="site_name">usatba-krm</span><span class="domen">.DN.UA</span></a>
+                        <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt=""><span class="site_name">usatba-krm</span><span class="domen">.DN.UA</span></a>
                         <div class="copyright">Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством Украины.</div>
                     </div>
                     <div class="footer_center">

@@ -1,0 +1,40 @@
+<div class="block block_package">
+    <div class="block_content">
+        <div class="block_title">Выберите подходящий пакет:</div>
+        <div class="view_content">
+            <div class="views_row beginner">
+                <div class="title">{{ service.base_packet.title }}</div>
+                <div class="views_body">
+                    <ul>
+                        {% for text in service.base_packet.text.all %}
+                            <li>{{ text.text }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="submit"><a href="#">Отправить заявку</a></div>
+                </div>
+            </div>
+            <div class="views_row advanced">
+                <div class="title">{{ service.midle_packet.title }}</div>
+                <div class="views_body">
+                    <ul>
+                        {% for text in service.midle_packet.text.all %}
+                            <li>{{ text.text }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="submit"><a href="#">Отправить заявку</a></div>
+                </div>
+            </div>
+            <div class="views_row expert">
+                <div class="title">{{ service.expert_packet.title }}</div>
+                <div class="views_body">
+                    <ul>
+                        {% for text in service.expert_packet.text.all %}
+                            <li>{{ text.text }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="submit"><a href="#">Отправить заявку</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

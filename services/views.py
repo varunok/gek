@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, TemplateView, DetailView
 
 from common.mixins import ServiceSiteMixin
-from services.models import ServicesRieltor, Valuation, Repair, Insurance
+from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning
 
 
 class ServicesSiteView(TemplateView):
@@ -35,3 +35,9 @@ class InsuranceView(ServiceSiteMixin):
     template_name = 'services/insurance.html'
     context_object_name = 'insurance'
     model = Insurance
+
+
+class CleaningView(ServiceSiteMixin):
+    template_name = 'services/cleaning.html'
+    context_object_name = 'cleaning'
+    model = Cleaning

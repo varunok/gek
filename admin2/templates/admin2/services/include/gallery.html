@@ -1,0 +1,38 @@
+{% load thumbnail %}
+<div role="tabpanel" class="tab-pane" id="tab_content4" aria-labelledby="galery-tab">
+    <form action="" id="galleryForm" class="galleryForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="{{ content_type }}" name="content_type">
+        <input type="hidden" value="{{ service.id }}" name="object_id">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6 col-xs-12">
+                <input type="file" name="image" multiple>
+            </div>
+            <div class=" col-md-6 col-sm-6 col-xs-12">
+                <button id="send_photo" name="send-photo" type="submit" class="btn btn-success">Сохранить</button>
+            </div>
+
+        </div>
+    </form>
+    <div class="ln_solid"></div>
+    <div class="row gallery">
+        {% for image in service.images.all %}
+            <div class="col-md-55">
+                <div class="thumbnail">
+                    <div class="image view view-first" style="height: 180px">
+                        <img style="width: 100%; display: block;" src="{{ image.image|thumbnail_url:'gallery_image_275' }}" alt="image" />
+                        <div class="mask" style="height: 180px">
+{#                              <p>Your Text</p>#}
+                            <div class="tools tools-bottom" style="margin: 93px 0 0 0">
+                                <a href="#">
+                                    <i class="fa fa-times del-photo"></i>
+                                </a>
+                                <input type="hidden" value="{{ image.id }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

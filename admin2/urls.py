@@ -5,7 +5,8 @@ from django.conf.urls import url
 from admin2.views import login_views, main_views, articles_views, static_page_views, services_views
 from admin2.views import settings_views
 from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, \
-    delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView
+    delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView, \
+    packet_text_save, packet_create
 
 urlpatterns = [
     # login views
@@ -119,6 +120,21 @@ urlpatterns = [
         name='status_rep'
     ),
     url(
+        r'status_packet',
+        status_common,
+        name='status_packet'
+    ),
+    url(
+        r'packet-text-save',
+        packet_text_save,
+        name='packet_text_save'
+    ),
+    url(
+        r'packet-create',
+        packet_create,
+        name='packet_create'
+    ),
+    url(
         r'delete-image',
         delete_image,
         name='delete_image'
@@ -192,5 +208,10 @@ urlpatterns = [
         r'^services/edit/insurence/$',
         services_views.InsurenceServiceView.as_view(),
         name='insurence_edit'
+    ),
+    url(
+        r'^services/edit/cleaning/$',
+        services_views.CleaningServiceView.as_view(),
+        name='cleaning_edit'
     ),
 ]

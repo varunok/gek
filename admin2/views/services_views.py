@@ -9,8 +9,9 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView
 
 from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm, \
-    InsuranceForm
-from services.models import ServicesRieltor, Valuation, Repair, Insurance
+    InsuranceForm, CleaningForm
+from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning
+from common.models import BasePacket, MidlePacket, ExpertPacket
 
 
 class ServicesMixin(UpdateView):
@@ -31,7 +32,6 @@ class ServicesMixin(UpdateView):
         return context
 
 
-
 class ServicesView(LoginRequiredMixin, TemplateView):
     template_name = 'admin2/services/services.html'
 
@@ -45,6 +45,8 @@ class ServicesView(LoginRequiredMixin, TemplateView):
         context['repair_content_type'] = ContentType.objects.get_for_model(Repair).id
         context['insurence'] = Insurance.get_solo()
         context['insurence_content_type'] = ContentType.objects.get_for_model(Insurance).id
+        context['cleaning'] = Cleaning.get_solo()
+        context['cleaning_content_type'] = ContentType.objects.get_for_model(Cleaning).id
         return context
 
 
@@ -87,6 +89,22 @@ class InsurenceServiceView(ServicesMixin):
     context_object_name = 'insurance'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
+
+
+class CleaningServiceView(ServicesMixin):
+    model = Cleaning
+    form_class = CleaningForm
+    template_name = 'admin2/services/cleaning_edit.html'
+    context_object_name = 'cleaning'
+    success_url = reverse_lazy('admin2:services')
+    video_form = VideoServiceSet
+
+    def get_context_data(self, **kwargs):
+        context = super(CleaningServiceView, self).get_context_data(**kwargs)
+        context['base_content_type'] = ContentType.objects.get_for_model(BasePacket).id
+        context['midle_content_type'] = ContentType.objects.get_for_model(MidlePacket).id
+        context['expert_content_type'] = ContentType.objects.get_for_model(ExpertPacket).id
+        return context
 
 
 def status_service(request):

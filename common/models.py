@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
@@ -13,7 +13,8 @@ class ModelInService(object):
         'servicesrieltor',
         'valuation',
         'repair',
-        'insurance'
+        'insurance',
+        'cleaning'
     )
 
 
@@ -179,4 +180,77 @@ class Photo(models.Model):
         return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
 
 
+class TextPacket(models.Model):
+    text = models.TextField(verbose_name='Текст')
 
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('basepacket',
+                                        'midlepacket',
+                                        'expertpacket'
+                                        )}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Текст пакета'
+        verbose_name_plural = 'Текст пакетов'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.id)
+
+
+class BasePacket(models.Model):
+    __name_packet__ = 'base_packet'
+    title = models.CharField(
+        verbose_name='Начинающий',
+        max_length=250,
+        default='Начинающий',
+        blank=True
+    )
+    text = GenericRelation(TextPacket, related_query_name='basepacket')
+
+    class Meta:
+        verbose_name = 'Пакет Начинающий'
+        verbose_name_plural = 'Пакет Начинающий'
+
+    def __unicode__(self):
+        return '{} - ID:{}'.format(self.title, self.id)
+
+
+class MidlePacket(models.Model):
+    __name_packet__ = 'midle_packet'
+    title = models.CharField(
+        verbose_name='Продвинутый',
+        max_length=250,
+        default='Продвинутый',
+        blank=True
+    )
+    text = GenericRelation(TextPacket, related_query_name='midlepacket')
+
+    class Meta:
+        verbose_name = 'Пакет Продвинутый'
+        verbose_name_plural = 'Пакет Продвинутый'
+
+    def __unicode__(self):
+        return '{} - ID:{}'.format(self.title, self.id)
+
+
+class ExpertPacket(models.Model):
+    __name_packet__ = 'expert_packet'
+    title = models.CharField(
+        verbose_name='Эксперт',
+        max_length=250,
+        default='Эксперт',
+        blank=True
+    )
+    text = GenericRelation(TextPacket, related_query_name='expertpacket')
+
+    class Meta:
+        verbose_name = 'Пакет Эксперт'
+        verbose_name_plural = 'Пакет Эксперт'
+
+    def __unicode__(self):
+        return '{} - ID:{}'.format(self.title, self.id)
