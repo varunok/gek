@@ -89,7 +89,7 @@ urlpatterns = [
         name='static_pages'
     ),
     url(
-        r'^static_pages/edit/(?P<pk>[\w-]+)/$',
+        r'^static_pages/edit/(?P<slug>[\w-]+)/$',
         static_page_views.StaticPageDetailView.as_view(),
         name='static_page_detail'
     ),

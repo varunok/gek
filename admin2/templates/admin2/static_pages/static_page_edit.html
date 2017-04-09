@@ -95,10 +95,10 @@
                                         <span class="value text-success">
                                             <form class="slideThreeForm" action="" style="display: flex">
                                                 <div class="slideThree">
-                                                    <input type="checkbox"  id="slideThree{{ page.id }}" name="check" {% if page.is_enable %} checked {% endif %} />
-                                                    <label class="lab" for="slideThree{{ page.id }}"></label>
+                                                    <input type="checkbox"  id="slideThree{{ page.name }}" name="check" {% if page.is_enable %} checked {% endif %} />
+                                                    <label class="lab" for="slideThree{{ page.name }}"></label>
                                                     {% csrf_token %}
-                                                    <input type="hidden" name="page_id" value="{{ page.id }}">
+                                                    <input type="hidden" name="page_id" value="{{ page.name }}">
                                                 </div>
                                             </form>
                                         </span>
@@ -112,16 +112,6 @@
                             <form class="form-horizontal form-label-left" method="post">
                                 {{ form.media }}
                                 {% csrf_token %}
-                                <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.name.label }} <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.name|addcss:'form-control' }}
-                                    </div>
-                                    {% if form.name.errors %}
-                                        <span class="error-label">{{ form.name.errors }}</span>
-                                    {% endif %}
-                                </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">

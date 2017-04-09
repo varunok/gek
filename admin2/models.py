@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 from solo.models import SingletonModel
 
 
@@ -34,6 +36,12 @@ class Settings(SingletonModel):
         verbose_name = "Site Configuration"
 
 
+def slug_validator(value):
+    if False:
+        raise ValidationError(
+            '%(value)s уже используется.',
+            params={'value': value},
+        )
 
 
 
@@ -43,6 +51,13 @@ class IndexPageModel(SingletonModel):
         verbose_name='Название',
         max_length=30,
         unique=True,
+        editable=False
+    )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Главная', allow_unicode=True),
+        validators=[slug_validator],
         editable=False
     )
     title = models.TextField(
@@ -87,6 +102,13 @@ class NewBuildingPageModel(SingletonModel):
         verbose_name='Название',
         max_length=30,
         unique=True,
+        editable=False
+    )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Новострои', allow_unicode=True),
+        validators=[slug_validator],
         editable=False
     )
     title = models.TextField(
@@ -137,6 +159,13 @@ class DailyPageModel(SingletonModel):
         unique=True,
         editable=False
     )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Посуточна', allow_unicode=True),
+        validators=[slug_validator],
+        editable=False
+    )
     title = models.TextField(
         verbose_name='Заголовок',
         blank=True,
@@ -183,6 +212,13 @@ class BuildingPageModel(SingletonModel):
         verbose_name='Название',
         max_length=30,
         unique=True,
+        editable=False
+    )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Квартиры и Дома', allow_unicode=True),
+        validators=[slug_validator],
         editable=False
     )
     title = models.TextField(
@@ -233,6 +269,13 @@ class OfisPageModel(SingletonModel):
         unique=True,
         editable=False
     )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Офисы и магазины', allow_unicode=True),
+        validators=[slug_validator],
+        editable=False
+    )
     title = models.TextField(
         verbose_name='Заголовок',
         blank=True,
@@ -281,6 +324,13 @@ class TrustPageModel(SingletonModel):
         unique=True,
         editable=False
     )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Доверее', allow_unicode=True),
+        validators=[slug_validator],
+        editable=False
+    )
     title = models.TextField(
         verbose_name='Заголовок',
         blank=True,
@@ -319,10 +369,17 @@ class TrustPageModel(SingletonModel):
 
 class ContactPageModel(SingletonModel):
     name = models.CharField(
-        default='Доверее',
-        verbose_name='Контакты',
+        default='Контакты',
+        verbose_name='Название',
         max_length=30,
         unique=True,
+        editable=False
+    )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Контакты', allow_unicode=True),
+        validators=[slug_validator],
         editable=False
     )
     title = models.TextField(

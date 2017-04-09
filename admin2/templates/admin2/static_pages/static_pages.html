@@ -44,16 +44,16 @@
                                             {% if page.name in 'Офисы и магазины, Квартиры и Дома, Посуточна, Новострои' %}
                                                 <form class="slideThreeForm" action="">
                                                     <div class="slideThree">
-                                                        <input type="checkbox"  id="slideThree{{ page.id }}" name="check" {% if page.is_enable %} checked {% endif %} />
-                                                        <label  for="slideThree{{ page.id }}"></label>
+                                                        <input type="checkbox"  id="slideThree{{ page.name }}" name="check" {% if page.is_enable %} checked {% endif %} />
+                                                        <label  for="slideThree{{ page.name }}"></label>
                                                         {% csrf_token %}
-                                                        <input type="hidden" name="page_id" value="{{ page.id }}">
+                                                        <input type="hidden" name="page_id" value="{{ page.name }}">
                                                     </div>
                                                 </form>
                                             {% endif %}
                                         </td>
                                         <td>
-                                            <a href="{% url 'admin2:static_page_detail' page.name %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                            <a href="{% url 'admin2:static_page_detail' page.slug %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                             <a href="{{ page.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
                                     </tr>
