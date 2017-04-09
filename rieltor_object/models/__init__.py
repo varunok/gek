@@ -1,0 +1,1 @@
+from rieltor_object.models.models import *

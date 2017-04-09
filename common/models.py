@@ -16,7 +16,8 @@ class ModelInService(object):
         'insurance',
         'cleaning',
         'installationwater',
-        'universalservice'
+        'universalservice',
+        'building'
     )
 
 

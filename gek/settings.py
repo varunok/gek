@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'common',
     'articles',
     'services',
+    'rieltor_object',
 ]
 
 MIDDLEWARE = [
