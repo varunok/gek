@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from django.views import View
 from django.views.generic import TemplateView, DeleteView, UpdateView, CreateView
 
-from admin2.forms import VideoRieltorServiceSet
+from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
@@ -29,6 +29,21 @@ def save_video(request):
         if form.is_valid():
             form.save()
             return HttpResponse(status=200, content='Сохранено')
+    return HttpResponse(status=500)
+
+
+def save_advantage(request):
+    if request.method == 'POST':
+        content_type_id = request.POST.get('content_type', None)
+        uuid = request.POST.get('uuid', None)
+        model = ContentType.objects.get_for_id(content_type_id)
+        model = model.get_object_for_this_type(uuid=uuid)
+        form = AdvantageSet(request.POST, request.FILES, instance=model)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=200, content='Сохранено')
+        if form.errors:
+            return HttpResponse(status=500, content='Не заполнени все поля')
     return HttpResponse(status=500)
 
 
@@ -76,7 +91,11 @@ def status_common(request):
 
 def delete_image(request):
     content_type_id = request.GET.get('content_type')
-    model = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
+    id = request.GET.get('id')
+    if id:
+        model = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=id)
+    else:
+        model = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
     model.image.delete(save=True)
     return HttpResponse('Удалено')
 

@@ -6,11 +6,11 @@ import uuid
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
 from solo.models import SingletonModel
 
-from common.models import Video, FAQ, Photo, TableRepair, BasePacket, MidlePacket, ExpertPacket
+from common.models import Video, FAQ, Photo, TableRepair, BasePacket, MidlePacket, ExpertPacket, Advantage
 
 
 def slug_validator(value):
@@ -355,3 +355,192 @@ class Cleaning(SingletonModel):
 
     def get_absolute_url(self):
         return reverse('services:cleaning', args=[self.slug])
+
+
+class InstallationWater(SingletonModel):
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Установка водомера', allow_unicode=True),
+        validators=[slug_validator]
+    )
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    subtitle = models.CharField(
+        verbose_name='Подзаголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Влючен ли?',
+        default=True
+    )
+    packet_enable = models.BooleanField(
+        verbose_name='Влючен ли пакет?',
+        default=True
+    )
+    faq_enable = models.BooleanField(
+        verbose_name='Влючен ли FAQ?',
+        default=True
+    )
+    videos = GenericRelation(Video, related_query_name='installation_water')
+    images = GenericRelation(Photo, related_query_name='installation_water')
+    fag = GenericRelation(FAQ, related_query_name='installation_water')
+    base_packet = models.OneToOneField(
+        BasePacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет начинающий',
+        related_query_name='installation_water',
+        blank=True,
+        null=True
+    )
+    midle_packet = models.OneToOneField(
+        MidlePacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет Продвинутый',
+        related_query_name='installation_water',
+        blank=True,
+        null=True
+    )
+    expert_packet = models.OneToOneField(
+        ExpertPacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет Эксперт',
+        related_query_name='installation_water',
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = 'Установка водомера'
+
+    def __unicode__(self):
+        return 'Установка водомера'
+
+    def get_absolute_url(self):
+        return reverse('services:installation_water', args=[self.slug])
+
+
+class UniversalService(models.Model):
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        validators=[slug_validator],
+        unique=True
+    )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        unique=True
+    )
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Влючен ли?',
+        default=True
+    )
+    packet_enable = models.BooleanField(
+        verbose_name='Влючен ли пакет?',
+        default=True
+    )
+    faq_enable = models.BooleanField(
+        verbose_name='Влючен ли FAQ?',
+        default=True
+    )
+    videos = GenericRelation(Video, related_query_name='universal')
+    images = GenericRelation(Photo, related_query_name='universal')
+    fag = GenericRelation(FAQ, related_query_name='universal')
+    advantages = GenericRelation(Advantage, related_query_name='universal')
+    base_packet = models.OneToOneField(
+        BasePacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет начинающий',
+        related_query_name='universal',
+        blank=True,
+        null=True
+    )
+    midle_packet = models.OneToOneField(
+        MidlePacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет Продвинутый',
+        related_query_name='universal',
+        blank=True,
+        null=True
+    )
+    expert_packet = models.OneToOneField(
+        ExpertPacket,
+        on_delete=models.SET_NULL,
+        verbose_name='Пакет Эксперт',
+        related_query_name='installation_water',
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = "Универсальная услуга"
+        verbose_name_plural = "Универсальние услуги"
+        ordering = ['id']
+
+    def __unicode__(self):
+        return '{0} - {1}'.format(self.name, self.slug)
+
+    def get_absolute_url(self):
+        return reverse('services:universal', args=[self.slug])
+

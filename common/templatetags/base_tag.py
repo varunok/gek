@@ -1,6 +1,6 @@
 from django import template
 
-from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning
+from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 register = template.Library()
 
@@ -53,3 +53,18 @@ def cleaning_is_active():
 @register.assignment_tag
 def cleaning_slug():
     return Cleaning.objects.get().slug
+
+
+@register.assignment_tag
+def installation_water_is_active():
+    return InstallationWater.objects.get().is_enable
+
+
+@register.assignment_tag
+def installation_water_slug():
+    return InstallationWater.objects.get().slug
+
+
+@register.assignment_tag
+def universals():
+    return UniversalService.objects.all()

@@ -34,32 +34,60 @@ class Settings(SingletonModel):
         verbose_name = "Site Configuration"
 
 
-class StaticPageModel(models.Model):
 
-    class StaticName:
-        INDEX = 'Главная'
-        NEWBUILD = 'Новострои'
-        DAILY = 'Посуточна'
-        HOMES = 'Квартиры и Дома'
-        SHOPS = 'Офисы и магазины'
-        TRUST = 'Доверее'
-        CONTACT = 'Контакты'
 
-        CHOICES = (
-            (INDEX, 'Главная'),
-            (NEWBUILD, 'Новострои'),
-            (DAILY, 'Посуточна'),
-            (HOMES, 'Квартиры и Дома'),
-            (SHOPS, 'Офисы и магазины'),
-            (TRUST, 'Доверее'),
-            (CONTACT, 'Контакты'),
-        )
 
+class IndexPageModel(SingletonModel):
     name = models.CharField(
-        choices=StaticName.CHOICES,
+        default='Главная',
         verbose_name='Название',
         max_length=30,
-        unique=True
+        unique=True,
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = 'Главная'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')
+
+
+class NewBuildingPageModel(SingletonModel):
+    name = models.CharField(
+        default='Новострои',
+        verbose_name='Название',
+        max_length=30,
+        unique=True,
+        editable=False
     )
     title = models.TextField(
         verbose_name='Заголовок',
@@ -87,19 +115,247 @@ class StaticPageModel(models.Model):
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включен ли?',
+        verbose_name='Включена ли страница?',
         default=True
     )
 
     class Meta:
-        verbose_name = 'Статическая страница'
-        verbose_name_plural = 'Статические страници'
-        ordering = ('name',)
+        verbose_name = 'Новострои'
 
     def __unicode__(self):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        if self.name == 'Главная':
-            return reverse('main')
-        return reverse('admin2:static_page_detail', args=[self.id])
+        return reverse('main')
+
+
+class DailyPageModel(SingletonModel):
+    name = models.CharField(
+        default='Посуточна',
+        verbose_name='Название',
+        max_length=30,
+        unique=True,
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Включена ли страница?',
+        default=True
+    )
+
+    class Meta:
+        verbose_name = 'Посуточна'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')
+
+
+class BuildingPageModel(SingletonModel):
+    name = models.CharField(
+        default='Квартиры и Дома',
+        verbose_name='Название',
+        max_length=30,
+        unique=True,
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Включена ли страница?',
+        default=True
+    )
+
+    class Meta:
+        verbose_name = 'Квартиры и Дома'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')
+
+
+class OfisPageModel(SingletonModel):
+    name = models.CharField(
+        default='Офисы и магазины',
+        verbose_name='Название',
+        max_length=30,
+        unique=True,
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Включена ли страница?',
+        default=True
+    )
+
+    class Meta:
+        verbose_name = 'Офисы и магазины'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')
+
+
+class TrustPageModel(SingletonModel):
+    name = models.CharField(
+        default='Доверее',
+        verbose_name='Название',
+        max_length=30,
+        unique=True,
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = 'Доверее'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')
+
+
+class ContactPageModel(SingletonModel):
+    name = models.CharField(
+        default='Доверее',
+        verbose_name='Контакты',
+        max_length=30,
+        unique=True,
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = 'Контакты'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')

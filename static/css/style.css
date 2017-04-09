@@ -1101,7 +1101,7 @@ body.superlending .slider_main .slider_title {
 }
 
 .installation_water .slider_main {
-    background: url(images/banner_25.jpg) no-repeat center/cover !important;
+    /*background: url(images/banner_25.jpg) no-repeat center/cover !important;*/
 }
 
 .installation_water .slider_main .title_text {

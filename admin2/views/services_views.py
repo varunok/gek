@@ -4,32 +4,14 @@ from __future__ import unicode_literals
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, CreateView, DeleteView
 
 from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm, \
-    InsuranceForm, CleaningForm
-from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning
-from common.models import BasePacket, MidlePacket, ExpertPacket
+    InsuranceForm, CleaningForm, InstallationWaterForm, UniversalServiceForm, UniversalServiceCreateForm, AdvantageSet
+from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
-
-class ServicesMixin(UpdateView):
-    video_form = None
-
-    def get_object(self, queryset=None):
-        return self.model.objects.get()
-
-    def get_context_data(self, **kwargs):
-        context = super(ServicesMixin, self).get_context_data(**kwargs)
-        context['video_form'] = self.video_form(instance=self.model.objects.get())
-        context['video_check'] = self.model.get_solo().videos.all().order_by('id')
-        try:
-            context['faqs'] = self.model.get_solo().fag.all().order_by('id')
-        except AttributeError:
-            pass
-        context['content_type'] = ContentType.objects.get_for_model(self.model).id
-        return context
+from common.mixins import DeleteAjaxMixin, ServicesMixin
 
 
 class ServicesView(LoginRequiredMixin, TemplateView):
@@ -47,6 +29,10 @@ class ServicesView(LoginRequiredMixin, TemplateView):
         context['insurence_content_type'] = ContentType.objects.get_for_model(Insurance).id
         context['cleaning'] = Cleaning.get_solo()
         context['cleaning_content_type'] = ContentType.objects.get_for_model(Cleaning).id
+        context['installation_water'] = InstallationWater.get_solo()
+        context['installation_water_content_type'] = ContentType.objects.get_for_model(InstallationWater).id
+        context['universals'] = UniversalService.objects.all()
+        context['universal_content_type'] = ContentType.objects.get_for_model(UniversalService).id
         return context
 
 
@@ -99,19 +85,49 @@ class CleaningServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
 
-    def get_context_data(self, **kwargs):
-        context = super(CleaningServiceView, self).get_context_data(**kwargs)
-        context['base_content_type'] = ContentType.objects.get_for_model(BasePacket).id
-        context['midle_content_type'] = ContentType.objects.get_for_model(MidlePacket).id
-        context['expert_content_type'] = ContentType.objects.get_for_model(ExpertPacket).id
-        return context
+
+class InstallationWaterServiceView(ServicesMixin):
+    model = InstallationWater
+    form_class = InstallationWaterForm
+    template_name = 'admin2/services/installation_water_edit.html'
+    context_object_name = 'installation_water'
+    success_url = reverse_lazy('admin2:services')
+    video_form = VideoServiceSet
+
+
+class UniversalServiceView(ServicesMixin):
+    model = UniversalService
+    form_class = UniversalServiceForm
+    template_name = 'admin2/services/universal_edit.html'
+    context_object_name = 'universal'
+    success_url = reverse_lazy('admin2:services')
+    video_form = VideoServiceSet
+    advantage_form = AdvantageSet
+
+
+class UniversalServiceCreate(LoginRequiredMixin, CreateView):
+    model = UniversalService
+    form_class = UniversalServiceCreateForm
+    template_name = 'admin2/services/universal_edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('admin2:universal_edit', args=[self.object.id])
+
+
+class UniversalServiceDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+    model = UniversalService
+    slug_field = 'slug'
 
 
 def status_service(request):
     if request.method == 'POST':
         on = request.POST.get('check')
+        id = request.POST.get('id')
         content_type_id = request.POST.get('content_type')
-        service = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
+        if id:
+            service = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=id)
+        else:
+            service = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
         if on:
             service.is_enable = True
             service.save()

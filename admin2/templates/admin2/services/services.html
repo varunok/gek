@@ -20,7 +20,7 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:articles_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать универсальную услугу</a>
+                            <a href="{% url 'admin2:universal_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать универсальную услугу</a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                                                 <input type="checkbox"  id="slideThree{{ cleaning.uuid }}" name="check" {% if cleaning.is_enable %} checked {% endif %} />
                                                 <label  for="slideThree{{ cleaning.uuid }}"></label>
                                                 {% csrf_token %}
-                                                <input type="hidden" name="content_type" value="{{ insurence_content_type }}">
+                                                <input type="hidden" name="content_type" value="{{ cleaning_content_type }}">
                                             </div>
                                         </form>
                                     </td>
@@ -134,16 +134,43 @@
                                         <a href="{{ cleaning.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
-                                {% for article in articles %}
+                                <tr>
+                                    <td><img src="{{ installation_water.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                    <td>{{ installation_water }}</td>
+                                    <td>
+                                        <form class="slideThreeForm" action="">
+                                            <div class="slideThree serviceStatus">
+                                                <input type="checkbox"  id="slideThree{{ installation_water.uuid }}" name="check" {% if installation_water.is_enable %} checked {% endif %} />
+                                                <label  for="slideThree{{ installation_water.uuid }}"></label>
+                                                {% csrf_token %}
+                                                <input type="hidden" name="content_type" value="{{ installation_water_content_type }}">
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'admin2:installation_water_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                        <a href="{{ installation_water.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                    </td>
+                                </tr>
+                                {% for universal in universals %}
                                     <tr>
-                                        <td>{{ article.id }}</td>
-                                        <td><img src="{{ article.image|thumbnail_url:'article_image_60' }}" alt=""></td>
-                                        <td>{{ article.heading }}</td>
-                                        <td>{{ article.created|date:'d.m.Y H:i' }}</td>
+                                        <td><img src="{{ universal.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                        <td>{{ universal }}</td>
                                         <td>
-                                            <a href="{{ article.slug }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                            <a href="{{ article.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                            <form class="slideThreeForm" action="">
+                                                <div class="slideThree serviceStatus">
+                                                    <input type="checkbox"  id="slideThree{{ universal.uuid }}" name="check" {% if universal.is_enable %} checked {% endif %} />
+                                                    <label  for="slideThree{{ universal.uuid }}"></label>
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="content_type" value="{{ universal_content_type }}">
+                                                    <input type="hidden" name="id" value="{{ universal.id }}">
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <a href="{{ universal.slug }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
+                                            <a href="{% url 'admin2:universal_edit' universal.id %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                            <a href="{{ universal.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -160,4 +187,5 @@
 
 {% block js %}
     <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/sections.js' %}"></script>
 {% endblock js %}

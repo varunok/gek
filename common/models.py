@@ -14,7 +14,9 @@ class ModelInService(object):
         'valuation',
         'repair',
         'insurance',
-        'cleaning'
+        'cleaning',
+        'installationwater',
+        'universalservice'
     )
 
 
@@ -254,3 +256,28 @@ class ExpertPacket(models.Model):
 
     def __unicode__(self):
         return '{} - ID:{}'.format(self.title, self.id)
+
+
+class Advantage(models.Model):
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='photos/%Y/%m/%d/',
+        blank=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('universalservice',)}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = "Преимущество"
+        verbose_name_plural = "Преимущества"
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.id)

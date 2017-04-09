@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 from common.models import Application, Video, FAQ, Photo, BasePacket, TextPacket, \
-    MidlePacket, ExpertPacket, TableRepair
+    MidlePacket, ExpertPacket, TableRepair, Advantage
 
 
 class VideoInline(GenericTabularInline):
@@ -32,6 +32,11 @@ class TableRepairInline(GenericTabularInline):
     extra = 0
 
 
+class AdvantageInline(GenericTabularInline):
+    model = Advantage
+    extra = 0
+
+
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'email', 'created')
 
@@ -56,4 +61,5 @@ admin.site.register(Photo)
 admin.site.register(BasePacket, BasePacketAdmin)
 admin.site.register(MidlePacket, MidlePacketAdmin)
 admin.site.register(ExpertPacket, ExpertPacketAdmin)
+admin.site.register(Advantage)
 admin.site.register(TextPacket)

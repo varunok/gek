@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.contrib.contenttypes.forms import generic_inlineformset_factory
-from django.forms.widgets import TextInput, Textarea
+from django.forms.widgets import TextInput, Textarea, FileInput, Select
 from ckeditor.widgets import CKEditorWidget
 
 from articles.models import Sections, Articles
-from common.models import Video, Photo
-from services.models import ServicesRieltor, Repair, Insurance, Cleaning
+from common.models import Video, Photo, Advantage
+from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 
 class SectionUpdateForm(forms.ModelForm):
@@ -76,6 +76,26 @@ class CleaningForm(forms.ModelForm):
         fields = '__all__'
 
 
+class InstallationWaterForm(forms.ModelForm):
+    class Meta:
+        model = InstallationWater
+        exclude = 'is_enable',
+        fields = '__all__'
+
+
+class UniversalServiceForm(forms.ModelForm):
+    class Meta:
+        model = UniversalService
+        exclude = 'is_enable',
+        fields = '__all__'
+
+
+class UniversalServiceCreateForm(forms.ModelForm):
+    class Meta:
+        model = UniversalService
+        exclude = 'is_enable',
+        fields = '__all__'
+
 
 VideoRieltorServiceSet = generic_inlineformset_factory(
     Video,
@@ -92,8 +112,22 @@ VideoServiceSet = generic_inlineformset_factory(
     min_num=1,
     max_num=1
 )
-PhotoServiceSet = generic_inlineformset_factory(
-    Photo,
+
+
+class AdvantageForm(forms.ModelForm):
+    image = forms.ImageField(
+        label='Фото',
+
+    )
+    image.widget.input_text = ''
+
+
+AdvantageSet = generic_inlineformset_factory(
+    Advantage,
+    form=AdvantageForm,
     can_delete=False,
-    extra=4
+    extra=4,
+    min_num=4,
+    max_num=4,
+
 )

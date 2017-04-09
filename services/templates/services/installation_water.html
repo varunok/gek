@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front installation_water" {% endblock %}
+
+{% block content %}
+    <main class="middle">
+        <div class="slider_main slider_notfront" {% if installation_water.image %}
+                style="background: url({{ installation_water.image.url }}) no-repeat center/cover"
+                {% else %}
+                    style="background: url({% static "images/banner_25.jpg" %}) no-repeat center/cover"
+             {% endif %}>
+            <div class="slider_title">{{ installation_water.title|default:'Установка водомера с узаконением' }}</div>
+            <div class="slider_subtitle">{{ installation_water.subtitle|default:'за один день, от 500 грн'}}</div>
+            <div class="title_text">Отправить заявку прямо сейчас!</div>
+            <form action="#" class="webform_client_form">
+                <div class="form_item name">
+                    <input type="text" placeholder="Введите имя">
+                </div>
+                <div class="form_item phone">
+                    <input type="text" placeholder="Введите телефон">
+                </div>
+                <div class="form_actions">
+                    <input class="form-submit" type="submit" value="Отправить">
+                </div>
+            </form>
+        </div>
+        <div class="middle_inner">
+            <div class="container">
+                <div id="content">
+                    <div class="block_benefits">
+                        <div class="block_content">
+                            <div class="block_title">
+                                Преимущества установки счетчиков
+                            </div>
+                            <div class="view_content">
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/i_1.png" %}" alt="">
+                                    </div>
+                                    <div class="text">Экономия средств</div>
+                                </div>
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/i_2.png" %} " alt="">
+                                    </div>
+                                    <div class="text">Оперативность</div>
+                                </div>
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/i_3.png" %} " alt="">
+                                    </div>
+                                    <div class="text">Профессиональная <br>установка</div>
+                                </div>
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/i_4.png" %} " alt="">
+                                    </div>
+                                    <div class="text">Гарантия качества</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_benefits steps">
+                        <div class="block_content">
+                            <div class="block_title">
+                                Установления счетчика в 3 шага
+                            </div>
+                            <div class="view_content">
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/step_1.png" %} " alt="">
+                                    </div>
+                                    <div class="text">Оставьте заявку <br>на консультацию</div>
+                                </div>
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/step_2.png" %}" alt="">
+                                    </div>
+                                    <div class="text">Эксперт выезжает на <br>объект и проводит анализ</div>
+                                </div>
+                                <div class="views_row">
+                                    <div class="field_img">
+                                        <img src="{% static "images/step_3.png" %}" alt="">
+                                    </div>
+                                    <div class="text">Согласовываем цену и <br>подписываем договор о <br>сотрудничестве</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- #content-->
+            </div>
+        </div>
+        <div class="block block_presentation">
+            <div class="block_content">
+                <div class="block_title">Отправить заявку на консультацию</div>
+                <div class="view_content">
+                    <form action="#" class="webform_client_form">
+                        <div class="form_item user_name">
+                            <input type="text" placeholder="Введите ваше имя">
+                        </div>
+                        <div class="form_item phone">
+                            <input type="text" placeholder="Введите ваш телефон">
+                        </div>
+                        <div class="form_actions">
+                            <input type="submit" class="form_submit" value="Отправить">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="block block_hydrometers">
+            <div class="block_content">
+                <div class="block_title">Мы установим водомеры</div>
+                <div class="view_content">
+                    <div class="views_row">
+                        <div class="field_img"><img src="{% static "images/h_1.png" %}" alt=""></div>
+                        <div class="title">Квартиры</div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_img"><img src="{% static "images/h_2.png" %}" alt=""></div>
+                        <div class="title">Дома</div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_img"><img src="{% static "images/h_3.png" %}" alt=""></div>
+                        <div class="title">Офисы</div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_img"><img src="{% static "images/h_4.png" %}" alt=""></div>
+                        <div class="title">Магазины</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block block_photo">
+            <div class="block_content">
+                <div class="block_title">Что может произойти с вашей недвижимостью?</div>
+                <div class="view_content">
+                {% for image in images %}
+                    <div class="views_row">
+                        <div class="filed_img">
+                            <img src="{{ image.image|thumbnail_url:'gallery_image_570' }}" alt="">
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if installation_water.packet_enable %}
+            {% include 'services/include/packets.html' with service=installation_water %}
+        {% endif %}
+        {% if installation_water.videos.all.first.is_enable and installation_water.videos.all.first.video %}
+            <div class="block block_video">
+                <div class="block_content">
+                    <div class="block_title">{{ installation_water.videos.all.first.title }}</div>
+                    {{ installation_water.videos.all.first.video|convert_to_frame|safe }}
+                </div>
+            </div>
+        {% endif %}
+        {% if faqs and installation_water.faq_enable %}
+            {% include 'services/include/faqs.html' %}
+        {% endif %}
+        <div class="block block_seo">
+            <div class="block_content">
+                <div class="block_title">Вся коммерческая недвижимость Одессы только у нас</div>
+                <div class="view_content">
+                    <div class="body">
+                        <div class="image">
+                            <img src="{% static "images/img.png" %} " alt="" class="left">
+                        </div>
+                        <div class="content_body">
+                            <p>Еще не знаете, какое помещение в Одессе арендовать или купить под бизнес? Наше агентство недвижимости «GEK» поможет не только с поиском, но и выполнит всю бумажную работу за Вас.</p>
+                            <p>На нашем сайте Вы найдете:</p>
+                            <ul>
+                                <li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+                                <li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+                            </ul>
+                            <p>Коммерческая недвижимость является привлекательным инвестиционным объектом. Ее приобретают с различными целями – для ведения своего бизнеса, сдачи в аренду или перепродажи. Таким образом, коммерческая недвижимость в Украине является высокодоходным активом, поэтому и данный сектор рынка недвижимости постоянно развивается. Коммерческая недвижимость представляет собой помещения, здания и различные объекты, которые используются для ведения бизнеса и</p>
+                            <p>На нашем сайте Вы найдете:</p>
+                            <ul>
+                                <li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+                                <li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="read_more"><a href="/">Читать всю статью</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="block block_services">
+            <div class="block_content">
+                <div class="block_title">Услуги агентства недвижимости</div>
+                <div class="view_content">
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/1.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Кредитование</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/2.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/3.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/4.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Инфоксводоканал</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/1.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Кредитование</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/3.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/2.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_image"><a href="/"><img src="images/4.png" alt=""></a></div>
+                        <div class="field_title"><a href="/">Инфоксводоканал</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="block region_banner">
+        <div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+    </div>
+    </main><!-- .content -->
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

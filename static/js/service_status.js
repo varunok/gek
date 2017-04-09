@@ -45,8 +45,9 @@ $(document).ready(function() {
     $('#delete-image').click(function (event) {
         event.preventDefault();
         var content_type = $(this).next().val();
+        var id = $(this).next().next().val();
         _this = $(this);
-        $.get('delete-image', {'content_type': content_type})
+        $.get('delete-image', {'content_type': content_type, 'id':id})
             .then(function(response) {
                     notify_success(response, 'Успешно');
                     $('#blah').attr("src","second.jpg");
