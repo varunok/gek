@@ -8,6 +8,7 @@ from ckeditor.widgets import CKEditorWidget
 
 from articles.models import Sections, Articles
 from common.models import Video, Photo, Advantage
+from rieltor_object.models import Building
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 
@@ -131,3 +132,11 @@ AdvantageSet = generic_inlineformset_factory(
     max_num=4,
 
 )
+
+
+class BuildingEditForm(forms.ModelForm):
+
+    class Meta:
+        model = Building
+        exclude = ['views']
+        fields = '__all__'

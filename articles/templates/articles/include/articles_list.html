@@ -1,4 +1,4 @@
-{% for article in articles %}
+{% for article in objects %}
     <div class="views_row">
         <a href="{% url 'articles:article_detail' article.sections.slug article.slug %}">
             <div class="field_image">

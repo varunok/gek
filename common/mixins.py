@@ -30,30 +30,51 @@ class ViewsCountMixin(BaseDetailView):
 
 
 class DinamicNextMixin(BaseListView):
+    dinamic_template_name = 'articles/include/articles_list.html'
+    context_object_name = 'objects'
 
     def get_context_data(self, **kwargs):
         context = super(DinamicNextMixin, self).get_context_data(**kwargs)
-        count_next = self.object_list.count() - self.paginate_by
-        context['count_next'] = 0 if count_next <= 0 else count_next
+        context['count_next'] = self.get_count_next()
         return context
+
+    def get_count_next(self):
+        count_next = self.get_queryset().count() - self.paginate_by
+        count_next = 0 if count_next <= 0 else count_next
+        return count_next
 
     def get(self, request, *args, **kwargs):
         page = self.request.GET.get('page')
         section = self.request.GET.get('section')
         if page:
-            self.template_name = 'articles/include/articles_list.html'
             object_list = self.get_queryset()
             if section:
                 object_list = object_list.filter(sections=section)
             paginator = self.get_paginator(object_list, self.paginate_by)
             data = JsonResponse({
                 'next': paginator.page(page).has_next(),
-                'articles': render_to_string(self.template_name,
-                                             {'articles': paginator.page(page).object_list}),
+                'html': render_to_string(self.dinamic_template_name,
+                                             {self.context_object_name: paginator.page(page).object_list}),
                 'obj': len(paginator.page(page).object_list)
             })
             return HttpResponse(data)
         return super(DinamicNextMixin, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        page = self.request.POST.get('page')
+        if page:
+            object_list = self.get_queryset()
+            paginator = self.get_paginator(object_list, self.paginate_by)
+            data = JsonResponse({
+                'next': paginator.page(page).has_next(),
+                'html': render_to_string(self.dinamic_template_name,
+                                         {self.context_object_name: paginator.page(page).object_list,
+                                          'count_next': self.get_count_next()}),
+                'obj': len(paginator.page(page).object_list)
+            })
+            return HttpResponse(data)
+        # return super(DinamicNextMixin, self).post(request, *args, **kwargs)
+
 
 
 class ServiceSiteMixin(DetailView):

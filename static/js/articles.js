@@ -10,7 +10,7 @@ $(document).ready(function() {
         $.get('more_pages', {'page': page, 'section': section})
                 .then(function(response) {
                     var data = $.parseJSON(response);
-                    $('#add-article').append(data.articles);
+                    $('#add-article').append(data.html);
                     page ++;
                     _this.find('span').text(data.obj);
                     if(!data.next){

@@ -1,0 +1,50 @@
+{% for building in objects %}
+    <div class="views_row vip_row">
+        {% if building.status == 1 %}
+            <div class="vip"></div>
+        {% endif %}
+        <div class="title">{{ building.title }}</div>
+        <div class="field_image">
+            <img src="{{ building.images.all.first.image.url }}" alt="" width="100%">
+        </div>
+        <div class="views_body">
+            <div class="star"></div>
+            <div class="address">{{ building.address }}</div>
+            <div class="text">{{ building.description|truncatewords:'15' }}</div>
+            <div class="top_wrap">
+                <div class="info">
+                    <div class="label">ID:</div>
+                    <div class="item">{{ building.id }}</div>
+                </div>
+                {% if building.footage %}
+                    <div class="info">
+                        <div class="label">Площадь:</div>
+                        <div class="item">{{ building.footage }} м<sup>2</sup></div>
+                    </div>
+                {% endif %}
+                {% if building.price %}
+                    <div class="price info">
+                        <div class="label">Аренда:</div>
+                        {{ building.price }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="bottom_wrap">
+                <div class="statistics">{{ building.views }}</div>
+                <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+                <div class="read_more"><a href="{{ building.get_absolute_url }}">Подробнее</a></div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="load_more_wrap">
+    {% if count_next %}
+        <div class="load_more read_more">
+            <a href="#">
+                Загрузить еще
+                <span>{{ count_next }}</span> объектов
+            </a>
+        </div>
+    {% endif %}
+</div>

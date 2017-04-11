@@ -53,7 +53,6 @@ class Sections(models.Model):
         auto_now=True
     )
 
-
     class Meta:
         verbose_name = 'Рубрика'
         verbose_name_plural = 'Рубрики'

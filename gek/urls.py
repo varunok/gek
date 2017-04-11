@@ -18,6 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.staticfiles import views
+from rieltor_object.urls import urlpatterns_search
 
 from common.views import MainView
 
@@ -32,6 +33,11 @@ urlpatterns = [
     # SITE
     url(r'^articles/', include('articles.urls', namespace='articles')),
     url(r'^services/', include('services.urls', namespace='services')),
+    url(r'^objects/', include('rieltor_object.urls', namespace='objects')),
+
+    #search
+    url(r'', include(urlpatterns_search))
+
 ]
 urlpatterns += [
     url(r'^static/(?P<path>.*)$', views.serve),

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'easy_thumbnails',
     'solo',
+    'django_filters',
 
     # own
     'users',
@@ -152,6 +153,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+FILTERS_NULL_CHOICE_VALUE = 'null_value'
+
 # CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -230,6 +233,7 @@ THUMBNAIL_ALIASES = {
         'gallery_image_370': {'size': (370, 211), 'crop': True},
         'gallery_image_570': {'size': (570, 338), 'crop': True},
         'universal_image_270': {'size': (270, 160), 'crop': True},
+        'slider_image_166': {'size': (166, 94), 'crop': True},
     },
 }
 

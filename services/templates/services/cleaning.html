@@ -106,14 +106,16 @@
 				</div>
 			</div>
 		</div>
-		{% if cleaning.videos.all.first.is_enable and cleaning.videos.all.first.video %}
-			<div class="block block_video">
-            	<div class="block_content">
-                	<div class="block_title">{{ cleaning.videos.all.first.title }}</div>
-                    {{ cleaning.videos.all.first.video|convert_to_frame|safe }}
+		{% with object.videos.all.first as video %}
+            {% if video.is_enable and video.video %}
+                <div class="block block_video">
+                    <div class="block_content">
+                        <div class="block_title">{{ video.title }}</div>
+                        {{ video.video|convert_to_frame|safe }}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
+        {% endwith %}
 		{% if cleaning.packet_enable %}
 			{% include 'services/include/packets.html' with service=cleaning %}
 		{% endif %}
