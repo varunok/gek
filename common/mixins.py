@@ -30,7 +30,7 @@ class ViewsCountMixin(BaseDetailView):
 
 
 class DinamicNextMixin(BaseListView):
-    dinamic_template_name = 'articles/include/articles_list.html'
+    dinamic_template_name = None
     context_object_name = 'objects'
 
     def get_context_data(self, **kwargs):

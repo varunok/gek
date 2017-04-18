@@ -14,8 +14,9 @@ PAGINATE_ARTICLE = 10
 
 class ArticlesSiteView(DinamicNextMixin, ListView):
     model = Articles
-    context_object_name = 'articles'
+    context_object_name = 'objects'
     template_name = 'articles/articles.html'
+    dinamic_template_name = 'articles/include/articles_list.html'
     paginate_by = PAGINATE_ARTICLE
 
     def get_context_data(self, **kwargs):
