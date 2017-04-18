@@ -1,38 +1,38 @@
-{% for building in objects %}
+{% for object in objects %}
     <div class="views_row vip_row">
-        {% if building.status == 1 %}
+        {% if object.status == 1 %}
             <div class="vip"></div>
         {% endif %}
-        <div class="title">{{ building.title }}</div>
+        <div class="title">{{ object.title }}</div>
         <div class="field_image">
-            <img src="{{ building.images.all.first.image.url }}" alt="" width="100%">
+            <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
         </div>
         <div class="views_body">
             <div class="star"></div>
-            <div class="address">{{ building.address }}</div>
-            <div class="text">{{ building.description|truncatewords:'15' }}</div>
+            <div class="address">{{ object.address }}</div>
+            <div class="text">{{ object.description|truncatewords:'15' }}</div>
             <div class="top_wrap">
                 <div class="info">
                     <div class="label">ID:</div>
-                    <div class="item">{{ building.id }}</div>
+                    <div class="item">{{ object.id }}</div>
                 </div>
-                {% if building.footage %}
+                {% if object.footage %}
                     <div class="info">
                         <div class="label">Площадь:</div>
-                        <div class="item">{{ building.footage }} м<sup>2</sup></div>
+                        <div class="item">{{ object.footage }} м<sup>2</sup></div>
                     </div>
                 {% endif %}
-                {% if building.price %}
+                {% if object.price %}
                     <div class="price info">
                         <div class="label">Аренда:</div>
-                        {{ building.price }}
+                        {{ object.price }}
                     </div>
                 {% endif %}
             </div>
             <div class="bottom_wrap">
-                <div class="statistics">{{ building.views }}</div>
+                <div class="statistics">{{ object.views }}</div>
                 <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                <div class="read_more"><a href="{{ building.get_absolute_url }}">Подробнее</a></div>
+                <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
             </div>
         </div>
     </div>

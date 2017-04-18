@@ -12,7 +12,7 @@ from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 
 
-class Building(models.Model):
+class Ofice(models.Model):
     title = models.CharField(
         verbose_name='Заголовок',
         max_length=250,
@@ -108,7 +108,7 @@ class Building(models.Model):
         District,
         verbose_name='Район',
         on_delete=models.SET_NULL,
-        related_name='building',
+        related_name='ofice',
         null=True,
         blank=True
     )
@@ -132,12 +132,12 @@ class Building(models.Model):
         default=uuid.uuid4,
         editable=False
     )
-    videos = GenericRelation(Video, related_query_name='building')
-    images = GenericRelation(Photo, related_query_name='building')
+    videos = GenericRelation(Video, related_query_name='ofice')
+    images = GenericRelation(Photo, related_query_name='ofice')
 
     class Meta:
-        verbose_name = 'Квартиры и Дома'
-        verbose_name_plural = 'Квартиры и Дома'
+        verbose_name = 'Офисы и магазины'
+        verbose_name_plural = 'Офисы и магазины'
         ordering = ['-when_create']
 
     def __unicode__(self):
@@ -150,16 +150,16 @@ class Building(models.Model):
             self.SEODescription = '{0} {1} {2} {3} {4}'.format(self.get_type_deal_display(),
                                                                self.get_appointment_display(), self.address, self.price,
                                                                self.title)
-        super(Building, self).save(*args, **kwargs)
+        super(Ofice, self).save(*args, **kwargs)
 
     def get_edit_url(self):
-        return reverse('admin2:building_edit', args=[self.id])
+        return reverse('admin2:ofice_edit', args=[self.id])
 
     def get_absolute_url(self):
-        return reverse('objects:buildings_detail', args=[self.id])
+        return reverse('objects:ofice_detail', args=[self.id])
 
     def get_list_url(self):
-        return reverse('admin2:buildings')
+        return reverse('admin2:ofices')
 
     def meta(self):
         return self._meta

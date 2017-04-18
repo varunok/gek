@@ -11,7 +11,7 @@ from django.views.generic import DetailView, ListView, FormView, TemplateView
 
 from common.mixins import ViewsCountMixin, DinamicNextMixin
 from rieltor_object.forms import FilterForm
-from rieltor_object.models import Building, TypeDeal
+from rieltor_object.models import Building, TypeDeal, Ofice
 from rieltor_object.search import BuildingFilter
 
 
@@ -50,3 +50,19 @@ class SearchBuildView(DinamicNextMixin, ListView):
 
     def get_queryset(self):
         return BuildingFilter(self.request.POST, queryset=self.model.objects.all()).qs
+
+
+class OficeListSiteView(DinamicNextMixin, ListView):
+    model = Ofice
+    template_name = 'rieltor_object/ofice_list.html'
+    paginate_by = PAGINATE_OBJ
+
+    def get_context_data(self, **kwargs):
+        context = super(OficeListSiteView, self).get_context_data(**kwargs)
+        context['filter_form'] = FilterForm()
+        return context
+
+
+class OficeDetailSiteView(ViewsCountMixin, DetailView):
+    model = Ofice
+    template_name = 'rieltor_object/ofice.html'

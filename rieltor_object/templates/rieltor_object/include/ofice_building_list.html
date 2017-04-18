@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load admin_tags %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front ranking sidebar_first" {% endblock %}
+
+{% block content %}
+<main class="middle">
+		<div class="slider_main slider_notfront">
+			<div class="slider_title">Аренда коммерческой недвижимости в Одессе</div>
+			<form action="#" class="webform_client_form">
+				<div class="form_item search">
+					<input type="text" placeholder="Искать в тексте объявления">
+				</div>
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Найти">
+				</div>
+			</form>
+		</div>
+		<div class="middle_inner">
+			<div class="container">
+				<div id="content">
+					<div class="block search_results">
+						<div class="top_wrap">
+							<div class="left_wrap">
+								<div class="count_result">1-20 из 128 результатов</div>
+							</div>
+							<div class="right_wrap">
+								<div class="sortable">
+									<label for="sort">Сортировка:</label>
+									<select name="sort" id="sort">
+										<option value="1">Новые наверху</option>
+										<option value="2">Новые внизу</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="bottom_wrap">
+							<div class="filters">
+								<div class="item">Аренда<div class="close"></div></div>
+								<div class="item">Офис<div class="close"></div></div>
+								<div class="item">5000-10000 грн<div class="close"></div></div>
+								<div class="item">40-50 м. кв.<div class="close"></div></div>
+							</div>
+							<div class="form_actions">
+								<input type="submit" value="Подобрать объект">
+							</div>
+						</div>
+					</div>
+					<div class="block block_shops block_search_results">
+						<div class="block_content">
+							<div class="view_content list-building">
+                                {% include 'rieltor_object/include/building_item.html' %}
+							</div>
+						</div>
+					</div>
+				</div><!-- #content-->
+
+			</div>
+			<div class="left_sidebar">
+				<div class="block property_search">
+					<div class="form_title">Поиск недвижимости</div>
+					<form action="" method="post" class="webform_client_form search-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="page" value="1">
+						<div class="form_item form_checkboxes">
+    						{% for type_deal in filter_form.type_deal %}
+                                <div class="form_checkbox">
+                                    {{ type_deal.tag }}
+                                    <label for="{{ type_deal.id_for_label }}">{{ type_deal.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+						</div>
+						<div class="form_item form_select form_wrapper">
+                            {{ filter_form.appointment.label_tag }}
+                            {{ filter_form.appointment }}
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Стоимость:</label>
+							<div class="form_number">
+                                {{ filter_form.price_from }}
+							</div>
+							<div class="form_number">
+								{{ filter_form.price_to }}
+							</div>
+							<select name="price_currency" class="price_currency">
+								<option value="uah">грн</option>
+								<option value="rub">руб</option>
+							</select>
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Площадь:</label>
+							<div class="form_number">
+								{{ filter_form.footage_from }}
+							</div>
+							<div class="form_number">
+								{{ filter_form.footage_to }}
+							</div>
+							<select name="price_currency" class="price_currency">
+								<option value="meter">м. кв.</option>
+								<option value="centimeter">см. кв.</option>
+							</select>
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Расположение:</label>
+							<div class="form_checkboxes">
+								<div class="form_checkbox">
+                                    {% for location in filter_form.location %}
+                                        <div class="form_checkbox">
+                                            {{ location.tag }}
+                                            <label for="{{ location.id_for_label }}">{{ location.choice_label }}</label>
+                                        </div>
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Этаж:</label>
+							<div class="form_checkboxes">
+								<div class="form_checkbox">
+                                    {% for floor in filter_form.floor %}
+                                        <div class="form_checkbox">
+                                            {{ floor.tag }}
+                                            <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                        </div>
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Вход:</label>
+							<div class="form_checkboxes">
+								<div class="form_checkbox">
+                                    {% for entrance in filter_form.entrance %}
+                                        <div class="form_checkbox">
+                                            {{ entrance.tag }}
+                                            <label for="{{ entrance.id_for_label }}">{{ entrance.choice_label }}</label>
+                                        </div>
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="form_actions">
+							<input type="submit" value="Поиск" class="searh-form">
+							<div class="links">
+								<div class="search_full"><a href="#">Расширенный поиск</a></div>
+								<div class="search_clear"><a href="#">очистить</a></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="block block_vip">
+					<div class="block_title">Vip</div>
+					<div class="view_content">
+						<div class="views_row">
+							<div class="field_image">
+								<img src="images/shop_1.png" alt="">
+							</div>
+							<div class="views_body">
+								<div class="star active"></div>
+								<div class="address">Льва Толстого, 14</div>
+								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
+								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
+								<div class="statistics">265</div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+						<div class="views_row">
+							<div class="field_image">
+								<img src="images/shop_2.png" alt="">
+							</div>
+							<div class="views_body">
+								<div class="star active"></div>
+								<div class="address">Льва Толстого, 14</div>
+								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
+								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
+								<div class="statistics">265</div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+						<div class="views_row">
+							<div class="field_image">
+								<img src="images/shop_3.png" alt="">
+							</div>
+							<div class="views_body">
+								<div class="star active"></div>
+								<div class="address">Льва Толстого, 14</div>
+								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
+								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
+								<div class="statistics">265</div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block banner">
+					<div class="field_image"><img src="images/banner.png" alt=""></div>
+				</div>
+				<div class="block block_services">
+					<div class="block_content">
+						<div class="block_title">Наши услуги</div>
+						<div class="view_content">
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_1.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Кредитование</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_2.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_3.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_4.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Инфоксводоканал</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_seo">
+			<div class="block_content">
+				<div class="block_title">Риэлторские услуги в Одессе</div>
+				<div class="view_content">
+					<div class="body">
+						<div class="image">
+							<img src="images/img.png" alt="" class="left">
+						</div>
+						<div class="content_body">
+							<p>Еще не знаете, какое помещение в Одессе арендовать или купить под бизнес? Наше агентство недвижимости «GEK» поможет не только с поиском, но и выполнит всю бумажную работу за Вас.</p>
+							<p>На нашем сайте Вы найдете:</p>
+							<ul>
+								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+							</ul>
+							<p>Коммерческая недвижимость является привлекательным инвестиционным объектом. Ее приобретают с различными целями – для ведения своего бизнеса, сдачи в аренду или перепродажи. Таким образом, коммерческая недвижимость в Украине является высокодоходным активом, поэтому и данный сектор рынка недвижимости постоянно развивается. Коммерческая недвижимость представляет собой помещения, здания и различные объекты, которые используются для ведения бизнеса и</p>
+							<p>На нашем сайте Вы найдете:</p>
+							<ul>
+								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+							</ul>
+						</div>
+					</div>
+					<div class="read_more"><a href="/">Читать всю статью</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_presentation">
+			<div class="block_content">
+				<div class="block_title">Подберем вам необходимый объект за 30 минут</div>
+				<div class="view_content">
+					<div class="sub_title">В базе более 1000 объектов</div>
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_item form_textarea">
+							<textarea placeholder="Введите ваше сообщение"></textarea>
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Связаться со специалистом">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main><!-- .content -->
+{% endblock content %}
+{% block js %}
+    <script src="{% static 'js/search_form.js' %}"></script>
+{% endblock js %}
