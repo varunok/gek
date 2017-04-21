@@ -5,7 +5,8 @@ $(document).ready(function() {
     $('.left_sidebar').on('click', '.searh-form', function (event) {
         event.preventDefault();
         var data = $('.search-form').serialize();
-        $.post('/search_building/', data)
+        var action = $('.search-form').attr('action')
+        $.post(action, data)
             .then(function(response) {
                 var data = $.parseJSON(response);
                 $('.list-building').html(data.html);

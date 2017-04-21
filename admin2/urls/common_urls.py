@@ -4,9 +4,11 @@ from django.conf.urls import url
 
 from admin2.views import login_views, main_views, articles_views, static_page_views, services_views
 from admin2.views import settings_views
+from admin2.views.rieltor_objects.newbuilding_view import related_building
 from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, \
     delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView, \
-    packet_text_save, packet_create, save_advantage
+    packet_text_save, packet_create, save_advantage, save_infrastructure, related_infrastructure, \
+    related_accommodations, save_accommodations
 
 urlpatterns = [
     # login views
@@ -95,5 +97,30 @@ urlpatterns = [
         r'delete-photo/(?P<id>[\w-]+)',
         DeletePhotoView.as_view(),
         name='delete_photo'
+    ),
+    url(
+        r'related-building/(?P<object_id>[\d-]+)/(?P<building_id>[\d-]+)$',
+        related_building,
+        name='related_building'
+    ),
+    url(
+        r'related-infrastructure/(?P<content_type>[\d-]+)/(?P<infra_id>[\d-]+)/(?P<object_id>[\d-]+)$',
+        related_infrastructure,
+        name='related_infrastructure'
+    ),
+    url(
+        r'save-infrastructure/$',
+        save_infrastructure,
+        name='save_infrastructure'
+    ),
+    url(
+        r'related-accommodations/(?P<content_type>[\d-]+)/(?P<acom_id>[\d-]+)/(?P<object_id>[\d-]+)$',
+        related_accommodations,
+        name='related_accommodations'
+    ),
+    url(
+        r'save-accommodations/$',
+        save_accommodations,
+        name='save_accommodations'
     ),
 ]

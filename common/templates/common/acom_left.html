@@ -1,0 +1,25 @@
+{% load thumbnail %}
+{% load staticfiles %}
+<div class="row item-acom" style="">
+    <input type="hidden" value="{{ accommodation.id }}" name="acom_id">
+    <input type="hidden" value="{{ content_type }}" name="content_type">
+    <div class="col-md-5 col-sm-5 col-xs-5">
+        {% if accommodation.image %}
+            <img src="{{ accommodation.image|thumbnail_url:'infrastructure_image_40' }}" alt="">
+        {% else %}
+            <img src="{% static 'images/no_photo.png' %}" alt="" width="40" height="40">
+        {% endif %}
+
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <p>
+            Заголовок: {{ accommodation.title }}
+        </p>
+        <p>
+            Описание: {{ accommodation.description }}
+        </p>
+    </div>
+    <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">
+        <i class="fa fa-arrow-right arrow-color"></i>
+    </div>
+</div>

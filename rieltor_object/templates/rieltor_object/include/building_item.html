@@ -1,6 +1,6 @@
 {% for object in objects %}
     <div class="views_row vip_row">
-        {% if object.status == 1 %}
+        {% if object.status == 'VIP' %}
             <div class="vip"></div>
         {% endif %}
         <div class="title">{{ object.title }}</div>
@@ -24,7 +24,7 @@
                 {% endif %}
                 {% if object.price %}
                     <div class="price info">
-                        <div class="label">Аренда:</div>
+                        <div class="label">{{ object.type_deal }}:</div>
                         {{ object.price }}
                     </div>
                 {% endif %}

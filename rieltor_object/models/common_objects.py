@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
 class TypeDeal(object):
-    RENT = 1
-    SALE = 2
+    RENT = 'Аренда'
+    SALE = 'Продажа'
     CHOICES = (
         (RENT, 'Аренда'),
         (SALE, 'Продажа')
@@ -14,8 +16,8 @@ class TypeDeal(object):
 
 
 class TypeAppointment(object):
-    APARTMENT = 1
-    HOUSE = 2
+    APARTMENT = 'Квартира'
+    HOUSE = 'Дом'
     CHOICES = (
         (APARTMENT, 'Квартира'),
         (HOUSE, 'Дом')
@@ -23,9 +25,9 @@ class TypeAppointment(object):
 
 
 class TypeStatus(object):
-    VIP = 1
-    DEFAULT = 2
-    SHORT = 3
+    VIP = 'VIP'
+    DEFAULT = 'Обычное'
+    SHORT = 'Краткое'
     CHOICES = (
         (VIP, 'VIP'),
         (DEFAULT, 'Обычное'),
@@ -34,9 +36,9 @@ class TypeStatus(object):
 
 
 class TypeLocation(object):
-    FACADE = 1
-    COURTYARD = 2
-    BISNESS = 3
+    FACADE = 'Фасад'
+    COURTYARD = 'Дворовой'
+    BISNESS = 'Бизнес-центр'
     CHOICES = (
         (FACADE, 'Фасад'),
         (COURTYARD, 'Дворовой'),
@@ -45,9 +47,9 @@ class TypeLocation(object):
 
 
 class TypeFloor(object):
-    FIRST = 1
-    COKOL = 2
-    BELTAG = 3
+    FIRST = '1-й'
+    COKOL = 'Цоколь'
+    BELTAG = 'Бельэтаж'
     CHOICES = (
         (FIRST, '1-й'),
         (COKOL, 'Цоколь'),
@@ -56,9 +58,9 @@ class TypeFloor(object):
 
 
 class TypeEntrance(object):
-    FACADE = 1
-    COURTYARD = 2
-    PARAD = 3
+    FACADE = 'Фасад'
+    COURTYARD = 'Со двора'
+    PARAD = 'С парадной'
     CHOICES = (
         (FACADE, 'Фасад'),
         (COURTYARD, 'Со двора'),
@@ -69,7 +71,8 @@ class TypeEntrance(object):
 class District(models.Model):
     name = models.CharField(
         verbose_name='Название',
-        max_length=250
+        max_length=250,
+        unique=True
     )
 
     class Meta:
@@ -78,3 +81,50 @@ class District(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class ModelIn(object):
+    model_in = (
+        'newbuilding',
+    )
+
+
+class Infrastructure(models.Model):
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='icons/%Y/%m/%d/',
+    )
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+    )
+
+    class Meta:
+        verbose_name = 'Инфраструктура'
+        verbose_name_plural = 'Инфраструктура'
+        ordering = ['-id']
+
+    def __unicode__(self):
+        return '{}'.format(self.title)
+
+
+class Accommodations(models.Model):
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='icons/%Y/%m/%d/',
+    )
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=250,
+    )
+    description = models.CharField(
+        verbose_name='Описание',
+        max_length=250,
+    )
+
+    class Meta:
+        verbose_name = 'Условия проживания'
+        verbose_name_plural = 'Условия проживания'
+
+    def __unicode__(self):
+        return '{}'.format(self.title)

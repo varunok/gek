@@ -5,6 +5,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 from common.models import Application, Video, FAQ, Photo, BasePacket, TextPacket, \
     MidlePacket, ExpertPacket, TableRepair, Advantage
+from rieltor_object.models import District
 
 
 class VideoInline(GenericTabularInline):
@@ -63,3 +64,4 @@ admin.site.register(MidlePacket, MidlePacketAdmin)
 admin.site.register(ExpertPacket, ExpertPacketAdmin)
 admin.site.register(Advantage)
 admin.site.register(TextPacket)
+

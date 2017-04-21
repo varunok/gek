@@ -5,15 +5,14 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView, ListView, FormView, TemplateView
 
 from common.mixins import ViewsCountMixin, DinamicNextMixin
-from rieltor_object.forms import FilterForm
-from rieltor_object.models import Building, TypeDeal, Ofice
-from rieltor_object.search import BuildingFilter
-
+from rieltor_object.models import Building, TypeDeal, Ofice, NewBuilding
+from rieltor_object.filters import FilterBuilding, FilterOfise, FilterNewBuilding
 
 PAGINATE_OBJ = 10
 
@@ -24,7 +23,8 @@ class BuildingListSiteView(DinamicNextMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
-        context['filter_form'] = FilterForm()
+        context['filter_form'] = FilterBuilding(self.request.GET, queryset=self.model.objects.all())
+        context['url_action'] = reverse_lazy('buildings_search')
         return context
 
 
@@ -33,23 +33,14 @@ class BuildingDetailSiteView(ViewsCountMixin, DetailView):
     template_name = 'rieltor_object/building.html'
 
 
-@require_http_methods(["POST"])
-def searchbuildingview(request):
-    if request.method == 'POST':
-        template_name = 'rieltor_object/include/building_item.html'
-        f = BuildingFilter(request.POST, queryset=Building.objects.all())
-        return render(request, template_name, {'objects': f.qs})
-    return HttpResponse(status=404)
-
-
-class SearchBuildView(DinamicNextMixin, ListView):
+class FilterBuildOficeView(DinamicNextMixin, ListView):
     paginate_by = PAGINATE_OBJ
-    model = Building
     template_name = 'rieltor_object/include/building_item.html'
     dinamic_template_name = 'rieltor_object/include/building_item.html'
 
     def get_queryset(self):
-        return BuildingFilter(self.request.POST, queryset=self.model.objects.all()).qs
+        filterset = self.kwargs.get('filterset')
+        return filterset(self.request.POST, queryset=self.model.objects.all()).qs
 
 
 class OficeListSiteView(DinamicNextMixin, ListView):
@@ -59,10 +50,27 @@ class OficeListSiteView(DinamicNextMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(OficeListSiteView, self).get_context_data(**kwargs)
-        context['filter_form'] = FilterForm()
+        context['filter_form'] = FilterOfise(self.request.GET, queryset=self.model.objects.all())
+        context['url_action'] = reverse_lazy('ofices_search')
         return context
 
 
 class OficeDetailSiteView(ViewsCountMixin, DetailView):
     model = Ofice
     template_name = 'rieltor_object/ofice.html'
+
+
+class NewBuildingListSiteView(DinamicNextMixin, ListView):
+    model = NewBuilding
+    template_name = 'rieltor_object/newbuilding_list.html'
+    paginate_by = PAGINATE_OBJ
+
+    def get_context_data(self, **kwargs):
+        context = super(NewBuildingListSiteView, self).get_context_data(**kwargs)
+        context['filter_form'] = FilterNewBuilding(self.request.GET, queryset=self.model.objects.all())
+        return context
+
+
+class NewBuildingDetailSiteView(ViewsCountMixin, DetailView):
+    model = NewBuilding
+    template_name = 'rieltor_object/newbuilding.html'

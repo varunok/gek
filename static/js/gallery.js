@@ -23,7 +23,7 @@ $(document).ready(function() {
                     notify_error('Ошибка '+ data.status, data.statusText);
                 }
                 });
-            });
+    });
     $(document).on('click', '.del-photo', function (event) {
         event.preventDefault();
         _this = $(this);

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, render_to_response
 from django.template.loader import render_to_string
 from django.views import View
@@ -13,6 +13,7 @@ from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
+from rieltor_object.models import Infrastructure, Accommodations
 
 
 class MainView(TemplateView):
@@ -246,3 +247,77 @@ def get_color(packet):
         return '#20ce5d'
     if packet.__name_packet__ == 'expert_packet':
         return '#f8bd2f'
+
+
+def save_infrastructure(request):
+    if request.method == 'POST':
+        object_id = request.POST.get('object_id')
+        content_type = request.POST.get('content_type')
+        image = request.FILES.get('image')
+        title = request.POST.get('title')
+        add = request.POST.get('add')
+        data = {}
+        if not title or not image:
+            return HttpResponse(status=500, content='Заголовок і картинка обязательни')
+        infra = Infrastructure.objects.create(
+            title=title,
+            image=image
+        )
+        data['item'] = render_to_string('common/infra_left.html', {'infrastructure':infra, 'content_type':content_type})
+        data['add'] = False
+        if add:
+            obj = ContentType.objects.get_for_id(content_type).model_class().objects.get(id=object_id)
+            obj.infrastructures.add(infra)
+            data['add'] = True
+            data['item'] = render_to_string('common/infra_right.html', {'infrastructure': infra, 'content_type':content_type})
+        data = JsonResponse(data)
+        return HttpResponse(data)
+    return HttpResponse(status=500)
+
+
+def related_infrastructure(request, content_type, infra_id, object_id):
+    obj = ContentType.objects.get_for_id(content_type).model_class().objects.get(id=object_id)
+    infra = Infrastructure.objects.get(id=infra_id)
+    if infra in obj.infrastructures.all():
+        obj.infrastructures.remove(infra)
+        return HttpResponse('Удалено')
+    obj.infrastructures.add(infra)
+    return HttpResponse('Добавлено')
+
+
+def save_accommodations(request):
+    if request.method == 'POST':
+        object_id = request.POST.get('object_id')
+        content_type = request.POST.get('content_type')
+        image = request.FILES.get('image')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        add = request.POST.get('add')
+        data = {}
+        if not title or not image:
+            return HttpResponse(status=500, content='Заголовок і картинка обязательни')
+        acom = Accommodations.objects.create(
+            title=title,
+            description=description,
+            image=image
+        )
+        data['item'] = render_to_string('common/acom_left.html', {'accommodation':acom, 'content_type':content_type})
+        data['add'] = False
+        if add:
+            obj = ContentType.objects.get_for_id(content_type).model_class().objects.get(id=object_id)
+            obj.accommodations.add(acom)
+            data['add'] = True
+            data['item'] = render_to_string('common/acom_right.html', {'accommodation': acom, 'content_type':content_type})
+        data = JsonResponse(data)
+        return HttpResponse(data)
+    return HttpResponse(status=500)
+
+
+def related_accommodations(request, content_type, acom_id, object_id):
+    obj = ContentType.objects.get_for_id(content_type).model_class().objects.get(id=object_id)
+    acom = Accommodations.objects.get(id=acom_id)
+    if acom in obj.accommodations.all():
+        obj.accommodations.remove(acom)
+        return HttpResponse('Удалено')
+    obj.accommodations.add(acom)
+    return HttpResponse('Добавлено')

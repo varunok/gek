@@ -1,0 +1,66 @@
+{% load thumbnail %}
+{% load staticfiles %}
+
+<div role="tabpanel" class="tab-pane" id="tab_content_related_object" aria-labelledby="related-object-tab">
+    <div class="row">
+        <div class=" col-md-12 col-sm-12 col-xs-12">
+            <input type="hidden" value="{{ object.id }}" id="object-id">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-5 border-related item-remove">
+                    {% for building in buildings %}
+                        <div class="row item-related" style="">
+                            <input type="hidden" value="{{ building.id }}">
+                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                {% with building.images as images %}
+                                    {% if images.count %}
+                                        <img src="{{ images.first.image|thumbnail_url:'article_image_80_40' }}" alt="">
+                                    {% else %}
+                                        <img src="{% static 'images/no_photo.png' %}" alt="" width="80" height="40">
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <p>
+                                    Заголовок: {{ building.title }}
+                                </p>
+                                <p>
+                                    Цена: {{ building.price }}
+                                </p>
+                            </div>
+                            <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">
+                                <i class="fa fa-arrow-right arrow-color"></i>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class=" col-md-5 col-sm-5 col-xs-5 border-related item-add">
+                    {% for building in object.building.all %}
+                        <div class="row item-related" style="">
+                            <input type="hidden" value="{{ building.id }}">
+                            <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">
+                                <i class="fa fa-arrow-left arrow-color"></i>
+                            </div>
+                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                {% with building.images as images %}
+                                    {% if images.count %}
+                                        <img src="{{ images.first.image|thumbnail_url:'article_image_80_40' }}" alt="">
+                                    {% else %}
+                                        <img src="{% static 'images/no_photo.png' %}" alt="" width="80" height="40">
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <p>
+                                    Заголовок: {{ building.title }}
+                                </p>
+                                <p>
+                                    Цена: {{ building.price }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

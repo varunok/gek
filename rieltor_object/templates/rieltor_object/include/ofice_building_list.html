@@ -63,28 +63,30 @@
 			<div class="left_sidebar">
 				<div class="block property_search">
 					<div class="form_title">Поиск недвижимости</div>
-					<form action="" method="post" class="webform_client_form search-form">
+					<form action="{{ url_action }}" method="post" class="webform_client_form search-form">
                         {% csrf_token %}
                         <input type="hidden" name="page" value="1">
 						<div class="form_item form_checkboxes">
-    						{% for type_deal in filter_form.type_deal %}
-                                <div class="form_checkbox">
-                                    {{ type_deal.tag }}
-                                    <label for="{{ type_deal.id_for_label }}">{{ type_deal.choice_label }}</label>
-                                </div>
+    						{% for type_deal in filter_form.form.type_deal %}
+                                {% if type_deal.choice_label %}
+                                    <div class="form_checkbox">
+                                        {{ type_deal.tag }}
+                                        <label for="{{ type_deal.id_for_label }}">{{ type_deal.choice_label }}</label>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
 						</div>
 						<div class="form_item form_select form_wrapper">
-                            {{ filter_form.appointment.label_tag }}
-                            {{ filter_form.appointment }}
+                            {{ filter_form.form.appointment.label_tag }}
+                            {{ filter_form.form.appointment }}
 						</div>
 						<div class="form_item group form_wrapper">
 							<label>Стоимость:</label>
 							<div class="form_number">
-                                {{ filter_form.price_from }}
+                                {{ filter_form.form.price__gt }}
 							</div>
 							<div class="form_number">
-								{{ filter_form.price_to }}
+								{{ filter_form.form.price__lt}}
 							</div>
 							<select name="price_currency" class="price_currency">
 								<option value="uah">грн</option>
@@ -94,10 +96,10 @@
 						<div class="form_item group form_wrapper">
 							<label>Площадь:</label>
 							<div class="form_number">
-								{{ filter_form.footage_from }}
+								{{ filter_form.form.footage__gt }}
 							</div>
 							<div class="form_number">
-								{{ filter_form.footage_to }}
+								{{ filter_form.form.footage__lt }}
 							</div>
 							<select name="price_currency" class="price_currency">
 								<option value="meter">м. кв.</option>
@@ -108,11 +110,13 @@
 							<label>Расположение:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
-                                    {% for location in filter_form.location %}
-                                        <div class="form_checkbox">
-                                            {{ location.tag }}
-                                            <label for="{{ location.id_for_label }}">{{ location.choice_label }}</label>
-                                        </div>
+                                    {% for location in filter_form.form.location %}
+                                        {% if location.choice_label %}
+                                            <div class="form_checkbox">
+                                                {{ location.tag }}
+                                                <label for="{{ location.id_for_label }}">{{ location.choice_label }}</label>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
 								</div>
 							</div>
@@ -121,11 +125,13 @@
 							<label>Этаж:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
-                                    {% for floor in filter_form.floor %}
-                                        <div class="form_checkbox">
-                                            {{ floor.tag }}
-                                            <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
-                                        </div>
+                                    {% for floor in filter_form.form.floor %}
+                                        {% if floor.choice_label %}
+                                            <div class="form_checkbox">
+                                                {{ floor.tag }}
+                                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
 								</div>
 							</div>
@@ -134,11 +140,13 @@
 							<label>Вход:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
-                                    {% for entrance in filter_form.entrance %}
-                                        <div class="form_checkbox">
-                                            {{ entrance.tag }}
-                                            <label for="{{ entrance.id_for_label }}">{{ entrance.choice_label }}</label>
-                                        </div>
+                                    {% for entrance in filter_form.form.entrance %}
+                                        {% if entrance.choice_label %}
+                                            <div class="form_checkbox">
+                                                {{ entrance.tag }}
+                                                <label for="{{ entrance.id_for_label }}">{{ entrance.choice_label }}</label>
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
 								</div>
 							</div>

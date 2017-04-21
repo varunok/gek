@@ -1,0 +1,97 @@
+{% load thumbnail %}
+{% load staticfiles %}
+<div role="tabpanel" class="tab-pane" id="tab_accommodations" aria-labelledby="accommodations-tab">
+    <form action="" id="accommodationsForm" class="accommodationsForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="{{ object.id }}" name="object_id">
+        <input type="hidden" value="{{ content_type }}" name="content_type">
+        <div class="row">
+            <div class=" col-md-3 col-sm-3 col-xs-12">
+                <input type="file" name="image">
+            </div>
+            <div class=" col-md-3 col-sm-3 col-xs-12">
+                <input type="text" name="title" placeholder="Заголовок">
+            </div>
+            <div class=" col-md-3 col-sm-3 col-xs-12">
+                <input type="text" name="description" placeholder="Описание">
+            </div>
+            <div class=" col-md-2 col-sm-2 col-xs-12">
+                <label>Добавить
+                    <input type="checkbox" class="js-switch" name="add" checked />
+                </label>
+            </div>
+            <div class=" col-md-2 col-sm-2 col-xs-12">
+                <button id="send_accommodations" name="send-accommodations" type="submit" class="btn btn-success">Сохранить</button>
+            </div>
+        </div>
+    </form>
+    <div class="ln_solid"></div>
+    <div class="row">
+        <div class=" col-md-12 col-sm-12 col-xs-12">
+            <input type="hidden" value="{{ object.id }}" id="object-id">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-5" style="margin-left: 35px">
+                    <h4>Общий список</h4>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5" style="margin-left: 40px">
+                    <h4>Прикреплено</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-5 border-related acom-remove">
+                    {% for accommodation in accommodations %}
+                        <div class="row item-acom" style="">
+                            <input type="hidden" value="{{ accommodation.id }}" name="acom_id">
+                            <input type="hidden" value="{{ content_type }}" name="content_type">
+                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                {% if accommodation.image %}
+                                    <img src="{{ accommodation.image|thumbnail_url:'infrastructure_image_40' }}" alt="">
+                                {% else %}
+                                    <img src="{% static 'images/no_photo.png' %}" alt="" width="40" height="40">
+                                {% endif %}
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <p>
+                                    Заголовок: {{ accommodation.title }}
+                                </p>
+                                <p>
+                                    Описание: {{ accommodation.description }}
+                                </p>
+                            </div>
+                            <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">
+                                <i class="fa fa-arrow-right arrow-color"></i>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class=" col-md-5 col-sm-5 col-xs-5 border-related acom-add">
+                    {% for accommodation in object.accommodations.all %}
+                        <div class="row item-acom" style="">
+                            <input type="hidden" value="{{ accommodation.id }}" name="acom_id">
+                            <input type="hidden" value="{{ content_type }}" name="content_type">
+                            <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">
+                                <i class="fa fa-arrow-left arrow-color"></i>
+                            </div>
+                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                {% if accommodation.image %}
+                                    <img src="{{ accommodation.image|thumbnail_url:'infrastructure_image_40' }}" alt="">
+                                {% else %}
+                                    <img src="{% static 'images/no_photo.png' %}" alt="" width="40" height="40">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <p>
+                                    Заголовок: {{ accommodation.title }}
+                                </p>
+                                <p>
+                                    Описание: {{ accommodation.description }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

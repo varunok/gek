@@ -85,7 +85,7 @@ class Video(models.Model):
         limit_choices_to={'model__in': ModelInService.model_in}
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name='Включен ли?',
         default=True
     )
     object_id = models.PositiveIntegerField()

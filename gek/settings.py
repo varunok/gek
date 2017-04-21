@@ -153,7 +153,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-FILTERS_NULL_CHOICE_VALUE = 'null_value'
+# FILTERS_NULL_CHOICE_VALUE = ''
 
 # CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
@@ -227,11 +227,15 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
 
 THUMBNAIL_ALIASES = {
     '': {
+        'infrastructure_image_40': {'size': (40, 40), 'crop': True},
         'article_image_60': {'size': (60, 60), 'crop': True},
+        'article_image_80_40': {'size': (80, 40), 'crop': True},
         'admin_avatar_200': {'size': (200, 200), 'crop': True},
+        'gallery_image_233': {'size': (233, 133), 'crop': True},
         'gallery_image_275': {'size': (275, 185), 'crop': True},
         'gallery_image_370': {'size': (370, 211), 'crop': True},
         'gallery_image_570': {'size': (570, 338), 'crop': True},
+        'gallery_image_469': {'size': (469, 266), 'crop': True},
         'universal_image_270': {'size': (270, 160), 'crop': True},
         'slider_image_166': {'size': (166, 94), 'crop': True},
     },

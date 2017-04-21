@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front newbuilding_inner daily_inner" {% endblock %}
+
+{% block content %}
+	<main class="middle">
+		<div class="slider_main slider_notfront">
+			<div class="block_content">		
+				<div class="top_inner_content">
+					<div class="main_breadcrumbs"><a href="/">Главная</a> / <span>Недвижимость</span></div>
+					<div class="title">Квартиры в новострое</div>
+				</div>
+				<div class="icons_wrap">
+					<div class="icon stat">{{ object.views }}</div>
+					<div class="icon favorite"></div>
+				</div>
+				<h1 class="slider_title page_title">{{ object.title }}. {{ object.address }}</h1>
+				<form action="#" class="webform_client_form">				
+					<div class="form_actions">
+						<input class="form-submit" type="submit" value="Отправить заявку">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+					<div class="block block_appartament_slider">
+						<div class="view_content">
+							{% with object.images.all as images %}
+							    <div class="slider_for" id="slider_for">
+                                    {% for image in images %}
+                                        <div class="item">
+                                            <div class="item_inner">
+                                                <img src="{{ image.image.url }}" alt="" width="100%">
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="slider_nav" id="slider_nav">
+                                    {% for image in images %}
+                                        <div class="item first">
+                                            <div class="item_inner">
+                                                <img src="{{ image.image|thumbnail_url:'slider_image_166' }}" alt="" width="100%">
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endwith %}
+						</div>
+					</div>	
+					<div class="block block_inform_appartament">
+						<div class="block_content">										
+							<div class="left_wrap information">
+								<div class="title">Информация:</div>
+								<div class="price_wrapper">
+									<div class="first_price">{{ object.price }}грн/м2</div><span></span><div class="second_price">{{ object.total_area }} м<sup>2</sup></div>
+								</div>
+								<div class="char_wrapper">
+										<div class="item">
+											<div class="label">Этажность:</div>
+											<div class="field_item">{{ object.storeys }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Парадных:</div>
+											<div class="field_item">{{ object.parade }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Район:</div>
+											<div class="field_item">{{ object.district }}</div>
+										</div>										
+								</div>
+							</div>
+							<div class="left_wrap information second">
+								<div class="title">г. Одесса <br>{{ object.address }}:</div>
+								<div class="char_wrapper">
+										<div class="item">
+											<div class="label">Парковочных мест:</div>
+											<div class="field_item">{{ object.parking_places|default:'--' }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Начало строительства:</div>
+											<div class="field_item">{{ object.start_construction|date:'F Y' }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Дата сдачи:</div>
+											<div class="field_item">{{ object.end_construction|date:'F Y' }}</div>
+										</div>									
+								</div>
+							</div>
+							<div class="right_wrap contacts">
+								<div class="title">Контакты:</div>
+								<div class="contacts_person name">
+									<div class="label">Имя:</div>
+									<div class="field_item">Алексей</div>
+								</div>
+								<div class="contacts_person phone">
+									<div class="label">Телефон:</div>
+									<div class="field_item"><a href="tel:+380694546241">(069) 454-62-41</a></div>
+								</div>
+								<div class="social_share">
+								<div class="label">Поделиться с друзьями:</div>
+									<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+									<script src="//yastatic.net/share2/share.js"></script>
+									<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter,linkedin,lj,tumblr,whatsapp,skype,telegram"></div>	
+								</div>
+							</div>
+						</div>	
+					</div>
+					<div class="block block_body">
+						<div class="title">Описание</div>
+						<div class="field_body">
+                            {{ object.description }}
+						</div>
+					</div>							
+				</div><!-- #content-->
+				
+			</div>			
+		</div>
+		<div class="block block_presentation order_block">
+			<div class="block_content">
+				<div class="block_title">Купить квартиру</div>
+				<div class="view_content">								
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Отправить">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>	
+		{% with object.videos.all.first as video %}
+            {% if video.is_enable and video.video %}
+                <div class="block block_video">
+                    <div class="block_content">
+                        <div class="block_title">{{ video.title }}</div>
+                        {{ video.video|convert_to_frame|safe }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+		<div class="block block_accommodations">
+			<div class="block_content">
+                {% with newbuilding.infrastructures.all as infrastructures %}
+                    {% if infrastructures %}
+                        <div class="left_wrap">
+                            <div class="title">Инфраструктура:</div>
+                            <div class="accommodations">
+                                {% for infra in infrastructures %}
+                                    <div class="item" style="background: url({{ infra.image|thumbnail_url:'infrastructure_image_40' }}) no-repeat center left;">{{ infra.title }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% with newbuilding.accommodations.all as accommodations %}
+                    {% if accommodations %}
+                        <div class="rigth_wrap">
+                            <div class="title">Условия проживания:</div>
+                            <div class="accommodations">
+                                {% for acom in accommodations %}
+                                    <div class="item" style="font-weight: 400; line-height: 24px;background: url({{ acom.image|thumbnail_url:'infrastructure_image_40' }}) no-repeat center left;">
+                                        <span style="">{{ acom.title }}: </span><br><strong>{{ acom.description }}</strong>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+			</div>
+		</div>
+		<div class="block_maps">
+			<div class="map">
+			<div class="title">На карте:</div>
+				<div class="field_image">
+					<img src="images/map_2.png" alt="">
+				</div>
+			</div>
+			<div class="map">
+			<div class="title">Панорама:</div>
+				<div class="field_image">
+					<img src="images/google.png" alt="">
+				</div>
+			</div>
+		</div>
+		{% if object.building.count %}
+            <div class="block block_vip_shops block_free">
+                <div class="block_title">В наличии свободные объекты:</div>
+                <div class="block_content">
+                    <div class="view_content">
+                        {% for build in object.building.all %}
+                            <div class="views_row vip_row">
+                                {% if build.status == 'VIP' %}
+                                    <div class="vip"></div>
+                                {% endif %}
+                                <div class="title">{{ build.title }}</div>
+                                <div class="field_image">
+                                    <img src="{% static 'images/shop_1.png' %}" alt="">
+                                </div>
+                                <div class="views_body">
+                                    <div class="star"></div>
+                                    <div class="address">{{ build.address|default:'' }}</div>
+                                    <div class="text"> {{ build.description|truncatewords:'15' }} </div>
+                                    <div class="top_wrap">
+                                        <div class="info">
+                                            <div class="label">Район:</div>
+                                            <div class="item">{{ build.district|default:'' }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">ID:</div>
+                                            <div class="item">{{ build.id }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">Комнат:</div>
+                                            <div class="item">2</div>
+                                        </div>
+                                        {% if build.price %}
+                                            <div class="info price">
+                                                {{ build.price }}грн
+                                            </div>
+                                        {% endif %}
+                                        {% if build.footage %}
+                                        <div class="info">
+                                            <div class="label">Площадь:</div>
+                                            <div class="item">{{ build.footage }} м<sup>2</sup></div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="bottom_wrap">
+                                        <div class="statistics">{{ build.views }}</div>
+                                        <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+                                        <div class="read_more"><a href="{{ build.get_absolute_url }}">Подробнее</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+		<div class="block region_banner">
+			<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		</div>
+	</main><!-- .content -->
+
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

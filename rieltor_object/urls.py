@@ -2,17 +2,38 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from rieltor_object.views import BuildingListSiteView, BuildingDetailSiteView, searchbuildingview, SearchBuildView, \
-    OficeDetailSiteView, OficeListSiteView
+from rieltor_object.filters import FilterBuilding, FilterOfise
+from rieltor_object.models import Building, Ofice
+from rieltor_object.views import BuildingListSiteView, BuildingDetailSiteView, FilterBuildOficeView, \
+    OficeDetailSiteView, OficeListSiteView, NewBuildingListSiteView, NewBuildingDetailSiteView
 
 urlpatterns = [
     # building
     url('^buildings/$', BuildingListSiteView.as_view(), name='buildings'),
     url('^buildings/(?P<pk>[\w-]+)/$', BuildingDetailSiteView.as_view(), name='buildings_detail'),
+
+    # newbuilding
+    url('^newbuildings/$', NewBuildingListSiteView.as_view(), name='newbuildings'),
+    url('^newbuildings/(?P<slug>[\w-]+)$', NewBuildingDetailSiteView.as_view(), name='newbuilding_detail'),
+
+    # ofices
     url('^ofices/$', OficeListSiteView.as_view(), name='ofices'),
     url('^ofices/(?P<pk>[\w-]+)/$', OficeDetailSiteView.as_view(), name='ofice_detail'),
 
 ]
+
+# FILTERING
 urlpatterns_search = [
-    url(r'search_building/$', SearchBuildView.as_view(), name='buildings_search'),
+    url(
+        r'search_building/$',
+        FilterBuildOficeView.as_view(model=Building),
+        kwargs={'filterset': FilterBuilding},
+        name='buildings_search'
+    ),
+    url(
+        r'search_ofices/$',
+        FilterBuildOficeView.as_view(model=Ofice),
+        kwargs={'filterset': FilterOfise},
+        name='ofices_search'
+    ),
 ]

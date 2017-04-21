@@ -4,6 +4,7 @@ from django.conf.urls import url
 
 from admin2.views.rieltor_objects.building_view import BuildingListView, BuildingEditView, BuildingCreateView, \
     BuildingDeleteView
+from admin2.views.rieltor_objects.newbuilding_view import NewBuildingListView, NewBuildingEditView
 from admin2.views.rieltor_objects.ofice_view import OficeListView, OficeEditView, OficeCreateView, OficeDeleteView
 
 urlpatterns = [
@@ -18,5 +19,11 @@ urlpatterns = [
     url('^objects/ofices/edit/(?P<pk>[\w-]+)/$', OficeEditView.as_view(), name='ofice_edit'),
     url('^objects/ofices/create/$', OficeCreateView.as_view(), name='ofice_create'),
     url('^objects/ofices/delete/(?P<pk>[\w-]+)/$', OficeDeleteView.as_view(),name='ofice_delete'),
+
+    # newbuilding
+    url('^objects/newbuilding/$', NewBuildingListView.as_view(), name='newbuildings'),
+    url('^objects/newbuilding/edit/(?P<pk>[\w-]+)/$', NewBuildingEditView.as_view(), name='newbuilding_edit'),
+    url('^objects/newbuilding/create/$', OficeCreateView.as_view(), name='newbuilding_create'),
+    url('^objects/newbuilding/delete/(?P<pk>[\w-]+)/$', OficeDeleteView.as_view(),name='newbuilding_delete'),
 
 ]

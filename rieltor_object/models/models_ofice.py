@@ -45,14 +45,16 @@ class Ofice(models.Model):
         blank=True,
         null=True
     )
-    type_deal = models.IntegerField(
+    type_deal = models.CharField(
         verbose_name='Тип',
+        max_length=20,
         choices=TypeDeal.CHOICES,
         blank=True,
         null=True
     )
-    appointment = models.IntegerField(
+    appointment = models.CharField(
         verbose_name='Назначение',
+        max_length=20,
         choices=TypeAppointment.CHOICES,
         blank=True,
         null=True
@@ -80,26 +82,30 @@ class Ofice(models.Model):
         verbose_name='Дата редактирования',
         auto_now=True
     )
-    location = models.IntegerField(
+    location = models.CharField(
         verbose_name='Расположение',
+        max_length=20,
         choices=TypeLocation.CHOICES,
         blank=True,
         null=True
     )
-    floor = models.IntegerField(
+    floor = models.CharField(
         verbose_name='Этаж',
+        max_length=20,
         choices=TypeFloor.CHOICES,
         blank=True,
         null=True
     )
-    entrance = models.IntegerField(
+    entrance = models.CharField(
         verbose_name='Вход',
+        max_length=20,
         choices=TypeEntrance.CHOICES,
         blank=True,
         null=True
     )
-    status = models.IntegerField(
+    status = models.CharField(
         verbose_name='Статус',
+        max_length=20,
         choices=TypeStatus.CHOICES,
         blank=True,
         null=True
@@ -145,11 +151,15 @@ class Ofice(models.Model):
 
     def save(self, *args, **kwargs):
         if self.title:
-            self.SEOTitle = self.title
-            self.SEOKeywords = self.title
-            self.SEODescription = '{0} {1} {2} {3} {4}'.format(self.get_type_deal_display(),
-                                                               self.get_appointment_display(), self.address, self.price,
-                                                               self.title)
+            if not self.SEOTitle:
+                self.SEOTitle = self.title
+            if not self.SEOKeywords:
+                self.SEOKeywords = self.title
+            if not self.SEODescription:
+                self.SEODescription = '{0} {1} {2} {3} {4}'.format(self.get_type_deal_display(),
+                                                                   self.get_appointment_display(), self.address,
+                                                                   self.price,
+                                                                   self.title)
         super(Ofice, self).save(*args, **kwargs)
 
     def get_edit_url(self):
