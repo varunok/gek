@@ -13,7 +13,7 @@ from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
-from rieltor_object.models import Infrastructure, Accommodations
+from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext
 
 
 class MainView(TemplateView):
@@ -321,3 +321,28 @@ def related_accommodations(request, content_type, acom_id, object_id):
         return HttpResponse('Удалено')
     obj.accommodations.add(acom)
     return HttpResponse('Добавлено')
+
+
+def save_apartment_next(request):
+    if request.method == 'POST':
+        object_id = request.POST.get('object_id')
+        content_type = request.POST.get('content_type')
+        name = request.POST.get('name')
+        value = request.POST.get('value')
+        content_type = ContentType.objects.get_for_id(content_type)
+        apartment_next = ApartmentNext.objects.create(
+            name=name,
+            value=value,
+            object_id=object_id,
+            content_type = content_type
+        )
+        item = render_to_string('common/apartment_next_item.html', {'object': apartment_next, 'next':apartment_next})
+        data = JsonResponse({
+            'item': item
+        })
+        return HttpResponse(data)
+    return HttpResponse(status=500)
+
+def delete_apartment_next(request, id):
+    ApartmentNext.objects.get(id=id).delete()
+    return HttpResponse()

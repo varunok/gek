@@ -1,0 +1,451 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front apartment daily_inner" {% endblock %}
+
+{% block content %}
+    <main class="middle">
+		<div class="slider_main slider_notfront"{% if object.image %}
+                style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="block_content">
+				<div class="top_inner_content">
+					<div class="main_breadcrumbs"><a href="/">Главная</a> / <span>Посуточно</span></div>
+					<div class="title">Аренда квартиры посуточно</div>
+				</div>
+				<div class="icons_wrap">
+					<div class="icon stat">{{ object.views }}</div>
+					<div class="icon favorite"></div>
+				</div>
+				<h1 class="slider_title page_title">{{ object.title }}. {{ object.address }}</h1>
+				<form action="#" class="webform_client_form">
+					<div class="form_actions">
+						<input class="form-submit" type="submit" value="Забронировать">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="middle_inner">
+			<div class="container">
+				<div id="content">
+                    {% with object.images.all as images %}
+                        {% if images %}
+                            <div class="block block_appartament_slider">
+                                <div class="view_content">
+                                    <div class="slider_for" id="slider_for">
+                                        {% for image in images %}
+                                            <div class="item">
+                                                <div class="item_inner">
+                                                    <img src="{{ image.image.url }}" alt="" width="100%">
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="slider_nav" id="slider_nav">
+                                        {% for image in images %}
+                                            <div class="item first">
+                                                <div class="item_inner">
+                                                    <img src="{{ image.image|thumbnail_url:'slider_image_166' }}" alt="" width="100%">
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+					<div class="block block_inform_appartament">
+						<div class="block_content">
+							<div class="left_wrap information">
+								<div class="title">Информация:</div>
+								<div class="price_wrapper">
+									<div class="first_price">{{ object.price }} грн/сутки</div><span></span><div class="second_price">45 м<sup>2</sup></div>
+								</div>
+								<div class="char_wrapper">
+									<div class="group">
+										<div class="item">
+											<div class="label">Этаж:</div>
+											<div class="field_item">{{ object.floor }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Комнаты:</div>
+											<div class="field_item">{{ object.rooms }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Гостей:</div>
+											<div class="field_item">{{ object.guest }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Спальных мест:</div>
+											<div class="field_item">{{ object.sleeping_places }}</div>
+										</div>
+										<div class="item">
+											<div class="label">ID:</div>
+											<div class="field_item">{{ object.id }}</div>
+										</div>
+										<div class="item">
+											<div class="label">Тех план:</div>
+											<div class="field_item"><a href="#">Посмотреть</a></div>
+										</div>
+									</div>
+                                    {% with object.apartment_has.all as apartment_has %}
+                                        {% if apartment_has %}
+                                            <div class="group">
+                                                <div class="item list">
+                                                    <div class="label">В квартире есть:</div>
+                                                    <div class="field_item">
+                                                        <ul>
+                                                            {% for value in apartment_has %}
+                                                                <li>{{ value }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endwith %}
+								</div>
+							</div>
+							<div class="right_wrap contacts">
+								<div class="title">Контакты:</div>
+								<div class="contacts_person name">
+									<div class="label">Имя:</div>
+									<div class="field_item">Алексей</div>
+								</div>
+								<div class="contacts_person phone">
+									<div class="label">Телефон:</div>
+									<div class="field_item"><a href="tel:+380694546241">(069) 454-62-41</a></div>
+								</div>
+								<div class="social_share">
+								<div class="label">Поделиться с друзьями:</div>
+									<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+									<script src="//yastatic.net/share2/share.js"></script>
+									<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter,linkedin,lj,tumblr,whatsapp,skype,telegram"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block block_body">
+						<div class="title">Описание</div>
+						<div class="field_body">
+                            {{ object.description }}
+						</div>
+					</div>
+				</div><!-- #content-->
+
+			</div>
+		</div>
+		<div class="block block_presentation order_block">
+			<div class="block_content">
+				<div class="block_title">Бронировать квартиру</div>
+				<div class="view_content">
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Отправить">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="block block_accommodations">
+			<div class="block_content">
+                {% with object.infrastructures.all as infrastructures %}
+                    {% if infrastructures %}
+                        <div class="left_wrap">
+                            <div class="title">Условия проживания:</div>
+                            <div class="accommodations">
+                                {% for infra in infrastructures %}
+                                    <div class="item" style="background: url({{ infra.image|thumbnail_url:'infrastructure_image_40' }}) no-repeat center left;">{{ infra.title }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% with object.apartment_next.all as apartment_next %}
+                    {% if apartment_next %}
+                        <div class="rigth_wrap">
+                            <div class="title">Рядом с квартирой:</div>
+                            <div class="char">
+                                {% for values in apartment_next %}
+                                    <div class="group">
+                                        <div class="item">
+                                            <div class="label">{{ values.name }}:</div>
+                                            <div class="field_item">{{ values.value }}м</div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+			</div>
+		</div>
+		<div class="block_maps">
+			<div class="map">
+			<div class="title">На карте:</div>
+				<div class="field_image">
+					<img src="{% static 'images/map_2.png' %}" alt="">
+				</div>
+			</div>
+			<div class="map">
+			<div class="title">Панорама:</div>
+				<div class="field_image">
+					<img src="{% static 'images/google.png' %}" alt="">
+				</div>
+			</div>
+		</div>
+		{% with object.videos.all.first as video %}
+            {% if video.is_enable and video.video %}
+                <div class="block block_video">
+                    <div class="block_content">
+                        <div class="block_title">{{ video.title }}</div>
+                        {{ video.video|convert_to_frame|safe }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+		<div class="block block_vip_shops block_search_results block_daily_products">
+			<div class="block_title">Похожие объекты</div>
+			<div class="block_content">
+				<div class="view_content">
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_1.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">Район:</div>
+									<div class="item">центр</div>
+								</div>
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">456465</div>
+								</div>
+								<div class="info">
+									<div class="label">Комнат:</div>
+									<div class="item">2</div>
+								</div>
+								<div class="price info">
+									800 грн/сутки
+								</div>
+								<div class="info">
+									<div class="label">Спальных мест:</div>
+									<div class="item">2</div>
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">74</div>
+								<div class="read_more preview"><a href="/">Забронировать</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_2.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">Район:</div>
+									<div class="item">центр</div>
+								</div>
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">456465</div>
+								</div>
+								<div class="info">
+									<div class="label">Комнат:</div>
+									<div class="item">2</div>
+								</div>
+								<div class="price info">
+									800 грн/сутки
+								</div>
+								<div class="info">
+									<div class="label">Спальных мест:</div>
+									<div class="item">2</div>
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">58</div>
+								<div class="read_more preview"><a href="/">Забронировать</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_3.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">Район:</div>
+									<div class="item">центр</div>
+								</div>
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">456465</div>
+								</div>
+								<div class="info">
+									<div class="label">Комнат:</div>
+									<div class="item">2</div>
+								</div>
+								<div class="price info">
+									800 грн/сутки
+								</div>
+								<div class="info">
+									<div class="label">Спальных мест:</div>
+									<div class="item">2</div>
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">61</div>
+								<div class="read_more preview"><a href="/">Забронировать</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_1.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">Район:</div>
+									<div class="item">центр</div>
+								</div>
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">456465</div>
+								</div>
+								<div class="info">
+									<div class="label">Комнат:</div>
+									<div class="item">2</div>
+								</div>
+								<div class="price info">
+									800 грн/сутки
+								</div>
+								<div class="info">
+									<div class="label">Спальных мест:</div>
+									<div class="item">2</div>
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">74</div>
+								<div class="read_more preview"><a href="/">Забронировать</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_2.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">Район:</div>
+									<div class="item">центр</div>
+								</div>
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">456465</div>
+								</div>
+								<div class="info">
+									<div class="label">Комнат:</div>
+									<div class="item">2</div>
+								</div>
+								<div class="price info">
+									800 грн/сутки
+								</div>
+								<div class="info">
+									<div class="label">Спальных мест:</div>
+									<div class="item">2</div>
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">58</div>
+								<div class="read_more preview"><a href="/">Забронировать</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_3.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">Район:</div>
+									<div class="item">центр</div>
+								</div>
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">456465</div>
+								</div>
+								<div class="info">
+									<div class="label">Комнат:</div>
+									<div class="item">2</div>
+								</div>
+								<div class="price info">
+									800 грн/сутки
+								</div>
+								<div class="info">
+									<div class="label">Спальных мест:</div>
+									<div class="item">2</div>
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">61</div>
+								<div class="read_more preview"><a href="/">Забронировать</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block region_banner">
+			<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		</div>
+	</main><!-- .content -->
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

@@ -2,13 +2,15 @@
 from __future__ import unicode_literals
 
 from django import forms
+from dal import autocomplete
 from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.forms.widgets import TextInput, Textarea, FileInput, Select
 from ckeditor.widgets import CKEditorWidget
+from django.urls import reverse_lazy
 
 from articles.models import Sections, Articles
 from common.models import Video, Photo, Advantage
-from rieltor_object.models import Building, Ofice, NewBuilding
+from rieltor_object.models import Building, Ofice, NewBuilding, Daily
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 
@@ -156,3 +158,17 @@ class OficeEditForm(forms.ModelForm):
         model = Ofice
         exclude = ['views']
         fields = '__all__'
+
+
+class DailyEditForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Daily
+        exclude = ['views', 'infrastructures']
+        fields = '__all__'
+        widgets = {
+            'apartment_has': autocomplete.ModelSelect2Multiple(
+                url=reverse_lazy('admin2:apartment-has-autocomplete'),
+            )
+        }

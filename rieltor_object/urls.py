@@ -5,7 +5,8 @@ from django.conf.urls import url
 from rieltor_object.filters import FilterBuilding, FilterOfise
 from rieltor_object.models import Building, Ofice
 from rieltor_object.views import BuildingListSiteView, BuildingDetailSiteView, FilterBuildOficeView, \
-    OficeDetailSiteView, OficeListSiteView, NewBuildingListSiteView, NewBuildingDetailSiteView
+    OficeDetailSiteView, OficeListSiteView, NewBuildingListSiteView, NewBuildingDetailSiteView, DailyListSiteView, \
+    DailyDetailSiteView
 
 urlpatterns = [
     # building
@@ -19,6 +20,10 @@ urlpatterns = [
     # ofices
     url('^ofices/$', OficeListSiteView.as_view(), name='ofices'),
     url('^ofices/(?P<pk>[\w-]+)/$', OficeDetailSiteView.as_view(), name='ofice_detail'),
+
+    # daily
+    url('^dailys/$', DailyListSiteView.as_view(), name='dailys'),
+    url('^dailys/(?P<pk>[\w-]+)/$', DailyDetailSiteView.as_view(), name='daily_detail'),
 
 ]
 

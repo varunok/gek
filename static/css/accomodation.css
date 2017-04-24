@@ -1,0 +1,36 @@
+.item-related{
+    cursor: pointer;
+    padding: 10px;
+}
+.item-related:hover{
+    background-color: #1b6d85;
+    color: #BDBDBD;
+}
+.item-infra{
+    cursor: pointer;
+    padding: 10px;
+}
+.item-infra:hover{
+    background-color: #1b6d85;
+    color: #BDBDBD;
+}
+.item-acom{
+    cursor: pointer;
+    padding: 10px;
+}
+.item-acom:hover{
+    background-color: #1b6d85;
+    color: #BDBDBD;
+}
+.border-related{
+    border: 1px solid #9DA18C;
+    margin: 15px;
+    max-height: 550px;
+    overflow-y: auto;
+}
+.arrow-color{
+    color: white;
+}
+.arrow-color:hover{
+    color: black;
+}

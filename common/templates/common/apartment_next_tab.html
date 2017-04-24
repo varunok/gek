@@ -1,0 +1,55 @@
+{% load thumbnail %}
+{% load staticfiles %}
+<div role="tabpanel" class="tab-pane" id="tab_apartment_next" aria-labelledby="apartment_next-tab">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Добавить</button>
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">Добавить Рядом с квартирой</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" name="apartment_nextForm" id="apartment_nextForm">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ content_type }}" name="content_type">
+                        <input type="hidden" value="{{ object.id }}" name="object_id">
+                        <div>
+                            <label>Название:
+                                <input type="text" name="name">
+                            </label>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div>
+                            <label>Значение:
+                                <input type="number" name="value">
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    <button id="btn_an" type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ln_solid"></div>
+    <div class="x_content">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th style="width: 33%">Название</th>
+                    <th style="width: 33%">Значение, м</th>
+                    <th style="width: 33%"></th>
+                </tr>
+            </thead>
+            <tbody id="tbody-item">
+                {% for next in object.apartment_next.all %}
+                    {% include 'common/apartment_next_item.html' %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

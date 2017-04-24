@@ -5,10 +5,12 @@ from django.conf.urls import url
 from admin2.views import login_views, main_views, articles_views, static_page_views, services_views
 from admin2.views import settings_views
 from admin2.views.rieltor_objects.newbuilding_view import related_building
+from common.mixins import Select2QuerySetViewCustom
 from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, \
     delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView, \
     packet_text_save, packet_create, save_advantage, save_infrastructure, related_infrastructure, \
-    related_accommodations, save_accommodations
+    related_accommodations, save_accommodations, save_apartment_next, delete_apartment_next
+from rieltor_object.models import ApartmentHas
 
 urlpatterns = [
     # login views
@@ -122,5 +124,22 @@ urlpatterns = [
         r'save-accommodations/$',
         save_accommodations,
         name='save_accommodations'
+    ),
+    url(
+        r'save-apartment-next',
+        save_apartment_next,
+        name='save_apartment_next'
+    ),
+    url(
+        r'delete/apartment-next/(?P<id>[\d-]+)/$',
+        delete_apartment_next,
+        name='delete_apartment_next'
+    ),
+    url(
+        '^apartment-has-autocomplete/$',
+        Select2QuerySetViewCustom.as_view(
+            model=ApartmentHas,
+            create_field='name',),
+        name='apartment-has-autocomplete'
     ),
 ]

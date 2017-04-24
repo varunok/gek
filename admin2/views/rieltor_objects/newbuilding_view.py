@@ -19,7 +19,7 @@ class NewBuildingListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(NewBuildingListView, self).get_context_data(**kwargs)
         context['page_title'] = 'Новострои'
-        context['create_url'] = reverse_lazy('admin2:building_create')
+        context['create_url'] = reverse_lazy('admin2:newbuilding_create')
         return context
 
 
@@ -53,22 +53,22 @@ def related_building(request, object_id, building_id):
     building.save()
     return HttpResponse(status=200, content='Добавлено')
 
-# class BuildingCreateView(CreateView):
-#     model = Building
-#     form_class = BuildingEditForm
-#     template_name = 'admin2/rieltor_object/building/building_edit.html'
-#
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(BuildingCreateView, self).get_context_data(**kwargs)
-#         context['verbose_name'] = self.model._meta.verbose_name
-#         context['list_url'] = reverse_lazy('admin2:buildings')
-#         return context
-#
-#     def get_success_url(self):
-#         return self.object.get_edit_url()
-#
-#
-# class BuildingDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
-#     model = Building
-#     pk_url_kwarg = 'pk'
+class NewBuildingCreateView(CreateView):
+    model = NewBuilding
+    form_class = NewBuildingEditForm
+    template_name = 'admin2/rieltor_object/new_building/new_building_edit.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(NewBuildingCreateView, self).get_context_data(**kwargs)
+        context['verbose_name'] = self.model._meta.verbose_name
+        context['list_url'] = reverse_lazy('admin2:newbuildings')
+        return context
+
+    def get_success_url(self):
+        return self.object.get_edit_url()
+
+
+class NewBuildingDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+    model = NewBuilding
+    pk_url_kwarg = 'pk'

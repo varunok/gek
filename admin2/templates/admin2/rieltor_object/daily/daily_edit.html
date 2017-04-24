@@ -7,8 +7,8 @@
 {% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
 
 {% block css %}
+    <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
     <link rel="stylesheet" href="{% static 'css/switchery.min.css' %}">
-
     <style>
         .slideThree {
             width: 80px;
@@ -60,9 +60,7 @@
         input[type=checkbox]:checked + label {
             left: 43px;
         }
-
     </style>
-    <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -124,13 +122,10 @@
                                             <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
                                         </li>
                                         <li role="presentation" class="">
-                                            <a href="#tab_content_related_object" id="related-object-tab" role="tab" data-toggle="tab" aria-expanded="false">Связанные объекты</a>
-                                        </li>
-                                        <li role="presentation" class="">
                                             <a href="#tab_infrastructure" id="infrastructure-tab" role="tab" data-toggle="tab" aria-expanded="false">Инфраструктура</a>
                                         </li>
                                         <li role="presentation" class="">
-                                            <a href="#tab_accommodations" id="accommodations-tab" role="tab" data-toggle="tab" aria-expanded="false">Условия проживания</a>
+                                            <a href="#tab_apartment_next" id="apartment_next-tab" role="tab" data-toggle="tab" aria-expanded="false">Рядом с квартирой</a>
                                         </li>
                                         {% endif %}
                                     </ul>
@@ -139,16 +134,6 @@
                                             <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
                                                 {% csrf_token %}
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.slug.label }}:
-                                                    </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.slug|addcss:'form-control' }}
-                                                    </div>
-                                                    {% if form.slug.errors %}
-                                                        <span class="error-label">{{ form.slug.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.point.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
@@ -156,20 +141,6 @@
                                                     </div>
                                                     {% if form.point.errors %}
                                                         <span class="error-label">{{ form.point.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.is_enable.label }}:
-                                                        <br><span style="color: lightgrey; font-size: 11px;">{{ form.is_enable.help_text }}</span>
-                                                    </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        <div class="slideThree">
-                                                            <input type="checkbox"  id="statusNewBuild{{ object.uuid }}" name="is_enable" {% if object.is_enable %} checked {% endif %} />
-                                                            <label class="lab" for="statusNewBuild{{ object.uuid }}"></label>
-                                                        </div>
-                                                    </div>
-                                                    {% if form.is_enable.errors %}
-                                                        <span class="error-label">{{ form.is_enable.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -230,73 +201,54 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.parade.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.guest.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.parade|addcss:'form-control' }}
+                                                        {{ form.guest|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.parade.errors %}
-                                                        <span class="error-label">{{ form.parade.errors }}</span>
+                                                    {% if form.guest.errors %}
+                                                        <span class="error-label">{{ form.guest.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.storeys.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.apartment_has.label }}:
+                                                        <br><span style="color: lightgrey; font-size: 11px;">{{ form.apartment_has.help_text }}</span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.storeys|addcss:'form-control' }}
+                                                        {{ form.apartment_has|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.storeys.errors %}
-                                                        <span class="error-label">{{ form.storeys.errors }}</span>
+                                                    {% if form.apartment_has.errors %}
+                                                        <span class="error-label">{{ form.apartment_has.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.parking_places.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.sleeping_places.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.parking_places|addcss:'form-control' }}
+                                                        {{ form.sleeping_places|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.parking_places.errors %}
-                                                        <span class="error-label">{{ form.parking_places.errors }}</span>
+                                                    {% if form.sleeping_places.errors %}
+                                                        <span class="error-label">{{ form.sleeping_places.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.total_area.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.rooms.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.total_area|addcss:'form-control' }}
+                                                        {{ form.rooms|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.total_area.errors %}
-                                                        <span class="error-label">{{ form.total_area.errors }}</span>
+                                                    {% if form.rooms.errors %}
+                                                        <span class="error-label">{{ form.rooms.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.class_house.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.floor.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.class_house|addcss:'form-control' }}
+                                                        {{ form.floor|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.class_house.errors %}
-                                                        <span class="error-label">{{ form.class_house.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.start_construction.label }}:
-                                                    </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.start_construction|addcss:'form-control daterange' }}
-                                                    </div>
-                                                    {% if form.start_construction.errors %}
-                                                        <span class="error-label">{{ form.start_construction.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.end_construction.label }}:
-                                                    </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.end_construction|addcss:'form-control daterange' }}
-                                                    </div>
-                                                    {% if form.end_construction.errors %}
-                                                        <span class="error-label">{{ form.end_construction.errors }}</span>
+                                                    {% if form.floor.errors %}
+                                                        <span class="error-label">{{ form.floor.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -336,6 +288,17 @@
                                                         <span class="error-label">{{ form.geo.errors }}</span>
                                                     {% endif %}
                                                 </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        <input id="imgInp" name="image" type="file">
+                                                        <img id="blah" src="
+                                                        {% if object.image %}
+                                                            {{ object.image.url }}
+                                                        {% endif %}
+                                                        " alt="" width="100%" />
+                                                    </div>
+                                                </div>
 
 
                                                 <div class="ln_solid"></div>
@@ -349,9 +312,8 @@
                                         {% include 'admin2/services/include/videos.html' with service=object %}
                                         {% include 'admin2/services/include/packets.html' with service=object %}
                                         {% include 'admin2/services/include/gallery.html' with service=object %}
-                                        {% include 'admin2/rieltor_object/common/related_items.html' with service=object %}
                                         {% include 'common/infrastructure_tab.html' %}
-                                        {% include 'common/accommodations_item.html' %}
+                                        {% include 'common/apartment_next_tab.html' %}
                                     </div>
                                 </div>
                             </div>
@@ -367,15 +329,11 @@
 {% block js %}
     <script src="{% static 'js/service_status.js' %}"></script>
     <script src="{% static 'js/video_status.js' %}"></script>
-    <script src="{% static 'js/packets_status.js' %}"></script>
     <script src="{% static 'js/gallery.js' %}"></script>
     <script src="{% static 'js/infrastructure.js' %}"></script>
-    <script src="{% static 'js/accommodations.js' %}"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-    <script src="{% static 'js/custom_datepicker.js' %}"></script>
-    <script src="{% static 'js/newbuilding.js' %}"></script>
+    <script src="{% static 'js/apartment_next.js' %}"></script>
     <script src="{% static 'js/switchery.min.js' %}"></script>
+    <script src="{% static 'js/sections.js' %}"></script>
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -389,5 +347,7 @@
         $("#imgInp").change(function(){
             readURL(this);
         });
+
     </script>
+    {{ form.media }}
 {% endblock js %}

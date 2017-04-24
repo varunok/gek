@@ -9,8 +9,7 @@
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront"{% if cleaning.image %}
-                style="background: url({{ cleaning.image.url }}) no-repeat center/cover"
-             {% endif %}>
+                style="background: url({{ cleaning.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="slider_title">{{ cleaning.title|default:'ПРОФЕССИОНАЛЬНАЯ УБОРКА КВАРТИР' }}</div>
 			<div class="slider_subtitle">от ведущих клининговых компаний</div>
 			<div class="title_text">Отправить заявку прямо сейчас!</div>

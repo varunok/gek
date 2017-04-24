@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from dal_select2.views import Select2QuerySetView
+from django.utils.translation import ugettext as _
 from django.db.models import F
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
@@ -133,3 +138,23 @@ class ServicesMixin(UpdateView):
         except AttributeError:
             pass
         return context
+
+
+class Select2QuerySetViewCustom(Select2QuerySetView):
+    def get_create_option(self, context, q):
+        """Form the correct create_option to append to results."""
+        create_option = []
+        display_create_option = False
+        if self.create_field and q:
+            page_obj = context.get('page_obj', None)
+            if page_obj is None or page_obj.number == 1:
+                display_create_option = True
+
+        if display_create_option and self.has_add_permission(self.request):
+            create_option = [{
+                'id': q,
+                'text': _('Создать "%(new_value)s"') % {'new_value': q},
+                'create_id': True,
+            }]
+        return create_option
+

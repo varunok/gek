@@ -282,3 +282,30 @@ class Advantage(models.Model):
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.id)
+
+
+class ApartmentNext(models.Model):
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250
+    )
+    value = models.IntegerField(
+        verbose_name='Значение',
+    )
+
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('daily',
+                                        )}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Рядом с квартирой'
+        verbose_name_plural = 'Рядом с квартирой'
+        ordering = ['-id']
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.id)

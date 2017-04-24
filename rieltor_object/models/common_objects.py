@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
@@ -78,6 +76,36 @@ class District(models.Model):
     class Meta:
         verbose_name = 'Район'
         verbose_name_plural = 'Районы'
+
+    def __unicode__(self):
+        return self.name
+
+
+class DailyDistrict(models.Model):
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Район для посуточно'
+        verbose_name_plural = 'Районы для посуточно'
+
+    def __unicode__(self):
+        return self.name
+
+
+class ApartmentHas(models.Model):
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'В квартире есть'
+        verbose_name_plural = 'В квартире есть'
 
     def __unicode__(self):
         return self.name
