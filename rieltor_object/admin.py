@@ -8,7 +8,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 from common.admin import PhotoInline, VideoInline
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Infrastructure, Accommodations, District, \
-    DailyDistrict, ApartmentHas
+    DailyDistrict, ApartmentHas, Earth
 from common.models import ApartmentNext
 
 
@@ -27,10 +27,15 @@ class NewBuildingAdmin(admin.ModelAdmin):
 class DailyAdmin(admin.ModelAdmin):
     inlines = [PhotoInline, VideoInline]
 
+
+class EarthAdmin(admin.ModelAdmin):
+    inlines = [PhotoInline]
+
 admin.site.register(Building, BuildingAdmin)
 admin.site.register(Ofice, OficeAdmin)
 admin.site.register(NewBuilding, NewBuildingAdmin)
 admin.site.register(Daily, DailyAdmin)
+admin.site.register(Earth, EarthAdmin)
 admin.site.register(District)
 admin.site.register(DailyDistrict)
 admin.site.register(Infrastructure)

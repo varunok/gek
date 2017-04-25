@@ -7,6 +7,7 @@ from django.conf.urls import url
 from admin2.views.rieltor_objects.building_view import BuildingListView, BuildingEditView, BuildingCreateView, \
     BuildingDeleteView
 from admin2.views.rieltor_objects.daily_view import DailyListView, DailyEditView, DailyCreateView, DailyDeleteView
+from admin2.views.rieltor_objects.earth_view import EarthListView, EarthEditView, EarthCreateView, EarthDeleteView
 from admin2.views.rieltor_objects.newbuilding_view import NewBuildingListView, NewBuildingEditView, \
     NewBuildingCreateView, NewBuildingDeleteView
 from admin2.views.rieltor_objects.ofice_view import OficeListView, OficeEditView, OficeCreateView, OficeDeleteView
@@ -35,6 +36,12 @@ urlpatterns = [
     url('^objects/daily/edit/(?P<pk>[\w-]+)/$', DailyEditView.as_view(), name='daily_edit'),
     url('^objects/daily/create/$', DailyCreateView.as_view(), name='daily_create'),
     url('^objects/daily/delete/(?P<pk>[\w-]+)/$', DailyDeleteView.as_view(),name='daily_delete'),
+
+    # earth
+    url('^objects/earth/$', EarthListView.as_view(), name='earth'),
+    url('^objects/earth/edit/(?P<pk>[\w-]+)/$', EarthEditView.as_view(), name='earth_edit'),
+    url('^objects/earth/create/$', EarthCreateView.as_view(), name='earth_create'),
+    url('^objects/earth/delete/(?P<pk>[\w-]+)/$', EarthDeleteView.as_view(),name='earth_delete'),
 
 
 ]

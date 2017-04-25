@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'solo',
     'django_filters',
+    'multiselectfield',
 
     # own
     'users',
@@ -240,6 +241,7 @@ THUMBNAIL_ALIASES = {
         'gallery_image_469': {'size': (469, 266), 'crop': True},
         'universal_image_270': {'size': (270, 160), 'crop': True},
         'slider_image_166': {'size': (166, 94), 'crop': True},
+        'earth_image_542': {'size': (542, 293), 'crop': True},
     },
 }
 

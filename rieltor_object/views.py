@@ -11,7 +11,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import DetailView, ListView, FormView, TemplateView
 
 from common.mixins import ViewsCountMixin, DinamicNextMixin
-from rieltor_object.models import Building, TypeDeal, Ofice, NewBuilding, Daily
+from rieltor_object.models import Building, TypeDeal, Ofice, NewBuilding, Daily, Earth
 from rieltor_object.filters import FilterBuilding, FilterOfise, FilterNewBuilding
 
 PAGINATE_OBJ = 10
@@ -90,3 +90,14 @@ class DailyListSiteView(DinamicNextMixin, ListView):
 class DailyDetailSiteView(ViewsCountMixin, DetailView):
     model = Daily
     template_name = 'rieltor_object/daily.html'
+
+
+class EarthSiteView(DinamicNextMixin, ListView):
+    model = Earth
+    template_name = 'rieltor_object/earth.html'
+    paginate_by = PAGINATE_OBJ
+
+    def get_context_data(self, **kwargs):
+        context = super(EarthSiteView, self).get_context_data(**kwargs)
+        # context['filter_form'] = FilterNewBuilding(self.request.GET, queryset=self.model.objects.all())
+        return context

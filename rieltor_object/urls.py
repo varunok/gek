@@ -6,7 +6,7 @@ from rieltor_object.filters import FilterBuilding, FilterOfise
 from rieltor_object.models import Building, Ofice
 from rieltor_object.views import BuildingListSiteView, BuildingDetailSiteView, FilterBuildOficeView, \
     OficeDetailSiteView, OficeListSiteView, NewBuildingListSiteView, NewBuildingDetailSiteView, DailyListSiteView, \
-    DailyDetailSiteView
+    DailyDetailSiteView, EarthSiteView
 
 urlpatterns = [
     # building
@@ -24,6 +24,10 @@ urlpatterns = [
     # daily
     url('^dailys/$', DailyListSiteView.as_view(), name='dailys'),
     url('^dailys/(?P<pk>[\w-]+)/$', DailyDetailSiteView.as_view(), name='daily_detail'),
+
+    # earth
+    url('^earth/$', EarthSiteView.as_view(), name='earth'),
+    # url('^earth/(?P<pk>[\w-]+)/$', DailyDetailSiteView.as_view(), name='earth_detail'),
 
 ]
 

@@ -66,6 +66,45 @@ class TypeEntrance(object):
     )
 
 
+class TypeArea(object):
+    FOR_BUILDING = 'Под застройку'
+    GARDENING = 'Садоводство'
+    COMMERCIAL = 'Комерческая'
+    HANDED = 'Дом сдан'
+    CHOICES = (
+        (FOR_BUILDING, 'Под застройку'),
+        (GARDENING, 'Садоводство'),
+        (COMMERCIAL, 'Комерческая'),
+        (HANDED, 'Дом сдан'),
+    )
+
+
+class Communications(object):
+    WATER = 'Вода'
+    GAS = 'Газ'
+    SEWERAGE = 'Канализация'
+    ELECTRICITY = 'Электричество'
+    CHOICES = (
+        (WATER, 'Вода'),
+        (GAS, 'Газ'),
+        (SEWERAGE, 'Канализация'),
+        (ELECTRICITY, 'Электричество'),
+    )
+
+
+class StructureHouse(object):
+    HOUSE = 'Дом'
+    CUISINE = 'Летная кухня'
+    BARN = 'Сарай'
+    POOL = 'Бассейн'
+    CHOICES = (
+        (HOUSE, 'Дом'),
+        (CUISINE, 'Летная кухня'),
+        (BARN, 'Сарай'),
+        (POOL, 'Бассейн'),
+    )
+
+
 class District(models.Model):
     name = models.CharField(
         verbose_name='Название',
@@ -91,6 +130,21 @@ class DailyDistrict(models.Model):
     class Meta:
         verbose_name = 'Район для посуточно'
         verbose_name_plural = 'Районы для посуточно'
+
+    def __unicode__(self):
+        return self.name
+
+
+class EarthDistrict(models.Model):
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Район для земля'
+        verbose_name_plural = 'Районы для земля'
 
     def __unicode__(self):
         return self.name
