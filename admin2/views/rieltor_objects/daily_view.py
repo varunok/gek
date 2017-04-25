@@ -14,6 +14,7 @@ from rieltor_object.models import Daily, Infrastructure
 class DailyListView(ListView):
     model = Daily
     template_name = 'admin2/rieltor_object/daily/daily_list.html'
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(DailyListView, self).get_context_data(**kwargs)

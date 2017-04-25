@@ -1,0 +1,13 @@
+{% if is_paginated %}
+    <div class="row" style="float: right">
+        <div class="btn-group">
+            {% for p in paginator.page_range %}
+                {% ifequal p page_obj.number  %}
+                    <a class="btn btn-danger">{{ p }}</a>
+                {% else %}
+                    <a class="btn btn-default" href="?page={{ p }}">{{ p }}</a>
+                {% endifequal %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

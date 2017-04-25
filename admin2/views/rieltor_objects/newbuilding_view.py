@@ -15,6 +15,7 @@ from rieltor_object.models import NewBuilding, Building, Infrastructure, Accommo
 class NewBuildingListView(ListView):
     model = NewBuilding
     template_name = 'admin2/rieltor_object/new_building/new_building_list.html'
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(NewBuildingListView, self).get_context_data(**kwargs)

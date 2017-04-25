@@ -23,7 +23,7 @@
 					<div class="block block_shops block_search_results">
 						<div class="block_content">
 							<div class="view_content" id="add-article">
-								{% include 'articles/include/articles_list.html' %}
+								{% include 'articles/include/articles_list.html' with objects=articles %}
 							</div>
                             <input type="hidden" value="{{ section.id }}" name="section">
                             {% if count_next %}

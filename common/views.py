@@ -13,11 +13,16 @@ from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
-from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext
+from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding
 
 
 class MainView(TemplateView):
     template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MainView, self).get_context_data(**kwargs)
+        context['newbuildings'] = NewBuilding.objects.order_by('?')
+        return context
 
 
 def save_video(request):

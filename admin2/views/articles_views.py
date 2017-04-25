@@ -15,6 +15,7 @@ class SectionsView(LoginRequiredMixin, ListView):
     model = Sections
     context_object_name = 'sections'
     template_name = 'admin2/articles/sections_list.html'
+    paginate_by = 10
 
 
 class SectionsUpdateView(LoginRequiredMixin, UpdateView):
@@ -40,6 +41,7 @@ class ArticlesView(LoginRequiredMixin, ListView):
     model = Articles
     context_object_name = 'articles'
     template_name = 'admin2/articles/articles_list.html'
+    paginate_by = 10
 
 
 class ArticlesUpdateView(LoginRequiredMixin, UpdateView):

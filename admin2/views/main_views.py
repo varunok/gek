@@ -10,6 +10,7 @@ class Admin2MainView(LoginRequiredMixin, ListView):
     template_name = "admin2/main.html"
     model = Application
     context_object_name = 'applications'
+    paginate_by = 10
 
 
 class DellApplication(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):

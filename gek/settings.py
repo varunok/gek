@@ -238,6 +238,7 @@ THUMBNAIL_ALIASES = {
         'gallery_image_275': {'size': (275, 185), 'crop': True},
         'gallery_image_370': {'size': (370, 211), 'crop': True},
         'gallery_image_570': {'size': (570, 338), 'crop': True},
+        'newbuild_index_image_570': {'size': (570, 269), 'crop': True},
         'gallery_image_469': {'size': (469, 266), 'crop': True},
         'universal_image_270': {'size': (270, 160), 'crop': True},
         'slider_image_166': {'size': (166, 94), 'crop': True},

@@ -43,6 +43,7 @@ class SectionsDetailView(DetailView):
             context['count_next'] = 0 if count_next <= 0 else count_next
         except:
             pass
+        print(context['articles'])
         return context
 
 

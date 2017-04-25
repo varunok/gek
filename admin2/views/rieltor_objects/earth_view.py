@@ -14,6 +14,7 @@ from rieltor_object.models import Earth
 class EarthListView(ListView):
     model = Earth
     template_name = 'admin2/rieltor_object/earth/earth_list.html'
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(EarthListView, self).get_context_data(**kwargs)

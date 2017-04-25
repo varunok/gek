@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
+{% load thumbnail %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="front" {% endblock %}
@@ -218,68 +219,40 @@
 			<div class="block_content">
 				<div class="block_title">Новостройки</div>
 				<div class="view_content">
-					<div class="views_row">
-						<div class="title">Складской комплекс “Vivaldi”</div>
-						<div class="field_image">
-							<img src="images/new_1.png" alt="">
-						</div>
-						<div class="views_body">
-							<div class="star"></div>
-							<div class="left_wrap">
-								<div class="address">Цветочная, 3</div>
-								<div class="info">
-									<div class="label">Район:</div>
-									<div class="item">Центр</div>
-								</div>
-								<div class="info">
-									<div class="label">Сдаваемых помещений:</div>
-									<div class="item">4</div>
-								</div>
-								<div class="price">$577</div>
-							</div>
-							<div class="right_wrap">
-								<div class="statistics">120</div>
-								<div class="info">
-									<div class="label">Сдаётся с    </div><div class="item"> 1 мая 2017 г.</div>
-								</div>
-								<div class="info">
-									<div class="label">Общая площадь:</div><div class="item"> 907 м.кв.</div>
-								</div>
-								<div class="read_more"><a href="/">Оставить заявку</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="views_row">
-						<div class="title">Микрорайон “Фазенда”</div>
-						<div class="field_image">
-							<img src="images/new_2.png" alt="">
-						</div>
-						<div class="views_body">
-							<div class="star active"></div>
-							<div class="left_wrap">
-								<div class="address">Пушкинская, 32</div>
-								<div class="info">
-									<div class="label">Район:</div>
-									<div class="item">Центр</div>
-								</div>
-								<div class="info">
-									<div class="label">Сдаваемых помещений:</div>
-									<div class="item">4</div>
-								</div>
-								<div class="price">$577</div>
-							</div>
-							<div class="right_wrap">
-								<div class="statistics">120</div>
-								<div class="info">
-									<div class="label">Сдаётся с</div><div class="item"> 1 мая 2017 г.</div>
-								</div>
-								<div class="info">
-									<div class="label">Общая площадь:</div><div class="item"> 907 м.кв.</div>
-								</div>
-								<div class="read_more"><a href="/">Оставить заявку</a></div>
-							</div>
-						</div>
-					</div>
+                    {% for newbuilding in newbuildings|slice:':2' %}
+                        <div class="views_row">
+                            <div class="title">{{ newbuilding.title|default:'' }}</div>
+                            <div class="field_image">
+                                <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
+                            </div>
+                            <div class="views_body">
+                                <div class="star"></div>
+                                <div class="left_wrap">
+                                    <div class="address">{{ newbuilding.address|default:'' }}</div>
+                                    <div class="info">
+                                        <div class="label">Район:</div>
+                                        <div class="item">{{ newbuilding.district|default:'' }}</div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="label">Сдаваемых помещений:</div>
+                                        <div class="item">{{ newbuilding.building.count }}</div>
+                                    </div>
+                                    <div class="price">${{ newbuilding.price|default:'' }}</div>
+                                </div>
+                                <div class="right_wrap">
+                                    <div class="statistics">{{ newbuilding.views }}</div>
+                                    <div class="info">
+                                        <div class="label">Сдаётся с    </div><div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="label">Общая площадь:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
+                                    </div>
+                                    <div class="read_more"><a href="/">Оставить заявку</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
 				</div>
 			</div>
 		</div>
