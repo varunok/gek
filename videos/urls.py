@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from contact.views import Contacts
+from trust.views import Trust
 
 urlpatterns = [
     # building
-    url('^$', Contacts.as_view(), name='contact'),
+    url('^$', Trust.as_view(), name='trust'),
     ]

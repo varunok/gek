@@ -141,11 +141,8 @@
         elem.attr('id', elem.attr('id').replace(idRegex, replacement));
       }
       if (elem.attr('name')) {
-        // console.log(elem.attr('name'));
         elem.attr('name', elem.attr('name').replace(idRegex, replacement));
-        // console.log(elem.attr('name'))
       }
-      console.log(elem);
     },
 
     // Check whether we can add more rows

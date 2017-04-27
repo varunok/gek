@@ -158,3 +158,29 @@ class Select2QuerySetViewCustom(Select2QuerySetView):
             }]
         return create_option
 
+
+class FormSetMixin(UpdateView):
+    formset = None
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        formset = self.formset(instance=self.get_object())
+        return self.render_to_response(
+            self.get_context_data(
+                                  formset=formset))
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        formset =  self.formset(self.request.POST,self.request.FILES, instance=self.get_object())
+        if formset.is_valid():
+            return self.form_valid(formset)
+        else:
+            return self.form_invalid(formset)
+
+    def form_valid(self, formset):
+        self.object = formset.save()
+        return HttpResponseRedirect(self.success_url)
+
+    def form_invalid(self, formset):
+        return self.render_to_response(
+            self.get_context_data(formset=formset))

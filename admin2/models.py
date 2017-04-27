@@ -11,6 +11,7 @@ from django.utils.text import slugify
 from solo.models import SingletonModel
 
 from common.models import Photo, Video, FAQ, Feed, Schedule
+from users.models import User
 
 
 class Settings(SingletonModel):
@@ -453,7 +454,17 @@ class ContactPageModel(SingletonModel):
         blank=True,
         null=True
     )
+    phone = models.CharField(
+        verbose_name='Телефон',
+        max_length=100,
+        blank=True,
+        null=True
+    )
     schedules = GenericRelation(Schedule, related_query_name='contact')
+    users = models.ManyToManyField(User,
+                                   related_name='contact',
+                                   blank=True,
+                                   verbose_name='Наши специалисты')
 
     class Meta:
         verbose_name = 'Контакты'

@@ -1,0 +1,240 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap-timepicker.min.css' %}">
+    <style>
+        .slideThree {
+            width: 80px;
+            height: 26px;
+            background: #4B5F71;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50px;
+            box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+
+        }
+        .slideThree:after {
+            content: 'OFF';
+            color: #000;
+            position: absolute;
+            right: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+        }
+        .slideThree:before {
+            content: 'ON';
+            color: greenyellow;
+            position: absolute;
+            left: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+        }
+        label.lab {
+            display: block;
+            width: 34px;
+            height: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: 1;
+            background: #fcfff4;
+            background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+        }
+        input[type=checkbox] {
+            visibility: hidden;
+        }
+        input[type=checkbox]:checked + label {
+            left: 43px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Контакты</h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Изменить Контакты</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'admin2/contact/contact_nav.html' %}
+                                    <div id="myTabContent" class="tab-content">
+                                        <form method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+                                            {% csrf_token %}
+                                            <fieldset class="formlist">
+                                                {{ formset.management_form }}
+                                                {% for fields in formset %}
+                                                    <div class="dynamic-form">
+                                                        {{ fields.id }}
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.day.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.day|addcss:'form-control' }}
+                                                            </div>
+                                                            {% if fields.day.errors %}
+                                                                <span class="error-label">{{ fields.day.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.open_from.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.open_from|addcss:'form-control daterange' }}
+                                                            </div>
+                                                            {% if fields.open_from.errors %}
+                                                                <span class="error-label">{{ fields.open_from.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.open_to.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.open_to|addcss:'form-control daterange' }}
+                                                            </div>
+                                                            {% if fields.open_to.errors %}
+                                                                <span class="error-label">{{ fields.open_to.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.special.label }}:
+                                                                {{ fields.special.help_text }}
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.special|addcss:'form-control' }}
+                                                            </div>
+                                                            {% if fields.special.errors %}
+                                                                <span class="error-label">{{ fields.special.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                    </div>
+                                                {% endfor %}
+                                            </fieldset>
+                                            <button name="save_shedule" type="submit" class="btn btn-success">Сохранить</button>
+                                        </form>
+
+                                        <div class="empty-form" style="display: none;">
+                                            <div class="dynamic-form">
+                                                {{ formset.empty_form.id }}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.day.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.day|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if formset.empty_form.day.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.day.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.open_from.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.open_from|addcss:'form-control daterange2' }}
+                                                    </div>
+                                                    {% if formset.empty_form.open_from.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.open_from.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.open_to.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.open_to|addcss:'form-control daterange2' }}
+                                                    </div>
+                                                    {% if formset.empty_form.open_to.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.open_to.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.special.label }}:
+                                                        {{ fields.special.help_text }}
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.special|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if formset.empty_form.special.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.special.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/superformset.js' %}"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <script src="{% static 'js/bootstrap-timepicker.min.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+        $(document).ready(function() {
+            $('.daterange').timepicker({
+                showMeridian:false,
+                defaultTime:false
+            });
+            $('.formlist').superformset({
+                prefix: 'common-schedule-content_type-object_id',
+                containerSel: '.tab-content',
+                deleteTriggerSel: 'input[name$="-DELETE"]',
+                addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</a>'
+            });
+            $(document).on('click', '.btn', function () {
+                $('.daterange2').timepicker({
+                    showMeridian:false,
+                    defaultTime:false
+                });
+            })
+        });
+    </script>
+    {{ form.media }}
+{% endblock js %}

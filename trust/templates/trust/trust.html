@@ -8,8 +8,7 @@
 
 {% block content %}
 	<main class="middle">
-		<div class="slider_main slider_notfront"
-        style="background:{% if object.image %}url({{ object.image.url }}){% else %}url({% static 'images/banner_6.jpg' %}){% endif %}no-repeat center/cover;">
+		<div class="slider_main slider_notfront" {% if object.image %}style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="slider_title">{{ object.title|default:'Как можно зарабатывать на недвижимости ?' }}</div>
 			<div class="slider_subtitle">Бесплатная консультация по телефону</div>
 			<div class="title_text">Просто запоните поля и мы вам перезвоним</div>

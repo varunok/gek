@@ -24,6 +24,7 @@ class UserChangeForm(UserChangeForm):
 
     class Meta:
         model = User
+        exclude = ['is_active', 'is_superuser', 'is_staff']
         fields = '__all__'
 
 

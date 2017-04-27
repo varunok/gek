@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front contacts" {% endblock %}
+
+{% block content %}
+	<main class="middle">
+		<div class="slider_main slider_notfront" {% if object.image %}style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
+			<h1 class="slider_title page_title">{{ object.title|default:'Свяжитесь с нами' }}</h1>
+			<div class="top_inner_content">
+				<div class="title">Бесплатная консультация по всем вопросам 24/7</div>
+			</div>
+			<form action="#" class="webform_client_form">
+				<div class="form_item name">
+					<input type="text" placeholder="Введите ваше имя">
+				</div>
+				<div class="form_item phone">
+					<input type="text" placeholder="Введите ваш телефон">
+				</div>
+				<div class="form_textarea">
+					<textarea placeholder="Введите ваше сообщение"></textarea>
+				</div>				
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Связаться со специалистом">
+				</div>
+			</form>
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+					<div class="block_work_client">
+						<div class="block_content">
+							<div class="title">ОТДЕЛ ПО РАБОТЕ С КЛИЕНТАМИ:</div>
+							<div class="view_content">
+								<div class="views_row">
+									<div class="label">Наш адрес:</div>
+									<div class="field_item">{{ object.our_address|default:'' }}</div>
+								</div>
+								<div class="views_row">
+									<div class="label">E-mail:</div>
+									<div class="field_item"><a href="mailto:image2007@bk.ru">{{ object.our_email|default:'' }}</a></div>
+								</div>
+								<div class="views_row">
+									<div class="label">График работы:</div>
+									<div class="field_item">
+                                        {% for schedule in object.schedules.all reversed %}
+                                            {% if schedule.special %}
+                                                {{ schedule.special }}
+                                            {% else %}
+                                                {{ schedule.day }} c {{ schedule.open_from }} до {{ schedule.open_to }}
+                                            {% endif %}
+                                            <br>
+                                        {% endfor %}
+                                    </div>
+								</div>
+								<div class="views_row">
+									<div class="label">По любому вопросу вы можете позвонить по телефонам:</div>
+									<div class="field_item"><a href="tel:+380972443790">{{ object.phone }}</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block_contacts_specialists">
+						<div class="block_title">Наши специалисты:</div>	
+						<div class="block_content">
+							<div class="view_contet">
+                                {% for user in object.users.all %}
+                                    <div class="views_row">
+                                        <div class="views_row_inner">
+                                            {% if user.avatar %}
+                                                <div class="left_wrap">
+                                                    <div class="field_image">
+                                                        <img src="{{ user.avatar|thumbnail_url:'user_avatar_270_330' }}" alt="">
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            <div class="right_wrap">
+                                                <div class="name">{{ user.first_name }}</div>
+                                                <div class="about_block">
+                                                    <div class="field_item">
+                                                        <div class="label">Специализация:</div>
+                                                        <div class="text">{{ user.specialization|default:'' }}</div>
+                                                    </div>
+                                                    <div class="field_item">
+                                                        <div class="label">Skype:</div>
+                                                        <div class="text">{{ user.skype|default:'' }}</div>
+                                                    </div>
+                                                    <div class="field_item">
+                                                        <div class="label">Номер телефона:</div>
+                                                        <div class="text"><a href="tel:{{ user.phone|default:'' }}">{{ user.phone|default:'' }}</a></div>
+                                                    </div>
+                                                    <div class="field_item">
+                                                        <div class="label">E-mail:</div>
+                                                        <div class="text"><a href="mailto:{{ user.email|default:'' }}">{{ user.email|default:'' }}</a></div>
+                                                    </div>
+                                                </div>
+                                                <div class="body_wrap">
+                                                    {{ user.about_self|default:'' }} 
+                                                </div>
+                                                {% if user.video %}
+                                                    <div class="video">
+                                                        <div class="title">Видеопрезентация:</div>
+                                                        <div class="video_field">
+                                                            <div>
+                                                                {{ user.video|convert_to_frame|safe }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+							</div>
+						</div>
+					</div>
+				</div><!-- #content-->				
+			</div>			
+		</div>
+		<div class="region_map">
+			<div class="map">
+				<div class="field_image">
+					<img src="images/contact_map.jpg" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="block block_vip_shops">
+			<div class="block_title">VIP</div>
+			<div class="block_content">
+				<div class="view_content">
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_1.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="address">Цветочная, 3</div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">65458</div>
+								</div>
+								<div class="info">
+									<div class="label">Склад:</div>
+									<div class="item">40 м<sup>2</sup></div>
+								</div>
+								<div class="price info">
+									<div class="label">Аренда:</div>
+									$577
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">74</div>											
+								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>							
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_2.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="address">Цветочная, 3</div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">65458</div>
+								</div>
+								<div class="info">
+									<div class="label">Склад:</div>
+									<div class="item">40 м<sup>2</sup></div>
+								</div>
+								<div class="price info">
+									<div class="label">Аренда:</div>
+									$577
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">58</div>											
+								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>							
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_3.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="address">Цветочная, 3</div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">65458</div>
+								</div>
+								<div class="info">
+									<div class="label">Склад:</div>
+									<div class="item">40 м<sup>2</sup></div>
+								</div>
+								<div class="price info">
+									<div class="label">Аренда:</div>
+									$577
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">61</div>											
+								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block region_banner">
+			<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		</div>
+	</main><!-- .content -->
+
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

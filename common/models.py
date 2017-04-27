@@ -401,6 +401,7 @@ class Schedule(models.Model):
     class Meta:
         verbose_name = 'График работы'
         verbose_name_plural = 'График работы'
+        # ordering = ['-id']
 
     def __unicode__(self):
         if self.special:

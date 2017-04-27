@@ -11,6 +11,7 @@ from common.views import save_video, status_video, ModalVideo, create_faq, save_
     packet_text_save, packet_create, save_advantage, save_infrastructure, related_infrastructure, \
     related_accommodations, save_accommodations, save_apartment_next, delete_apartment_next
 from rieltor_object.models import ApartmentHas, EarthDistrict
+from users.models import User
 
 urlpatterns = [
     # login views
@@ -148,5 +149,11 @@ urlpatterns = [
             model=EarthDistrict,
             create_field='name',),
         name='earth-district-autocomplete'
+    ),
+    url(
+        '^users-autocomplete/$',
+        Select2QuerySetViewCustom.as_view(
+            model=User),
+        name='users-autocomplete'
     ),
 ]
