@@ -9,7 +9,7 @@ from ckeditor.widgets import CKEditorWidget
 from django.urls import reverse_lazy
 
 from articles.models import Sections, Articles
-from common.models import Video, Photo, Advantage
+from common.models import Video, Photo, Advantage, Feed
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
@@ -114,6 +114,19 @@ VideoServiceSet = generic_inlineformset_factory(
     extra=1,
     min_num=1,
     max_num=1
+)
+
+FeedSet = generic_inlineformset_factory(
+    Feed,
+    extra=0,
+    min_num=1
+)
+
+
+FeedVideoSet = generic_inlineformset_factory(
+    Video,
+    extra=0,
+    min_num=1
 )
 
 

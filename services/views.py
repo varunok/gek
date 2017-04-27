@@ -13,6 +13,10 @@ from services.models import ServicesRieltor, Valuation, Repair, Insurance, Clean
 class ServicesSiteView(TemplateView):
     template_name = 'services/services.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super(ServicesSiteView, self).get_context_data(**kwargs)
+    #     return context
+
 
 class RieltorServiceView(ServiceSiteMixin):
     template_name = 'services/rieltor_service.html'

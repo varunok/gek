@@ -1,0 +1,180 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/switchery.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Доверие</h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Изменить Доверие</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'admin2/trust/trust_nav.html' %}
+                                    <div id="myTabContent" class="tab-content">
+                                        <form method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+                                            {% csrf_token %}
+                                            <fieldset class="formlist">
+                                                {{ formset.management_form }}
+                                                {% for fields in formset %}
+                                                    <div class="dynamic-form">
+                                                        {{ fields.id }}
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.name.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.name|addcss:'form-control' }}
+                                                            </div>
+                                                            {% if fields.name.errors %}
+                                                                <span class="error-label">{{ fields.name.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.city.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.city|addcss:'form-control' }}
+                                                            </div>
+                                                            {% if fields.city.errors %}
+                                                                <span class="error-label">{{ fields.city.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.feed.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.feed|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                            </div>
+                                                            {% if fields.feed.errors %}
+                                                                <span class="error-label">{{ fields.feed.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.image.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.image }}
+                                                            </div>
+                                                            {% if fields.image.errors %}
+                                                                <span class="error-label">{{ fields.image.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                    </div>
+                                                {% endfor %}
+                                            </fieldset>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        </form>
+
+                                        <div class="empty-form" style="display: none;">
+                                            <div class="dynamic-form">
+                                                {{ formset.empty_form.id }}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.name.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.name|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if formset.empty_form.name.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.name.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.city.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.city|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if formset.empty_form.city.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.city.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.feed.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.feed|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if formset.empty_form.feed.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.feed.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.image.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.image }}
+                                                    </div>
+                                                    {% if formset.empty_form.image.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.image.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/faq_status.js' %}"></script>
+    <script src="{% static 'js/switchery.min.js' %}"></script>
+    <script src="{% static 'js/sections.js' %}"></script>
+    <script src="{% static 'js/superformset.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+            $(document).ready(function() {
+                $('.formlist').superformset({
+                    prefix: 'common-feed-content_type-object_id',
+                    containerSel: '.tab-content',
+                    deleteTriggerSel: 'input[name$="-DELETE"]',
+                    addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</a>'
+                })
+            })
+
+    </script>
+    {{ form.media }}
+
+{% endblock js %}

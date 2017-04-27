@@ -1,0 +1,17 @@
+<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" {% if request.path == '/admin/trust/' %}class="active"{% endif %} >
+        <a href="{% url 'admin2:trust' %}">Редактировать</a>
+    </li>
+    <li role="presentation" {% if request.path == '/admin/trust/gallery/' %}class="active"{% endif %}>
+        <a href="{% url 'admin2:trust_gallery' %}">Галерея(Дипломы и регалии)</a>
+    </li>
+    <li role="presentation" {% if request.path == '/admin/trust/feed/' %}class="active"{% endif %}>
+        <a href="{% url 'admin2:trust_feed' %}">Отзывы</a>
+    </li>
+    <li role="presentation" {% if request.path == '/admin/trust/feed_video/' %}class="active"{% endif %}>
+        <a href="{% url 'admin2:trust_feed_video' %}">Видео Отзывы</a>
+    </li>
+    <li role="presentation" {% if request.path == '/admin/trust/faq/' %}class="active"{% endif %}>
+        <a href="{% url 'admin2:trust_faq' %}">FAQ</a>
+    </li>
+</ul>

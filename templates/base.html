@@ -115,7 +115,7 @@
                                 </ul>
                             </li>
                             <li class="leaf"><a href="{% url 'articles:articles' %}" {% if 'articles' in request.path  %} class="active" {% endif %}>Статьи</a></li>
-                            <li class="leaf"><a href="/">Доверие</a></li>
+                            <li class="leaf"><a href="{% url 'trust:trust' %}">Доверие</a></li>
                             <li class="leaf"><a href="/">Контакты</a></li>
                         </ul>
                     </div>

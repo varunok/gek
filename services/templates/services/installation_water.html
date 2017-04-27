@@ -152,14 +152,16 @@
         {% if installation_water.packet_enable %}
             {% include 'services/include/packets.html' with service=installation_water %}
         {% endif %}
-        {% if installation_water.videos.all.first.is_enable and installation_water.videos.all.first.video %}
-            <div class="block block_video">
-                <div class="block_content">
-                    <div class="block_title">{{ installation_water.videos.all.first.title }}</div>
-                    {{ installation_water.videos.all.first.video|convert_to_frame|safe }}
+        {% with installation_water.videos.first as video %}
+            {% if video.is_enable and video.video %}
+                <div class="block block_video">
+                    <div class="block_content">
+                        <div class="block_title">{{ video.title }}</div>
+                        {{ video.video|convert_to_frame|safe }}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
+        {% endwith %}
         {% if faqs and installation_water.faq_enable %}
             {% include 'services/include/faqs.html' %}
         {% endif %}

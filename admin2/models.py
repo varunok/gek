@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import uuid
+
+from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from solo.models import SingletonModel
+
+from common.models import Photo, Video, FAQ, Feed, Schedule
 
 
 class Settings(SingletonModel):
@@ -356,6 +361,27 @@ class TrustPageModel(SingletonModel):
         blank=True,
         null=True
     )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    video = models.TextField(
+        verbose_name='Код видео',
+        blank=True
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False
+    )
+    faq_enable = models.BooleanField(
+        verbose_name='Влючен ли FAQ?',
+        default=True
+    )
+    images = GenericRelation(Photo, related_query_name='trust')
+    videos = GenericRelation(Video, related_query_name='trust')
+    fag = GenericRelation(FAQ, related_query_name='trust')
+    feeds = GenericRelation(Feed, related_query_name='trust')
 
     class Meta:
         verbose_name = 'Доверее'
@@ -407,6 +433,27 @@ class ContactPageModel(SingletonModel):
         blank=True,
         null=True
     )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False
+    )
+    our_address = models.CharField(
+        verbose_name='Наш адрес',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    our_email = models.EmailField(
+        verbose_name='E-mail',
+        blank=True,
+        null=True
+    )
+    schedules = GenericRelation(Schedule, related_query_name='contact')
 
     class Meta:
         verbose_name = 'Контакты'

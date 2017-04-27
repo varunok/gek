@@ -1,0 +1,322 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front trust" {% endblock %}
+
+{% block content %}
+	<main class="middle">
+		<div class="slider_main slider_notfront"
+        style="background:{% if object.image %}url({{ object.image.url }}){% else %}url({% static 'images/banner_6.jpg' %}){% endif %}no-repeat center/cover;">
+			<div class="slider_title">{{ object.title|default:'Как можно зарабатывать на недвижимости ?' }}</div>
+			<div class="slider_subtitle">Бесплатная консультация по телефону</div>
+			<div class="title_text">Просто запоните поля и мы вам перезвоним</div>
+			<form action="#" class="webform_client_form">
+				<div class="form_item name">
+					<input type="text" placeholder="Введите имя">
+				</div>
+				<div class="form_item phone">
+					<input type="text" placeholder="Введите телефон">
+				</div>
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Отправить заявку">
+				</div>
+			</form>
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+					<div class="block_benefits">
+						<div class="block_content">
+							<div class="block_title">
+								Наши преимущества
+							</div>
+							<div class="view_content">
+								
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/ben_1.png' %}" alt="">
+									</div>
+									<div class="text">Индивидуальный подход</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/ben_2.png' %}" alt="">
+									</div>
+									<div class="text">Открытость</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/ben_3.png' %}" alt="">
+									</div>
+									<div class="text">Профессионализм</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/ben_4.png' %}" alt="">
+									</div>
+									<div class="text">Тактичность</div>
+								</div>
+								<div class="views_row">
+									<div class="field_img">
+										<img src="{% static 'images/ben_5.png' %}" alt="">
+									</div>
+									<div class="text">Богатый опыт</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div><!-- #content-->				
+			</div>			
+		</div>
+		<div class="block_numbers">
+			<div class="block_content">
+				<div class="block_title">О нас в цифрах</div>
+				<div class="view_content">
+					<div class="views_row">
+						<div class="count">127</div>
+						<div class="text">Рекламируем объектов</div>
+					</div>
+					<div class="views_row">
+						<div class="count">3150</div>
+						<div class="text">Объектов в базе</div>
+					</div>
+					<div class="views_row">
+						<div class="count">682</div>
+						<div class="text">Оставлено заявок</div>
+					</div>
+					<div class="views_row">
+						<div class="count">165</div>
+						<div class="text">Успешных сделок</div>
+					</div>
+					<div class="views_row">
+						<div class="count">6</div>
+						<div class="text">Отработано месяцев:</div>
+					</div>
+					<div class="views_row">
+						<div class="count">3150</div>
+						<div class="text">Составлено планов</div>
+					</div>
+					<div class="views_row">
+						<div class="count">7</div>
+						<div class="text">Пройдено тестов</div>
+					</div>
+					<div class="views_row">
+						<div class="count">3</div>
+						<div class="text">Снято передач</div>
+					</div>
+				</div>
+			</div>
+		</div>
+            {% if object.video %}
+                <div class="block block_video">
+                    <div class="block_content">
+                        {{ object.video|convert_to_frame|safe }}
+                    </div>
+                </div>
+            {% endif %}
+		<div class="block_diplomas">
+			<div class="block_content">
+				<div class="block_title">Наши дипломы и регалии, доказательство</div>
+				<div class="view_content">
+                    {% for image in object.images.all %}
+                        <div class="views_row">
+                            <div class="field_image">
+                                <img src="{{ image.image|thumbnail_url:'trust_image_344' }}" alt="">
+                            </div>
+                        </div>
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="block_reviews">
+			<div class="block_content">
+				<div class="block_title">Отзывы наших клиентов и успешние сделки</div>
+				<div class="view_content">
+                    <div class="slider_video" id="slider_video">
+                        {% for video in object.videos.all %}
+                            <div class="views_row">
+                                {{ video.video|convert_to_frame_slider|safe }}
+                            </div>
+                        {% endfor %}
+					</div>
+					<div class="reviews_text">
+                        {% for feed in object.feeds.all %}
+                            <div class="view_row">
+                                <div class="field_image">
+                                    <img src="{{ feed.image|thumbnail_url:'trust_image_372' }}" alt="">
+                                </div>
+                                <div class="views_body">
+                                <div class="name">{{ feed.name }}</div>
+                                <div class="city">{{ feed.city }}</div>
+                                <div class="text">{{ feed.feed }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+        {% with object.fag.all as faqs %}
+            {% if faqs and object.faq_enable %}
+                {% include 'services/include/faqs.html' with faqs=faqs %}
+            {% endif %}
+        {% endwith %}
+		<div class="block block_seo">
+			<div class="block_content">
+				<div class="block_title">Риэлторские услуги в Одессе</div>
+				<div class="view_content">
+					<div class="body">
+						<div class="image">
+							<img src="images/img.png" alt="" class="left">						
+						</div>
+						<div class="content_body">						
+							<p>Еще не знаете, какое помещение в Одессе арендовать или купить под бизнес? Наше агентство недвижимости «GEK» поможет не только с поиском, но и выполнит всю бумажную работу за Вас.</p>
+							<p>На нашем сайте Вы найдете:</p>
+							<ul>
+								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+							</ul>
+							<p>Коммерческая недвижимость является привлекательным инвестиционным объектом. Ее приобретают с различными целями – для ведения своего бизнеса, сдачи в аренду или перепродажи. Таким образом, коммерческая недвижимость в Украине является высокодоходным активом, поэтому и данный сектор рынка недвижимости постоянно развивается. Коммерческая недвижимость представляет собой помещения, здания и различные объекты, которые используются для ведения бизнеса и</p>
+							<p>На нашем сайте Вы найдете:</p>
+							<ul>
+								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
+								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
+							</ul>
+						</div>
+					</div>
+					<div class="read_more"><a href="/">Читать всю статью</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_vip_shops">
+			<div class="block_title">VIP</div>
+			<div class="block_content">
+				<div class="view_content">
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_1.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="address">Цветочная, 3</div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">65458</div>
+								</div>
+								<div class="info">
+									<div class="label">Склад:</div>
+									<div class="item">40 м<sup>2</sup></div>
+								</div>
+								<div class="price info">
+									<div class="label">Аренда:</div>
+									$577
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">74</div>											
+								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>							
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_2.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="address">Цветочная, 3</div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">65458</div>
+								</div>
+								<div class="info">
+									<div class="label">Склад:</div>
+									<div class="item">40 м<sup>2</sup></div>
+								</div>
+								<div class="price info">
+									<div class="label">Аренда:</div>
+									$577
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">58</div>											
+								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>							
+						</div>
+					</div>
+					<div class="views_row vip_row">
+						<div class="vip"></div>
+						<div class="title">Складской комплекс “Vivaldi”</div>
+						<div class="field_image">
+							<img src="images/shop_3.png" alt="">
+						</div>
+						<div class="views_body">
+							<div class="star"></div>
+							<div class="address">Цветочная, 3</div>
+							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+							<div class="top_wrap">
+								<div class="info">
+									<div class="label">ID:</div>
+									<div class="item">65458</div>
+								</div>
+								<div class="info">
+									<div class="label">Склад:</div>
+									<div class="item">40 м<sup>2</sup></div>
+								</div>
+								<div class="price info">
+									<div class="label">Аренда:</div>
+									$577
+								</div>
+							</div>
+							<div class="bottom_wrap">
+								<div class="statistics">61</div>											
+								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+								<div class="read_more"><a href="/">Подробнее</a></div>
+							</div>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_presentation">
+			<div class="block_content">
+				<div class="block_title">Подберем вам необходимый объект за 30 минут</div>
+				<div class="view_content">
+					<div class="sub_title">В базе более 1000 объектов</div>
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_item form_textarea">
+							<textarea placeholder="Введите ваше сообщение"></textarea>
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Связаться со специалистом">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main><!-- .content -->
+
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

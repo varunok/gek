@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="tab_content3" aria-labelledby="faq-tab">
+<div role="tabpanel" {% if 'trust' not in request.path %}class="tab-pane"{% endif %} id="tab_content3" aria-labelledby="faq-tab">
     <div class="form-group" style="float: right">
         <div class="col-md-12">
             <span class="value text-success">

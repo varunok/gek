@@ -17,3 +17,16 @@ def convert_to_frame(video):
         except:
             return 'Неверний формат кода видео'
     return video
+
+
+@register.filter(name='convert_to_frame_slider')
+def convert_to_frame_slider(video):
+    iframe = '<iframe width="566" height="368" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
+    if 'iframe' not in video:
+        try:
+            video = video.split('/')[-1]
+            iframe = iframe.format(video)
+            return iframe
+        except:
+            return 'Неверний формат кода видео'
+    return video

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 from common.models import Application, Video, FAQ, Photo, BasePacket, TextPacket, \
-    MidlePacket, ExpertPacket, TableRepair, Advantage
+    MidlePacket, ExpertPacket, TableRepair, Advantage, Feed
 from rieltor_object.models import District
 
 
@@ -59,6 +59,7 @@ admin.site.register(Video)
 admin.site.register(FAQ)
 admin.site.register(TableRepair)
 admin.site.register(Photo)
+admin.site.register(Feed)
 admin.site.register(BasePacket, BasePacketAdmin)
 admin.site.register(MidlePacket, MidlePacketAdmin)
 admin.site.register(ExpertPacket, ExpertPacketAdmin)

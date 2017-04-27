@@ -8,6 +8,7 @@ from static_urls import urlpatterns as urlpatterns_static
 from services_urls import urlpatterns as urlpatterns_service
 from settings_urls import urlpatterns as urlpatterns_settings
 from objects_urls import urlpatterns as urlpatterns_objects
+from trust_url import urlpatterns as urlpatterns_trust
 
 urlpatterns = []
 urlpatterns.extend(urlpatterns_articles)
@@ -17,3 +18,4 @@ urlpatterns.extend(urlpatterns_static)
 urlpatterns.extend(urlpatterns_service)
 urlpatterns.extend(urlpatterns_settings)
 urlpatterns.extend(urlpatterns_objects)
+urlpatterns.extend(urlpatterns_trust)

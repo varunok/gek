@@ -10,16 +10,18 @@ from django.forms import models as model_forms
 from admin2.models import IndexPageModel, NewBuildingPageModel, DailyPageModel, BuildingPageModel, OfisPageModel, \
     TrustPageModel, ContactPageModel
 
-class PageList(object):
-    LIST_PAGE = [
-        IndexPageModel.get_solo(),
-        NewBuildingPageModel.get_solo(),
-        DailyPageModel.get_solo(),
-        BuildingPageModel.get_solo(),
-        OfisPageModel.get_solo(),
-        TrustPageModel.get_solo(),
-        ContactPageModel.get_solo()
-    ]
+
+def page_list():
+        LIST_PAGE = [
+            IndexPageModel.get_solo(),
+            NewBuildingPageModel.get_solo(),
+            DailyPageModel.get_solo(),
+            BuildingPageModel.get_solo(),
+            OfisPageModel.get_solo(),
+            TrustPageModel.get_solo(),
+            ContactPageModel.get_solo()
+        ]
+        return LIST_PAGE
 
 
 class StaticPageView(LoginRequiredMixin, TemplateView):
@@ -29,7 +31,7 @@ class StaticPageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(StaticPageView, self).get_context_data(**kwargs)
-        context['pages'] = PageList.LIST_PAGE
+        context['pages'] = page_list()
         return context
 
 
@@ -41,9 +43,8 @@ class StaticPageDetailView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('admin2:static_pages')
 
     def get_object(self, *args, **kwargs):
-        print(self.kwargs)
         slug = self.kwargs.get('slug')
-        for page in PageList.LIST_PAGE:
+        for page in page_list():
             if page.slug == slug:
                 return page
         return None
@@ -57,7 +58,7 @@ def status_page(request):
     if request.POST:
         on = request.POST.get('check')
         page_name = request.POST.get('page_id')
-        for page in PageList.LIST_PAGE:
+        for page in page_list():
             if page.name == page_name:
                 if on:
                     page.is_enable = True

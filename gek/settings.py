@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'articles',
     'services',
     'rieltor_object',
+    'trust',
 ]
 
 MIDDLEWARE = [
@@ -243,6 +244,8 @@ THUMBNAIL_ALIASES = {
         'universal_image_270': {'size': (270, 160), 'crop': True},
         'slider_image_166': {'size': (166, 94), 'crop': True},
         'earth_image_542': {'size': (542, 293), 'crop': True},
+        'trust_image_344': {'size': (344, 245), 'crop': True},
+        'trust_image_372': {'size': (372, 212), 'crop': True},
     },
 }
 

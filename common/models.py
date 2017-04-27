@@ -17,7 +17,8 @@ class ModelInService(object):
         'cleaning',
         'installationwater',
         'universalservice',
-        'building'
+        'building',
+        'trustpagemodel'
     )
 
 
@@ -309,3 +310,99 @@ class ApartmentNext(models.Model):
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.id)
+
+
+class Feed(models.Model):
+    name = models.CharField(
+        verbose_name='Имя',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    city = models.CharField(
+        verbose_name='Город',
+        max_length=250,
+        blank=True,
+        null=True
+    )
+    feed = models.TextField(
+        verbose_name='Отзив',
+        blank=True,
+        null=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='feed/%Y/%m/%d/',
+        blank=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('trustpagemodel',
+                                        )}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Отзив'
+        verbose_name_plural = 'Отзивы'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.name if self.name else self.id)
+
+
+class Schedule(models.Model):
+    MO = 'Понедельник'
+    TU = 'Вторник'
+    WE = 'Среда'
+    TH = 'Четверг'
+    FR = 'Пятница'
+    SA = 'Суббота'
+    SU = 'Воскресенье'
+    CHOICES = (
+        (MO, 'Понедельник'),
+        (TU, 'Вторник'),
+        (WE, 'Среда'),
+        (TH, 'Четверг'),
+        (FR, 'Пятница'),
+        (SA, 'Суббота'),
+        (SU, 'Воскресенье'),
+    )
+    day = models.CharField(
+        verbose_name='День недели',
+        max_length=25,
+        choices=CHOICES,
+        blank=True, null=True
+    )
+    open_from = models.TimeField(
+        verbose_name='Часов От',
+        blank=True, null=True
+    )
+    open_to = models.TimeField(
+        verbose_name='Часов До',
+        blank=True, null=True
+    )
+    special = models.CharField(
+        verbose_name='Cобственное значение',
+        max_length=250,
+        blank=True, null=True,
+        help_text='Другое будет игнорироватся'
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('contactpagemodel',
+                                        )}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'График работы'
+        verbose_name_plural = 'График работы'
+
+    def __unicode__(self):
+        if self.special:
+            return '{} - {}'.format(self.content_type, self.special)
+        return '{} - {} c {} до {}'.format(self.content_type, self.day, self.open_from, self.open_to)
