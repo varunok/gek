@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load video_tag %}
 {% load thumbnail %}
+{% load favorites_tag %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="not-front apartment daily_inner" {% endblock %}
@@ -17,7 +18,10 @@
 				</div>
 				<div class="icons_wrap">
 					<div class="icon stat">{{ object.views }}</div>
-					<div class="icon favorite"></div>
+					<div class="icon favorite {{ object|fav_is_active:request }}">
+                        <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
+                        <input type="hidden" name="object_id" value="{{ object.id }}">
+                    </div>
 				</div>
 				<h1 class="slider_title page_title">{{ object.title }}. {{ object.address }}</h1>
 				<form action="#" class="webform_client_form">

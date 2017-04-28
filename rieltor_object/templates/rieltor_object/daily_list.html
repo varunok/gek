@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load video_tag %}
 {% load admin_tags %}
+{% load favorites_tag %}
 {% load thumbnail %}
 {% block css %}{% endblock css %}
 
@@ -118,46 +119,7 @@
 					<div class="block block_shops block_search_results block_daily_products">
 						<div class="block_content">
 							<div class="view_content">
-                                {% for object in objects %}
-                                    <div class="views_row">
-                                        <div class="title">{{ object.address|default:'' }}</div>
-                                        {% if object.image %}
-                                            <div class="field_image">
-                                                <img src="{{ object.image|thumbnail_url:'gallery_image_370' }}" width="100%" alt="">
-                                            </div>
-                                        {% endif %}
-                                        <div class="views_body">
-                                            <div class="star active"></div>
-                                            <div class="text">{{ object.description|truncatechars:'100' }}</div>
-                                            <div class="top_wrap">
-                                                <div class="info">
-                                                    <div class="label">Район:</div>
-                                                    <div class="item">{{ object.district }}</div>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="label">ID:</div>
-                                                    <div class="item">{{ object.id }}</div>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="label">Комнат:</div>
-                                                    <div class="item">{{ object.rooms|default:'' }}</div>
-                                                </div>
-                                                <div class="price info">
-                                                    {{ object.price|default:'' }} грн/сутки
-                                                </div>
-                                                <div class="info">
-                                                    <div class="label">Спальных мест:</div>
-                                                    <div class="item">{{ object.sleeping_places|default:'' }}</div>
-                                                </div>
-                                            </div>
-                                            <div class="bottom_wrap">
-                                                <div class="statistics">{{ object.views }}</div>
-                                                <div class="read_more preview"><a href="/">Забронировать</a></div>
-                                                <div class="read_more"><a href="{% url 'objects:daily_detail' object.id %}">Подробнее</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                {% include 'rieltor_object/include/daily_item.html' %}
 							</div>
 						</div>
 					</div>

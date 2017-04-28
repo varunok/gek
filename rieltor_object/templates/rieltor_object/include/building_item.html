@@ -1,3 +1,4 @@
+{% load favorites_tag %}
 {% for object in objects %}
     <div class="views_row vip_row">
         {% if object.status == 'VIP' %}
@@ -8,7 +9,10 @@
             <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
         </div>
         <div class="views_body">
-            <div class="star"></div>
+            <div class="star {{ object|fav_is_active:request }}">
+                <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
+                <input type="hidden" name="object_id" value="{{ object.id }}">
+            </div>
             <div class="address">{{ object.address }}</div>
             <div class="text">{{ object.description|truncatewords:'15' }}</div>
             <div class="top_wrap">

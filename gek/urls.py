@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'^objects/', include('rieltor_object.urls', namespace='objects')),
     url(r'^trust/', include('trust.urls', namespace='trust')),
     url(r'^contacts/', include('contact.urls', namespace='contacts')),
+    url(r'^video/', include('videos.urls', namespace='videos')),
+    url(r'favorites/', include('favorites.urls', namespace='favorites')),
 
     #search
     url(r'', include(urlpatterns_search))

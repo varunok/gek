@@ -1,0 +1,242 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/switchery.min.css' %}">
+    <style>
+        .slideThree {
+            width: 80px;
+            height: 26px;
+            background: #4B5F71;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50px;
+            box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+
+        }
+        .slideThree:after {
+            content: 'OFF';
+            color: #000;
+            position: absolute;
+            right: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+        }
+        .slideThree:before {
+            content: 'ON';
+            color: greenyellow;
+            position: absolute;
+            left: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+        }
+        label.lab {
+            display: block;
+            width: 34px;
+            height: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: 1;
+            background: #fcfff4;
+            background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+        }
+        input[type=checkbox] {
+            visibility: hidden;
+        }
+        input[type=checkbox]:checked + label {
+            left: 43px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ verbose_name }}</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            {% if object.when_create %}
+                                <a href="{{ object.get_list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            {% else %}
+                                <a href="{{ list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{% if object.when_create %}Изменить{% else %}Создать{% endif %} {{ object.SEODescription }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            {% if object.when_create %}
+                                <ul class="stats-overview">
+                                    <li>
+                                        <span class="name"> Дата создания </span>
+                                        <span class="value text-success"> {{ object.when_create }} </span>
+                                    </li>
+                                    <li>
+                                        <span class="name"> Дата редактирования </span>
+                                        <span class="value text-success"> {{ object.updated }} </span>
+                                    </li>
+                                    <li >
+                                        <span class="name"> URL </span>
+                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'admin2/videos/videos_nav.html' %}
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
+                                                {% csrf_token %}
+                                                {{ form.errors }}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.title.errors %}
+                                                        <span class="error-label">{{ form.title.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOTitle.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEOTitle|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEOTitle.errors %}
+                                                        <span class="error-label">{{ form.SEOTitle.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOKeywords.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEOKeywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEOKeywords.errors %}
+                                                        <span class="error-label">{{ form.SEOKeywords.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEODescription.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEODescription|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEODescription.errors %}
+                                                        <span class="error-label">{{ form.SEODescription.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.video.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.video.errors %}
+                                                        <span class="error-label">{{ form.video.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.time.label }}:
+                                                        {{ form.time.help_text }}
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.time|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.time.errors %}
+                                                        <span class="error-label">{{ form.time.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.description.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.description|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
+                                                    </div>
+                                                    {% if form.description.errors %}
+                                                        <span class="error-label">{{ form.description.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        <input id="imgInp" name="image" type="file">
+                                                        <img id="blah" src="
+                                                        {% if object.image %}
+                                                            {{ object.image.url }}
+                                                        {% endif %}
+                                                        " alt="" width="100%" />
+                                                        {% if object.image %}
+                                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input type="hidden" value="{{ content_type }}">
+                                                            <input type="hidden" value="{{ object.id }}">
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+
+    </script>
+    {{ form.media }}
+{% endblock js %}

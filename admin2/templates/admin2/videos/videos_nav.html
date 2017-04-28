@@ -1,0 +1,10 @@
+<ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+    <li role="presentation" {% if not 'you_knows' in request.path %}class="active"{% endif %}>
+        <a href="{{ object.get_edit_url }}"  id="home-tab" role="tab">{% if object.when_create %}Редактировать{% else %}Создать{% endif %}</a>
+    </li>
+    {% if object.when_create %}
+        <li role="presentation" {% if 'you_knows' in request.path %}class="active"{% endif %}>
+            <a href="{% url 'admin2:videos_edit_knows' object.id %}"  id="video-tab" role="tab">Что вы узнаете</a>
+        </li>
+    {% endif %}
+</ul>

@@ -171,7 +171,7 @@ class FormSetMixin(UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = None
-        formset =  self.formset(self.request.POST,self.request.FILES, instance=self.get_object())
+        formset =  self.formset(self.request.POST, instance=self.get_object())
         if formset.is_valid():
             return self.form_valid(formset)
         else:
@@ -179,6 +179,8 @@ class FormSetMixin(UpdateView):
 
     def form_valid(self, formset):
         self.object = formset.save()
+        if not self.success_url:
+            self.success_url = self.get_success_url()
         return HttpResponseRedirect(self.success_url)
 
     def form_invalid(self, formset):

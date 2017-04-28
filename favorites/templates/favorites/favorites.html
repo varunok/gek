@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front favorites sidebar_first" {% endblock %}
+
+{% block content %}
+	<main class="middle">
+		<div class="slider_main slider_notfront">
+			<div class="slider_title">Избранное</div>	
+			<div class="block_favorites">
+				<div class="block_content">
+					<div class="views_row">
+						<div class="label">Квартиры и дома:  </div>
+						<div class="count">{{ buildings.count }}</div>
+					</div>
+					<div class="views_row">
+						<div class="label">Магазины и офисы </div>
+						<div class="count">{{ ofices.count }}</div>
+					</div>
+					<div class="views_row">
+						<div class="label">Посуточна аренда:</div>
+						<div class="count">{{ dailys.count }}</div>
+					</div>
+					<div class="views_row">
+						<div class="label">Новострои:</div>
+						<div class="count">{{ newbuildings.count }}</div>
+					</div>
+					<div class="views_row">
+						<div class="label">Земля:</div>
+						<div class="count">3</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+					<div class="block block_shops block_search_results">
+						<div class="block_content">
+							<div class="block_title">Квартиры и дома</div>
+							<div class="view_content">
+                                {% include 'rieltor_object/include/building_item.html' with objects=buildings %}
+							</div>
+						</div>
+					</div>
+					<div class="block block_shops block_search_results">
+						<div class="block_content">
+							<div class="block_title">Магазины и офисы</div>
+							<div class="view_content">
+								{% include 'rieltor_object/include/building_item.html' with objects=ofices %}
+							</div>
+						</div>
+					</div>
+					<div class="block block_shops block_search_results block_daily_products">
+						<div class="block_title">Посуточна аренда</div>
+						<div class="block_content">
+							<div class="view_content">
+								{% include 'rieltor_object/include/daily_item.html' with objects=dailys %}
+							</div>
+						</div>
+					</div>
+                    {% if newbuildings %}
+                        <div class="block block_shops block_search_results block_newbuilding_row">
+                            <div class="block_content">
+                                <div class="block_title">Новострои</div>
+                                <div class="view_content">
+                                    {% for newbuilding in newbuildings %}
+                                        {% include 'rieltor_object/include/newbuilding_item.html' with object=newbuilding %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+					<div class="block block_earth">
+						<div class="block_content">
+							<div class="block_title">Земля</div>
+							<div class="view_content">
+								<div class="views_row">
+									<div class="title">Продам земельный участок под застройку</div>
+									<div class="top_wrap">										
+										<div class="left_wrap">
+											<div class="map"><img src="images/map.png" alt=""></div>
+										</div>
+										<div class="right_wrap">
+											<div class="slider" id="slider">
+												<div class="item"><img src="images/earth_1.png" alt=""></div>
+												<div class="item"><img src="images/earth_1.png" alt=""></div>
+											</div>
+										</div>
+									</div>
+									<div class="bottom_wrap">
+										<div class="left_wrap">
+											<div class="char_item">
+												<div class="label">Тип участка:</div>
+												<div class="item">Под застройку</div>
+											</div>
+											<div class="char_item">
+												<div class="label">Район:</div>
+												<div class="item">Н.Свет</div>
+											</div>
+											<div class="char_item">
+												<div class="label">До города:</div>
+												<div class="item">0 км</div>
+											</div>
+											<div class="char_item">
+												<div class="label">ID:</div>
+												<div class="item">2503</div>
+											</div>
+											<div class="char_item">
+												<div class="label">Коммуникации:</div>
+												<div class="item">Вода</div>
+											</div>
+											<div class="char_item">
+												<div class="label">Строение дома:</div>
+											</div>
+										</div>
+										<div class="right_wrap">
+											<div class="info_wrap">
+												<div class="item">
+													<div class="label">Участок:</div>
+													<div class="count">21 соток</div>
+												</div>
+												<div class="item">
+													<div class="label">Цена:</div>
+													<div class="count">$ 7 500</div>
+												</div>
+											</div>
+											<div class="contacts">
+												<div class="title">Контакты:</div>
+												<div class="item field_name">
+													<div class="label">Имя:</div>
+													<div class="field_item">Наталия</div>
+												</div>
+												<div class="item field_phone">
+													<div class="label">Телефон:</div>
+													<div class="field_item">(069) 454-62-41</div>
+												</div>
+												<div class="btn">Заказать просмотр</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- #content-->
+				
+			</div>
+			<div class="left_sidebar">				
+				<div class="block block_services">
+					<div class="block_content">
+						<div class="block_title">Наши услуги</div>
+						<div class="view_content">
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="{% static 'images/left_1.png' %}" alt=""></a></div>
+								<div class="field_title"><a href="/">Кредитование</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_2.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_3.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_4.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Инфоксводоканал</a></div>
+							</div>							
+						</div>
+					</div>
+				</div>
+				<div class="block banner">
+					<div class="field_image"><img src="{% static 'images/banner.png' %}" alt=""></div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_presentation">
+			<div class="block_content">
+				<div class="block_title">Хотите посмотреть все 6 объектов?</div>
+				<div class="view_content">								
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Отправить">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="block region_banner">
+			<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		</div>		
+	</main><!-- .content -->
+
+
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

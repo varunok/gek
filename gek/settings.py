@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'trust',
     'contact',
     'videos',
+    'favorites',
 ]
 
 MIDDLEWARE = [

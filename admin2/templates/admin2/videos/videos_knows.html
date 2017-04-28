@@ -1,0 +1,194 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/switchery.min.css' %}">
+    <style>
+        .slideThree {
+            width: 80px;
+            height: 26px;
+            background: #4B5F71;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50px;
+            box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+
+        }
+        .slideThree:after {
+            content: 'OFF';
+            color: #000;
+            position: absolute;
+            right: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+        }
+        .slideThree:before {
+            content: 'ON';
+            color: greenyellow;
+            position: absolute;
+            left: 10px;
+            z-index: 0;
+            font: 12px/26px Arial, sans-serif;
+            font-weight: bold;
+        }
+        label.lab {
+            display: block;
+            width: 34px;
+            height: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: 1;
+            background: #fcfff4;
+            background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+        }
+        input[type=checkbox] {
+            visibility: hidden;
+        }
+        input[type=checkbox]:checked + label {
+            left: 43px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ verbose_name }}</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            {% if object.when_create %}
+                                <a href="{{ object.get_list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            {% else %}
+                                <a href="{{ list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{% if object.when_create %}Изменить{% else %}Создать{% endif %} {{ object.SEODescription }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            {% if object.when_create %}
+                                <ul class="stats-overview">
+                                    <li>
+                                        <span class="name"> Дата создания </span>
+                                        <span class="value text-success"> {{ object.when_create }} </span>
+                                    </li>
+                                    <li>
+                                        <span class="name"> Дата редактирования </span>
+                                        <span class="value text-success"> {{ object.updated }} </span>
+                                    </li>
+                                    <li >
+                                        <span class="name"> URL </span>
+                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'admin2/videos/videos_nav.html' %}
+                                    <div id="myTabContent" class="tab-content">
+                                        <form method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+                                            {% csrf_token %}
+                                            <fieldset class="formlist">
+                                                {{ formset.management_form }}
+                                                {% for fields in formset %}
+                                                    <div class="dynamic-form">
+                                                        {{ fields.id }}
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.text.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.text|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                            </div>
+                                                            {% if fields.text.errors %}
+                                                                <span class="error-label">{{ fields.text.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                    </div>
+                                                {% endfor %}
+                                            </fieldset>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        </form>
+
+                                        <div class="empty-form" style="display: none;">
+                                            <div class="dynamic-form">
+                                                {{ formset.empty_form.id }}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.text.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.text|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if formset.empty_form.text.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.text.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/superformset.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+        $(document).ready(function() {
+            $('.formlist').superformset({
+                prefix: 'common-whatyouknown-content_type-object_id',
+                containerSel: '.tab-content',
+                deleteTriggerSel: 'input[name$="-DELETE"]',
+                addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</a>'
+            })
+        })
+
+    </script>
+    {{ form.media }}
+{% endblock js %}

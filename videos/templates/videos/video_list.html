@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front video_transfer sidebar_first" {% endblock %}
+
+{% block content %}
+    <main class="middle">
+		<div class="slider_main slider_notfront">
+			<div class="slider_title">Видео передачи по одесской недвижимости</div>	
+			<form action="#" class="webform_client_form">
+				<div class="form_item search">
+					<input type="text" placeholder="Поиск видео передач">
+				</div>
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Найти">
+				</div>
+			</form>			
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+					<div class="block block_video_transfer">
+						<div class="block_content">
+							<div class="view_content">
+                                {% for object in object_list %}
+                                    <div class="views_row">
+                                        <div class="views_row_inner">
+                                            <a href="{{ object.get_absolute_url }}"><div class="title">{{ object.title }}</div></a>
+                                            <div class="field_image"><img src="{{ object.image|thumbnail_url:'gallery_image_370' }}" alt=""></div>
+                                            <div class="field_nid">
+                                                <ul>
+                                                    {% for known in object.what_you_knowns.all %}
+                                                        <li>{{ known.text }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class="field_info">
+                                                <div class="stat">{{ object.views }}</div>
+                                                <div class="time">{{ object.time }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+							</div>
+							<div class="load_more read_more"><a href="#">Загрузить еще <span>45</span> видеопередач</a></div>
+						</div>
+					</div>
+				</div><!-- #content-->
+				
+			</div>
+			<div class="left_sidebar">				
+				<div class="block block_services">
+					<div class="block_content">
+						<div class="block_title">Наши услуги</div>
+						<div class="view_content">
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_1.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Кредитование</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_2.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_3.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
+							</div>
+							<div class="views_row">
+								<div class="field_image"><a href="/"><img src="images/left_4.png" alt=""></a></div>
+								<div class="field_title"><a href="/">Инфоксводоканал</a></div>
+							</div>							
+						</div>
+					</div>
+				</div>
+				<div class="block banner">
+					<div class="field_image"><img src="images/banner.png" alt=""></div>
+				</div>
+			</div>
+		</div>
+		<div class="block block_articles">
+			<div class="block_content">
+				<div class="block_title">Похожие статьи  на эту тему</div>
+				<div class="view_content">
+					<div class="views_row">
+						<div class="field_image">
+							<a href="/">
+								<img src="images/ar_1.png" alt="">
+							</a>
+						</div>
+						<div class="views_body">							
+						<div class="field_title"><a href="/">Рынок жилой недвижимости в 2016 году: спрос, предложение, цены</a></div>
+						<div class="field_body">Рынок жилой недвижимости в уходящем году был достаточно активным – на этом сходятся все эксперты.</div>
+						<div class="statistics">265</div>
+						</div>
+					</div>
+					<div class="views_row">
+						<div class="field_image">
+							<a href="/">
+								<img src="images/ar_2.png" alt="">
+							</a>
+						</div>
+						<div class="views_body">							
+						<div class="field_title"><a href="/">Украинская недвижимость остается привлекательной для инвесторов</a></div>
+						<div class="field_body">Киев в очередной раз принимал инвестиционный Форум недвижимости стран Восточной Европы, в ходе которого</div>
+						<div class="statistics">63</div>
+						</div>
+					</div>
+					<div class="views_row">
+						<div class="field_image">
+							<a href="/">
+								<img src="images/ar_3.png" alt="">
+							</a>
+						</div>
+						<div class="views_body">							
+						<div class="field_title"><a href="/">Покупаем земельный участок не в сезон: выгодно или нет?</a></div>
+						<div class="field_body">Завершение теплого периода года обычно негативно отражается на активности рынка земельных участков.</div>
+						<div class="statistics">96</div>
+						</div>
+					</div>
+					<div class="views_row">
+						<div class="field_image">
+							<a href="/">
+								<img src="images/ar_4.png" alt="">
+							</a>
+						</div>
+						<div class="views_body">							
+						<div class="field_title"><a href="/">Кредиты и рассрочки на квартиры в новостройках: что изменилось </a></div>
+						<div class="field_body">Рассрочка от застройщика уже несколько лет для многих потенциальных покупателей жилья является единственным</div>
+						<div class="statistics">47</div>
+						</div>
+					</div>
+					<!-- <div class="read_more"><a href="/">Читать все статьи</a></div> -->
+				</div>
+			</div>
+		</div>
+		<div class="block region_banner">
+			<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		</div>		
+	</main><!-- .content -->
+
+
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

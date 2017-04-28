@@ -4,15 +4,16 @@ from __future__ import unicode_literals
 from django import forms
 from dal import autocomplete
 from django.contrib.contenttypes.forms import generic_inlineformset_factory
-from django.forms.widgets import TextInput, Textarea, FileInput, Select, SelectMultiple
+from django.forms.widgets import TextInput, Textarea, FileInput, Select, SelectMultiple, TimeInput
 from ckeditor.widgets import CKEditorWidget
 from django.urls import reverse_lazy
 
 from admin2.models import ContactPageModel
 from articles.models import Sections, Articles
-from common.models import Video, Photo, Advantage, Feed, Schedule
+from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
+from videos.models import Videos
 
 
 class SectionUpdateForm(forms.ModelForm):
@@ -136,6 +137,12 @@ FeedVideoSet = generic_inlineformset_factory(
     min_num=1
 )
 
+WhatYouKnownSet = generic_inlineformset_factory(
+    WhatYouKnown,
+    extra=0,
+    min_num=1
+)
+
 
 class AdvantageForm(forms.ModelForm):
     image = forms.ImageField(
@@ -215,4 +222,14 @@ class ContactForm(forms.ModelForm):
             'users': autocomplete.ModelSelect2Multiple(
                 url=reverse_lazy('admin2:users-autocomplete'),
             )
+        }
+
+
+class VideosCreateForm(forms.ModelForm):
+    class Meta:
+        model = Videos
+        exclude = ['views']
+        fields = '__all__'
+        widgets = {
+            'time': TimeInput()
         }

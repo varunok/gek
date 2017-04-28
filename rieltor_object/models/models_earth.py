@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import uuid
 
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from multiselectfield import MultiSelectField
 
@@ -144,6 +145,9 @@ class Earth(models.Model):
 
     def get_list_url(self):
         return reverse('admin2:earth')
+
+    def get_content_type(self):
+        return ContentType.objects.get_for_model(self.__class__).id
 
     def meta(self):
         return self._meta

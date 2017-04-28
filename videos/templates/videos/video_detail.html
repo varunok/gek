@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load thumbnail %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front video_inner" {% endblock %}
+
+{% block content %}
+	<main class="middle">
+		<div class="slider_main slider_notfront">
+			<div class="block_content">	
+				<div class="come_back"><a href="{% url 'videos:video' %}">Вернуться назад</a></div>
+				<h1 class="slider_title page_title">{{ object.title|default:'Все о новостройках' }}</h1>
+				<div class="icons_wrap">
+					<div class="icon stat">{{ object.views }}</div>
+					<div class="icon time">{{ object.time }}</div>
+				</div>				
+			</div>
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+                    {% if object.video %}
+                        <div class="block block_video">
+                            <div class="block_content">
+                                {{ object.video|convert_to_frame|safe }}
+                            </div>
+                        </div>
+                    {% endif %}
+					<div class="block block_body">
+						<div class="left_wrap">
+							<div class="title">Что вы узнаете:</div>
+                            <ul>
+                                {% for known in object.what_you_knowns.all %}
+                                    <li>{{ known.text }}</li>
+                                {% endfor %}
+							</ul>
+						</div>
+						<div class="field_body">
+							<p>{{ object.description|safe }}</p>
+						</div>
+					</div>							
+				</div><!-- #content-->
+				
+			</div>			
+		</div>	
+	
+		<div class="block region_banner">
+			<div class="field_banner"><img src="images/banner_2.png" alt=""></div>
+		</div>
+	</main><!-- .content -->
+
+{% endblock content %}
+{% block js %}
+    <script src="{% static '' %}"></script>
+{% endblock js %}

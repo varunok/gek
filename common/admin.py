@@ -4,12 +4,17 @@ from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 from common.models import Application, Video, FAQ, Photo, BasePacket, TextPacket, \
-    MidlePacket, ExpertPacket, TableRepair, Advantage, Feed
+    MidlePacket, ExpertPacket, TableRepair, Advantage, Feed, WhatYouKnown
 from rieltor_object.models import District
 
 
 class VideoInline(GenericTabularInline):
     model = Video
+    extra = 0
+
+
+class WhatYouKnownInline(GenericTabularInline):
+    model = WhatYouKnown
     extra = 0
 
 

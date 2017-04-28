@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from trust.views import Trust
+from videos.views import VideosList, VideosDetail
 
 urlpatterns = [
-    # building
-    url('^$', Trust.as_view(), name='trust'),
+    # video
+    url('^$', VideosList.as_view(), name='video'),
+    url('^(?P<pk>[\w-]+)/$', VideosDetail.as_view(), name='videos_detail'),
     ]

@@ -41,9 +41,9 @@
                         </div>
                         <div class="benefits">
                             <div class="item test"><a href="/">Пройди тест</a></div>
-                            <div class="item video"><a href="/">Смотреть видео</a></div>
+                            <div class="item video"><a href="{% url 'videos:video' %}">Смотреть видео</a></div>
                             <div class="item plan"><a href="/">Составить план</a></div>
-                            <div class="item favorite"><a href="/">Избранное</a></div>
+                            <div class="item favorite"><a href="{% url 'favorites:favorites' %}">Избранное</a></div>
                         </div>
                         <div class="buttons_header">
                             <div class="application">Оставить заявку</div>
@@ -237,6 +237,7 @@
         <script type="text/javascript" src="{% static 'js/social-likes.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/jquery.livequery.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/giz.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/favorites.js' %}"></script>
         {% block js %}{% endblock js %}
     </body>
 </html>

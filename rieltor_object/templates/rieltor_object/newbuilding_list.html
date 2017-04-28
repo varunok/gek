@@ -54,61 +54,8 @@
 						<div class="block_content">
 							<div class="view_content">
                                 {% for object in objects %}
-                                    <div class="views_row">
-                                        <div class="left_wrap">
-                                            <div class="title">{{ object.title }}</div>
-                                            <div class="field_images">
-                                                <div class="star"></div>
-                                                <div class="field_image">
-                                                    {% for image in object.images.all %}
-                                                        <img src="{{ image.image|thumbnail_url:'gallery_image_469' }}" alt="">
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                            <div class="views_body">
-                                                <div class="text">{{ object.description }}</div>
-                                                <div class="address">{{ object.address }}</div>
-                                            </div>
-                                        </div>
-                                        <div class="right_wrap">
-                                            <div class="title">Свободные объекты</div>
-                                            {% for build in object.building.all|slice:':2' %}
-                                                <div class="views_row">
-                                                    <div class="field_img">
-                                                        <img src="{{ build.images.first.image|thumbnail_url:'gallery_image_233' }}" alt="">
-                                                    </div>
-                                                    {% if build.footage %}
-                                                        <div class="area">{{ build.footage }} м2</div>
-                                                    {% endif %}
-                                                    {% if build.price %}
-                                                        <div class="price">{{ build.price }}$</div>
-                                                    {% endif %}
-                                                </div>
-                                            {% endfor %}
-                                            <div class="see_more"><a href="{% url 'objects:buildings' %}">Смотреть больше</a></div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="top_wrap">
-                                                <div class="left_wrap">
-                                                    <div class="price info">
-                                                        <div class="label">Цена за м2:</div>
-                                                        <div class="item">{{ object.price }} грн</div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="label">Дата сдачи:</div>
-                                                        <div class="item">{{ object.end_construction|date:'d.m.Y' }}</div>
-                                                    </div>
-                                                </div>
-                                                <div class="right_wrap">
-                                                    <div class="statistics">{{ object.views }}</div>
-                                                    <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                                    <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% include 'rieltor_object/include/newbuilding_item.html' %}
                                 {% endfor %}
-
 								<div class="load_more_wrap">
 									<div class="read_more load_more"><a href="#">Загрузить еще 45 объектов</a></div>									
 								</div>

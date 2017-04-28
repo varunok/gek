@@ -407,3 +407,27 @@ class Schedule(models.Model):
         if self.special:
             return '{} - {}'.format(self.content_type, self.special)
         return '{} - {} c {} до {}'.format(self.content_type, self.day, self.open_from, self.open_to)
+
+
+class WhatYouKnown(models.Model):
+    text = models.TextField(
+        verbose_name='Текст',
+        blank=True,
+        null=True
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': ('videos',
+                                        )}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Что вы узнаете'
+        verbose_name_plural = 'Что вы узнаете'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.text)
+

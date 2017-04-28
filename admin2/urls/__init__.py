@@ -10,6 +10,7 @@ from settings_urls import urlpatterns as urlpatterns_settings
 from objects_urls import urlpatterns as urlpatterns_objects
 from trust_urls import urlpatterns as urlpatterns_trust
 from contact_urls import urlpatterns as urlpatterns_contact
+from videos_urls import urlpatterns as urlpatterns_videos
 
 urlpatterns = []
 urlpatterns.extend(urlpatterns_articles)
@@ -21,3 +22,4 @@ urlpatterns.extend(urlpatterns_settings)
 urlpatterns.extend(urlpatterns_objects)
 urlpatterns.extend(urlpatterns_trust)
 urlpatterns.extend(urlpatterns_contact)
+urlpatterns.extend(urlpatterns_videos)

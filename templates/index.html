@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load favorites_tag %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="front" {% endblock %}
@@ -226,7 +227,10 @@
                                 <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
                             </div>
                             <div class="views_body">
-                                <div class="star"></div>
+                                <div class="star {{ newbuilding|fav_is_active:request }}">
+                                    <input type="hidden" name="content_type" value="{{ newbuilding.get_content_type }}">
+                                    <input type="hidden" name="object_id" value="{{ newbuilding.id }}">
+                                </div>
                                 <div class="left_wrap">
                                     <div class="address">{{ newbuilding.address|default:'' }}</div>
                                     <div class="info">
@@ -420,4 +424,6 @@
 	</main><!-- .content -->
 {% endblock content %}
 
-{% block js %}{% endblock js %}
+{% block js %}
+
+{% endblock js %}
