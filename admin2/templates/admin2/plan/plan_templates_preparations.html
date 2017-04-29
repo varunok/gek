@@ -1,0 +1,48 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}Редактирование {{ verbose_name }}{% endblock title %}
+
+{% block css %}
+    <style>
+        .style-del{
+            vertical-align: bottom;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    {% include 'admin2/plan/include/preparations.html' with object=object %}
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/superformset.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+        $(document).ready(function() {
+                $('.formlist').superformset({
+                    prefix: 'common-{{ prefix }}-content_type-object_id',
+                    containerSel: '.tab-content',
+                    deleteTriggerSel: 'input[name$="-DELETE"]',
+                    addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</a>'
+                })
+            })
+
+    </script>
+    {{ form.media }}
+{% endblock js %}

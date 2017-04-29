@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^contacts/', include('contact.urls', namespace='contacts')),
     url(r'^video/', include('videos.urls', namespace='videos')),
     url(r'favorites/', include('favorites.urls', namespace='favorites')),
+    url(r'plan/', include('plan.urls', namespace='plan')),
 
     #search
     url(r'', include(urlpatterns_search))

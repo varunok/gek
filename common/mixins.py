@@ -164,6 +164,8 @@ class FormSetMixin(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = None
+        if not self.formset:
+            self.formset = self.get_formset(request)
         formset = self.formset(instance=self.get_object())
         return self.render_to_response(
             self.get_context_data(
@@ -171,6 +173,8 @@ class FormSetMixin(UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = None
+        if not self.formset:
+            self.formset = self.get_formset(request)
         formset =  self.formset(self.request.POST, instance=self.get_object())
         if formset.is_valid():
             return self.form_valid(formset)

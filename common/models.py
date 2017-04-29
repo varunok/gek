@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse_lazy, reverse
 
 
 class ModelInService(object):
@@ -430,4 +431,149 @@ class WhatYouKnown(models.Model):
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.text)
+
+
+class PriorityChoices(object):
+    HARD = 'Сложное'
+    LOW = 'Простое'
+    MIDDLE = 'Среднее'
+    CHOICES = (
+        (HARD, 'Сложное'),
+        (LOW, 'Простое'),
+        (MIDDLE, 'Среднее'),
+    )
+
+    model__in = ('salebuildplan',)
+
+
+class Preparation(models.Model):
+    title = models.TextField(
+        verbose_name='Заголовок'
+    )
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+    priority = models.CharField(
+        verbose_name='Приоритет задания',
+        choices=PriorityChoices.CHOICES,
+        max_length=20,
+        blank=True,
+        null=True
+    )
+    when_do = models.DateField(
+        verbose_name='Когда приступите?',
+        blank=True,
+        null=True
+    )
+    plan_do = models.DateField(
+        verbose_name='Планируете выполнить',
+        blank=True,
+        null=True
+    )
+
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': PriorityChoices.model__in}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Подготовка'
+        verbose_name_plural = 'Подготовки'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.title)
+
+    def get_absolute_url(self):
+        success_url = reverse('admin2:plan_preparations')
+
+
+class Process(models.Model):
+    title = models.TextField(
+        verbose_name='Заголовок'
+    )
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+    priority = models.CharField(
+        verbose_name='Приоритет задания',
+        choices=PriorityChoices.CHOICES,
+        max_length=20,
+        blank=True,
+        null=True
+    )
+    when_do = models.DateField(
+        verbose_name='Когда приступите?',
+        blank=True,
+        null=True
+    )
+    plan_do = models.DateField(
+        verbose_name='Планируете выполнить',
+        blank=True,
+        null=True
+    )
+
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': PriorityChoices.model__in}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Процесс'
+        verbose_name_plural = 'Процесс'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.title)
+
+    def get_absolute_url(self):
+        success_url = reverse('admin2:plan_process')
+
+
+class Finish(models.Model):
+    title = models.TextField(
+        verbose_name='Заголовок'
+    )
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+    priority = models.CharField(
+        verbose_name='Приоритет задания',
+        choices=PriorityChoices.CHOICES,
+        max_length=20,
+        blank=True,
+        null=True
+    )
+    when_do = models.DateField(
+        verbose_name='Когда приступите?',
+        blank=True,
+        null=True
+    )
+    plan_do = models.DateField(
+        verbose_name='Планируете выполнить',
+        blank=True,
+        null=True
+    )
+
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to={'model__in': PriorityChoices.model__in}
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Завершение'
+        verbose_name_plural = 'Завершение'
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.content_type, self.title)
+
+    def get_absolute_url(self):
+        success_url = reverse('admin2:plan_finish')
 

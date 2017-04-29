@@ -1,0 +1,108 @@
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ verbose_name }}</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            <a href="{% url 'admin2:plan_templates' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Изменить {{ verbose_name }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" >
+                                            <a href="{{ object.get_edit_url }}"  id="home-tab" role="tab">Редактировать</a>
+                                        </li>
+                                        {{ nav|safe }}
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <form method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+                                            {% csrf_token %}
+                                            <fieldset class="formlist">
+                                                {{ formset.management_form }}
+                                                {% for fields in formset %}
+                                                    <label class="" for="name">{{ fields.DELETE.label }}: {{ fields.DELETE|addcss:'style-del' }}
+                                                            </label>
+                                                    <div class="dynamic-form">
+                                                        {{ fields.id }}
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.title.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                            </div>
+                                                            {% if fields.title.errors %}
+                                                                <span class="error-label">{{ fields.title.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="item form-group">
+                                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.description.label }}:
+                                                            </label>
+                                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                                {{ fields.description|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                            </div>
+                                                            {% if fields.description.errors %}
+                                                                <span class="error-label">{{ fields.description.errors }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="ln_solid"></div>
+                                                    </div>
+                                                {% endfor %}
+                                            </fieldset>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        </form>
+
+                                        <div class="empty-form" style="display: none;">
+                                            <div class="dynamic-form">
+                                                {{ formset.empty_form.id }}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.title.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if formset.empty_form.title.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.title.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.description.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ formset.empty_form.description|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if formset.empty_form.description.errors %}
+                                                        <span class="error-label">{{ formset.empty_form.description.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->

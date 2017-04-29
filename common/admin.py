@@ -4,8 +4,23 @@ from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 
 from common.models import Application, Video, FAQ, Photo, BasePacket, TextPacket, \
-    MidlePacket, ExpertPacket, TableRepair, Advantage, Feed, WhatYouKnown
-from rieltor_object.models import District
+    MidlePacket, ExpertPacket, TableRepair, Advantage, Feed, WhatYouKnown, Process,  \
+    Finish, Preparation
+
+
+class PreparationInline(GenericTabularInline):
+    model = Preparation
+    extra = 0
+
+
+class FinishInline(GenericTabularInline):
+    model = Finish
+    extra = 0
+
+
+class ProcessInline(GenericTabularInline):
+    model = Process
+    extra = 0
 
 
 class VideoInline(GenericTabularInline):
@@ -70,4 +85,7 @@ admin.site.register(MidlePacket, MidlePacketAdmin)
 admin.site.register(ExpertPacket, ExpertPacketAdmin)
 admin.site.register(Advantage)
 admin.site.register(TextPacket)
+admin.site.register(Process)
+admin.site.register(Preparation)
+admin.site.register(Finish)
 

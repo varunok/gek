@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 
 from admin2.models import ContactPageModel
 from articles.models import Sections, Articles
-from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown
+from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown, Preparation, Process, Finish
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 from videos.models import Videos
@@ -139,6 +139,24 @@ FeedVideoSet = generic_inlineformset_factory(
 
 WhatYouKnownSet = generic_inlineformset_factory(
     WhatYouKnown,
+    extra=0,
+    min_num=1
+)
+
+PreparationsSet = generic_inlineformset_factory(
+    Preparation,
+    extra=0,
+    min_num=1
+)
+
+ProcessSet = generic_inlineformset_factory(
+    Process,
+    extra=0,
+    min_num=1
+)
+
+FinishSet = generic_inlineformset_factory(
+    Finish,
     extra=0,
     min_num=1
 )

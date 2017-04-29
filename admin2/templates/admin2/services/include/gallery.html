@@ -1,5 +1,5 @@
 {% load thumbnail %}
-<div role="tabpanel" {% if 'trust' not in request.path %}class="tab-pane"{% endif %} id="tab_content4" aria-labelledby="galery-tab">
+<div role="tabpanel" {% if 'trust' not in request.path and 'plan' not in request.path %}class="tab-pane"{% endif %} id="tab_content4" aria-labelledby="galery-tab">
     <form action="" id="galleryForm" class="galleryForm" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" value="{{ content_type }}" name="content_type">

@@ -1,0 +1,147 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}Редактирование {{ verbose_name }}{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ verbose_name }}</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Изменить {{ verbose_name }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <ul class="stats-overview">
+                                <li >
+                                    <span class="name"> URL </span>
+                                    <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                </li>
+                            </ul>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'admin2/plan/plan_nav.html' %}
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel"  id="tab_content4" aria-labelledby="galery-tab">
+                                            <div class="x_content">
+                                                <table class="table table-striped projects">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 20%">Название</th>
+                                                        <th style="width: 20%">Фото</th>
+                                                        <th style="width: 20%">Заголовок</th>
+                                                        <th style="width: 20%"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{ salebuildplan }}</td>
+                                                            {% if salebuildplan.image %}
+                                                                <td><img src="{{ salebuildplan.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                                            {% else %}
+                                                                <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
+                                                            {% endif %}
+                                                            <td>{{ salebuildplan.title }}</td>
+                                                            <td>
+                                                                <a href="{{ salebuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ buybuildplan }}</td>
+                                                            {% if buybuildplan.image %}
+                                                                <td><img src="{{ buybuildplan.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                                            {% else %}
+                                                                <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
+                                                            {% endif %}
+                                                            <td>{{ buybuildplan.title }}</td>
+                                                            <td>
+                                                                <a href="{{ buybuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ rentbuildplan }}</td>
+                                                            {% if rentbuildplan.image %}
+                                                                <td><img src="{{ rentbuildplan.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                                            {% else %}
+                                                                <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
+                                                            {% endif %}
+                                                            <td>{{ rentbuildplan.title }}</td>
+                                                            <td>
+                                                                <a href="{{ rentbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ passbuildplan }}</td>
+                                                            {% if passbuildplan.image %}
+                                                                <td><img src="{{ passbuildplan.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                                            {% else %}
+                                                                <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
+                                                            {% endif %}
+                                                            <td>{{ passbuildplan.title }}</td>
+                                                            <td>
+                                                                <a href="{{ passbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ repairbuildplan }}</td>
+                                                            {% if repairbuildplan.image %}
+                                                                <td><img src="{{ repairbuildplan.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                                            {% else %}
+                                                                <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
+                                                            {% endif %}
+                                                            <td>{{ repairbuildplan.title }}</td>
+                                                            <td>
+                                                                <a href="{{ repairbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/gallery.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+
+    </script>
+    {{ form.media }}
+{% endblock js %}

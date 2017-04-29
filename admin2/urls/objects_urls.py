@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from dal import autocomplete
 from django.conf.urls import url
 
 from admin2.views.rieltor_objects.building_view import BuildingListView, BuildingEditView, BuildingCreateView, \
