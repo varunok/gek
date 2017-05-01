@@ -12,6 +12,7 @@ from trust_urls import urlpatterns as urlpatterns_trust
 from contact_urls import urlpatterns as urlpatterns_contact
 from videos_urls import urlpatterns as urlpatterns_videos
 from plan_urls import urlpatterns as urlpatterns_plan
+from polls_urls import urlpatterns as urlpatterns_polls
 
 urlpatterns = []
 urlpatterns.extend(urlpatterns_articles)
@@ -25,3 +26,4 @@ urlpatterns.extend(urlpatterns_trust)
 urlpatterns.extend(urlpatterns_contact)
 urlpatterns.extend(urlpatterns_videos)
 urlpatterns.extend(urlpatterns_plan)
+urlpatterns.extend(urlpatterns_polls)

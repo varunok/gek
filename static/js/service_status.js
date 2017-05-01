@@ -46,11 +46,27 @@ $(document).ready(function() {
         event.preventDefault();
         var content_type = $(this).next().val();
         var id = $(this).next().next().val();
+        var title_image = $(this).next().next().next().val();
         _this = $(this);
-        $.get('delete-image', {'content_type': content_type, 'id':id})
+        $.get('delete-image', {'content_type': content_type, 'id':id, 'title_image': title_image})
             .then(function(response) {
                     notify_success(response, 'Успешно');
                     $('#blah').attr("src","second.jpg");
+                    _this.fadeOut();
+                }, function(err) {
+                    notify_error('Ошибка '+ err.status, err.statusText);
+                });
+    });
+    $('#delete-image2').click(function (event) {
+        event.preventDefault();
+        var content_type = $(this).next().val();
+        var id = $(this).next().next().val();
+        var title_image = $(this).next().next().next().val();
+        _this = $(this);
+        $.get('delete-image', {'content_type': content_type, 'id':id, 'title_image': title_image})
+            .then(function(response) {
+                    notify_success(response, 'Успешно');
+                    $('#blah2').attr("src","second.jpg");
                     _this.fadeOut();
                 }, function(err) {
                     notify_error('Ошибка '+ err.status, err.statusText);

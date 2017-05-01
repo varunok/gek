@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from admin2.models import ContactPageModel
 from articles.models import Sections, Articles
 from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown, Preparation, Process, Finish
+from polls.models import Question, Choice, Polls
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 from videos.models import Videos
@@ -251,3 +252,24 @@ class VideosCreateForm(forms.ModelForm):
         widgets = {
             'time': TimeInput()
         }
+
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = '__all__'
+
+
+class ChoicesForm(forms.ModelForm):
+    class Meta:
+        model = Choice
+        exclude = 'question',
+        fields = '__all__'
+
+
+class PollsForm(forms.ModelForm):
+    class Meta:
+        model = Polls
+        exclude = 'test_end', 'questions', 'results',
+        fields = '__all__'
+

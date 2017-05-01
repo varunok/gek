@@ -98,10 +98,14 @@ def status_common(request):
 def delete_image(request):
     content_type_id = request.GET.get('content_type')
     id = request.GET.get('id')
+    title_image = request.GET.get('title_image')
     if id:
         model = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=id)
     else:
         model = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
+    if title_image:
+        model.title_image.delete(save=True)
+        return HttpResponse('Удалено')
     model.image.delete(save=True)
     return HttpResponse('Удалено')
 

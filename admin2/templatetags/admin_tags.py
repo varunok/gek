@@ -24,3 +24,11 @@ def addrows(field, rows):
         repl = ''.join(['rows="', rows, '"'])
         field = re.sub(regex, repl, field, flags=re.IGNORECASE)
     return field
+
+
+@register.filter(name='add_style')
+def add_style(field, style):
+    try:
+        return field.as_widget(attrs={"style": style})
+    except AttributeError:
+        return ''

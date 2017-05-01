@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^video/', include('videos.urls', namespace='videos')),
     url(r'favorites/', include('favorites.urls', namespace='favorites')),
     url(r'plan/', include('plan.urls', namespace='plan')),
+    url(r'polls/', include('plan.urls', namespace='polls')),
 
     #search
     url(r'', include(urlpatterns_search))

@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'videos',
     'favorites',
     'plan',
+    'polls',
 ]
 
 MIDDLEWARE = [

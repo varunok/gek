@@ -453,6 +453,11 @@ class Preparation(models.Model):
     description = models.TextField(
         verbose_name='Описание'
     )
+    comment = models.TextField(
+        verbose_name='Комментарий',
+        blank=True,
+        null=True
+    )
     priority = models.CharField(
         verbose_name='Приоритет задания',
         choices=PriorityChoices.CHOICES,
@@ -497,6 +502,11 @@ class Process(models.Model):
     description = models.TextField(
         verbose_name='Описание'
     )
+    comment = models.TextField(
+        verbose_name='Комментарий',
+        blank=True,
+        null=True
+    )
     priority = models.CharField(
         verbose_name='Приоритет задания',
         choices=PriorityChoices.CHOICES,
@@ -540,6 +550,11 @@ class Finish(models.Model):
     )
     description = models.TextField(
         verbose_name='Описание'
+    )
+    comment = models.TextField(
+        verbose_name='Комментарий',
+        blank=True,
+        null=True
     )
     priority = models.CharField(
         verbose_name='Приоритет задания',

@@ -1,93 +1,41 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
-	<title>Планы</title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" />
-	<meta property="glyanec:code" content="39eef315143e93d76d452ab02a15ad2f">
-	<link rel="stylesheet" type="text/css" href="css/social-likes_flat.css"/>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-	<link rel="stylesheet" type="text/css" href="css/slicknav.css"/>
-	<link href="style.css" rel="stylesheet">
-	<link rel="shortcut icon" href="favicon.ico" type="image/png">
-	<!-- Responsible for the project: ID764 -->
-	<!-- Website development - http://glyanec.net/ -->
-</head>
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+{% load favorites_tag %}
+{% load video_tag %}
+{% block css %}{% endblock css %}
 
-<body class="not-front plan">
+{% block class_body %}  class="not-front plan" {% endblock %}
 
-<div class="wrapper">
-
-	<header class="header">
-		<div class="header_content">
-			<div class="logo_wrapper">
-				<a href="/" class="logo"><img src="images/logo.png" alt=""><span class="site_name">usatba-krm</span><span class="domen">.DN.UA</span></a>
-			</div>
-			<div class="region_header">
-				<div class="contacts_header">
-					<div class="phone_number">
-						<a href="tel:+380679280167">(067) 928 01 67</a>
-					</div>
-					<div class="address">г. Одесса, ул. Успенская, 33.</div>
-					<div class="email"><a href="mailto:ofis@gek.od.ua">ofis@gek.od.ua</a></div>
-				</div>
-				<div class="benefits">
-					<div class="item test"><a href="/">Пройди тест</a></div>
-					<div class="item video"><a href="/">Смотреть видео</a></div>
-					<div class="item plan"><a href="/">Составить план</a></div>
-					<div class="item favorite"><a href="/">Избранное</a></div>
-				</div>
-				<div class="buttons_header">
-					<div class="application">Оставить заявку</div>
-					<div class="add_advert">Добавить объявление</div>
-				</div>
-			</div>
-		</div>
-		<div class="block_main_menu">
-			<div class="block_content">
-				<ul class="menu">
-					<li class="leaf"><a href="/" >Главная</a></li>
-					<li class="leaf"><a href="/" >Недвижимость</a></li>
-					<li class="leaf"><a href="/" class="active">Услуги</a></li>
-					<li class="leaf"><a href="/">Статьи</a></li>
-					<li class="leaf"><a href="/">Доверие</a></li>
-					<li class="leaf"><a href="/">Контакты</a></li>
-				</ul>
-			</div>
-		</div>
-	</header><!-- .header-->
-
+{% block content %}
 	<main class="middle">
-		<div class="slider_main slider_notfront">
-			<h1 class="slider_title page_title">План работы по недвижимости всего за 3 минуты</h1>
-			<div class="top_inner_content"><div class="title">По вашему запросу мы составим план действий</div></div>
+		<div class="slider_main slider_notfront"{% if object.image %}
+                style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
+			<h1 class="slider_title page_title">{{ object.title|default:'План работы по недвижимости всего за 3 минуты' }}</h1>
+			<div class="top_inner_content"><div class="title">{{ object.subtitle|default:'По вашему запросу мы составим план действий' }}</div></div>
 			<div class="slider_list">
 				<div class="item">
 					<div class="li">1</div>
-					<div class="field_item">Купить квартиру</div>
+					<div class="field_item">{{ object.point1|default:'Купить квартиру' }}</div>
 				</div>
 				<div class="item">
 					<div class="li">2</div>
-					<div class="field_item">Продать дом</div>
+					<div class="field_item">{{ object.point2|default:'Продать дом' }}</div>
 				</div>
 				<div class="item">
 					<div class="li">3</div>
-					<div class="field_item">Арендовать квартиру</div>
+					<div class="field_item">{{ object.point3|default:'Арендовать квартиру' }}</div>
 				</div>
 				<div class="item">
 					<div class="li">4</div>
-					<div class="field_item">Сдать квартиру</div>
+					<div class="field_item">{{ object.point4|default:'Сдать квартиру' }}</div>
 				</div>
 				<div class="item">
 					<div class="li">5</div>
-					<div class="field_item">Ремонт квартиры</div>
+					<div class="field_item">{{ object.point5|default:'Ремонт квартиры' }}</div>
 				</div>
 			</div>			
-			<div class="submit"><a href="#">Создать план</a></div>
+			<div class="submit"><a href="{% url 'plan:plan_create' %}">Создать план</a></div>
 		</div>
 		<div class="middle_inner">		
 			<div class="container">
@@ -97,60 +45,49 @@
 							<div class="view_content">								
 								<div class="views_row">
 									<div class="field_img">
-										<img src="images/pl_1.png" alt="">
+										<img src="{% static 'images/pl_1.png' %}" alt="">
 									</div>
 									<div class="text">Бесплатное <Br>пользование</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
-										<img src="images/pl_2.png" alt="">
+										<img src="{% static 'images/pl_2.png' %}" alt="">
 									</div>
 									<div class="text">Готовый чек лист <br>по важным вопросам</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
-										<img src="images/pl_3.png" alt="">
+										<img src="{% static 'images/pl_3.png' %}" alt="">
 									</div>
 									<div class="text">Стимул достигнуть <Br>цели</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
-										<img src="images/pl_4.png" alt="">
+										<img src="{% static 'images/pl_4.png' %}" alt="">
 									</div>
 									<div class="text">Уже создано 677 <br>планов</div>
 								</div>								
 							</div>
 						</div>
-					</div>		
-					<div class="block block_video">
-						<div class="block_content">
-							<iframe src="https://www.youtube.com/embed/fKMbAxliZpc?ecver=2" width="640" height="360" allowfullscreen></iframe>			
-						</div>
 					</div>
+                    {% if object.video %}
+                        <div class="block block_video">
+                            <div class="block_content">
+                                {{ object.video|convert_to_frame|safe }}
+                            </div>
+                        </div>
+                    {% endif %}
 					<div class="block block_photo">
 						<div class="block_content">
 							<div class="block_title">Примеры готовых планов работы <br>по недвижимости</div>
 							<div class="view_content">
-								<div class="views_row">
-									<div class="filed_img">
-										<img src="images/photo_1.png" alt="">
-									</div>
-								</div>
-								<div class="views_row">
-									<div class="filed_img">
-										<img src="images/photo_2.png" alt="">
-									</div>
-								</div>
-								<div class="views_row">
-									<div class="filed_img">
-										<img src="images/photo_3.png" alt="">
-									</div>
-								</div>
-								<div class="views_row">
-									<div class="filed_img">
-										<img src="images/photo_4.png" alt="">
-									</div>
-								</div>
+                                {% for image in object.images.all %}
+                                    <div class="views_row">
+                                        <div class="filed_img">
+                                            <img src="{{ image.image|thumbnail_url:'gallery_image_570' }}" alt="">
+                                        </div>
+                                    </div>
+                                {% endfor %}
 							</div>
 						</div>
 					</div>			
@@ -189,7 +126,7 @@
 			<div class="block_content">
 				<div class="block_title">Начните создавать свой план работы <br>по недвижимости уже сейчас</div>
 				<div class="view_content">								
-					<form action="#" class="webform_client_form">
+					<form action="{% url 'plan:plan_create' %}" class="webform_client_form">
 						<div class="form_actions">
 							<input type="submit" class="form_submit" value="Создать план">
 						</div>
@@ -199,123 +136,7 @@
 		</div>
 	</main><!-- .content -->
 
-</div><!-- .wrapper -->
+{% endblock content %}
 
-<footer class="footer">
-	<div class="footer_top">	
-		<div class="region_footer">
-			<div class="logo_wrapper">
-				<a href="/" class="logo"><img src="images/logo.png" alt=""><span class="site_name">usatba-krm</span><span class="domen">.DN.UA</span></a>
-				<div class="copyright">Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством Украины.</div>
-			</div>
-			<div class="footer_center">				
-				<div class="menu_footer">
-					<ul>	
-						<li class="group_item">
-							<ul>
-								<li class="leaf"><a href="/">Главная</a></li>
-								<li class="leaf"><a href="/">Недвижимость</a></li>
-								<li class="leaf"><a href="/">Услуги</a></li>
-							</ul>
-						</li>
-						<li class="group_item">
-							<ul>
-								<li class="leaf expanded"><a href="/" class="expanded_btn" id="expanded_btn">Выбрать</a>
-									<ul class="disabled">
-										<li class="leaf"><a href="/">Статья1</a></li>
-										<li class="leaf"><a href="/">Статья2</a></li>
-										<li class="leaf"><a href="/">Статья3</a></li>
-									</ul>
-								</li>
-								<li class="leaf"><a href="/">Статьи</a></li>
-								<li class="leaf"><a href="/">Доверие</a></li>
-							</ul>
-						</li>
-						<li class="group_item">
-							<ul>
-								<li class="leaf"><a href="/">Смотреть видео передачи</a></li>									
-								<li class="leaf"><a href="/">Пройти тест</a></li>								
-								<li class="leaf"><a href="/">Нарисовать план</a></li>								
-							</ul>
-						</li>
-					</ul>
-					<div class="visit">
-						<div class="item"><img src="images/bitmap.png" alt=""></div>
-						<div class="item"><img src="images/bitmap.png" alt=""></div>
-						<div class="item"><img src="images/bitmap.png" alt=""></div>
-						<div class="item"><img src="images/bitmap.png" alt=""></div>
-					</div>
-				</div>
-			</div>
-			<div class="footer_right">
-				<div class="contacts_header">
-					<div class="phone_number">
-						<a href="tel:+380679280167">(067) 928 01 67</a>
-					</div>
-					<div class="email"><a href="mailto:ofis@gek.od.ua">ofis@gek.od.ua</a></div>
-					<div class="address">г. Одесса, ул. Успенская, 33.</div>
-				</div>
-				<div class="buttons_header">
-					<div class="application">Оставить заявку</div>
-					<div class="add_advert">Добавить объявление</div>
-				</div>
-			</div>
-			<div class="social_links">
-				<div class="item fb"><a href="https://www.facebook.com/" target="_blank"></a></div>
-				<div class="item vk"><a href="https://vk.com/" target="_blank"></a></div>
-				<div class="item tw"><a href="https://twitter.com/" target="_blank"></a></div>
-				<div class="item gp"><a href="https://www.instagram.com/" target="_blank"></a></div>
-			</div>
-		</div>
-	</div>
-	<div class="footer_bottom">	
-		<div class="region_footer">
-			<div class="menu_footer">
-				<ul>
-					<li class="group_item">
-						<ul>
-							<li class="leaf"><a href="/">Продажа офисов</a></li>
-							<li class="leaf"><a href="/">Продажа коммерческой недвижимости</a></li>
-							<li class="leaf"><a href="/">Продажа гаражей</a></li>
-						</ul>						
-					</li>
-					<li class="group_item">
-						<ul>
-							<li class="leaf"><a href="/">Аренда недвижимости</a></li>
-							<li class="leaf"><a href="/">Аренда квартир</a></li>
-							<li class="leaf"><a href="/">Аренда домов</a></li>
-						</ul>						
-					</li>
-					<li class="group_item">
-						<ul>
-							<li class="leaf"><a href="/">Аренда земельных участков</a></li>
-							<li class="leaf"><a href="/">Аренда офисов</a></li>
-							<li class="leaf"><a href="/">Аренда коммерческой недвижимости</a></li>
-						</ul>						
-					</li>
-					<li class="group_item">
-						<ul>
-							<li class="leaf"><a href="/">Аренда недвижимости посуточно</a></li>
-							<li class="leaf"><a href="/">Аренда квартир посуточно</a></li>
-							<li class="leaf"><a href="/">Аренда комнат посуточно</a></li>
-						</ul>						
-					</li>
-				</ul>				
-			</div>
-		</div>
-	</div>
-	<div class="popup_exit"></div>
-	<div class="to_up"></div>
-</footer><!-- .footer -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-<script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
-<script type="text/javascript" src="js/datepicker-ru.js"></script>
-<script type="text/javascript" src="js/social-likes.min.js"></script>
-<script type="text/javascript" src="js/jquery.slicknav.min.js"></script>
-<script type="text/javascript" src="js/jquery.livequery.js"></script>
-<script type="text/javascript" src="js/giz.js"></script>
-</body>
-</html>
+{% block js %}
+{% endblock js %}

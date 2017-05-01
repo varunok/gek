@@ -1,0 +1,47 @@
+{% load admin_tags %}
+<div  id="{{ iden }}">
+<fieldset class="formlist">
+    {{ formset.management_form }}
+    {% for fields in formset %}
+        <div class="views_row">
+            {{ fields.id }}
+            <div class="left_wrap">
+                <div class="read_more"><a href="#">Сделаю</a></div>
+            </div>
+            <div class="right_wrap">
+                <div class="title">{{ fields.title.value }}</div>
+                <div hidden>
+                    {{ fields.title }}
+                </div>
+                <div class="text">{{ fields.description.value }}</div>
+                <div hidden>
+                    {{ fields.description }}
+                </div>
+                <div class="webform_client_form">
+                    <div class="form_textarea">
+                        <label for="comment">Свой комментарий:</label>
+                        {{ fields.comment }}
+                    </div>
+                    <div class="group">
+                        <div class="form_item form_select status">
+                            <label for="status">Приоритет задания:</label>
+                            <div class="status_wrap red">
+                                <span></span>
+                                {{ fields.priority }}
+                            </div>
+                        </div>
+                        <div class="form_item date">
+                            <label for="datepicker">Когда приступите?</label>
+                            {{ fields.when_do|addcss:'datepicker' }}
+                        </div>
+                        <div class="form_item date">
+                            <label for="datepicker2">Планируете выполнить:</label>
+                            {{ fields.plan_do|addcss:'datepicker' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</fieldset>
+</div>
