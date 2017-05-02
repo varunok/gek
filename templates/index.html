@@ -307,19 +307,19 @@
 						<div class="see_present">Посмотреть<br> видеопрезентацию</div>
 					</div>
 					<div class="views_row">
-						<div class="field_image"><img src="images/why_1.png" alt=""></div>
+						<div class="field_image"><img src="{% static 'images/why_1.png' %}" alt=""></div>
 						<div class="title">Оказание помощи<br> при заключении договора</div>
 					</div>
 					<div class="views_row">
-						<div class="field_image"><img src="images/why_2.png" alt=""></div>
+						<div class="field_image"><img src="{% static 'images/why_2.png' %}" alt=""></div>
 						<div class="title">Подборка помещений<br> на почту за 2 часа</div>
 					</div>
 					<div class="views_row">
-						<div class="field_image"><img src="images/why_3.png" alt=""></div>
+						<div class="field_image"><img src="{% static 'images/why_3.png' %}" alt=""></div>
 						<div class="title">Договорённость<br> на осмотр помещения</div>
 					</div>
 					<div class="views_row">
-						<div class="field_image"><img src="images/why_4.png" alt=""></div>
+						<div class="field_image"><img src="{% static 'images/why_4.png' %}" alt=""></div>
 						<div class="title">Бесплатное размещение<br> объявлений на сайте</div>
 					</div>
 					<form action="#" class="webform_client_form">
@@ -371,7 +371,7 @@
 						<div class="views_row">
 							<div class="field_image">
 								<a href="/">
-									<img src="images/ar_1.png" alt="">
+									<img src="{% static 'images/ar_1.png' %}" alt="">
 								</a>
 							</div>
 							<div class="views_body">
@@ -383,7 +383,7 @@
 						<div class="views_row">
 							<div class="field_image">
 								<a href="/">
-									<img src="images/ar_2.png" alt="">
+									<img src="{% static 'images/ar_2.png' %}" alt="">
 								</a>
 							</div>
 							<div class="views_body">
@@ -395,7 +395,7 @@
 						<div class="views_row">
 							<div class="field_image">
 								<a href="/">
-									<img src="images/ar_3.png" alt="">
+									<img src="{% static 'images/ar_3.png' %}" alt="">
 								</a>
 							</div>
 							<div class="views_body">
@@ -407,7 +407,7 @@
 						<div class="views_row">
 							<div class="field_image">
 								<a href="/">
-									<img src="images/ar_4.png" alt="">
+									<img src="{% static 'images/ar_4.png' %}" alt="">
 								</a>
 							</div>
 							<div class="views_body">
@@ -417,7 +417,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="read_more"><a href="/">Читать все статьи</a></div>
+					<div class="read_more"><a href="{% url 'articles:articles' %}">Читать все статьи</a></div>
 				</div>
 			</div>
 		</div>

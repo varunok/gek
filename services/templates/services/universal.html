@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load video_tag %}
 {% load thumbnail %}
+{% load banners_tag %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="not-front universal" {% endblock %}
@@ -142,9 +143,7 @@
                 </div>
             </div>
         </div>
-    <div class="block region_banner">
-        <div class="field_banner"><img src="{% static "images/banner_2.png" %}" alt=""></div>
-    </div>
+        {% downbanner %}
     </main><!-- .content -->
 {% endblock content %}
 

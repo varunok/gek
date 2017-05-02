@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 # Create your models here.
@@ -16,6 +17,7 @@ class Question(models.Model):
     class Meta:
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Вопросы'
+        ordering = ['id']
 
     def __unicode__(self):
         return self.question_text
@@ -41,7 +43,7 @@ class Result(models.Model):
         verbose_name='Заголовок',
         max_length=250
     )
-    description = models.TextField(
+    description = RichTextUploadingField(
         verbose_name='Комментарий'
     )
     title_image = models.ImageField(
@@ -92,6 +94,10 @@ class Polls(models.Model):
         verbose_name='Результаты',
         related_name='polls'
     )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
 
 
     class Meta:
@@ -106,6 +112,9 @@ class Polls(models.Model):
 
     def get_delete_url(self):
         return reverse('admin2:poll_delete', args=[self.id])
+
+    def get_absolute_url(self):
+        return reverse('polls:test_start', args=[self.id])
 
 
 

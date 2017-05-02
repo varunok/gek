@@ -5,7 +5,7 @@ from django.conf.urls import url
 from admin2.views import polls_views
 
 urlpatterns = [
-    # SERVICES
+    # POLLS
     url(r'^polls/$',polls_views.PollsList.as_view(),name='polls'),
     url(r'^polls/edit/(?P<pk>[\w-]+)/$', polls_views.PollEdit.as_view(),name='poll_edit'),
     url(r'^polls/delete/(?P<pk>[\w-]+)/$', polls_views.DeletePoll.as_view(),name='poll_delete'),

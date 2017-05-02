@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 
 from admin2.models import ContactPageModel
 from articles.models import Sections, Articles
+from banners.models import DownBanner, SideBanner
 from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown, Preparation, Process, Finish
 from polls.models import Question, Choice, Polls
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
@@ -272,4 +273,48 @@ class PollsForm(forms.ModelForm):
         model = Polls
         exclude = 'test_end', 'questions', 'results',
         fields = '__all__'
+
+
+class DownBannersImageForm(forms.ModelForm):
+    class Meta:
+        model = DownBanner
+        exclude = 'code', 'active_code'
+        fields = '__all__'
+
+    def save(self, commit=True):
+        self.instance.active_code = False
+        return super(DownBannersImageForm, self).save(commit=True)
+
+
+class SideBannersImageForm(forms.ModelForm):
+    class Meta:
+        model = SideBanner
+        exclude = 'code', 'active_code'
+        fields = '__all__'
+
+    def save(self, commit=True):
+        self.instance.active_code = False
+        return super(SideBannersImageForm, self).save(commit=True)
+
+
+class DownBannersCodeForm(forms.ModelForm):
+    class Meta:
+        model = DownBanner
+        exclude = 'image', 'link'
+        fields = '__all__'
+
+    def save(self, commit=True):
+        self.instance.active_code = True
+        return super(DownBannersCodeForm, self).save(commit=True)
+
+
+class SideBannersCodeForm(forms.ModelForm):
+    class Meta:
+        model = SideBanner
+        exclude = 'image', 'link'
+        fields = '__all__'
+
+    def save(self, commit=True):
+        self.instance.active_code = True
+        return super(SideBannersCodeForm, self).save(commit=True)
 

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from dal_select2.views import Select2QuerySetView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import ugettext as _
 from django.db.models import F
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
@@ -190,3 +191,7 @@ class FormSetMixin(UpdateView):
     def form_invalid(self, formset):
         return self.render_to_response(
             self.get_context_data(formset=formset))
+
+
+class MessageMixin(SuccessMessageMixin):
+    success_message = "Сохранено"

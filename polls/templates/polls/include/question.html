@@ -1,0 +1,13 @@
+<div class="title">{{ question }}</div>
+<form action="#" class="webform_client_form">
+	<div class="form_radios">
+        {% for choice in question.choice_set.all %}
+            <div class="form_radio">
+                <input type="radio" id="val_{{ choice.id }}" name="test" value="{{ choice.ball }}">
+                <label for="val_{{ choice.id }}" class="check-var">{{ choice }}</label>
+            </div>
+            <br>
+        {% endfor %}
+        <input type="hidden" id="object_id" value="{{ next_question }}">
+	</div>
+</form>

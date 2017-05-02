@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
     'favorites',
     'plan',
     'polls',
+    'banners',
 ]
 
 MIDDLEWARE = [
@@ -232,6 +234,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
+
 FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
 
 THUMBNAIL_ALIASES = {
@@ -252,6 +262,7 @@ THUMBNAIL_ALIASES = {
         'trust_image_344': {'size': (344, 245), 'crop': True},
         'trust_image_372': {'size': (372, 212), 'crop': True},
         'user_avatar_270_330': {'size': (270, 330), 'crop': True},
+        'test_427': {'size': (427, 245), 'crop': True},
     },
 }
 
