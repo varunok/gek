@@ -4,11 +4,11 @@ from __future__ import unicode_literals
 
 import django_filters
 from django import forms
-from django.forms import CheckboxSelectMultiple, NumberInput, SelectDateWidget
+from django.forms import CheckboxSelectMultiple, NumberInput, SelectDateWidget, Select
 from django.utils.timezone import now
 from django_filters import STRICTNESS
 
-from rieltor_object.models import Building, Ofice, NewBuilding, TypeEntrance, TypeLocation, TypeDeal, TypeFloor
+from rieltor_object.models import Building, Ofice, NewBuilding, TypeEntrance, TypeLocation, TypeDeal, TypeFloor, Daily
 
 
 class NumberInFilter(django_filters.BaseInFilter, django_filters.NumberFilter):
@@ -17,51 +17,69 @@ class NumberInFilter(django_filters.BaseInFilter, django_filters.NumberFilter):
 
 
 class FilterObjectMixin(django_filters.FilterSet):
-    floor = django_filters.AllValuesMultipleFilter(
-        widget=CheckboxSelectMultiple(choices=TypeFloor.CHOICES),
+    floor = django_filters.MultipleChoiceFilter(
+        # widget=CheckboxSelectMultiple(choices=TypeFloor.CHOICES),
+        choices=TypeFloor.CHOICES,
         required=False,
         lookup_expr='in',
     )
-    type_deal = django_filters.AllValuesMultipleFilter(
-        widget=CheckboxSelectMultiple(choices=TypeDeal.CHOICES),
+    type_deal = django_filters.MultipleChoiceFilter(
+        choices=TypeDeal.CHOICES,
         required=False,
         lookup_expr='in',
     )
-    location = django_filters.AllValuesMultipleFilter(
-        widget=CheckboxSelectMultiple(choices=TypeLocation.CHOICES),
+    location = django_filters.MultipleChoiceFilter(
+        # widget=CheckboxSelectMultiple(choices=TypeLocation.CHOICES),
+        choices=TypeLocation.CHOICES,
         required=False,
         lookup_expr='in',
     )
-    entrance = django_filters.AllValuesMultipleFilter(
-        widget=CheckboxSelectMultiple(choices=TypeEntrance.CHOICES),
+    entrance = django_filters.MultipleChoiceFilter(
+        # widget=CheckboxSelectMultiple(choices=TypeEntrance.CHOICES),
+        choices=TypeEntrance.CHOICES,
         required=False,
         lookup_expr='in',
     )
-    price__lt = django_filters.NumberFilter(
-        widget=NumberInput(
-            attrs={'placeholder': 'До'}
-        ),
-        name='price__lt',
-        lookup_expr='lt',
-    )
-    price__gt = django_filters.NumberFilter(
-        widget=NumberInput(
-            attrs={'placeholder': 'От'}
-        ),
-        name='price__gt',
-        lookup_expr='gt',
-    )
+    # price__lt = django_filters.NumberFilter(
+    #     widget=NumberInput(
+    #         attrs={'placeholder': 'До'}
+    #     ),
+    #     name='price__lt',
+    #     lookup_expr='lt',
+    # )
+    # price__gt = django_filters.NumberFilter(
+    #     widget=NumberInput(
+    #         attrs={'placeholder': 'От'}
+    #     ),
+    #     name='price__gt',
+    #     lookup_expr='gt',
+    # )
+    # footage__lt = django_filters.NumberFilter(
+    #     widget=NumberInput(
+    #         attrs={'placeholder': 'До'}
+    #     ),
+    #     name='footage__lt',
+    #     lookup_expr='lt',
+    # )
+    # footage__gt = django_filters.NumberFilter(
+    #     widget=NumberInput(
+    #         attrs={'placeholder': 'От'}
+    #     ),
+    #     name='footage__gt',
+    #     lookup_expr='gt',
+    # )
 
 
 class FilterBuilding(FilterObjectMixin):
     class Meta:
         model = Building
         fields = {
-            'footage': ['lt', 'gt'],
             'appointment': ['exact'],
+            'footage': ['gt', 'lt'],
+            'price': ['gt', 'lt'],
         }
-        strict = STRICTNESS.RAISE_VALIDATION_ERROR
-        # strict = STRICTNESS.RETURN_NO_RESULTS
+        # strict = STRICTNESS.RAISE_VALIDATION_ERROR
+        strict = STRICTNESS.RETURN_NO_RESULTS
         # strict = STRICTNESS.IGNORE
 
 
@@ -69,11 +87,12 @@ class FilterOfise(FilterObjectMixin):
     class Meta:
         model = Ofice
         fields = {
-            'footage': ['lt', 'gt'],
             'appointment': ['exact'],
+            'footage': ['gt', 'lt'],
+            'price': ['gt', 'lt'],
         }
-        strict = STRICTNESS.RAISE_VALIDATION_ERROR
-        # strict = STRICTNESS.RETURN_NO_RESULTS
+        # strict = STRICTNESS.RAISE_VALIDATION_ERROR
+        strict = STRICTNESS.RETURN_NO_RESULTS
         # strict = STRICTNESS.IGNORE
 
 
@@ -123,6 +142,21 @@ class FilterNewBuilding(django_filters.FilterSet):
         fields = {
             'district': ['in'],
             # 'start_construction': ['exact']
+            # 'appointment': ['exact'],
+        }
+
+
+class FilterDaily(django_filters.FilterSet):
+    rooms = django_filters.AllValuesFilter(
+        widget=Select(),
+        lookup_expr='exact',
+        exclude='null'
+    )
+    class Meta:
+        model = Daily
+        fields = {
+            'district': ['in'],
+            'price': ['gt', 'lt'],
             # 'appointment': ['exact'],
         }
 

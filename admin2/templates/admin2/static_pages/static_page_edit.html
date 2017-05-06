@@ -109,16 +109,16 @@
                                     <span class="value text-success"></span>
                                 </li>
                             </ul>
-                            <form class="form-horizontal form-label-left" method="post">
+                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
                                 {{ form.media }}
                                 {% csrf_token %}
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_h1.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                        {{ form.title_h1|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
-                                    {% if form.title.errors %}
-                                        <span class="error-label">{{ form.title.errors.as_text }}</span>
+                                    {% if form.title_h1.errors %}
+                                        <span class="error-label">{{ form.title_h1.errors.as_text }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">
@@ -157,7 +157,57 @@
                                         <span class="error-label">{{ form.SEODescription.errors.as_text }}</span>
                                     {% endif %}
                                 </div>
-
+                                <div class="item form-group">
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}</label>
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                    </div>
+                                    {% if form.title.errors %}
+                                        <span class="error-label">{{ form.title.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.content.label }}</label>
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        {{ form.content|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                    </div>
+                                    {% if form.content.errors %}
+                                        <span class="error-label">{{ form.content.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="item form-group">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image.label }}</label>
+                                        <div class="col-md-7 col-sm-7 col-xs-12">
+                                            <input id="imgInp" name="image" type="file">
+                                            <img id="blah" src="
+                                            {% if page.image %}
+                                                {{ page.image.url }}
+                                            {% endif %}
+                                            " alt="" width="100%" />
+                                            {% if page.image %}
+                                                <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                <input type="hidden" value="{{ content_type }}">
+                                                <input type="hidden" value="{{ page.id }}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image_seo.label }}</label>
+                                        <div class="col-md-7 col-sm-7 col-xs-12">
+                                            <input id="imgInp2" name="image_seo" type="file">
+                                            <img id="blah2" src="
+                                            {% if object.image_seo %}
+                                                {{ object.image_seo.url }}
+                                            {% endif %}
+                                            " alt="" width="100%" />
+                                            {% if page.image_seo %}
+                                                <input id="delete-image2" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                <input type="hidden" value="{{ content_type }}">
+                                                <input type="hidden" value="{{ page.id }}">
+                                                <input type="hidden" value="image_seo">
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group" style="float: right">
                                     <div class="col-md-12">
@@ -176,4 +226,32 @@
 
 {% block js %}
     <script src="{% static 'js/static_page.js' %}"></script>
+    <script src="{% static 'js/service_status.js' %}"></script>
+     <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+        $("#imgInp2").change(function(){
+            readURL2(this);
+        });
+
+    </script>
 {% endblock js %}

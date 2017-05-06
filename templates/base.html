@@ -55,19 +55,28 @@
                     <div class="block_content">
                         <ul class="menu">
                             <li class="leaf"><a href="{% url 'main' %}" {% if request.path == '/' %} class="active" {% endif %}>Главная</a></li>
-                            <li class="leaf expanded"><a href="/">Недвижимость</a>
+                            <li class="leaf expanded"><a href="#">Недвижимость</a>
                                 <ul class="menu_child">
-                                    <li>
-                                        <a href="{% url 'objects:buildings' %}">Квартиры и Дома</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'objects:ofices' %}">Офисы и магазины</a>
-                                    </li>
+                                    {% building_is_enable as building_is_enable %}
+                                    {% ofices_is_enable as ofices_is_enable %}
+                                    {% daily_is_enable as daily_is_enable %}
+                                    {% if building_is_enable %}
+                                        <li>
+                                            <a href="{% url 'objects:buildings' %}">Квартиры и Дома</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if ofices_is_enable %}
+                                        <li>
+                                            <a href="{% url 'objects:ofices' %}">Офисы и магазины</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if daily_is_enable %}
+                                        <li>
+                                            <a href="{% url 'objects:dailys' %}">Посуточно</a>
+                                        </li>
+                                    {% endif %}
                                     <li>
                                         <a href="{% url 'objects:newbuildings' %}">Новострои</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'objects:dailys' %}">Посуточно</a>
                                     </li>
                                     <li>
                                         <a href="{% url 'objects:earth' %}">Земля</a>
@@ -98,7 +107,7 @@
                                     {% endif %}
                                     {% cleaning_is_active as is_active_cleaning %}
                                     {% cleaning_slug as cleaning_slug %}
-                                    {% if is_active_insurance %}
+                                    {% if is_active_cleaning %}
                                         <li><a href="{% url 'services:cleaning' cleaning_slug %}">Уборка квартир</a></li>
                                     {% endif %}
                                     {% installation_water_is_active as is_active_installation_water %}

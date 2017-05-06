@@ -452,6 +452,7 @@ body.repair_premises .block_seo,
     margin-bottom: 40px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    min-height: 430px;
 }
 
 .tests body.repair_premises .block_seo,
@@ -1812,7 +1813,7 @@ body.superlending .slider_main .slider_title {
 }
 
 .webform_client_form .form_number input {
-    width: 102px;
+    width: 148px;
     border: 1px solid #bec7d1;
     height: 32px;
     color: #3b4047;

@@ -1,0 +1,22 @@
+{% load thumbnail %}
+<div class="block block_seo">
+    <div class="block_content">
+        <div class="block_title">{{ seo.title }}</div>
+            <div class="view_content">
+                <div class="body">
+                    <div class="image">
+                        {% if seo.image_seo %}
+                            <img src="{{ seo.image_seo|thumbnail_url:'seo_480' }}" alt="" class="left">
+                            {% else %}
+                            <img src="{{ seo.image|thumbnail_url:'seo_480' }}" alt="" class="left">
+                        {% endif %}
+
+                    </div>
+                    <div class="content_body">
+                        {{ seo.content|safe }}
+                    </div>
+                </div>
+            <div class="read_more"><a href="/">Читать всю статью</a></div>
+        </div>
+    </div>
+</div>

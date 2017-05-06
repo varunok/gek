@@ -18,7 +18,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.staticfiles import views
-from rieltor_object.urls import urlpatterns_search
 
 from common.views import MainView
 
@@ -40,9 +39,6 @@ urlpatterns = [
     url(r'favorites/', include('favorites.urls', namespace='favorites')),
     url(r'plan/', include('plan.urls', namespace='plan')),
     url(r'tests/', include('polls.urls', namespace='polls')),
-
-    #search
-    url(r'', include(urlpatterns_search))
 
 ]
 urlpatterns += [

@@ -13,6 +13,12 @@ from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 
 
+class OficeManager(models.Manager):
+    def vips(self, *args, **kwargs):
+        kwargs['status'] = TypeStatus.VIP
+        return self.filter(*args, **kwargs)
+
+
 class Ofice(models.Model):
     title = models.CharField(
         verbose_name='Заголовок',
@@ -141,6 +147,8 @@ class Ofice(models.Model):
     )
     videos = GenericRelation(Video, related_query_name='ofice')
     images = GenericRelation(Photo, related_query_name='ofice')
+
+    objects = OficeManager()
 
     class Meta:
         verbose_name = 'Офисы и магазины'

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import uuid
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -31,6 +32,12 @@ class Settings(SingletonModel):
     )
     dollar_rate = models.FloatField(
         verbose_name='Курс доллара',
+        blank=True,
+        null=True
+    )
+    name_site = models.CharField(
+        verbose_name='Название сайта',
+        max_length=50,
         blank=True,
         null=True
     )
@@ -91,6 +98,25 @@ class IndexPageModel(SingletonModel):
         blank=True,
         null=True
     )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
 
     class Meta:
         verbose_name = 'Главная'
@@ -145,6 +171,25 @@ class NewBuildingPageModel(SingletonModel):
     is_enable = models.BooleanField(
         verbose_name='Включена ли страница?',
         default=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
 
     class Meta:
@@ -201,6 +246,25 @@ class DailyPageModel(SingletonModel):
         verbose_name='Включена ли страница?',
         default=True
     )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
 
     class Meta:
         verbose_name = 'Посуточна'
@@ -228,7 +292,7 @@ class BuildingPageModel(SingletonModel):
         editable=False
     )
     title = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name='SEO Заголовок',
         blank=True,
         null=True
     )
@@ -255,6 +319,25 @@ class BuildingPageModel(SingletonModel):
     is_enable = models.BooleanField(
         verbose_name='Включена ли страница?',
         default=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
 
     class Meta:
@@ -310,6 +393,25 @@ class OfisPageModel(SingletonModel):
     is_enable = models.BooleanField(
         verbose_name='Включена ли страница?',
         default=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
 
     class Meta:

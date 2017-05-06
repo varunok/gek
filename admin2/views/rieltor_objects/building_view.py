@@ -7,11 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, BuildingEditForm
+from admin2.mixins import BuildingStatusMixin
 from common.mixins import DeleteAjaxMixin
 from rieltor_object.models import Building
 
 
-class BuildingListView(ListView):
+class BuildingListView(BuildingStatusMixin, ListView):
     model = Building
     template_name = 'admin2/rieltor_object/building/building_list.html'
     paginate_by = 10
@@ -22,7 +23,7 @@ class BuildingListView(ListView):
         context['create_url'] = reverse_lazy('admin2:building_create')
         return context
 
-class BuildingEditView(UpdateView):
+class BuildingEditView(BuildingStatusMixin, UpdateView):
     model = Building
     template_name = 'admin2/rieltor_object/building/building_edit.html'
     success_url = reverse_lazy('admin2:buildings')
@@ -38,7 +39,7 @@ class BuildingEditView(UpdateView):
         return context
 
 
-class BuildingCreateView(CreateView):
+class BuildingCreateView(BuildingStatusMixin, CreateView):
     model = Building
     form_class = BuildingEditForm
     template_name = 'admin2/rieltor_object/building/building_edit.html'
@@ -54,6 +55,6 @@ class BuildingCreateView(CreateView):
         return self.object.get_edit_url()
 
 
-class BuildingDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class BuildingDeleteView(BuildingStatusMixin, LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
     model = Building
     pk_url_kwarg = 'pk'

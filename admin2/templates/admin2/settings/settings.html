@@ -38,7 +38,7 @@
                                         <a href="#home" data-toggle="tab">Валюта</a>
                                     </li>
                                     <li>
-                                        <a href="#profile" data-toggle="tab">Profile</a>
+                                        <a href="#profile" data-toggle="tab">Сайт</a>
                                     </li>
                                     <li>
                                         <a href="#messages" data-toggle="tab">Messages</a>
@@ -56,13 +56,27 @@
                                         <p>
                                             <form class="form-horizontal form-label-left" method="post">
                                                 {{ form.media }}
+                                                {{ form.errors }}
                                                 {% csrf_token %}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.name_site.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.name_site|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.name_site.errors %}
+                                                        <span class="error-label">{{ form.name_site.errors }}</span>
+                                                    {% endif %}
+                                                </div>
                                                 <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.currency.label }} <span class="required"></span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
                                                         {{ form.currency|addcss:'form-control col-md-7 col-xs-12' }}
                                                     </div>
+                                                    {% if form.currency.errors %}
+                                                        <span class="error-label">{{ form.currency.errors }}</span>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.dollar_rate.label }} <span class="required"></span>
@@ -70,6 +84,9 @@
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
                                                         {{ form.dollar_rate|addcss:'form-control col-md-7 col-xs-12' }}
                                                     </div>
+                                                    {% if form.dollar_rate.errors %}
+                                                        <span class="error-label">{{ form.dollar_rate.errors }}</span>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">
@@ -79,7 +96,9 @@
                                             </form>
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="profile">Profile Tab.</div>
+                                    <div class="tab-pane" id="profile">
+
+                                    </div>
                                     <div class="tab-pane" id="messages">Messages Tab.</div>
                                     <div class="tab-pane" id="settings">Settings Tab.</div>
                                 </div>

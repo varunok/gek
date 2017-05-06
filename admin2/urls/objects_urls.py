@@ -19,10 +19,10 @@ urlpatterns = [
     url('^objects/buildings/delete/(?P<pk>[\w-]+)/$', BuildingDeleteView.as_view(),name='building_delete'),
 
     # ofice
-    url('^objects/ofices/$', OficeListView.as_view(), name='ofices'),
-    url('^objects/ofices/edit/(?P<pk>[\w-]+)/$', OficeEditView.as_view(), name='ofice_edit'),
-    url('^objects/ofices/create/$', OficeCreateView.as_view(), name='ofice_create'),
-    url('^objects/ofices/delete/(?P<pk>[\w-]+)/$', OficeDeleteView.as_view(),name='ofice_delete'),
+    url('^objects/offices/$', OficeListView.as_view(), name='ofices'),
+    url('^objects/offices/edit/(?P<pk>[\w-]+)/$', OficeEditView.as_view(), name='ofice_edit'),
+    url('^objects/offices/create/$', OficeCreateView.as_view(), name='ofice_create'),
+    url('^objects/offices/delete/(?P<pk>[\w-]+)/$', OficeDeleteView.as_view(),name='ofice_delete'),
 
     # newbuilding
     url('^objects/newbuilding/$', NewBuildingListView.as_view(), name='newbuildings'),

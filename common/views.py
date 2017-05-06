@@ -10,10 +10,12 @@ from django.views import View
 from django.views.generic import TemplateView, DeleteView, UpdateView, CreateView
 
 from admin2.forms import VideoRieltorServiceSet, AdvantageSet
+from admin2.models import IndexPageModel
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
-from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding
+from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding, Building,\
+    Ofice
 
 
 class MainView(TemplateView):
@@ -21,7 +23,10 @@ class MainView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
+        context['offices'] = Ofice.objects.vips().order_by('?')
+        context['buildings'] = Building.objects.vips().order_by('?')
         context['newbuildings'] = NewBuilding.objects.order_by('?')
+        context['indexpagemodel'] = IndexPageModel.get_solo()
         return context
 
 
@@ -104,7 +109,10 @@ def delete_image(request):
     else:
         model = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
     if title_image:
-        model.title_image.delete(save=True)
+        try:
+            model.title_image.delete(save=True)
+        except AttributeError:
+            model.image_seo.delete(save=True)
         return HttpResponse('Удалено')
     model.image.delete(save=True)
     return HttpResponse('Удалено')

@@ -14,6 +14,7 @@ from videos_urls import urlpatterns as urlpatterns_videos
 from plan_urls import urlpatterns as urlpatterns_plan
 from polls_urls import urlpatterns as urlpatterns_polls
 from banners_urls import urlpatterns as urlpatterns_banners
+from seo_urls import urlpatterns as urlpatterns_seo
 
 urlpatterns = []
 urlpatterns.extend(urlpatterns_articles)
@@ -29,3 +30,4 @@ urlpatterns.extend(urlpatterns_videos)
 urlpatterns.extend(urlpatterns_plan)
 urlpatterns.extend(urlpatterns_polls)
 urlpatterns.extend(urlpatterns_banners)
+urlpatterns.extend(urlpatterns_seo)

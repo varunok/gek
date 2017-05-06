@@ -7,11 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, OficeEditForm
+from admin2.mixins import OfficesStatusMixin
 from common.mixins import DeleteAjaxMixin
 from rieltor_object.models import Ofice
 
 
-class OficeListView(ListView):
+class OficeListView(OfficesStatusMixin, ListView):
     model = Ofice
     template_name = 'admin2/rieltor_object/building/building_list.html'
     paginate_by = 10
@@ -23,7 +24,7 @@ class OficeListView(ListView):
         return context
 
 
-class OficeEditView(UpdateView):
+class OficeEditView(OfficesStatusMixin, UpdateView):
     model = Ofice
     template_name = 'admin2/rieltor_object/ofice/ofice_edit.html'
     success_url = reverse_lazy('admin2:ofices')
@@ -39,7 +40,7 @@ class OficeEditView(UpdateView):
         return context
 
 
-class OficeCreateView(CreateView):
+class OficeCreateView(OfficesStatusMixin, CreateView):
     model = Ofice
     form_class = OficeEditForm
     template_name = 'admin2/rieltor_object/ofice/ofice_edit.html'

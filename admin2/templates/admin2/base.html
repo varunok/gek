@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load base_tag %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,8 +69,14 @@
                                     <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>
                                     <li><a><i class="fa fa-server"></i> Объекты <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{% url 'admin2:buildings' %} "><i class="fa fa-home"></i>Квартиры и дома</a></li>
-                                            <li><a href="{% url 'admin2:ofices' %}"><i class="fa fa-money"></i>Офисы и магазины</a></li>
+                                            {% building_is_enable as building_is_enable %}
+                                            {% ofices_is_enable as ofices_is_enable %}
+                                            {% if building_is_enable %}
+                                                <li><a href="{% url 'admin2:buildings' %} "><i class="fa fa-home"></i>Квартиры и дома</a></li>
+                                            {% endif %}
+                                            {% if ofices_is_enable %}
+                                                <li><a href="{% url 'admin2:ofices' %}"><i class="fa fa-money"></i>Офисы и магазины</a></li>
+                                            {% endif %}
                                             <li><a href="{% url 'admin2:newbuildings' %}"><i class="fa fa-building"></i>Новострои</a></li>
                                             <li><a href="{% url 'admin2:earth' %}"><i class="fa fa-globe"></i>Земля</a></li>
                                             <li><a href="{% url 'admin2:dailys' %}"><i class="fa fa-calendar"></i>Посуточно</a></li>
@@ -83,11 +90,11 @@
                                     <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> Баннеры </a></li>
                                     <li><a href="#"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
                                     <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>
-                                    <li><a href="#"><i class="fa fa-ravelry"></i> SEO </a></li>
+                                    <li><a href="{% url 'admin2:seo' %}"><i class="fa fa-ravelry"></i> SEO </a></li>
                                     <li><a href="{% url 'users:admins' %}"><i class="fa fa-lock"></i> Администраторы </a></li>
                                     <li><a><i class="fa fa-cogs"></i> Настройки сайта <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="#"><i class="fa fa-cog"></i>Параметры</a></li>
+                                            <li><a href="{% url 'admin2:settings' %}"><i class="fa fa-cog"></i>Параметры</a></li>
                                             <li><a href="#"><i class="fa fa-map-marker"></i>Районы</a></li>
                                             <li><a href="#"><i class="fa fa-user"></i>Сотрудники</a></li>
                                             <li><a href="#"><i class="fa fa-trophy"></i>Награды</a></li>

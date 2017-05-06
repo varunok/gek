@@ -26,7 +26,7 @@ SECRET_KEY = 'x92o^!)r-e&&_yhwk2-b%@!v#nz%uhha@jvkvhj)q*egv9&!lm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gek.com']
 
 
 # Application definition
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'plan',
     'polls',
     'banners',
+    'seo',
 ]
 
 MIDDLEWARE = [
@@ -263,6 +264,7 @@ THUMBNAIL_ALIASES = {
         'trust_image_372': {'size': (372, 212), 'crop': True},
         'user_avatar_270_330': {'size': (270, 330), 'crop': True},
         'test_427': {'size': (427, 245), 'crop': True},
+        'seo_480': {'size': (480, 287), 'crop': True},
     },
 }
 

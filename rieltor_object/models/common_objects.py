@@ -5,8 +5,8 @@ from django.db import models
 
 
 class TypeDeal(object):
-    RENT = 'Аренда'
-    SALE = 'Продажа'
+    RENT = 'rent'
+    SALE = 'sale'
     CHOICES = (
         (RENT, 'Аренда'),
         (SALE, 'Продажа')
@@ -14,8 +14,8 @@ class TypeDeal(object):
 
 
 class TypeAppointment(object):
-    APARTMENT = 'Квартира'
-    HOUSE = 'Дом'
+    APARTMENT = 'apartment'
+    HOUSE = 'house'
     CHOICES = (
         (APARTMENT, 'Квартира'),
         (HOUSE, 'Дом')
@@ -23,9 +23,9 @@ class TypeAppointment(object):
 
 
 class TypeStatus(object):
-    VIP = 'VIP'
-    DEFAULT = 'Обычное'
-    SHORT = 'Краткое'
+    VIP = 'vip'
+    DEFAULT = 'default'
+    SHORT = 'short'
     CHOICES = (
         (VIP, 'VIP'),
         (DEFAULT, 'Обычное'),
@@ -34,9 +34,9 @@ class TypeStatus(object):
 
 
 class TypeLocation(object):
-    FACADE = 'Фасад'
-    COURTYARD = 'Дворовой'
-    BISNESS = 'Бизнес-центр'
+    FACADE = 'facade'
+    COURTYARD = 'from_yard'
+    BISNESS = 'business_center'
     CHOICES = (
         (FACADE, 'Фасад'),
         (COURTYARD, 'Дворовой'),
@@ -45,20 +45,20 @@ class TypeLocation(object):
 
 
 class TypeFloor(object):
-    FIRST = '1-й'
-    COKOL = 'Цоколь'
-    BELTAG = 'Бельэтаж'
+    FIRST = 'first'
+    BASE = 'base'
+    BELTAG = 'mezzanine'
     CHOICES = (
         (FIRST, '1-й'),
-        (COKOL, 'Цоколь'),
+        (BASE, 'Цоколь'),
         (BELTAG, 'Бельэтаж'),
     )
 
 
 class TypeEntrance(object):
-    FACADE = 'Фасад'
-    COURTYARD = 'Со двора'
-    PARAD = 'С парадной'
+    FACADE = 'facade'
+    COURTYARD = 'from_yard'
+    PARAD = 'with_grand'
     CHOICES = (
         (FACADE, 'Фасад'),
         (COURTYARD, 'Со двора'),
@@ -67,10 +67,10 @@ class TypeEntrance(object):
 
 
 class TypeArea(object):
-    FOR_BUILDING = 'Под застройку'
-    GARDENING = 'Садоводство'
-    COMMERCIAL = 'Комерческая'
-    HANDED = 'Дом сдан'
+    FOR_BUILDING = 'for_building'
+    GARDENING = 'gardening'
+    COMMERCIAL = 'commercial'
+    HANDED = 'handed'
     CHOICES = (
         (FOR_BUILDING, 'Под застройку'),
         (GARDENING, 'Садоводство'),
@@ -80,10 +80,10 @@ class TypeArea(object):
 
 
 class Communications(object):
-    WATER = 'Вода'
-    GAS = 'Газ'
-    SEWERAGE = 'Канализация'
-    ELECTRICITY = 'Электричество'
+    WATER = 'water'
+    GAS = 'gas'
+    SEWERAGE = 'sewage'
+    ELECTRICITY = 'electricity'
     CHOICES = (
         (WATER, 'Вода'),
         (GAS, 'Газ'),
@@ -93,10 +93,10 @@ class Communications(object):
 
 
 class StructureHouse(object):
-    HOUSE = 'Дом'
-    CUISINE = 'Летная кухня'
-    BARN = 'Сарай'
-    POOL = 'Бассейн'
+    HOUSE = 'house'
+    CUISINE = 'cuisine'
+    BARN = 'barn'
+    POOL = 'pool'
     CHOICES = (
         (HOUSE, 'Дом'),
         (CUISINE, 'Летная кухня'),

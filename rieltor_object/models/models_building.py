@@ -14,6 +14,12 @@ from rieltor_object.models.common_objects import *
 from rieltor_object.models.models_newbuilding import NewBuilding
 
 
+class BuildingManager(models.Manager):
+    def vips(self, *args, **kwargs):
+        kwargs['status'] = TypeStatus.VIP
+        return self.filter(*args, **kwargs)
+
+
 class Building(models.Model):
     title = models.CharField(
         verbose_name='Заголовок',
@@ -151,6 +157,8 @@ class Building(models.Model):
 
     videos = GenericRelation(Video, related_query_name='building')
     images = GenericRelation(Photo, related_query_name='building')
+
+    objects = BuildingManager()
 
     class Meta:
         verbose_name = 'Квартиры и Дома'

@@ -1,5 +1,5 @@
 {% load favorites_tag %}
-{% for object in objects %}
+{% for object in object_list %}
     <div class="views_row vip_row">
         {% if object.status == 'VIP' %}
             <div class="vip"></div>
@@ -28,7 +28,7 @@
                 {% endif %}
                 {% if object.price %}
                     <div class="price info">
-                        <div class="label">{{ object.type_deal }}:</div>
+                        <div class="label">{{ object.get_type_deal_display }}:</div>
                         {{ object.price }}
                     </div>
                 {% endif %}

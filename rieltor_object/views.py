@@ -1,61 +1,76 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
-from django.shortcuts import render
-
+from django.conf import settings
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views import View
-from django.views.decorators.http import require_http_methods
-from django.views.generic import DetailView, ListView, FormView, TemplateView
+from django.views.generic import DetailView, ListView
 
+from admin2.models import OfisPageModel, BuildingPageModel, DailyPageModel
 from common.mixins import ViewsCountMixin, DinamicNextMixin
-from rieltor_object.models import Building, TypeDeal, Ofice, NewBuilding, Daily, Earth
-from rieltor_object.filters import FilterBuilding, FilterOfise, FilterNewBuilding
+from rieltor_object.filters import FilterBuilding, FilterOfise, FilterNewBuilding, FilterDaily
+from rieltor_object.helpers import HelperFilter
+from rieltor_object.mixins import BuildingStatusMixin, OfficeStatusMixin, DailyStatusMixin
+from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
+from seo.models import SEO
 
 PAGINATE_OBJ = 10
 
-class BuildingListSiteView(DinamicNextMixin, ListView):
+
+class BuildingListSiteView(BuildingStatusMixin, ListView):
     model = Building
     template_name = 'rieltor_object/building_list.html'
     paginate_by = PAGINATE_OBJ
 
     def get_context_data(self, **kwargs):
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
-        context['filter_form'] = FilterBuilding(self.request.GET, queryset=self.model.objects.all())
-        context['url_action'] = reverse_lazy('buildings_search')
+        queryFilter = HelperFilter(self.request).qd
+        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
+        if SEO.objects.filter(url=path).exists():
+            context['seo'] = SEO.objects.filter(url=path).first()
+        else:
+            context['seo'] = BuildingPageModel.get_solo()
+        if queryFilter:
+            context['object_list'] = FilterBuilding(queryFilter, queryset=self.object_list).qs
+            context['filter_form'] = FilterBuilding(queryFilter, queryset=self.object_list)
+        else:
+            context['filter_form'] = FilterBuilding(self.request.GET, queryset=self.object_list)
+            context['count_obj'] = Building.objects.count()
+        context['BASE_URL'] = '/objects/buildings'
+        context['clear_filter'] = reverse_lazy('objects:buildings')
         return context
 
 
-class BuildingDetailSiteView(ViewsCountMixin, DetailView):
+class BuildingDetailSiteView(BuildingStatusMixin, ViewsCountMixin, DetailView):
     model = Building
     template_name = 'rieltor_object/building.html'
 
 
-class FilterBuildOficeView(DinamicNextMixin, ListView):
-    paginate_by = PAGINATE_OBJ
-    template_name = 'rieltor_object/include/building_item.html'
-    dinamic_template_name = 'rieltor_object/include/building_item.html'
-
-    def get_queryset(self):
-        filterset = self.kwargs.get('filterset')
-        return filterset(self.request.POST, queryset=self.model.objects.all()).qs
-
-
-class OficeListSiteView(DinamicNextMixin, ListView):
+class OficeListSiteView(OfficeStatusMixin, ListView):
     model = Ofice
     template_name = 'rieltor_object/ofice_list.html'
     paginate_by = PAGINATE_OBJ
-
+    
     def get_context_data(self, **kwargs):
         context = super(OficeListSiteView, self).get_context_data(**kwargs)
-        context['filter_form'] = FilterOfise(self.request.GET, queryset=self.model.objects.all())
-        context['url_action'] = reverse_lazy('ofices_search')
+        queryFilter = HelperFilter(self.request).qd
+        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
+        if SEO.objects.filter(url=path).exists():
+            context['seo'] = SEO.objects.filter(url=path).first()
+        else:
+            context['seo'] = OfisPageModel.get_solo()
+        if queryFilter:
+            context['object_list'] = FilterOfise(queryFilter, queryset=self.object_list).qs
+            context['filter_form'] = FilterOfise(queryFilter, queryset=self.object_list)
+        else:
+            context['filter_form'] = FilterOfise(self.request.GET, queryset=self.object_list)
+            context['count_obj'] = Ofice.objects.count()
+        context['BASE_URL'] = '/objects/offices'
+        context['clear_filter'] = reverse_lazy('objects:ofices')
         return context
 
 
-class OficeDetailSiteView(ViewsCountMixin, DetailView):
+class OficeDetailSiteView(OfficeStatusMixin, ViewsCountMixin, DetailView):
     model = Ofice
     template_name = 'rieltor_object/ofice.html'
 
@@ -76,18 +91,31 @@ class NewBuildingDetailSiteView(ViewsCountMixin, DetailView):
     template_name = 'rieltor_object/newbuilding.html'
 
 
-class DailyListSiteView(DinamicNextMixin, ListView):
+class DailyListSiteView(DailyStatusMixin, ListView):
     model = Daily
     template_name = 'rieltor_object/daily_list.html'
     paginate_by = PAGINATE_OBJ
 
     def get_context_data(self, **kwargs):
         context = super(DailyListSiteView, self).get_context_data(**kwargs)
-        # context['filter_form'] = FilterNewBuilding(self.request.GET, queryset=self.model.objects.all())
+        queryFilter = HelperFilter(self.request).qd
+        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
+        if SEO.objects.filter(url=path).exists():
+            context['seo'] = SEO.objects.filter(url=path).first()
+        else:
+            context['seo'] = DailyPageModel.get_solo()
+        if queryFilter:
+            context['object_list'] = FilterDaily(queryFilter, queryset=self.object_list).qs
+            context['filter_form'] = FilterDaily(queryFilter, queryset=self.object_list)
+        else:
+            context['filter_form'] = FilterDaily(self.request.GET, queryset=self.object_list)
+            context['count_obj'] = Ofice.objects.count()
+        context['BASE_URL'] = '/objects/dailys'
+        context['clear_filter'] = reverse_lazy('objects:dailys')
         return context
 
 
-class DailyDetailSiteView(ViewsCountMixin, DetailView):
+class DailyDetailSiteView(DailyStatusMixin, ViewsCountMixin, DetailView):
     model = Daily
     template_name = 'rieltor_object/daily.html'
 
