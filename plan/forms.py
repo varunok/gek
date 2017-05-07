@@ -19,7 +19,7 @@ class PlanList(object):
             ('5', RepairBuildPlan.get_solo()),
         )
     except:
-        pass
+        list = ((0,0),)
 
 
 class PlanTitleForm(forms.Form):
