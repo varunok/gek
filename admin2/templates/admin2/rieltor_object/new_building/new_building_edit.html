@@ -230,6 +230,16 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.price_object.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.price_object|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.price_object.errors %}
+                                                        <span class="error-label">{{ form.price_object.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.parade.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
@@ -390,4 +400,5 @@
             readURL(this);
         });
     </script>
+    {{ form.media }}
 {% endblock js %}

@@ -68,6 +68,11 @@ class NewBuilding(models.Model):
         blank=True,
         null=True
     )
+    price_object = models.IntegerField(
+        verbose_name='Цена за объект',
+        blank=True,
+        null=True
+    )
     date_delivery = models.DateField(
         verbose_name='Дата сдачи',
         blank=True,

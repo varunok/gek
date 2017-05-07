@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.redirects',
 
     # origin
     'ckeditor',
@@ -74,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'common.middleware.RedirectMiddlewareCustom',
 ]
 
 ROOT_URLCONF = 'gek.urls'
@@ -93,6 +96,8 @@ TEMPLATES = [
         },
     },
 ]
+
+SITE_ID = 1
 
 WSGI_APPLICATION = 'gek.wsgi.application'
 
@@ -265,6 +270,7 @@ THUMBNAIL_ALIASES = {
         'user_avatar_270_330': {'size': (270, 330), 'crop': True},
         'test_427': {'size': (427, 245), 'crop': True},
         'seo_480': {'size': (480, 287), 'crop': True},
+        'article_271': {'size': (271, 154), 'crop': True},
     },
 }
 

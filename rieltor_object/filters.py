@@ -3,15 +3,17 @@ from __future__ import unicode_literals
 
 
 import django_filters
+from ckeditor import widgets
 from django import forms
-from django.forms import CheckboxSelectMultiple, NumberInput, SelectDateWidget, Select
+from django.forms import CheckboxSelectMultiple, NumberInput, SelectDateWidget, Select, TextInput
 from django.utils.timezone import now
 from django_filters import STRICTNESS
 
-from rieltor_object.models import Building, Ofice, NewBuilding, TypeEntrance, TypeLocation, TypeDeal, TypeFloor, Daily
+from rieltor_object.models import Building, Ofice, NewBuilding, TypeEntrance, TypeLocation, TypeDeal, TypeFloor, Daily, \
+    DailyDistrict, District, Earth, EarthDistrict
 
 
-class NumberInFilter(django_filters.BaseInFilter, django_filters.NumberFilter):
+class NumberInFilter(django_filters.NumberFilter):
     field_class = forms.IntegerField
     # pass
 
@@ -54,20 +56,7 @@ class FilterObjectMixin(django_filters.FilterSet):
     #     name='price__gt',
     #     lookup_expr='gt',
     # )
-    # footage__lt = django_filters.NumberFilter(
-    #     widget=NumberInput(
-    #         attrs={'placeholder': 'До'}
-    #     ),
-    #     name='footage__lt',
-    #     lookup_expr='lt',
-    # )
-    # footage__gt = django_filters.NumberFilter(
-    #     widget=NumberInput(
-    #         attrs={'placeholder': 'От'}
-    #     ),
-    #     name='footage__gt',
-    #     lookup_expr='gt',
-    # )
+
 
 
 class FilterBuilding(FilterObjectMixin):
@@ -97,66 +86,61 @@ class FilterOfise(FilterObjectMixin):
 
 
 class FilterNewBuilding(django_filters.FilterSet):
-    price__lt = django_filters.NumberFilter(
-        widget=NumberInput(
-            attrs={'placeholder': 'До'}
-        ),
-        name='price__lt',
-        lookup_expr='lt',
+    district = django_filters.ModelChoiceFilter(
+        widget=Select(),
+        queryset=District.objects.all()
     )
-    price__gt = django_filters.NumberFilter(
-        widget=NumberInput(
-            attrs={'placeholder': 'От'}
-        ),
-        name='price__gt',
-        lookup_expr='gt',
-    )
-    total_area__lt = django_filters.NumberFilter(
-        widget=NumberInput(
-            attrs={'placeholder': 'До'}
-        ),
-        name='total_area__lt',
-        lookup_expr='lt',
-    )
-    total_area__gt = django_filters.NumberFilter(
-        widget=NumberInput(
-            attrs={'placeholder': 'От'}
-        ),
-        name='total_area__gt',
-        lookup_expr='gt',
-    )
-    start_construction = django_filters.DateFromToRangeFilter(
-        widget=SelectDateWidget(
-            years=range(1950, now().year+1),
-            attrs={'style': 'width:32.5%;'}
-        ),
-    )
-    end_construction = django_filters.DateFromToRangeFilter(
-        widget=SelectDateWidget(
-            years=range(1950, now().year+1),
-            attrs={'style': 'width:32.5%;'}
+    end_construction = django_filters.DateFilter(
+        widget=TextInput(
+            attrs={'class': 'datepicker_c',
+                   'style': 'width:310px;'}
         ),
     )
     class Meta:
         model = NewBuilding
         fields = {
-            'district': ['in'],
+            # 'district': ['in'],
+            'price': ['gt', 'lt'],
+            'price_object': ['gt', 'lt'],
+            'total_area': ['gt', 'lt'],
             # 'start_construction': ['exact']
             # 'appointment': ['exact'],
         }
+        strict = STRICTNESS.RETURN_NO_RESULTS
 
 
 class FilterDaily(django_filters.FilterSet):
     rooms = django_filters.AllValuesFilter(
         widget=Select(),
         lookup_expr='exact',
-        exclude='null'
+    )
+    sleeping_places = django_filters.AllValuesFilter(
+        widget=Select(),
+        lookup_expr='exact',
+    )
+    district = django_filters.ModelChoiceFilter(
+        widget=Select(),
+        queryset=DailyDistrict.objects.all()
     )
     class Meta:
         model = Daily
         fields = {
-            'district': ['in'],
             'price': ['gt', 'lt'],
-            # 'appointment': ['exact'],
         }
+        strict = STRICTNESS.RETURN_NO_RESULTS
+
+
+class FilterEarth(django_filters.FilterSet):
+    district = django_filters.ModelChoiceFilter(
+        widget=Select(),
+        queryset=EarthDistrict.objects.all()
+    )
+    class Meta:
+        model = Earth
+        fields = {
+            'area': ['gt', 'lt'],
+            'price': ['gt', 'lt'],
+            'type_area': ['exact'],
+        }
+        strict = STRICTNESS.RETURN_NO_RESULTS
 

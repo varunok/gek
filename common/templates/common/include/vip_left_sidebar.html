@@ -1,0 +1,27 @@
+{% load staticfiles %}
+{% load favorites_tag %}
+{% load vip_tag %}
+{% vips as vips %}
+<div class="block block_vip">
+    <div class="block_title">Vip</div>
+    <div class="view_content">
+        {% for object in vips %}
+        <div class="views_row">
+            <div class="field_image">
+                <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
+            </div>
+            <div class="views_body">
+                <div class="star {{ object|fav_is_active:request }}">
+                    <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
+                    <input type="hidden" name="object_id" value="{{ object.id }}">
+                </div>
+                <div class="address">{{ object.address }}</div>
+                <div class="price"><div class="label">{{ object.get_type_deal_display }}:</div><div class="item">${{ object.price }}</div></div>
+                <div class="area"><div class="label">{{ object.get_appointment_display }}:</div><div class="count">{{ object.footage }}</div> <div class="units">м<sup>2</sup></div></div>
+                <div class="statistics">{{ object.views }}</div>
+                <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

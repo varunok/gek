@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponseRedirect
 
-from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel
+from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel
 
 
 class BuildingStatusMixin(object):
@@ -25,3 +25,17 @@ class DailyStatusMixin(object):
         if not DailyPageModel.get_solo().is_enable:
             return HttpResponseRedirect('/')
         return super(DailyStatusMixin, self).get(request, *args, **kwargs)
+
+
+class NewBuildingStatusMixin(object):
+    def get(self, request, *args, **kwargs):
+        if not NewBuildingPageModel.get_solo().is_enable:
+            return HttpResponseRedirect('/')
+        return super(NewBuildingStatusMixin, self).get(request, *args, **kwargs)
+
+
+class EarthStatusMixin(object):
+    def get(self, request, *args, **kwargs):
+        if not EarthPageModel.get_solo().is_enable:
+            return HttpResponseRedirect('/')
+        return super(EarthStatusMixin, self).get(request, *args, **kwargs)

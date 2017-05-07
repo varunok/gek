@@ -71,15 +71,25 @@
                                         <ul class="nav child_menu">
                                             {% building_is_enable as building_is_enable %}
                                             {% ofices_is_enable as ofices_is_enable %}
+                                            {% daily_is_enable as daily_is_enable %}
+                                            {% newbuilding_is_enable as newbuilding_is_enable %}
+                                            {% earth_is_enable as earth_is_enable %}
                                             {% if building_is_enable %}
                                                 <li><a href="{% url 'admin2:buildings' %} "><i class="fa fa-home"></i>Квартиры и дома</a></li>
                                             {% endif %}
                                             {% if ofices_is_enable %}
                                                 <li><a href="{% url 'admin2:ofices' %}"><i class="fa fa-money"></i>Офисы и магазины</a></li>
                                             {% endif %}
-                                            <li><a href="{% url 'admin2:newbuildings' %}"><i class="fa fa-building"></i>Новострои</a></li>
-                                            <li><a href="{% url 'admin2:earth' %}"><i class="fa fa-globe"></i>Земля</a></li>
-                                            <li><a href="{% url 'admin2:dailys' %}"><i class="fa fa-calendar"></i>Посуточно</a></li>
+                                            {% if daily_is_enable %}
+                                                <li><a href="{% url 'admin2:dailys' %}"><i class="fa fa-calendar"></i>Посуточно</a></li>
+                                            {% endif %}
+                                            {% if newbuilding_is_enable %}
+                                                <li><a href="{% url 'admin2:newbuildings' %}"><i class="fa fa-building"></i>Новострои</a></li>
+                                            {% endif %}
+                                            {% if earth_is_enable %}
+                                                <li><a href="{% url 'admin2:earth' %}"><i class="fa fa-globe"></i>Земля</a></li>
+                                            {% endif %}
+
                                         </ul>
                                     </li>
                                     <li><a href="{% url 'admin2:trust' %}"><i class="fa fa-address-card-o"></i> Доверие </a></li>
@@ -89,8 +99,9 @@
                                     <li><a href="{% url 'admin2:polls' %}"><i class="fa fa-indent"></i> Тесты </a></li>
                                     <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> Баннеры </a></li>
                                     <li><a href="#"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
-                                    <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>
+{#                                    <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>#}
                                     <li><a href="{% url 'admin2:seo' %}"><i class="fa fa-ravelry"></i> SEO </a></li>
+                                    <li><a href="{% url 'admin2:redirects' %}"><i class="fa fa-reply-all"></i> Редирект </a></li>
                                     <li><a href="{% url 'users:admins' %}"><i class="fa fa-lock"></i> Администраторы </a></li>
                                     <li><a><i class="fa fa-cogs"></i> Настройки сайта <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">

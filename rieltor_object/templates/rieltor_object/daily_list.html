@@ -5,6 +5,7 @@
 {% load favorites_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load rieltor_tag %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="not-front ranking_daily" {% endblock %}
@@ -50,55 +51,66 @@
 				<div id="content">
 					<div class="block search_results search_products">
 						<div class="form_title">Найти квартиру</div>
-						<form action="#" class="webform_client_form">
+						<form action="." method="get" class="webform_client_form search-form">
 							<div class="form_item group form_wrapper">
 								<label>Стоимость, грн:</label>
 								<div class="form_number">
-									<input type="number" placeholder="От">
+									{{ filter_form.form.price__gt }}
 								</div>
 								<div class="form_number">
-									<input type="number" placeholder="До">
+									{{ filter_form.form.price__lt}}
 								</div>
 							</div>
 							<div class="form_item form_select form_wrapper area_select">
-								<label for="type_ads">Район:</label>
-								<select name="type_ads" id="type_ads">
-									<option value="1">Любой</option>
-									<option value="2">ИЖС</option>
-									<option value="3">СНТ</option>
+								<label for="{{ filter_form.form.district.id_for_label }}">Район:</label>
+								{{ filter_form.form.district }}
+							</div>
+							<div class="form_item form_select form_wrapper">
+								<label for="{{ filter_form.form.rooms.id_for_label }}">Кол-во комнат:</label>
+                                <select name="{{ filter_form.form.rooms.name }}" id="{{ filter_form.form.rooms.id_for_label }}">
+                                    {% for rooms in filter_form.form.rooms %}
+                                        {% if rooms.data.value %}
+                                            <option value="{{ rooms.data.value }}">{{ rooms.data.value }}</option>
+                                        {% endif %}
+                                    {% endfor %}
 								</select>
 							</div>
 							<div class="form_item form_select form_wrapper">
-								<label for="type_ads1">Кол-во комнат:</label>
-{#								{{ filter_form.form.rooms }}#}
-
-{#                                <select name="type_ads" id="type_ads2">#}
-                                    {% for rooms in filter_form.form.rooms %}
-                                                                                {{ rooms.data }}
-{#                                        {% if rooms %}#}
-{#                                            <option value="{{ rooms.data.value }}{% if rooms.data.selected %}selected{% endif %}">{{ rooms }}</option>#}
-{#                                        {% endif %}#}
+								<label for="{{ filter_form.form.sleeping_places.id_for_label }}">Спальных мест:</label>
+								<select name="{{ filter_form.form.sleeping_places.name }}" id="{{ filter_form.form.sleeping_places.id_for_label }}">
+                                    {% for sleeping_places in filter_form.form.sleeping_places %}
+                                        {% if sleeping_places.data.value %}
+                                            <option value="{{ sleeping_places.data.value }}">{{ sleeping_places.data.value }}</option>
+                                        {% endif %}
                                     {% endfor %}
-{#								</select>#}
-							</div>
-							<div class="form_item form_select form_wrapper">
-								<label for="type_ads2">Спальных мест:</label>
-								<select name="type_ads" id="type_ads2">
-									<option value="1">Выбрать</option>
-									<option value="2">1</option>
-									<option value="3">2</option>
 								</select>
 							</div>
 							<div class="form_actions">
 								<div class="links">
-									<div class="search_clear"><a href="#">очистить</a></div>
+									<div class="search_clear"><a href="{% url 'objects:dailys' %}">очистить</a></div>
 								</div>
-								<input type="submit" value="Поиск">
+								<input type="submit" value="Поиск" class="searh-click">
 							</div>
 						</form>
 						<div class="top_wrap">
 							<div class="left_wrap">
-								<div class="count_result">1-20 из 128 результатов</div>
+								<div class="count_result">
+                                    {% if not object_list.count %}
+                                        {{ object_list.count }}
+                                        {% else %}
+                                        {% if object_list.count < 10 %}
+                                            1-{{ object_list.count }} из {{ object_list.count }}
+                                            {% else %}
+                                            1-10 из
+                                            {% if count_obj %}
+                                                {{ count_obj }}
+                                                {% else %}
+                                                {{ object_list.count }}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                     результатов
+                                </div>
 							</div>
 							<div class="right_wrap">
 								<div class="sortable">
@@ -112,10 +124,48 @@
 						</div>
 						<div class="bottom_wrap">
 							<div class="filters">
-								<div class="item">Одесса<div class="close"></div></div>
-								<div class="item">Квартира<div class="close"></div></div>
-								<div class="item">4 спальных места<div class="close"></div></div>
-								<div class="item">2 комнаты<div class="close"></div></div>
+								{% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.price__gt.data %}
+                                            {% if not filter_form.form.price__lt.data %}
+                                                От {{ filter_form.form.price__gt.data }}
+                                                {% else %}
+                                                {{ filter_form.form.price__gt.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.price__lt.data %}
+                                            {% if not filter_form.form.price__gt.data %}
+                                                До {{ filter_form.form.price__lt.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.price__lt.data }}
+                                            {% endif %}
+                                        {% endif %} грн
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
+                                                {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                                                {% elif filter_form.form.price__gt.data %}
+                                                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
+                                                {% elif filter_form.form.price__lt.data %}
+                                                    {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+								{% for district in filter_form.form.district %}
+                                    {% if district.data.selected and '-' not in district.choice_label %}
+                                        <div class="item">{{ district.choice_label }}<div class="close" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for rooms in filter_form.form.rooms %}
+                                    {% if rooms.data.selected  %}
+                                        <div class="item">{{ rooms.data.value }}<div class="close" data-href="{% filterpath request.path rooms.data.name rooms.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for sleeping_places in filter_form.form.sleeping_places %}
+                                    {% if sleeping_places.data.selected  %}
+                                        <div class="item">{{ sleeping_places.data.value }}<div class="close" data-href="{% filterpath request.path sleeping_places.data.name sleeping_places.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
 							</div>
 							<div class="form_actions">
 								<input type="submit" value="Подобрать квартиру">
@@ -125,7 +175,7 @@
 					<div class="block block_shops block_search_results block_daily_products">
 						<div class="block_content">
 							<div class="view_content">
-                                {% include 'rieltor_object/include/daily_item.html' %}
+                                {% include 'rieltor_object/include/daily_item.html' with objects=object_list %}
 							</div>
 						</div>
 					</div>
@@ -133,109 +183,14 @@
 			</div>
 		</div>
 		{% include 'seo/seo.html' %}
-		<div class="block block_vip_shops">
-			<div class="block_title">VIP</div>
-			<div class="block_content">
-				<div class="view_content">
-					<div class="views_row vip_row">
-						<div class="vip"></div>
-						<div class="title">Складской комплекс “Vivaldi”</div>
-						<div class="field_image">
-							<img src="images/shop_1.png" alt="">
-						</div>
-						<div class="views_body">
-							<div class="star"></div>
-							<div class="address">Цветочная, 3</div>
-							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
-							<div class="top_wrap">
-								<div class="info">
-									<div class="label">ID:</div>
-									<div class="item">65458</div>
-								</div>
-								<div class="info">
-									<div class="label">Склад:</div>
-									<div class="item">40 м<sup>2</sup></div>
-								</div>
-								<div class="price info">
-									<div class="label">Аренда:</div>
-									$577
-								</div>
-							</div>
-							<div class="bottom_wrap">
-								<div class="statistics">74</div>
-								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="views_row vip_row">
-						<div class="vip"></div>
-						<div class="title">Складской комплекс “Vivaldi”</div>
-						<div class="field_image">
-							<img src="images/shop_2.png" alt="">
-						</div>
-						<div class="views_body">
-							<div class="star"></div>
-							<div class="address">Цветочная, 3</div>
-							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
-							<div class="top_wrap">
-								<div class="info">
-									<div class="label">ID:</div>
-									<div class="item">65458</div>
-								</div>
-								<div class="info">
-									<div class="label">Склад:</div>
-									<div class="item">40 м<sup>2</sup></div>
-								</div>
-								<div class="price info">
-									<div class="label">Аренда:</div>
-									$577
-								</div>
-							</div>
-							<div class="bottom_wrap">
-								<div class="statistics">58</div>
-								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="views_row vip_row">
-						<div class="vip"></div>
-						<div class="title">Складской комплекс “Vivaldi”</div>
-						<div class="field_image">
-							<img src="images/shop_3.png" alt="">
-						</div>
-						<div class="views_body">
-							<div class="star"></div>
-							<div class="address">Цветочная, 3</div>
-							<div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
-							<div class="top_wrap">
-								<div class="info">
-									<div class="label">ID:</div>
-									<div class="item">65458</div>
-								</div>
-								<div class="info">
-									<div class="label">Склад:</div>
-									<div class="item">40 м<sup>2</sup></div>
-								</div>
-								<div class="price info">
-									<div class="label">Аренда:</div>
-									$577
-								</div>
-							</div>
-							<div class="bottom_wrap">
-								<div class="statistics">61</div>
-								<div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{% include 'common/include/vip.html' %}
 		{% downbanner %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}
+    <script>
+        var BASE_URL = '{{ BASE_URL }}';
+    </script>
     <script src="{% static 'js/search_form.js' %}"></script>
 {% endblock js %}
+

@@ -8,7 +8,7 @@ from django.views.generic.base import ContextMixin
 
 from admin2.forms import FeedSet, FeedVideoSet
 from admin2.models import TrustPageModel
-from common.mixins import FormSetMixin
+from common.mixins import FormSetMixin, MessageMixin
 
 
 class TrustMixin(ContextMixin):
@@ -23,7 +23,7 @@ class TrustMixin(ContextMixin):
         return TrustPageModel.get_solo()
 
 
-class TrustDetail(TrustMixin, UpdateView):
+class TrustDetail(TrustMixin, MessageMixin,  UpdateView):
     template_name = 'admin2/trust/trust.html'
     context_object_name = 'trust'
     slug_field = 'slug'
@@ -39,7 +39,7 @@ class TrustFaq(TrustMixin, DetailView):
     template_name = 'admin2/trust/trust_faq.html'
 
 
-class TrustFeed(TrustMixin, FormSetMixin):
+class TrustFeed(TrustMixin, MessageMixin, FormSetMixin):
     model = TrustPageModel
     template_name = 'admin2/trust/trust_feed.html'
     fields = '__all__'
@@ -47,7 +47,7 @@ class TrustFeed(TrustMixin, FormSetMixin):
     formset = FeedSet
 
 
-class TrustFeedVideo(TrustMixin, FormSetMixin):
+class TrustFeedVideo(TrustMixin, MessageMixin, FormSetMixin):
     model = TrustPageModel
     template_name = 'admin2/trust/trust_feed_video.html'
     fields = '__all__'

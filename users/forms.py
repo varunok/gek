@@ -70,6 +70,7 @@ class UserCreationForm(forms.ModelForm):
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
         user.date_joined = datetime.now()
+        user.is_active = True
         if commit:
             user.save()
         return user

@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django import forms
 from dal import autocomplete
 from django.contrib.contenttypes.forms import generic_inlineformset_factory
+from django.contrib.redirects.models import Redirect
+from django.contrib.sites.models import Site
 from django.forms.widgets import TextInput, Textarea, FileInput, Select, SelectMultiple, TimeInput
 from ckeditor.widgets import CKEditorWidget
 from django.urls import reverse_lazy
@@ -189,6 +191,11 @@ class BuildingEditForm(forms.ModelForm):
         model = Building
         exclude = ['views']
         fields = '__all__'
+        widgets = {
+            'district': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:district-autocomplete'),
+            )
+        }
 
 
 class NewBuildingEditForm(forms.ModelForm):
@@ -197,6 +204,11 @@ class NewBuildingEditForm(forms.ModelForm):
         model = NewBuilding
         exclude = ['views']
         fields = '__all__'
+        widgets = {
+            'district': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:district-autocomplete'),
+            )
+        }
 
 
 class OficeEditForm(forms.ModelForm):
@@ -205,6 +217,11 @@ class OficeEditForm(forms.ModelForm):
         model = Ofice
         exclude = ['views']
         fields = '__all__'
+        widgets = {
+            'district': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:district-autocomplete'),
+            )
+        }
 
 
 class EarthEditForm(forms.ModelForm):
@@ -230,6 +247,9 @@ class DailyEditForm(forms.ModelForm):
         widgets = {
             'apartment_has': autocomplete.ModelSelect2Multiple(
                 url=reverse_lazy('admin2:apartment-has-autocomplete'),
+            ),
+            'district': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:daily-district-autocomplete'),
             )
         }
 
@@ -318,3 +338,9 @@ class SideBannersCodeForm(forms.ModelForm):
         self.instance.active_code = True
         return super(SideBannersCodeForm, self).save(commit=True)
 
+
+class RedirectForm(forms.ModelForm):
+    class Meta:
+        model = Redirect
+        exclude = 'site',
+        fields = '__all__'

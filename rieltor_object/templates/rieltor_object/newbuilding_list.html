@@ -4,14 +4,15 @@
 {% load admin_tags %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load rieltor_tag %}
 {% block css %}{% endblock css %}
 
 {% block class_body %}  class="not-front newbuilding sidebar_first" {% endblock %}
 
 {% block content %}
 	<main class="middle">
-		<div class="slider_main slider_notfront">
-			<div class="slider_title">Продажа квартир в новостроях по всей Одессе</div>
+		<div class="slider_main slider_notfront" {% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ seo.title_h1|default:'Продажа квартир в новостроях' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
 					<input type="text" placeholder="Искать в тексте объявления">
@@ -27,7 +28,23 @@
 					<div class="block search_results">
 						<div class="top_wrap">
 							<div class="left_wrap">
-								<div class="count_result">1-20 из 128 результатов</div>
+								<div class="count_result">
+                                    {% if not object_list.count %}
+                                        {{ object_list.count }}
+                                        {% else %}
+                                        {% if object_list.count < 10 %}
+                                            1-{{ object_list.count }} из {{ object_list.count }}
+                                            {% else %}
+                                            1-10 из
+                                            {% if count_obj %}
+                                                {{ count_obj }}
+                                                {% else %}
+                                                {{ object_list.count }}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                     результатов
+                                </div>
 							</div>
 							<div class="right_wrap">
 								<div class="sortable">								
@@ -41,10 +58,93 @@
 						</div>
 						<div class="bottom_wrap">
 							<div class="filters">
-								<div class="item">Куплю<div class="close"></div></div>
-								<div class="item">Офис<div class="close"></div></div>
-								<div class="item">5000-10000 грн<div class="close"></div></div>
-								<div class="item">40-50 м. кв.<div class="close"></div></div>
+                                {% for district in filter_form.form.district %}
+                                    {% if district.data.selected and '-' not in district.choice_label %}
+                                        <div class="item">{{ district.choice_label }}<div class="close" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+								{% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.price__gt.data %}
+                                            {% if not filter_form.form.price__lt.data %}
+                                                От {{ filter_form.form.price__gt.data }}
+                                                {% else %}
+                                                {{ filter_form.form.price__gt.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.price__lt.data %}
+                                            {% if not filter_form.form.price__gt.data %}
+                                                До {{ filter_form.form.price__lt.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.price__lt.data }}
+                                            {% endif %}
+                                        {% endif %} грн
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
+                                                {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                                                {% elif filter_form.form.price__gt.data %}
+                                                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
+                                                {% elif filter_form.form.price__lt.data %}
+                                                    {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+                                {% if filter_form.form.price_object__gt.data or filter_form.form.price_object__lt.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.price_object__gt.data %}
+                                            {% if not filter_form.form.price_object__lt.data %}
+                                                От {{ filter_form.form.price_object__gt.data }}
+                                                {% else %}
+                                                {{ filter_form.form.price_object__gt.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.price_object__lt.data %}
+                                            {% if not filter_form.form.price_object__gt.data %}
+                                                До {{ filter_form.form.price_object__lt.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.price_object__lt.data }}
+                                            {% endif %}
+                                        {% endif %} грн
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.price_object__gt.data and filter_form.form.price_object__lt.data %}
+                                                {% filterpath request.path filter_form.form.price_object__gt.name filter_form.form.price_object__gt.data filter_form.form.price_object__lt.name filter_form.form.price_object__lt.data %}
+                                                {% elif filter_form.form.price_object__gt.data %}
+                                                    {% filterpath request.path filter_form.form.price_object__gt.name filter_form.form.price_object__gt.data %}
+                                                {% elif filter_form.form.price_object__lt.data %}
+                                                    {% filterpath request.path filter_form.form.price_object__lt.name filter_form.form.price_object__lt.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+                                {% if filter_form.form.total_area__gt.data or filter_form.form.total_area__lt.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.total_area__gt.data %}
+                                            {% if not filter_form.form.total_area__lt.data %}
+                                                От {{ filter_form.form.total_area__gt.data }}
+                                                {% else %}
+                                                {{ filter_form.form.total_area__gt.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.total_area__lt.data %}
+                                            {% if not filter_form.form.total_area__gt.data %}
+                                                До {{ filter_form.form.total_area__lt.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.total_area__lt.data }}
+                                            {% endif %}
+                                        {% endif %} м.кв
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.total_area__gt.data and filter_form.form.total_area__lt.data %}
+                                                {% filterpath request.path filter_form.form.total_area__gt.name filter_form.form.total_area__gt.data filter_form.form.total_area__lt.name filter_form.form.total_area__lt.data %}
+                                                {% elif filter_form.form.total_area__gt.data %}
+                                                    {% filterpath request.path filter_form.form.total_area__gt.name filter_form.form.total_area__gt.data %}
+                                                {% elif filter_form.form.total_area__lt.data %}
+                                                    {% filterpath request.path filter_form.form.total_area__lt.name filter_form.form.total_area__lt.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+
 							</div>
 							<div class="form_actions">
 								<input type="submit" value="Подобрать объект">
@@ -54,7 +154,7 @@
 					<div class="block block_shops block_search_results block_newbuilding_row">
 						<div class="block_content">
 							<div class="view_content">
-                                {% for object in objects %}
+                                {% for object in object_list %}
                                     {% include 'rieltor_object/include/newbuilding_item.html' %}
                                 {% endfor %}
 								<div class="load_more_wrap">
@@ -69,148 +169,59 @@
 			<div class="left_sidebar">
 				<div class="block property_search">
 					<div class="form_title">Поиск новостроек</div>
-					<form action="#" class="webform_client_form">						
+					<form action="." method="get" class="webform_client_form search-form">
 						<div class="form_item form_select form_wrapper">
 							<label for="type_ads">Район:</label>
-                            {{ filter_form.form.district__in }}
+                            {{ filter_form.form.district }}
 						</div>
-                        <div class="form_item form_select form_wrapper">
-							<label for="type_ads">{{ filter_form.form.start_construction.label }}:</label>
-                            {{ filter_form.form.start_construction }}
-						</div>
-                        <div class="form_item form_select form_wrapper">
+                        <div class="form_item form_wrapper">
 							<label for="type_ads">{{ filter_form.form.end_construction.label }}:</label>
-                            {{ filter_form.form.end_construction }}
+                            <div class="form_number" style="100%">
+                                {{ filter_form.form.end_construction }}
+                            </div>
 						</div>
+                        <br>
 						<div class="form_item group form_wrapper">
 							<label>Стоимость:</label>
-							<div class="form_number">
-								{{ filter_form.form.price__gt }}
+							<div class="form_number" style="width:32%">
+                                {% if filter_form.form.price__gt.data %}
+                                        <input value="{{ filter_form.form.price__gt.data }}" class="price_gt" type="number" name="{{ filter_form.form.price__gt.name }}" id="{{ filter_form.form.price__gt.id_for_label }}" placeholder="От" style="width: 100%">
+                                    {% else %}
+                                        <input value="{{ filter_form.form.price_object__gt.data }}" class="price_gt" type="number" name="{{ filter_form.form.price_object__gt.name }}" id="{{ filter_form.form.price_object__gt.id_for_label }}" placeholder="От" style="width: 100%">
+                                {% endif %}
 							</div>
-							<div class="form_number">
-								{{ filter_form.form.price__lt}}
+							<div class="form_number" style="width:32%">
+                                {% if filter_form.form.price__lt.data %}
+                                        <input value="{{ filter_form.form.price__lt.data }}" class="price_lt" type="number" name="{{ filter_form.form.price__lt.name }}" id="{{ filter_form.form.price__lt.id_for_label }}" placeholder="До" style="width: 100%">
+                                    {% else %}
+                                        <input value="{{ filter_form.form.price_object__lt.data }}" class="price_lt" type="number" name="{{ filter_form.form.price_object__lt.name }}" id="{{ filter_form.form.price_object__lt.id_for_label }}" placeholder="До" style="width: 100%">
+                                {% endif %}
 							</div>
-							<select name="price_currency" class="price_currency">
-								<option value="uah">грн</option>
-								<option value="rub">руб</option>
-							</select>
+                            <div class="form_number">
+                                <select name="" id="item_value">
+                                    <option value="1" {% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}selected{% endif %}>м.кв</option>
+                                    <option value="2" {% if filter_form.form.price_object__gt.data or filter_form.form.price_object__lt.data %}selected{% endif %}>обьект</option>
+                                </select>
+                            </div>
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Площадь:</label>
+							<label>Площадь квартиры:</label>
 							<div class="form_number">
-								{{ filter_form.form.total_area__gt }}
+                                <input value="{{ filter_form.form.total_area__gt.data }}" type="number" name="{{ filter_form.form.total_area__gt.name }}" id="{{ filter_form.form.total_area__gt.id_for_label }}" placeholder="От">
 							</div>
 							<div class="form_number">
-								{{ filter_form.form.total_area__lt}}
-							</div>
-							<select name="price_currency" class="price_currency">
-								<option value="meter">м. кв.</option>
-								<option value="centimeter">см. кв.</option>
-							</select>
-						</div>
-						<div class="form_item group form_wrapper">
-							<label>Расположение:</label>
-							<div class="form_checkboxes">
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_1">
-									<label for="check_1">Фасад</label>																	
-								</div>
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_2">
-									<label for="check_2">Дворовой</label>																	
-								</div>
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_3">
-									<label for="check_3">Бизнес-центр</label>																	
-								</div>
-							</div>
-						</div>
-						<div class="form_item group form_wrapper">
-							<label>Этаж:</label>
-							<div class="form_checkboxes">
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_10">
-									<label for="check_10">1-й</label>																	
-								</div>
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_20">
-									<label for="check_20">Цоколь</label>																	
-								</div>
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_30">
-									<label for="check_30">Бельэтаж</label>																	
-								</div>
-							</div>
-						</div>
-						<div class="form_item group form_wrapper">
-							<label>Вход:</label>
-							<div class="form_checkboxes">
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_11">
-									<label for="check_11">Фасад</label>																	
-								</div>
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_22">
-									<label for="check_22">Со двора</label>																	
-								</div>
-								<div class="form_checkbox">								
-									<input type="checkbox" id="check_33">
-									<label for="check_33">С парадной</label>																	
-								</div>
+                                <input value="{{ filter_form.form.total_area__lt.data }}" type="number" name="{{ filter_form.form.total_area__lt.name }}" id="{{ filter_form.form.total_area__lt.id_for_label }}" placeholder="До">
 							</div>
 						</div>
 						<div class="form_actions">
-							<input type="submit" value="Поиск">
+							<input type="submit" value="Поиск" class="searh-click">
 							<div class="links">
-								<div class="search_clear"><a href="#">очистить</a></div>
+								<div class="search_clear"><a href="{% url 'objects:newbuildings' %}">очистить</a></div>
 							</div>
 						</div>
 					</form>
 				</div>
-				<div class="block block_vip">
-					<div class="block_title">Vip</div>
-					<div class="view_content">
-						<div class="views_row">
-							<div class="field_image">
-								<img src="images/shop_1.png" alt="">
-							</div>
-							<div class="views_body">
-								<div class="star active"></div>
-								<div class="address">Льва Толстого, 14</div>
-								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
-								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
-								<div class="statistics">265</div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<img src="images/shop_2.png" alt="">
-							</div>
-							<div class="views_body">
-								<div class="star active"></div>
-								<div class="address">Льва Толстого, 14</div>
-								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
-								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
-								<div class="statistics">265</div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<img src="images/shop_3.png" alt="">
-							</div>
-							<div class="views_body">
-								<div class="star active"></div>
-								<div class="address">Льва Толстого, 14</div>
-								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
-								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
-								<div class="statistics">265</div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% include 'common/include/vip_left_sidebar.html' %}
 				{% sidebanner %}
 				<div class="block block_services">
 					<div class="block_content">
@@ -237,35 +248,27 @@
 				</div>
 			</div>
 		</div>
-		<div class="block block_seo">
-			<div class="block_content">
-				<div class="block_title">Риэлторские услуги в Одессе</div>
-				<div class="view_content">
-					<div class="body">
-						<div class="image">
-							<img src="images/img.png" alt="" class="left">						
-						</div>
-						<div class="content_body">						
-							<p>Еще не знаете, какое помещение в Одессе арендовать или купить под бизнес? Наше агентство недвижимости «GEK» поможет не только с поиском, но и выполнит всю бумажную работу за Вас.</p>
-							<p>На нашем сайте Вы найдете:</p>
-							<ul>
-								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
-								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
-							</ul>
-							<p>Коммерческая недвижимость является привлекательным инвестиционным объектом. Ее приобретают с различными целями – для ведения своего бизнеса, сдачи в аренду или перепродажи. Таким образом, коммерческая недвижимость в Украине является высокодоходным активом, поэтому и данный сектор рынка недвижимости постоянно развивается. Коммерческая недвижимость представляет собой помещения, здания и различные объекты, которые используются для ведения бизнеса и</p>
-							<p>На нашем сайте Вы найдете:</p>
-							<ul>
-								<li>Отобранные магазины в аренду, а так же в продажу по самым доступным ценам от проверенных хозяев.</li>
-								<li>Большой выбор офисов в аренду или продажу, как с ремонтом и мебелью, так и под ремонт с гораздо меньшей стоимостью.</li>
-							</ul>
-						</div>
-					</div>
-					<div class="read_more"><a href="/">Читать всю статью</a></div>
-				</div>
-			</div>
-		</div>
+		{% include 'seo/seo.html' %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}
+    <script>
+        var BASE_URL = '{{ BASE_URL }}';
+    </script>
     <script src="{% static 'js/search_form.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#item_value', function () {
+                var value = $(this).val();
+                if(value==='1'){
+                    $('.price_gt').attr({'name': 'price__gt', 'id': 'id_price__gt'});
+                    $('.price_lt').attr({'name': 'price__lt', 'id': 'id_price__lt'});
+                }else if(value==='2'){
+                    $('.price_gt').attr({'name': 'price_object__gt', 'id': 'id_price_object__gt'});
+                    $('.price_lt').attr({'name': 'price_object__lt', 'id': 'id_price_object__lt'});
+                }
+            });
+            $('.datepicker_c').datepicker({ dateFormat: 'dd.mm.yy' })
+        });
+    </script>
 {% endblock js %}

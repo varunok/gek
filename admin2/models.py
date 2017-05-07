@@ -350,6 +350,80 @@ class BuildingPageModel(SingletonModel):
         return reverse('main')
 
 
+class EarthPageModel(SingletonModel):
+    name = models.CharField(
+        default='Земля',
+        verbose_name='Название',
+        max_length=30,
+        unique=True,
+        editable=False
+    )
+    slug = models.SlugField(
+        verbose_name='URL',
+        allow_unicode=True,
+        default=slugify('Земля', allow_unicode=True),
+        validators=[slug_validator],
+        editable=False
+    )
+    title = models.TextField(
+        verbose_name='SEO Заголовок',
+        blank=True,
+        null=True
+    )
+    subtitle = models.TextField(
+        verbose_name='Подзаголовок',
+        blank=True,
+        null=True
+    )
+    SEOTitle = models.TextField(
+        verbose_name='SEO Title',
+        blank=True,
+        null=True
+    )
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
+        blank=True,
+        null=True
+    )
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Включена ли страница?',
+        default=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
+
+    class Meta:
+        verbose_name = 'Земля'
+
+    def __unicode__(self):
+        return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('main')
+
+
 class OfisPageModel(SingletonModel):
     name = models.CharField(
         default='Офисы и магазины',

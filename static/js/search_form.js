@@ -2,7 +2,7 @@
  * Created by varunok on 10.04.17.
  */
 $(document).ready(function() {
-    $('.left_sidebar').on('click', '.searh-form', function (event) {
+    $(document).on('click', '.searh-click', function (event) {
         event.preventDefault();
         var data = $('.search-form').serializeArray();
         runFilter(data);

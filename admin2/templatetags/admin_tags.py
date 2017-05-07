@@ -32,3 +32,9 @@ def add_style(field, style):
         return field.as_widget(attrs={"style": style})
     except AttributeError:
         return ''
+
+@register.filter(name='add_attr')
+def add_attr(field, style):
+    index_tag = field.find('>')
+    templ_tag = field[0:index_tag] + ' ' + style + field[index_tag:]
+    return templ_tag

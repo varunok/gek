@@ -147,6 +147,16 @@
 						<div class="block_content">
 							<div class="view_content list-building">
                                 {% include 'rieltor_object/include/building_item.html' %}
+                                <div class="load_more_wrap">
+                                    {% if count_next %}
+                                        <div class="load_more read_more">
+                                            <a href="#">
+                                                Загрузить еще
+                                                <span>{{ count_next }}</span> объектов
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -236,7 +246,7 @@
 							</div>
 						</div>
 						<div class="form_actions">
-							<input type="button" value="Поиск" class="searh-form">
+							<input type="button" value="Поиск" class="search-click">
 							<div class="links">
 {#								<div class="search_full"><a href="#">Расширенный поиск</a></div>#}
 								<div class="search_clear"><a href="{{ clear_filter }}">очистить</a></div>
@@ -244,50 +254,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="block block_vip">
-					<div class="block_title">Vip</div>
-					<div class="view_content">
-						<div class="views_row">
-							<div class="field_image">
-								<img src="{% static 'images/shop_1.png' %}" alt="">
-							</div>
-							<div class="views_body">
-								<div class="star active"></div>
-								<div class="address">Льва Толстого, 14</div>
-								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
-								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
-								<div class="statistics">265</div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<img src="{% static 'images/shop_2.png' %}" alt="">
-							</div>
-							<div class="views_body">
-								<div class="star active"></div>
-								<div class="address">Льва Толстого, 14</div>
-								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
-								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
-								<div class="statistics">265</div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<img src="{% static 'images/shop_3.png' %}" alt="">
-							</div>
-							<div class="views_body">
-								<div class="star active"></div>
-								<div class="address">Льва Толстого, 14</div>
-								<div class="price"><div class="label">Аренда:</div><div class="item">$9641</div></div>
-								<div class="area"><div class="label">Магазин:</div><div class="count">90</div> <div class="units">м<sup>2</sup></div></div>
-								<div class="statistics">265</div>
-								<div class="read_more"><a href="/">Подробнее</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% include 'common/include/vip_left_sidebar.html' %}
                 {% sidebanner %}
 				<div class="block block_services">
 					<div class="block_content">

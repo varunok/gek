@@ -9,7 +9,7 @@ from django.views.generic import ListView, UpdateView, TemplateView
 from django.forms import models as model_forms
 
 from admin2.models import IndexPageModel, NewBuildingPageModel, DailyPageModel, BuildingPageModel, OfisPageModel, \
-    TrustPageModel, ContactPageModel
+    TrustPageModel, ContactPageModel, EarthPageModel
 
 
 def page_list():
@@ -20,7 +20,8 @@ def page_list():
             BuildingPageModel.get_solo(),
             OfisPageModel.get_solo(),
             TrustPageModel.get_solo(),
-            ContactPageModel.get_solo()
+            ContactPageModel.get_solo(),
+            EarthPageModel.get_solo()
         ]
         return LIST_PAGE
 

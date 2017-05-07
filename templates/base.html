@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load base_tag %}
+{% load banners_tag %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -60,6 +61,8 @@
                                     {% building_is_enable as building_is_enable %}
                                     {% ofices_is_enable as ofices_is_enable %}
                                     {% daily_is_enable as daily_is_enable %}
+                                    {% newbuilding_is_enable as newbuilding_is_enable %}
+                                    {% earth_is_enable as earth_is_enable %}
                                     {% if building_is_enable %}
                                         <li>
                                             <a href="{% url 'objects:buildings' %}">Квартиры и Дома</a>
@@ -75,12 +78,16 @@
                                             <a href="{% url 'objects:dailys' %}">Посуточно</a>
                                         </li>
                                     {% endif %}
-                                    <li>
-                                        <a href="{% url 'objects:newbuildings' %}">Новострои</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'objects:earth' %}">Земля</a>
-                                    </li>
+                                    {% if newbuilding_is_enable %}
+                                        <li>
+                                            <a href="{% url 'objects:newbuildings' %}">Новострои</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if earth_is_enable %}
+                                        <li>
+                                            <a href="{% url 'objects:earth' %}">Земля</a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </li>
                             <li class="leaf expanded"><a href="{% url 'services:services' %}" {% if 'services' in request.path  %} class="active" {% endif %}>Услуги</a>

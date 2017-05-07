@@ -1,0 +1,29 @@
+{% load thumbnail %}
+{% load article_tag %}
+{% articles as articles %}
+<div class="block block_articles">
+	<div class="block_content">
+		<div class="block_title">Полезные статьи </div>
+		<div class="view_content">
+			<div class="view_content_inner">
+                {% for article in articles %}
+                    <div class="views_row">
+                        <div class="field_image">
+                            <a href="{{ article.get_absolute_url }}">
+                                <img src="{{ article.image|thumbnail_url:'article_271' }}" alt="">
+                            </a>
+                        </div>
+                        <div class="views_body">
+                        <div class="field_title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></div>
+                        <div class="field_body">{{ article.content|truncatewords:'15'|safe }}</div>
+                        <div class="statistics">{{ article.views }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+			</div>
+            {% if not sections %}
+                <div class="read_more"><a href="{% url 'articles:articles' %}">Читать все статьи</a></div>
+            {% endif %}
+		</div>
+	</div>
+</div>

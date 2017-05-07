@@ -11,6 +11,8 @@ register = template.Library()
 
 @register.simple_tag(name='filterpath')
 def filterpath(url, name, value, *args):
+    if isinstance(value, int):
+        value = unicode(value)
     if url[-1] == '/':
         url = url[:-1]
     args = args or ()

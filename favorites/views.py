@@ -33,6 +33,6 @@ def set_favorites(request, content_type, object_id):
         obj.favorites.add(favorites)
     else:
         obj.favorites.remove(favorites)
-    return HttpResponse()
+    return HttpResponse('ok')
 
 

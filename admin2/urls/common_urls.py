@@ -10,7 +10,7 @@ from common.views import save_video, status_video, ModalVideo, create_faq, save_
     delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView, \
     packet_text_save, packet_create, save_advantage, save_infrastructure, related_infrastructure, \
     related_accommodations, save_accommodations, save_apartment_next, delete_apartment_next
-from rieltor_object.models import ApartmentHas, EarthDistrict
+from rieltor_object.models import ApartmentHas, EarthDistrict, District, DailyDistrict
 from users.models import User
 
 urlpatterns = [
@@ -155,5 +155,19 @@ urlpatterns = [
         Select2QuerySetViewCustom.as_view(
             model=User),
         name='users-autocomplete'
+    ),
+    url(
+        '^district-autocomplete/$',
+        Select2QuerySetViewCustom.as_view(
+            model=District,
+            create_field='name',),
+        name='district-autocomplete'
+    ),
+    url(
+        '^daily-district-autocomplete/$',
+        Select2QuerySetViewCustom.as_view(
+            model=DailyDistrict,
+            create_field='name',),
+        name='daily-district-autocomplete'
     ),
 ]

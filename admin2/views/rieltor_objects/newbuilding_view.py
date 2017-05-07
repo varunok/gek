@@ -8,11 +8,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, BuildingEditForm, NewBuildingEditForm
+from admin2.mixins import NewBuildingStatusMixin
 from common.mixins import DeleteAjaxMixin
 from rieltor_object.models import NewBuilding, Building, Infrastructure, Accommodations
 
 
-class NewBuildingListView(ListView):
+class NewBuildingListView(NewBuildingStatusMixin, ListView):
     model = NewBuilding
     template_name = 'admin2/rieltor_object/new_building/new_building_list.html'
     paginate_by = 10
@@ -24,7 +25,7 @@ class NewBuildingListView(ListView):
         return context
 
 
-class NewBuildingEditView(UpdateView):
+class NewBuildingEditView(NewBuildingStatusMixin, UpdateView):
     model = NewBuilding
     template_name = 'admin2/rieltor_object/new_building/new_building_edit.html'
     success_url = reverse_lazy('admin2:newbuildings')
@@ -44,9 +45,10 @@ class NewBuildingEditView(UpdateView):
 
 
 def related_building(request, object_id, building_id):
-    newbuilding_set = NewBuilding.objects.filter(building=building_id)
+    newbuilding_set = NewBuilding.objects.filter(id=object_id, building=building_id)
     building = Building.objects.get(id=building_id)
     newbuilding = NewBuilding.objects.get(id=object_id)
+    print(newbuilding.building.all())
     if newbuilding_set:
         newbuilding.building.remove(building)
         return HttpResponse(status=200, content='Удалено')
@@ -54,7 +56,7 @@ def related_building(request, object_id, building_id):
     building.save()
     return HttpResponse(status=200, content='Добавлено')
 
-class NewBuildingCreateView(CreateView):
+class NewBuildingCreateView(NewBuildingStatusMixin, CreateView):
     model = NewBuilding
     form_class = NewBuildingEditForm
     template_name = 'admin2/rieltor_object/new_building/new_building_edit.html'

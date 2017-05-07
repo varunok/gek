@@ -2961,6 +2961,10 @@ body.superlending .slider_main .slider_title {
     margin-right: 30px;
 }
 
+.search_results.search_products .webform_client_form .form_wrapper_earth {
+    margin-right: 15px;
+}
+
 .search_results.search_products .webform_client_form .form_select.area_select select {
     width: 189px;
 }

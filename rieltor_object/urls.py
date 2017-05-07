@@ -15,19 +15,19 @@ urlpatterns = [
     url('^buildings/[\w-]*', BuildingListSiteView.as_view(), name='buildings'),
 
     # newbuilding
-    url('^newbuildings/$', NewBuildingListSiteView.as_view(), name='newbuildings'),
-    url('^newbuildings/(?P<slug>[\w-]+)$', NewBuildingDetailSiteView.as_view(), name='newbuilding_detail'),
+    url('^newbuildings/[\w-]*', NewBuildingListSiteView.as_view(), name='newbuildings'),
+    url('^detail/newbuildings/(?P<slug>[\w-]+)$', NewBuildingDetailSiteView.as_view(), name='newbuilding_detail'),
 
     # ofices
     url('^offices/[\w-]*', OficeListSiteView.as_view(), name='ofices'),
     url('^detail/offices/(?P<pk>[\w-]+)/$', OficeDetailSiteView.as_view(), name='ofice_detail'),
 
     # daily
-    url('^dailys/$', DailyListSiteView.as_view(), name='dailys'),
-    url('^dailys/(?P<pk>[\w-]+)/$', DailyDetailSiteView.as_view(), name='daily_detail'),
+    url('^dailys/[\w-]*', DailyListSiteView.as_view(), name='dailys'),
+    url('^detail/dailys/(?P<pk>[\w-]+)/$', DailyDetailSiteView.as_view(), name='daily_detail'),
 
     # earth
-    url('^earth/$', EarthSiteView.as_view(), name='earth'),
+    url('^earth/[\w-]*', EarthSiteView.as_view(), name='earth'),
     # url('^earth/(?P<pk>[\w-]+)/$', DailyDetailSiteView.as_view(), name='earth_detail'),
 ]
 

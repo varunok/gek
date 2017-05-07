@@ -212,64 +212,7 @@
 			</div>
 		</div>
 		{% include 'seo/seo.html' with seo=indexpagemodel %}
-		<div class="block block_articles">
-			<div class="block_content">
-				<div class="block_title">Полезные статьи на тему ”Недвижимость Одессы”</div>
-				<div class="view_content">
-					<div class="view_content_inner">
-						<div class="views_row">
-							<div class="field_image">
-								<a href="/">
-									<img src="{% static 'images/ar_1.png' %}" alt="">
-								</a>
-							</div>
-							<div class="views_body">
-							<div class="field_title"><a href="/">Рынок жилой недвижимости в 2016 году: спрос, предложение, цены</a></div>
-							<div class="field_body">Рынок жилой недвижимости в уходящем году был достаточно активным – на этом сходятся все эксперты.</div>
-							<div class="statistics">265</div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<a href="/">
-									<img src="{% static 'images/ar_2.png' %}" alt="">
-								</a>
-							</div>
-							<div class="views_body">
-							<div class="field_title"><a href="/">Украинская недвижимость остается привлекательной для инвесторов</a></div>
-							<div class="field_body">Киев в очередной раз принимал инвестиционный Форум недвижимости стран Восточной Европы, в ходе которого</div>
-							<div class="statistics">63</div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<a href="/">
-									<img src="{% static 'images/ar_3.png' %}" alt="">
-								</a>
-							</div>
-							<div class="views_body">
-							<div class="field_title"><a href="/">Покупаем земельный участок не в сезон: выгодно или нет?</a></div>
-							<div class="field_body">Завершение теплого периода года обычно негативно отражается на активности рынка земельных участков.</div>
-							<div class="statistics">96</div>
-							</div>
-						</div>
-						<div class="views_row">
-							<div class="field_image">
-								<a href="/">
-									<img src="{% static 'images/ar_4.png' %}" alt="">
-								</a>
-							</div>
-							<div class="views_body">
-							<div class="field_title"><a href="/">Кредиты и рассрочки на квартиры в новостройках: что изменилось </a></div>
-							<div class="field_body">Рассрочка от застройщика уже несколько лет для многих потенциальных покупателей жилья является единственным</div>
-							<div class="statistics">47</div>
-							</div>
-						</div>
-					</div>
-					<div class="read_more"><a href="{% url 'articles:articles' %}">Читать все статьи</a></div>
-				</div>
-			</div>
-		</div>
+        {% include 'articles/include/article_prop.html' %}
 	</main><!-- .content -->
 {% endblock content %}
 

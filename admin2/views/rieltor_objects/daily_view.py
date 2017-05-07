@@ -7,11 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, DailyEditForm
+from admin2.mixins import DailyStatusMixin
 from common.mixins import DeleteAjaxMixin
 from rieltor_object.models import Daily, Infrastructure
 
 
-class DailyListView(ListView):
+class DailyListView(DailyStatusMixin, ListView):
     model = Daily
     template_name = 'admin2/rieltor_object/daily/daily_list.html'
     paginate_by = 10
@@ -23,7 +24,7 @@ class DailyListView(ListView):
         return context
 
 
-class DailyEditView(UpdateView):
+class DailyEditView(DailyStatusMixin, UpdateView):
     model = Daily
     template_name = 'admin2/rieltor_object/daily/daily_edit.html'
     success_url = reverse_lazy('admin2:dailys')
@@ -40,7 +41,7 @@ class DailyEditView(UpdateView):
         return context
 
 
-class DailyCreateView(CreateView):
+class DailyCreateView(DailyStatusMixin, CreateView):
     model = Daily
     form_class = DailyEditForm
     template_name = 'admin2/rieltor_object/daily/daily_edit.html'

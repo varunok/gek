@@ -1,7 +1,7 @@
 {% load thumbnail %}
 <div class="block block_seo">
     <div class="block_content">
-        <div class="block_title">{{ seo.title }}</div>
+        <div class="block_title">{{ seo.title|default_if_none:'' }}</div>
             <div class="view_content">
                 <div class="body">
                     <div class="image">

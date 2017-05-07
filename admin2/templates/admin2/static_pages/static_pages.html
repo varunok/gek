@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>{{ page.name }}</td>
                                         <td>
-                                            {% if page.name in 'Офисы и магазины, Квартиры и Дома, Посуточна, Новострои' %}
+                                            {% if page.name in 'Офисы и магазины, Квартиры и Дома, Посуточна, Новострои, Земля' %}
                                                 <form class="slideThreeForm" action="">
                                                     <div class="slideThree">
                                                         <input type="checkbox"  id="slideThree{{ page.name }}" name="check" {% if page.is_enable %} checked {% endif %} />

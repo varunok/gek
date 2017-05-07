@@ -7,11 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import EarthEditForm
+from admin2.mixins import EarthStatusMixin
 from common.mixins import DeleteAjaxMixin
 from rieltor_object.models import Earth
 
 
-class EarthListView(ListView):
+class EarthListView(EarthStatusMixin, ListView):
     model = Earth
     template_name = 'admin2/rieltor_object/earth/earth_list.html'
     paginate_by = 10
@@ -23,7 +24,7 @@ class EarthListView(ListView):
         return context
 
 
-class EarthEditView(UpdateView):
+class EarthEditView(EarthStatusMixin, UpdateView):
     model = Earth
     template_name = 'admin2/rieltor_object/earth/earth_edit.html'
     success_url = reverse_lazy('admin2:earth')
@@ -37,7 +38,7 @@ class EarthEditView(UpdateView):
         return context
 
 
-class EarthCreateView(CreateView):
+class EarthCreateView(EarthStatusMixin, CreateView):
     model = Earth
     form_class = EarthEditForm
     template_name = 'admin2/rieltor_object/earth/earth_edit.html'

@@ -10,6 +10,11 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
     <link rel="stylesheet" href="{% static 'css/switchery.min.css' %}">
+    <style>
+        .style-del{
+            vertical-align: bottom;
+        }
+    </style>
 {% endblock css %}
 
 {% block content %}
@@ -40,6 +45,8 @@
                                             <fieldset class="formlist">
                                                 {{ formset.management_form }}
                                                 {% for fields in formset %}
+                                                    <label class="" for="name">{{ fields.DELETE.label }}: {{ fields.DELETE|addcss:'style-del' }}
+                                                            </label>
                                                     <div class="dynamic-form">
                                                         <h4>Видео№{{ forloop.counter }}</h4>
                                                         {{ fields.id }}

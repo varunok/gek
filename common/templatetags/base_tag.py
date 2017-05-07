@@ -1,6 +1,6 @@
 from django import template
 
-from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel
+from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 register = template.Library()
@@ -84,6 +84,16 @@ def ofices_is_enable():
 @register.assignment_tag
 def daily_is_enable():
     return DailyPageModel.objects.get().is_enable
+
+
+@register.assignment_tag
+def newbuilding_is_enable():
+    return NewBuildingPageModel.objects.get().is_enable
+
+
+@register.assignment_tag
+def earth_is_enable():
+    return EarthPageModel.objects.get().is_enable
 
 
 @register.filter(name='cut_last_char')

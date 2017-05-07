@@ -11,6 +11,7 @@ from django.views.generic import TemplateView, DeleteView, UpdateView, CreateVie
 
 from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from admin2.models import IndexPageModel
+from articles.models import Articles
 from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
