@@ -104,6 +104,7 @@
                                                 <label class="lab" for="{{ universal.uuid }}"></label>
                                                 {% csrf_token %}
                                                 <input type="hidden" name="content_type" value="{{ content_type }}">
+                                                <input type="hidden" name="id" value="{{ universal.id }}">
                                             </div>
                                         </form>
                                     </span>
@@ -176,6 +177,15 @@
                                                     </div>
                                                     {% if form.title.errors %}
                                                         <span class="error-label">{{ form.title.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.description.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.description|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.description.errors %}
+                                                        <span class="error-label">{{ form.description.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -269,7 +279,6 @@
     $(document).ready(function() {
         $('.advantageForm').on('change', '.advantage-photo', function() {
             var photo = $(this).parents('.item').next().next().next('.preview-advantage-photo').find('.pap');
-            console.log($(this)[0].files[0])
             if ($(this)[0].files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {

@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs tabs-left">
+    <li {% if 'currency' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings' %}" >Валюта</a>
+    </li>
+    <li {% if 'site' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_site' %}" >Сайт</a>
+    </li>
+    <li>
+        <a href="#" >Франшиза</a>
+    </li>
+    <li {% if 'address' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_address' %}" >Адреса</a>
+    </li>
+</ul>

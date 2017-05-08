@@ -190,85 +190,54 @@
                 </div>
             {% endif %}
         {% endwith %}
-		<div class="block new_buildings">
-			<div class="block_content">
-				<div class="block_title">Квартира продается в новострое</div>
-				<div class="view_content">
-					<div class="views_row">
-						<div class="title">Складской комплекс “Vivaldi”</div>
-						<div class="field_image">
-							<img src="images/new_1.png" alt="">
-						</div>
-						<div class="views_body">
-							<div class="star"></div>
-							<div class="left_wrap">
-								<div class="address">Цветочная, 3</div>
-								<div class="info">
-									<div class="label">Район:</div>
-									<div class="item">Центр</div>
-								</div>
-								<div class="info">
-									<div class="label">Сдаваемых помещений:</div>
-									<div class="item">4</div>
-								</div>
-								<div class="price">$577</div>
-							</div>
-							<div class="right_wrap">
-								<div class="statistics">120</div>
-								<div class="info">
-									<div class="label">Сдаётся с    </div><div class="item"> 1 мая 2017 г.</div>
-								</div>
-								<div class="info">
-									<div class="label">Общая площадь:</div><div class="item"> 907 м.кв.</div>										
-								</div>
-								<div class="read_more"><a href="/">Оставить заявку</a></div>
-							</div>							
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
+        {% with object.newbuilding as newbuilding %}
+            {% if newbuilding %}
+                <div class="block new_buildings">
+                    <div class="block_content">
+                        <div class="block_title">Квартира продается в новострое</div>
+                        <div class="view_content">
+                            <div class="views_row">
+                                <div class="title">{{ newbuilding.title|default_if_none:'' }}</div>
+                                <div class="field_image">
+                                    <img src="{% static 'images/new_1.png' %}" alt="">
+                                </div>
+                                <div class="views_body">
+                                    <div class="star {{ newbuilding|fav_is_active:request }}">
+                                        <input type="hidden" name="content_type" value="{{ newbuilding.get_content_type }}">
+                                        <input type="hidden" name="object_id" value="{{ newbuilding.id }}">
+                                    </div>
+                                    <div class="left_wrap">
+                                        <div class="address">{{ newbuilding.address|default_if_none:'' }}</div>
+                                        <div class="info">
+                                            <div class="label">Район:</div>
+                                            <div class="item">{{ newbuilding.district|default_if_none:'' }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">Сдаваемых помещений:</div>
+                                            <div class="item">{{ newbuilding.building.count }}</div>
+                                        </div>
+                                        <div class="price">${{ newbuilding.price|default_if_none:'' }} м.кв</div>
+                                    </div>
+                                    <div class="right_wrap">
+                                        <div class="statistics">{{ newbuilding.views }}</div>
+                                        <div class="info">
+                                            <div class="label">Сдаётся с    </div><div class="item"> {{ newbuilding.end_construction|date:'d E Y' }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">Общая площадь:</div><div class="item"> {{ newbuilding.footage|default_if_none:'' }} м.кв.</div>
+                                        </div>
+                                        <div class="read_more"><a href="/">Оставить заявку</a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
 		{% include 'common/include/vip.html' %}
-		<div class="block block_services">
-			<div class="block_content">
-				<div class="block_title">Услуги агентства недвижимости</div>
-				<div class="view_content">
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/1.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Кредитование</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/2.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/3.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/4.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Инфоксводоканал</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/1.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Кредитование</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/3.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/2.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="images/4.png" alt=""></a></div>
-						<div class="field_title"><a href="/">Инфоксводоканал</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{% include 'services/include/services_downbar.html' %}
 		{% downbanner %}
 		<div class="block block_presentation block_picking">
 			<div class="block_content">

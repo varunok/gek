@@ -1,0 +1,21 @@
+{% load thumbnail %}
+{% load staticfiles %}
+{% load services_tag %}
+{% service_list_downbar as service_list %}
+{% if service_list %}
+    <div class="block block_services">
+        <div class="block_content">
+            <div class="block_title">Услуги агентства недвижимости</div>
+            <div class="view_content">
+                {% for service in service_list %}
+                    <div class="views_row">
+                        {% if service.image %}
+                            <div class="field_image"><a href="{{ service.get_absolute_url }}"><img src="{{ service.image|thumbnail_url:'article_271' }}" alt=""></a></div>
+                        {% endif %}
+                        <div class="field_title"><a href="{{ service.get_absolute_url }}">{{ service }}</a></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

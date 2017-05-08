@@ -22,6 +22,15 @@ class TypeAppointment(object):
     )
 
 
+class TypeAppointmentOffice(object):
+    OFFICE = 'office'
+    SHOP = 'shop'
+    CHOICES = (
+        (OFFICE, 'Офис'),
+        (SHOP, 'Магазин')
+    )
+
+
 class TypeStatus(object):
     VIP = 'vip'
     DEFAULT = 'default'

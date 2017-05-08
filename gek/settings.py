@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'polls',
     'banners',
     'seo',
+    'landing',
 ]
 
 MIDDLEWARE = [
@@ -271,6 +272,8 @@ THUMBNAIL_ALIASES = {
         'test_427': {'size': (427, 245), 'crop': True},
         'seo_480': {'size': (480, 287), 'crop': True},
         'article_271': {'size': (271, 154), 'crop': True},
+        'service_585': {'size': (585, 248), 'crop': True},
+        'service_370': {'size': (370, 154), 'crop': True},
     },
 }
 

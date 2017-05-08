@@ -62,7 +62,7 @@ class Ofice(models.Model):
     appointment = models.CharField(
         verbose_name='Назначение',
         max_length=20,
-        choices=TypeAppointment.CHOICES,
+        choices=TypeAppointmentOffice.CHOICES,
         blank=True,
         null=True
     )

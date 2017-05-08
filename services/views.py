@@ -1,11 +1,9 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
 # Create your views here.
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, TemplateView, DetailView
+from django.template.loader import render_to_string
+from django.views.generic import TemplateView
 
 from common.mixins import ServiceSiteMixin
+from services.helpers import return_list_services
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, \
     UniversalService
 
@@ -13,9 +11,19 @@ from services.models import ServicesRieltor, Valuation, Repair, Insurance, Clean
 class ServicesSiteView(TemplateView):
     template_name = 'services/services.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(ServicesSiteView, self).get_context_data(**kwargs)
-    #     return context
+
+    def get_context_data(self, **kwargs):
+        context = super(ServicesSiteView, self).get_context_data(**kwargs)
+        active_service = return_list_services()
+        context['services'] = ''
+        for service in active_service:
+            if active_service.index(service) % 2:
+                context['services'] += render_to_string('services/include/services_page_left.html',
+                                                        {'service': service})
+            else:
+                context['services'] += render_to_string('services/include/services_page_right.html',
+                                                        {'service': service})
+        return context
 
 
 class RieltorServiceView(ServiceSiteMixin):

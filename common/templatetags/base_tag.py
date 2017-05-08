@@ -1,6 +1,11 @@
-from django import template
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel
+from django import template
+from django.contrib.sites.models import Site
+
+from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel, \
+    SettingsAddress
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 register = template.Library()
@@ -8,62 +13,62 @@ register = template.Library()
 
 @register.assignment_tag
 def service_rieltor_is_active():
-    return ServicesRieltor.objects.get().is_enable
+    return ServicesRieltor.get_solo().is_enable
 
 
 @register.assignment_tag
 def service_rieltor_slug():
-    return ServicesRieltor.objects.get().slug
+    return ServicesRieltor.get_solo().slug
 
 
 @register.assignment_tag
 def valuation_is_active():
-    return Valuation.objects.get().is_enable
+    return Valuation.get_solo().is_enable
 
 
 @register.assignment_tag
 def valuation_slug():
-    return Valuation.objects.get().slug
+    return Valuation.get_solo().slug
 
 
 @register.assignment_tag
 def repair_is_active():
-    return Repair.objects.get().is_enable
+    return Repair.get_solo().is_enable
 
 
 @register.assignment_tag
 def repair_slug():
-    return Repair.objects.get().slug
+    return Repair.get_solo().slug
 
 
 @register.assignment_tag
 def insurance_is_active():
-    return Insurance.objects.get().is_enable
+    return Insurance.get_solo().is_enable
 
 
 @register.assignment_tag
 def insurance_slug():
-    return Insurance.objects.get().slug
+    return Insurance.get_solo().slug
 
 
 @register.assignment_tag
 def cleaning_is_active():
-    return Cleaning.objects.get().is_enable
+    return Cleaning.get_solo().is_enable
 
 
 @register.assignment_tag
 def cleaning_slug():
-    return Cleaning.objects.get().slug
+    return Cleaning.get_solo().slug
 
 
 @register.assignment_tag
 def installation_water_is_active():
-    return InstallationWater.objects.get().is_enable
+    return InstallationWater.get_solo().is_enable
 
 
 @register.assignment_tag
 def installation_water_slug():
-    return InstallationWater.objects.get().slug
+    return InstallationWater.get_solo().slug
 
 
 @register.assignment_tag
@@ -73,29 +78,59 @@ def universals():
 
 @register.assignment_tag
 def building_is_enable():
-    return BuildingPageModel.objects.get().is_enable
+    return BuildingPageModel.get_solo().is_enable
 
 
 @register.assignment_tag
 def ofices_is_enable():
-    return OfisPageModel.objects.get().is_enable
+    return OfisPageModel.get_solo().is_enable
 
 
 @register.assignment_tag
 def daily_is_enable():
-    return DailyPageModel.objects.get().is_enable
+    return DailyPageModel.get_solo().is_enable
 
 
 @register.assignment_tag
 def newbuilding_is_enable():
-    return NewBuildingPageModel.objects.get().is_enable
+    return NewBuildingPageModel.get_solo().is_enable
 
 
 @register.assignment_tag
 def earth_is_enable():
-    return EarthPageModel.objects.get().is_enable
+    return EarthPageModel.get_solo().is_enable
 
 
 @register.filter(name='cut_last_char')
 def cut_last_char(string):
     return string[:-1]
+
+
+@register.assignment_tag
+def domen():
+    tmp = '<span class="site_name">{0}</span><span class="domen">{1}</span>'
+    domen = Site.objects.get_current()
+    name = domen.name.split('.')[0]
+    domen = domen.name.replace(name, '')
+    return tmp.format(name, domen)
+
+
+@register.assignment_tag
+def phone():
+    return SettingsAddress.get_solo().phone
+
+
+@register.assignment_tag
+def city():
+    return SettingsAddress.get_solo().city
+
+
+@register.assignment_tag
+def address():
+    return SettingsAddress.get_solo().address
+
+
+@register.assignment_tag
+def email():
+    return SettingsAddress.get_solo().email
+

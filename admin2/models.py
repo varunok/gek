@@ -5,6 +5,7 @@ import uuid
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
@@ -35,18 +36,52 @@ class Settings(SingletonModel):
         blank=True,
         null=True
     )
-    name_site = models.CharField(
-        verbose_name='Название сайта',
+
+    def __unicode__(self):
+        return "Валюта"
+
+    class Meta:
+        verbose_name = "Валюта"
+
+
+class SettingsAddress(SingletonModel):
+    phone = models.CharField(
+        verbose_name=' Телефон',
+        max_length=50,
+        blank=True,
+        null=True
+    )
+    city = models.CharField(
+        verbose_name='Город',
+        max_length=50,
+        blank=True,
+        null=True
+    )
+    city_plural = models.CharField(
+        verbose_name='Город (родительный)',
+        max_length=50,
+        blank=True,
+        null=True
+    )
+    address = models.CharField(
+        verbose_name='Улица',
+        max_length=50,
+        blank=True,
+        null=True
+    )
+    email = models.EmailField(
+        verbose_name='Email',
         max_length=50,
         blank=True,
         null=True
     )
 
+
     def __unicode__(self):
-        return "Site Configuration"
+        return "Адреса"
 
     class Meta:
-        verbose_name = "Site Configuration"
+        verbose_name = "Адреса"
 
 
 def slug_validator(value):

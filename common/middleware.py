@@ -25,6 +25,7 @@ class RedirectMiddlewareCustom(MiddlewareMixin):
         full_path = request.get_full_path()
         current_site = get_current_site(request)
 
+
         r = None
         try:
             r = Redirect.objects.get(site=current_site, old_path=full_path)

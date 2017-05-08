@@ -1,0 +1,121 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load solo_tags %}
+
+{% block title %}Редактирование Статьи{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropzone.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    {% get_solo 'admin2.Settings' as site_config %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Настройки</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><i class="fa fa-bars"></i> Параметры <small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-xs-2">
+                                <!-- required for floating -->
+                                <!-- Nav tabs -->
+                                {% include 'admin2/settings/settings_nav.html' %}
+                            </div>
+                            <div class="col-xs-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" >
+                                        <p class="lead"></p>
+                                        <p>
+                                            <form class="form-horizontal form-label-left" method="post">
+                                                {{ form.media }}
+                                                {{ form.errors }}
+                                                {% csrf_token %}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.phone.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.phone|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.phone.errors %}
+                                                        <span class="error-label">{{ form.phone.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.city.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.city|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.city.errors %}
+                                                        <span class="error-label">{{ form.city.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.city_plural.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.city_plural|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.city_plural.errors %}
+                                                        <span class="error-label">{{ form.city_plural.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.address.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.address|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.address.errors %}
+                                                        <span class="error-label">{{ form.address.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.email.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.email|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.email.errors %}
+                                                        <span class="error-label">{{ form.email.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="send" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/select2.full.js' %}"></script>
+{% endblock js %}

@@ -105,6 +105,8 @@ def delete_image(request):
     content_type_id = request.GET.get('content_type')
     id = request.GET.get('id')
     title_image = request.GET.get('title_image')
+    seo_image = request.GET.get('seo_image')
+    form_image = request.GET.get('form_image')
     if id:
         model = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=id)
     else:
@@ -115,7 +117,14 @@ def delete_image(request):
         except AttributeError:
             model.image_seo.delete(save=True)
         return HttpResponse('Удалено')
-    model.image.delete(save=True)
+    if seo_image:
+        model.image_seo.delete(save=True)
+        return HttpResponse('Удалено')
+    if form_image:
+        model.image_form.delete(save=True)
+        return HttpResponse('Удалено')
+    else:
+        model.image.delete(save=True)
     return HttpResponse('Удалено')
 
 

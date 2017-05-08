@@ -1,0 +1,146 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load thumbnail %}
+
+{% block title %}Редактирование {{ object }}{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Мультилендинг</h3>
+                </div>
+                <div style="float: right">
+                    <a href="{% url 'admin2:landings' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-circle-left"></i> Назад</a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Изменить {{ object }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    {% include 'admin2/landing/landing_nav.html' %}
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
+                                                {% csrf_token %}
+                                                {{ form.errors }}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.title.errors %}
+                                                        <span class="error-label">{{ form.title.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOTitle.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEOTitle|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEOTitle.errors %}
+                                                        <span class="error-label">{{ form.SEOTitle.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOKeywords.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEOKeywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEOKeywords.errors %}
+                                                        <span class="error-label">{{ form.SEOKeywords.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEODescription.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.SEODescription|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.SEODescription.errors %}
+                                                        <span class="error-label">{{ form.SEODescription.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.content.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.content|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                    </div>
+                                                    {% if form.content.errors %}
+                                                        <span class="error-label">{{ form.content.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image_seo.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        <input id="imgInp" name="image_seo" type="file">
+                                                        <img id="blah" src="
+                                                        {% if object.image_seo %}
+                                                            {{ object.image_seo.url }}
+                                                        {% endif %}
+                                                        " alt="" width="100%" />
+                                                        {% if object.image_seo %}
+                                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input type="hidden" value="{{ content_type }}">
+                                                            <input type="hidden" value="{{ object.id }}">
+                                                            <input type="hidden" value="image_seo" name="seoImage">
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+
+    </script>
+    {{ form.media }}
+{% endblock js %}

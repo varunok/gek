@@ -1,4 +1,5 @@
 import random
+from itertools import chain
 
 from django import template
 
@@ -9,12 +10,7 @@ register = template.Library()
 
 @register.assignment_tag
 def vips():
-    try:
-        bool_rand = bool(random.getrandbits(1))
-        print (bool_rand)
-        if bool_rand:
-            return Ofice.objects.vips().order_by('?')[:3]
-        else:
-            return Building.objects.vips().order_by('?')[:3]
-    except:
-        return ''
+    office = Ofice.objects.vips().order_by('?')[:2]
+    building = Building.objects.vips().order_by('?')[:2]
+    result = list(chain(building, office))
+    return result

@@ -49,7 +49,6 @@ class PlanDonePage(UpdateView):
         form__preparations = PreparationsSet(self.request.POST)
         form__process = ProcessSet(self.request.POST)
         form__finish = FinishSet(self.request.POST)
-        print(self.request.POST)
         return self.render_to_response(
             self.get_context_data(
                 form__preparations=form__preparations,

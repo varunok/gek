@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% load thumbnail %}
+<div class="views_row even">
+	<div class="views_inner">
+		<div class="left_wrap">
+			<div class="field_image">
+                <a href="{{ service.get_absolute_url }}">
+                    {% if service.image %}
+                        <img src="{{ service.image|thumbnail_url:'service_585' }}" alt="">
+                    {% else %}
+                        <img src="" alt="" width="585" height="248">
+                    {% endif %}
+				</a>
+			</div>
+		</div>
+		<div class="right_wrap">
+			<div class="views_body">
+				<div class="title">{{ service }}</div>
+				<div class="text">{{ service.description|default_if_none:'' }}</div>
+			</div>
+		</div>
+	</div>
+</div>

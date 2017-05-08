@@ -14,8 +14,9 @@ from admin2.models import ContactPageModel
 from articles.models import Sections, Articles
 from banners.models import DownBanner, SideBanner
 from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown, Preparation, Process, Finish
+from landing.models import Landing
 from polls.models import Question, Choice, Polls
-from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
+from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth, District
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 from videos.models import Videos
 
@@ -343,4 +344,39 @@ class RedirectForm(forms.ModelForm):
     class Meta:
         model = Redirect
         exclude = 'site',
+        fields = '__all__'
+
+
+class LandingForm(forms.ModelForm):
+    district = forms.ModelChoiceField(
+        queryset=District.objects,
+        empty_label='Все',
+        label='Район',
+        required=False
+    )
+
+    class Meta:
+        model = Landing
+        exclude = ('SEOTitle', 'SEODescription', 'SEOKeywords', 'title', 'content', 'image_seo', 'image_form',
+                   'subtitle_form', 'title_form')
+        fields = '__all__'
+        widgets = {
+            'type_property': autocomplete.Select2Multiple(),
+        }
+
+
+class LandingSeoForm(forms.ModelForm):
+    class Meta:
+        model = Landing
+        exclude = ('slug', 'title_h1', 'type_deal', 'price_gt', 'price_lt', 'footage_gt', 'footage_lt',
+                   'rooms', 'district', 'image', 'type_property', 'subtitle_form', 'title_form', 'image_form')
+        fields = '__all__'
+
+
+class LandingFormForm(forms.ModelForm):
+    class Meta:
+        model = Landing
+        exclude = ('slug', 'title_h1', 'type_deal', 'price_gt', 'price_lt', 'footage_gt', 'footage_lt',
+                   'rooms', 'district', 'image', 'type_property', 'SEOTitle', 'SEODescription', 'SEOKeywords',
+                   'title', 'content', 'image_seo')
         fields = '__all__'

@@ -40,7 +40,7 @@ class NewBuilding(models.Model):
     is_enable = models.BooleanField(
         verbose_name='Статус',
         default=True,
-        help_text='активный или не активный'
+        help_text='нужно сохранять'
     )
     SEOTitle = models.TextField(
         verbose_name='SEO Title',

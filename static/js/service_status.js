@@ -47,8 +47,12 @@ $(document).ready(function() {
         var content_type = $(this).next().val();
         var id = $(this).next().next().val();
         var title_image = $(this).next().next().next().val();
+        var seo_image = $('input[name="seoImage"]').val();
+        var form_image = $('input[name="formImage"]').val();
+
         _this = $(this);
-        $.get('delete-image', {'content_type': content_type, 'id':id, 'title_image': title_image})
+        $.get('delete-image', {'content_type': content_type, 'id':id,
+            'title_image': title_image, 'seo_image': seo_image, 'form_image': form_image})
             .then(function(response) {
                     notify_success(response, 'Успешно');
                     $('#blah').attr("src","second.jpg");

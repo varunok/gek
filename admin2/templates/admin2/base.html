@@ -66,7 +66,7 @@
                                     </li>
                                     <li><a href="{% url 'admin2:static_pages' %}"><i class="fa fa-file-text"></i> Страницы </a></li>
                                     <li><a href="{% url 'admin2:services' %}"><i class="fa fa-suitcase"></i> Услуги </a></li>
-                                    <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>
+{#                                    <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>#}
                                     <li><a><i class="fa fa-server"></i> Объекты <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             {% building_is_enable as building_is_enable %}
@@ -98,7 +98,7 @@
                                     <li><a href="{% url 'admin2:plan' %}"><i class="fa fa-calendar-check-o"></i> Планы </a></li>
                                     <li><a href="{% url 'admin2:polls' %}"><i class="fa fa-indent"></i> Тесты </a></li>
                                     <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> Баннеры </a></li>
-                                    <li><a href="#"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
+                                    <li><a href="{% url 'admin2:landings' %}"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
 {#                                    <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>#}
                                     <li><a href="{% url 'admin2:seo' %}"><i class="fa fa-ravelry"></i> SEO </a></li>
                                     <li><a href="{% url 'admin2:redirects' %}"><i class="fa fa-reply-all"></i> Редирект </a></li>

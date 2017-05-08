@@ -208,12 +208,17 @@
                                 {% if build.status == 'VIP' %}
                                     <div class="vip"></div>
                                 {% endif %}
-                                <div class="title">{{ build.title }}</div>
+                                <div class="title">{{ build.title|default_if_none:'' }}</div>
                                 <div class="field_image">
-                                    <img src="{% static 'images/shop_1.png' %}" alt="">
+                                    {% if build.images %}
+                                        <img src="{{ build.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                    {% endif %}
                                 </div>
                                 <div class="views_body">
-                                    <div class="star"></div>
+                                    <div class="star {{ build|fav_is_active:request }}">
+                                        <input type="hidden" name="content_type" value="{{ build.get_content_type }}">
+                                        <input type="hidden" name="object_id" value="{{ build.id }}">
+                                    </div>
                                     <div class="address">{{ build.address|default:'' }}</div>
                                     <div class="text"> {{ build.description|truncatewords:'15' }} </div>
                                     <div class="top_wrap">

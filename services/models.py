@@ -66,6 +66,11 @@ class ServicesRieltor(SingletonModel):
         default=uuid.uuid4,
         editable=False
     )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
+    )
     videos = GenericRelation(Video, related_query_name='services_rieltor')
     fag = GenericRelation(FAQ, related_query_name='services_rieltor')
 
@@ -123,6 +128,11 @@ class Valuation(SingletonModel):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False
+    )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
     )
     videos = GenericRelation(Video, related_query_name='valuation')
     fag = GenericRelation(FAQ, related_query_name='valuation')
@@ -202,6 +212,11 @@ class Repair(SingletonModel):
         default=uuid.uuid4,
         editable=False
     )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
+    )
     videos = GenericRelation(Video, related_query_name='repair')
     repairs = GenericRelation(TableRepair, related_query_name='repair')
     images = GenericRelation(Photo, related_query_name='repair')
@@ -261,6 +276,11 @@ class Insurance(SingletonModel):
         default=uuid.uuid4,
         editable=False
     )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
+    )
     videos = GenericRelation(Video, related_query_name='insurance')
     images = GenericRelation(Photo, related_query_name='insurance')
     fag = GenericRelation(FAQ, related_query_name='insurance')
@@ -319,6 +339,11 @@ class Cleaning(SingletonModel):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False
+    )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
     )
     videos = GenericRelation(Video, related_query_name='cleaning')
     images = GenericRelation(Photo, related_query_name='cleaning')
@@ -412,6 +437,11 @@ class InstallationWater(SingletonModel):
         verbose_name='Влючен ли FAQ?',
         default=True
     )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
+    )
     videos = GenericRelation(Video, related_query_name='installation_water')
     images = GenericRelation(Photo, related_query_name='installation_water')
     fag = GenericRelation(FAQ, related_query_name='installation_water')
@@ -503,6 +533,11 @@ class UniversalService(models.Model):
     faq_enable = models.BooleanField(
         verbose_name='Влючен ли FAQ?',
         default=True
+    )
+    description = models.TextField(
+        verbose_name='Описание главная услуги',
+        blank=True,
+        null=True
     )
     videos = GenericRelation(Video, related_query_name='universal')
     images = GenericRelation(Photo, related_query_name='universal')

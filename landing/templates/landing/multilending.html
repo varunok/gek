@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+{% load favorites_tag %}
+{% load video_tag %}
+{% load banners_tag %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front multilending" {% endblock %}
+
+{% block content %}
+	<main class="middle">
+		<div class="slider_main slider_notfront"{% if object.image %}
+                style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ object.title|default:'Коммерческая недвижимость' }}</div>
+			<div class="slider_subtitle">{{ object_list|length }} объекта по вашим параметрам</div>
+			<div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
+			<form action="#" class="webform_client_form">
+				<div class="form_item name">
+					<input type="text" placeholder="Введите имя">
+				</div>
+				<div class="form_item phone">
+					<input type="text" placeholder="Введите телефон">
+				</div>
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Отправить заявку">
+				</div>
+			</form>
+		</div>
+		<div class="middle_inner">		
+			<div class="container">
+				<div id="content">
+
+					<div class="block search_results">
+						<div class="form_title">ПОиск недвижимости</div>
+						<div class="top_wrap">
+							<form action="#" class="webform_client_form">
+								<div class="form_item metro">
+									<label for="metro">Введите район, метро, шоссе или город:</label>
+									<input type="text" id="metro">
+								</div>
+								<div class="form_item group form_wrapper">
+									<label>Стоимость</label>
+									<div class="form_number">
+										<input type="number" placeholder="От">
+									</div>
+									<div class="form_number">
+										<input type="number" placeholder="До">
+									</div>
+									<div class="form_select currency">
+										<select>
+											<option value="11">грн.</option>
+											<option value="12">руб.</option>
+										</select>
+									</div>
+								</div>
+								<div class="form_actions">
+									<input type="submit" value="Поиск">
+									<div class="links">
+										<div class="search_clear"><a href="#">очистить</a></div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div class="block block_shops block_search_results">
+						<div class="block_content">
+							<div class="view_content">
+                                {% for result in object_list %}
+                                    <div class="views_row vip_row">
+                                        {% if result.status == 'vip' %}
+                                            <div class="vip"></div>
+                                        {% endif %}
+                                        <div class="title">{{ result.title|default:'' }}</div>
+                                        <div class="field_image" {% if not result.images.count %}style="height: 210px"{% endif %}>
+                                            {% if result.images.count %}
+                                                    <img src="{{ result.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                            {% endif %}
+                                        </div>
+                                        <div class="views_body">
+                                            <div class="star {{ result|fav_is_active:request }}">
+                                                <input type="hidden" name="content_type" value="{{ result.get_content_type }}">
+                                                <input type="hidden" name="object_id" value="{{ result.id }}">
+                                            </div>
+                                            <div class="address">{{ object.address|default_if_none:'' }}</div>
+                                            <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+                                            <div class="top_wrap">
+                                                <div class="info">
+                                                    <div class="label">ID:</div>
+                                                    <div class="item">{{ result.id }}</div>
+                                                </div>
+                                                <div class="info">
+                                                    <div class="label">{{ result.get_appointment_display }}:</div>
+                                                    <div class="item">{{ result.footage|default_if_none:'' }} м<sup>2</sup></div>
+                                                </div>
+                                                <div class="price info">
+                                                    <div class="label">{{ result.get_type_deal_display }}:</div>
+                                                    ${{ result.price|default_if_none:'' }}
+                                                </div>
+                                            </div>
+                                            <div class="bottom_wrap">
+                                                <div class="statistics">{{ result.views }}</div>
+                                                <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+                                                <div class="read_more"><a href="{{ result.get_absolute_url }}">Подробнее</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+								<div class="load_more_wrap">
+									<div class="read_more load_more"><a href="#">Загрузить еще <span>45</span> объектов</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- #content-->
+				
+			</div>
+		</div>
+		{% include 'seo/seo.html' with seo=object %}
+		{% include 'common/include/vip.html' %}
+		<div class="block block_presentation"{% if object.image_form %}
+                style="background: url({{ object.image_form.url }}) no-repeat center/cover"{% endif %}>
+			<div class="block_content">
+				<div class="block_title">{{ object.title_form|default:'Подберем вам необходимый объект за 30 минут' }}</div>
+				<div class="view_content">
+					<div class="sub_title">{{ object.subtitle_form|default:'В базе более 1000 объектов' }}</div>
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_item form_textarea">
+							<textarea placeholder="Введите ваше сообщение"></textarea>
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Связаться со специалистом">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main><!-- .content -->
+{% endblock content %}
+
+{% block js %}{% endblock js %}
