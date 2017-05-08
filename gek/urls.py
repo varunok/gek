@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'favorites/', include('favorites.urls', namespace='favorites')),
     url(r'plan/', include('plan.urls', namespace='plan')),
     url(r'tests/', include('polls.urls', namespace='polls')),
-    url(r'^/', include('landing.urls', namespace='landings')),
+    url(r'^', include('landing.urls', namespace='landings')),
 
 ]
 urlpatterns += [
