@@ -11,7 +11,7 @@ from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationFo
     InsuranceForm, CleaningForm, InstallationWaterForm, UniversalServiceForm, UniversalServiceCreateForm, AdvantageSet
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
-from common.mixins import DeleteAjaxMixin, ServicesMixin
+from common.mixins import DeleteAjaxMixin, ServicesMixin, SuccesMixin, MessageMixin
 
 
 class ServicesView(LoginRequiredMixin, TemplateView):
@@ -105,7 +105,7 @@ class UniversalServiceView(ServicesMixin):
     advantage_form = AdvantageSet
 
 
-class UniversalServiceCreate(LoginRequiredMixin, CreateView):
+class UniversalServiceCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):
     model = UniversalService
     form_class = UniversalServiceCreateForm
     template_name = 'admin2/services/universal_edit.html'
@@ -114,9 +114,11 @@ class UniversalServiceCreate(LoginRequiredMixin, CreateView):
         return reverse_lazy('admin2:universal_edit', args=[self.object.id])
 
 
-class UniversalServiceDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class UniversalServiceDeleteView(LoginRequiredMixin, DeleteView):
     model = UniversalService
-    slug_field = 'slug'
+    pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:services')
 
 
 def status_service(request):

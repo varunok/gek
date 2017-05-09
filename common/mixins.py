@@ -15,6 +15,17 @@ from django.views.generic import UpdateView
 from common.models import BasePacket, MidlePacket, ExpertPacket
 
 
+
+class MessageMixin(SuccessMessageMixin):
+    success_message = "Сохранено"
+
+
+class SuccesMixin():
+    object = None
+    def get_success_url(self):
+        return self.object.get_edit_url()
+
+
 class DeleteAjaxMixin(SingleObjectMixin):
 
     def get(self, request, *args, **kwargs):
@@ -109,7 +120,7 @@ class ServiceSiteMixin(DetailView):
         return self.model.objects.get()
 
 
-class ServicesMixin(UpdateView):
+class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
     video_form = None
     advantage_form = None
 
@@ -193,5 +204,4 @@ class FormSetMixin(UpdateView):
             self.get_context_data(formset=formset))
 
 
-class MessageMixin(SuccessMessageMixin):
-    success_message = "Сохранено"
+

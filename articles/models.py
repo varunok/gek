@@ -67,6 +67,15 @@ class Sections(models.Model):
     def get_absolute_url(self):
         return reverse('articles:sections_detail', args=[self.slug])
 
+    def get_delete_url(self):
+        return reverse('admin2:sections_delete', args=[self.slug])
+
+    def get_edit_url(self):
+        return reverse('admin2:sections_update', args=[self.slug])
+
+    def get_list_url(self):
+        return reverse('admin2:sections')
+
     def save(self, *args, **kwargs):
         if not self.slug and not Sections.objects.filter(slug=self.title).exists():
             self.slug = slugify(self.title, allow_unicode=True)
@@ -144,6 +153,15 @@ class Articles(models.Model):
 
     def get_absolute_url(self):
         return reverse('articles:article_detail', args=[self.sections.slug, self.slug])
+
+    def get_delete_url(self):
+        return reverse('admin2:articles_delete', args=[self.slug])
+
+    def get_edit_url(self):
+        return reverse('admin2:articles_update', args=[self.slug])
+
+    def get_list_url(self):
+        return reverse('admin2:articles')
 
     def save(self, *args, **kwargs):
         if not self.slug and not Articles.objects.filter(slug=self.title).exists():

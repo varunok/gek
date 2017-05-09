@@ -1,0 +1,41 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% block title %}Удаление {{ object }}{% endblock title %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Удаление </h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Удаление {{ object }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <form action="" method="post">{% csrf_token %}
+                                <p><i class="fa fa-trash"></i> Уверени что хотите удалить "{{ object }}"? </p>
+                                <input type="submit" value="Подтвердит" class="btn btn-danger" />
+                                <a href="{{ object.get_list_url }}" class="btn btn-success">Отмена</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}

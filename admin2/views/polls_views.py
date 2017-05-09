@@ -28,6 +28,7 @@ class PollsMixin(ContextMixin):
 
 class PollsList(ListView):
     model = Polls
+    paginate_by = 10
     template_name = 'admin2/polls/polls_list.html'
 
 

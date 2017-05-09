@@ -63,7 +63,7 @@
                                         <td>{{ object.get_appointment_display }}</td>
                                         <td>{{ object.when_create|date:'d.m.Y H:i' }}</td>
                                         <td>
-                                            <a href="{{ object.id }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
+                                            <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
                                             <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                             <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
@@ -82,5 +82,4 @@
 {% endblock content %}
 
 {% block js %}
-    <script src="{% static 'js/sections.js' %}"></script>
 {% endblock js %}

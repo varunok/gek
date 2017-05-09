@@ -21,4 +21,19 @@ urlpatterns = [
         settings_views.SettingsAddressView.as_view(),
         name='settings_address'
     ),
+    url(
+        r'^settings/franchise/$',
+        settings_views.SettingFranchise.as_view(),
+        name='settings_franchise'
+    ),
+    url(
+        r'^settings/date-add/$',
+        settings_views.SettingFranchiseAdd.as_view(),
+        name='settings_franchise_add'
+    ),
+    url(
+        r'^settings/privat24/$',
+        settings_views.SettingsPrivate24View.as_view(),
+        name='settings_private24'
+    ),
 ]

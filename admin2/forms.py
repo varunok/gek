@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 from django import forms
 from dal import autocomplete
 from django.contrib.contenttypes.forms import generic_inlineformset_factory
@@ -10,7 +11,7 @@ from django.forms.widgets import TextInput, Textarea, FileInput, Select, SelectM
 from ckeditor.widgets import CKEditorWidget
 from django.urls import reverse_lazy
 
-from admin2.models import ContactPageModel
+from admin2.models import ContactPageModel, ActiveFranchise
 from articles.models import Sections, Articles
 from banners.models import DownBanner, SideBanner
 from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown, Preparation, Process, Finish
@@ -380,3 +381,21 @@ class LandingFormForm(forms.ModelForm):
                    'rooms', 'district', 'image', 'type_property', 'SEOTitle', 'SEODescription', 'SEOKeywords',
                    'title', 'content', 'image_seo')
         fields = '__all__'
+
+
+class SettingFranchiseAddForm(forms.ModelForm):
+    add_date = forms.IntegerField(
+        label='Добавить дней'
+    )
+    active_franchise = forms.DateField(
+        disabled=True,
+        label='Франшиза активна до'
+    )
+
+    class Meta:
+        model = ActiveFranchise
+        fields = '__all__'
+
+    def save(self, commit=True):
+        self.instance.active_franchise += datetime.timedelta(days=self.cleaned_data['add_date'])
+        return super(SettingFranchiseAddForm, self).save(commit=True)

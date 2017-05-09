@@ -19,7 +19,8 @@ class SEO(models.Model):
     )
     url = models.URLField(
         verbose_name='URL',
-        unique=True
+        unique=True,
+        help_text='Полний путь. Пример http://example.com'
     )
     content = RichTextUploadingField(
         blank=True,
@@ -58,3 +59,6 @@ class SEO(models.Model):
 
     def get_edit_url(self):
         return reverse('admin2:seo_edit', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:seo')

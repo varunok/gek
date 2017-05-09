@@ -46,23 +46,33 @@
                                                 {{ form.errors }}
                                                 {% csrf_token %}
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.domain.label }} <span class="required"></span>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.price_30.label }} <span class="required"></span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.domain|addcss:'form-control col-md-7 col-xs-12' }}
+                                                        {{ form.price_30|addcss:'form-control col-md-7 col-xs-12' }}
                                                     </div>
-                                                    {% if form.domain.errors %}
-                                                        <span class="error-label">{{ form.domain.errors }}</span>
+                                                    {% if form.price_30.errors %}
+                                                        <span class="error-label">{{ form.price_30.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.name.label }} <span class="required"></span>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.price_90.label }} <span class="required"></span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.name|addcss:'form-control col-md-7 col-xs-12' }}
+                                                        {{ form.price_90|addcss:'form-control col-md-7 col-xs-12' }}
                                                     </div>
-                                                    {% if form.name.errors %}
-                                                        <span class="error-label">{{ form.name.errors }}</span>
+                                                    {% if form.price_90.errors %}
+                                                        <span class="error-label">{{ form.price_90.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.price_180.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.price_180|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.price_180.errors %}
+                                                        <span class="error-label">{{ form.price_180.errors }}</span>
                                                     {% endif %}
                                                 </div>
 

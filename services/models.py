@@ -83,6 +83,9 @@ class ServicesRieltor(SingletonModel):
     def get_absolute_url(self):
         return reverse('services:rieltor_service', args=[self.slug])
 
+    def get_edit_url(self):
+        return reverse('admin2:rieltor_service_edit')
+
 
 class Valuation(SingletonModel):
     slug = models.SlugField(
@@ -145,6 +148,9 @@ class Valuation(SingletonModel):
 
     def get_absolute_url(self):
         return reverse('services:valuation', args=[self.slug])
+
+    def get_edit_url(self):
+        return reverse('admin2:valuation_edit')
 
 
 class Repair(SingletonModel):
@@ -230,6 +236,9 @@ class Repair(SingletonModel):
     def get_absolute_url(self):
         return reverse('services:repair', args=[self.slug])
 
+    def get_edit_url(self):
+        return reverse('admin2:repair_edit')
+
 
 class Insurance(SingletonModel):
     slug = models.SlugField(
@@ -293,6 +302,9 @@ class Insurance(SingletonModel):
 
     def get_absolute_url(self):
         return reverse('services:insurance', args=[self.slug])
+
+    def get_edit_url(self):
+        return reverse('admin2:insurence_edit')
 
 
 class Cleaning(SingletonModel):
@@ -380,6 +392,9 @@ class Cleaning(SingletonModel):
 
     def get_absolute_url(self):
         return reverse('services:cleaning', args=[self.slug])
+
+    def get_edit_url(self):
+        return reverse('admin2:cleaning_edit')
 
 
 class InstallationWater(SingletonModel):
@@ -478,6 +493,10 @@ class InstallationWater(SingletonModel):
 
     def get_absolute_url(self):
         return reverse('services:installation_water', args=[self.slug])
+
+    def get_edit_url(self):
+        return reverse('admin2:installation_water_edit')
+
 
 
 class UniversalService(models.Model):
@@ -578,4 +597,13 @@ class UniversalService(models.Model):
 
     def get_absolute_url(self):
         return reverse('services:universal', args=[self.slug])
+
+    def get_delete_url(self):
+        return reverse('admin2:universal_delete', args=[self.id])
+
+    def get_edit_url(self):
+        return reverse('admin2:universal_edit', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:services')
 

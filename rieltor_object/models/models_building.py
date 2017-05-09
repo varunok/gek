@@ -166,6 +166,8 @@ class Building(models.Model):
         ordering = ['-when_create']
 
     def __unicode__(self):
+        if self.SEODescription:
+            return '{0}'.format(self.SEODescription)
         return '{0}'.format(self.id)
 
     def save(self, *args, **kwargs):
@@ -183,6 +185,9 @@ class Building(models.Model):
 
     def get_edit_url(self):
         return reverse('admin2:building_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:building_delete', args=[self.id])
 
     def get_absolute_url(self):
         return reverse('objects:buildings_detail', args=[self.id])

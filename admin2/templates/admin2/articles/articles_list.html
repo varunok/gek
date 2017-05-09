@@ -51,8 +51,8 @@
                                         <td>{{ article.heading }}</td>
                                         <td>{{ article.created|date:'d.m.Y H:i' }}</td>
                                         <td>
-                                            <a href="{{ article.slug }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{% url 'admin2:articles_update'  article.slug %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                            <a href="{{ article.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
+                                            <a href="{{ article.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                             <a href="{{ article.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
                                     </tr>
@@ -70,5 +70,5 @@
 {% endblock content %}
 
 {% block js %}
-    <script src="{% static 'js/sections.js' %}"></script>
+{#    <script src="{% static 'js/sections.js' %}"></script>#}
 {% endblock js %}

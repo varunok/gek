@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import date
+from django.utils.translation import ugettext_lazy as _
+
 from django import template
 from django.contrib.sites.models import Site
 
 from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel, \
-    SettingsAddress
+    SettingsAddress, ActiveFranchise
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 register = template.Library()
@@ -116,6 +119,12 @@ def domen():
 
 
 @register.assignment_tag
+def domen_admin():
+    domen = Site.objects.get_current()
+    return domen.name
+
+
+@register.assignment_tag
 def phone():
     return SettingsAddress.get_solo().phone
 
@@ -133,4 +142,18 @@ def address():
 @register.assignment_tag
 def email():
     return SettingsAddress.get_solo().email
+
+
+@register.assignment_tag
+def franchise():
+    active_franchise =  ActiveFranchise.get_solo().active_franchise
+    print(active_franchise - date.today())
+    try:
+        active_franchise, word = str(active_franchise - date.today()).split(',')[0].split(' ')
+        active_franchise = int(active_franchise)
+        if active_franchise < 0:
+            return 0
+    except:
+        return 0
+    return active_franchise
 

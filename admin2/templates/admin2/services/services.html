@@ -168,8 +168,8 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{{ universal.slug }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{% url 'admin2:universal_edit' universal.id %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                            <a href="{{ universal.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
+                                            <a href="{{ universal.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                             <a href="{{ universal.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
                                     </tr>
@@ -187,5 +187,4 @@
 
 {% block js %}
     <script src="{% static 'js/service_status.js' %}"></script>
-    <script src="{% static 'js/sections.js' %}"></script>
 {% endblock js %}

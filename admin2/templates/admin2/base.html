@@ -1,5 +1,8 @@
 {% load static from staticfiles %}
 {% load base_tag %}
+{% domen_admin as domain %}
+{% franchise as franchise %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +53,7 @@
                 <div class="col-md-3 left_col">
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title" style="border: 0;">
-                            <a href="" class="site_title"> <img src="{% static 'favicon.ico' %}" alt="" width="20px"> <span>test.com.ua</span></a>
+                            <a href="" class="site_title"> <img src="{% static 'favicon.ico' %}" alt="" width="20px"> <span>{{ domain }}</span></a>
                         </div>
                         <div class="clearfix"></div>
                         <!-- sidebar menu -->
@@ -166,25 +169,45 @@
                                     </a>
                                 </li>
                                 <li role="presentation" class="dropdown">
-                                    <a href="#" class="dropdown-toggle info-number" >
+                                    <a href="{% url 'privat24:paylist' %}" class="dropdown-toggle info-number" >
                                         Франшиза
-                                        <i class="fa fa-check" style="color: green"></i>
-                                        <i class="fa fa-close" style="color: red"></i>
-                                    </a>
-                                </li>
-                                <li role="presentation" class="dropdown">
-                                    <a href="#" class="dropdown-toggle info-number" >
-                                        Записная книжка
-                                        <i class="fa fa-address-book-o"></i>
+                                        {% if franchise %}
+                                            <i class="fa fa-check" style="color: green"></i>
+                                            {% else %}
+                                            <i class="fa fa-close" style="color: red"></i>
+                                        {% endif %}
 
                                     </a>
                                 </li>
+
                                 <li role="presentation" class="dropdown">
-                                    <a href="#" class="dropdown-toggle info-number" >
-                                        Новая сделка
-                                        <i class="fa fa-handshake-o"></i>
-                                    </a>
+                                {% if franchise %}
+                                    <span class="badge {% if franchise < 3 %} bg-orange {% else %} bg-blue {% endif %}" style="margin-top: 20px">осталось: {{ franchise }}
+                                        {% if franchise == 1 %}
+                                            день
+                                        {% elif franchise == 2 %}
+                                            дня
+                                            {% else %}
+                                            дней
+                                        {% endif %}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-red" style="margin-top: 20px">неактивна</span>
+                                {% endif %}
+
+
+{#                                    <a href="#" class="dropdown-toggle info-number" >#}
+{#                                        Записная книжка#}
+{#                                        <i class="fa fa-address-book-o"></i>#}
+{##}
+{#                                    </a>#}
                                 </li>
+{#                                <li role="presentation" class="dropdown">#}
+{#                                    <a href="#" class="dropdown-toggle info-number" >#}
+{#                                        Новая сделка#}
+{#                                        <i class="fa fa-handshake-o"></i>#}
+{#                                    </a>#}
+{#                                </li>#}
                             </ul>
                         </nav>
                     </div>
@@ -199,7 +222,7 @@
             <!-- footer content -->
             <footer>
               <div class="pull-right">
-                gek 2017<a href="https://colorlib.com"></a>
+                {{ domain }} {% now "Y" %}<a href="https://colorlib.com"></a>
               </div>
               <div class="clearfix"></div>
             </footer>

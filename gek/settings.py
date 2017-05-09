@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'banners',
     'seo',
     'landing',
+    'privat24',
 ]
 
 MIDDLEWARE = [

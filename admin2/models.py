@@ -9,6 +9,7 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 from solo.models import SingletonModel
 
@@ -16,7 +17,7 @@ from common.models import Photo, Video, FAQ, Feed, Schedule
 from users.models import User
 
 
-class Settings(SingletonModel):
+class CurrencyChoice(object):
     UAH = 'UAH'
     RUB = 'RUB'
     KZT = 'KZT'
@@ -25,9 +26,23 @@ class Settings(SingletonModel):
         (RUB, 'руб'),
         (KZT, 'тнг')
     )
+
+class CurrencyPayChoice(object):
+    UAH = 'UAH'
+    RUB = 'RUB'
+    USD = 'USD'
+    CARRENCY = (
+        (UAH, 'UAH'),
+        (RUB, 'RUB'),
+        (USD, 'USD')
+    )
+
+
+class Settings(SingletonModel):
+
     currency = models.CharField(
         verbose_name='Валюта',
-        choices=CARRENCY,
+        choices=CurrencyChoice.CARRENCY,
         max_length=3,
         blank=True
     )
@@ -91,6 +106,51 @@ def slug_validator(value):
             params={'value': value},
         )
 
+
+class SettingsFranchise(SingletonModel):
+    price_30 = models.PositiveIntegerField(
+        verbose_name='Стоимость 30 дней',
+        default=0
+    )
+    price_90 = models.PositiveIntegerField(
+        verbose_name='Стоимость 90 дней',
+        default=0
+    )
+    price_180 = models.PositiveIntegerField(
+        verbose_name='Стоимость 180 дней',
+        default=0
+    )
+
+    class Meta:
+        verbose_name = 'Стоимость франшизы'
+        verbose_name_plural = 'Стоимость франшизы'
+
+
+class SettingsPrivate24(SingletonModel):
+    merchant = models.IntegerField(
+        verbose_name='Приват24 merchant ID',
+        blank=True,
+        null=True
+    )
+    signature = models.CharField(
+        verbose_name='Приват24 signature',
+        blank=True,
+        null=True,
+        max_length=250
+    )
+    currency = models.CharField(
+        verbose_name='Валюта',
+        choices=CurrencyPayChoice.CARRENCY,
+        max_length=3,
+        blank=True
+    )
+
+
+class ActiveFranchise(SingletonModel):
+    active_franchise = models.DateField(
+        verbose_name='Франшиза активна до',
+        default=timezone.now
+    )
 
 
 class IndexPageModel(SingletonModel):

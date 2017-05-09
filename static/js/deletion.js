@@ -3,7 +3,7 @@
  */
 
         function dell_app(id, _this) {
-            $.get('delete/'+id)
+            $.get('/delete/'+id)
                 .then(function(response) {
                     _this.fadeOut('slow', function () {
                            _this.remove();

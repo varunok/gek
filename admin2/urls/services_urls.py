@@ -57,8 +57,8 @@ urlpatterns = [
         name='universal_create'
     ),
     url(
-        '^services/delete/(?P<slug>[\w-]+)/$',
+        r'^services/delete/(?P<pk>[\w-]+)/$',
         services_views.UniversalServiceDeleteView.as_view(),
-        name='sections_delete'
+        name='universal_delete'
     ),
 ]

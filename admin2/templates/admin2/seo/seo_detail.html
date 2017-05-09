@@ -59,7 +59,7 @@
                                                 </div>
                                                 <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.url.label }}<span class="red">*</span>:
-                                                    </label>
+                                                       <br><span style="color: lightgrey; font-size: 11px;">{{ form.url.help_text }}</span></label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
                                                         {{ form.url|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                                     </div>

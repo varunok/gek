@@ -8,7 +8,7 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import EarthEditForm
 from admin2.mixins import EarthStatusMixin
-from common.mixins import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
 from rieltor_object.models import Earth
 
 
@@ -24,12 +24,10 @@ class EarthListView(EarthStatusMixin, ListView):
         return context
 
 
-class EarthEditView(EarthStatusMixin, UpdateView):
+class EarthEditView(SuccesMixin, MessageMixin, EarthStatusMixin, UpdateView):
     model = Earth
     template_name = 'admin2/rieltor_object/earth/earth_edit.html'
-    success_url = reverse_lazy('admin2:earth')
     form_class = EarthEditForm
-
 
     def get_context_data(self, **kwargs):
         context = super(EarthEditView, self).get_context_data(**kwargs)
@@ -38,11 +36,10 @@ class EarthEditView(EarthStatusMixin, UpdateView):
         return context
 
 
-class EarthCreateView(EarthStatusMixin, CreateView):
+class EarthCreateView(SuccesMixin, MessageMixin, EarthStatusMixin, CreateView):
     model = Earth
     form_class = EarthEditForm
     template_name = 'admin2/rieltor_object/earth/earth_edit.html'
-
 
     def get_context_data(self, **kwargs):
         context = super(EarthCreateView, self).get_context_data(**kwargs)
@@ -50,10 +47,9 @@ class EarthCreateView(EarthStatusMixin, CreateView):
         context['list_url'] = reverse_lazy('admin2:earth')
         return context
 
-    def get_success_url(self):
-        return self.object.get_edit_url()
 
-
-class EarthDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class EarthDeleteView(LoginRequiredMixin, DeleteView):
     model = Earth
     pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:earth')

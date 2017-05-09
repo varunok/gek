@@ -8,7 +8,7 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, DailyEditForm
 from admin2.mixins import DailyStatusMixin
-from common.mixins import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
 from rieltor_object.models import Daily, Infrastructure
 
 
@@ -24,10 +24,9 @@ class DailyListView(DailyStatusMixin, ListView):
         return context
 
 
-class DailyEditView(DailyStatusMixin, UpdateView):
+class DailyEditView(SuccesMixin, MessageMixin, DailyStatusMixin, UpdateView):
     model = Daily
     template_name = 'admin2/rieltor_object/daily/daily_edit.html'
-    success_url = reverse_lazy('admin2:dailys')
     form_class = DailyEditForm
     video_form = VideoServiceSet
 
@@ -41,7 +40,7 @@ class DailyEditView(DailyStatusMixin, UpdateView):
         return context
 
 
-class DailyCreateView(DailyStatusMixin, CreateView):
+class DailyCreateView(SuccesMixin, MessageMixin, DailyStatusMixin, CreateView):
     model = Daily
     form_class = DailyEditForm
     template_name = 'admin2/rieltor_object/daily/daily_edit.html'
@@ -53,10 +52,9 @@ class DailyCreateView(DailyStatusMixin, CreateView):
         context['list_url'] = reverse_lazy('admin2:dailys')
         return context
 
-    def get_success_url(self):
-        return self.object.get_edit_url()
 
-
-class DailyDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class DailyDeleteView(LoginRequiredMixin, DeleteView):
     model = Daily
     pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:dailys')

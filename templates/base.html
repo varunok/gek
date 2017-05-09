@@ -2,6 +2,7 @@
 {% load base_tag %}
 {% load banners_tag %}
 {% domen as domen %}
+{% franchise as franchise %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -34,13 +35,15 @@
                         <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt="">{{ domen|safe }}</a>
                     </div>
                     <div class="region_header">
-                        <div class="contacts_header">
-                            <div class="phone_number">
-                                <a href="tel:+380679280167">{% phone %}</a>
+                        {% if franchise %}
+                            <div class="contacts_header" style="max-width: 270px">
+                                <div class="phone_number">
+                                    <a href="tel:+380679280167">{% phone %}</a>
+                                </div>
+                                <div class="address">г. {% city %}, {% address %}.</div>
+                                <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
                             </div>
-                            <div class="address">г. {% city %}, {% address %}.</div>
-                            <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
-                        </div>
+                        {% endif %}
                         <div class="benefits">
                             <div class="item test"><a href="{% url 'polls:test' %}">Пройди тест</a></div>
                             <div class="item video"><a href="{% url 'videos:video' %}">Смотреть видео</a></div>
@@ -48,8 +51,8 @@
                             <div class="item favorite"><a href="{% url 'favorites:favorites' %}">Избранное</a></div>
                         </div>
                         <div class="buttons_header">
-                            <div id="open-modal" class="application">Оставить заявку</div>
-                            <div class="add_advert">Добавить объявление</div>
+                            <div  class="application">Оставить заявку</div>
+                            <div id="open-modal" class="add_advert">Добавить объявление</div>
                         </div>
                     </div>
                 </div>
@@ -212,7 +215,7 @@
                                 </li>
                             </ul>
                             <div class="visit">
-                                <div class="item"><img src="images/bitmap.png" alt=""></div>
+                                <div class="item"><img src="{% static 'images/bitmap.png' %}" alt=""></div>
                                 <div class="item"><img src="images/bitmap.png" alt=""></div>
                                 <div class="item"><img src="images/bitmap.png" alt=""></div>
                                 <div class="item"><img src="images/bitmap.png" alt=""></div>
@@ -220,13 +223,15 @@
                         </div>
                     </div>
                     <div class="footer_right">
-                        <div class="contacts_header">
-                            <div class="phone_number">
-                                <a href="tel:+380679280167">{% phone %}</a>
+                        {% if franchise %}
+                            <div class="contacts_header" style="max-width: 195px">
+                                <div class="phone_number">
+                                    <a href="tel:+380679280167">{% phone %}</a>
+                                </div>
+                                <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
+                                <div class="address">г. {% city %}, {% address %}.</div>
                             </div>
-                            <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
-                            <div class="address">г. {% city %}, {% address %}.</div>
-                        </div>
+                        {% endif %}
                         <div class="buttons_header">
                             <div class="application">Оставить заявку</div>
                             <div class="add_advert">Добавить объявление</div>

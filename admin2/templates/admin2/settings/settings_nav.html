@@ -5,10 +5,16 @@
     <li {% if 'site' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_site' %}" >Сайт</a>
     </li>
-    <li>
-        <a href="#" >Франшиза</a>
+    <li {% if 'franchise' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_franchise' %}" >Франшиза</a>
     </li>
     <li {% if 'address' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_address' %}" >Адреса</a>
+    </li>
+    <li {% if 'date' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_franchise_add' %}" >Добавить время</a>
+    </li>
+    <li {% if 'private' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_private24' %}" >Privat24</a>
     </li>
 </ul>

@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>{{ object.id }}</td>
                                             <td>{{ object.slug }}</td>
-                                            <td>{{ object.title|default_if_none:'' }}</td>
+                                            <td>{{ object.title_h1|default_if_none:'' }}</td>
                                             <td>{{ object.get_type_deal_display }}</td>
                                             <td>
                                                 <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить </a>
@@ -59,6 +59,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {% include 'admin2/include/paginator.html' %}
                     </div>
                 </div>
             </div>

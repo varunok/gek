@@ -164,3 +164,6 @@ class Landing(models.Model):
 
     def get_delete_url(self):
         return reverse('admin2:landing_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:landings')

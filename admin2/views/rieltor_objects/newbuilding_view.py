@@ -9,7 +9,7 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, BuildingEditForm, NewBuildingEditForm
 from admin2.mixins import NewBuildingStatusMixin
-from common.mixins import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
 from rieltor_object.models import NewBuilding, Building, Infrastructure, Accommodations
 
 
@@ -25,10 +25,9 @@ class NewBuildingListView(NewBuildingStatusMixin, ListView):
         return context
 
 
-class NewBuildingEditView(NewBuildingStatusMixin, UpdateView):
+class NewBuildingEditView(SuccesMixin, MessageMixin, NewBuildingStatusMixin, UpdateView):
     model = NewBuilding
     template_name = 'admin2/rieltor_object/new_building/new_building_edit.html'
-    success_url = reverse_lazy('admin2:newbuildings')
     form_class = NewBuildingEditForm
     video_form = VideoServiceSet
 
@@ -44,6 +43,25 @@ class NewBuildingEditView(NewBuildingStatusMixin, UpdateView):
         return context
 
 
+class NewBuildingCreateView(SuccesMixin, MessageMixin, NewBuildingStatusMixin, CreateView):
+    model = NewBuilding
+    form_class = NewBuildingEditForm
+    template_name = 'admin2/rieltor_object/new_building/new_building_edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(NewBuildingCreateView, self).get_context_data(**kwargs)
+        context['verbose_name'] = self.model._meta.verbose_name
+        context['list_url'] = reverse_lazy('admin2:newbuildings')
+        return context
+
+
+class NewBuildingDeleteView(LoginRequiredMixin, DeleteView):
+    model = NewBuilding
+    pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:newbuildings')
+
+
 def related_building(request, object_id, building_id):
     newbuilding_set = NewBuilding.objects.filter(id=object_id, building=building_id)
     building = Building.objects.get(id=building_id)
@@ -55,23 +73,3 @@ def related_building(request, object_id, building_id):
     building.newbuilding = newbuilding
     building.save()
     return HttpResponse(status=200, content='Добавлено')
-
-class NewBuildingCreateView(NewBuildingStatusMixin, CreateView):
-    model = NewBuilding
-    form_class = NewBuildingEditForm
-    template_name = 'admin2/rieltor_object/new_building/new_building_edit.html'
-
-
-    def get_context_data(self, **kwargs):
-        context = super(NewBuildingCreateView, self).get_context_data(**kwargs)
-        context['verbose_name'] = self.model._meta.verbose_name
-        context['list_url'] = reverse_lazy('admin2:newbuildings')
-        return context
-
-    def get_success_url(self):
-        return self.object.get_edit_url()
-
-
-class NewBuildingDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
-    model = NewBuilding
-    pk_url_kwarg = 'pk'

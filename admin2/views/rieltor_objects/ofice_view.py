@@ -8,7 +8,7 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, OficeEditForm
 from admin2.mixins import OfficesStatusMixin
-from common.mixins import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
 from rieltor_object.models import Ofice
 
 
@@ -24,10 +24,9 @@ class OficeListView(OfficesStatusMixin, ListView):
         return context
 
 
-class OficeEditView(OfficesStatusMixin, UpdateView):
+class OficeEditView(SuccesMixin, MessageMixin, OfficesStatusMixin, UpdateView):
     model = Ofice
     template_name = 'admin2/rieltor_object/ofice/ofice_edit.html'
-    success_url = reverse_lazy('admin2:ofices')
     form_class = OficeEditForm
     video_form = VideoServiceSet
 
@@ -40,7 +39,7 @@ class OficeEditView(OfficesStatusMixin, UpdateView):
         return context
 
 
-class OficeCreateView(OfficesStatusMixin, CreateView):
+class OficeCreateView(SuccesMixin, MessageMixin, OfficesStatusMixin, CreateView):
     model = Ofice
     form_class = OficeEditForm
     template_name = 'admin2/rieltor_object/ofice/ofice_edit.html'
@@ -52,10 +51,9 @@ class OficeCreateView(OfficesStatusMixin, CreateView):
         context['list_url'] = reverse_lazy('admin2:ofices')
         return context
 
-    def get_success_url(self):
-        return self.object.get_edit_url()
 
-
-class OficeDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class OficeDeleteView(OfficesStatusMixin, LoginRequiredMixin, DeleteView):
     model = Ofice
     pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:ofices')

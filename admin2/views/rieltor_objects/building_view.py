@@ -8,7 +8,7 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, BuildingEditForm
 from admin2.mixins import BuildingStatusMixin
-from common.mixins import DeleteAjaxMixin
+from common.mixins import DeleteAjaxMixin, MessageMixin, SuccesMixin
 from rieltor_object.models import Building
 
 
@@ -23,7 +23,8 @@ class BuildingListView(BuildingStatusMixin, ListView):
         context['create_url'] = reverse_lazy('admin2:building_create')
         return context
 
-class BuildingEditView(BuildingStatusMixin, UpdateView):
+
+class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateView):
     model = Building
     template_name = 'admin2/rieltor_object/building/building_edit.html'
     success_url = reverse_lazy('admin2:buildings')
@@ -39,7 +40,7 @@ class BuildingEditView(BuildingStatusMixin, UpdateView):
         return context
 
 
-class BuildingCreateView(BuildingStatusMixin, CreateView):
+class BuildingCreateView(SuccesMixin, MessageMixin, BuildingStatusMixin, CreateView):
     model = Building
     form_class = BuildingEditForm
     template_name = 'admin2/rieltor_object/building/building_edit.html'
@@ -51,10 +52,9 @@ class BuildingCreateView(BuildingStatusMixin, CreateView):
         context['list_url'] = reverse_lazy('admin2:buildings')
         return context
 
-    def get_success_url(self):
-        return self.object.get_edit_url()
 
-
-class BuildingDeleteView(BuildingStatusMixin, LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class BuildingDeleteView(BuildingStatusMixin, LoginRequiredMixin, DeleteView):
     model = Building
     pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:buildings')

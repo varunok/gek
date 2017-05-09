@@ -12,6 +12,7 @@ from admin2.forms import RedirectForm
 
 class RedrectList(ListView):
     model = Redirect
+    paginate_by = 10
     template_name = 'admin2/redirect/redirect_list.html'
 
 

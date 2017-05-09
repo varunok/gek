@@ -76,6 +76,8 @@ class Videos(models.Model):
         ordering = ['-when_create']
 
     def __unicode__(self):
+        if self.title:
+            return self.title
         return '{0}'.format(self.id)
 
     def save(self, *args, **kwargs):
@@ -90,6 +92,9 @@ class Videos(models.Model):
 
     def get_edit_url(self):
         return reverse('admin2:videos_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:videos_delete', args=[self.id])
 
     def get_absolute_url(self):
         return reverse('videos:videos_detail', args=[self.id])

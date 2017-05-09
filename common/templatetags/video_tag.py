@@ -8,6 +8,8 @@ register = template.Library()
 
 @register.filter(name='convert_to_frame')
 def convert_to_frame(video):
+    if not video:
+        return ''
     iframe = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
     if 'iframe' not in video:
         try:
@@ -21,6 +23,8 @@ def convert_to_frame(video):
 
 @register.filter(name='convert_to_frame_slider')
 def convert_to_frame_slider(video):
+    if not video:
+        return ''
     iframe = '<iframe width="566" height="368" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
     if 'iframe' not in video:
         try:
@@ -34,6 +38,8 @@ def convert_to_frame_slider(video):
 
 @register.filter(name='convert_to_frame_slider')
 def convert_to_frame_slider(video):
+    if not video:
+        return ''
     iframe = '<iframe width="595" height="340" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
     if 'iframe' not in video:
         try:

@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import WhatYouKnownSet, VideosCreateForm
-from common.mixins import FormSetMixin, DeleteAjaxMixin
+from common.mixins import FormSetMixin, DeleteAjaxMixin, SuccesMixin, MessageMixin
 from videos.models import Videos
 
 
@@ -23,14 +23,11 @@ class VideosList(ListView):
         return context
 
 
-class VideosEdit(UpdateView):
+class VideosEdit(SuccesMixin, MessageMixin, UpdateView):
     model = Videos
     form_class = VideosCreateForm
     pk_url_kwarg = 'pk'
     template_name = 'admin2/videos/videos_edit.html'
-
-    def get_success_url(self):
-        return self.object.get_edit_url()
 
     def get_context_data(self, **kwargs):
         context = super(VideosEdit, self).get_context_data(**kwargs)
@@ -38,13 +35,10 @@ class VideosEdit(UpdateView):
         return context
 
 
-class VideosCreate(CreateView):
+class VideosCreate(SuccesMixin, MessageMixin, CreateView):
     model = Videos
     template_name = 'admin2/videos/videos_edit.html'
     form_class = VideosCreateForm
-
-    def get_success_url(self):
-        return self.object.get_edit_url()
 
     def get_context_data(self, **kwargs):
         context = super(VideosCreate, self).get_context_data(**kwargs)
@@ -69,6 +63,8 @@ class VideosKnowsEdit(FormSetMixin):
         return context
 
 
-class VideosDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+class VideosDeleteView(LoginRequiredMixin, DeleteView):
     model = Videos
     slug_field = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:videos')

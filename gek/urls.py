@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^common/', include('common.urls', namespace='common')),
     url(r'^admin/', include('admin2.urls', namespace='admin2')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^p24/', include('privat24.urls', namespace='privat24')),
 
     # SITE
     url(r'^articles/', include('articles.urls', namespace='articles')),
