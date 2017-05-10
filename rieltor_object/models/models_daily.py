@@ -7,6 +7,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 
+from admin2.models import SettingsAddress
 from common.models import Photo, Video, ApartmentNext
 # from django.db import models
 from rieltor_object.models.common_objects import *
@@ -136,14 +137,17 @@ class Daily(models.Model):
         return '{0}'.format(self.id)
 
     def save(self, *args, **kwargs):
-        if self.title:
-            if not self.SEOTitle:
-                self.SEOTitle = self.title
-            if not self.SEOKeywords:
-                self.SEOKeywords = self.title
-            if not self.SEODescription:
-                self.SEODescription = '{0} {1} {2}'.format(self.address, self.price,
-                                                           self.title)
+        self.SEOTitle = self.normalize_SEO('Аренда {0} комнаты по {1} ценна {2} в {3}'.format(
+                                                     self.rooms or '',
+                                                     self.address or '',
+                                                     self.price or '',
+                                                     SettingsAddress.get_solo().city_plural or ''))
+        self.SEODescription = self.normalize_SEO('Аренда {0} комнаты по {1} район {2} в {3}'.format(
+                                                     self.rooms or '',
+                                                     self.address or '',
+                                                     self.district or '',
+                                                     SettingsAddress.get_solo().city_plural or ''))
+        self.SEOKeywords = self.SEODescription
         super(Daily, self).save(*args, **kwargs)
 
     def get_edit_url(self):
@@ -163,3 +167,8 @@ class Daily(models.Model):
 
     def meta(self):
         return self._meta
+
+    def normalize_SEO(self, text):
+        if self.rooms > 1:
+            text = text.replace('комнаты', 'комнат')
+        return text

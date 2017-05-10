@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^admin/', include('admin2.urls', namespace='admin2')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^p24/', include('privat24.urls', namespace='privat24')),
+    url(r'^liqpay/', include('liqpayapp.urls', namespace='liqpay')),
 
     # SITE
     url(r'^articles/', include('articles.urls', namespace='articles')),
@@ -40,7 +41,7 @@ urlpatterns = [
     url(r'favorites/', include('favorites.urls', namespace='favorites')),
     url(r'plan/', include('plan.urls', namespace='plan')),
     url(r'tests/', include('polls.urls', namespace='polls')),
-    url(r'^', include('landing.urls', namespace='landings')),
+    # url(r'^', include('landing.urls', namespace='landings')),
 
 ]
 urlpatterns += [

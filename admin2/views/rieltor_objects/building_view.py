@@ -34,8 +34,6 @@ class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateVie
     def get_context_data(self, **kwargs):
         context = super(BuildingEditView, self).get_context_data(**kwargs)
         context['content_type'] = ContentType.objects.get_for_model(self.model).id
-        context['video_form'] = self.video_form(instance=self.get_object())
-        context['video_check'] = self.get_object().videos.all().order_by('id')
         context['verbose_name'] = self.model._meta.verbose_name
         return context
 

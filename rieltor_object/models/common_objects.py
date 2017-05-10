@@ -53,6 +53,17 @@ class TypeLocation(object):
     )
 
 
+class TypeLayout(object):
+    RELATED = 'related'
+    SEPARATE = 'separate'
+    RELATED_SEPARATE = 'related-separate'
+    CHOICES = (
+        (RELATED, 'Смежные'),
+        (SEPARATE, 'Раздельные'),
+        (RELATED_SEPARATE, 'Смежно-раздельные'),
+    )
+
+
 class TypeFloor(object):
     FIRST = 'first'
     BASE = 'base'

@@ -10,9 +10,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
-        <title>Любая операция по коммерческой недвижимости в Одессе за 30 мин</title>
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
+        <title>{% block SEOTitle %}  {% endblock SEOTitle %}</title>
+        <meta name="keywords" content="{% block SEOKeywords %}  {% endblock SEOKeywords %}" />
+        <meta name="description" content="{% block SEODescription %}  {% endblock SEODescription %}" />
         <meta property="glyanec:code" content="39eef315143e93d76d452ab02a15ad2f">
         <link rel="stylesheet" type="text/css" href="{% static 'css/social-likes_flat.css' %}"/>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -25,7 +25,7 @@
         <!-- Website development - http://glyanec.net/ -->
     </head>
 
-    <body {% block class_body %}  {% endblock %}>
+    <body {% block class_body %}  {% endblock class_body %}>
 
         <div class="wrapper">
 
@@ -186,7 +186,7 @@
                 <div class="region_footer">
                     <div class="logo_wrapper">
                         <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt="">{{ domen|safe }}</a>
-                        <div class="copyright">Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством Украины.</div>
+                        <div class="copyright">Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством.</div>
                     </div>
                     <div class="footer_center">
                         <div class="menu_footer">

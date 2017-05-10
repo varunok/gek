@@ -16,14 +16,16 @@
 				<div class="title">Аренда фасадного помещения</div>
 			</div>
 			<div class="icons_wrap">
-				<div class="icon vip"></div>
+                {% if object.is_vip %}
+                    <div class="icon vip"></div>
+                {% endif %}
 				<div class="icon stat">{{ object.views }}</div>
 				<div class="icon favorite {{ object|fav_is_active:request }}">
                     <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
                     <input type="hidden" name="object_id" value="{{ object.id }}">
                 </div>
 			</div>
-			<h1 class="slider_title page_title">{{ object.get_type_deal_display }} {{ object.get_appointment_display }}, {{ object.address }}. <br>({{ object.price }} грн, $5101)</h1>
+			<h1 class="slider_title page_title">{{ object.get_title }} , {{ object.address }}. <br>({{ object.price }} грн, $5101)</h1>
 			<div class="webform_client_form">				
 				<div class="form_actions">
 					<input class="form-submit" type="submit" value="Заказать осмотр">

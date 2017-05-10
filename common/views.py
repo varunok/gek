@@ -4,23 +4,23 @@ from __future__ import unicode_literals
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.views import View
-from django.views.generic import TemplateView, DeleteView, UpdateView, CreateView
+from django.views.generic import DeleteView, DetailView
 
 from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from admin2.models import IndexPageModel
-from articles.models import Articles
-from common.forms import PhotoForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
-from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding, Building,\
+from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding, Building, \
     Ofice
+from seo.mixins import SEOMixin
 
 
-class MainView(TemplateView):
+class MainView(SEOMixin, DetailView):
     template_name = 'index.html'
+    seo_model = IndexPageModel
 
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
@@ -29,6 +29,9 @@ class MainView(TemplateView):
         context['newbuildings'] = NewBuilding.objects.order_by('?')
         context['indexpagemodel'] = IndexPageModel.get_solo()
         return context
+
+    def get_object(self, queryset=None):
+        return IndexPageModel.get_solo()
 
 
 def save_video(request):

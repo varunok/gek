@@ -147,7 +147,6 @@ def email():
 @register.assignment_tag
 def franchise():
     active_franchise =  ActiveFranchise.get_solo().active_franchise
-    print(active_franchise - date.today())
     try:
         active_franchise, word = str(active_franchise - date.today()).split(',')[0].split(' ')
         active_franchise = int(active_franchise)

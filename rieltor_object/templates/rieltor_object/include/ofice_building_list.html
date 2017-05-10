@@ -183,7 +183,7 @@
                             {{ filter_form.form.appointment }}
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Стоимость, грн:</label>
+							<label>Стоимость, <span id="currency_nac">грн</span><span id="currency_dol" style="display: none">$</span>:</label>
 							<div class="form_number">
                                 {{ filter_form.form.price__gt }}
 							</div>
@@ -191,6 +191,7 @@
 								{{ filter_form.form.price__lt}}
 							</div>
 						</div>
+
 						<div class="form_item group form_wrapper">
 							<label>Площадь, м. кв.:</label>
 							<div class="form_number">
@@ -289,4 +290,18 @@
         var BASE_URL = '{{ BASE_URL }}';
     </script>
     <script src="{% static 'js/search_form.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', 'input[name="type_deal"]', function () {
+                var val = $(this).val();
+                if( val==='rent'){
+                    $('#currency_nac').fadeIn();
+                    $('#currency_dol').fadeOut();
+                }else{
+                    $('#currency_nac').fadeOut();
+                    $('#currency_dol').fadeIn();
+                }
+            })
+        })
+    </script>
 {% endblock js %}

@@ -2,7 +2,7 @@
  * Created by varunok on 10.04.17.
  */
 $(document).ready(function() {
-    $(document).on('click', '.searh-click', function (event) {
+    $(document).on('click', '.search-click', function (event) {
         event.preventDefault();
         var data = $('.search-form').serializeArray();
         runFilter(data);
@@ -24,7 +24,7 @@ $(document).ready(function() {
         var redirectTo = BASE_URL;
         if(uris.length > 0)
             redirectTo += '/' + uris.join('-');
-
+        console.log(redirectTo)
         location.href = redirectTo;
     }
     $(document).on('click', '.close', function () {

@@ -1,7 +1,7 @@
 {% load favorites_tag %}
 {% for object in object_list %}
     <div class="views_row vip_row">
-        {% if object.status == 'vip' %}
+        {% if object.is_vip %}
             <div class="vip"></div>
         {% endif %}
         <div class="title">{{ object.title }}</div>

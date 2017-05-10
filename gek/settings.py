@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'seo',
     'landing',
     'privat24',
+    'liqpayapp',
 ]
 
 MIDDLEWARE = [

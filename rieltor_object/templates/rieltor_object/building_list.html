@@ -1,1 +1,325 @@
-{% include 'rieltor_object/include/ofice_building_list.html' %}
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load video_tag %}
+{% load admin_tags %}
+{% load thumbnail %}
+{% load banners_tag %}
+{% load rieltor_tag %}
+{% block css %}{% endblock css %}
+
+{% block class_body %}  class="not-front ranking sidebar_first" {% endblock %}
+
+{% block content %}
+<main class="middle">
+		<div class="slider_main slider_notfront"{% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ seo.title_h1|default:'Аренда коммерческой недвижимости' }}</div>
+			<form action="#" class="webform_client_form">
+				<div class="form_item search">
+					<input type="text" placeholder="Искать в тексте объявления">
+				</div>
+				<div class="form_actions">
+					<input class="form-submit" type="submit" value="Найти">
+				</div>
+			</form>
+		</div>
+		<div class="middle_inner">
+			<div class="container">
+				<div id="content">
+					<div class="block search_results">
+						<div class="top_wrap">
+							<div class="left_wrap">
+								<div class="count_result">
+                                    {% if not object_list.count %}
+                                        {{ object_list.count }}
+                                        {% else %}
+                                        {% if object_list.count < 10 %}
+                                            1-{{ object_list.count }} из {{ object_list.count }}
+                                            {% else %}
+                                            1-10 из
+                                            {% if count_obj %}
+                                                {{ count_obj }}
+                                                {% else %}
+                                                {{ object_list.count }}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                     результатов
+                                </div>
+							</div>
+							<div class="right_wrap">
+								<div class="sortable">
+									<label for="sort">Сортировка:</label>
+									<select name="sort" id="sort">
+										<option value="1">Новые наверху</option>
+										<option value="2">Новые внизу</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="bottom_wrap">
+							<div class="filters">
+                                {% for type_deal in filter_form.form.type_deal %}
+                                    {% if type_deal.data.selected %}
+                                        <div class="item">{{ type_deal.choice_label }}<div class="close" data-href="{% filterpath request.path type_deal.data.name type_deal.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for appointment in filter_form.form.appointment %}
+                                    {% if appointment.data.selected and '-' not in appointment.choice_label %}
+                                        <div class="item">{{ appointment.choice_label }}<div class="close" data-href="{% filterpath request.path appointment.data.name appointment.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for district in filter_form.form.district %}
+                                    {% if district.data.selected and '-' not in district.choice_label %}
+                                        <div class="item">{{ district.choice_label }}<div class="close" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for layout in filter_form.form.layout %}
+                                    {% if layout.data.selected and '-' not in layout.choice_label %}
+                                        <div class="item">{{ layout.choice_label }}<div class="close" data-href="{% filterpath request.path layout.data.name layout.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for rooms in filter_form.form.rooms %}
+                                    {% if rooms.data.selected and '------' not in rooms.choice_label %}
+                                        <div class="item">{{ rooms.choice_label }}<div class="close" data-href="{% filterpath request.path rooms.data.name rooms.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.price__gt.data %}
+                                            {% if not filter_form.form.price__lt.data %}
+                                                От {{ filter_form.form.price__gt.data }}
+                                                {% else %}
+                                                {{ filter_form.form.price__gt.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.price__lt.data %}
+                                            {% if not filter_form.form.price__gt.data %}
+                                                До {{ filter_form.form.price__lt.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.price__lt.data }}
+                                            {% endif %}
+                                        {% endif %} грн
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
+                                                {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                                                {% elif filter_form.form.price__gt.data %}
+                                                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
+                                                {% elif filter_form.form.price__lt.data %}
+                                                    {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+                                {% if filter_form.form.footage__gt.data or filter_form.form.footage__lt.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.footage__gt.data %}
+                                            {% if not filter_form.form.footage__lt.data %}
+                                                От {{ filter_form.form.footage__gt.data }}
+                                                {% else %}
+                                                {{ filter_form.form.footage__gt.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.footage__lt.data %}
+                                            {% if not filter_form.form.footage__gt.data %}
+                                                До {{ filter_form.form.footage__lt.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.footage__lt.data }}
+                                            {% endif %}
+                                        {% endif %} грн
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.footage__gt.data and filter_form.form.footage__lt.data %}
+                                                {% filterpath request.path filter_form.form.footage__gt.name filter_form.form.footage__gt.data filter_form.form.footage__lt.name filter_form.form.footage__lt.data %}
+                                                {% elif filter_form.form.footage__gt.data %}
+                                                    {% filterpath request.path filter_form.form.footage__gt.name filter_form.form.footage__gt.data %}
+                                                {% elif filter_form.form.footage__lt.data %}
+                                                    {% filterpath request.path filter_form.form.footage__lt.name filter_form.form.footage__lt.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+                                {% if filter_form.form.floor__gte.data or filter_form.form.floor__lte.data %}
+                                    <div class="item">
+                                        {% if filter_form.form.floor__gte.data %}
+                                            {% if not filter_form.form.floor__lte.data %}
+                                                От {{ filter_form.form.floor__gte.data }}
+                                                {% else %}
+                                                {{ filter_form.form.floor__gte.data }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if filter_form.form.floor__lte.data %}
+                                            {% if not filter_form.form.floor__gte.data %}
+                                                До {{ filter_form.form.floor__lte.data }}
+                                                {% else %}
+                                                -{{ filter_form.form.floor__lte.data }}
+                                            {% endif %}
+                                        {% endif %} грн
+                                        <div class="close" data-href="
+                                             {% if filter_form.form.floor__gte.data and filter_form.form.floor__lte.data %}
+                                                {% filterpath request.path filter_form.form.floor__gte.name filter_form.form.floor__gte.data filter_form.form.floor__lte.name filter_form.form.floor__lte.data %}
+                                                {% elif filter_form.form.floor__gte.data %}
+                                                    {% filterpath request.path filter_form.form.floor__gte.name filter_form.form.floor__gte.data %}
+                                                {% elif filter_form.form.footage__lt.data %}
+                                                    {% filterpath request.path filter_form.form.floor__lte.name filter_form.form.floor__lte.data %}
+                                             {% endif %}
+                                        "></div>
+                                    </div>
+                                {% endif %}
+                                {% for location in filter_form.form.location %}
+                                    {% if location.data.selected %}
+                                        <div class="item">{{ location.choice_label }}<div class="close" data-href="{% filterpath request.path location.data.name location.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for floor in filter_form.form.floor %}
+                                    {% if floor.data.selected %}
+                                        <div class="item">{{ floor.choice_label }}<div class="close" data-href="{% filterpath request.path floor.data.name floor.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for entrance in filter_form.form.entrance %}
+                                    {% if entrance.data.selected %}
+                                        <div class="item">{{ entrance.choice_label }}<div class="close" data-href="{% filterpath request.path entrance.data.name entrance.data.value %}"></div></div>
+                                    {% endif %}
+                                {% endfor %}
+							</div>
+							<div class="form_actions">
+								<input type="submit" value="Подобрать объект">
+							</div>
+						</div>
+					</div>
+					<div class="block block_shops block_search_results">
+						<div class="block_content">
+							<div class="view_content list-building">
+                                {% include 'rieltor_object/include/building_item.html' %}
+                                <div class="load_more_wrap">
+                                    {% if count_next %}
+                                        <div class="load_more read_more">
+                                            <a href="#">
+                                                Загрузить еще
+                                                <span>{{ count_next }}</span> объектов
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div><!-- #content-->
+
+			</div>
+			<div class="left_sidebar">
+				<div class="block property_search">
+					<div class="form_title">Поиск недвижимости {{ filter_result }}</div>
+					<form action="." method="get" class="webform_client_form search-form">
+                        {% csrf_token %}
+						<div class="form_item form_checkboxes">
+    						{% for type_deal in filter_form.form.type_deal %}
+                                {% if type_deal.choice_label %}
+                                    <div class="form_checkbox">
+                                        <input type="checkbox" value="{{ type_deal.data.value }}" name="{{ type_deal.data.name }}" id="{{ type_deal.id_for_label }}" {% if type_deal.data.selected %} checked {% endif %}>
+                                        <label for="{{ type_deal.id_for_label }}">{{ type_deal.choice_label }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+						</div>
+						<div class="form_item form_select form_wrapper">
+                            {{ filter_form.form.appointment.label_tag }}
+                            {{ filter_form.form.appointment }}
+						</div>
+						<div class="form_item form_select form_wrapper">
+                            {{ filter_form.form.district.label_tag }}
+                            {{ filter_form.form.district }}
+						</div>
+                        <div class="form_item group form_wrapper">
+							{{ filter_form.form.layout.label_tag }}
+                            {{ filter_form.form.layout }}
+						</div>
+                        <div class="form_item group form_wrapper">
+							{{ filter_form.form.rooms.label_tag }}
+                            {{ filter_form.form.rooms }}
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Стоимость, <span id="currency_nac">грн</span><span id="currency_dol" style="display: none">$</span>:</label>
+							<div class="form_number">
+                                {{ filter_form.form.price__gt }}
+							</div>
+							<div class="form_number">
+								{{ filter_form.form.price__lt}}
+							</div>
+						</div>
+
+						<div class="form_item group form_wrapper">
+							<label>Площадь, м. кв.:</label>
+							<div class="form_number">
+								{{ filter_form.form.footage__gt }}
+							</div>
+							<div class="form_number">
+								{{ filter_form.form.footage__lt }}
+							</div>
+						</div>
+						<div class="form_item group form_wrapper">
+							<label>Этаж:</label>
+							<div class="form_number">
+								{{ filter_form.form.floor__gte }}
+							</div>
+							<div class="form_number">
+								{{ filter_form.form.floor__lte }}
+							</div>
+						</div>
+						<div class="form_actions">
+							<input type="button" value="Поиск" class="search-click">
+							<div class="links">
+{#								<div class="search_full"><a href="#">Расширенный поиск</a></div>#}
+								<div class="search_clear"><a href="{{ clear_filter }}">очистить</a></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				{% include 'common/include/vip_left_sidebar.html' %}
+                {% sidebanner %}
+				{% include 'services/include/services_sidebar.html' %}
+			</div>
+		</div>
+		{% include 'seo/seo.html' %}
+		<div class="block block_presentation">
+			<div class="block_content">
+				<div class="block_title">Подберем вам необходимый объект за 30 минут</div>
+				<div class="view_content">
+					<div class="sub_title">В базе более 1000 объектов</div>
+					<form action="#" class="webform_client_form">
+						<div class="form_item user_name">
+							<input type="text" placeholder="Введите ваше имя">
+						</div>
+						<div class="form_item phone">
+							<input type="text" placeholder="Введите ваш телефон">
+						</div>
+						<div class="form_item form_textarea">
+							<textarea placeholder="Введите ваше сообщение"></textarea>
+						</div>
+						<div class="form_actions">
+							<input type="submit" class="form_submit" value="Связаться со специалистом">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main><!-- .content -->
+{% endblock content %}
+{% block js %}
+    <script>
+        var BASE_URL = '{{ BASE_URL }}';
+    </script>
+    <script src="{% static 'js/search_form.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', 'input[name="type_deal"]', function () {
+                var val = $(this).val();
+                if( val==='rent'){
+                    $('#currency_nac').fadeIn();
+                    $('#currency_dol').fadeOut();
+                }else{
+                    $('#currency_nac').fadeOut();
+                    $('#currency_dol').fadeIn();
+                }
+            })
+        })
+    </script>
+{% endblock js %}

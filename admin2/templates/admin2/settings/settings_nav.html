@@ -17,4 +17,7 @@
     <li {% if 'private' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_private24' %}" >Privat24</a>
     </li>
+    <li {% if 'liqpay' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_liqpay' %}" >Liqpay</a>
+    </li>
 </ul>

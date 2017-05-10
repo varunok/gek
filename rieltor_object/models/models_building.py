@@ -9,6 +9,7 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
+from admin2.models import SettingsAddress
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 from rieltor_object.models.models_newbuilding import NewBuilding
@@ -16,7 +17,7 @@ from rieltor_object.models.models_newbuilding import NewBuilding
 
 class BuildingManager(models.Manager):
     def vips(self, *args, **kwargs):
-        kwargs['status'] = TypeStatus.VIP
+        kwargs['is_vip'] = True
         return self.filter(*args, **kwargs)
 
 
@@ -90,33 +91,25 @@ class Building(models.Model):
         verbose_name='Дата редактирования',
         auto_now=True
     )
-    location = models.CharField(
-        verbose_name='Расположение',
+    layout = models.CharField(
+        verbose_name='Планировка',
         max_length=20,
-        choices=TypeLocation.CHOICES,
+        choices=TypeLayout.CHOICES,
         blank=True,
         null=True
     )
-    floor = models.CharField(
+    floor = models.IntegerField(
         verbose_name='Этаж',
-        max_length=20,
-        choices=TypeFloor.CHOICES,
         blank=True,
         null=True
     )
-    entrance = models.CharField(
-        verbose_name='Вход',
-        max_length=20,
-        choices=TypeEntrance.CHOICES,
-        blank=True,
-        null=True
+    is_vip = models.BooleanField(
+        verbose_name='VIP',
+        default=False
     )
-    status = models.CharField(
-        verbose_name='Статус',
-        max_length=20,
-        choices=TypeStatus.CHOICES,
-        blank=True,
-        null=True
+    is_short = models.BooleanField(
+        verbose_name='Краткое',
+        default=False
     )
     district = models.ForeignKey(
         District,
@@ -142,10 +135,6 @@ class Building(models.Model):
         verbose_name='Панорама',
         blank=True
     )
-    geo = models.TextField(
-        verbose_name='На карте',
-        blank=True
-    )
     views = models.IntegerField(
         verbose_name='Просмотры',
         default=0
@@ -155,7 +144,10 @@ class Building(models.Model):
         editable=False
     )
 
-    videos = GenericRelation(Video, related_query_name='building')
+    video = models.TextField(
+        verbose_name='Код видео',
+        blank=True
+    )
     images = GenericRelation(Photo, related_query_name='building')
 
     objects = BuildingManager()
@@ -171,17 +163,20 @@ class Building(models.Model):
         return '{0}'.format(self.id)
 
     def save(self, *args, **kwargs):
-        if self.title:
-            if not self.SEOTitle:
-                self.SEOTitle = self.title
-            if not self.SEOKeywords:
-                self.SEOKeywords = self.title
-            if not self.SEODescription:
-                self.SEODescription = '{0} {1} {2} {3} {4}'.format(self.get_type_deal_display(),
-                                                                   self.get_appointment_display(), self.address,
-                                                                   self.price,
-                                                                   self.title)
+        self.SEOTitle = self.normalize_SEO('{0} {1} по {2} ценна {3} в {4}'.format(self.get_type_deal_display() or '',
+                                                     self.get_appointment_display() or '',
+                                                     self.address or '',
+                                                     self.price or '',
+                                                     SettingsAddress.get_solo().city_plural or ''))
+        self.SEODescription = self.normalize_SEO('{0} {1} {2} по {3} район {4}'.format(self.title or '',
+                                                             self.get_type_deal_display() or '',
+                                                             self.get_appointment_display() or '',
+                                                             self.address or '',
+                                                             self.district or ''))
+        self.SEOKeywords = self.SEODescription
         super(Building, self).save(*args, **kwargs)
+
+
 
     def get_edit_url(self):
         return reverse('admin2:building_edit', args=[self.id])
@@ -200,3 +195,12 @@ class Building(models.Model):
 
     def meta(self):
         return self._meta
+
+    def normalize_SEO(self, text):
+        text = text.replace('Дом', 'дома')
+        text = text.replace('Квартира', 'квартиры')
+        return text
+
+    def get_title(self):
+        appointment = self.normalize_SEO(self.get_appointment_display())
+        return '{0} {1}'.format(self.get_type_deal_display(), appointment)

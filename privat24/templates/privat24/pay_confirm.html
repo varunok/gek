@@ -52,7 +52,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Сумма платежа: <span class="required"></span>
                                             </label>
                                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                                <input type="text" disabled value="{{ pay_setting.price_30 }} {{ privat_setting.currency }}" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" disabled value="{{ price }} {{ privat_setting.currency }}" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -66,26 +66,36 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Метод платежа: <span class="required"></span>
                                             </label>
                                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                                <input type="text" disabled value="Приват24" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" disabled value="{{ method }}" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Дней: <span class="required"></span>
+                                            </label>
+                                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                                <input type="text" disabled value="{{ days }}" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>
                                     <form action="https://api.privatbank.ua/p24api/ishop" method="post">
-                                        <input type="hidden" name="amt" value="{{ pay_setting.price_30 }}">
-                                        <input type="hidden" name="ccy" value="{{ privat_setting.currency }}">
-                                        <input type="hidden" name="merchant" value="{{ privat_setting.merchant }}">
-                                        <input type="hidden" name="order" value="1">
-                                        <input type="hidden" name="details" value="Продление франшизы {{ request.get_host }}">
-                                        <input type="hidden" name="ext_details" value="Стоимость за {{ days }}">
-                                        <input type="hidden" name="pay_way" value="privat24">
-                                        <input type="hidden" name="return_url" value="xata-spb.ru">
-                                        <input type="hidden" name="server_url" value="xata-spb.ru">
-                                        <input type="hidden" name="signature" value="{{ signature }}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="sid" value="{{ fields.sid }}">
+                                        <input type="hidden" name="amt" value="{{ fields.amt }}">
+                                        <input type="hidden" name="ccy" value="{{ fields.ccy }}">
+                                        <input type="hidden" name="merchant" value="{{ fields.merchant }}">
+                                        <input type="hidden" name="order" value="{{ fields.order }}">
+                                        <input type="hidden" name="details" value="{{ fields.details }} {{ request.get_host }}">
+                                        <input type="hidden" name="ext_details" value="{{ fields.ext_details }}">
+                                        <input type="hidden" name="pay_way" value="{{ fields.pay_way }}">
+                                        <input type="hidden" name="return_url" value="{{ fields.return_url }}">
+                                        <input type="hidden" name="server_url" value="{{ fields.server_url }}">
+{#                                        <input type="hidden" name="signature" value="{{ fields.signature }}">#}
                                         <div class="form-group" style="float: right">
                                             <input type="submit" class="btn btn-success" value="Перейти к оплате">
                                         </div>
                                     </form>
+                                    {{ html|safe }}
 
                                 </div>
                             </div>

@@ -59,17 +59,48 @@ class FilterObjectMixin(django_filters.FilterSet):
 
 
 
-class FilterBuilding(FilterObjectMixin):
+class FilterBuilding(django_filters.FilterSet):
+    ROOMS_CHOICES = (
+        (1, '1-но комнатные'),
+        (2, '2-но комнатные'),
+        (3, '3-но комнатные'),
+        (4, '4-но комнатные'),
+        (5, 'Многокомнатные'),
+    )
+    type_deal = django_filters.MultipleChoiceFilter(
+        choices=TypeDeal.CHOICES,
+        required=False,
+        lookup_expr='in',
+    )
+    district = django_filters.ModelChoiceFilter(
+        widget=Select(),
+        queryset=District.objects.all()
+    )
+    rooms = django_filters.ChoiceFilter(
+        choices=ROOMS_CHOICES,
+        method='rooms_choice'
+    )
     class Meta:
         model = Building
         fields = {
             'appointment': ['exact'],
+            'layout': ['exact'],
             'footage': ['gt', 'lt'],
             'price': ['gt', 'lt'],
+            'floor': ['gte', 'lte'],
         }
         # strict = STRICTNESS.RAISE_VALIDATION_ERROR
         strict = STRICTNESS.RETURN_NO_RESULTS
         # strict = STRICTNESS.IGNORE
+
+    def rooms_choice(self, queryset, name, value):
+        if isinstance(value, unicode):
+            value = int(value)
+        if value >= 5:
+            lookup = '__'.join([name, 'gt'])
+        else:
+            lookup = '__'.join([name, 'exact'])
+        return queryset.filter(**{lookup: value})
 
 
 class FilterOfise(FilterObjectMixin):

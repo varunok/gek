@@ -10,7 +10,8 @@ from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from admin2.forms import SettingFranchiseAddForm
-from admin2.models import Settings, SettingsAddress, SettingsFranchise, ActiveFranchise, SettingsPrivate24
+from admin2.models import Settings, SettingsAddress, SettingsFranchise, ActiveFranchise, SettingsPrivate24, \
+    SettingsLiqpay
 from common.mixins import MessageMixin
 
 
@@ -78,5 +79,15 @@ class SettingsPrivate24View(MessageMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return SettingsPrivate24.get_solo()
+
+
+class SettingsLiqpayView(MessageMixin, UpdateView):
+    model = SettingsLiqpay
+    template_name = 'admin2/settings/settings_liqpay.html'
+    success_url = reverse_lazy('admin2:settings_liqpay')
+    fields = '__all__'
+
+    def get_object(self, queryset=None):
+        return SettingsLiqpay.get_solo()
 
 

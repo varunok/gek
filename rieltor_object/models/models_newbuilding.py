@@ -9,6 +9,7 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
+from admin2.models import SettingsAddress
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 
@@ -182,14 +183,16 @@ class NewBuilding(models.Model):
         return '{0}'.format(self.id)
 
     def save(self, *args, **kwargs):
-        if self.title:
-            if not self.SEOTitle:
-                self.SEOTitle = self.title
-            if not self.SEOKeywords:
-                self.SEOKeywords = self.title
-            if not self.SEODescription:
-                self.SEODescription = '{0} {1} {2}'.format(self.address, self.price,
-                                                           self.title)
+        self.SEOTitle = self.normalize_SEO('Продажа в новострое по {0} район {1} ценна {2} в {3}'.format(
+                                                     self.address or '',
+                                                     self.district or '',
+                                                     self.price or '',
+                                                     SettingsAddress.get_solo().city_plural or ''))
+        self.SEODescription = self.normalize_SEO('Продажа в новострое по {0} район {1} в {2}'.format(
+                                                     self.address or '',
+                                                     self.district or '',
+                                                     SettingsAddress.get_solo().city_plural or ''))
+        self.SEOKeywords = self.SEODescription
         super(NewBuilding, self).save(*args, **kwargs)
 
     def get_edit_url(self):
@@ -209,3 +212,6 @@ class NewBuilding(models.Model):
 
     def meta(self):
         return self._meta
+
+    def normalize_SEO(self, text):
+        return text

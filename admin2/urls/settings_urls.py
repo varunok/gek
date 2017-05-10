@@ -36,4 +36,9 @@ urlpatterns = [
         settings_views.SettingsPrivate24View.as_view(),
         name='settings_private24'
     ),
+    url(
+        r'^settings/liqpay/$',
+        settings_views.SettingsLiqpayView.as_view(),
+        name='settings_liqpay'
+    ),
 ]

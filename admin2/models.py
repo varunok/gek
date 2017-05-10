@@ -146,6 +146,26 @@ class SettingsPrivate24(SingletonModel):
     )
 
 
+class SettingsLiqpay(SingletonModel):
+    merchant = models.IntegerField(
+        verbose_name='Liqpay merchant ID',
+        blank=True,
+        null=True
+    )
+    signature = models.CharField(
+        verbose_name='Liqpay signature',
+        blank=True,
+        null=True,
+        max_length=250
+    )
+    currency = models.CharField(
+        verbose_name='Валюта',
+        choices=CurrencyPayChoice.CARRENCY,
+        max_length=3,
+        blank=True
+    )
+
+
 class ActiveFranchise(SingletonModel):
     active_franchise = models.DateField(
         verbose_name='Франшиза активна до',

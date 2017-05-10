@@ -5,13 +5,17 @@
 {% load base_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
 {% block class_body %}  class="front" {% endblock %}
 
 {% block content %}
     <main class="middle">
 		<div class="slider_front slider_main"{% if indexpagemodel.image %}
                 style="background: url({{ indexpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ indexpagemodel.title_h1|default:'Коммерческая недвижимость' }}</h1>
+			<h1 class="slider_title page_title">{{ seo.title_h1|default:'Коммерческая недвижимость' }}</h1>
 			<div class="slider_subtitle">{{ indexpagemodel.subtitle|default:'<u>Нужно решить проблемы</u>  c коммерческой недвижимостью?' }}</div>
 			<div class="text">Помогаем с любой операцией по недвижимости за <u>30 минут</u></div>
 			<form action="#" class="webform_client_form">
@@ -23,37 +27,39 @@
 				</div>
 			</form>
 		</div>
-
-		<div class="block block_shops">
-			<div class="block_content">
-				<div class="block_title">Офисы и магазины / Горячие предложения</div>
-				<div class="view_content">
-                    {% for office in offices %}
-                        <div class="views_row">
-                            <div class="field_image">
-                                <img src="{{ office.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
-                                <div class="type">{{ office.get_type_deal_display|default:'' }}
-                                    {% if office.appointment == 'apartment' %}
-                                        {{ office.get_appointment_display|cut_last_char }}{{ 0|pluralize:'ы' }}
-                                        {% elif office.appointment == 'house' %}
-                                        {{ office.get_appointment_display }}{{ 0|pluralize:'a' }}
-                                    {% endif %}
+        {% ofices_is_enable as ofices_is_enable %}
+        {% if ofices_is_enable %}
+            <div class="block block_shops">
+                <div class="block_content">
+                    <div class="block_title">Офисы и магазины / Горячие предложения</div>
+                    <div class="view_content">
+                        {% for office in offices %}
+                            <div class="views_row">
+                                <div class="field_image">
+                                    <img src="{{ office.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                    <div class="type">{{ office.get_type_deal_display|default:'' }}
+                                        {% if office.appointment == 'apartment' %}
+                                            {{ office.get_appointment_display|cut_last_char }}{{ 0|pluralize:'ы' }}
+                                            {% elif office.appointment == 'house' %}
+                                            {{ office.get_appointment_display }}{{ 0|pluralize:'a' }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="views_body">
+                                    <div class="star"></div>
+                                    <div class="address">{{ office.address|default:'' }}</div>
+                                    <div class="text">{{ office.description|default:'' }}</div>
+                                    <div class="price">${{ office.price|default:'' }}</div>
+                                    <div class="statistics">{{ office.views }}</div>
+                                    <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
+                                    <div class="read_more"><a href="/">Оставить заявку</a></div>
                                 </div>
                             </div>
-                            <div class="views_body">
-                                <div class="star"></div>
-                                <div class="address">{{ office.address|default:'' }}</div>
-                                <div class="text">{{ office.description|default:'' }}</div>
-                                <div class="price">${{ office.price|default:'' }}</div>
-                                <div class="statistics">{{ office.views }}</div>
-                                <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                <div class="read_more"><a href="/">Оставить заявку</a></div>
-                            </div>
-                        </div>
-                    {% endfor %}
-				</div>
-			</div>
-		</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         {% building_is_enable as building_is_enable %}
         {% if building_is_enable %}
             <div class="block block_shops hot_deals">
@@ -91,50 +97,53 @@
                 </div>
             </div>
         {% endif %}
-		<div class="block new_buildings">
-			<div class="block_content">
-				<div class="block_title">Новостройки</div>
-				<div class="view_content">
-                    {% for newbuilding in newbuildings|slice:':2' %}
-                        <div class="views_row">
-                            <div class="title">{{ newbuilding.title|default:'' }}</div>
-                            <div class="field_image">
-                                <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
+        {% newbuilding_is_enable as newbuilding_is_enable %}
+        {% if newbuilding_is_enable %}
+            <div class="block new_buildings">
+                <div class="block_content">
+                    <div class="block_title">Новостройки</div>
+                    <div class="view_content">
+                        {% for newbuilding in newbuildings|slice:':2' %}
+                            <div class="views_row">
+                                <div class="title">{{ newbuilding.title|default:'' }}</div>
+                                <div class="field_image">
+                                    <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
+                                </div>
+                                <div class="views_body">
+                                    <div class="star {{ newbuilding|fav_is_active:request }}">
+                                        <input type="hidden" name="content_type" value="{{ newbuilding.get_content_type }}">
+                                        <input type="hidden" name="object_id" value="{{ newbuilding.id }}">
+                                    </div>
+                                    <div class="left_wrap">
+                                        <div class="address">{{ newbuilding.address|default:'' }}</div>
+                                        <div class="info">
+                                            <div class="label">Район:</div>
+                                            <div class="item">{{ newbuilding.district|default:'' }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">Сдаваемых помещений:</div>
+                                            <div class="item">{{ newbuilding.building.count }}</div>
+                                        </div>
+                                        <div class="price">${{ newbuilding.price|default:'' }}</div>
+                                    </div>
+                                    <div class="right_wrap">
+                                        <div class="statistics">{{ newbuilding.views }}</div>
+                                        <div class="info">
+                                            <div class="label">Сдаётся с    </div><div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">Общая площадь:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
+                                        </div>
+                                        <div class="read_more"><a href="/">Оставить заявку</a></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="views_body">
-                                <div class="star {{ newbuilding|fav_is_active:request }}">
-                                    <input type="hidden" name="content_type" value="{{ newbuilding.get_content_type }}">
-                                    <input type="hidden" name="object_id" value="{{ newbuilding.id }}">
-                                </div>
-                                <div class="left_wrap">
-                                    <div class="address">{{ newbuilding.address|default:'' }}</div>
-                                    <div class="info">
-                                        <div class="label">Район:</div>
-                                        <div class="item">{{ newbuilding.district|default:'' }}</div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="label">Сдаваемых помещений:</div>
-                                        <div class="item">{{ newbuilding.building.count }}</div>
-                                    </div>
-                                    <div class="price">${{ newbuilding.price|default:'' }}</div>
-                                </div>
-                                <div class="right_wrap">
-                                    <div class="statistics">{{ newbuilding.views }}</div>
-                                    <div class="info">
-                                        <div class="label">Сдаётся с    </div><div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="label">Общая площадь:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
-                                    </div>
-                                    <div class="read_more"><a href="/">Оставить заявку</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
 
-				</div>
-			</div>
-		</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         {% include 'services/include/services_downbar.html' %}
 		<div class="block block_presentation">
 			<div class="block_content">
@@ -173,7 +182,7 @@
 				</div>
 			</div>
 		</div>
-		{% include 'seo/seo.html' with seo=indexpagemodel %}
+		{% include 'seo/seo.html' %}
         {% include 'articles/include/article_prop.html' %}
 	</main><!-- .content -->
 {% endblock content %}

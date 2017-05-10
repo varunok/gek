@@ -9,6 +9,7 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
+from admin2.models import SettingsAddress
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 
@@ -161,16 +162,17 @@ class Ofice(models.Model):
         return '{0}'.format(self.id)
 
     def save(self, *args, **kwargs):
-        if self.title:
-            if not self.SEOTitle:
-                self.SEOTitle = self.title
-            if not self.SEOKeywords:
-                self.SEOKeywords = self.title
-            if not self.SEODescription:
-                self.SEODescription = '{0} {1} {2} {3} {4}'.format(self.get_type_deal_display(),
-                                                                   self.get_appointment_display(), self.address,
-                                                                   self.price,
-                                                                   self.title)
+        self.SEOTitle = self.normalize_SEO('{0} {1} по {2} ценна {3} в {4}'.format(self.get_type_deal_display() or '',
+                                                     self.get_appointment_display() or '',
+                                                     self.address or '',
+                                                     self.price or '',
+                                                     SettingsAddress.get_solo().city_plural or ''))
+        self.SEODescription = self.normalize_SEO('{0} {1} {2} по {3} район {4}'.format(self.title or '',
+                                                             self.get_type_deal_display() or '',
+                                                             self.get_appointment_display() or '',
+                                                             self.address or '',
+                                                             self.district or ''))
+        self.SEOKeywords = self.SEODescription
         super(Ofice, self).save(*args, **kwargs)
 
     def get_edit_url(self):
@@ -190,3 +192,8 @@ class Ofice(models.Model):
 
     def meta(self):
         return self._meta
+
+    def normalize_SEO(self, text):
+        text = text.replace('Офис', 'офиса')
+        text = text.replace('Магазин', 'магазина')
+        return text

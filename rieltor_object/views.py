@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 # Create your views here.
+from django.contrib.sites.models import Site
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 
@@ -13,24 +14,21 @@ from rieltor_object.helpers import HelperFilter
 from rieltor_object.mixins import BuildingStatusMixin, OfficeStatusMixin, DailyStatusMixin, NewBuildingStatusMixin, \
     EarthStatusMixin
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
+from seo.mixins import SEOMixin
 from seo.models import SEO
 
 PAGINATE_OBJ = 10
 
 
-class BuildingListSiteView(BuildingStatusMixin, ListView):
+class BuildingListSiteView(SEOMixin, BuildingStatusMixin, ListView):
     model = Building
     template_name = 'rieltor_object/building_list.html'
     paginate_by = PAGINATE_OBJ
+    seo_model = BuildingPageModel
 
     def get_context_data(self, **kwargs):
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
-        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
-        if SEO.objects.filter(url=path).exists():
-            context['seo'] = SEO.objects.filter(url=path).first()
-        else:
-            context['seo'] = BuildingPageModel.get_solo()
         if queryFilter:
             context['object_list'] = FilterBuilding(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterBuilding(queryFilter, queryset=self.object_list)
