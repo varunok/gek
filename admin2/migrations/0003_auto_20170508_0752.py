@@ -9,6 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('sites', '__first__'),
         ('admin2', '0002_contactpagemodel_users'),
     ]
 
