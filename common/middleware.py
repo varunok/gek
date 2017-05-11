@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse, reverse_lazy
 from django.utils.deprecation import MiddlewareMixin
 
 class RedirectMiddlewareCustom(MiddlewareMixin):
@@ -25,6 +26,9 @@ class RedirectMiddlewareCustom(MiddlewareMixin):
         full_path = request.get_full_path()
         current_site = get_current_site(request)
 
+
+        if request.path == '/admin':
+            return self.response_redirect_class(reverse_lazy('admin2:auth_login'))
 
         r = None
         try:
