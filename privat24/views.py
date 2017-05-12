@@ -2,64 +2,45 @@
 from __future__ import unicode_literals
 
 import datetime
+from hashlib import md5, sha1
 
 from django.contrib.sites.models import Site
 from django.http import HttpResponse
+from django.http import QueryDict
 from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, UpdateView, FormView, TemplateView
+from django.utils.crypto import get_random_string
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 
 from admin2.models import SettingsFranchise, SettingsPrivate24, ActiveFranchise
-from privat24.forms import PayListForm, Privat24TransactionForm
-from hashlib import md5, sha1
-from django.views.decorators.csrf import csrf_exempt
-import json
-from django.http import QueryDict
-from django.utils.crypto import get_random_string
-
-from privat24.models import Privat24Transaction, OrderCounter
-
-
-class PayList(UpdateView):
-    template_name = 'privat24/pay_list.html'
-    fields = '__all__'
-
-    def get_context_data(self, **kwargs):
-        context = super(PayList, self).get_context_data(**kwargs)
-        context['currency'] = SettingsPrivate24.get_solo().currency
-        return context
-
-
-    def get_object(self, queryset=None):
-        return SettingsFranchise.get_solo()
+from privat24.forms import Privat24TransactionForm
+from privat24.models import OrderCounter
 
 
 class ConfirmPayPrivat24(TemplateView):
-    template_name = 'privat24/pay_confirm.html'
+    template_name = 'admin2/pay/pay_confirm.html'
 
     def get_context_data(self, **kwargs):
         context = super(ConfirmPayPrivat24, self).get_context_data(**kwargs)
         days = self.kwargs.get('days')
         context['privat_setting'] = SettingsPrivate24.get_solo()
         context['price'] = getattr(SettingsFranchise.get_solo(), 'price_{0}'.format(days))
+        context['currency'] = SettingsFranchise.get_solo().currency
         context['days'] = days
         context['method'] = 'Приват24'
+        context['title'] = 'Оплата через Приват24'
         site = Site.objects.get_current().domain
-        return_url = site + str(reverse_lazy('privat24:pay_done'))
-        server_url = site + str(reverse_lazy('privat24:pay_callback'))
+        return_url = site + str(reverse_lazy('privat24:done_p24'))
+        server_url = site + str(reverse_lazy('privat24:callback_p24'))
         sid = unique_id = get_random_string(length=16)
-        order = OrderCounter.get_solo()
-        order.counter = order.counter + 1
-        order.save()
         fields = {
             'sid': sid,
             'amt': context['price'],
-            'ccy': context['privat_setting'].currency,
+            'ccy': context['currency'],
             'merchant': context['privat_setting'].merchant,
-            'order': order.counter,
+            'order': self.get_order_count(),
             'details': 'Продление франшизы',
             'ext_details': 'Дней %s' % days,
             'pay_way': 'privat24',
@@ -70,10 +51,18 @@ class ConfirmPayPrivat24(TemplateView):
         context['fields'] = fields
         return context
 
+    def get_order_count(self):
+        site = Site.objects.get_current().name
+        order = OrderCounter.get_solo()
+        order.counter = order.counter + 1
+        order.save()
+        order_text = site + str(order.counter)
+        return order_text.upper()
+
 
 @csrf_exempt
 def PayDone(request):
-    template_name = 'privat24/pay_done.html'
+    template_name = 'admin2/pay/pay_done.html'
     payment = QueryDict(request.POST.get('payment').encode('utf-8'))
     if payment['state'] in ['ok', 'test']:
         state = 'Оплата проведена'

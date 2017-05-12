@@ -40,24 +40,20 @@ class BuildingListSiteView(SEOMixin, BuildingStatusMixin, ListView):
         return context
 
 
-class BuildingDetailSiteView(BuildingStatusMixin, ViewsCountMixin, DetailView):
+class BuildingDetailSiteView(SEOMixin, BuildingStatusMixin, ViewsCountMixin, DetailView):
     model = Building
     template_name = 'rieltor_object/building.html'
 
 
-class OficeListSiteView(OfficeStatusMixin, ListView):
+class OficeListSiteView(SEOMixin, OfficeStatusMixin, ListView):
     model = Ofice
     template_name = 'rieltor_object/ofice_list.html'
     paginate_by = PAGINATE_OBJ
+    seo_model = OfisPageModel
     
     def get_context_data(self, **kwargs):
         context = super(OficeListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
-        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
-        if SEO.objects.filter(url=path).exists():
-            context['seo'] = SEO.objects.filter(url=path).first()
-        else:
-            context['seo'] = OfisPageModel.get_solo()
         if queryFilter:
             context['object_list'] = FilterOfise(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterOfise(queryFilter, queryset=self.object_list)
@@ -69,7 +65,7 @@ class OficeListSiteView(OfficeStatusMixin, ListView):
         return context
 
 
-class OficeDetailSiteView(OfficeStatusMixin, ViewsCountMixin, DetailView):
+class OficeDetailSiteView(SEOMixin, OfficeStatusMixin, ViewsCountMixin, DetailView):
     model = Ofice
     template_name = 'rieltor_object/ofice.html'
 

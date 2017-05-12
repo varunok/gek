@@ -46,11 +46,9 @@ class User(AbstractUser):
     class Group:
         SA = 1
         AD = 2
-        MOD = 3
         CHOICES = (
             (SA, 'Супер администратор'),
-            (AD, 'Администратор'),
-            (MOD, 'Модератор')
+            (AD, 'Администратор')
         )
 
     username = models.CharField(
@@ -149,6 +147,8 @@ class User(AbstractUser):
         return reverse('users:profile', args=[self.id])
 
     def save(self, *args, **kwargs):
-        if self.is_superuser:
-            self.group = self.Group.SA
+        if self.group == 1:
+            self.is_superuser = True
+        else:
+            self.is_superuser = False
         super(User, self).save(*args, **kwargs)

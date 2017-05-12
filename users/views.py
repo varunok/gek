@@ -28,6 +28,9 @@ class AdminDetail(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
     form_class = UserChangeForm
 
+    def get_form(self, form_class=None):
+        return self.form_class(request_user=self.request.user, **self.get_form_kwargs())
+
 
 class AdminCreate(LoginRequiredMixin, CreateView):
     model = User
@@ -40,7 +43,7 @@ class AdminDeleteView(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
     pk_url_kwarg = 'id'
 
 
-class ChangePass(View):
+class ChangePass(LoginRequiredMixin, View):
     status_404 = 404
 
     def post(self, *args, **kwargs):

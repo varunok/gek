@@ -153,28 +153,30 @@
 				<div class="text">По возможности пришлите фотографии объекта на почту: <a href="mailto:ofis@gek.od.ua">{% email %}</a></div>
 				<div class="close"></div>
 				<div class="view_content">
-					<form action="#" class="webform_client_form">
+					<form action="#" class="webform_client_form" id="base-form">
 						<div class="top_wrap">
 							<div class="form_item name">
-								<input type="text" placeholder="Введите ваше имя">
+								<input name="name"  type="text" placeholder="Введите ваше имя">
 							</div>
 							<div class="form_item phone">
-								<input type="text" placeholder="Номер телефона">
+								<input name="phone" type="text" placeholder="Номер телефона">
 							</div>
 							<div class="form_item address">
-								<input type="text" placeholder="Адрес">
+								<input name="address" type="text" placeholder="Адрес">
 							</div>
 							<div class="form_item price">
-								<input type="text" placeholder="Цена">
+								<input name="price" type="text" placeholder="Цена">
 							</div>
 						</div>
 						<div class="bottom_wrap">
 							<div class="form_item textarea">
-								<textarea placeholder="Максимально подробно опишите ваш объект"></textarea>
+								<textarea name="text" placeholder="Максимально подробно опишите ваш объект"></textarea>
 							</div>
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Добавить">
+							<input type="submit" class="form_submit" value="Добавить" onclick="function No(event) {
+							  event.preventDefault();
+							}">
 						</div>
 					</form>
 				</div>
@@ -303,12 +305,15 @@
                 });
                 $('.form_submit').livequery('click', function () {
                     $('body').removeClass('popup');
-                    $('#block-webform').fadeOut();
+                    $('.block_webform').fadeOut();
+                    var data = $('#base-form').serialize();
+                    $.post('/save-application/', data)
                 });
                 $(document).on('click', '.close', function () {
                     $('body').removeClass('popup');
-                    $('#block-webform').fadeOut();
-                })
+                    $('.block_webform').fadeOut();
+                });
+
             })
         </script>
         {% block js %}{% endblock js %}

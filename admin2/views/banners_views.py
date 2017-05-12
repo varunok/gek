@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, UpdateView
 from django.views.generic.base import ContextMixin
 
 from admin2.forms import DownBannersImageForm, SideBannersImageForm, DownBannersCodeForm, SideBannersCodeForm
+from admin2.mixins import AccesMixin
 from banners.models import DownBanner, SideBanner
 from common.mixins import MessageMixin
 
@@ -23,7 +24,7 @@ class BannersMixin(ContextMixin):
         return context
 
 
-class Banners(TemplateView):
+class Banners(AccesMixin, TemplateView):
     template_name = 'admin2/banners/banners_list.html'
 
     def get_context_data(self, **kwargs):
@@ -33,7 +34,7 @@ class Banners(TemplateView):
         return context
 
 
-class EditBannerImage(BannersMixin, MessageMixin, UpdateView):
+class EditBannerImage(AccesMixin, BannersMixin, MessageMixin, UpdateView):
     template_name = 'admin2/banners/banners_image_edit.html'
 
     def get_form_class(self):
@@ -49,7 +50,7 @@ class EditBannerImage(BannersMixin, MessageMixin, UpdateView):
         return succes_url
 
 
-class EditBannerCode(BannersMixin, MessageMixin, UpdateView):
+class EditBannerCode(AccesMixin, BannersMixin, MessageMixin, UpdateView):
     template_name = 'admin2/banners/banners_code_edit.html'
 
     def get_form_class(self):

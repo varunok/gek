@@ -55,6 +55,18 @@ class Application(models.Model):
         blank=True,
         null=True
     )
+    address = models.CharField(
+        verbose_name='Адрес',
+        max_length=300,
+        blank=True,
+        null=True
+    )
+    price = models.CharField(
+        verbose_name='Цена',
+        max_length=300,
+        blank=True,
+        null=True
+    )
     text = models.TextField(
         verbose_name='Комментарий',
         blank=True,

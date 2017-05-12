@@ -50,6 +50,11 @@ class ServicesRieltor(SingletonModel):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True
@@ -116,6 +121,11 @@ class Valuation(SingletonModel):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True
@@ -194,6 +204,11 @@ class Repair(SingletonModel):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True
@@ -269,6 +284,11 @@ class Insurance(SingletonModel):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True
@@ -336,6 +356,11 @@ class Cleaning(SingletonModel):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True
@@ -432,6 +457,11 @@ class InstallationWater(SingletonModel):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True
@@ -533,6 +563,11 @@ class UniversalService(models.Model):
         null=True
     )
     image = models.ImageField(
+        verbose_name='Фото аватар',
+        upload_to='services/%Y/%m/%d/',
+        blank=True
+    )
+    image_avatar = models.ImageField(
         verbose_name='Фото',
         upload_to='services/%Y/%m/%d/',
         blank=True

@@ -24,9 +24,11 @@ $(document).ready(function() {
         var redirectTo = BASE_URL;
         if(uris.length > 0)
             redirectTo += '/' + uris.join('-');
-        console.log(redirectTo)
+        if(!uris.length)
+            redirectTo += '/';
         location.href = redirectTo;
     }
+
     $(document).on('click', '.close', function () {
        location.href = $(this).data('href');
     })

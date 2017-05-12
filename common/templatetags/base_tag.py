@@ -126,22 +126,22 @@ def domen_admin():
 
 @register.assignment_tag
 def phone():
-    return SettingsAddress.get_solo().phone
+    return SettingsAddress.get_solo().phone or ''
 
 
 @register.assignment_tag
 def city():
-    return SettingsAddress.get_solo().city
+    return SettingsAddress.get_solo().city or ''
 
 
 @register.assignment_tag
 def address():
-    return SettingsAddress.get_solo().address
+    return SettingsAddress.get_solo().address or ''
 
 
 @register.assignment_tag
 def email():
-    return SettingsAddress.get_solo().email
+    return SettingsAddress.get_solo().email or ''
 
 
 @register.assignment_tag

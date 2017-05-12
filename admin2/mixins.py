@@ -40,3 +40,15 @@ class EarthStatusMixin(object):
         if not EarthPageModel.get_solo().is_enable:
             return HttpResponseRedirect(reverse_lazy('admin2:main'))
         return super(EarthStatusMixin, self).get(request, *args, **kwargs)
+
+
+class AccesMixin(object):
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return HttpResponseRedirect(reverse_lazy('admin2:main'))
+        return super(AccesMixin, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return HttpResponseRedirect(reverse_lazy('admin2:main'))
+        return super(AccesMixin, self).post(request, *args, **kwargs)

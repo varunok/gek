@@ -5,9 +5,19 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import AuthenticationForm, ReadOnlyPasswordHashField, UserChangeForm
+from django.forms.widgets import Select
 from django.utils.datetime_safe import datetime
 
 from users.models import User
+
+
+class Group:
+    SA = 1
+    AD = 2
+    CHOICES = (
+        (SA, 'Супер администратор'),
+        (AD, 'Администратор')
+    )
 
 
 class AuthForm(AuthenticationForm):
@@ -21,11 +31,22 @@ class UserChangeForm(UserChangeForm):
         required=False
     )
     date_joined = forms.DateTimeField(required=False)
+    group = forms.IntegerField(
+        widget=Select(choices=Group.CHOICES),
+        disabled=True,
+        label='Група'
+    )
 
     class Meta:
         model = User
         exclude = ['is_active', 'is_superuser', 'is_staff']
         fields = '__all__'
+
+    def __init__(self, request_user, *args, **kwargs):
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+        if request_user.is_superuser:
+            self.fields['group'].disabled = False
+
 
 
 class UserCreationForm(forms.ModelForm):

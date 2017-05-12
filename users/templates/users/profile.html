@@ -127,16 +127,16 @@
                                                 </div>
                                                 <div class="clearfix"></div>
                                                 <br>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.group.label }}: <span class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-5 col-sm-5 col-xs-12">
-                                                        {{ form.group|addcss:'form-control' }}
+                                                    <div class="item form-group" >
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.group.label }}: <span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-5 col-sm-5 col-xs-12" >
+                                                            {{ form.group|addcss:'form-control' }}
+                                                        </div>
+                                                        {% if form.group.errors %}
+                                                            <span class="error-label">{{ form.group.errors }}</span>
+                                                        {% endif %}
                                                     </div>
-                                                    {% if form.group.errors %}
-                                                        <span class="error-label">{{ form.group.errors }}</span>
-                                                    {% endif %}
-                                                </div>
                                                 <div class="clearfix"></div>
                                                 <br>
                                                 <div class="item form-group">

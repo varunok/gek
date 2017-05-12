@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, TemplateView
 from django.forms import models as model_forms
 
+from admin2.mixins import AccesMixin
 from admin2.models import IndexPageModel, NewBuildingPageModel, DailyPageModel, BuildingPageModel, OfisPageModel, \
     TrustPageModel, ContactPageModel, EarthPageModel
 
@@ -26,7 +27,7 @@ def page_list():
         return LIST_PAGE
 
 
-class StaticPageView(LoginRequiredMixin, TemplateView):
+class StaticPageView(LoginRequiredMixin, AccesMixin, TemplateView):
     # model = StaticPageModel
     template_name = 'admin2/static_pages/static_pages.html'
 
@@ -37,7 +38,7 @@ class StaticPageView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class StaticPageDetailView(LoginRequiredMixin, UpdateView):
+class StaticPageDetailView(LoginRequiredMixin, AccesMixin, UpdateView):
     template_name = 'admin2/static_pages/static_page_edit.html'
     context_object_name = 'page'
     slug_field = 'slug'
@@ -63,16 +64,17 @@ class StaticPageDetailView(LoginRequiredMixin, UpdateView):
 
 def status_page(request):
     if request.POST:
-        on = request.POST.get('check')
-        page_name = request.POST.get('page_id')
-        for page in page_list():
-            if page.name == page_name:
-                if on:
-                    page.is_enable = True
-                    page.save()
-                    return HttpResponse('Включено')
-                else:
-                    page.is_enable = False
-                    page.save()
-                    return HttpResponse('Выключено')
+        if request.user.is_superuser:
+            on = request.POST.get('check')
+            page_name = request.POST.get('page_id')
+            for page in page_list():
+                if page.name == page_name:
+                    if on:
+                        page.is_enable = True
+                        page.save()
+                        return HttpResponse('Включено')
+                    else:
+                        page.is_enable = False
+                        page.save()
+                        return HttpResponse('Выключено')
     return HttpResponse(status=500)

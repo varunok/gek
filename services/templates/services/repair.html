@@ -9,7 +9,9 @@
 
 {% block content %}
     <main class="middle">
-		<div class="slider_main slider_notfront">
+		<div class="slider_main slider_notfront"{% if repair.image_avatar %}
+                style="background: url({{ repair.image_avatar.url }}) no-repeat center/cover"
+             {% endif %}>
 			<div class="slider_title">{{ repair.title|default:'Ремонтные работы любой сложности “под ключ”' }}</div>
 			<div class="slider_subtitle">{{ repair.subtitle|default:'12 месяцев сервисной гарантии' }}</div>
 			<div class="text">{{ repair.help_subtitle|default:'Мы знаем, что вам предложить!' }}</div>

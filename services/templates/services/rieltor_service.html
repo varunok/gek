@@ -9,8 +9,8 @@
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront"
-             {% if service_rieltor.image %}
-                style="background: url({{ service_rieltor.image.url }}) no-repeat center/cover"
+             {% if service_rieltor.image_avatar %}
+                style="background: url({{ service_rieltor.image_avatar.url }}) no-repeat center/cover"
              {% endif %}>
 			<div class="slider_title">{{ service_rieltor.title|default:'Помощь с поиском коммерческой недвижимости' }}</div>
 			<form action="#" class="webform_client_form">

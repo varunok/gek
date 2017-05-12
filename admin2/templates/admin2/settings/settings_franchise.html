@@ -75,6 +75,16 @@
                                                         <span class="error-label">{{ form.price_180.errors }}</span>
                                                     {% endif %}
                                                 </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.currency.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.currency|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.currency.errors %}
+                                                        <span class="error-label">{{ form.currency.errors }}</span>
+                                                    {% endif %}
+                                                </div>
 
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">

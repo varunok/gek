@@ -9,8 +9,8 @@
 
 {% block content %}
     <main class="middle">
-		<div class="slider_main slider_notfront"{% if cleaning.image %}
-                style="background: url({{ cleaning.image.url }}) no-repeat center/cover"{% endif %}>
+		<div class="slider_main slider_notfront"{% if cleaning.image_avatar %}
+                style="background: url({{ cleaning.image_avatar.url }}) no-repeat center/cover"{% endif %}>
 			<div class="slider_title">{{ cleaning.title|default:'ПРОФЕССИОНАЛЬНАЯ УБОРКА КВАРТИР' }}</div>
 			<div class="slider_subtitle">от ведущих клининговых компаний</div>
 			<div class="title_text">Отправить заявку прямо сейчас!</div>
@@ -160,45 +160,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="block block_services">
-			<div class="block_content">
-				<div class="block_title">Услуги агентства недвижимости</div>
-				<div class="view_content">
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/1.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Кредитование</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/2.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/3.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/4.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Инфоксводоканал</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/1.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Кредитование</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/3.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка газовых счетчиков</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/2.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Установка счетчиков тепла</a></div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><a href="/"><img src="{% static 'images/4.png' %}" alt=""></a></div>
-						<div class="field_title"><a href="/">Инфоксводоканал</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{% include 'services/include/services_downbar.html' %}
         {% downbanner %}
 	</main><!-- .content -->
 {% endblock content %}

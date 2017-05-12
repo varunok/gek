@@ -9,8 +9,8 @@
 
 {% block content %}
     <main class="middle">
-        <div class="slider_main slider_notfront"{% if universal.image %}
-                style="background: url({{ universal.image.url }}) no-repeat center/cover"
+        <div class="slider_main slider_notfront"{% if universal.image_avatar %}
+                style="background: url({{ universal.image_avatar.url }}) no-repeat center/cover"
              {% endif %}>
             <div class="slider_title">{{ universal.title|default:'Поможем с договорами пром\быт и другими<br> вопросами' }}</div>
             <div class="title_text">Отправить заявку прямо сейчас!</div>

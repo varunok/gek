@@ -118,6 +118,9 @@ def delete_image(request):
         try:
             model.title_image.delete(save=True)
         except AttributeError:
+            if hasattr(model, 'image_avatar'):
+                model.image_avatar.delete(save=True)
+                return HttpResponse('Удалено')
             model.image_seo.delete(save=True)
         return HttpResponse('Удалено')
     if seo_image:

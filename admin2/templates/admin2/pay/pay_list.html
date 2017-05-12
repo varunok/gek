@@ -3,7 +3,9 @@
 {% load static from staticfiles %}
 {% load thumbnail %}
 
-{% block title %}Редирект{% endblock title %}
+{% block title %}
+Оплата франшизы
+{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -29,12 +31,12 @@
                                 <div class="pricing">
                                     <div class="title">
                                         <h2>{{ form.price_30.label }}</h2>
-                                        <h1>{{ form.price_30.value }} {{ currency }}</h1>
+                                        <h1>{{ form.price_30.value }} {{ form.currency.value }}</h1>
                                     </div>
                                     <div class="x_content">
                                         <div class="pricing_footer">
                                             <a href="{% url 'privat24:pay_confirm' 30 %}" class="btn btn-success btn-block" role="button">Privat24 <span></span></a>
-                                            <a href="{% url 'liqpay:pay_confirm' %}" class="btn btn-success btn-block" role="button">LiqPay <span></span></a>
+                                            <a href="{% url 'liqpay:pay_confirm' 30 %}" class="btn btn-success btn-block" role="button">LiqPay <span></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -43,12 +45,12 @@
                                 <div class="pricing">
                                     <div class="title">
                                         <h2>{{ form.price_90.label }}</h2>
-                                        <h1>{{ form.price_90.value }} {{ currency }}</h1>
+                                        <h1>{{ form.price_90.value }} {{ form.currency.value }}</h1>
                                     </div>
                                     <div class="x_content">
                                         <div class="pricing_footer">
                                             <a href="{% url 'privat24:pay_confirm' 90 %}" class="btn btn-success btn-block" role="button">Privat24 <span></span></a>
-                                            <a href="#" class="btn btn-success btn-block" role="button">LiqPay <span></span></a>
+                                            <a href="{% url 'liqpay:pay_confirm' 90 %}" class="btn btn-success btn-block" role="button">LiqPay <span></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -57,12 +59,12 @@
                                 <div class="pricing">
                                     <div class="title">
                                         <h2>{{ form.price_180.label }}</h2>
-                                        <h1>{{ form.price_180.value }} {{ currency }}</h1>
+                                        <h1>{{ form.price_180.value }} {{ form.currency.value }}</h1>
                                     </div>
                                     <div class="x_content">
                                         <div class="pricing_footer">
                                             <a href="{% url 'privat24:pay_confirm' 180 %}" class="btn btn-success btn-block" role="button">Privat24 <span></span></a>
-                                            <a href="#" class="btn btn-success btn-block" role="button">LiqPay <span></span></a>
+                                            <a href="{% url 'liqpay:pay_confirm' 180 %}" class="btn btn-success btn-block" role="button">LiqPay <span></span></a>
                                         </div>
                                     </div>
                                 </div>

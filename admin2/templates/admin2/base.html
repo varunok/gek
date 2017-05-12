@@ -53,7 +53,7 @@
                 <div class="col-md-3 left_col">
                     <div class="left_col scroll-view">
                         <div class="navbar nav_title" style="border: 0;">
-                            <a href="" class="site_title"> <img src="{% static 'favicon.ico' %}" alt="" width="20px"> <span>{{ domain }}</span></a>
+                            <a href="/" target="_blank" class="site_title"> <img src="{% static 'favicon.ico' %}" alt="" width="20px"> <span>{{ domain }}</span></a>
                         </div>
                         <div class="clearfix"></div>
                         <!-- sidebar menu -->
@@ -67,8 +67,10 @@
                                             <li><a href="{% url 'admin2:sections' %}"><i class="fa fa-outdent"></i> Рубрики статей</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{% url 'admin2:static_pages' %}"><i class="fa fa-file-text"></i> Страницы </a></li>
-                                    <li><a href="{% url 'admin2:services' %}"><i class="fa fa-suitcase"></i> Услуги </a></li>
+                                    {% if request.user.is_superuser %}
+                                        <li><a href="{% url 'admin2:static_pages' %}"><i class="fa fa-file-text"></i> Страницы </a></li>
+                                        <li><a href="{% url 'admin2:services' %}"><i class="fa fa-suitcase"></i> Услуги </a></li>
+                                    {% endif %}
 {#                                    <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>#}
                                     <li><a><i class="fa fa-server"></i> Объекты <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
@@ -100,7 +102,9 @@
                                     <li><a href="{% url 'admin2:videos' %}"><i class="fa fa-youtube-play"></i> Видео </a></li>
                                     <li><a href="{% url 'admin2:plan' %}"><i class="fa fa-calendar-check-o"></i> Планы </a></li>
                                     <li><a href="{% url 'admin2:polls' %}"><i class="fa fa-indent"></i> Тесты </a></li>
-                                    <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> Баннеры </a></li>
+                                    {% if request.user.is_superuser %}
+                                        <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> Баннеры </a></li>
+                                    {% endif %}
                                     <li><a href="{% url 'admin2:landings' %}"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
 {#                                    <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>#}
                                     <li><a href="{% url 'admin2:seo' %}"><i class="fa fa-ravelry"></i> SEO </a></li>
@@ -108,7 +112,9 @@
                                     <li><a href="{% url 'users:admins' %}"><i class="fa fa-lock"></i> Администраторы </a></li>
                                     <li><a><i class="fa fa-cogs"></i> Настройки сайта <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{% url 'admin2:settings' %}"><i class="fa fa-cog"></i>Параметры</a></li>
+                                            {% if request.user.is_superuser %}
+                                                <li><a href="{% url 'admin2:settings' %}"><i class="fa fa-cog"></i>Параметры</a></li>
+                                            {% endif %}
                                             <li><a href="#"><i class="fa fa-map-marker"></i>Районы</a></li>
                                             <li><a href="#"><i class="fa fa-user"></i>Сотрудники</a></li>
                                             <li><a href="#"><i class="fa fa-trophy"></i>Награды</a></li>
@@ -169,7 +175,7 @@
                                     </a>
                                 </li>
                                 <li role="presentation" class="dropdown">
-                                    <a href="{% url 'privat24:paylist' %}" class="dropdown-toggle info-number" >
+                                    <a href="{% url 'admin2:paylist' %}" class="dropdown-toggle info-number" >
                                         Франшиза
                                         {% if franchise %}
                                             <i class="fa fa-check" style="color: green"></i>

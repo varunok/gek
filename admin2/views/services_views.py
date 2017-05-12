@@ -9,12 +9,13 @@ from django.views.generic import TemplateView, CreateView, DeleteView
 
 from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm, \
     InsuranceForm, CleaningForm, InstallationWaterForm, UniversalServiceForm, UniversalServiceCreateForm, AdvantageSet
+from admin2.mixins import AccesMixin
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 from common.mixins import DeleteAjaxMixin, ServicesMixin, SuccesMixin, MessageMixin
 
 
-class ServicesView(LoginRequiredMixin, TemplateView):
+class ServicesView(LoginRequiredMixin, AccesMixin, TemplateView):
     template_name = 'admin2/services/services.html'
 
     def get_context_data(self, **kwargs):
@@ -36,7 +37,7 @@ class ServicesView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class RieltorServiceView(ServicesMixin):
+class RieltorServiceView(AccesMixin, ServicesMixin):
     model = ServicesRieltor
     form_class = RieltorServiceForm
     template_name = 'admin2/services/rieltor_service_edit.html'
@@ -45,7 +46,7 @@ class RieltorServiceView(ServicesMixin):
     video_form = VideoRieltorServiceSet
 
 
-class ValuationServiceView(ServicesMixin):
+class ValuationServiceView(AccesMixin, ServicesMixin):
     model = Valuation
     form_class = ValuationForm
     template_name = 'admin2/services/valuation_edit.html'
@@ -54,7 +55,7 @@ class ValuationServiceView(ServicesMixin):
     video_form = VideoServiceSet
 
 
-class RepairServiceView(ServicesMixin):
+class RepairServiceView(AccesMixin, ServicesMixin):
     model = Repair
     form_class = RepairForm
     template_name = 'admin2/services/repair_edit.html'
@@ -68,7 +69,7 @@ class RepairServiceView(ServicesMixin):
         return context
 
 
-class InsurenceServiceView(ServicesMixin):
+class InsurenceServiceView(AccesMixin, ServicesMixin):
     model = Insurance
     form_class = InsuranceForm
     template_name = 'admin2/services/insurence_edit.html'
@@ -77,7 +78,7 @@ class InsurenceServiceView(ServicesMixin):
     video_form = VideoServiceSet
 
 
-class CleaningServiceView(ServicesMixin):
+class CleaningServiceView(AccesMixin, ServicesMixin):
     model = Cleaning
     form_class = CleaningForm
     template_name = 'admin2/services/cleaning_edit.html'
@@ -86,7 +87,7 @@ class CleaningServiceView(ServicesMixin):
     video_form = VideoServiceSet
 
 
-class InstallationWaterServiceView(ServicesMixin):
+class InstallationWaterServiceView(AccesMixin, ServicesMixin):
     model = InstallationWater
     form_class = InstallationWaterForm
     template_name = 'admin2/services/installation_water_edit.html'
@@ -95,7 +96,7 @@ class InstallationWaterServiceView(ServicesMixin):
     video_form = VideoServiceSet
 
 
-class UniversalServiceView(ServicesMixin):
+class UniversalServiceView(AccesMixin, ServicesMixin):
     model = UniversalService
     form_class = UniversalServiceForm
     template_name = 'admin2/services/universal_edit.html'
@@ -105,7 +106,7 @@ class UniversalServiceView(ServicesMixin):
     advantage_form = AdvantageSet
 
 
-class UniversalServiceCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):
+class UniversalServiceCreate(LoginRequiredMixin, AccesMixin, SuccesMixin, MessageMixin, CreateView):
     model = UniversalService
     form_class = UniversalServiceCreateForm
     template_name = 'admin2/services/universal_edit.html'
@@ -114,7 +115,7 @@ class UniversalServiceCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, Crea
         return reverse_lazy('admin2:universal_edit', args=[self.object.id])
 
 
-class UniversalServiceDeleteView(LoginRequiredMixin, DeleteView):
+class UniversalServiceDeleteView(LoginRequiredMixin, AccesMixin, DeleteView):
     model = UniversalService
     pk_url_kwarg = 'pk'
     template_name = 'admin2/common/delete_confirm.html'
@@ -123,19 +124,20 @@ class UniversalServiceDeleteView(LoginRequiredMixin, DeleteView):
 
 def status_service(request):
     if request.method == 'POST':
-        on = request.POST.get('check')
-        id = request.POST.get('id')
-        content_type_id = request.POST.get('content_type')
-        if id:
-            service = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=id)
-        else:
-            service = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
-        if on:
-            service.is_enable = True
-            service.save()
-            return HttpResponse('Включено')
-        else:
-            service.is_enable = False
-            service.save()
-            return HttpResponse('Выключено')
+        if request.user.is_superuser:
+            on = request.POST.get('check')
+            id = request.POST.get('id')
+            content_type_id = request.POST.get('content_type')
+            if id:
+                service = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=id)
+            else:
+                service = ContentType.objects.get_for_id(content_type_id).model_class().get_solo()
+            if on:
+                service.is_enable = True
+                service.save()
+                return HttpResponse('Включено')
+            else:
+                service.is_enable = False
+                service.save()
+                return HttpResponse('Выключено')
     return HttpResponse(status=500)

@@ -49,3 +49,25 @@ def convert_to_frame_slider(video):
         except:
             return 'Неверний формат кода видео'
     return video
+
+
+@register.filter(name='get_video_code')
+def get_video_code(video):
+    if not video:
+        return ''
+    if 'iframe' in video:
+        tag_list = video.split(' ')
+        src = [src for src in tag_list if 'src' in src]
+        if src:
+            code = src[0].split('/')[-1]
+            if '?' in code:
+                code = code.split('?')[0]
+            return code
+    else:
+        code = video.split('/')[-1]
+        if '?' in code:
+            code = code.split('?')[0]
+        return code
+    return ''
+
+

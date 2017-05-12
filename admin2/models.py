@@ -120,6 +120,12 @@ class SettingsFranchise(SingletonModel):
         verbose_name='Стоимость 180 дней',
         default=0
     )
+    currency = models.CharField(
+        verbose_name='Валюта',
+        choices=CurrencyPayChoice.CARRENCY,
+        max_length=3,
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'Стоимость франшизы'
@@ -138,31 +144,20 @@ class SettingsPrivate24(SingletonModel):
         null=True,
         max_length=250
     )
-    currency = models.CharField(
-        verbose_name='Валюта',
-        choices=CurrencyPayChoice.CARRENCY,
-        max_length=3,
-        blank=True
-    )
 
 
 class SettingsLiqpay(SingletonModel):
-    merchant = models.IntegerField(
+    merchant = models.CharField(
         verbose_name='Liqpay merchant ID',
         blank=True,
-        null=True
+        null=True,
+        max_length=250
     )
     signature = models.CharField(
         verbose_name='Liqpay signature',
         blank=True,
         null=True,
         max_length=250
-    )
-    currency = models.CharField(
-        verbose_name='Валюта',
-        choices=CurrencyPayChoice.CARRENCY,
-        max_length=3,
-        blank=True
     )
 
 
@@ -231,6 +226,10 @@ class IndexPageModel(SingletonModel):
     content = RichTextUploadingField(
         blank=True,
         verbose_name='Контент'
+    )
+    video = models.TextField(
+        verbose_name='Код видео',
+        blank=True
     )
 
     class Meta:
