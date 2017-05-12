@@ -12,9 +12,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='indexpagemodel',
-            name='video',
-            field=models.TextField(blank=True, verbose_name='\u041a\u043e\u0434 \u0432\u0438\u0434\u0435\u043e'),
-        ),
+        #migrations.AddField(
+        #    model_name='indexpagemodel',
+        #    name='video',
+        #    field=models.TextField(blank=True, verbose_name='\u041a\u043e\u0434 \u0432\u0438\u0434\u0435\u043e'),
+        #),
     ]

@@ -12,17 +12,17 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='settingsliqpay',
-            name='currency',
-        ),
-        migrations.RemoveField(
-            model_name='settingsprivate24',
-            name='currency',
-        ),
-        migrations.AddField(
-            model_name='settingsfranchise',
-            name='currency',
-            field=models.CharField(blank=True, choices=[('UAH', 'UAH'), ('RUB', 'RUB'), ('USD', 'USD')], max_length=3, verbose_name='\u0412\u0430\u043b\u044e\u0442\u0430'),
-        ),
+        #migrations.RemoveField(
+        #    model_name='settingsliqpay',
+        #    name='currency',
+        #),
+        #migrations.RemoveField(
+        #    model_name='settingsprivate24',
+        #    name='currency',
+        #),
+        #migrations.AddField(
+        #    model_name='settingsfranchise',
+        #    name='currency',
+        #    field=models.CharField(blank=True, choices=[('UAH', 'UAH'), ('RUB', 'RUB'), ('USD', 'USD')], max_length=3, verbose_name='\u0412\u0430\u043b\u044e\u0442\u0430'),
+        #),
     ]

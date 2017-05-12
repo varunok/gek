@@ -12,9 +12,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='application',
-            name='address',
-            field=models.CharField(blank=True, max_length=300, null=True, verbose_name='\u0410\u0434\u0440\u0435\u0441'),
-        ),
+        #migrations.AddField(
+        #    model_name='application',
+        #    name='address',
+        #    field=models.CharField(blank=True, max_length=300, null=True, verbose_name='\u0410\u0434\u0440\u0435\u0441'),
+        #),
     ]
