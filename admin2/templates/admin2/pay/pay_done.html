@@ -1,0 +1,72 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% block title %}{{ state }}{% endblock title %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Оплата франшизы</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Оплата проведена</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id="wizard" class="form_wizard wizard_horizontal">
+                                <ul class="wizard_steps">
+                                    <li>
+                                        <a href="#step-1" class="selected">
+                                            <span class="step_no">1</span>
+                                            <span class="step_descr">
+                                                Шаг 1<br />
+                                                <small>Шаг 1 подтверждение</small>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                    <a href="#step-2" class="selected">
+                                        <span class="step_no">2</span>
+                                        <span class="step_descr">
+                                            Шаг 2<br />
+                                            <small>Шаг 2 подтверждено</small>
+                                        </span>
+                                    </a>
+                                    </li>
+                                </ul>
+                                <div id="step-1">
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="item form-group">
+                                            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center">
+                                                <h1>{{ state }}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/sections.js' %}"></script>
+{% endblock js %}
