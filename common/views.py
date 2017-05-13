@@ -390,12 +390,12 @@ class SaveApplication(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            send_mail('Subject here',
+            sending = send_mail('Subject here',
                     'Here is the message.',
                     'from@example.com',
                     ['varunok13@gmail.com'],
                     fail_silently=False,)
-            return HttpResponse(200)
+            return HttpResponse(status=200, content=sending)
         else:
             print(form.errors)
             return HttpResponse(status=404)
