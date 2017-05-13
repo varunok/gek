@@ -33,6 +33,8 @@
                                     <th style="width: 10%">Имя</th>
                                     <th style="width: 10%">Телефон</th>
                                     <th style="width: 10%">Email</th>
+                                    <th style="width: 10%">Адресс</th>
+                                    <th style="width: 10%">Цена</th>
                                     <th>Комментарий</th>
                                     <th style="width: 5%">
                                         <a href="#" class="btn btn-danger btn-xs" id="del-all-app"><i class="fa fa-trash-o"></i> Удалить все </a>
@@ -44,11 +46,13 @@
                                     <tr>
                                         <td>{{ app.id }}</td>
                                         <td>{{ app.created|date:'d.m.Y H:i' }}</td>
-                                        <td>{{ app.get_source_display }}</td>
-                                        <td>{{ app.name }}</td>
-                                        <td>{{ app.phone }}</td>
-                                        <td>{{ app.email }}</td>
-                                        <td>{{ app.text }}</td>
+                                        <td>{{ app.source|safe }}</td>
+                                        <td>{{ app.name|default_if_none:'---' }}</td>
+                                        <td>{{ app.phone|default_if_none:'---' }}</td>
+                                        <td>{{ app.email|default_if_none:'---' }}</td>
+                                        <td>{{ app.address|default_if_none:'---' }}</td>
+                                        <td>{{ app.price|default_if_none:'---' }}</td>
+                                        <td>{{ app.text|default_if_none:'---' }}</td>
                                         <td>
                                             <a href="{{ app.id }}" class="btn btn-danger btn-xs del-app"><i class="fa fa-trash-o"></i> Удалить </a>
                                         </td>

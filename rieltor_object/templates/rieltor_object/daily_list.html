@@ -28,23 +28,26 @@
 					<div class="field_item">Заселения <br>в квартиру</div>
 				</div>
 			</div>
-			<form action="#" class="webform_client_form">
+			<form action="#" class="webform_client_form" id="form-page-daily">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Оставить заявку. Страница посуточно.">
 				<div class="form_item name">
-					<input type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="Введите имя">
 				</div>
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="Введите телефон">
 				</div>
 				<div class="form_item date">
-					<input type="text" id="datepicker" placeholder="Заезд">
+					<input name="comming" type="text" id="datepicker" placeholder="Заезд">
 				</div>
 				<div class="form_item date">
-					<input type="text" id="datepicker2" placeholder="Отъезд">
+					<input name="go" type="text" id="datepicker2" placeholder="Отъезд">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Отправить заявку">
+					<input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
 				</div>
 			</form>
+
 		</div>
 		<div class="middle_inner">
 			<div class="container">
@@ -185,6 +188,7 @@
 		{% include 'seo/seo.html' %}
 		{% include 'common/include/vip.html' %}
 		{% downbanner %}
+        {% include 'common/application/modal_booking.html' %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}

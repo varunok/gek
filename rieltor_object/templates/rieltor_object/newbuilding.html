@@ -26,7 +26,8 @@
 				<h1 class="slider_title page_title">{{ object.title }}. {{ object.address }}</h1>
 				<form action="#" class="webform_client_form">				
 					<div class="form_actions">
-						<input class="form-submit" type="submit" value="Отправить заявку">
+						<input class="form-submit submit-add-inspection-modal" type="submit" value="Отправить заявку">
+                        <div class="read_more" style="display: none"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
 					</div>
 				</form>
 			</div>
@@ -131,14 +132,16 @@
 				<div class="block_title">Купить квартиру</div>
 				<div class="view_content">								
 					<form action="#" class="webform_client_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Купить квартиру.<a target='_blank' href='{{ object.get_absolute_url }}'>Объект</a>">
 						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
 						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="Введите ваш телефон">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Отправить">
+							<input type="submit" class="form_submit submit-save-application" value="Отправить">
 						</div>
 					</form>
 				</div>

@@ -19,12 +19,14 @@
 			<h1 class="slider_title page_title">{{ seo.title_h1|default:'Коммерческая недвижимость' }}</h1>
 			<div class="slider_subtitle">{{ indexpagemodel.subtitle|default:'<u>Нужно решить проблемы</u>  c коммерческой недвижимостью?' }}</div>
 			<div class="text">Помогаем с любой операцией по недвижимости за <u>30 минут</u></div>
-			<form action="#" class="webform_client_form">
+			<form action="#" class="webform_client_form" id="index-form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Заказать бесплатную консультацию.Главная">
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="Введите ваш телефон">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Заказать бесплатную консультацию">
+					<input class="form-submit submit-save-application" type="submit" value="Заказать бесплатную консультацию">
 				</div>
 			</form>
 		</div>
@@ -53,7 +55,8 @@
                                     <div class="price">${{ office.price|default:'' }}</div>
                                     <div class="statistics">{{ office.views }}</div>
                                     <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                    <div class="read_more"><a href="/">Оставить заявку</a></div>
+                                    <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
+                                    <div class="read_more" style="display: none"><a href="{{ office.get_absolute_url }}"></a></div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -90,7 +93,8 @@
                                     <div class="price">${{ building.price|default:'' }}</div>
                                     <div class="statistics">{{ building.views }}</div>
                                     <div class="area"><div class="count">{{ building.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                    <div class="read_more"><a href="/">Оставить заявку</a></div>
+                                    <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
+                                    <div class="read_more" style="display: none"><a href="{{ building.get_absolute_url }}"></a></div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -135,7 +139,8 @@
                                         <div class="info">
                                             <div class="label">Общая площадь:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
                                         </div>
-                                        <div class="read_more"><a href="/">Оставить заявку</a></div>
+                                        <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
+                                        <div class="read_more" style="display: none"><a href="{{ newbuilding.get_absolute_url }}"></a></div>
                                     </div>
                                 </div>
                             </div>
@@ -169,15 +174,17 @@
 						<div class="field_image"><img src="{% static 'images/why_4.png' %}" alt=""></div>
 						<div class="title">Бесплатное размещение<br> объявлений на сайте</div>
 					</div>
-					<form action="#" class="webform_client_form">
+					<form action="#" class="webform_client_form" id="index-form-down">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Связаться с агентством. Главная">
 						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
 						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="Введите ваш телефон">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Связаться с агентством">
+							<input type="submit" class="form_submit submit-save-application" value="Связаться с агентством">
 						</div>
 					</form>
 				</div>
@@ -190,7 +197,6 @@
 				<div class="close"></div>
 				<div class="view_content">
                     <div id="player"></div>
-
 				</div>
 			</div>
 		</div>
@@ -225,7 +231,8 @@
                 $('body').removeClass('popup');
                 $('.block_webform').fadeOut();
                 player.pauseVideo()
-            })
+            });
+
         })
 
 

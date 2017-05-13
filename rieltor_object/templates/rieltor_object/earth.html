@@ -16,11 +16,13 @@
 			<div class="slider_subtitle">{{ seo.subtitle|default:'Вам нужен хороший участок?' }}</div>
 			<div class="text">Поможем в выборе земельного участка для строительства или бизнеса</div>
 			<form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Подобрать участок">
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите номер телефона">
+					<input name="phone" type="text" placeholder="Введите номер телефона">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Подобрать участок">
+					<input class="form-submit submit-save-application" type="submit" value="Подобрать участок">
 				</div>
 			</form>
 		</div>
@@ -235,7 +237,8 @@
                                                         <div class="label">Телефон:</div>
                                                         <div class="field_item">{{ object.phone|default:'' }}</div>
                                                     </div>
-                                                    <div class="btn">Заказать просмотр</div>
+                                                    <div class="btn submit-add-inspection-modal">Заказать просмотр</div>
+                                                    <div class="read_more" style="display: none"><a href="{{ object.id }}">Подробнее</a></div>
                                                 </div>
                                             </div>
                                         </div>

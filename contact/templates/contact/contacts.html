@@ -15,17 +15,19 @@
 				<div class="title">Бесплатная консультация по всем вопросам 24/7</div>
 			</div>
 			<form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Связаться со специалистом.Контакти">
 				<div class="form_item name">
-					<input type="text" placeholder="Введите ваше имя">
+					<input name="name" type="text" placeholder="Введите ваше имя">
 				</div>
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="Введите ваш телефон">
 				</div>
 				<div class="form_textarea">
-					<textarea placeholder="Введите ваше сообщение"></textarea>
+					<textarea name="text" placeholder="Введите ваше сообщение"></textarea>
 				</div>				
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Связаться со специалистом">
+					<input class="form-submit submit-save-application" type="submit" value="Связаться со специалистом">
 				</div>
 			</form>
 		</div>

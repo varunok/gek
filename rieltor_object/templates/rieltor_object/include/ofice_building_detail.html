@@ -32,7 +32,8 @@
 			<h1 class="slider_title page_title">{{ object.get_title }} , {{ object.address }}. <br>({{ object.price }} грн, $5101)</h1>
 			<div class="webform_client_form">				
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Заказать осмотр">
+					<input  class="form-submit submit-add-inspection-modal" type="submit" value="Заказать осмотр">
+                    <div class="read_more" style="display: none"><a href="{% url 'objects:daily_detail' object.id %}">Подробнее</a></div>
 				</div>
 			</div>
 		</div>
@@ -154,24 +155,7 @@
 				
 			</div>			
 		</div>
-		<div class="block block_presentation order_block">
-			<div class="block_content">
-				<div class="block_title">Заказать осмотр объекта</div>
-				<div class="view_content">								
-					<form action="#" class="webform_client_form">
-						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
-						</div>
-						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
-						</div>
-						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Отправить">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>	
+		{% include 'common/application/block_order_an_inspection.html' %}
 		<div class="block_maps">
 			<div class="map">
 			<div class="title">На карте:</div>
@@ -245,28 +229,7 @@
 		{% include 'common/include/vip.html' %}
 		{% include 'services/include/services_downbar.html' %}
 		{% downbanner %}
-		<div class="block block_presentation block_picking">
-			<div class="block_content">
-				<div class="block_title">Подберем вам необходимый объект за 30 минут</div>
-				<div class="view_content">
-					<div class="sub_title">В базе более 1000 объектов</div>
-					<form action="#" class="webform_client_form">
-						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
-						</div>
-						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
-						</div>
-						<div class="form_item form_textarea">
-							<textarea placeholder="Введите ваше сообщение"></textarea>
-						</div>
-						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Связаться со специалистом">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		{% include 'common/application/block_presentation.html' with source=seo class='block_picking' %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}

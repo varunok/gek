@@ -14,20 +14,22 @@
              {% endif %}>
 			<div class="slider_title">{{ service_rieltor.title|default:'Помощь с поиском коммерческой недвижимости' }}</div>
 			<form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Получить подборку.Риелторские услуги.">
 				<div class="form_item name">
-					<input type="text" placeholder="Введите ваше имя">
+					<input name="name" type="text" placeholder="Введите ваше имя">
 				</div>
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="Введите ваш телефон">
 				</div>
 				<div class="form_item email">
-					<input type="text" placeholder="Введите вашу почту">
+					<input name="email" type="text" placeholder="Введите вашу почту">
 				</div>
 				<div class="form_item textarea comment">
-					<textarea placeholder="Ваши пожелания"></textarea>
+					<textarea name="text" placeholder="Ваши пожелания"></textarea>
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Получить подборку">
+					<input class="form-submit submit-save-application" type="submit" value="Получить подборку">
 				</div>
 			</form>
 		</div>
@@ -153,14 +155,16 @@
 				<div class="block_title">Отправить заявку на подбор недвижимости</div>
 				<div class="view_content">
 					<form action="#" class="webform_client_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Подбор недвижимости.Риелторские услуги.">
 						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
 						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="Введите ваш телефон">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Отправить">
+							<input type="submit" class="form_submit submit-save-application" value="Отправить">
 						</div>
 					</form>
 				</div>
@@ -181,23 +185,25 @@
 				<div class="title_text">Заполните заявку за 2 мин и мы приведем Вам клиента! </div>
 				<div class="view_content">
 					<form action="#" class="webform_client_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Заявка.Риелторские услуги.">
 						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
 						<div class="form_item phone">
-							<input type="text" placeholder="Номер телефона">
+							<input name="phone" type="text" placeholder="Номер телефона">
 						</div>
 						<div class="form_item address">
-							<input type="email" placeholder="Адрес">
+							<input name="address" type="text" placeholder="Адрес">
 						</div>
 						<div class="form_item price">
-							<input type="number" placeholder="Цена">
+							<input name="price" type="text" placeholder="Цена">
 						</div>
 						<div class="form_textarea">
-							<textarea placeholder="Описание"></textarea>
+							<textarea name="text" placeholder="Описание"></textarea>
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Добавить">
+							<input type="submit" class="form_submit submit-save-application" value="Добавить">
 						</div>
 					</form>
 				</div>

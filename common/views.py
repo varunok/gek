@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
+from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -11,6 +12,7 @@ from django.views.generic import DeleteView, DetailView
 
 from admin2.forms import VideoRieltorServiceSet, AdvantageSet
 from admin2.models import IndexPageModel
+from common.forms import SaveApplicationForm
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
 from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding, Building, \
@@ -379,3 +381,22 @@ def save_apartment_next(request):
 def delete_apartment_next(request, id):
     ApartmentNext.objects.get(id=id).delete()
     return HttpResponse()
+
+
+class SaveApplication(View):
+    form_class = SaveApplicationForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            send_mail('Subject here',
+                    'Here is the message.',
+                    'from@example.com',
+                    ['varunok13@gmail.com'],
+                    fail_silently=False,)
+            return HttpResponse(200)
+        else:
+            print(form.errors)
+            return HttpResponse(status=404)
+

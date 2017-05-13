@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
 
     function dell_app(id, _this) {
-        $.get('app/dell/'+id)
+        $.get('app/dell/'+id+'/')
             .then(function(response) {
                 _this.fadeOut('slow');
                 notify_success(0, 'Удалено');
@@ -26,10 +26,11 @@ $(document).ready(function() {
     }
 
     function dell_app_all(id, _this) {
-        $.get('app/dell/all')
+        $.get('app/dell/all/')
             .then(function(response) {
                 _this.fadeOut('slow');
                 notify_success(0, 'Удалено');
+
             }, function(err) {
                 notify_error('Ошибка '+ err.status, err.statusText);
             });

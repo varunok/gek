@@ -17,14 +17,16 @@
 			<div class="slider_subtitle">от ведущих компаний, за 2 часа!</div>
 			<div class="title_text">Отправить заявку прямо сейчас!</div>
 			<form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Заявка.Страхование недвижимости.">
 				<div class="form_item name">
-					<input type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="Введите имя">
 				</div>
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="Введите телефон">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Отправить">
+					<input class="form-submit submit-save-application" type="submit" value="Отправить">
 				</div>
 			</form>
 		</div>
@@ -169,14 +171,16 @@
 				<div class="block_title">Вы еще сомневаетесь страховать квартиру?</div>
 				<div class="view_content">								
 					<form action="#" class="webform_client_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Заявка.Страхование недвижимости.">
 						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
 						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="Введите ваш телефон">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Отправить">
+							<input type="submit" class="form_submit submit-save-application" value="Отправить">
 						</div>
 					</form>
 				</div>

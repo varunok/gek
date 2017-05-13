@@ -29,7 +29,7 @@ $(document).ready(function() {
         location.href = redirectTo;
     }
 
-    $(document).on('click', '.close', function () {
-       location.href = $(this).data('href');
-    })
+    // $(document).on('click', '.close', function () {
+    //    location.href = $(this).data('href');
+    // })
 });

@@ -16,14 +16,16 @@
 			<div class="slider_subtitle">{{ repair.subtitle|default:'12 месяцев сервисной гарантии' }}</div>
 			<div class="text">{{ repair.help_subtitle|default:'Мы знаем, что вам предложить!' }}</div>
 			<form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Заявка.Ремонт помещения.">
 				<div class="form_item name">
-					<input type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="Введите имя">
 				</div>
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="Введите телефон">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Заказать бесплатную консультацию">
+					<input class="form-submit submit-save-application" type="submit" value="Заказать бесплатную консультацию">
 				</div>
 			</form>
 		</div>
@@ -131,16 +133,13 @@
 					<div class="field_img">
 						<img src="{% static 'images/t_1.png' %}" alt="">
 					</div>
-					<div class="text">Составляем смету и <br>
-заключаем договор</div>
+					<div class="text">Составляем смету и <br> заключаем договор</div>
 				</div>
 				<div class="views_row">
 					<div class="field_img">
 						<img src="{% static 'images/t_2.png' %}" alt="">
 					</div>
-					<div class="text">Производим закупку и <br>
-доставку необходимых<br>
-материалов</div>
+					<div class="text">Производим закупку и <br> доставку необходимых<br> материалов</div>
 				</div>
 				<div class="views_row">
 					<div class="field_img">
@@ -152,8 +151,7 @@
 					<div class="field_img">
 						<img src="{% static 'images/t_4.png' %}" alt="">
 					</div>
-					<div class="text">Презентация выполненных <br>
-работ</div>
+					<div class="text">Презентация выполненных <br> работ</div>
 				</div>
 			</div>
 		</div>
@@ -189,13 +187,35 @@
 		<div class="block_content">
 			<div class="block_title">готовы принять решение?</div>
 			<div class="view_content">
-				<div class="read_more"><a href="#">Интересное предложение, я еще подумаю</a></div>
-				<div class="submit"><a href="#">Вызвать замерщика бесплатно</a></div>
-				<div class="read_more order"><a href="#">заказать бесплатную консультацию</a></div>
+				<div class="read_more block-add-repair-sub"><a href="#">Интересное предложение, я еще подумаю</a></div>
+				<div class="submit block-add-repair-sub"><a href="#">Вызвать замерщика бесплатно</a></div>
+				<div class="read_more order block-add-repair-sub"><a href="#">заказать бесплатную консультацию</a></div>
 			</div>
 		</div>
 	</div>
 	{% downbanner %}
+    <div  class="block block_webform webform_client block-add-repair" style="max-width: 500px; top: 40%; left: 75%; display: none">
+			<div class="block_content">
+				<div class="close" style="top: -20px; right: -25px"></div>
+				<div class="view_content">
+                    <form action="#" class="webform_client_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Оставить заявку. Ремонт помещения.">
+						<div class="top_wrap">
+							<div class="form_item name">
+								<input name="name"  type="text" placeholder="Введите ваше имя">
+							</div>
+							<div class="form_item phone">
+								<input name="phone" type="text" placeholder="Номер телефона">
+							</div>
+                        </div>
+                        <div class="form_actions">
+							<input type="submit" class="form_submit submit-save-application" value="Оставить заявку">
+						</div>
+                    </form>
+				</div>
+			</div>
+		</div>
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}

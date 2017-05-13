@@ -197,8 +197,11 @@ class Building(models.Model):
         return self._meta
 
     def normalize_SEO(self, text):
-        text = text.replace('Дом', 'дома')
-        text = text.replace('Квартира', 'квартиры')
+        try:
+            text = text.replace('Дом', 'дома')
+            text = text.replace('Квартира', 'квартиры')
+        except AttributeError:
+            return text
         return text
 
     def get_title(self):

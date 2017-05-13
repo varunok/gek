@@ -279,28 +279,7 @@
 			</div>
 		</div>
 		{% include 'seo/seo.html' %}
-		<div class="block block_presentation">
-			<div class="block_content">
-				<div class="block_title">Подберем вам необходимый объект за 30 минут</div>
-				<div class="view_content">
-					<div class="sub_title">В базе более 1000 объектов</div>
-					<form action="#" class="webform_client_form">
-						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
-						</div>
-						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
-						</div>
-						<div class="form_item form_textarea">
-							<textarea placeholder="Введите ваше сообщение"></textarea>
-						</div>
-						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Связаться со специалистом">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		{% include 'common/application/block_presentation.html' with source=seo %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}

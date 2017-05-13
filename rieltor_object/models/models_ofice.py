@@ -194,6 +194,9 @@ class Ofice(models.Model):
         return self._meta
 
     def normalize_SEO(self, text):
-        text = text.replace('Офис', 'офиса')
-        text = text.replace('Магазин', 'магазина')
+        try:
+            text = text.replace('Офис', 'офиса')
+            text = text.replace('Магазин', 'магазина')
+        except AttributeError:
+            pass
         return text

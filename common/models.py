@@ -24,18 +24,12 @@ class ModelInService(object):
 
 
 class Application(models.Model):
-    HOME = 'home'
-    CHOICES_SOURCE = (
-        (HOME, 'Главная'),
-    )
     created = models.DateTimeField(
         verbose_name='Дата создания',
         auto_now_add=True
     )
-    source = models.CharField(
-        choices=CHOICES_SOURCE,
-        verbose_name='Источник',
-        max_length=150
+    source = models.TextField(
+        verbose_name='Источник'
     )
     name = models.CharField(
         verbose_name='Имя',
@@ -72,9 +66,27 @@ class Application(models.Model):
         blank=True,
         null=True
     )
+    comming = models.TextField(
+        verbose_name='Заезд',
+        blank=True,
+        null=True
+    )
+    go = models.TextField(
+        verbose_name='Отьезд',
+        blank=True,
+        null=True
+    )
+
 
     def __unicode__(self):
         return '%s' % (self.id)
+
+    def save(self, *args, **kwargs):
+        if self.comming:
+            self.text = '{0}.Заезд: {1}'.format(self.text, self.comming)
+        if self.go:
+            self.text = '{0}.Отьезд: {1}'.format(self.text, self.go)
+        super(Application, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Заявка'

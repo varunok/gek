@@ -1,0 +1,24 @@
+<div class="block block_presentation {{ class }}">
+	<div class="block_content">
+		<div class="block_title">Подберем вам необходимый объект за 30 минут</div>
+		<div class="view_content">
+			<div class="sub_title">В базе более 1000 объектов</div>
+			<form action="#" class="webform_client_form" id="form_block_presentation">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Связаться со специалистом.{{ source }}">
+				<div class="form_item user_name">
+					<input name="name" type="text" placeholder="Введите ваше имя">
+				</div>
+				<div class="form_item phone">
+					<input name="phone" type="text" placeholder="Введите ваш телефон">
+				</div>
+				<div class="form_item form_textarea">
+					<textarea name="text" placeholder="Введите ваше сообщение"></textarea>
+				</div>
+				<div class="form_actions">
+					<input type="submit" class="form_submit submit-save-application" value="Связаться со специалистом">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

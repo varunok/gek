@@ -144,6 +144,13 @@ LOGIN_REDIRECT_URL = '/admin/'
 LOGIN_URL = '/admin/login/'
 LOGOUT_URL = '/admin/login/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'Server <server@whatever.com>'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

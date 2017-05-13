@@ -13,7 +13,8 @@
                 animate: true,
                 in_class: 'fadeInUp',
                 out_class: 'fadeOutDown'
-            }
+            },
+            afterClose: setTimeout(function(){ location.reload() }, 2500)
          });
     }
 

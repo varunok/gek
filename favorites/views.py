@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 # Create your views here.
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
 from common.helpers import get_client_ip
@@ -21,6 +22,14 @@ class FavoritesPage(TemplateView):
         context['buildings'] = Building.objects.filter(favorites__ip=ip)
         context['ofices'] = Ofice.objects.filter(favorites__ip=ip)
         context['dailys'] = Daily.objects.filter(favorites__ip=ip)
+        context['all_objects'] = context['newbuildings'].count() + context['buildings'].count()\
+                                 + context['ofices'].count() + context['dailys'].count()
+        context['link_objects'] = render_to_string('favorites/link_object.html', {
+            'buildings': context['buildings'],
+            'ofices': context['ofices'],
+            'dailys': context['dailys'],
+            'newbuildings': context['newbuildings'],
+        })
         return context
 
 

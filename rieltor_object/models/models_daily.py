@@ -170,5 +170,8 @@ class Daily(models.Model):
 
     def normalize_SEO(self, text):
         if self.rooms > 1:
-            text = text.replace('комнаты', 'комнат')
+            try:
+                text = text.replace('комнаты', 'комнат')
+            except AttributeError:
+                pass
         return text

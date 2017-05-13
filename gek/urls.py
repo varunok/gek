@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.staticfiles import views
 
-from common.views import MainView
+from common.views import MainView, SaveApplication
 
 urlpatterns = [
     url(r'^$', MainView.as_view(), name='main'),
@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'favorites/', include('favorites.urls', namespace='favorites')),
     url(r'plan/', include('plan.urls', namespace='plan')),
     url(r'tests/', include('polls.urls', namespace='polls')),
+    url(r'save-application/$', SaveApplication.as_view(), name='save_application'),
     url(r'^', include('landing.urls', namespace='landings')),
 
 ]

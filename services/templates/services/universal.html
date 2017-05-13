@@ -15,14 +15,16 @@
             <div class="slider_title">{{ universal.title|default:'Поможем с договорами пром\быт и другими<br> вопросами' }}</div>
             <div class="title_text">Отправить заявку прямо сейчас!</div>
             <form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Заявка.{{ universal }}">
                 <div class="form_item name">
-                    <input type="text" placeholder="Введите имя">
+                    <input name="name" type="text" placeholder="Введите имя">
                 </div>
                 <div class="form_item phone">
-                    <input type="text" placeholder="Введите телефон">
+                    <input name="phone" type="text" placeholder="Введите телефон">
                 </div>
                 <div class="form_actions">
-                    <input class="form-submit" type="submit" value="Отправить">
+                    <input class="form-submit submit-save-application" type="submit" value="Отправить">
                 </div>
             </form>
         </div>
