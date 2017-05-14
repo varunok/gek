@@ -4,6 +4,7 @@ from django.conf.urls import url
 
 from admin2.views import login_views, main_views, articles_views, static_page_views, services_views
 from admin2.views import settings_views
+from admin2.views.main_views import check_notyfy
 from admin2.views.rieltor_objects.newbuilding_view import related_building
 from common.mixins import Select2QuerySetViewCustom
 from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, \
@@ -169,5 +170,10 @@ urlpatterns = [
             model=DailyDistrict,
             create_field='name',),
         name='daily-district-autocomplete'
+    ),
+    url(
+        'check-notify/$',
+        check_notyfy,
+        name='check-notify'
     ),
 ]

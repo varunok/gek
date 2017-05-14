@@ -76,6 +76,9 @@ class Application(models.Model):
         blank=True,
         null=True
     )
+    is_reading = models.BooleanField(
+        default=False
+    )
 
 
     def __unicode__(self):

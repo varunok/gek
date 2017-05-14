@@ -1,4 +1,6 @@
 {% load static %}
+{% load base_tag %}
+{% domen_admin as domain %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,8 +50,8 @@
                             <div class="separator">
                                 <div class="clearfix"></div><br>
                             </div>
-                            <h1>dom-test.net.ua</h1>
-                            <p>2017 © rieltory.net</p>
+                            <h1>{{ domain }}</h1>
+                            <p>{% now 'Y' %} © rieltory.net</p>
                         </form>
                     </section>
                 </div>

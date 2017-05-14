@@ -53,3 +53,22 @@
                         fun(id, _this);
             }).on('pnotify.cancel', function() {});
     }
+
+    $(document).ready(function () {
+        function not() {
+            $.get('check-notify/')
+               .then(function(response) {
+                    var data = $.parseJSON(response);
+                    if(data.notify){
+                        $('.notify').text(data.notify)
+                    }
+                }, function(err) {
+                });
+        }
+        not();
+
+       setInterval(function () {
+           not();
+       }, 6000)
+
+    });

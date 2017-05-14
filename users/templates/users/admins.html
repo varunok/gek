@@ -92,9 +92,9 @@
         $(document).ready(function() {
             $(document).on('click', '.del-admin', function (event) {
                 event.preventDefault();
-                var id = $(this).attr('href');
+                var id = 'admins/' + $(this).attr('href');
                 var _this = $(this).parents('.profile_details');
-                notify_confirm(id, _this, 0, 0, dell_app);
+                notify_confirm(id, _this, 0, 0, dell_user);
             });
         });
     </script>
