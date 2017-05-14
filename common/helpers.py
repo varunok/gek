@@ -48,18 +48,18 @@ def sending_email(obj):
               'Источник: {source}, ' \
               'Имя:{name}, ' \
               'Телефон:{phone}, ' \
-              'Email:{email}' \
-              'Адрес:{address}' \
-              'Цена:{price}' \
+              'Email:{email}, ' \
+              'Адрес:{address}, ' \
+              'Цена:{price}, ' \
               'Комментарий:{text}'.format(
         created=obj.created,
         source=obj.source,
-        name=obj.name,
-        phone=obj.phone,
-        email=obj.email,
-        address=obj.address,
-        price=obj.price,
-        text=obj.text
+        name=obj.name or '--',
+        phone=obj.phone or '--',
+        email=obj.email or '--',
+        address=obj.address or '--',
+        price=obj.price or '--',
+        text=obj.text or '--'
     )
     if ActiveFranchise.get_solo().is_active:
         send_mail(subject=subject, message=message, from_email=from_email, recipient_list=emails_to,
