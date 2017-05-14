@@ -69,6 +69,6 @@
 
        setInterval(function () {
            not();
-       }, 6000)
+       }, 60000)
 
     });
