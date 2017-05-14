@@ -3,7 +3,7 @@
  */
 
 var parameter_list = {
-    type_deal: $('div[name="type_deal"]').eq(0).text(),
+    type_deal: $('div[name="type_deal"]').eq(0).text() || '--',
     appointment: $('div[name="appointment"]').eq(0).text() || '--',
     district: $('div[name="district"]').eq(0).text() || '--',
     layout: $('div[name="layout"]').eq(0).text() || '--',
