@@ -5,14 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.models import Site
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView, CreateView, DeleteView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from admin2.forms import SettingFranchiseAddForm
 from admin2.mixins import AccesMixin
 from admin2.models import Settings, SettingsAddress, SettingsFranchise, ActiveFranchise, SettingsPrivate24, \
-    SettingsLiqpay
+    SettingsLiqpay, EmailForward
 from common.mixins import MessageMixin
 
 
@@ -89,5 +89,36 @@ class SettingsLiqpayView(AccesMixin, MessageMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return SettingsLiqpay.get_solo()
+
+
+class EmailForwardView(ListView):
+    model = EmailForward
+    template_name = 'admin2/settings/email_forward_list.html'
+    paginate_by = 10
+
+
+class EmailForwardCreate(MessageMixin, CreateView):
+    model = EmailForward
+    template_name = 'admin2/settings/email_forward_edit.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return self.object.get_edit_url()
+
+
+class EmailForwardEdit(MessageMixin, UpdateView):
+    model = EmailForward
+    template_name = 'admin2/settings/email_forward_edit.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return self.object.get_edit_url()
+
+
+class EmailForwardDelete(DeleteView):
+    model = EmailForward
+    pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:email_forward')
 
 

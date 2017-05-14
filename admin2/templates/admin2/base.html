@@ -2,6 +2,7 @@
 {% load base_tag %}
 {% domen_admin as domain %}
 {% franchise as franchise %}
+{% franchise_day as franchise_day %}
 
 
 <!DOCTYPE html>
@@ -115,6 +116,7 @@
                                             {% if request.user.is_superuser %}
                                                 <li><a href="{% url 'admin2:settings' %}"><i class="fa fa-cog"></i>Параметры</a></li>
                                             {% endif %}
+                                            <li><a href="{% url 'admin2:email_forward' %}"><i class="fa fa-mail-forward"></i>Почта для рассылки</a></li>
                                             <li><a href="#"><i class="fa fa-map-marker"></i>Районы</a></li>
                                             <li><a href="#"><i class="fa fa-user"></i>Сотрудники</a></li>
                                             <li><a href="#"><i class="fa fa-trophy"></i>Награды</a></li>
@@ -161,7 +163,7 @@
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                        <li><a href="{% url 'users:profile' request.user.id %}"> Профиль</a></li>
+                                        <li><a href="{{ request.user.get_absolute_url }}"> Профиль</a></li>
                                         <li><a href="{% url 'admin2:auth_logout' %}"><i class="fa fa-sign-out pull-right"></i> Виход</a></li>
                                     </ul>
                                 </li>
@@ -188,10 +190,10 @@
 
                                 <li role="presentation" class="dropdown">
                                 {% if franchise %}
-                                    <span class="badge {% if franchise < 3 %} bg-orange {% else %} bg-blue {% endif %}" style="margin-top: 20px">осталось: {{ franchise }}
-                                        {% if franchise == 1 %}
+                                    <span class="badge {% if franchise_day < 3 %} bg-orange {% else %} bg-blue {% endif %}" style="margin-top: 20px">осталось: {{ franchise_day }}
+                                        {% if franchise_day == 1 %}
                                             день
-                                        {% elif franchise == 2 %}
+                                        {% elif franchise_day == 2 %}
                                             дня
                                             {% else %}
                                             дней

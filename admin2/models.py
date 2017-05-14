@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import uuid
+from datetime import date
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation
@@ -166,6 +167,34 @@ class ActiveFranchise(SingletonModel):
         verbose_name='Франшиза активна до',
         default=timezone.now
     )
+
+    def is_active(self):
+        if self.active_franchise < date.today():
+            return False
+        else:
+            return True
+
+
+class EmailForward(models.Model):
+    email = models.EmailField(
+        verbose_name='Почта'
+    )
+
+    class Meta:
+        verbose_name_plural = 'Почта для рассылки'
+        verbose_name  = 'Почта для рассылки'
+
+    def __unicode__(self):
+        return self.email
+
+    def get_edit_url(self):
+        return reverse('admin2:email_forward_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:email_forward_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:email_forward')
 
 
 class IndexPageModel(SingletonModel):

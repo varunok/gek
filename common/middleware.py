@@ -9,10 +9,14 @@ from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse, reverse_lazy
 from django.utils.deprecation import MiddlewareMixin
 
+from admin2.models import ActiveFranchise
+
+
 class RedirectMiddlewareCustom(MiddlewareMixin):
     # Defined as class-level attributes to be subclassing-friendly.
     response_gone_class = http.HttpResponseGone
     response_redirect_class = http.HttpResponsePermanentRedirect
+    response_redirect = http.HttpResponseRedirect
 
     def __init__(self, get_response=None):
         if not apps.is_installed('django.contrib.sites'):
@@ -26,6 +30,10 @@ class RedirectMiddlewareCustom(MiddlewareMixin):
         full_path = request.get_full_path()
         current_site = get_current_site(request)
 
+        if not request.user.is_superuser and not ActiveFranchise.get_solo().is_active():
+            if 'admin' in request.path and reverse_lazy('admin2:paylist') != request.path and reverse_lazy('admin2'
+                                                                                                           ':auth_login') != request.path:
+                return self.response_redirect(reverse_lazy('admin2:paylist'))
 
         if request.path == '/admin':
             return self.response_redirect_class(reverse_lazy('admin2:auth_login'))

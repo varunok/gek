@@ -11,8 +11,9 @@ from django.views import View
 from django.views.generic import DeleteView, DetailView
 
 from admin2.forms import VideoRieltorServiceSet, AdvantageSet
-from admin2.models import IndexPageModel
+from admin2.models import IndexPageModel, ActiveFranchise
 from common.forms import SaveApplicationForm
+from common.helpers import sending_email
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
 from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding, Building, \
@@ -390,13 +391,8 @@ class SaveApplication(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            sending = send_mail('Subject here',
-                    'Here is the message.',
-                    'from@example.com',
-                    ['varunok13@gmail.com'],
-                    fail_silently=False,)
-            return HttpResponse(status=200, content=sending)
+            sending_email(form.instance)
+            return HttpResponse(status=200)
         else:
-            print(form.errors)
             return HttpResponse(status=404)
 

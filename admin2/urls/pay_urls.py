@@ -5,6 +5,6 @@ from django.conf.urls import url
 from admin2.views.pay_views import PayList
 
 urlpatterns = [
-    # privat24
+    # paylist
     url('^paylist$', PayList.as_view(), name='paylist'),
 ]

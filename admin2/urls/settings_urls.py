@@ -41,4 +41,24 @@ urlpatterns = [
         settings_views.SettingsLiqpayView.as_view(),
         name='settings_liqpay'
     ),
+    url(
+        r'^settings/email-forward/$',
+        settings_views.EmailForwardView.as_view(),
+        name='email_forward'
+    ),
+    url(
+        r'^settings/email-forward/create$',
+        settings_views.EmailForwardCreate.as_view(),
+        name='email_forward_create'
+    ),
+    url(
+        r'^settings/email-forward/edit/(?P<pk>[\d-]+)/$',
+        settings_views.EmailForwardEdit.as_view(),
+        name='email_forward_edit'
+    ),
+    url(
+        r'^settings/email-forward/delete/(?P<pk>[\d-]+)/$',
+        settings_views.EmailForwardDelete.as_view(),
+        name='email_forward_delete'
+    ),
 ]

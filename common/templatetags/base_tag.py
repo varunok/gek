@@ -146,6 +146,10 @@ def email():
 
 @register.assignment_tag
 def franchise():
+    return ActiveFranchise.get_solo().is_active()
+
+@register.assignment_tag
+def franchise_day():
     active_franchise =  ActiveFranchise.get_solo().active_franchise
     try:
         active_franchise, word = str(active_franchise - date.today()).split(',')[0].split(' ')
