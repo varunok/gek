@@ -2892,6 +2892,7 @@ body.superlending .slider_main .slider_title {
 }
 
 .search_results .filters .item {
+    margin-bottom: 10px;
     font-size: 14px;
     font-weight: 400;
     border: 1px solid #a9d5e8;
