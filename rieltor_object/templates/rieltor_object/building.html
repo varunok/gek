@@ -9,15 +9,15 @@
     <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 {% endblock css %}
 
-{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
-{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
-{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
 
 {% block class_body %}  class="not-front apartment" {% endblock %}
 
 {% block content %}
 	<main class="middle">
-		<div class="slider_main slider_notfront" {% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
+		<div class="slider_main slider_notfront" {% if object.image %}style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="top_inner_content">
 				<div class="main_breadcrumbs"><a href="/">Главная</a> / <span>Недвижимость</span></div>
 				<div class="title"></div>

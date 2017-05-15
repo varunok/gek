@@ -4,7 +4,13 @@
 {% load thumbnail %}
 {% load favorites_tag %}
 {% load banners_tag %}
-{% block css %}{% endblock css %}
+{% block css %}
+    <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+{% endblock css %}
+
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
 
 {% block class_body %}  class="not-front apartment daily_inner" {% endblock %}
 

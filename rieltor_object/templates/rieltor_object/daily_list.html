@@ -8,12 +8,16 @@
 {% load rieltor_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front ranking_daily" {% endblock %}
 
 {% block content %}
     <main class="middle">
-		<div class="slider_main slider_notfront"{% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ seo.title_h1|default:'Доступные квартиры посуточно' }}</h1>
+		<div class="slider_main slider_notfront" {% if dailypagemodel.image %}style="background: url({{ dailypagemodel.image.url }}) no-repeat center/cover"{% endif %}>
+			<h1 class="slider_title page_title">{{ seo.title|default:'Доступные квартиры посуточно' }}</h1>
 			<div class="slider_list">
 				<div class="item">
 					<div class="li">1</div>

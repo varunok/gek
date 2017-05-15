@@ -10,14 +10,15 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 from polls.models import Polls, Question
+from seo.mixins import SEOMixin
 
 
-class TestList(ListView):
+class TestList(SEOMixin, ListView):
     model = Polls
     template_name = 'polls/tests.html'
 
 
-class StartTest(DetailView):
+class StartTest(SEOMixin, DetailView):
     model = Polls
     template_name = 'polls/test_passing.html'
     pk_url_kwarg = 'pk'
@@ -39,7 +40,7 @@ class StartTest(DetailView):
         return context
 
 
-class ResultTest(DetailView):
+class ResultTest(SEOMixin, DetailView):
     model = Polls
     template_name = 'polls/test_result.html'
 

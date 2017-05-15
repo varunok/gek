@@ -12,9 +12,10 @@ from django.views.generic import DetailView, TemplateView, UpdateView
 from admin2.forms import PreparationsSet, ProcessSet, FinishSet
 from plan.forms import PlanTitleForm
 from plan.models import PlanPage, SaleBuildPlan, BuyBuildPlan, RentBuildPlan, PassBuildPlan, RepairBuildPlan
+from seo.mixins import SEOMixin
 
 
-class PlanSitePage(DetailView):
+class PlanSitePage(SEOMixin, DetailView):
     model = PlanPage
     template_name = 'plan/plan.html'
 
@@ -22,7 +23,7 @@ class PlanSitePage(DetailView):
         return self.model.get_solo()
 
 
-class PlanCreatePage(TemplateView):
+class PlanCreatePage(SEOMixin, TemplateView):
     template_name = 'plan/process.html'
 
     def get_context_data(self, **kwargs):
@@ -34,7 +35,7 @@ class PlanCreatePage(TemplateView):
         return context
 
 
-class PlanDonePage(UpdateView):
+class PlanDonePage(SEOMixin, UpdateView):
     model = PlanPage
     template_name = 'plan/final.html'
     fields = '__all__'

@@ -16,7 +16,7 @@
     <main class="middle">
 		<div class="slider_front slider_main"{% if indexpagemodel.image %}
                 style="background: url({{ indexpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ seo.title_h1|default:'Коммерческая недвижимость' }}</h1>
+			<h1 class="slider_title page_title">{{ seo.title|default:'Коммерческая недвижимость' }}</h1>
 			<div class="slider_subtitle">{{ indexpagemodel.subtitle|default:'<u>Нужно решить проблемы</u>  c коммерческой недвижимостью?' }}</div>
 			<div class="text">Помогаем с любой операцией по недвижимости за <u>30 минут</u></div>
 			<form action="#" class="webform_client_form" id="index-form">

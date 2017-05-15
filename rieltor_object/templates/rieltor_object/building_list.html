@@ -7,12 +7,16 @@
 {% load rieltor_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front ranking sidebar_first" {% endblock %}
 
 {% block content %}
 <main class="middle">
-		<div class="slider_main slider_notfront"{% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title_h1|default:'Аренда коммерческой недвижимости' }}</div>
+		<div class="slider_main slider_notfront" {% if buildingpagemodel.image %}style="background: url({{ buildingpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ seo.title|default:'Аренда коммерческой недвижимости' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
 					<input type="text" placeholder="Искать в тексте объявления">

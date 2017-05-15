@@ -6,6 +6,10 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front final" {% endblock %}
 
 {% block content %}

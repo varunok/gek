@@ -10,9 +10,10 @@ from django.views.generic import TemplateView
 from common.helpers import get_client_ip
 from favorites.models import Favorites
 from rieltor_object.models import NewBuilding, Building, Ofice, Daily
+from seo.mixins import SEOMixin
 
 
-class FavoritesPage(TemplateView):
+class FavoritesPage(SEOMixin, TemplateView):
     template_name = 'favorites/favorites.html'
 
     def get_context_data(self, **kwargs):

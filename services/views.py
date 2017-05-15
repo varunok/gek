@@ -9,7 +9,7 @@ from services.models import ServicesRieltor, Valuation, Repair, Insurance, Clean
     UniversalService
 
 
-class ServicesSiteView(TemplateView):
+class ServicesSiteView(SEOMixin, TemplateView):
     template_name = 'services/services.html'
 
 
@@ -33,37 +33,37 @@ class RieltorServiceView(SEOMixin, ServiceSiteMixin):
     model = ServicesRieltor
 
 
-class ValuationView(ServiceSiteMixin):
+class ValuationView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/valuation.html'
     context_object_name = 'valuation'
     model = Valuation
 
 
-class RepairView(ServiceSiteMixin):
+class RepairView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/repair.html'
     context_object_name = 'repair'
     model = Repair
 
 
-class InsuranceView(ServiceSiteMixin):
+class InsuranceView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/insurance.html'
     context_object_name = 'insurance'
     model = Insurance
 
 
-class CleaningView(ServiceSiteMixin):
+class CleaningView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/cleaning.html'
     context_object_name = 'cleaning'
     model = Cleaning
 
 
-class InstallationWaterView(ServiceSiteMixin):
+class InstallationWaterView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/installation_water.html'
     context_object_name = 'installation_water'
     model = InstallationWater
 
 
-class UniversalView(ServiceSiteMixin):
+class UniversalView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/universal.html'
     context_object_name = 'universal'
     model = UniversalService

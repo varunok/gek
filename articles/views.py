@@ -7,12 +7,12 @@ from django.views.generic import ListView, DetailView
 
 from articles.models import Articles, Sections
 from common.mixins import ViewsCountMixin, DinamicNextMixin
-
+from seo.mixins import SEOMixin
 
 PAGINATE_ARTICLE = 10
 
 
-class ArticlesSiteView(DinamicNextMixin, ListView):
+class ArticlesSiteView(SEOMixin, DinamicNextMixin, ListView):
     model = Articles
     context_object_name = 'objects'
     template_name = 'articles/articles.html'
@@ -25,9 +25,7 @@ class ArticlesSiteView(DinamicNextMixin, ListView):
         return context
 
 
-
-
-class SectionsDetailView(DetailView):
+class SectionsDetailView(SEOMixin, DetailView):
     model = Sections
     slug_field = 'slug'
     context_object_name = 'section'
@@ -47,7 +45,7 @@ class SectionsDetailView(DetailView):
         return context
 
 
-class ArticlesDetailView(ViewsCountMixin, DetailView):
+class ArticlesDetailView(SEOMixin, ViewsCountMixin, DetailView):
     model = Articles
     slug_url_kwarg = 'slug_a'
     context_object_name = 'article'

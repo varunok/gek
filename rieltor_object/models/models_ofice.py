@@ -9,7 +9,7 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
-from admin2.models import SettingsAddress
+from admin2.models import SettingsAddress, Settings
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 

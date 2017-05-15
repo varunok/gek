@@ -9,6 +9,7 @@ from seo.models import SEO
 
 class SEOMixin(ContextMixin):
     seo_model = None
+    object = None
 
     def get_context_data(self, **kwargs):
         context = super(SEOMixin, self).get_context_data(**kwargs)

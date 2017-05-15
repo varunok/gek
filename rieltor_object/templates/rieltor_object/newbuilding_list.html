@@ -7,12 +7,16 @@
 {% load rieltor_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front newbuilding sidebar_first" {% endblock %}
 
 {% block content %}
 	<main class="middle">
-		<div class="slider_main slider_notfront" {% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title_h1|default:'Продажа квартир в новостроях' }}</div>
+		<div class="slider_main slider_notfront" {% if newbuildingpagemodel.image %}style="background: url({{ newbuildingpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ seo.title|default:'Продажа квартир в новостроях' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
 					<input type="text" placeholder="Искать в тексте объявления">

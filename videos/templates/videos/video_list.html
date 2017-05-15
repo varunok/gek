@@ -5,12 +5,16 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front video_transfer sidebar_first" {% endblock %}
 
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront">
-			<div class="slider_title">Видео передачи по одесской недвижимости</div>	
+			<div class="slider_title">{{ seo.title|default:'Видео передачи' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
 					<input type="text" placeholder="Поиск видео передач">

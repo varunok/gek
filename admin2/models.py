@@ -212,7 +212,7 @@ class IndexPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -247,7 +247,7 @@ class IndexPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -286,7 +286,7 @@ class NewBuildingPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -325,7 +325,7 @@ class NewBuildingPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -342,7 +342,7 @@ class NewBuildingPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('objects:newbuildings')
 
 
 class DailyPageModel(SingletonModel):
@@ -360,7 +360,7 @@ class DailyPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -399,7 +399,7 @@ class DailyPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -416,7 +416,7 @@ class DailyPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('objects:dailys')
 
 
 class BuildingPageModel(SingletonModel):
@@ -434,7 +434,7 @@ class BuildingPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='SEO Заголовок',
         blank=True,
         null=True
@@ -473,7 +473,7 @@ class BuildingPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -490,7 +490,7 @@ class BuildingPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('objects:buildings')
 
 
 class EarthPageModel(SingletonModel):
@@ -508,7 +508,7 @@ class EarthPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='SEO Заголовок',
         blank=True,
         null=True
@@ -547,7 +547,7 @@ class EarthPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -564,7 +564,7 @@ class EarthPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('objects:earth')
 
 
 class OfisPageModel(SingletonModel):
@@ -582,7 +582,7 @@ class OfisPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -621,7 +621,7 @@ class OfisPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -638,7 +638,7 @@ class OfisPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('objects:ofices')
 
 
 class TrustPageModel(SingletonModel):
@@ -656,7 +656,7 @@ class TrustPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -699,7 +699,7 @@ class TrustPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -724,7 +724,7 @@ class TrustPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('trust:trust')
 
 
 class ContactPageModel(SingletonModel):
@@ -742,7 +742,7 @@ class ContactPageModel(SingletonModel):
         validators=[slug_validator],
         editable=False
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -777,7 +777,7 @@ class ContactPageModel(SingletonModel):
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -820,4 +820,4 @@ class ContactPageModel(SingletonModel):
         return '%s' % self.name
 
     def get_absolute_url(self):
-        return reverse('main')
+        return reverse('contacts:contact')

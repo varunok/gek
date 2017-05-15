@@ -114,12 +114,12 @@
                                 {{ form.errors }}
                                 {% csrf_token %}
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_h1.label }}</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.title_h1|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
-                                    {% if form.title_h1.errors %}
-                                        <span class="error-label">{{ form.title_h1.errors.as_text }}</span>
+                                    {% if form.title.errors %}
+                                        <span class="error-label">{{ form.title.errors.as_text }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">
@@ -159,12 +159,12 @@
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_seo.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                        {{ form.title_seo|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
-                                    {% if form.title.errors %}
-                                        <span class="error-label">{{ form.title.errors.as_text }}</span>
+                                    {% if form.title_seo.errors %}
+                                        <span class="error-label">{{ form.title_seo.errors.as_text }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">

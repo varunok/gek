@@ -3,6 +3,10 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front articles articles_inner sidebar_first" {% endblock %}
 
 {% block content %}

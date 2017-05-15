@@ -48,13 +48,13 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_h1.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_seo.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.title_h1|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                        {{ form.title_seo|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                                     </div>
-                                                    {% if form.title_h1.errors %}
-                                                        <span class="error-label">{{ form.title_h1.errors }}</span>
+                                                    {% if form.title_seo.errors %}
+                                                        <span class="error-label">{{ form.title_seo.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -108,18 +108,19 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image.label }}</label>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image_seo.label }}</label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        <input id="imgInp" name="image" type="file">
+                                                        <input id="imgInp" name="image_seo" type="file">
                                                         <img id="blah" src="
-                                                        {% if object.image %}
-                                                            {{ object.image.url }}
+                                                        {% if object.image_seo %}
+                                                            {{ object.image_seo.url }}
                                                         {% endif %}
                                                         " alt="" width="100%" />
-                                                        {% if object.image %}
+                                                        {% if object.image_seo %}
                                                             <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
                                                             <input type="hidden" value="{{ content_type }}">
                                                             <input type="hidden" value="{{ object.id }}">
+                                                            <input type="hidden" name="seoImage" value="{{ object.id }}">
                                                         {% endif %}
                                                     </div>
                                                 </div>

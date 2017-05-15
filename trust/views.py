@@ -11,7 +11,6 @@ from seo.mixins import SEOMixin
 
 
 class Trust(SEOMixin, DetailView):
-    # model = TrustPageModel
     template_name = 'trust/trust.html'
 
     def get_object(self, queryset=None):

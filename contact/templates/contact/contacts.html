@@ -5,12 +5,16 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front contacts" {% endblock %}
 
 {% block content %}
 	<main class="middle">
 		<div class="slider_main slider_notfront" {% if object.image %}style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ object.title|default:'Свяжитесь с нами' }}</h1>
+			<h1 class="slider_title page_title">{{ seo.title|default:'Свяжитесь с нами' }}</h1>
 			<div class="top_inner_content">
 				<div class="title">Бесплатная консультация по всем вопросам 24/7</div>
 			</div>

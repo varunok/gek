@@ -7,12 +7,16 @@
 {% load rieltor_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front earth" {% endblock %}
 
 {% block content %}
     <main class="middle">
-		<div class="slider_main slider_notfront"  {% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title_h1|default:'Оформление и проверка земли за 1 день' }}</div>
+		<div class="slider_main slider_notfront"  {% if earthpagemodel.image %}style="background: url({{ earthpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ seo.title|default:'Оформление и проверка земли за 1 день' }}</div>
 			<div class="slider_subtitle">{{ seo.subtitle|default:'Вам нужен хороший участок?' }}</div>
 			<div class="text">Поможем в выборе земельного участка для строительства или бизнеса</div>
 			<form action="#" class="webform_client_form">

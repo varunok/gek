@@ -7,10 +7,10 @@ from django.shortcuts import render
 from django.views.generic import DetailView
 
 from admin2.models import ContactPageModel
+from seo.mixins import SEOMixin
 
 
-class Contacts(DetailView):
-    # model = TrustPageModel
+class Contacts(SEOMixin, DetailView):
     template_name = 'contact/contacts.html'
 
     def get_object(self, queryset=None):

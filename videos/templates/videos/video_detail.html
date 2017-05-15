@@ -5,6 +5,10 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front video_inner" {% endblock %}
 
 {% block content %}
@@ -12,7 +16,7 @@
 		<div class="slider_main slider_notfront">
 			<div class="block_content">	
 				<div class="come_back"><a href="{% url 'videos:video' %}">Вернуться назад</a></div>
-				<h1 class="slider_title page_title">{{ object.title|default:'Все о новостройках' }}</h1>
+				<h1 class="slider_title page_title">{{ seo.title|default:'' }}</h1>
 				<div class="icons_wrap">
 					<div class="icon stat">{{ object.views }}</div>
 					<div class="icon time">{{ object.time }}</div>

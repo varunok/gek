@@ -37,6 +37,7 @@ class BuildingListSiteView(SEOMixin, BuildingStatusMixin, ListView):
             context['count_obj'] = Building.objects.count()
         context['BASE_URL'] = '/objects/buildings'
         context['clear_filter'] = reverse_lazy('objects:buildings')
+        context['buildingpagemodel'] = self.seo_model.get_solo()
         return context
 
 
@@ -62,6 +63,7 @@ class OficeListSiteView(SEOMixin, OfficeStatusMixin, ListView):
             context['count_obj'] = Ofice.objects.count()
         context['BASE_URL'] = '/objects/offices'
         context['clear_filter'] = reverse_lazy('objects:ofices')
+        context['ofispagemodel'] = self.seo_model.get_solo()
         return context
 
 
@@ -70,19 +72,15 @@ class OficeDetailSiteView(SEOMixin, OfficeStatusMixin, ViewsCountMixin, DetailVi
     template_name = 'rieltor_object/ofice.html'
 
 
-class NewBuildingListSiteView(NewBuildingStatusMixin, ListView):
+class NewBuildingListSiteView(SEOMixin, NewBuildingStatusMixin, ListView):
     model = NewBuilding
     template_name = 'rieltor_object/newbuilding_list.html'
     paginate_by = PAGINATE_OBJ
+    seo_model = NewBuildingPageModel
 
     def get_context_data(self, **kwargs):
         context = super(NewBuildingListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
-        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
-        if SEO.objects.filter(url=path).exists():
-            context['seo'] = SEO.objects.filter(url=path).first()
-        else:
-            context['seo'] = NewBuildingPageModel.get_solo()
         if queryFilter:
             context['object_list'] = FilterNewBuilding(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterNewBuilding(queryFilter, queryset=self.object_list)
@@ -91,28 +89,25 @@ class NewBuildingListSiteView(NewBuildingStatusMixin, ListView):
             context['count_obj'] = NewBuilding.objects.count()
         context['BASE_URL'] = '/objects/newbuildings'
         context['clear_filter'] = reverse_lazy('objects:newbuildings')
+        context['newbuildingpagemodel'] = self.seo_model.get_solo()
         # context['filter_form'] = FilterNewBuilding(self.request.GET, queryset=self.model.objects.all())
         return context
 
 
-class NewBuildingDetailSiteView(NewBuildingStatusMixin, ViewsCountMixin, DetailView):
+class NewBuildingDetailSiteView(SEOMixin, NewBuildingStatusMixin, ViewsCountMixin, DetailView):
     model = NewBuilding
     template_name = 'rieltor_object/newbuilding.html'
 
 
-class DailyListSiteView(DailyStatusMixin, ListView):
+class DailyListSiteView(SEOMixin, DailyStatusMixin, ListView):
     model = Daily
     template_name = 'rieltor_object/daily_list.html'
     paginate_by = PAGINATE_OBJ
+    seo_model = DailyPageModel
 
     def get_context_data(self, **kwargs):
         context = super(DailyListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
-        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
-        if SEO.objects.filter(url=path).exists():
-            context['seo'] = SEO.objects.filter(url=path).first()
-        else:
-            context['seo'] = DailyPageModel.get_solo()
         if queryFilter:
             context['object_list'] = FilterDaily(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterDaily(queryFilter, queryset=self.object_list)
@@ -121,27 +116,24 @@ class DailyListSiteView(DailyStatusMixin, ListView):
             context['count_obj'] = Daily.objects.count()
         context['BASE_URL'] = '/objects/dailys'
         context['clear_filter'] = reverse_lazy('objects:dailys')
+        context['dailypagemodel'] = self.seo_model.get_solo()
         return context
 
 
-class DailyDetailSiteView(DailyStatusMixin, ViewsCountMixin, DetailView):
+class DailyDetailSiteView(SEOMixin, DailyStatusMixin, ViewsCountMixin, DetailView):
     model = Daily
     template_name = 'rieltor_object/daily.html'
 
 
-class EarthSiteView(EarthStatusMixin, ListView):
+class EarthSiteView(SEOMixin, EarthStatusMixin, ListView):
     model = Earth
     template_name = 'rieltor_object/earth.html'
     paginate_by = PAGINATE_OBJ
+    seo_model = EarthPageModel
 
     def get_context_data(self, **kwargs):
         context = super(EarthSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
-        path = 'http://' + settings.ALLOWED_HOSTS[0] + self.request.get_full_path()
-        if SEO.objects.filter(url=path).exists():
-            context['seo'] = SEO.objects.filter(url=path).first()
-        else:
-            context['seo'] = EarthPageModel.get_solo()
         if queryFilter:
             context['object_list'] = FilterEarth(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterEarth(queryFilter, queryset=self.object_list)
@@ -150,4 +142,5 @@ class EarthSiteView(EarthStatusMixin, ListView):
             context['count_obj'] = Earth.objects.count()
         context['BASE_URL'] = '/objects/earth'
         context['clear_filter'] = reverse_lazy('objects:earth')
+        context['earthpagemodel'] = self.seo_model.get_solo()
         return context

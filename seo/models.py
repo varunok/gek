@@ -9,10 +9,12 @@ from django.urls import reverse
 
 
 class SEO(models.Model):
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='Заголовок',
+        blank=True,
+        null=True
     )
-    title_h1 = models.TextField(
+    title = models.TextField(
         verbose_name='Заголовок H1',
         blank=True,
         null=True
@@ -41,7 +43,7 @@ class SEO(models.Model):
         blank=True,
         null=True
     )
-    image = models.ImageField(
+    image_seo = models.ImageField(
         verbose_name='Фото',
         upload_to='seo/%Y/%m/%d/',
         blank=True

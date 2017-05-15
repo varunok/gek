@@ -11,8 +11,8 @@
 
 {% block content %}
 <main class="middle">
-		<div class="slider_main slider_notfront"{% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title_h1|default:'Аренда коммерческой недвижимости' }}</div>
+		<div class="slider_main slider_notfront" {% if ofispagemodel.image %}style="background: url({{ ofispagemodel.image.url }}) no-repeat center/cover"{% endif %}>
+			<div class="slider_title">{{ seo.title|default:'Аренда коммерческой недвижимости' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
 					<input type="text" placeholder="Искать в тексте объявления">

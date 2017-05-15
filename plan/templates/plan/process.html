@@ -7,6 +7,10 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front process sidebar_first" {% endblock %}
 
 {% block content %}
@@ -14,7 +18,7 @@
         <form action="{% url 'plan:plan_done' %}" method="post">
             {% csrf_token %}
             <div class="slider_main slider_notfront">
-                <div class="slider_title">Составьте свой план </div>
+                <div class="slider_title">{{ seo.title|default:'Составьте свой план' }}</div>
                 <div class="webform_client_form">
                     <div class="form_item">
                        {{ title_form.name }}
