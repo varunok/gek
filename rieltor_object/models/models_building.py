@@ -9,7 +9,7 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
-from admin2.models import SettingsAddress
+from admin2.models import SettingsAddress, Settings
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 from rieltor_object.models.models_newbuilding import NewBuilding
@@ -119,6 +119,22 @@ class Building(models.Model):
         null=True,
         blank=True
     )
+    name = models.ForeignKey(
+        Name,
+        verbose_name='Имя',
+        on_delete=models.SET_NULL,
+        related_name='building',
+        null=True,
+        blank=True
+    )
+    phone = models.ForeignKey(
+        Phone,
+        verbose_name='Телефон',
+        on_delete=models.SET_NULL,
+        related_name='building',
+        null=True,
+        blank=True
+    )
     newbuilding = models.ForeignKey(
         NewBuilding,
         verbose_name='Новострои',
@@ -146,6 +162,11 @@ class Building(models.Model):
 
     video = models.TextField(
         verbose_name='Код видео',
+        blank=True
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
         blank=True
     )
     images = GenericRelation(Photo, related_query_name='building')
@@ -207,3 +228,13 @@ class Building(models.Model):
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())
         return '{0} {1}'.format(self.get_type_deal_display(), appointment)
+
+    def footage_price(self):
+        if self.footage and self.price:
+            return self.price // self.footage
+
+    def get_current(self):
+        if self.type_deal == TypeDeal.SALE:
+            return '$'
+        elif self.type_deal == TypeDeal.RENT:
+            return Settings.get_solo().get_currency_display()

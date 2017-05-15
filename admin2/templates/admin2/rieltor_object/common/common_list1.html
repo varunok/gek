@@ -49,18 +49,16 @@
                                 <tbody>
                                 {% for object in object_list %}
                                     <tr>
-                                        <td>{{ object.point }}</td>
-                                        {% with object.images.all.first as image %}
-                                            {% if image %}
-                                                <td><img src="{{ image.image|thumbnail_url:'article_image_60' }}" alt=""></td>
+                                        <td>{{ object.point|default_if_none:'--' }}</td>
+                                            {% if object.image %}
+                                                <td><img src="{{ object.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                             {% else %}
                                                 <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
                                             {% endif %}
-                                        {% endwith %}
-                                        <td>{{ object.address }}</td>
-                                        <td>{{ object.price }}</td>
-                                        <td>{{ object.get_type_deal_display }}</td>
-                                        <td>{{ object.get_appointment_display }}</td>
+                                        <td>{{ object.address|default_if_none:'--' }}</td>
+                                        <td>{{ object.price|default_if_none:'--' }}</td>
+                                        <td>{{ object.get_type_deal_display|default_if_none:'--' }}</td>
+                                        <td>{{ object.get_appointment_display|default_if_none:'--' }}</td>
                                         <td>{{ object.when_create|date:'d.m.Y H:i' }}</td>
                                         <td>
                                             <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>

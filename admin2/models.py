@@ -694,6 +694,20 @@ class TrustPageModel(SingletonModel):
         default=uuid.uuid4,
         editable=False
     )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
     faq_enable = models.BooleanField(
         verbose_name='Влючен ли FAQ?',
         default=True
@@ -757,6 +771,20 @@ class ContactPageModel(SingletonModel):
         verbose_name='Фото',
         upload_to='background/%Y/%m/%d/',
         blank=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото SEO',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    title_h1 = models.TextField(
+        verbose_name='Заголовок H1',
+        blank=True,
+        null=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
     uuid = models.UUIDField(
         default=uuid.uuid4,

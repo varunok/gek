@@ -7,9 +7,10 @@ from django.shortcuts import render
 from django.views.generic import DetailView
 
 from admin2.models import TrustPageModel
+from seo.mixins import SEOMixin
 
 
-class Trust(DetailView):
+class Trust(SEOMixin, DetailView):
     # model = TrustPageModel
     template_name = 'trust/trust.html'
 

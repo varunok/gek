@@ -1,12 +1,15 @@
 {% load favorites_tag %}
+{% load base_tag %}
 {% for object in object_list %}
     <div class="views_row vip_row">
         {% if object.is_vip %}
             <div class="vip"></div>
         {% endif %}
-        <div class="title">{{ object.title }}</div>
-        <div class="field_image">
-            <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
+        <div class="title">{{ object.title|default_if_none:'' }}</div>
+        <div class="field_image" style="transition: .3s">
+            <a href="{{ object.get_absolute_url }}">
+                <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
+            </a>
         </div>
         <div class="views_body">
             <div class="star {{ object|fav_is_active:request }}">
@@ -16,10 +19,12 @@
             <div class="address">{{ object.address|default_if_none:'' }}</div>
             <div class="text">{{ object.description|truncatewords:'15' }}</div>
             <div class="top_wrap">
-                <div class="info">
-                    <div class="label">ID:</div>
-                    <div class="item">{{ object.id }}</div>
-                </div>
+                {% if object.rooms %}
+                    <div class="info">
+                        <div class="label">Комнат:</div>
+                        <div class="item">{{ object.rooms }}</div>
+                    </div>
+                {% endif %}
                 {% if object.footage %}
                     <div class="info">
                         <div class="label">Площадь:</div>
@@ -29,7 +34,7 @@
                 {% if object.price %}
                     <div class="price info">
                         <div class="label">{{ object.get_type_deal_display }}:</div>
-                        {{ object.price }}
+                        {{ object.price }}{{ object.get_current }}
                     </div>
                 {% endif %}
             </div>

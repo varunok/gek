@@ -8,7 +8,7 @@ from django import template
 from django.contrib.sites.models import Site
 
 from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel, \
-    SettingsAddress, ActiveFranchise
+    SettingsAddress, ActiveFranchise, Settings
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
 
 register = template.Library()
@@ -160,3 +160,7 @@ def franchise_day():
         return 0
     return active_franchise
 
+
+@register.assignment_tag
+def carrency():
+    return Settings.get_solo().get_currency_display()

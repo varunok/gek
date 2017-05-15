@@ -16,6 +16,7 @@ class OficeListView(OfficesStatusMixin, ListView):
     model = Ofice
     template_name = 'admin2/rieltor_object/building/building_list.html'
     paginate_by = 10
+    ordering = ['point']
 
     def get_context_data(self, **kwargs):
         context = super(OficeListView, self).get_context_data(**kwargs)

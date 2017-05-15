@@ -17,6 +17,20 @@
             afterClose: setTimeout(function(){ location.reload() }, 2500)
          });
     }
+    function notify_success_not_reload(title, text) {
+         new PNotify({
+             title: title || 'Успешно',
+             text: text || 'Сохранено',
+             type: 'success',
+             styling: 'bootstrap3',
+             delay: 2000,
+             animate: {
+                animate: true,
+                in_class: 'fadeInUp',
+                out_class: 'fadeOutDown'
+            }
+         });
+    }
 
     function notify_error(title, text) {
          new PNotify({

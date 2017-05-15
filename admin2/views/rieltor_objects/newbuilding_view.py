@@ -17,6 +17,7 @@ class NewBuildingListView(NewBuildingStatusMixin, ListView):
     model = NewBuilding
     template_name = 'admin2/rieltor_object/new_building/new_building_list.html'
     paginate_by = 10
+    ordering = ['point']
 
     def get_context_data(self, **kwargs):
         context = super(NewBuildingListView, self).get_context_data(**kwargs)

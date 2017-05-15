@@ -11,7 +11,7 @@ from common.views import save_video, status_video, ModalVideo, create_faq, save_
     delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView, \
     packet_text_save, packet_create, save_advantage, save_infrastructure, related_infrastructure, \
     related_accommodations, save_accommodations, save_apartment_next, delete_apartment_next
-from rieltor_object.models import ApartmentHas, EarthDistrict, District, DailyDistrict
+from rieltor_object.models import ApartmentHas, EarthDistrict, District, DailyDistrict, Name, Phone
 from users.models import User
 
 urlpatterns = [
@@ -170,6 +170,20 @@ urlpatterns = [
             model=DailyDistrict,
             create_field='name',),
         name='daily-district-autocomplete'
+    ),
+    url(
+        '^name-autocomplete/$',
+        Select2QuerySetViewCustom.as_view(
+            model=Name,
+            create_field='name',),
+        name='name-autocomplete'
+    ),
+    url(
+        '^phone-autocomplete/$',
+        Select2QuerySetViewCustom.as_view(
+            model=Phone,
+            create_field='phone',),
+        name='phone-autocomplete'
     ),
     url(
         'check-notify/$',

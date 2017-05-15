@@ -78,6 +78,22 @@ class Daily(models.Model):
         null=True,
         blank=True
     )
+    name = models.ForeignKey(
+        Name,
+        verbose_name='Имя',
+        on_delete=models.SET_NULL,
+        related_name='daily',
+        null=True,
+        blank=True
+    )
+    phone = models.ForeignKey(
+        Phone,
+        verbose_name='Телефон',
+        on_delete=models.SET_NULL,
+        related_name='daily',
+        null=True,
+        blank=True
+    )
     panorama = models.TextField(
         verbose_name='Панорама',
         blank=True

@@ -26,18 +26,6 @@ class NewBuilding(models.Model):
         blank=True,
         null=True
     )
-    name = models.CharField(
-        verbose_name='Имя',
-        max_length=250,
-        blank=True,
-        null=True
-    )
-    phone = models.CharField(
-        verbose_name='Телефон',
-        max_length=250,
-        blank=True,
-        null=True
-    )
     is_enable = models.BooleanField(
         verbose_name='Статус',
         default=True,
@@ -82,6 +70,22 @@ class NewBuilding(models.Model):
     district = models.ForeignKey(
         District,
         verbose_name='Район',
+        on_delete=models.SET_NULL,
+        related_name='newbuilding',
+        null=True,
+        blank=True
+    )
+    name = models.ForeignKey(
+        Name,
+        verbose_name='Имя',
+        on_delete=models.SET_NULL,
+        related_name='newbuilding',
+        null=True,
+        blank=True
+    )
+    phone = models.ForeignKey(
+        Phone,
+        verbose_name='Телефон',
         on_delete=models.SET_NULL,
         related_name='newbuilding',
         null=True,

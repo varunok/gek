@@ -8,7 +8,7 @@ from django.db.models import F
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.views.generic.detail import SingleObjectMixin, BaseDetailView, DetailView
-from django.views.generic.list import BaseListView
+from django.views.generic.list import BaseListView, MultipleObjectMixin
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import UpdateView
 
@@ -169,6 +169,15 @@ class Select2QuerySetViewCustom(Select2QuerySetView):
                 'create_id': True,
             }]
         return create_option
+
+    def get_queryset(self):
+        qs = MultipleObjectMixin.get_queryset(self)
+        if self.q:
+            create_field = '{0}__icontains'.format(self.create_field)
+            qs = qs.filter(**{create_field: self.q})
+            print(qs)
+
+        return qs
 
 
 class FormSetMixin(UpdateView):

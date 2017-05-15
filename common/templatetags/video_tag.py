@@ -71,3 +71,14 @@ def get_video_code(video):
     return ''
 
 
+@register.filter(name='convert_panorama')
+def convert_panorama(panorama):
+    if not panorama:
+        return panorama
+    code = '<iframe src="https://www.google.com/maps/embed?{code} ' \
+           'width="{width}" height="{height}" ' \
+           'frameborder="0" style="border:0" allowfullscreen></iframe>'
+    if 'iframe' in panorama:
+        panorama_code = panorama.split(' ')[1].split('?')[-1]
+        return code.format(code=panorama_code, width='542', height='293')
+    return ''

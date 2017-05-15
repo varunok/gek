@@ -6,7 +6,7 @@ $(document).ready(function() {
         event.preventDefault();
         var content_type = $('input[name="content_type"]').val();
         var model_id = $('input[name="model_id"]').val();
-        $.get('create-faq', {'content_type': content_type, 'model_id': model_id})
+        $.get('create-faq/', {'content_type': content_type, 'model_id': model_id})
             .then(function(response) {
                 $('.list-faq').append(response);
             }, function(err) {
@@ -18,7 +18,7 @@ $(document).ready(function() {
         var data = $('.faqForm').serialize();
         $.post('save-faq/', data)
             .then(function(response) {
-                notify_success(response, 'Сохранено');
+                notify_success_not_reload(response, 'Сохранено');
             }, function(err) {
                 notify_error('Ошибка '+ err.status, err.statusText);
             });
@@ -30,7 +30,7 @@ $(document).ready(function() {
         _this = $(this);
         $.get('del-faq/'+faq_id)
             .then(function(response) {
-                notify_success(response, 'Удалено');
+                notify_success_not_reload(response, 'Удалено');
                 _this.parents('.faq-quant').fadeOut();
             }, function(err) {
                 notify_error('Ошибка '+ err.status, err.statusText);

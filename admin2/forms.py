@@ -196,6 +196,12 @@ class BuildingEditForm(forms.ModelForm):
         widgets = {
             'district': autocomplete.ModelSelect2(
                 url=reverse_lazy('admin2:district-autocomplete'),
+            ),
+            'name': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:name-autocomplete'),
+            ),
+            'phone': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:phone-autocomplete'),
             )
         }
 
@@ -209,6 +215,12 @@ class NewBuildingEditForm(forms.ModelForm):
         widgets = {
             'district': autocomplete.ModelSelect2(
                 url=reverse_lazy('admin2:district-autocomplete'),
+            ),
+            'name': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:name-autocomplete'),
+            ),
+            'phone': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:phone-autocomplete'),
             )
         }
 
@@ -222,6 +234,12 @@ class OficeEditForm(forms.ModelForm):
         widgets = {
             'district': autocomplete.ModelSelect2(
                 url=reverse_lazy('admin2:district-autocomplete'),
+            ),
+            'name': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:name-autocomplete'),
+            ),
+            'phone': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:phone-autocomplete'),
             )
         }
 
@@ -236,6 +254,12 @@ class EarthEditForm(forms.ModelForm):
             'structure_house': autocomplete.Select2Multiple(),
             'district': autocomplete.ModelSelect2(
                 url=reverse_lazy('admin2:earth-district-autocomplete'),
+            ),
+            'name': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:name-autocomplete'),
+            ),
+            'phone': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:phone-autocomplete'),
             )
         }
 
@@ -252,6 +276,12 @@ class DailyEditForm(forms.ModelForm):
             ),
             'district': autocomplete.ModelSelect2(
                 url=reverse_lazy('admin2:daily-district-autocomplete'),
+            ),
+            'name': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:name-autocomplete'),
+            ),
+            'phone': autocomplete.ModelSelect2(
+                url=reverse_lazy('admin2:phone-autocomplete'),
             )
         }
 

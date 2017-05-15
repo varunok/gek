@@ -140,6 +140,36 @@ class District(models.Model):
         return self.name
 
 
+class Name(models.Model):
+    name = models.CharField(
+        verbose_name='Имя',
+        max_length=250,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Имя'
+        verbose_name_plural = 'Имена'
+
+    def __unicode__(self):
+        return self.name
+
+
+class Phone(models.Model):
+    phone = models.CharField(
+        verbose_name='Телефон',
+        max_length=250,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Телефон'
+        verbose_name_plural = 'Телефон'
+
+    def __unicode__(self):
+        return self.phone
+
+
 class DailyDistrict(models.Model):
     name = models.CharField(
         verbose_name='Название',

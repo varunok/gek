@@ -126,6 +126,22 @@ class Ofice(models.Model):
         null=True,
         blank=True
     )
+    name = models.ForeignKey(
+        Name,
+        verbose_name='Имя',
+        on_delete=models.SET_NULL,
+        related_name='ofice',
+        null=True,
+        blank=True
+    )
+    phone = models.ForeignKey(
+        Phone,
+        verbose_name='Телефон',
+        on_delete=models.SET_NULL,
+        related_name='ofice',
+        null=True,
+        blank=True
+    )
     description = models.TextField(
         verbose_name='Описание',
         blank=True
@@ -145,6 +161,11 @@ class Ofice(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False
+    )
+    image = models.ImageField(
+        verbose_name='Фото',
+        upload_to='background/%Y/%m/%d/',
+        blank=True
     )
     videos = GenericRelation(Video, related_query_name='ofice')
     images = GenericRelation(Photo, related_query_name='ofice')
@@ -200,3 +221,13 @@ class Ofice(models.Model):
         except AttributeError:
             pass
         return text
+
+    def footage_price(self):
+        if self.footage and self.price:
+            return self.price // self.footage
+
+    def get_current(self):
+        if self.type_deal == TypeDeal.SALE:
+            return '$'
+        elif self.type_deal == TypeDeal.RENT:
+            return Settings.get_solo().get_currency_display()

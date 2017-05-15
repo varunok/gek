@@ -85,18 +85,6 @@ class Earth(models.Model):
         blank=True,
         null=True
     )
-    contact_name = models.CharField(
-        verbose_name='Контактное лицо',
-        max_length=250,
-        blank=True,
-        null=True
-    )
-    phone = models.CharField(
-        verbose_name='Телефон',
-        max_length=250,
-        blank=True,
-        null=True
-    )
     description = models.TextField(
         verbose_name='Описание',
         blank=True
@@ -116,6 +104,22 @@ class Earth(models.Model):
     updated = models.DateTimeField(
         verbose_name='Дата редактирования',
         auto_now=True
+    )
+    name = models.ForeignKey(
+        Name,
+        verbose_name='Имя',
+        on_delete=models.SET_NULL,
+        related_name='earth',
+        null=True,
+        blank=True
+    )
+    phone = models.ForeignKey(
+        Phone,
+        verbose_name='Телефон',
+        on_delete=models.SET_NULL,
+        related_name='earth',
+        null=True,
+        blank=True
     )
     images = GenericRelation(Photo, related_query_name='earth')
 
