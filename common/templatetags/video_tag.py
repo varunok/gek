@@ -78,7 +78,16 @@ def convert_panorama(panorama):
     code = '<iframe src="https://www.google.com/maps/embed?{code} ' \
            'width="{width}" height="{height}" ' \
            'frameborder="0" style="border:0" allowfullscreen></iframe>'
+    yandex_code = '<script src="https://panoramas.api-maps.yandex.ru/embed/1.x/?lang=ru&ll=24.02731861%2C49.84294679&ost=dir%3A152.89056442361806%2C9.061250000000003~span%3A119.21110794003725%2C80&size=690%2C495&l=stv"></script>'
+    size = 'size={width}%2C{height}'
     if 'iframe' in panorama:
         panorama_code = panorama.split(' ')[1].split('?')[-1]
         return code.format(code=panorama_code, width='542', height='293')
-    return ''
+    if 'yandex' in panorama:
+        panorama_list = panorama.split('&')
+        for index, ele in enumerate(panorama_list):
+            if 'size=' in ele:
+                ele = size.format(width='542', height='293')
+                panorama_list[index] = ele
+        return '&'.join(panorama_list)
+    return panorama

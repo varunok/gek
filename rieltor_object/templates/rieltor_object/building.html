@@ -17,7 +17,7 @@
 
 {% block content %}
 	<main class="middle">
-		<div class="slider_main slider_notfront">
+		<div class="slider_main slider_notfront" {% if seo.image %}style="background: url({{ seo.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="top_inner_content">
 				<div class="main_breadcrumbs"><a href="/">Главная</a> / <span>Недвижимость</span></div>
 				<div class="title"></div>
@@ -170,16 +170,14 @@
 				</div>
 			</div>
 		</div>
-        {% with object.videos.all.first as video %}
-            {% if video.is_enable and video.video %}
-                <div class="block block_video">
-                    <div class="block_content">
-                        <div class="block_title">{{ video.title }}</div>
-                        {{ video.video|convert_to_frame|safe }}
-                    </div>
+        {% if object.video %}
+            <div class="block block_video">
+                <div class="block_content">
+{#                    <div class="block_title">{{ object.title }}</div>#}
+                    {{ object.video|convert_to_frame|safe }}
                 </div>
-            {% endif %}
-        {% endwith %}
+            </div>
+        {% endif %}
         {% with object.newbuilding as newbuilding %}
             {% if newbuilding %}
                 <div class="block new_buildings">
