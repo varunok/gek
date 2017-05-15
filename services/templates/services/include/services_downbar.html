@@ -12,7 +12,7 @@
                         {% if service.image %}
                             <div class="field_image"><a href="{{ service.get_absolute_url }}"><img src="{{ service.image|thumbnail_url:'article_271' }}" alt=""></a></div>
                         {% endif %}
-                        <div class="field_title"><a href="{{ service.get_absolute_url }}">{{ service }}</a></div>
+                        <div class="field_title"><a href="{{ service.get_absolute_url }}">{{ service.name|default:service }}</a></div>
                     </div>
                 {% endfor %}
             </div>
