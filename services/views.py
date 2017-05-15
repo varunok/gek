@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
 from common.mixins import ServiceSiteMixin
+from seo.mixins import SEOMixin
 from services.helpers import return_list_services
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, \
     UniversalService
@@ -26,7 +27,7 @@ class ServicesSiteView(TemplateView):
         return context
 
 
-class RieltorServiceView(ServiceSiteMixin):
+class RieltorServiceView(SEOMixin, ServiceSiteMixin):
     template_name = 'services/rieltor_service.html'
     context_object_name = 'service_rieltor'
     model = ServicesRieltor
