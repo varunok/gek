@@ -151,4 +151,6 @@ class User(AbstractUser):
             self.is_superuser = True
         else:
             self.is_superuser = False
+        if self.is_superuser:
+            self.group = self.Group.SA
         super(User, self).save(*args, **kwargs)
