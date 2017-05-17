@@ -78,6 +78,10 @@
 								<div class="char_wrapper">
 									<div class="group">
 										<div class="item">
+											<div class="label">ID:</div>
+											<div class="field_item">{{ object.custom_id|default_if_none:'' }}</div>
+										</div>
+                                        <div class="item">
 											<div class="label">Район:</div>
 											<div class="field_item">{{ object.district|default_if_none:'' }}</div>
 										</div>

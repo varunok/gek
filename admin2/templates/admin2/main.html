@@ -28,6 +28,7 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%">#</th>
+                                    <th style="width: 1%">ID</th>
                                     <th style="width: 10%">Дата</th>
                                     <th style="width: 10%">Источник</th>
                                     <th style="width: 10%">Имя</th>
@@ -45,6 +46,7 @@
                                 {% for app in applications %}
                                     <tr>
                                         <td>{{ app.id }}</td>
+                                        <td>{{ app.custom_id|default_if_none:'--' }}</td>
                                         <td>{{ app.created|date:'d.m.Y H:i' }}</td>
                                         <td>{{ app.source|safe }}</td>
                                         <td>{{ app.name|default_if_none:'---' }}</td>

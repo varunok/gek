@@ -5,6 +5,7 @@
             <form action="#" class="webform_client_form" id="form-add-inspection">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заказать осмотр объекта.<a target='_blank' href='{{ object.get_absolute_url }}'>Объект</a>">
+                <input type="hidden" name="custom_id" value="{{ object.custom_id }}">
                 <div class="top_wrap">
                     <div class="form_item name">
                         <input name="name"  type="text" placeholder="Введите ваше имя">
@@ -14,7 +15,7 @@
                     </div>
                 </div>
                 <div class="form_actions">
-                    <input type="submit" class="form_submit submit-save-application" value="Заказать осмотр объекта">
+                    <input type="submit" class="form_submit submit-save-application" value="Заказать осмотр объекта ID{{ object.custom_id }}">
                 </div>
             </form>
         </div>

@@ -21,6 +21,12 @@ class OficeManager(models.Manager):
 
 
 class Ofice(models.Model):
+    custom_id = models.PositiveIntegerField(
+        verbose_name='ID',
+        unique=True,
+        blank=True,
+        null=True
+    )
     title = models.CharField(
         verbose_name='Заголовок',
         max_length=250,

@@ -35,6 +35,7 @@
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
+                                    <th style="width: 1%">ID</th>
                                     <th style="width: 1%">Балы</th>
                                     <th style="width: 20%">Фото</th>
                                     <th style="width: 20%">Адресс</th>
@@ -49,7 +50,8 @@
                                 <tbody>
                                 {% for object in object_list %}
                                     <tr>
-                                        <td>{{ object.point }}</td>
+                                        <td>{{ object.custom_id|default_if_none:'' }}</td>
+                                        <td>{{ object.point|default_if_none:'' }}</td>
                                         {% with object.images.all.first as image %}
                                             {% if image %}
                                                 <td><img src="{{ image.image|thumbnail_url:'article_image_60' }}" alt=""></td>
