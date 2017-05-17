@@ -17,69 +17,69 @@ class Migration(migrations.Migration):
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='cleaning',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='cleaning',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
         migrations.AlterField(
             model_name='installationwater',
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='installationwater',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='installationwater',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
         migrations.AlterField(
             model_name='insurance',
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='insurance',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='insurance',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
         migrations.AlterField(
             model_name='repair',
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='repair',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='repair',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
         migrations.AlterField(
             model_name='servicesrieltor',
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='servicesrieltor',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='servicesrieltor',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
         migrations.AlterField(
             model_name='universalservice',
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='universalservice',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='universalservice',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
         migrations.AlterField(
             model_name='valuation',
             name='image',
             field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e \u0430\u0432\u0430\u0442\u0430\u0440'),
         ),
-        migrations.AlterField(
-            model_name='valuation',
-            name='image_avatar',
-            field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
-        ),
+        # migrations.AlterField(
+        #     model_name='valuation',
+        #     name='image_avatar',
+        #     field=models.ImageField(blank=True, upload_to='services/%Y/%m/%d/', verbose_name='\u0424\u043e\u0442\u043e'),
+        # ),
     ]
