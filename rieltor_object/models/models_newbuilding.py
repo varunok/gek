@@ -15,6 +15,12 @@ from rieltor_object.models.common_objects import *
 
 
 class NewBuilding(models.Model):
+    custom_id = models.PositiveIntegerField(
+        verbose_name='ID',
+        unique=True,
+        blank=True,
+        null=True
+    )
     slug = models.SlugField(
         verbose_name='URL',
         unique=True,

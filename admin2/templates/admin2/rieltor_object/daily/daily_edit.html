@@ -134,6 +134,16 @@
                                             <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
                                                 {% csrf_token %}
                                                 <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.custom_id.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.custom_id|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.custom_id.errors %}
+                                                        <span class="error-label">{{ form.custom_id.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.point.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">

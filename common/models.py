@@ -79,6 +79,11 @@ class Application(models.Model):
     is_reading = models.BooleanField(
         default=False
     )
+    custom_id = models.PositiveIntegerField(
+        verbose_name='ID',
+        blank=True,
+        null=True
+    )
 
 
     def __unicode__(self):

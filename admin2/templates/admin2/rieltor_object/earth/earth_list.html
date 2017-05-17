@@ -49,7 +49,7 @@
                                 <tbody>
                                 {% for object in object_list %}
                                     <tr>
-                                        <td>{{ object.id }}</td>
+                                        <td>{{ object.custom_id }}</td>
                                             {% if object.image %}
                                                 <td><img src="{{ object.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                             {% else %}

@@ -1,10 +1,11 @@
 <div class="block block_presentation order_block">
 	<div class="block_content">
-		<div class="block_title">Заказать осмотр объекта</div>
+		<div class="block_title">Заказать осмотр объекта ID {{ object.custom_id|default_if_none:'' }}</div>
 		<div class="view_content">
 			<form action="#" class="webform_client_form" id="form_order_block">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заказать осмотр объекта.<a target='_blank' href='{{ object.get_absolute_url }}'>Объект</a>">
+                <input type="hidden" name="custom_id" value="{{ object.custom_id }}">
 				<div class="form_item user_name">
 					<input name="name" type="text" placeholder="Введите ваше имя">
 				</div>
