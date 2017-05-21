@@ -10,6 +10,16 @@
             <div name="appointment" class="item">{{ appointment.choice_label }}<div class="close close-item" data-href="{% filterpath request.path appointment.data.name appointment.data.value %}"></div></div>
         {% endif %}
     {% endfor %}
+    {% for period in filter_form.form.period %}
+        {% if period.data.selected and '-' not in period.choice_label %}
+            <div name="period" class="item">{{ period.choice_label }}<div class="close close-item" data-href="{% filterpath request.path period.data.name period.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+    {% for period in filter_form.form.proposal %}
+        {% if proposal.data.selected and '-' not in proposal.choice_label %}
+            <div name="proposal" class="item">{{ proposal.choice_label }}<div class="close close-item" data-href="{% filterpath request.path proposal.data.name proposal.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
     {% for district in filter_form.form.district %}
         {% if district.data.selected and '-' not in district.choice_label %}
             <div name="district" class="item">{{ district.choice_label }}<div class="close close-item" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>

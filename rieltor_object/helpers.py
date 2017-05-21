@@ -17,6 +17,7 @@ class HelperFilter(object):
     def mutable_path(self, path):
         if path[-1] == '/':
             path = path[:-1]
+        print(path)
         element = self.group(path.split('/')[-1].split('-'), 2)
         if element:
             for index, ele in enumerate(element):

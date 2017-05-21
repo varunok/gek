@@ -83,6 +83,8 @@ class FilterBuilding(django_filters.FilterSet):
     class Meta:
         model = Building
         fields = {
+            'proposal': ['exact'],
+            'period': ['exact'],
             'appointment': ['exact'],
             'layout': ['exact'],
             'footage': ['gt', 'lt'],

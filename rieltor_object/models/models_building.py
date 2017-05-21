@@ -15,6 +15,28 @@ from rieltor_object.models.common_objects import *
 from rieltor_object.models.models_newbuilding import NewBuilding
 
 
+class Period(object):
+    SHORT = 'short'
+    MONTH = 'month'
+    LONG = 'long'
+    CHOICES = (
+        (SHORT, 'короткий'),
+        (MONTH, 'месяц'),
+        (LONG, 'долгий срок (6мес)'),
+    )
+
+
+class Proposal(object):
+    CONDO = 'condo'
+    APARTMENT = 'appartment'
+    VILLAS = 'villas'
+    CHOICES = (
+        (CONDO, 'кондо'),
+        (APARTMENT, 'квартиры'),
+        (VILLAS, 'виллы'),
+    )
+
+
 class BuildingManager(models.Manager):
     def vips(self, *args, **kwargs):
         kwargs['is_vip'] = True
@@ -174,6 +196,20 @@ class Building(models.Model):
         verbose_name='Фото',
         upload_to='background/%Y/%m/%d/',
         blank=True
+    )
+    period = models.CharField(
+        verbose_name='Период',
+        choices=Period.CHOICES,
+        max_length=50,
+        blank=True,
+        null=True
+    )
+    proposal = models.CharField(
+        verbose_name='Предложение',
+        choices=Proposal.CHOICES,
+        max_length=50,
+        blank=True,
+        null=True
     )
     images = GenericRelation(Photo, related_query_name='building')
 

@@ -22,10 +22,12 @@ class CurrencyChoice(object):
     UAH = 'UAH'
     RUB = 'RUB'
     KZT = 'KZT'
+    THB = 'THB'
     CARRENCY = (
         (UAH, 'грн'),
         (RUB, 'руб'),
-        (KZT, 'тнг')
+        (KZT, 'тнг'),
+        (THB, 'бат')
     )
 
 class CurrencyPayChoice(object):
