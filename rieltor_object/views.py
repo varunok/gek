@@ -40,6 +40,11 @@ class BuildingListSiteView(SEOMixin, BuildingStatusMixin, ListView):
         context['buildingpagemodel'] = self.seo_model.get_solo()
         return context
 
+    def get_template_names(self):
+        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
+            return 'rieltor_object/special/building_list.html'
+        return self.template_name
+
 
 class BuildingDetailSiteView(SEOMixin, BuildingStatusMixin, ViewsCountMixin, DetailView):
     model = Building

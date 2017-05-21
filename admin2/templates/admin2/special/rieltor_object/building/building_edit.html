@@ -1,0 +1,326 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load base_tag %}
+{% load thumbnail %}
+
+{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+
+{% block css %}
+{#    <link rel="stylesheet" href="{% static 'css/vCheck.css' %}">#}
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{{ verbose_name }}</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div style="float: right">
+                            {% if object.when_create %}
+                                <a href="{{ object.get_list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            {% else %}
+                                <a href="{{ list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>{% if object.when_create %}Изменить{% else %}Создать{% endif %} {{ object.SEODescription }}</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            {% if object.when_create %}
+                                <ul class="stats-overview">
+                                    <li>
+                                        <span class="name"> Дата создания </span>
+                                        <span class="value text-success"> {{ object.when_create }} </span>
+                                    </li>
+                                    <li>
+                                        <span class="name"> Дата редактирования </span>
+                                        <span class="value text-success"> {{ object.updated }} </span>
+                                    </li>
+                                    <li >
+                                        <span class="name"> URL </span>
+                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">{% if object.when_create %}Редактировать{% else %}Создать{% endif %}</a>
+                                        </li>
+                                        {% if object.when_create %}
+                                        <li role="presentation" class="">
+                                            <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                            <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
+                                                {% csrf_token %}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.custom_id.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.custom_id|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.custom_id.errors %}
+                                                        <span class="error-label">{{ form.custom_id.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.point.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.point|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.point.errors %}
+                                                        <span class="error-label">{{ form.point.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.is_vip.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12" style="padding-top: 8px;">
+                                                        {{ form.is_vip|addcss:'form-control flat' }}
+                                                    </div>
+                                                    {% if form.is_vip.errors %}
+                                                        <span class="error-label">{{ form.is_vip.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.is_short.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12" style="padding-top: 8px;">
+                                                        {{ form.is_short|addcss:'form-control flat' }}
+                                                    </div>
+                                                    {% if form.is_short.errors %}
+                                                        <span class="error-label">{{ form.is_short.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.newbuilding.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.newbuilding|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.newbuilding.errors %}
+                                                        <span class="error-label">{{ form.newbuilding.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.title|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.title.errors %}
+                                                        <span class="error-label">{{ form.title.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.address.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.address|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.address.errors %}
+                                                        <span class="error-label">{{ form.address.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.price.label }},
+                                                        {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %}
+                                                        :
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.price|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.price.errors %}
+                                                        <span class="error-label">{{ form.price.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.type_deal.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.type_deal|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.type_deal.errors %}
+                                                        <span class="error-label">{{ form.type_deal.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.appointment.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.appointment|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.appointment.errors %}
+                                                        <span class="error-label">{{ form.appointment.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.rooms.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.rooms|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.rooms.errors %}
+                                                        <span class="error-label">{{ form.rooms.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.period.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.period|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.period.errors %}
+                                                        <span class="error-label">{{ form.period.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.proposal.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.proposal|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.proposal.errors %}
+                                                        <span class="error-label">{{ form.proposal.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.district.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.district|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.district.errors %}
+                                                        <span class="error-label">{{ form.district.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.name.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.name|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.name.errors %}
+                                                        <span class="error-label">{{ form.name.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.phone.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.phone|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.phone.errors %}
+                                                        <span class="error-label">{{ form.phone.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.description.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.description|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
+                                                    </div>
+                                                    {% if form.description.errors %}
+                                                        <span class="error-label">{{ form.description.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.panorama.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.panorama|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
+                                                    </div>
+                                                    {% if form.panorama.errors %}
+                                                        <span class="error-label">{{ form.panorama.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.video.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
+                                                    </div>
+                                                    {% if form.video.errors %}
+                                                        <span class="error-label">{{ form.video.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.image.label }}</label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        <input id="imgInp" name="image" type="file">
+                                                        <img id="blah" src="
+                                                        {% if object.image %}
+                                                            {{ object.image.url }}
+                                                        {% endif %}
+                                                        " alt="" width="100%" />
+                                                        {% if object.image %}
+                                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input type="hidden" value="{{ content_type }}">
+                                                            <input type="hidden" value="{{ object.id }}">
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {% include 'admin2/services/include/packets.html' with service=object %}
+                                        {% include 'admin2/services/include/gallery.html' with service=object %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/service_status.js' %}"></script>
+    <script src="{% static 'js/video_status.js' %}"></script>
+    <script src="{% static 'js/packets_status.js' %}"></script>
+    <script src="{% static 'js/gallery.js' %}"></script>
+    <script src="{% static 'js/icheck.min.js' %}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function(){
+            readURL(this);
+        });
+
+    </script>
+    {{ form.media }}
+{% endblock js %}
