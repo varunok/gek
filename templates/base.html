@@ -253,10 +253,18 @@
                                 </li>
                             </ul>
                             <div class="visit">
-                                <div class="item"><img src="{% static 'images/bitmap.png' %}" alt=""></div>
-                                <div class="item"><img src="images/bitmap.png" alt=""></div>
-                                <div class="item"><img src="images/bitmap.png" alt=""></div>
-                                <div class="item"><img src="images/bitmap.png" alt=""></div>
+                                {% if counter_1 %}
+                                    <div class="item">{{ counter_1|safe }}</div>
+                                {% endif %}
+                                {% if counter_2 %}
+                                    <div class="item">{{ counter_2|safe }}</div>
+                                {% endif %}
+                                {% if counter_3 %}
+                                    <div class="item">{{ counter_3|safe }}</div>
+                                {% endif %}
+                                {% if counter_4 %}
+                                    <div class="item">{{ counter_4|safe }}</div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

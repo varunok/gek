@@ -12,7 +12,6 @@
 {% endblock css %}
 
 {% block content %}
-    {% get_solo 'admin2.Settings' as site_config %}
     <!-- page content -->
     <div class="right_col" role="main">
         <div class="">
@@ -26,15 +25,10 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-bars"></i> Параметры <small></small></h2>
+                            <h2><i class="fa fa-bars"></i> Счетчики <small></small></h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="col-xs-2">
-                                <!-- required for floating -->
-                                <!-- Nav tabs -->
-                                {% include 'admin2/settings/settings_nav.html' %}
-                            </div>
                             <div class="col-xs-9">
                                 <!-- Tab panes -->
                                 <div class="tab-content">
@@ -46,33 +40,43 @@
                                                 {{ form.errors }}
                                                 {% csrf_token %}
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.merchant.label }} <span class="required"></span>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.counter_1.label }} <span class="required"></span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.merchant|addcss:'form-control col-md-7 col-xs-12' }}
+                                                        {{ form.counter_1|addcss:'form-control col-md-7 col-xs-12'|addrows:'4'|safe }}
                                                     </div>
-                                                    {% if form.merchant.errors %}
-                                                        <span class="error-label">{{ form.merchant.errors }}</span>
+                                                    {% if form.counter_1.errors %}
+                                                        <span class="error-label">{{ form.counter_1.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.signature.label }} <span class="required"></span>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.counter_2.label }} <span class="required"></span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.signature|addcss:'form-control col-md-7 col-xs-12' }}
+                                                        {{ form.counter_2|addcss:'form-control col-md-7 col-xs-12'|addrows:'4'|safe }}
                                                     </div>
-                                                    {% if form.signature.errors %}
-                                                        <span class="error-label">{{ form.signature.errors }}</span>
+                                                    {% if form.counter_2.errors %}
+                                                        <span class="error-label">{{ form.counter_2.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{ form.currency.label }} <span class="required"></span>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.counter_3.label }} <span class="required"></span>
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.currency|addcss:'form-control col-md-7 col-xs-12' }}
+                                                        {{ form.counter_3|addcss:'form-control col-md-7 col-xs-12'|addrows:'4'|safe }}
                                                     </div>
-                                                    {% if form.currency.errors %}
-                                                        <span class="error-label">{{ form.currency.errors }}</span>
+                                                    {% if form.counter_3.errors %}
+                                                        <span class="error-label">{{ form.counter_3.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.counter_4.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.counter_4|addcss:'form-control col-md-7 col-xs-12'|addrows:'4'|safe }}
+                                                    </div>
+                                                    {% if form.counter_4.errors %}
+                                                        <span class="error-label">{{ form.counter_4.errors }}</span>
                                                     {% endif %}
                                                 </div>
 
@@ -97,5 +101,4 @@
 {% endblock content %}
 
 {% block js %}
-    <script src="{% static 'js/select2.full.js' %}"></script>
 {% endblock js %}
