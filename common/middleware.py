@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+from pprint import pprint
+
 from django import http
 from django.apps import apps
 from django.conf import settings
@@ -31,14 +33,15 @@ class RedirectMiddlewareCustom(MiddlewareMixin):
         current_site = get_current_site(request)
 
         if not request.user.is_superuser and not ActiveFranchise.get_solo().is_active():
-            if 'admin' in request.path and reverse_lazy('admin2:paylist') != request.path and reverse_lazy('admin2'
-                                                                                                           ':auth_login') != request.path:
+            if 'admin' in request.path and reverse_lazy('admin2:paylist')\
+                    != request.path and reverse_lazy('admin2:auth_login') != request.path:
                 return self.response_redirect(reverse_lazy('admin2:paylist'))
 
         if request.path == '/admin':
             return self.response_redirect_class(reverse_lazy('admin2:auth_login'))
 
         r = None
+
         try:
             r = Redirect.objects.get(site=current_site, old_path=full_path)
         except Redirect.DoesNotExist:
