@@ -199,6 +199,29 @@ class EmailForward(models.Model):
         return reverse('admin2:email_forward')
 
 
+class Counters(SingletonModel):
+    counter_1 = models.TextField(
+        verbose_name='Счетчик №1',
+        blank=True,
+        null=True
+    )
+    counter_2 = models.TextField(
+        verbose_name='Счетчик №2',
+        blank=True,
+        null=True
+    )
+    counter_3 = models.TextField(
+        verbose_name='Счетчик №3',
+        blank=True,
+        null=True
+    )
+    counter_4 = models.TextField(
+        verbose_name='Счетчик №4',
+        blank=True,
+        null=True
+    )
+
+
 class IndexPageModel(SingletonModel):
     name = models.CharField(
         default='Главная',

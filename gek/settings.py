@@ -95,6 +95,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'common.context_processors.counter'
             ],
         },
     },
@@ -283,6 +284,7 @@ THUMBNAIL_ALIASES = {
         'article_271': {'size': (271, 154), 'crop': True},
         'service_585': {'size': (585, 248), 'crop': True},
         'service_370': {'size': (370, 154), 'crop': True},
+        'slider_1110': {'size': (1110, 624), 'crop': 'zoom'},
     },
 }
 

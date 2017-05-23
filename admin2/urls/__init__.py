@@ -18,6 +18,7 @@ from seo_urls import urlpatterns as urlpatterns_seo
 from redirect_urls import urlpatterns as urlpatterns_redirect
 from landing_urls import urlpatterns as urlpatterns_landing
 from pay_urls import urlpatterns as urlpatterns_pay
+from counters_urls import urlpatterns as urlpatterns_counters
 
 urlpatterns = []
 urlpatterns.extend(urlpatterns_articles)
@@ -37,3 +38,4 @@ urlpatterns.extend(urlpatterns_seo)
 urlpatterns.extend(urlpatterns_redirect)
 urlpatterns.extend(urlpatterns_landing)
 urlpatterns.extend(urlpatterns_pay)
+urlpatterns.extend(urlpatterns_counters)
