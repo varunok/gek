@@ -1,5 +1,5 @@
 {% load thumbnail %}
-{% if seo.title_seo or seo.content_seo  %}
+{% if seo.title_seo or seo.content  %}
     <div class="block block_seo">
         <div class="block_content">
             <div class="block_title">{{ seo.title_seo|default_if_none:'' }}</div>

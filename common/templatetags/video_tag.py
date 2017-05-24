@@ -18,7 +18,17 @@ def convert_to_frame(video):
             return iframe
         except:
             return 'Неверний формат кода видео'
-    return video
+    else:
+        try:
+            video_item = video.split(' ')
+            for ele in video_item:
+                if 'watch' in ele:
+                    el = ele.split('=')[-1]
+                    iframe = iframe.format(el)
+            return iframe
+        except:
+            return 'Неверний формат кода видео'
+    # return video
 
 
 @register.filter(name='convert_to_frame_slider')
@@ -48,7 +58,16 @@ def convert_to_frame_slider(video):
             return iframe
         except:
             return 'Неверний формат кода видео'
-    return video
+    else:
+        try:
+            video_item = video.split(' ')
+            for ele in video_item:
+                if 'watch' in ele:
+                    el = ele.split('=')[-1]
+                    iframe = iframe.format(el)
+            return iframe
+        except:
+            return 'Неверний формат кода видео'
 
 
 @register.filter(name='get_video_code')
