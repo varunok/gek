@@ -21,7 +21,7 @@
                 <input type="hidden" name="object_id" value="{{ object.id }}">
             </div>
             <div class="address">{{ object.address|default_if_none:'' }}</div>
-            <div class="text" style="word-break: break-all;">{{ object.description|truncatewords:'15' }}</div>
+            <div class="text" style="word-break: break-all;">{{ object.description|truncatewords:'15'|safe }}</div>
             <div class="top_wrap">
                 {% if object.rooms %}
                     <div class="info">

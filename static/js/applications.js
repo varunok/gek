@@ -19,7 +19,7 @@ $(document).ready(function() {
         $.get('app/dell/'+id+'/')
             .then(function(response) {
                 _this.fadeOut('slow');
-                notify_success(0, 'Удалено');
+                notify_success_reload(0, 'Удалено');
             }, function(err) {
                 notify_error('Ошибка '+ err.status, err.statusText);
             });
@@ -29,7 +29,7 @@ $(document).ready(function() {
         $.get('app/dell/all/')
             .then(function(response) {
                 _this.fadeOut('slow');
-                notify_success(0, 'Удалено');
+                notify_success_reload(0, 'Удалено');
 
             }, function(err) {
                 notify_error('Ошибка '+ err.status, err.statusText);

@@ -13,7 +13,7 @@
                 <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
                 <input type="hidden" name="object_id" value="{{ object.id }}">
             </div>
-            <div class="text">{{ object.description|truncatechars:'100' }}</div>
+            <div class="text">{{ object.description|truncatechars:'100'|safe }}</div>
             <div class="top_wrap">
                 <div class="info">
                     <div class="label">Район:</div>

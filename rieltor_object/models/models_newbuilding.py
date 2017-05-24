@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import uuid
+
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -102,7 +104,7 @@ class NewBuilding(models.Model):
         blank=True,
         null=True
     )
-    description = models.TextField(
+    description = RichTextUploadingField(
         verbose_name='Описание',
         blank=True
     )

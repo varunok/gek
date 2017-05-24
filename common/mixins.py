@@ -196,7 +196,7 @@ class FormSetMixin(UpdateView):
         self.object = None
         if not self.formset:
             self.formset = self.get_formset(request)
-        formset =  self.formset(self.request.POST, instance=self.get_object())
+        formset =  self.formset(self.request.POST, self.request.FILES, instance=self.get_object())
         if formset.is_valid():
             return self.form_valid(formset)
         else:
