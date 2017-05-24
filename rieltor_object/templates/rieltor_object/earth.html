@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="center_wrap">
                                                 <div class="address">{{ object.address|default:'' }}</div>
-                                                <div class="body">{{ object.description }}</div>
+                                                <div class="body">{{ object.description|safe }}</div>
                                             </div>
                                             <div class="right_wrap">
                                                 <div class="info_wrap">

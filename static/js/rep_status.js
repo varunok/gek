@@ -6,7 +6,7 @@ $(document).ready(function() {
         event.preventDefault();
         var content_type = $('input[name="content_type"]').val();
         var model_id = $('input[name="model_id"]').val();
-        $.get('create-rep', {'content_type': content_type, 'model_id': model_id})
+        $.get('create-rep/', {'content_type': content_type, 'model_id': model_id})
             .then(function(response) {
                 $('.list-rep').append(response);
             }, function(err) {

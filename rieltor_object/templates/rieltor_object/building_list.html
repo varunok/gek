@@ -119,7 +119,7 @@
                             {{ filter_form.form.rooms }}
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Стоимость, <span id="currency_nac">грн</span><span id="currency_dol" style="display: none">$</span>:</label>
+							<label>Стоимость, <span id="currency_nac">{{ nac_carrency }}</span><span id="currency_dol" style="display: none">$</span>:</label>
 							<div class="form_number">
                                 {{ filter_form.form.price__gt }}
 							</div>

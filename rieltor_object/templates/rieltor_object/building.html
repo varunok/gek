@@ -36,7 +36,7 @@
 			<div class="webform_client_form">
 				<div class="form_actions">
 					<input  class="form-submit submit-add-inspection-modal" type="submit" value="Заказать осмотр">
-                    <div class="read_more" style="display: none"><a href="{% url 'objects:daily_detail' object.id %}">Подробнее</a></div>
+                    <div class="read_more" style="display: none"><a href="{{ object.id }}">Подробнее</a></div>
 				</div>
 			</div>
 		</div>
@@ -152,7 +152,7 @@
 					<div class="block block_body">
 						<div class="title">Описание</div>
 						<div class="field_body">
-							{{ object.description }}
+							{{ object.description|safe }}
 						</div>
 					</div>
 				</div><!-- #content-->
