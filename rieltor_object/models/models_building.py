@@ -271,6 +271,10 @@ class Building(models.Model):
         appointment = self.normalize_SEO(self.get_appointment_display())
         return '{0} {1}'.format(self.get_type_deal_display(), appointment)
 
+    def get_phuket_title(self):
+        proposal = self.normalize_SEO(self.get_proposal_display())
+        return '{0} {1}'.format(self.get_type_deal_display(), proposal)
+
     def footage_price(self):
         if self.footage and self.price:
             return self.price // self.footage
