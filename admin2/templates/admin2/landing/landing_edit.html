@@ -39,13 +39,13 @@
                                                 {% csrf_token %}
                                                 {{ form.errors }}
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_h1.label }} <span class="red">*</span>:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }} <span class="red">*</span>:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.title_h1|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                                     </div>
-                                                    {% if form.title_h1.errors %}
-                                                        <span class="error-label">{{ form.title_h1.errors }}</span>
+                                                    {% if form.title.errors %}
+                                                        <span class="error-label">{{ form.title.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">

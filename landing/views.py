@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import resolve
 from django.views.generic import TemplateView, DetailView
 
-from landing.helpers import query_landing
+from landing.helpers import query_landing, get_seo
 from landing.models import Landing
 
 
@@ -30,9 +30,11 @@ def redirect_view(request, slug):
     try:
         object = Landing.objects.get(slug=slug)
         object_list = query_landing(object)
+
         context = {
             'object': object,
-            'object_list': object_list
+            'object_list': object_list,
+            'seo': get_seo(request) or object
         }
         return render(request, 'landing/multilending.html', context)
     except ObjectDoesNotExist:

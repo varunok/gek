@@ -388,7 +388,7 @@ class LandingForm(forms.ModelForm):
 
     class Meta:
         model = Landing
-        exclude = ('SEOTitle', 'SEODescription', 'SEOKeywords', 'title', 'content', 'image_seo', 'image_form',
+        exclude = ('SEOTitle', 'SEODescription', 'SEOKeywords', 'title_seo', 'content', 'image_seo', 'image_form',
                    'subtitle_form', 'title_form')
         fields = '__all__'
         widgets = {
@@ -399,7 +399,7 @@ class LandingForm(forms.ModelForm):
 class LandingSeoForm(forms.ModelForm):
     class Meta:
         model = Landing
-        exclude = ('slug', 'title_h1', 'type_deal', 'price_gt', 'price_lt', 'footage_gt', 'footage_lt',
+        exclude = ('slug', 'title', 'type_deal', 'price_gt', 'price_lt', 'footage_gt', 'footage_lt',
                    'rooms', 'district', 'image', 'type_property', 'subtitle_form', 'title_form', 'image_form')
         fields = '__all__'
 
@@ -407,9 +407,9 @@ class LandingSeoForm(forms.ModelForm):
 class LandingFormForm(forms.ModelForm):
     class Meta:
         model = Landing
-        exclude = ('slug', 'title_h1', 'type_deal', 'price_gt', 'price_lt', 'footage_gt', 'footage_lt',
+        exclude = ('slug', 'title', 'type_deal', 'price_gt', 'price_lt', 'footage_gt', 'footage_lt',
                    'rooms', 'district', 'image', 'type_property', 'SEOTitle', 'SEODescription', 'SEOKeywords',
-                   'title', 'content', 'image_seo')
+                   'title_seo', 'content', 'image_seo')
         fields = '__all__'
 
 

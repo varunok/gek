@@ -3,7 +3,11 @@ from __future__ import unicode_literals
 
 import random
 from itertools import chain
+
+from django.contrib.sites.models import Site
+
 from rieltor_object.models import Building, Ofice
+from seo.models import SEO
 
 
 def query_landing(filter):
@@ -37,3 +41,10 @@ def query_landing(filter):
     random.shuffle(result)
     return result
 
+
+def get_seo(request):
+    path = str(Site.objects.get_current()) + request.get_full_path()
+    if SEO.objects.filter(url=path).exists():
+        seo = SEO.objects.filter(url=path).first()
+        return seo
+    return None
