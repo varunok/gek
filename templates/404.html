@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load thumbnail %}
+{% load favorites_tag %}
+{% load base_tag %}
+{% load video_tag %}
+{% block css %}{% endblock css %}
+
+{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
+{% block class_body %}  class="front" {% endblock %}
+
+{% block content %}
+    <main class="middle">
+        <div style="text-align: center; margin-top: 50px; font-size: 7em; font-weight: 900; color: #8f1a19">
+            404
+        </div>
+        <div style="font-size: 3em; text-align: center; text-transform: uppercase">
+            Страница не найдена
+        </div>
+        <br>
+        <br>
+        <div style="text-align: center; font-size: 2em; text-transform: uppercase; font-weight: 900;">
+            <a href="/">На главную</a>
+        </div>
+    </main>
+
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}
