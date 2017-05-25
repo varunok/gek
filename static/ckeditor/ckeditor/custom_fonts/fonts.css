@@ -1,0 +1,18 @@
+ @font-face {
+
+   font-family: "PFDinTextCompPro";
+
+   src: url(/static/fonts/PFDinTextCompPro-Regular.eot); /* IE */
+
+   src: local("PFDinTextCompPro-Regular"), url("/static/fonts/PFDinTextCompPro-Regular.ttf") format("truetype"); /*non-IE*/
+
+}
+@font-face {
+
+   font-family: "Roboto";
+
+   src: url(/static/fonts/roboto-regular.eot); /* IE */
+
+   src: local("Roboto"), url("/static/fonts/roboto-regular.ttf") format("truetype"); /*non-IE*/
+
+}
