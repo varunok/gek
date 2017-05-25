@@ -134,7 +134,7 @@ CKEDITOR_CONFIGS = {
         ],
         'toolbar_YourCustomToolbarConfig': [
             {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
-            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']},
             {'name': 'tools', 'items': ['Maximize', 'Preview','ShowBlocks']},
             # {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
             # {'name': 'forms',
@@ -160,7 +160,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
         # 'height': 291,
-        'width': '620px',
+        'width': '100%',
         # 'filebrowserWindowHeight': 725,
         # 'filebrowserWindowWidth': 840,
         'toolbarCanCollapse': False,
