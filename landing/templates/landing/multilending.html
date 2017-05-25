@@ -6,13 +6,17 @@
 {% load banners_tag %}
 {% block css %}{% endblock css %}
 
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+
 {% block class_body %}  class="not-front multilending" {% endblock %}
 
 {% block content %}
 	<main class="middle">
 		<div class="slider_main slider_notfront"{% if object.image %}
                 style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ object.title|default:'Коммерческая недвижимость' }}</div>
+			<div class="slider_title">{{ seo.title|default:'Коммерческая недвижимость' }}</div>
 			<div class="slider_subtitle">{{ object_list|length }} объекта по вашим параметрам</div>
 			<div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
 			<form action="#" class="webform_client_form">
@@ -117,7 +121,7 @@
 				
 			</div>
 		</div>
-		{% include 'seo/seo.html' with seo=object %}
+		{% include 'seo/seo.html' %}
 		{% include 'common/include/vip.html' %}
 		<div class="block block_presentation"{% if object.image_form %}
                 style="background: url({{ object.image_form.url }}) no-repeat center/cover"{% endif %}>

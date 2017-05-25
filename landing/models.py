@@ -102,7 +102,7 @@ class Landing(models.Model):
         blank=True,
         null=True
     )
-    title = models.TextField(
+    title_seo = models.TextField(
         verbose_name='SEO Заголовок',
         blank=True,
         null=True
@@ -127,7 +127,7 @@ class Landing(models.Model):
         blank=True,
         null=True
     )
-    title_h1 = models.CharField(
+    title = models.CharField(
         verbose_name='Заголовок',
         max_length=250,
     )
