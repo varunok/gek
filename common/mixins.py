@@ -46,23 +46,25 @@ class ViewsCountMixin(BaseDetailView):
         return super(ViewsCountMixin, self).get(request, *args, **kwargs)
 
 
-class DinamicNextMixin(BaseListView):
+class DinamicPageMixin(BaseListView):
     dinamic_template_name = None
-    context_object_name = 'objects'
+    # context_object_name = 'objects'
 
-    def get_context_data(self, **kwargs):
-        context = super(DinamicNextMixin, self).get_context_data(**kwargs)
-        context['count_next'] = self.get_count_next()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(DinamicPageMixin, self).get_context_data(**kwargs)
+    #     # context['count_next'] = self.get_count_next()
+    #     return context
 
-    def get_count_next(self):
-        count_next = self.get_queryset().count() - self.paginate_by
-        count_next = 0 if count_next <= 0 else count_next
-        return count_next
+    # def get_count_next(self):
+    #     count_next = self.get_queryset().count() - self.paginate_by
+    #     count_next = 0 if count_next <= 0 else count_next
+    #     return count_next
 
     def get(self, request, *args, **kwargs):
         page = self.request.GET.get('page')
         section = self.request.GET.get('section')
+        if not self.context_object_name:
+            self.context_object_name = 'object_list'
         if page:
             object_list = self.get_queryset()
             if section:
@@ -71,27 +73,12 @@ class DinamicNextMixin(BaseListView):
             data = JsonResponse({
                 'next': paginator.page(page).has_next(),
                 'html': render_to_string(self.dinamic_template_name,
-                                             {self.context_object_name: paginator.page(page).object_list}),
+                                             {'request':self.request,
+                                              self.context_object_name: paginator.page(page).object_list}),
                 'obj': len(paginator.page(page).object_list)
             })
             return HttpResponse(data)
-        return super(DinamicNextMixin, self).get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        page = self.request.POST.get('page')
-        if page:
-            object_list = self.get_queryset()
-            paginator = self.get_paginator(object_list, self.paginate_by)
-            data = JsonResponse({
-                'next': paginator.page(page).has_next(),
-                'html': render_to_string(self.dinamic_template_name,
-                                         {self.context_object_name: paginator.page(page).object_list,
-                                          'count_next': self.get_count_next()}),
-                'obj': len(paginator.page(page).object_list)
-            })
-            return HttpResponse(data)
-        # return super(DinamicNextMixin, self).post(request, *args, **kwargs)
-
+        return super(DinamicPageMixin, self).get(request, *args, **kwargs)
 
 
 class ServiceSiteMixin(DetailView):
@@ -103,6 +90,7 @@ class ServiceSiteMixin(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ServiceSiteMixin, self).get_context_data(**kwargs)
+        context['content_type'] = ContentType.objects.get_for_model(self.model).id
         try:
             context['faqs'] = self.get_object().fag.all().order_by('id')
         except AttributeError:
@@ -123,6 +111,7 @@ class ServiceSiteMixin(DetailView):
 class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
     video_form = None
     advantage_form = None
+    partner_form = None
 
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk')
@@ -149,6 +138,8 @@ class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
             context['expert_content_type'] = ContentType.objects.get_for_model(ExpertPacket).id
         except AttributeError:
             pass
+        context['partner_form'] = self.partner_form()
+        context['partners'] = self.get_object().partners.all()
         return context
 
 

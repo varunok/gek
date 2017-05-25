@@ -4,13 +4,16 @@ from __future__ import unicode_literals
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DeleteView
 
 from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm, \
-    InsuranceForm, CleaningForm, InstallationWaterForm, UniversalServiceForm, UniversalServiceCreateForm, AdvantageSet
+    InsuranceForm, CleaningForm, InstallationWaterForm, UniversalServiceForm, UniversalServiceCreateForm, AdvantageSet, \
+    PartnerForm
 from admin2.mixins import AccesMixin
-from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, UniversalService
+from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, \
+    UniversalService, Partner
 
 from common.mixins import DeleteAjaxMixin, ServicesMixin, SuccesMixin, MessageMixin
 
@@ -44,6 +47,7 @@ class RieltorServiceView(AccesMixin, ServicesMixin):
     context_object_name = 'rieltor_service'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoRieltorServiceSet
+    partner_form = PartnerForm
 
 
 class ValuationServiceView(AccesMixin, ServicesMixin):
@@ -53,6 +57,7 @@ class ValuationServiceView(AccesMixin, ServicesMixin):
     context_object_name = 'valuation'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
+    partner_form = PartnerForm
 
 
 class RepairServiceView(AccesMixin, ServicesMixin):
@@ -62,6 +67,7 @@ class RepairServiceView(AccesMixin, ServicesMixin):
     context_object_name = 'repair'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
+    partner_form = PartnerForm
 
     def get_context_data(self, **kwargs):
         context = super(RepairServiceView, self).get_context_data(**kwargs)
@@ -76,6 +82,7 @@ class InsurenceServiceView(AccesMixin, ServicesMixin):
     context_object_name = 'insurance'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
+    partner_form = PartnerForm
 
 
 class CleaningServiceView(AccesMixin, ServicesMixin):
@@ -85,6 +92,7 @@ class CleaningServiceView(AccesMixin, ServicesMixin):
     context_object_name = 'cleaning'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
+    partner_form = PartnerForm
 
 
 class InstallationWaterServiceView(AccesMixin, ServicesMixin):
@@ -94,6 +102,7 @@ class InstallationWaterServiceView(AccesMixin, ServicesMixin):
     context_object_name = 'installation_water'
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
+    partner_form = PartnerForm
 
 
 class UniversalServiceView(AccesMixin, ServicesMixin):
@@ -104,6 +113,7 @@ class UniversalServiceView(AccesMixin, ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
     advantage_form = AdvantageSet
+    partner_form = PartnerForm
 
 
 class UniversalServiceCreate(LoginRequiredMixin, AccesMixin, SuccesMixin, MessageMixin, CreateView):
@@ -141,3 +151,38 @@ def status_service(request):
                 service.save()
                 return HttpResponse('Выключено')
     return HttpResponse(status=500)
+
+
+def partner_create(request):
+    if request.method == 'POST':
+        partner = None
+        partner_id = request.POST.get('partner_id')
+        if partner_id:
+            partner = Partner.objects.get(id=partner_id)
+        form = PartnerForm(request.POST, instance=partner)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=200)
+    return HttpResponse(status=500)
+
+
+def partner_edit(request, object_id):
+    partner = get_object_or_404(Partner, id=object_id)
+    partner_form = PartnerForm(instance=partner)
+    context = {
+        'partner_form': partner_form,
+        'content_type': partner.content_type_id,
+        'object': {'id':partner.object_id},
+        'partner': partner.id
+    }
+    return render(request, 'admin2/services/include/item/partner_form.html', context)
+
+
+def get_partner_list(request, content_type, object_id):
+    service = ContentType.objects.get_for_id(content_type).model_class().objects.get(id=object_id)
+    partners = service.partners.all()
+    return render(request, 'admin2/services/include/item/partners.html', {'partners': partners})
+
+
+class DellPartner(LoginRequiredMixin, DeleteAjaxMixin, DeleteView):
+    model = Partner

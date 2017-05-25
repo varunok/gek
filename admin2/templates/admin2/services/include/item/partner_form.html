@@ -1,0 +1,53 @@
+{% load admin_tags %}
+<form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="partnerForm">
+    {% csrf_token %}
+    <input type="hidden" name="content_type" value="{{ content_type }}">
+    <input type="hidden" name="object_id" value="{{ object.id }}">
+    <input type="hidden" name="partner_id" value="{{ partner }}">
+    <div class="item form-group">
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ partner_form.name.label }}: <span class="required"></span>
+        </label>
+        <div class="col-md-7 col-sm-7 col-xs-12">
+            {{ partner_form.name|addcss:'form-control' }}
+        </div>
+        {% if partner_form.name.errors %}
+            <span class="error-label">{{ partner_form.name.errors }}</span>
+        {% endif %}
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ partner_form.email.label }}: <span class="required"></span>
+        </label>
+        <div class="col-md-7 col-sm-7 col-xs-12">
+            {{ partner_form.email|addcss:'form-control' }}
+        </div>
+        {% if partner_form.email.errors %}
+            <span class="error-label">{{ partner_form.email.errors }}</span>
+        {% endif %}
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ partner_form.phone.label }}: <span class="required"></span>
+        </label>
+        <div class="col-md-7 col-sm-7 col-xs-12">
+            {{ partner_form.phone|addcss:'form-control' }}
+        </div>
+        {% if partner_form.phone.errors %}
+            <span class="error-label">{{ partner_form.phone.errors }}</span>
+        {% endif %}
+    </div>
+    <div class="item form-group">
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ partner_form.comment.label }}: <span class="required"></span>
+        </label>
+        <div class="col-md-7 col-sm-7 col-xs-12">
+            {{ partner_form.comment|addcss:'form-control'|addrows:'3'|safe }}
+        </div>
+        {% if partner_form.comment.errors %}
+            <span class="error-label">{{ partner_form.comment.errors }}</span>
+        {% endif %}
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group" style="float: right">
+        <div class="col-md-12">
+            <button name="save-partner" type="submit" class="btn btn-success btn-save-partner">Сохранить</button>
+        </div>
+    </div>
+</form>

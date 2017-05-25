@@ -1,0 +1,14 @@
+{% for partner in partners %}
+    <tr>
+        <td>{{ partner.name }}</td>
+        <td>{{ partner.email }}</td>
+        <td>{{ partner.phone }}</td>
+        <td>{{ partner.comment }}</td>
+        <td>{{ partner.application_count }}</td>
+        <td>{{ partner.create_date }}</td>
+        <td>
+            <a href="{{ partner.id }}" class="btn btn-danger btn-xs del-partner"><i class="fa fa-trash-o"></i> Удалить </a>
+            <a href="{{ partner.id }}" class="btn btn-dark btn-xs btn-partner-edit"><i class="fa fa-pencil"></i> Редактировать </a>
+        </td>
+    </tr>
+{% endfor %}
