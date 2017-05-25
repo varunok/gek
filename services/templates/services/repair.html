@@ -22,6 +22,8 @@
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заявка.Ремонт помещения.">
+                <input type="hidden" name="content_type" value="{{ content_type }}">
+                <input type="hidden" name="object_id" value="{{ repair.id }}">
 				<div class="form_item name">
 					<input name="name" type="text" placeholder="Введите имя">
 				</div>
@@ -97,7 +99,7 @@
                     <div class="calculate_form">
                         <div class="title">Хотите рассчитать стоимость ремонта?</div>
                         <div class="subtitle">Вызовите замерщика бесплатно</div>
-                        <div class="form_actions"><a href="#">Пригласить замерщика бесплатно</a></div>
+                        <div class="form_actions"><a href="#" class="block-add-repair-sub">Пригласить замерщика бесплатно</a></div>
                     </div>
                 </div>
             </div>
@@ -179,6 +181,8 @@
                     <form action="#" class="webform_client_form">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="Оставить заявку. Ремонт помещения.">
+                        <input type="hidden" name="content_type" value="{{ content_type }}">
+                        <input type="hidden" name="object_id" value="{{ repair.id }}">
 						<div class="top_wrap">
 							<div class="form_item name">
 								<input name="name"  type="text" placeholder="Введите ваше имя">

@@ -6,13 +6,13 @@ from django.template.loader import render_to_string
 from django.views.generic import ListView, DetailView
 
 from articles.models import Articles, Sections
-from common.mixins import ViewsCountMixin, DinamicNextMixin
+from common.mixins import ViewsCountMixin
 from seo.mixins import SEOMixin
 
 PAGINATE_ARTICLE = 10
 
 
-class ArticlesSiteView(SEOMixin, DinamicNextMixin, ListView):
+class ArticlesSiteView(SEOMixin, ListView):
     model = Articles
     context_object_name = 'objects'
     template_name = 'articles/articles.html'

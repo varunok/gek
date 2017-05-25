@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 # from django.core.mail import send_mail
+from django.contrib.contenttypes.models import ContentType
 
 from admin2.models import EmailForward, ActiveFranchise
 from django.conf import settings
@@ -42,6 +43,11 @@ def get_client_ip(request):
 
 def sending_email(obj):
     emails_to = EmailForward.objects.all().values_list('email', flat=True)
+    try:
+        service = ContentType.objects.get_for_id(obj.content_type.id).model_class().objects.get(id=obj.object_id)
+        partners_emails = service.partners.all().values_list('email', flat=True)
+    except AttributeError:
+        partners_emails = None
     from_email = settings.DEFAULT_FROM_EMAIL
     subject = 'Новая Заявка'
     message = 'Дата создания: {created}, ' \
@@ -64,6 +70,9 @@ def sending_email(obj):
     if ActiveFranchise.get_solo().is_active:
         send_mail(subject=subject, message=message, from_email=from_email, recipient_list=emails_to,
                   fail_silently=False,)
+        if partners_emails:
+            send_mail(subject=subject, message=message, from_email=from_email, recipient_list=partners_emails,
+                      fail_silently=False,)
     else:
         message = 'Источник: {source}'.format(source=obj.source)
         send_mail(subject=subject, message=message, from_email=from_email, recipient_list=emails_to,

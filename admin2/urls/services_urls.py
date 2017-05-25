@@ -61,4 +61,24 @@ urlpatterns = [
         services_views.UniversalServiceDeleteView.as_view(),
         name='universal_delete'
     ),
+    url(
+        r'partner/create/$',
+        services_views.partner_create,
+        name='partner_create'
+    ),
+    url(
+        r'get-partner-list/(?P<content_type>[\w-]+)/(?P<object_id>[\w-]+)/$',
+        services_views.get_partner_list,
+        name='get_partner_list'
+    ),
+    url(
+        'partner/dell/(?P<pk>\d+)/$',
+        services_views.DellPartner.as_view(),
+        name='dell_partner'
+    ),
+    url(
+        'partner/edit/(?P<object_id>\d+)/$',
+        services_views.partner_edit,
+        name='partner_edit'
+    ),
 ]

@@ -124,6 +124,9 @@
                                         <li role="presentation" class="">
                                             <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
                                         </li>
+                                        <li role="presentation" class="">
+                                            <a href="#partners_tab" id="partners-tab" role="tab" data-toggle="tab" aria-expanded="false">Партнеры</a>
+                                        </li>
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -248,6 +251,7 @@
                                         {% include 'admin2/services/include/videos.html' with service=repair %}
                                         {% include 'admin2/services/include/repair.html' with service=repair %}
                                         {% include 'admin2/services/include/gallery.html' with service=repair %}
+                                        {% include 'admin2/services/include/partners.html' with service=repair %}
                                     </div>
                                 </div>
                             </div>
@@ -266,6 +270,7 @@
     <script src="{% static 'js/video_status.js' %}"></script>
     <script src="{% static 'js/rep_status.js' %}"></script>
     <script src="{% static 'js/gallery.js' %}"></script>
+    <script src="{% static 'js/partners.js' %}"></script>
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {

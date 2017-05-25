@@ -21,6 +21,8 @@
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заявка.Уборка квартир.">
+                <input type="hidden" name="content_type" value="{{ content_type }}">
+                <input type="hidden" name="object_id" value="{{ object.id }}">
 				<div class="form_item name">
 					<input name="name" type="text" placeholder="Введите имя">
 				</div>
@@ -100,6 +102,8 @@
 						<form action="#" class="webform_client_form">
                             {% csrf_token %}
                             <input type="hidden" name="source" value="Заявка.Уборка квартир.">
+                            <input type="hidden" name="content_type" value="{{ content_type }}">
+                            <input type="hidden" name="object_id" value="{{ object.id }}">
 							<div class="form_item name">
 								<input name="name" type="text" placeholder="Введите ваше имя">
 							</div>

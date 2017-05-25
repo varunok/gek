@@ -84,6 +84,18 @@ class Application(models.Model):
         blank=True,
         null=True
     )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+        # limit_choices_to={'model__in': somsing}
+    )
+    object_id = models.PositiveIntegerField(
+        blank=True,
+        null=True
+    )
+    content_object = GenericForeignKey('content_type', 'object_id')
 
 
     def __unicode__(self):

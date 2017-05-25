@@ -143,6 +143,9 @@
                                         <li role="presentation" class="">
                                             <a href="#advantage_tab_content" id="advantage-tab" role="tab" data-toggle="tab" aria-expanded="false">Преимущество</a>
                                         </li>
+                                        <li role="presentation" class="">
+                                            <a href="#partners_tab" id="partners-tab" role="tab" data-toggle="tab" aria-expanded="false">Партнеры</a>
+                                        </li>
                                         {% endif %}
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
@@ -261,6 +264,7 @@
                                         {% include 'admin2/services/include/faqs.html' with service=universal %}
                                         {% include 'admin2/services/include/gallery.html' with service=universal %}
                                         {% include 'admin2/services/include/advantage.html' with service=universal %}
+                                        {% include 'admin2/services/include/partners.html' with service=universal %}
                                     </div>
                                 </div>
                             </div>
@@ -280,6 +284,7 @@
     <script src="{% static 'js/gallery.js' %}"></script>
     <script src="{% static 'js/faq_status.js' %}"></script>
     <script src="{% static 'js/advantage.js' %}"></script>
+    <script src="{% static 'js/partners.js' %}"></script>
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {

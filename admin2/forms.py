@@ -18,7 +18,7 @@ from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown,
 from landing.models import Landing
 from polls.models import Question, Choice, Polls
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth, District
-from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService
+from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService, Partner
 from videos.models import Videos
 
 
@@ -429,3 +429,10 @@ class SettingFranchiseAddForm(forms.ModelForm):
     def save(self, commit=True):
         self.instance.active_franchise += datetime.timedelta(days=self.cleaned_data['add_date'])
         return super(SettingFranchiseAddForm, self).save(commit=True)
+
+
+class PartnerForm(forms.ModelForm):
+    class Meta:
+        model = Partner
+        exclude = ('is_phone_confirmed', 'application_count',)
+        fields = '__all__'

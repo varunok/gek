@@ -57,12 +57,16 @@ $(document).ready(function () {
                     $('.block_webform').fadeOut();
                     $('body').addClass('popup');
                     $('#webform_confirmation_text').text('Спасибо! Ваша заявка отправлена!');
-                    $('#block-webform-confirm').fadeIn();
+                    $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
+                        $('body').removeClass('popup');
+                    });
                 }, function(err) {
                     $('.block_webform').fadeOut();
                     $('body').addClass('popup');
                     $('#webform_confirmation_text').text('Ошибка. Попробуйте позже.');
-                    $('#block-webform-confirm').fadeIn();
+                    $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
+                        $('body').removeClass('popup');
+                    });
                 });
         }
 });

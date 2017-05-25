@@ -20,6 +20,8 @@
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Получить подборку.Риелторские услуги.">
+                <input type="hidden" name="content_type" value="{{ content_type }}">
+                <input type="hidden" name="object_id" value="{{ service_rieltor.id }}">
 				<div class="form_item name">
 					<input name="name" type="text" placeholder="Введите ваше имя">
 				</div>
@@ -161,6 +163,8 @@
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="Подбор недвижимости.Риелторские услуги.">
+                        <input type="hidden" name="content_type" value="{{ content_type }}">
+                        <input type="hidden" name="object_id" value="{{ service_rieltor.id }}">
 						<div class="form_item user_name">
 							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
@@ -191,6 +195,8 @@
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="Заявка.Риелторские услуги.">
+                        <input type="hidden" name="content_type" value="{{ content_type }}">
+                        <input type="hidden" name="object_id" value="{{ service_rieltor.id }}">
 						<div class="form_item user_name">
 							<input name="name" type="text" placeholder="Введите ваше имя">
 						</div>
