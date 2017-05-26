@@ -27,8 +27,8 @@ class BannerNode(template.Node):
 def sidebanner(parser, token):
     sideban = SideBanner.get_solo()
     if sideban.active_code:
-        code = '<div class="block banner"><div class="field_image">{0}</div></div>'.format(sideban.code)
-        return BannerNode(code=code)
+        # code = '<div class="block banner"><div class="field_image">{0}</div></div>'.format(sideban.code)
+        return BannerNode(code=sideban.code)
     else:
         if sideban.image:
             image = '<div class="block banner"><a href="{1}"><div class="field_image"><img src="{0}" alt=""></div></a></div>'.format(
