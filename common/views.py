@@ -27,9 +27,9 @@ class MainView(SEOMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
-        context['offices'] = Ofice.objects.vips().order_by('?')
-        context['buildings'] = Building.objects.vips().order_by('?')
-        context['newbuildings'] = NewBuilding.objects.order_by('?')
+        context['offices'] = Ofice.objects.vips().order_by('?')[:3]
+        context['buildings'] = Building.objects.vips().order_by('?')[:3]
+        context['newbuildings'] = NewBuilding.objects.order_by('?')[:2]
         context['indexpagemodel'] = IndexPageModel.get_solo()
         return context
 

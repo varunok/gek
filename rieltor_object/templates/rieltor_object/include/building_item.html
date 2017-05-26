@@ -50,11 +50,13 @@
         </div>
     </div>
 {% endfor %}
-<div class="load_more_wrap">
-    <div class="load_more read_more">
-        <a href="#">
-            Загрузить еще
-            <span>{{ count_next }}</span> объектов
-        </a>
+{% if is_paginated %}
+    <div class="load_more_wrap">
+        <div class="load_more read_more">
+            <a href="#">
+                Загрузить еще
+                <span>{{ count_next }}</span> объектов
+            </a>
+        </div>
     </div>
-</div>
+{% endif %}

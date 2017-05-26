@@ -10,7 +10,12 @@ register = template.Library()
 
 @register.assignment_tag
 def vips():
-    office = Ofice.objects.vips().order_by('?')[:2]
-    building = Building.objects.vips().order_by('?')[:2]
+    office = Ofice.objects.vips().order_by('?')
+    building = Building.objects.vips().order_by('?')
     result = list(chain(building, office))
-    return result
+    list_vip = []
+    for i in range(0, 3):
+        rand_item = random.choice(result)
+        list_vip.append(rand_item)
+        result.remove(rand_item)
+    return list_vip
