@@ -39,7 +39,9 @@
                         {% for office in offices %}
                             <div class="views_row">
                                 <div class="field_image">
-                                    <img src="{{ office.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                    <a href="{{ office.get_absolute_url }}">
+                                        <img src="{{ office.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                    </a>
                                     <div class="type">{{ office.get_type_deal_display|default:'' }}
                                         {% if office.appointment == 'apartment' %}
                                             {{ office.get_appointment_display|cut_last_char }}{{ 0|pluralize:'ы' }}
@@ -73,7 +75,9 @@
                         {% for building in buildings %}
                             <div class="views_row">
                                 <div class="field_image">
-                                    <img src="{{ building.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                    <a href="{{ building.get_absolute_url }}">
+                                        <img src="{{ building.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                    </a>
                                     <div class="type">{{ building.get_type_deal_display|default:'' }}
                                         {% if building.appointment == 'apartment' %}
 {#                                            {{ building.appointment }}#}
@@ -89,7 +93,7 @@
                                         <input type="hidden" name="object_id" value="{{ building.id }}">
                                     </div>
                                     <div class="address">{{ building.address|default:'' }}</div>
-                                    <div class="text">{{ building.description|default:''|truncatechars:'200'|safe }}</div>
+                                    <div class="text" style="word-break: break-all">{{ building.description|default:''|truncatechars:'200'|safe }}</div>
                                     <div class="price">${{ building.price|default:'' }}</div>
                                     <div class="statistics">{{ building.views }}</div>
                                     <div class="area"><div class="count">{{ building.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
@@ -108,12 +112,14 @@
                 <div class="block_content">
                     <div class="block_title">Новостройки</div>
                     <div class="view_content">
-                        {% for newbuilding in newbuildings|slice:':2' %}
+                        {% for newbuilding in newbuildings %}
                             <div class="views_row">
                                 <div class="title">{{ newbuilding.title|default:'' }}</div>
-                                <div class="field_image">
-                                    <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
-                                </div>
+                                <a href="{{ newbuilding.get_absolute_url }}">
+                                    <div class="field_image">
+                                        <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
+                                    </div>
+                                </a>
                                 <div class="views_body">
                                     <div class="star {{ newbuilding|fav_is_active:request }}">
                                         <input type="hidden" name="content_type" value="{{ newbuilding.get_content_type }}">
