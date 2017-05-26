@@ -16,6 +16,9 @@ $(document).ready(function() {
                 notify_success(response, 'Сохранено');
                 var data = _this.serializeArray();
                 _this.children('.hade-item').remove();
+                var edit_name = _this.parents('.pricing').find('.edit-name');
+                console.log(edit_name.val());
+                edit_name.parents('.title').html('<h1>'+edit_name.val()+' </h1><i class="fa fa-pencil"></i>');
                 for(var i in data){
                     if(data[i].name.search('item') != -1){
                         _this_ul.append('<li>'+data[i].value+'</li>');
@@ -38,4 +41,11 @@ $(document).ready(function() {
                 notify_error('Ошибка '+ err.status, err.statusText);
             });
     });
-})
+
+    $(document).on('click', '.fa-pencil', function () {
+        $(this).prev('h1').html('<input type="text" class="edit-name" style="width: 100%;color: black">');
+    });
+    $(document).on('keyup', '.edit-name', function () {
+        $(this).parents('.pricing').find('input[name="name"]').val($(this).val());
+    })
+});

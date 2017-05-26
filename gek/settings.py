@@ -16,7 +16,7 @@ from django.contrib.messages import constants as messages
 try:
     from common_settings import *
 except ImportError:
-    pass
+    INSTALLED_APPS = []
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,7 +35,45 @@ ALLOWED_HOSTS = ['gek.com']
 
 
 # Application definition
+INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.redirects',
 
+    # origin
+    'ckeditor',
+    'ckeditor_uploader',
+    'easy_thumbnails',
+    'solo',
+    'django_filters',
+    'multiselectfield',
+
+    # own
+    'users',
+    'admin2',
+    'common',
+    'articles',
+    'services',
+    'rieltor_object',
+    'trust',
+    'contact',
+    'videos',
+    'favorites',
+    'plan',
+    'polls',
+    'banners',
+    'seo',
+    'landing',
+    'privat24',
+    'liqpayapp',
+]
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -71,6 +109,37 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'common.context_processors.counter',
+            ],
+        },
+    },
+]
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 try:
     from local_settings import *

@@ -15,6 +15,15 @@
             </span>
         </div>
     </div>
+    <style>
+{#        .fa-pencil{#}
+{#            color: transparent;#}
+{#        }#}
+        .fa-pencil:hover{
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 
         <div class="col-md-12 packets">
             <!-- price element -->
@@ -22,7 +31,8 @@
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="pricing">
                     <div class="title" style="background-color:#03baf7">
-                        <h1>{{ service.base_packet.title }}</h1>
+                        <h1>{{ service.base_packet.title }} </h1>
+                        <i class="fa fa-pencil"></i>
                     </div>
                     <div class="x_content">
                         <div class="">
@@ -36,6 +46,7 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="packet_content_type" value="{{ base_content_type }}">
                                     <input type="hidden" name="packet_id" value="{{ service.base_packet.id }}">
+                                    <input type="hidden" name="name" value="">
                                 </form>
                             </div>
                         </div>
@@ -72,6 +83,7 @@
                 <div class="pricing">
                     <div class="title" style="background-color:#20ce5d">
                         <h1>{{ service.midle_packet.title }}</h1>
+                        <i class="fa fa-pencil"></i>
                     </div>
                     <div class="x_content">
                         <div class="">
@@ -85,6 +97,7 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="packet_content_type" value="{{ midle_content_type }}">
                                     <input type="hidden" name="packet_id" value="{{ service.midle_packet.id }}">
+                                    <input type="hidden" name="name" value="">
                                 </form>
                             </div>
                         </div>
@@ -121,6 +134,7 @@
                 <div class="pricing">
                     <div class="title" style="background-color:#f8bd2f">
                         <h1>{{ service.expert_packet.title }}</h1>
+                        <i class="fa fa-pencil"></i>
                     </div>
                     <div class="x_content">
                         <div class="">
@@ -134,6 +148,7 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="packet_content_type" value="{{ expert_content_type }}">
                                     <input type="hidden" name="packet_id" value="{{ service.expert_packet.id }}">
+                                    <input type="hidden" name="name" value="">
                                 </form>
                             </div>
                         </div>

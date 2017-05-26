@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-from django.urls import resolve
+from django.urls import resolve, Resolver404
 from django.views.generic import TemplateView, DetailView
 
 from landing.helpers import query_landing, get_seo
@@ -27,6 +27,7 @@ from landing.models import Landing
 
 
 def redirect_view(request, slug):
+
     try:
         object = Landing.objects.get(slug=slug)
         object_list = query_landing(object)
@@ -42,6 +43,8 @@ def redirect_view(request, slug):
         full_path = request.get_full_path()
         r = get_object_or_404(Redirect, site=current_site, new_path__icontains=full_path)
         view, args, kwargs = resolve(r.old_path)
+        if not view.__dict__:
+            raise Resolver404()
         kwargs['request'] = request
         return view(*args, **kwargs)
 

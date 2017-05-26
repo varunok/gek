@@ -1,6 +1,7 @@
     <div class="pricing">
         <div class="title" style="background-color:{{color}}">
             <h1>{{ packet.title }}</h1>
+            <i class="fa fa-pencil"></i>
         </div>
         <div class="x_content">
             <div class="">
@@ -14,6 +15,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="packet_content_type" value="{{ packet_content_type }}">
                         <input type="hidden" name="packet_id" value="{{ packet.id }}">
+                        <input type="hidden" name="name" value="">
                     </form>
                 </div>
             </div>
