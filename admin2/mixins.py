@@ -6,6 +6,7 @@ from django.urls import reverse_lazy, Resolver404
 from django.views.generic.base import ContextMixin
 
 from admin2.models import BuildingPageModel, OfisPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel
+from rieltor_object.models import District, DailyDistrict, EarthDistrict
 
 
 class BuildingStatusMixin(object):
