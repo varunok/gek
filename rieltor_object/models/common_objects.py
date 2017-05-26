@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 
 
 class TypeDeal(object):
@@ -125,12 +126,19 @@ class StructureHouse(object):
     )
 
 
+class DistrictManager(models.Manager):
+    def get_list_url(self):
+        return reverse('admin2:district_list')
+
+
 class District(models.Model):
     name = models.CharField(
         verbose_name='Название',
         max_length=250,
         unique=True
     )
+
+    objects = DistrictManager()
 
     class Meta:
         verbose_name = 'Район'
@@ -139,6 +147,14 @@ class District(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_edit_url(self):
+        return reverse('admin2:district_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:district_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:district_list')
 
 class Name(models.Model):
     name = models.CharField(
@@ -170,6 +186,11 @@ class Phone(models.Model):
         return self.phone
 
 
+class DailyDistrictManager(models.Manager):
+    def get_list_url(self):
+        return reverse('admin2:district_list')
+
+
 class DailyDistrict(models.Model):
     name = models.CharField(
         verbose_name='Название',
@@ -177,12 +198,28 @@ class DailyDistrict(models.Model):
         unique=True
     )
 
+    objects = DailyDistrictManager()
+
     class Meta:
         verbose_name = 'Район для посуточно'
         verbose_name_plural = 'Районы для посуточно'
 
     def __unicode__(self):
         return self.name
+
+    def get_edit_url(self):
+        return reverse('admin2:district_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:district_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:district_list')
+
+
+class EarthDistrictManager(models.Manager):
+    def get_list_url(self):
+        return reverse('admin2:district_list')
 
 
 class EarthDistrict(models.Model):
@@ -192,12 +229,23 @@ class EarthDistrict(models.Model):
         unique=True
     )
 
+    objects = EarthDistrictManager()
+
     class Meta:
         verbose_name = 'Район для земля'
         verbose_name_plural = 'Районы для земля'
 
     def __unicode__(self):
         return self.name
+
+    def get_edit_url(self):
+        return reverse('admin2:district_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:district_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:district_list')
 
 
 class ApartmentHas(models.Model):

@@ -245,8 +245,12 @@ def packet_text_save(request):
     if request.method == 'POST':
         packet_content_type = request.POST.get('packet_content_type')
         packet_id = request.POST.get('packet_id')
+        name = request.POST.get('name')
         content_type = ContentType.objects.get_for_id(packet_content_type)
-        # packet = packet_model.objects.get(id=packet_id)
+        if name:
+            packet = ContentType.objects.get_for_id(content_type.id).model_class().objects.get(id=packet_id)
+            packet.title = name
+            packet.save()
         # print(packet)
         for item in request.POST:
             if 'item' in item:

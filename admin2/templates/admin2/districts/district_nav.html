@@ -1,0 +1,53 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load thumbnail %}
+
+{% block title %}Районы{% endblock title %}
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Районы</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <table class="table table-striped projects">
+                                <tbody>
+                                    <tr>
+                                        <td>Районы</td>
+                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ District }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Районы для посуточно</td>
+                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ DailyDistrict }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Районы для земля</td>
+                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ EarthDistrict }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}
