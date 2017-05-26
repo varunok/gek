@@ -36,8 +36,9 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%">#</th>
-                                    <th style="width: 20%">Фото</th>
-                                    <th style="width: 50%">Заголовок</th>
+                                    <th style="width: 10%">Фото</th>
+                                    <th style="width: 45%">Заголовок</th>
+                                    <th style="width: 15%">Рубрика</th>
                                     <th style="width: 20%">Опубликована</th>
                                     <th style="width: 5%">
                                     </th>
@@ -49,6 +50,7 @@
                                         <td>{{ article.id }}</td>
                                         <td><img src="{{ article.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                         <td>{{ article.heading }}</td>
+                                        <td>{{ article.sections }}</td>
                                         <td>{{ article.created|date:'d.m.Y H:i' }}</td>
                                         <td>
                                             <a href="{{ article.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
