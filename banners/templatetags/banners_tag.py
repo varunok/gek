@@ -27,14 +27,15 @@ class BannerNode(template.Node):
 def sidebanner(parser, token):
     sideban = SideBanner.get_solo()
     if sideban.active_code:
-        return BannerNode(sideban.code)
+        code = '<div class="block banner"><div class="field_image">{0}</div></div>'.format(sideban.code)
+        return BannerNode(code=code)
     else:
         if sideban.image:
             image = '<div class="block banner"><a href="{1}"><div class="field_image"><img src="{0}" alt=""></div></a></div>'.format(
                 sideban.image.url,
                 sideban.link
             )
-            return BannerNode(image)
+            return BannerNode(image=image)
     return BannerNode('')
 
 
@@ -42,7 +43,8 @@ def sidebanner(parser, token):
 def downbanner(parser, token):
     downban = DownBanner.get_solo()
     if downban.active_code:
-        return BannerNode(downban.code)
+        code = '<div class="block region_banner" style="text-align: center;"><div class="field_image">{0}</div></div>'.format(downban.code)
+        return BannerNode(code=code)
     else:
         if downban.image:
             thumbnailer = get_thumbnailer(downban.image)
@@ -54,5 +56,5 @@ def downbanner(parser, token):
                 image_thumb,
                 downban.link
             )
-            return BannerNode(image)
+            return BannerNode(image=image)
     return BannerNode('')
