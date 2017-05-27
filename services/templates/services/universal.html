@@ -71,7 +71,7 @@
                         <div class="block block_video">
                             <div class="block_content">
                                 <div class="block_title">{{ universal.videos.all.first.title }}</div>
-                                {{ universal.videos.all.first.video|convert_to_frame|safe }}
+                                {{ universal.videos.all.first.video|get_video_code|convert_to_frame|safe }}
                             </div>
                         </div>
                     {% endif %}
