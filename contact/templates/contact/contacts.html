@@ -3,7 +3,10 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
-{% block css %}{% endblock css %}
+{% load base_tag %}
+{% block css %}
+    <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
 {% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
@@ -130,7 +133,7 @@
 		<div class="region_map">
 			<div class="map">
 				<div class="field_image">
-					<img src="{% static 'images/contact_map.jpg' %}" alt="">
+                    <div id="map" style="width: 100%; height: 320px;"></div>
 				</div>
 			</div>
 		</div>
@@ -140,5 +143,29 @@
 
 {% endblock content %}
 {% block js %}
-    <script src="{% static '' %}"></script>
+    <script>
+        $(document).ready(function(){
+            ymaps.ready(init);
+
+            function init() {
+                var myMap = new ymaps.Map('map', {
+                    center: [55.753994, 37.622093],
+                    zoom: 9
+                });
+
+                ymaps.geocode('{% city %}', {
+                    results: 1
+                }).then(function (res) {
+                    var firstGeoObject = res.geoObjects.get(0),
+                    coords = firstGeoObject.geometry.getCoordinates(),
+                    bounds = firstGeoObject.properties.get('boundedBy');
+
+                    myMap.geoObjects.add(firstGeoObject);
+                    myMap.setBounds(bounds, {
+                        checkZoomRange: true
+                    });
+                });
+            }
+        });
+    </script>
 {% endblock js %}
