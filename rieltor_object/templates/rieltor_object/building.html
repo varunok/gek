@@ -236,28 +236,28 @@
 {% endblock content %}
 {% block js %}
     <script>
-    $(document).ready(function(){
-                    ymaps.ready(init);
+        $(document).ready(function(){
+                        ymaps.ready(init);
 
-                function init() {
-                    var myMap = new ymaps.Map('map', {
-                        center: [55.753994, 37.622093],
-                        zoom: 9
-                    });
-
-                    ymaps.geocode('{% city %}, {{ object.address }}', {
-                        results: 1
-                    }).then(function (res) {
-                        var firstGeoObject = res.geoObjects.get(0),
-                        coords = firstGeoObject.geometry.getCoordinates(),
-                        bounds = firstGeoObject.properties.get('boundedBy');
-
-                        myMap.geoObjects.add(firstGeoObject);
-                        myMap.setBounds(bounds, {
-                            checkZoomRange: true
+                    function init() {
+                        var myMap = new ymaps.Map('map', {
+                            center: [55.753994, 37.622093],
+                            zoom: 9
                         });
-                    });
-                }
-    });
-</script>
+
+                        ymaps.geocode('{% city %}, {{ object.address }}', {
+                            results: 1
+                        }).then(function (res) {
+                            var firstGeoObject = res.geoObjects.get(0),
+                            coords = firstGeoObject.geometry.getCoordinates(),
+                            bounds = firstGeoObject.properties.get('boundedBy');
+
+                            myMap.geoObjects.add(firstGeoObject);
+                            myMap.setBounds(bounds, {
+                                checkZoomRange: true
+                            });
+                        });
+                    }
+        });
+    </script>
 {% endblock js %}
