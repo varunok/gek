@@ -41,6 +41,48 @@ class CurrencyPayChoice(object):
     )
 
 
+class HelpManager(models.Manager):
+    def is_enable(self, *args, **kwargs):
+        kwargs['is_enable'] = True
+        return self.filter(*args, **kwargs)
+
+
+class Help(models.Model):
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=500,
+        blank=True,
+        null=True
+    )
+    video = models.TextField(
+        verbose_name='Код видео',
+        blank=True,
+        null=True
+    )
+    is_enable = models.BooleanField(
+        verbose_name='Включено?',
+        default=True
+    )
+
+    objects = HelpManager()
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'Видео'
+        verbose_name = 'Видео'
+
+    def get_edit_url(self):
+        return reverse('admin2:help_edit', args=[self.id])
+
+    def get_delete_url(self):
+        return reverse('admin2:help_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:helps_list')
+
+
 class Settings(SingletonModel):
 
     currency = models.CharField(
