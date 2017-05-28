@@ -20,6 +20,7 @@ from landing_urls import urlpatterns as urlpatterns_landing
 from pay_urls import urlpatterns as urlpatterns_pay
 from counters_urls import urlpatterns as urlpatterns_counters
 from district_urls import urlpatterns as urlpatterns_district
+from help_urls import urlpatterns as urlpatterns_help
 
 urlpatterns = []
 urlpatterns.extend(urlpatterns_articles)
@@ -41,3 +42,4 @@ urlpatterns.extend(urlpatterns_landing)
 urlpatterns.extend(urlpatterns_pay)
 urlpatterns.extend(urlpatterns_counters)
 urlpatterns.extend(urlpatterns_district)
+urlpatterns.extend(urlpatterns_help)

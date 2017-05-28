@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import Http404, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.views.generic.base import View
@@ -30,6 +30,11 @@ class AdminDetail(LoginRequiredMixin, UpdateView):
 
     def get_form(self, form_class=None):
         return self.form_class(request_user=self.request.user, **self.get_form_kwargs())
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser and request.user.id != int(kwargs.get('id')):
+            return redirect('admin2:main')
+        return super(AdminDetail, self).get(request, *args, **kwargs)
 
 
 class AdminCreate(LoginRequiredMixin, CreateView):

@@ -31,19 +31,19 @@ def convert_to_frame(video):
     # return video
 
 
-@register.filter(name='convert_to_frame_slider')
-def convert_to_frame_slider(video):
-    if not video:
-        return ''
-    iframe = '<iframe width="566" height="368" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
-    if 'iframe' not in video:
-        try:
-            video = video.split('/')[-1]
-            iframe = iframe.format(video)
-            return iframe
-        except:
-            return 'Неверний формат кода видео'
-    return video
+# @register.filter(name='convert_to_frame_slider')
+# def convert_to_frame_slider(video):
+#     if not video:
+#         return ''
+#     iframe = '<iframe width="566" height="368" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
+#     if 'iframe' not in video:
+#         try:
+#             video = video.split('/')[-1]
+#             iframe = iframe.format(video)
+#             return iframe
+#         except:
+#             return 'Неверний формат кода видео'
+#     return video
 
 
 @register.filter(name='convert_to_frame_slider')
@@ -51,6 +51,30 @@ def convert_to_frame_slider(video):
     if not video:
         return ''
     iframe = '<iframe width="595" height="340" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
+    if 'iframe' not in video:
+        try:
+            video = video.split('/')[-1]
+            iframe = iframe.format(video)
+            return iframe
+        except:
+            return 'Неверний формат кода видео'
+    else:
+        try:
+            video_item = video.split(' ')
+            for ele in video_item:
+                if 'watch' in ele:
+                    el = ele.split('=')[-1]
+                    iframe = iframe.format(el)
+            return iframe
+        except:
+            return 'Неверний формат кода видео'
+
+
+@register.filter(name='convert_to_frame_help')
+def convert_to_frame_help(video):
+    if not video:
+        return ''
+    iframe = '<iframe width="450" height="250" src="https://www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'
     if 'iframe' not in video:
         try:
             video = video.split('/')[-1]
@@ -82,6 +106,14 @@ def get_video_code(video):
             if '?' in code:
                 code = code.split('?')[0]
             return code
+    elif 'watch' in video:
+        video_item = video.split(' ')
+        for ele in video_item:
+            if 'watch' in ele:
+                el = ele.split('=')[1]
+                if '&' in el:
+                    el = el.split('&')[0]
+                return el
     else:
         code = video.split('/')[-1]
         if '?' in code:

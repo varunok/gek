@@ -147,11 +147,11 @@ class User(AbstractUser):
         return reverse('users:profile', args=[self.id])
 
     def save(self, *args, **kwargs):
-        if self.is_superuser:
-            self.group = self.Group.SA
+        # if self.is_superuser:
+        #     self.group = self.Group.SA
         if self.group == 1:
             self.is_superuser = True
-        else:
+        elif self.group == 2:
             self.is_superuser = False
 
         super(User, self).save(*args, **kwargs)
