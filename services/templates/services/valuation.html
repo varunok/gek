@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load video_tag %}
 {% load banners_tag %}
+{% load base_tag %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -97,7 +98,7 @@
 					<div class="views_row">Копии документов о праве <br>собственности (свидетельство, договор купли-продажи, дарения, решения <br>суда и т.д.)</div>
 					<div class="views_row">Копия тех-паспорта, <br>изготовленного бюро <br>технической инвентаризации <br>(при наличии)</div>
 					<div class="views_row">Паспорт собственности <br>Идентификационный код <br>собственника</div>
-					<div class="views_row email_row">Пришлите документы на почту <br><a href="mailto:ofis@gek.pd.ua">ofis@gek.pd.ua</a></div>
+					<div class="views_row email_row">Пришлите документы на почту <br><a href="mailto:ofis@gek.pd.ua">{% email %}</a></div>
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="Заявка.Оценка недвижимости.">

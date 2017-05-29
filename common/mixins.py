@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from dal_select2.views import Select2QuerySetView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import EmptyPage
 from django.utils.translation import ugettext as _
 from django.db.models import F
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
@@ -50,15 +51,20 @@ class DinamicPageMixin(BaseListView):
     dinamic_template_name = None
     # context_object_name = 'objects'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(DinamicPageMixin, self).get_context_data(**kwargs)
-    #     # context['count_next'] = self.get_count_next()
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(DinamicPageMixin, self).get_context_data(**kwargs)
+        context['count_next'] = self.get_count_next()
+        return context
 
-    # def get_count_next(self):
-    #     count_next = self.get_queryset().count() - self.paginate_by
-    #     count_next = 0 if count_next <= 0 else count_next
-    #     return count_next
+    def get_count_next(self):
+        page = self.request.GET.get('page')
+        try:
+            paginator = self.get_paginator(self.get_queryset(), self.paginate_by)
+            page = page or 1
+            count_next = paginator.page(int(page)+1).object_list.count()
+        except:
+            count_next = 0
+        return count_next
 
     def get(self, request, *args, **kwargs):
         page = self.request.GET.get('page')
@@ -74,7 +80,9 @@ class DinamicPageMixin(BaseListView):
                 'next': paginator.page(page).has_next(),
                 'html': render_to_string(self.dinamic_template_name,
                                              {'request':self.request,
-                                              self.context_object_name: paginator.page(page).object_list}),
+                                              self.context_object_name: paginator.page(page).object_list,
+                                              'is_paginated':paginator.page(page).has_other_pages(),
+                                              'count_next': self.get_count_next()},),
                 'obj': len(paginator.page(page).object_list)
             })
             return HttpResponse(data)

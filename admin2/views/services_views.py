@@ -18,7 +18,7 @@ from services.models import ServicesRieltor, Valuation, Repair, Insurance, Clean
 from common.mixins import DeleteAjaxMixin, ServicesMixin, SuccesMixin, MessageMixin
 
 
-class ServicesView(LoginRequiredMixin, AccesMixin, TemplateView):
+class ServicesView(LoginRequiredMixin, TemplateView):
     template_name = 'admin2/services/services.html'
 
     def get_context_data(self, **kwargs):
@@ -40,7 +40,7 @@ class ServicesView(LoginRequiredMixin, AccesMixin, TemplateView):
         return context
 
 
-class RieltorServiceView(AccesMixin, ServicesMixin):
+class RieltorServiceView(ServicesMixin):
     model = ServicesRieltor
     form_class = RieltorServiceForm
     template_name = 'admin2/services/rieltor_service_edit.html'
@@ -50,7 +50,7 @@ class RieltorServiceView(AccesMixin, ServicesMixin):
     partner_form = PartnerForm
 
 
-class ValuationServiceView(AccesMixin, ServicesMixin):
+class ValuationServiceView(ServicesMixin):
     model = Valuation
     form_class = ValuationForm
     template_name = 'admin2/services/valuation_edit.html'
@@ -60,7 +60,7 @@ class ValuationServiceView(AccesMixin, ServicesMixin):
     partner_form = PartnerForm
 
 
-class RepairServiceView(AccesMixin, ServicesMixin):
+class RepairServiceView(ServicesMixin):
     model = Repair
     form_class = RepairForm
     template_name = 'admin2/services/repair_edit.html'
@@ -75,7 +75,7 @@ class RepairServiceView(AccesMixin, ServicesMixin):
         return context
 
 
-class InsurenceServiceView(AccesMixin, ServicesMixin):
+class InsurenceServiceView(ServicesMixin):
     model = Insurance
     form_class = InsuranceForm
     template_name = 'admin2/services/insurence_edit.html'
@@ -85,7 +85,7 @@ class InsurenceServiceView(AccesMixin, ServicesMixin):
     partner_form = PartnerForm
 
 
-class CleaningServiceView(AccesMixin, ServicesMixin):
+class CleaningServiceView(ServicesMixin):
     model = Cleaning
     form_class = CleaningForm
     template_name = 'admin2/services/cleaning_edit.html'
@@ -95,7 +95,7 @@ class CleaningServiceView(AccesMixin, ServicesMixin):
     partner_form = PartnerForm
 
 
-class InstallationWaterServiceView(AccesMixin, ServicesMixin):
+class InstallationWaterServiceView(ServicesMixin):
     model = InstallationWater
     form_class = InstallationWaterForm
     template_name = 'admin2/services/installation_water_edit.html'
@@ -105,7 +105,7 @@ class InstallationWaterServiceView(AccesMixin, ServicesMixin):
     partner_form = PartnerForm
 
 
-class UniversalServiceView(AccesMixin, ServicesMixin):
+class UniversalServiceView(ServicesMixin):
     model = UniversalService
     form_class = UniversalServiceForm
     template_name = 'admin2/services/universal_edit.html'
@@ -116,7 +116,7 @@ class UniversalServiceView(AccesMixin, ServicesMixin):
     partner_form = PartnerForm
 
 
-class UniversalServiceCreate(LoginRequiredMixin, AccesMixin, SuccesMixin, MessageMixin, CreateView):
+class UniversalServiceCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):
     model = UniversalService
     form_class = UniversalServiceCreateForm
     template_name = 'admin2/services/universal_edit.html'
@@ -125,7 +125,7 @@ class UniversalServiceCreate(LoginRequiredMixin, AccesMixin, SuccesMixin, Messag
         return reverse_lazy('admin2:universal_edit', args=[self.object.id])
 
 
-class UniversalServiceDeleteView(LoginRequiredMixin, AccesMixin, DeleteView):
+class UniversalServiceDeleteView(LoginRequiredMixin, DeleteView):
     model = UniversalService
     pk_url_kwarg = 'pk'
     template_name = 'admin2/common/delete_confirm.html'

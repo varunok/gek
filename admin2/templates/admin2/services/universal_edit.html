@@ -310,18 +310,18 @@
         $("#imgInp2").change(function(){
             readURL2(this);
         });
-    $(document).ready(function() {
-        $('.advantageForm').on('change', '.advantage-photo', function() {
-            var photo = $(this).parents('.item').next().next().next('.preview-advantage-photo').find('.pap');
-            if ($(this)[0].files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    photo.attr('src', e.target.result);
-                };
-                reader.readAsDataURL($(this)[0].files[0]);
-            }
+        $(document).ready(function() {
+            $('.advantageForm').on('change', '.advantage-photo', function() {
+                var photo = $(this).parents('.item').next().next().next('.preview-advantage-photo').find('.pap');
+                if ($(this)[0].files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        photo.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL($(this)[0].files[0]);
+                }
+            });
         });
-    });
 
     </script>
 {% endblock js %}

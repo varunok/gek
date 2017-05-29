@@ -115,9 +115,9 @@
                                             <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">{% if object.when_create %}Редактировать{% else %}Создать{% endif %}</a>
                                         </li>
                                         {% if object.when_create %}
-                                        <li role="presentation" class="">
-                                            <a href="#tab_content2" id="video-tab" role="tab" data-toggle="tab" aria-expanded="false">Видео</a>
-                                        </li>
+{#                                        <li role="presentation" class="">#}
+{#                                            <a href="#tab_content2" id="video-tab" role="tab" data-toggle="tab" aria-expanded="false">Видео</a>#}
+{#                                        </li>#}
                                         <li role="presentation" class="">
                                             <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
                                         </li>
@@ -283,12 +283,12 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.geo.label }}</label>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.video.label }}</label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.geo|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
+                                                        {{ form.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
                                                     </div>
-                                                    {% if form.geo.errors %}
-                                                        <span class="error-label">{{ form.geo.errors }}</span>
+                                                    {% if form.video.errors %}
+                                                        <span class="error-label">{{ form.video.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -317,7 +317,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        {% include 'admin2/services/include/videos.html' with service=object %}
+{#                                        {% include 'admin2/services/include/videos.html' with service=object %}#}
                                         {% include 'admin2/services/include/packets.html' with service=object %}
                                         {% include 'admin2/services/include/gallery.html' with service=object %}
                                         {% include 'common/infrastructure_tab.html' %}

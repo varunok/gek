@@ -38,10 +38,11 @@
                                 </thead>
                                 <tbody>
                                 {% for page in pages %}
+                                    {% if request.user.is_superuser or page.is_enable != False %}
                                     <tr>
                                         <td>{{ page.name }}</td>
                                         <td>
-                                            {% if page.name in 'Офисы и магазины, Квартиры и Дома, Посуточна, Новострои, Земля' %}
+                                            {% if page.name in 'Офисы и магазины, Квартиры и Дома, Посуточна, Новострои, Земля' and request.user.is_superuser %}
                                                 <form class="slideThreeForm" action="">
                                                     <div class="slideThree">
                                                         <input type="checkbox"  id="slideThree{{ page.name }}" name="check" {% if page.is_enable %} checked {% endif %} />
@@ -57,6 +58,7 @@
                                             <a href="{{ page.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                         </td>
                                     </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>

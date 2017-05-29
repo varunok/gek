@@ -1,4 +1,5 @@
 {% extends 'admin2/base.html' %}
+{% load admin_tags %}
 
 {% load static from staticfiles %}
 
@@ -54,7 +55,7 @@
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Навзвание <span class="required">*</span>
                                     </label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.name }}
+                                        {{ form.name|addcss:'form-control col-md-7 col-xs-12' }}
                                     </div>
                                     {% if form.name.errors %}
                                         <span class="error-label">{{ form.name.errors }}</span>
@@ -63,38 +64,38 @@
                                 <div class="item form-group">
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">URL</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.slug }}
+                                        {{ form.slug|addcss:'form-control col-md-7 col-xs-12' }}
                                     </div>
                                     {% if form.slug.errors %}
                                         <span class="error-label">{{ form.slug.errors.as_text }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Title <span class="required">*</span>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title.label }} <span class="required"></span>
                                     </label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.title }}
+                                        {{ form.title|addcss:'form-control col-md-7 col-xs-12' }}
                                     </div>
                                     {% if form.title.errors %}
                                         <span class="error-label">{{ form.title.errors }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Keywords</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOTitle.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.keywords }}
+                                        {{ form.SEOTitle|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Description</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOKeywords.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.description }}
+                                        {{ form.SEOKeywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Заголовок</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEODescription.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.heading }}
+                                        {{ form.SEODescription|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
                                 </div>
                                 <div class="item form-group">

@@ -33,8 +33,9 @@
                                 {% for object in object_list %}
                                     <div class="views_row">
                                         <div class="views_row_inner">
-                                            <a href="{{ object.get_absolute_url }}"><div class="title">{{ object.title }}</div></a>
+                                            <a href="{{ object.get_absolute_url }}"><div class="title">{{ object.title }}</div>
                                             <div class="field_image"><img src="{{ object.image|thumbnail_url:'gallery_image_370' }}" alt=""></div>
+                                            </a>
                                             <div class="field_nid">
                                                 <ul>
                                                     {% for known in object.what_you_knowns.all %}
@@ -51,7 +52,7 @@
                                 {% endfor %}
 
 							</div>
-							<div class="load_more read_more"><a href="#">Загрузить еще <span>45</span> видеопередач</a></div>
+{#							<div class="load_more read_more"><a href="#">Загрузить еще <span>45</span> видеопередач</a></div>#}
 						</div>
 					</div>
 				</div><!-- #content-->

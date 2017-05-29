@@ -49,7 +49,7 @@
                                     {% for image in images %}
                                         <div class="item">
                                             <div class="item_inner">
-                                                <img src="{{ image.image.url }}" alt="" width="100%">
+                                                <img src="{{ image.image|thumbnail_url:'slider_1110' }}" alt="" width="100%">
                                             </div>
                                         </div>
                                     {% endfor %}

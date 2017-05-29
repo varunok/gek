@@ -127,6 +127,13 @@ class ServicesRieltor(SingletonModel):
         blank=True,
         null=True
     )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        blank=True,
+        null=True,
+        default='Услуги риелторские'
+    )
     videos = GenericRelation(Video, related_query_name='services_rieltor')
     fag = GenericRelation(FAQ, related_query_name='services_rieltor')
     partners = GenericRelation(Partner, related_query_name='services_rieltor')
@@ -135,7 +142,7 @@ class ServicesRieltor(SingletonModel):
         verbose_name = 'Услуги риелторские'
 
     def __unicode__(self):
-        return 'Услуги риелторские'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services:rieltor_service', args=[self.slug])
@@ -199,6 +206,13 @@ class Valuation(SingletonModel):
         blank=True,
         null=True
     )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        blank=True,
+        null=True,
+        default='Оценка недвижимости'
+    )
     videos = GenericRelation(Video, related_query_name='valuation')
     fag = GenericRelation(FAQ, related_query_name='valuation')
     partners = GenericRelation(Partner, related_query_name='valuation')
@@ -207,7 +221,7 @@ class Valuation(SingletonModel):
         verbose_name = 'Оценка недвижимости'
 
     def __unicode__(self):
-        return 'Оценка недвижимости'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services:valuation', args=[self.slug])
@@ -291,6 +305,13 @@ class Repair(SingletonModel):
         blank=True,
         null=True
     )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        blank=True,
+        null=True,
+        default='Ремонт помещения'
+    )
     videos = GenericRelation(Video, related_query_name='repair')
     repairs = GenericRelation(TableRepair, related_query_name='repair')
     images = GenericRelation(Photo, related_query_name='repair')
@@ -300,7 +321,7 @@ class Repair(SingletonModel):
         verbose_name = 'Ремонт помещения'
 
     def __unicode__(self):
-        return 'Ремонт помещения'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services:repair', args=[self.slug])
@@ -364,6 +385,13 @@ class Insurance(SingletonModel):
         blank=True,
         null=True
     )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        blank=True,
+        null=True,
+        default='Страхование недвижимости'
+    )
     videos = GenericRelation(Video, related_query_name='insurance')
     images = GenericRelation(Photo, related_query_name='insurance')
     fag = GenericRelation(FAQ, related_query_name='insurance')
@@ -373,7 +401,7 @@ class Insurance(SingletonModel):
         verbose_name = 'Страхование недвижимости'
 
     def __unicode__(self):
-        return 'Страхование недвижимости'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services:insurance', args=[self.slug])
@@ -464,12 +492,19 @@ class Cleaning(SingletonModel):
         blank=True,
         null=True
     )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        blank=True,
+        null=True,
+        default='Уборка квартир'
+    )
 
     class Meta:
         verbose_name = 'Уборка квартир'
 
     def __unicode__(self):
-        return 'Уборка квартир'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services:cleaning', args=[self.slug])
@@ -571,12 +606,19 @@ class InstallationWater(SingletonModel):
         blank=True,
         null=True
     )
+    name = models.CharField(
+        verbose_name='Название',
+        max_length=250,
+        blank=True,
+        null=True,
+        default='Установка водомера'
+    )
 
     class Meta:
         verbose_name = 'Установка водомера'
 
     def __unicode__(self):
-        return 'Установка водомера'
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services:installation_water', args=[self.slug])

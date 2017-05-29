@@ -25,6 +25,11 @@ def service_rieltor_slug():
 
 
 @register.assignment_tag
+def service_rieltor_name():
+    return ServicesRieltor.get_solo().name
+
+
+@register.assignment_tag
 def valuation_is_active():
     return Valuation.get_solo().is_enable
 
@@ -32,6 +37,11 @@ def valuation_is_active():
 @register.assignment_tag
 def valuation_slug():
     return Valuation.get_solo().slug
+
+
+@register.assignment_tag
+def valuation_name():
+    return Valuation.get_solo().name
 
 
 @register.assignment_tag
@@ -45,6 +55,11 @@ def repair_slug():
 
 
 @register.assignment_tag
+def repair_name():
+    return Repair.get_solo().name
+
+
+@register.assignment_tag
 def insurance_is_active():
     return Insurance.get_solo().is_enable
 
@@ -52,6 +67,11 @@ def insurance_is_active():
 @register.assignment_tag
 def insurance_slug():
     return Insurance.get_solo().slug
+
+
+@register.assignment_tag
+def insurance_name():
+    return Insurance.get_solo().name
 
 
 @register.assignment_tag
@@ -65,6 +85,11 @@ def cleaning_slug():
 
 
 @register.assignment_tag
+def cleaning_name():
+    return Cleaning.get_solo().name
+
+
+@register.assignment_tag
 def installation_water_is_active():
     return InstallationWater.get_solo().is_enable
 
@@ -72,6 +97,11 @@ def installation_water_is_active():
 @register.assignment_tag
 def installation_water_slug():
     return InstallationWater.get_solo().slug
+
+
+@register.assignment_tag
+def installation_water_name():
+    return InstallationWater.get_solo().name
 
 
 @register.assignment_tag

@@ -39,9 +39,10 @@
                         {% if franchise %}
                             <div class="contacts_header" style="max-width: 270px">
                                 <div class="phone_number">
-                                    <a href="tel:+380679280167">{% phone %}</a>
+                                    <a href="tel:{% phone %}">{% phone %}</a>
                                 </div>
-                                <div class="address">г. {% city %}, {% address %}.</div>
+                                {% address as address_if %}
+                                <div class="address">{% city %}{% if address_if %},{% endif %} {% address %}</div>
                                 <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
                             </div>
                         {% endif %}
@@ -100,32 +101,32 @@
                                     {% service_rieltor_is_active as is_active_rs %}
                                     {% service_rieltor_slug as service_rieltor_slug %}
                                     {% if is_active_rs %}
-                                        <li><a href="{% url 'services:rieltor_service' service_rieltor_slug %}">Риелторсике услуги</a></li>
+                                        <li><a href="{% url 'services:rieltor_service' service_rieltor_slug %}">{% service_rieltor_name %}</a></li>
                                     {% endif %}
                                     {% valuation_is_active as is_active_valuation %}
                                     {% valuation_slug as valuation_slug %}
                                     {% if is_active_valuation %}
-                                        <li><a href="{% url 'services:valuation' valuation_slug %}">Оценка недвижимости</a></li>
+                                        <li><a href="{% url 'services:valuation' valuation_slug %}">{% valuation_name %}</a></li>
                                     {% endif %}
                                     {% repair_is_active as is_active_repair %}
                                     {% repair_slug as repair_slug %}
                                     {% if is_active_repair %}
-                                        <li><a href="{% url 'services:repair' repair_slug %}">Ремонт помещения</a></li>
+                                        <li><a href="{% url 'services:repair' repair_slug %}">{% repair_name %}</a></li>
                                     {% endif %}
                                     {% insurance_is_active as is_active_insurance %}
                                     {% insurance_slug as insurance_slug %}
                                     {% if is_active_insurance %}
-                                        <li><a href="{% url 'services:insurance' insurance_slug %}">Страхование недвижимости</a></li>
+                                        <li><a href="{% url 'services:insurance' insurance_slug %}">{% insurance_name %}</a></li>
                                     {% endif %}
                                     {% cleaning_is_active as is_active_cleaning %}
                                     {% cleaning_slug as cleaning_slug %}
                                     {% if is_active_cleaning %}
-                                        <li><a href="{% url 'services:cleaning' cleaning_slug %}">Уборка квартир</a></li>
+                                        <li><a href="{% url 'services:cleaning' cleaning_slug %}">{% cleaning_name %}</a></li>
                                     {% endif %}
                                     {% installation_water_is_active as is_active_installation_water %}
                                     {% installation_water_slug as installation_water_slug %}
                                     {% if is_active_installation_water %}
-                                        <li><a href="{% url 'services:installation_water' installation_water_slug %}">Установка водомеров</a></li>
+                                        <li><a href="{% url 'services:installation_water' installation_water_slug %}">{% installation_water_name %}</a></li>
                                     {% endif %}
                                     {% universals as universals %}
                                     {% for universal in universals %}
@@ -231,8 +232,8 @@
                             <ul>
                                 <li class="group_item">
                                     <ul>
-                                        <li class="leaf"><a href="/">Главная</a></li>
-                                        <li class="leaf"><a href="/">Недвижимость</a></li>
+                                        <li class="leaf"><a href="{% url 'contacts:contact' %}">Контакти</a></li>
+                                        <li class="leaf"><a href="http://rieltory.biz/franshiza" target="_blank">Франшиза</a></li>
                                         <li class="leaf"><a href="{% url 'services:services' %}">Услуги</a></li>
                                     </ul>
                                 </li>
@@ -248,7 +249,7 @@
                                     <ul>
                                         <li class="leaf"><a href="{% url 'videos:video' %}">Смотреть видео передачи</a></li>
                                         <li class="leaf"><a href="{% url 'polls:test' %}">Пройти тест</a></li>
-                                        <li class="leaf"><a href="{% url 'plan:plan' %}">Нарисовать план</a></li>
+                                        <li class="leaf"><a href="https://knin.com.ua/techplan" target="_blank">Нарисовать Тех План</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -272,10 +273,10 @@
                         {% if franchise %}
                             <div class="contacts_header" style="max-width: 195px">
                                 <div class="phone_number">
-                                    <a href="tel:+380679280167">{% phone %}</a>
+                                    <a href="tel:{% phone %}">{% phone %}</a>
                                 </div>
                                 <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
-                                <div class="address">г. {% city %}, {% address %}.</div>
+                                <div class="address">{% city %}{% if address_if %},{% endif %} {% address %}</div>
                             </div>
                         {% endif %}
                         <div class="buttons_header">
@@ -283,11 +284,17 @@
                             <div class="add_advert">Добавить объявление</div>
                         </div>
                     </div>
-                    <div class="social_links">
-                        <div class="item fb"><a href="https://www.facebook.com/" target="_blank"></a></div>
-                        <div class="item vk"><a href="https://vk.com/" target="_blank"></a></div>
-                        <div class="item tw"><a href="https://twitter.com/" target="_blank"></a></div>
-                        <div class="item gp"><a href="https://www.instagram.com/" target="_blank"></a></div>
+{#                    <div class="social_links">#}
+{#                        <div class="item fb facebook"><a href="#"></a></div>#}
+{#                        <div class="item vk"><a href="https://vk.com/" target="_blank"></a></div>#}
+{#                        <div class="item tw"><a href="https://twitter.com/" target="_blank"></a></div>#}
+{#                        <div class="item gp"><a href="https://www.instagram.com/" target="_blank"></a></div>#}
+{#                    </div>#}
+                    <div class="social_links social-likes social-likes_vertical" data-counters="no">
+                        <div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
+                        <div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
+                        <div class="plusone" title="Поделиться ссылкой в Гугл-плюсе">Google+</div>
+                        <div class="vkontakte" title="Поделиться ссылкой во Вконтакте">Вконтакте</div>
                     </div>
                 </div>
             </div>
@@ -344,7 +351,11 @@
         <script type="text/javascript" src="{% static 'js/load_more.js' %}"></script>
         <script>
             $(document).ready(function () {
-
+                $( "#expanded_btn" ).click(function() {
+                    $('html, body').animate({
+                        scrollTop: ($('.footer_bottom').offset().top)
+                    },500);
+                });
             })
         </script>
 

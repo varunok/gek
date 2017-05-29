@@ -4,6 +4,7 @@
 {% load thumbnail %}
 {% load favorites_tag %}
 {% load banners_tag %}
+{% load base_tag %}
 {% block css %}
     <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 {% endblock css %}
@@ -30,7 +31,7 @@
                         <input type="hidden" name="object_id" value="{{ object.id }}">
                     </div>
 				</div>
-				<h1 class="slider_title page_title">{{ object.title }}. {{ object.address }}</h1>
+				<h1 class="slider_title page_title">{{ object.get_title }}</h1>
 				<form action="#" class="webform_client_form">
 					<div class="form_actions">
 						<input class="form-submit submit-add-booking-modal" type="submit" value="Забронировать">
@@ -50,7 +51,7 @@
                                         {% for image in images %}
                                             <div class="item">
                                                 <div class="item_inner">
-                                                    <img src="{{ image.image.url }}" alt="" width="100%">
+                                                    <img src="{{ image.image|thumbnail_url:'slider_1110' }}" alt="" width="100%">
                                                 </div>
                                             </div>
                                         {% endfor %}
@@ -73,33 +74,35 @@
 							<div class="left_wrap information">
 								<div class="title">Информация:</div>
 								<div class="price_wrapper">
-									<div class="first_price">{{ object.price }} грн/сутки</div><span></span><div class="second_price">45 м<sup>2</sup></div>
+                                    {% if object.pric %}
+									    <div class="first_price">{{ object.price }} {{ nac_carrency }}/сутки</div>
+                                    {% endif %}
 								</div>
 								<div class="char_wrapper">
 									<div class="group">
 										<div class="item">
 											<div class="label">Этаж:</div>
-											<div class="field_item">{{ object.floor }}</div>
+											<div class="field_item">{{ object.floor|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
 											<div class="label">Комнаты:</div>
-											<div class="field_item">{{ object.rooms }}</div>
+											<div class="field_item">{{ object.rooms|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
 											<div class="label">Гостей:</div>
-											<div class="field_item">{{ object.guest }}</div>
+											<div class="field_item">{{ object.guest|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
 											<div class="label">Спальных мест:</div>
-											<div class="field_item">{{ object.sleeping_places }}</div>
+											<div class="field_item">{{ object.sleeping_places|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
 											<div class="label">ID:</div>
-											<div class="field_item">{{ object.id }}</div>
+											<div class="field_item">{{ object.custom_id|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
-											<div class="label">Тех план:</div>
-											<div class="field_item"><a href="#">Посмотреть</a></div>
+											<div class="label">Район:</div>
+											<div class="field_item">{{ object.district|default_if_none:'' }}</div>
 										</div>
 									</div>
                                     {% with object.apartment_has.all as apartment_has %}
@@ -124,11 +127,11 @@
 								<div class="title">Контакты:</div>
 								<div class="contacts_person name">
 									<div class="label">Имя:</div>
-									<div class="field_item">Алексей</div>
+									<div class="field_item">{{ object.name|default_if_none:'' }}</div>
 								</div>
 								<div class="contacts_person phone">
 									<div class="label">Телефон:</div>
-									<div class="field_item"><a href="tel:+380694546241">(069) 454-62-41</a></div>
+									<div class="field_item"><a href="tel:{{ object.phone|default_if_none:'' }}">{{ object.phone|default_if_none:'' }}</a></div>
 								</div>
 								<div class="social_share">
 								<div class="label">Поделиться с друзьями:</div>
@@ -207,31 +210,52 @@
 			<div class="map">
 			<div class="title">На карте:</div>
 				<div class="field_image">
-					<img src="{% static 'images/map_2.png' %}" alt="">
+					<div id="map" style="width: 542px; height: 293px;"></div>
 				</div>
 			</div>
 			<div class="map">
 			<div class="title">Панорама:</div>
 				<div class="field_image">
-					<img src="{% static 'images/google.png' %}" alt="">
+					{{ object.panorama|convert_panorama|safe }}
 				</div>
 			</div>
 		</div>
-		{% with object.videos.all.first as video %}
-            {% if video.is_enable and video.video %}
-                <div class="block block_video">
-                    <div class="block_content">
-                        <div class="block_title">{{ video.title }}</div>
-                        {{ video.video|convert_to_frame|safe }}
-                    </div>
+		{% if object.video %}
+            <div class="block block_video">
+                <div class="block_content">
+                    {{ object.video|get_video_code|convert_to_frame|safe }}
                 </div>
-            {% endif %}
-        {% endwith %}
+            </div>
+        {% endif %}
 		{% include 'common/include/vip.html' %}
 		{% downbanner %}
         {% include 'common/application/modal_booking.html' %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}
-    <script src="{% static '' %}"></script>
+    <script>
+        $(document).ready(function(){
+                        ymaps.ready(init);
+
+                    function init() {
+                        var myMap = new ymaps.Map('map', {
+                            center: [55.753994, 37.622093],
+                            zoom: 9
+                        });
+
+                        ymaps.geocode('{% city %}, {{ object.address }}', {
+                            results: 1
+                        }).then(function (res) {
+                            var firstGeoObject = res.geoObjects.get(0),
+                            coords = firstGeoObject.geometry.getCoordinates(),
+                            bounds = firstGeoObject.properties.get('boundedBy');
+
+                            myMap.geoObjects.add(firstGeoObject);
+                            myMap.setBounds(bounds, {
+                                checkZoomRange: true
+                            });
+                        });
+                    }
+        });
+    </script>
 {% endblock js %}
