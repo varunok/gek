@@ -15,7 +15,7 @@
                         </div>
                         <div class="views_body">
                         <div class="field_title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></div>
-                        <div class="field_body">{{ article.content|truncatechars:'200'|font_text|safe }}</div>
+                        <div class="field_body">{{ article.content|truncatechars_html:'200'|font_text|safe }}</div>
                         <div class="statistics">{{ article.views }}</div>
                         </div>
                     </div>

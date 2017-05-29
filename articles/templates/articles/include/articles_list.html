@@ -9,7 +9,7 @@
             </div>
             <div class="views_body">
                 <div class="address">{{ article.title }}</div>
-                <div class="text" style="font-size: 14px">{{ article.content|truncatechars:'200'|font_text|safe }}</div>
+                <div class="text" style="font-size: 14px">{{ article.content|truncatechars_html:'200'|font_text|safe }}</div>
                 <div class="bottom_wrap">
                     <div class="statistics">{{ article.views }}</div>
                 </div>
