@@ -91,6 +91,7 @@
                                     <span class="name"> URL </span>
                                     <span class="value text-success"> <a href="{{ insurance.get_absolute_url }}" target="_blank">{{ insurance.slug }}</a></span>
                                 </li>
+                                {% if request.user.is_superuser %}
                                 <li>
                                     <span class="value text-success">
                                         <form class="slideThreeForm serviceStatus" action="" style="display: flex">
@@ -103,6 +104,7 @@
                                         </form>
                                     </span>
                                 </li>
+                                {% endif %}
                                 <li>
                                     <span class="name">  </span>
                                     <span class="value text-success"> </span>
@@ -131,6 +133,16 @@
                                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                                             <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="serviceForm">
                                                 {% csrf_token %}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.name.label }}: <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.name|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.name.errors %}
+                                                        <span class="error-label">{{ form.name.errors }}</span>
+                                                    {% endif %}
+                                                </div>
                                                 <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.slug.label }}: <span class="required">*</span>
                                                     </label>

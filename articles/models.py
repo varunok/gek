@@ -21,21 +21,23 @@ class Sections(models.Model):
         null=True,
         allow_unicode=True
     )
-    title = models.CharField(
-        verbose_name='Title',
-        max_length=150
-    )
-    keywords = models.TextField(
-        verbose_name='Keywords',
+    SEOTitle = models.CharField(
+        verbose_name='SEO Title',
+        max_length=150,
         blank=True,
         null=True
     )
-    description = models.TextField(
-        verbose_name='Description',
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
         blank=True,
         null=True
     )
-    heading = models.TextField(
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    title = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -108,21 +110,23 @@ class Articles(models.Model):
         null=True,
         allow_unicode=True
     )
-    title = models.CharField(
-        verbose_name='Title',
-        max_length=150
-    )
-    keywords = models.TextField(
-        verbose_name='Keywords',
+    SEOTitle = models.CharField(
+        verbose_name='SEO Title',
+        max_length=150,
         blank=True,
         null=True
     )
-    description = models.TextField(
-        verbose_name='Description',
+    SEOKeywords = models.TextField(
+        verbose_name='SEO Keywords',
         blank=True,
         null=True
     )
-    heading = models.TextField(
+    SEODescription = models.TextField(
+        verbose_name='SEO Description',
+        blank=True,
+        null=True
+    )
+    title = models.TextField(
         verbose_name='Заголовок',
         blank=True,
         null=True
@@ -138,6 +142,11 @@ class Articles(models.Model):
     image = models.ImageField(
         verbose_name='Фото',
         upload_to='articles/%Y/%m/%d/',
+        blank=True
+    )
+    title_image = models.ImageField(
+        verbose_name='Фото Заголовок',
+        upload_to='background/%Y/%m/%d/',
         blank=True
     )
     views = models.IntegerField(
@@ -166,9 +175,9 @@ class Articles(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug and not Articles.objects.filter(slug=self.title).exists():
             self.slug = slugify(self.title, allow_unicode=True)
-        elif not self.slug and not Articles.objects.filter(slug=self.heading).exists():
-            self.slug = slugify(self.heading, allow_unicode=True)
-        elif not self.slug and not self.title and not self.heading:
+        elif not self.slug and not Articles.objects.filter(slug=self.title).exists():
+            self.slug = slugify(self.title, allow_unicode=True)
+        elif not self.slug and not self.title and not self.title:
             self.slug = slugify(get_random_string(length=8), allow_unicode=True)
         super(Articles, self).save(*args, **kwargs)
 

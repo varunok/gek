@@ -45,7 +45,9 @@
             <div class="bottom_wrap">
                 <div class="statistics">{{ object.views }}</div>
                 <div class="read_more preview submit-add-inspection-modal"><a href="/">Заказать просмотр</a></div>
-                <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
+                {% if not object.is_short %}
+                    <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
+                {% endif %}
             </div>
         </div>
     </div>

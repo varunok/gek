@@ -17,7 +17,7 @@ from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
 from seo.mixins import SEOMixin
 from seo.models import SEO
 
-PAGINATE_OBJ = 10
+PAGINATE_OBJ = 20
 
 
 class BuildingListSiteView(DinamicPageMixin, SEOMixin, BuildingStatusMixin, ListView):
@@ -32,7 +32,7 @@ class BuildingListSiteView(DinamicPageMixin, SEOMixin, BuildingStatusMixin, List
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            context['object_list'] = FilterBuilding(queryFilter, queryset=self.object_list).qs
+            # context['object_list'] = FilterBuilding(queryFilter, queryset=self.object_list).qs
             # self.object_list = FilterBuilding(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterBuilding(queryFilter, queryset=self.object_list)
         else:
@@ -42,6 +42,13 @@ class BuildingListSiteView(DinamicPageMixin, SEOMixin, BuildingStatusMixin, List
         context['clear_filter'] = reverse_lazy('objects:buildings')
         context['buildingpagemodel'] = self.seo_model.get_solo()
         return context
+
+    def get_queryset(self):
+        self.object_list = self.model.objects.order_by('-is_vip', 'point')
+        queryFilter = HelperFilter(self.request).qd
+        if queryFilter:
+            self.object_list = FilterBuilding(queryFilter, queryset=self.object_list).qs
+        return self.object_list
 
     def get_template_names(self):
         if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
@@ -112,17 +119,18 @@ class NewBuildingDetailSiteView(SEOMixin, NewBuildingStatusMixin, ViewsCountMixi
     template_name = 'rieltor_object/newbuilding.html'
 
 
-class DailyListSiteView(SEOMixin, DailyStatusMixin, ListView):
+class DailyListSiteView(DinamicPageMixin, SEOMixin, DailyStatusMixin, ListView):
     model = Daily
     template_name = 'rieltor_object/daily_list.html'
-    paginate_by = PAGINATE_OBJ
+    paginate_by = 2
     seo_model = DailyPageModel
+    dinamic_template_name = 'rieltor_object/include/daily_item.html'
 
     def get_context_data(self, **kwargs):
         context = super(DailyListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            context['object_list'] = FilterDaily(queryFilter, queryset=self.object_list).qs
+            # context['object_list'] = FilterDaily(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterDaily(queryFilter, queryset=self.object_list)
         else:
             context['filter_form'] = FilterDaily(self.request.GET, queryset=self.object_list)
@@ -131,6 +139,13 @@ class DailyListSiteView(SEOMixin, DailyStatusMixin, ListView):
         context['clear_filter'] = reverse_lazy('objects:dailys')
         context['dailypagemodel'] = self.seo_model.get_solo()
         return context
+
+    def get_queryset(self):
+        self.object_list = self.model.objects.order_by('point')
+        queryFilter = HelperFilter(self.request).qd
+        if queryFilter:
+            self.object_list = FilterBuilding(queryFilter, queryset=self.object_list).qs
+        return self.object_list
 
 
 class DailyDetailSiteView(SEOMixin, DailyStatusMixin, ViewsCountMixin, DetailView):

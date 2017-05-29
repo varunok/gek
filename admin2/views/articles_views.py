@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -49,6 +50,11 @@ class ArticlesUpdateView(LoginRequiredMixin, SuccesMixin, MessageMixin, UpdateVi
     form_class = ArticlesUpdateForm
     context_object_name = 'article'
     template_name = 'admin2/articles/articles_edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticlesUpdateView, self).get_context_data(**kwargs)
+        context['content_type'] = ContentType.objects.get_for_model(self.model).id
+        return context
 
 
 class ArticlesCreateView(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):

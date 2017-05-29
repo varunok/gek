@@ -39,14 +39,18 @@
                                 <tr>
                                     <th style="width: 20%">Фото</th>
                                     <th style="width: 50%">Название</th>
-                                    <th style="width: 20%">Вкл/Викл</th>
+                                    {% if request.user.is_superuser %}
+                                        <th style="width: 20%">Вкл/Викл</th>
+                                    {% endif %}
                                     <th style="width: 5%"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {% if request.user.is_superuser or rieltor_service.is_enable %}
                                 <tr>
                                     <td><img src="{{ rieltor_service.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                     <td>{{ rieltor_service }}</td>
+                                    {% if request.user.is_superuser %}
                                     <td>
                                         <form class="slideThreeForm" action="">
                                             <div class="slideThree serviceStatus">
@@ -57,14 +61,18 @@
                                             </div>
                                         </form>
                                     </td>
+                                    {% endif %}
                                     <td>
                                         <a href="{% url 'admin2:rieltor_service_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ rieltor_service.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                {% endif %}
+                                {% if request.user.is_superuser or valuation.is_enable %}
                                 <tr>
                                     <td><img src="{{ valuation.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                     <td>{{ valuation }}</td>
+                                    {% if request.user.is_superuser %}
                                     <td>
                                         <form class="slideThreeForm" action="">
                                             <div class="slideThree serviceStatus">
@@ -75,14 +83,18 @@
                                             </div>
                                         </form>
                                     </td>
+                                    {% endif %}
                                     <td>
                                         <a href="{% url 'admin2:valuation_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ valuation.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                {% endif %}
+                                {% if request.user.is_superuser or repair.is_enable %}
                                 <tr>
                                     <td><img src="{{ repair.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                     <td>{{ repair }}</td>
+                                    {% if request.user.is_superuser %}
                                     <td>
                                         <form class="slideThreeForm" action="">
                                             <div class="slideThree serviceStatus">
@@ -93,14 +105,18 @@
                                             </div>
                                         </form>
                                     </td>
+                                    {% endif %}
                                     <td>
                                         <a href="{% url 'admin2:repair_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ repair.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                {% endif %}
+                                {% if request.user.is_superuser or insurence.is_enable %}
                                 <tr>
                                     <td><img src="{{ insurence.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                     <td>{{ insurence }}</td>
+                                    {% if request.user.is_superuser %}
                                     <td>
                                         <form class="slideThreeForm" action="">
                                             <div class="slideThree serviceStatus">
@@ -111,14 +127,18 @@
                                             </div>
                                         </form>
                                     </td>
+                                    {% endif %}
                                     <td>
                                         <a href="{% url 'admin2:insurence_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ insurence.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                {% endif %}
+                                {% if request.user.is_superuser or cleaning.is_enable %}
                                 <tr>
                                     <td><img src="{{ cleaning.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                     <td>{{ cleaning }}</td>
+                                    {% if request.user.is_superuser %}
                                     <td>
                                         <form class="slideThreeForm" action="">
                                             <div class="slideThree serviceStatus">
@@ -129,14 +149,18 @@
                                             </div>
                                         </form>
                                     </td>
+                                    {% endif %}
                                     <td>
                                         <a href="{% url 'admin2:cleaning_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ cleaning.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                {% endif %}
+                                {% if request.user.is_superuser or installation_water.is_enable %}
                                 <tr>
                                     <td><img src="{{ installation_water.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                     <td>{{ installation_water }}</td>
+                                    {% if request.user.is_superuser %}
                                     <td>
                                         <form class="slideThreeForm" action="">
                                             <div class="slideThree serviceStatus">
@@ -147,15 +171,18 @@
                                             </div>
                                         </form>
                                     </td>
+                                    {% endif %}
                                     <td>
                                         <a href="{% url 'admin2:installation_water_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
                                         <a href="{{ installation_water.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
                                     </td>
                                 </tr>
+                                {% endif %}
                                 {% for universal in universals %}
                                     <tr>
                                         <td><img src="{{ universal.image|thumbnail_url:'article_image_60' }}" alt=""></td>
                                         <td>{{ universal }}</td>
+                                        {% if request.user.is_superuser %}
                                         <td>
                                             <form class="slideThreeForm" action="">
                                                 <div class="slideThree serviceStatus">
@@ -167,6 +194,7 @@
                                                 </div>
                                             </form>
                                         </td>
+                                        {% endif %}
                                         <td>
                                             <a href="{{ universal.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
                                             <a href="{{ universal.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>

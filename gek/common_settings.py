@@ -146,7 +146,7 @@ CKEDITOR_CONFIGS = {
             {'name': 'paragraph',
              'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-',
                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']},
-            # {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
             # {'name': 'insert',
              # 'items': ['Image', 'Update','Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
             # '/',

@@ -17,7 +17,7 @@ class ArticlesSiteView(SEOMixin, ListView):
     context_object_name = 'objects'
     template_name = 'articles/articles.html'
     dinamic_template_name = 'articles/include/articles_list.html'
-    paginate_by = PAGINATE_ARTICLE
+    # paginate_by = PAGINATE_ARTICLE
 
     def get_context_data(self, **kwargs):
         context = super(ArticlesSiteView, self).get_context_data(**kwargs)
@@ -35,13 +35,12 @@ class SectionsDetailView(SEOMixin, DetailView):
         context = super(SectionsDetailView, self).get_context_data(**kwargs)
         context['sections'] = Sections.objects.all().order_by('name')
         context['article_count'] = Articles.objects.count()
-        try:
-            context['articles'] = Articles.objects.filter(sections=self.object)[:PAGINATE_ARTICLE]
-            count_next = Articles.objects.filter(sections=self.object).count() - PAGINATE_ARTICLE
-            context['count_next'] = 0 if count_next <= 0 else count_next
-        except:
-            pass
-        print(context['articles'])
+        # try:
+        context['articles'] = Articles.objects.filter(sections=self.object)
+        #     count_next = Articles.objects.filter(sections=self.object).count() - PAGINATE_ARTICLE
+        #     context['count_next'] = 0 if count_next <= 0 else count_next
+        # except:
+        #     pass
         return context
 
 

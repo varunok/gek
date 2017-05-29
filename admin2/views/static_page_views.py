@@ -27,7 +27,7 @@ def page_list():
         return LIST_PAGE
 
 
-class StaticPageView(LoginRequiredMixin, AccesMixin, TemplateView):
+class StaticPageView(LoginRequiredMixin, TemplateView):
     # model = StaticPageModel
     template_name = 'admin2/static_pages/static_pages.html'
 
@@ -38,7 +38,7 @@ class StaticPageView(LoginRequiredMixin, AccesMixin, TemplateView):
         return context
 
 
-class StaticPageDetailView(LoginRequiredMixin, AccesMixin, UpdateView):
+class StaticPageDetailView(LoginRequiredMixin, UpdateView):
     template_name = 'admin2/static_pages/static_page_edit.html'
     context_object_name = 'page'
     slug_field = 'slug'

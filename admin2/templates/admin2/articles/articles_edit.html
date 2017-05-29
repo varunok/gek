@@ -83,21 +83,21 @@
                                     {% endif %}
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.keywords.label }}</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOTitle.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.keywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                        {{ form.SEOTitle|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.description.label }}</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOKeywords.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.description|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                        {{ form.SEOKeywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.heading.label }}</label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEODescription.label }}</label>
                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                        {{ form.heading|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
+                                        {{ form.SEODescription|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -121,6 +121,28 @@
                                             {{ article.image.url }}
                                         {% endif %}
                                         " alt="" width="100%" />
+                                        {% if article.image %}
+                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                            <input type="hidden" value="{{ content_type }}">
+                                            <input type="hidden" value="{{ article.id }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.title_image.label }}</label>
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        <input id="imgInp2" name="title_image" type="file">
+                                        <img id="blah2" src="
+                                        {% if article.title_image %}
+                                            {{ article.title_image.url }}
+                                        {% endif %}
+                                        " alt="" width="100%" />
+                                        {% if article.title_image %}
+                                            <input id="delete-image2" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                            <input type="hidden" value="{{ content_type }}">
+                                            <input type="hidden" value="{{ article.id }}">
+                                            <input type="hidden" value="title_image">
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>
@@ -141,7 +163,7 @@
 {% endblock content %}
 
 {% block js %}
-
+    <script src="{% static 'js/service_status.js' %}"></script>
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -152,8 +174,20 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah2').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
         $("#imgInp").change(function(){
             readURL(this);
+        });
+        $("#imgInp2").change(function(){
+            readURL2(this);
         });
     </script>
 {% endblock js %}

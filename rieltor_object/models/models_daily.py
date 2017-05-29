@@ -105,8 +105,8 @@ class Daily(models.Model):
         verbose_name='Панорама',
         blank=True
     )
-    geo = models.TextField(
-        verbose_name='На карте',
+    video = models.TextField(
+        verbose_name='Код видео',
         blank=True
     )
     views = models.IntegerField(
@@ -198,3 +198,6 @@ class Daily(models.Model):
             except AttributeError:
                 pass
         return text
+
+    def get_title(self):
+        return '{0}{2} {1}'.format(self.title or '', self.address or '', '.' if self.title else '' )

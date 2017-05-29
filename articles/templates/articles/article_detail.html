@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load banners_tag %}
+{% load video_tag %}
 {% block css %}{% endblock css %}
 
-{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
-{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
-{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
 
 {% block class_body %}  class="not-front articles articles_inner sidebar_first" {% endblock %}
 
 {% block content %}
     <main class="middle">
-		<div class="slider_main slider_notfront">
+		<div class="slider_main slider_notfront" {% if object.title_image %}style="background: url({{ object.title_image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="top_inner_content">
 				<div class="main_breadcrumbs">
                     <a href="/">Главная</a>
@@ -20,10 +21,10 @@
                     <span class="delimiter">/</span>
                     <a href="{% url 'articles:sections_detail' article.sections.slug %}">{{ article.sections.name }}</a>
                     <span class="delimiter">/</span>
-                    <span>{{ article.heading }}</span>
+                    <span>{{ seo.title }}</span>
                 </div>
 			</div>
-			<div class="slider_title">{{ article.heading }}</div>
+			<div class="slider_title">{{ seo.title }}</div>
 				<div class="icons_wrap">
 					<div class="icon stat">{{ article.views }}</div>
 				</div>
@@ -44,7 +45,9 @@
 					<div class="block block_node_content">
 						<div class="field_body">
                             {{ article.content|safe }}
-                            <div class="video"><iframe src="https://www.youtube.com/embed/fKMbAxliZpc?ecver=2" allowfullscreen height="353"></iframe></div>
+                            <div class="video">
+                                {{ article.video|get_video_code|convert_to_frame|safe }}
+                            </div>
 						</div>
 					</div>
 				</div><!-- #content-->

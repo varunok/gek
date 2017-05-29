@@ -90,6 +90,7 @@
                                     <span class="name"> URL </span>
                                     <span class="value text-success"> <a href="{{ page.get_absolute_url }}" target="_blank">{{ page.name }}</a></span>
                                 </li>
+                                {% if request.user.is_superuser %}
                                 <li class="hidden-phone">
                                     {% if page.name in 'Офисы и магазины, Квартиры и Дома, Посуточна, Новострои' %}
                                         <span class="value text-success">
@@ -104,6 +105,7 @@
                                         </span>
                                     {% endif %}
                                 </li>
+                                {% endif %}
                                 <li class="hidden-phone">
                                     <span class="name"></span>
                                     <span class="value text-success"></span>
