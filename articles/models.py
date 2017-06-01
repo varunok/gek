@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import absolute_import
+
+from transliterate import translit, get_available_language_codes
 
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.text import slugify
+from transliterate import slugify as trans_slugify
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
@@ -79,11 +82,11 @@ class Sections(models.Model):
         return reverse('admin2:sections')
 
     def save(self, *args, **kwargs):
-        if not self.slug and not Sections.objects.filter(slug=self.title).exists():
-            self.slug = slugify(self.title, allow_unicode=True)
-        elif not self.slug and not Sections.objects.filter(slug=self.name).exists():
-            self.slug = slugify(self.name, allow_unicode=True)
-        elif not self.slug and not self.title and not self.name:
+        # if not self.slug and not Sections.objects.filter(slug=self.title).exists():
+        self.slug = trans_slugify(self.title)
+        # elif not self.slug and not Sections.objects.filter(slug=self.name).exists():
+        #     self.slug = slugify(self.name, allow_unicode=True)
+        if not self.slug and not self.title and not self.name:
             self.slug = slugify(get_random_string(length=8), allow_unicode=True)
         super(Sections, self).save(*args, **kwargs)
 
@@ -173,11 +176,12 @@ class Articles(models.Model):
         return reverse('admin2:articles')
 
     def save(self, *args, **kwargs):
-        if not self.slug and not Articles.objects.filter(slug=self.title).exists():
-            self.slug = slugify(self.title, allow_unicode=True)
-        elif not self.slug and not Articles.objects.filter(slug=self.title).exists():
-            self.slug = slugify(self.title, allow_unicode=True)
-        elif not self.slug and not self.title and not self.title:
+        self.slug = trans_slugify(self.title)
+        # if not self.slug and not Articles.objects.filter(slug=self.title).exists():
+        #     self.slug = slugify(translit(str(self.title), str('en'), reversed=True))
+        # elif not self.slug and not Articles.objects.filter(slug=self.title).exists():
+        #     self.slug = slugify(self.title, allow_unicode=True)
+        if not self.slug and not self.title and not self.title:
             self.slug = slugify(get_random_string(length=8), allow_unicode=True)
         super(Articles, self).save(*args, **kwargs)
 

@@ -27,9 +27,12 @@
             event.preventDefault();
             var source = $(this).next().children('a').attr('href');
             if(parseInt(source)>0){
-                $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр участка. ID:"+source)
+                $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр объекта. ID:"+source);
+                $('.submit-save-application').val("Заказать осмотр объекта ID "+source);
+                $('input[name="custom_id"]').val(source);
             }else {
                 $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр объекта.<a target='_blank' href='"+source+"'>Объект</a>");
+                $('.submit-save-application').val("Заказать осмотр объекта ID ");
             }
             $('body').addClass('popup');
             $('.block-add-inspection').fadeIn();

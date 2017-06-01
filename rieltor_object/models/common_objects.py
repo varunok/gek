@@ -17,9 +17,11 @@ class TypeDeal(object):
 class TypeAppointment(object):
     APARTMENT = 'apartment'
     HOUSE = 'house'
+    ROOM = 'room'
     CHOICES = (
         (APARTMENT, 'Квартира'),
-        (HOUSE, 'Дом')
+        (HOUSE, 'Дом'),
+        (ROOM, 'Комната'),
     )
 
 
@@ -47,10 +49,12 @@ class TypeLocation(object):
     FACADE = 'facade'
     COURTYARD = 'from_yard'
     BISNESS = 'business_center'
+    ALONEBUILD = 'alonebuild'
     CHOICES = (
         (FACADE, 'Фасад'),
         (COURTYARD, 'Дворовой'),
         (BISNESS, 'Бизнес-центр'),
+        (ALONEBUILD, 'Отдельное здание'),
     )
 
 
@@ -69,10 +73,12 @@ class TypeFloor(object):
     FIRST = 'first'
     BASE = 'base'
     BELTAG = 'mezzanine'
+    TWOFIVE = 'twofive'
     CHOICES = (
         (FIRST, '1-й'),
         (BASE, 'Цоколь'),
         (BELTAG, 'Бельэтаж'),
+        (TWOFIVE, '2-5 этаж'),
     )
 
 

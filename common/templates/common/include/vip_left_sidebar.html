@@ -1,23 +1,32 @@
 {% load staticfiles %}
 {% load favorites_tag %}
 {% load vip_tag %}
+{% load thumbnail %}
 {% vips as vips %}
 <div class="block block_vip">
     <div class="block_title">Vip</div>
     <div class="view_content">
         {% for object in vips %}
         <div class="views_row">
-            <div class="field_image">
-                <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
-            </div>
+            <a href="{{ object.get_absolute_url }}">
+                {% with images=object.images.all %}
+                    {% if  images %}
+                        <img src="{{ images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
+                    {% endif %}
+                {% endwith %}
+            </a>
             <div class="views_body">
                 <div class="star {{ object|fav_is_active:request }}">
                     <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
                     <input type="hidden" name="object_id" value="{{ object.id }}">
                 </div>
                 <div class="address">{{ object.address }}</div>
-                <div class="price"><div class="label">{{ object.get_type_deal_display }}:</div><div class="item">${{ object.price }}</div></div>
-                <div class="area"><div class="label">{{ object.get_appointment_display }}:</div><div class="count">{{ object.footage }}</div> <div class="units">м<sup>2</sup></div></div>
+                <div class="price"><div class="label">{{ object.get_type_deal_display|default_if_none:'' }}:</div><div class="item">${{ object.price|default_if_none:'' }}</div></div>
+                <div class="area"><div class="label">{{ object.get_appointment_display|default_if_none:'' }}:</div><div class="count">{{ object.footage|default_if_none:'' }}</div>
+                    {% if object.footage %}
+                        <div class="units">м<sup>2</sup></div>
+                    {% endif %}
+                </div>
                 <div class="statistics">{{ object.views }}</div>
                 <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
             </div>

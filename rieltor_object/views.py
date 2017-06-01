@@ -156,7 +156,7 @@ class DailyDetailSiteView(SEOMixin, DailyStatusMixin, ViewsCountMixin, DetailVie
 class EarthSiteView(SEOMixin, EarthStatusMixin, ListView):
     model = Earth
     template_name = 'rieltor_object/earth.html'
-    paginate_by = PAGINATE_OBJ
+    paginate_by = 30
     seo_model = EarthPageModel
 
     def get_context_data(self, **kwargs):

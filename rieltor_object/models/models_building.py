@@ -265,6 +265,7 @@ class Building(models.Model):
         try:
             text = text.replace('Дом', 'дома')
             text = text.replace('Квартира', 'квартиры')
+            text = text.replace('Комната', 'комнаты')
         except AttributeError:
             return text
         return text

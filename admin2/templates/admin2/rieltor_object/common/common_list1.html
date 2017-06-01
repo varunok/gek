@@ -37,7 +37,8 @@
                                 <tr>
                                     <th style="width: 1%">ID</th>
                                     <th style="width: 1%">Балл</th>
-                                    <th style="width: 20%">Фото</th>
+                                    <th style="width: 15%">Фото</th>
+                                    <th style="width: 5%">Статус</th>
                                     <th style="width: 20%">Адресс</th>
                                     <th style="width: 10%">Цена</th>
                                     <th style="width: 10%">Тип</th>
@@ -57,6 +58,10 @@
                                             {% else %}
                                                 <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
                                             {% endif %}
+                                        <td>
+                                            {{ object.is_vip|yesno:'VIP, '|default_if_none:'--' }}
+                                            {{ object.is_short|yesno:'Краткое, '}}
+                                        </td>
                                         <td>{{ object.address|default_if_none:'--' }}</td>
                                         <td>{{ object.price|default_if_none:'--' }}</td>
                                         <td>{{ object.get_type_deal_display|default_if_none:'--' }}</td>

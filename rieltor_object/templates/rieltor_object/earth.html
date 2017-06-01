@@ -5,7 +5,10 @@
 {% load thumbnail %}
 {% load banners_tag %}
 {% load rieltor_tag %}
-{% block css %}{% endblock css %}
+{% load base_tag %}
+{% block css %}
+    <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
 {% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
@@ -66,7 +69,7 @@
 								<div class="links">
 									<div class="search_clear"><a href="{% url 'objects:earth' %}">очистить</a></div>
 								</div>
-								<input type="submit" value="Поиск" class="searh-click">
+								<input type="submit" value="Поиск" class="search-click">
 							</div>
 						</form>
 						<div class="top_wrap">
@@ -164,7 +167,7 @@
                                         <div class="title">{{ object.title|default:'' }}</div>
                                         <div class="top_wrap">
                                             <div class="left_wrap">
-                                                <div class="map"><img src="{% static 'images/map.png' %}" alt=""></div>
+                                                <div class="map"><div id="map" style="width: 542px; height: 293px;"></div></div>
                                             </div>
                                             {% with object.images.all as images %}
                                                 {% if images %}
@@ -172,10 +175,7 @@
                                                         <div class="slider" id="slider">
                                                             {% for image in images %}
                                                                 <div class="item"><img src="{{ image.image|thumbnail_url:'earth_image_542' }}" alt="" width="100%"></div>
-
                                                             {% endfor %}
-
-                                                            <div class="item"><img src="{% static 'images/earth_1.png' %}" alt=""></div>
                                                         </div>
                                                     </div>
                                                 {% endif %}
@@ -185,7 +185,7 @@
                                             <div class="left_wrap">
                                                 <div class="char_item">
                                                     <div class="label">Тип участка:</div>
-                                                    <div class="item">{{ object.type_area|default:'' }}</div>
+                                                    <div class="item">{{ object.get_type_area_display|default:'' }}</div>
                                                 </div>
                                                 <div class="char_item">
                                                     <div class="label">Район:</div>
@@ -197,7 +197,7 @@
                                                 </div>
                                                 <div class="char_item">
                                                     <div class="label">ID:</div>
-                                                    <div class="item">{{ object.id }}</div>
+                                                    <div class="item">{{ object.custom_id }}</div>
                                                 </div>
                                                 <div class="char_item">
                                                     <div class="label">Коммуникации:</div>
@@ -235,21 +235,21 @@
                                                     <div class="title">Контакты:</div>
                                                     <div class="item field_name">
                                                         <div class="label">Имя:</div>
-                                                        <div class="field_item">{{ object.contact_name|default:'' }}</div>
+                                                        <div class="field_item">{{ object.name|default:'' }}</div>
                                                     </div>
                                                     <div class="item field_phone">
                                                         <div class="label">Телефон:</div>
                                                         <div class="field_item">{{ object.phone|default:'' }}</div>
                                                     </div>
                                                     <div class="btn submit-add-inspection-modal">Заказать просмотр</div>
-                                                    <div class="read_more" style="display: none"><a href="{{ object.id }}">Подробнее</a></div>
+                                                    <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 {% endfor %}
 
-								<div class="load_more read_more"><a href="#">Загрузить еще <span>45</span> объектов</a></div>
+{#								<div class="load_more read_more"><a href="#">Загрузить еще <span>45</span> объектов</a></div>#}
 							</div>
 						</div>
 					</div>
@@ -266,4 +266,38 @@
         var BASE_URL = '{{ BASE_URL }}';
     </script>
     <script src="{% static 'js/search_form.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+                    try {
+
+                      ymaps.ready(init);
+
+                    } catch (err) {
+
+                      // обработка ошибки
+
+                    }
+
+
+                    function init() {
+                        var myMap = new ymaps.Map('map', {
+                            center: [55.753994, 37.622093],
+                            zoom: 9
+                        });
+
+                        ymaps.geocode('{% city %}, {{ object.address }}', {
+                            results: 1
+                        }).then(function (res) {
+                            var firstGeoObject = res.geoObjects.get(0),
+                            coords = firstGeoObject.geometry.getCoordinates(),
+                            bounds = firstGeoObject.properties.get('boundedBy');
+
+                            myMap.geoObjects.add(firstGeoObject);
+                            myMap.setBounds(bounds, {
+                                checkZoomRange: true
+                            });
+                        });
+                    }
+        });
+    </script>
 {% endblock js %}

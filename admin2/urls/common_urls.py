@@ -10,7 +10,7 @@ from common.mixins import Select2QuerySetViewCustom
 from common.views import save_video, status_video, ModalVideo, create_faq, save_faq, FAQDeleteView, \
     delete_image, create_rep, save_rep, RepairDeleteView, status_common, SavePhotoView, DeletePhotoView, \
     packet_text_save, packet_create, save_advantage, save_infrastructure, related_infrastructure, \
-    related_accommodations, save_accommodations, save_apartment_next, delete_apartment_next
+    related_accommodations, save_accommodations, save_apartment_next, delete_apartment_next, save_seo
 from rieltor_object.models import ApartmentHas, EarthDistrict, District, DailyDistrict, Name, Phone
 from users.models import User
 
@@ -21,6 +21,7 @@ urlpatterns = [
 
     # COMMON
     url('save-video/$', save_video, name='save_video'),
+    url('seo-save/$', save_seo, name='save_seo'),
     url('save-advantage/$', save_advantage, name='save_advantage'),
     url(
         r'status_faq',

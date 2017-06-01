@@ -204,7 +204,7 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.price.label }},
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12 currency-type" for="name">{{ form.price.label }},
                                                         {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %}
                                                         :
                                                     </label>
@@ -219,7 +219,7 @@
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.type_deal.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.type_deal|addcss:'form-control' }}
+                                                        {{ form.type_deal|addcss:'form-control type-deal' }}
                                                     </div>
                                                     {% if form.type_deal.errors %}
                                                         <span class="error-label">{{ form.type_deal.errors }}</span>
@@ -400,6 +400,16 @@
         }
         $("#imgInp").change(function(){
             readURL(this);
+        });
+        var carrency = '{% carrency %}';
+        $(document).ready(function() {
+            $('.type-deal').change(function () {
+                if($('.type-deal option:selected').val()==='sale'){
+                    $('.currency-type').text('Цена, $');
+                }else{
+                    $('.currency-type').text('Цена, ' + carrency);
+                }
+            })
         });
 
     </script>

@@ -10,7 +10,8 @@ from django.views.generic import TemplateView, CreateView, DeleteView
 
 from admin2.forms import RieltorServiceForm, VideoRieltorServiceSet, ValuationForm, VideoServiceSet, RepairForm, \
     InsuranceForm, CleaningForm, InstallationWaterForm, UniversalServiceForm, UniversalServiceCreateForm, AdvantageSet, \
-    PartnerForm
+    PartnerForm, ValuationSEOForm, UniversalServiceSEOForm, RieltorServiceSEOForm, RepairSEOForm, InsuranceSEOForm, \
+    CleaningSEOForm, InstallationWaterSEOForm
 from admin2.mixins import AccesMixin
 from services.models import ServicesRieltor, Valuation, Repair, Insurance, Cleaning, InstallationWater, \
     UniversalService, Partner
@@ -48,6 +49,7 @@ class RieltorServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoRieltorServiceSet
     partner_form = PartnerForm
+    seo_form = RieltorServiceSEOForm
 
 
 class ValuationServiceView(ServicesMixin):
@@ -58,6 +60,8 @@ class ValuationServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
     partner_form = PartnerForm
+    seo_form = ValuationSEOForm
+
 
 
 class RepairServiceView(ServicesMixin):
@@ -68,6 +72,7 @@ class RepairServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
     partner_form = PartnerForm
+    seo_form = RepairSEOForm
 
     def get_context_data(self, **kwargs):
         context = super(RepairServiceView, self).get_context_data(**kwargs)
@@ -83,6 +88,7 @@ class InsurenceServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
     partner_form = PartnerForm
+    seo_form = InsuranceSEOForm
 
 
 class CleaningServiceView(ServicesMixin):
@@ -93,6 +99,7 @@ class CleaningServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
     partner_form = PartnerForm
+    seo_form = CleaningSEOForm
 
 
 class InstallationWaterServiceView(ServicesMixin):
@@ -103,6 +110,7 @@ class InstallationWaterServiceView(ServicesMixin):
     success_url = reverse_lazy('admin2:services')
     video_form = VideoServiceSet
     partner_form = PartnerForm
+    seo_form = InstallationWaterSEOForm
 
 
 class UniversalServiceView(ServicesMixin):
@@ -114,6 +122,7 @@ class UniversalServiceView(ServicesMixin):
     video_form = VideoServiceSet
     advantage_form = AdvantageSet
     partner_form = PartnerForm
+    seo_form = UniversalServiceSEOForm
 
 
 class UniversalServiceCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):

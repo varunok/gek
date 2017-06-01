@@ -1,13 +1,14 @@
 appdirs==1.4.3
-Django==1.11
+Django==1.11.1
 django-autocomplete-light==3.2.4
-django-ckeditor==5.2.1
+django-ckeditor==5.2.2
 django-filter==1.0.2
 django-multiselectfield==0.1.5
 django-solo==1.1.2
 easy-thumbnails==2.4.1
 liqpay==1.0.1
 liqpay-python==1.0
+lorem-ipsum-generator==0.3
 olefile==0.44
 packaging==16.8
 Pillow==4.1.0
@@ -17,3 +18,4 @@ pyparsing==2.2.0
 pytz==2017.2
 requests==2.14.1
 six==1.10.0
+transliterate==1.9
