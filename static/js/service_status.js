@@ -2,6 +2,7 @@
  * Created by varunok on 31.03.17.
  */
 $(document).ready(function() {
+
     $('.serviceStatus').on('change', 'input[type=checkbox]', function () {
         var data = $(this).parents('.slideThreeForm').serialize();
         $.post('status_service', data)
@@ -71,6 +72,21 @@ $(document).ready(function() {
             .then(function(response) {
                     notify_success(response, 'Успешно');
                     $('#blah2').attr("src","second.jpg");
+                    _this.fadeOut();
+                }, function(err) {
+                    notify_error('Ошибка '+ err.status, err.statusText);
+                });
+    });
+    $('#delete-image3').click(function (event) {
+        event.preventDefault();
+        var content_type = $(this).next().val();
+        var id = $(this).next().next().val();
+        var seo_image = $(this).next().next().next().val();
+        _this = $(this);
+        $.get('delete-image', {'content_type': content_type, 'id':id, 'seo_image': seo_image})
+            .then(function(response) {
+                    notify_success(response, 'Успешно');
+                    $('#blah3').attr("src","second.jpg");
                     _this.fadeOut();
                 }, function(err) {
                     notify_error('Ошибка '+ err.status, err.statusText);

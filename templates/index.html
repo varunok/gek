@@ -58,7 +58,7 @@
                                     <div class="statistics">{{ office.views }}</div>
                                     <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
                                     <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
-                                    <div class="read_more" style="display: none"><a href="{{ office.get_absolute_url }}"></a></div>
+                                    <div class="read_more" style="display: none"><a href="{{ office.custom_id }}"></a></div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -98,7 +98,7 @@
                                     <div class="statistics">{{ building.views }}</div>
                                     <div class="area"><div class="count">{{ building.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
                                     <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
-                                    <div class="read_more" style="display: none"><a href="{{ building.get_absolute_url }}"></a></div>
+                                    <div class="read_more" style="display: none"><a href="{{ building.custom_id }}"></a></div>
                                 </div>
                             </div>
                         {% endfor %}

@@ -30,18 +30,12 @@ class SectionUpdateForm(forms.ModelForm):
         widgets = {
             'name': TextInput(attrs={'class': 'form-control col-md-7 col-xs-12'}),
             'slug': TextInput(attrs={'class': 'form-control col-md-7 col-xs-12'}),
-            'title': TextInput(attrs={'class': 'form-control col-md-7 col-xs-12'}),
+            'title': TextInput(attrs={'class': 'form-control col-md-7 col-xs-12', 'rows': '5'}),
             'keywords': Textarea(attrs={'class': 'form-control col-md-7 col-xs-12', 'rows': '5'}),
             'description': Textarea(attrs={'class': 'form-control col-md-7 col-xs-12', 'rows': '5'}),
             'heading': Textarea(attrs={'class': 'form-control col-md-7 col-xs-12', 'rows': '5'}),
             'content': CKEditorWidget(attrs={'class': 'form-control col-md-7 col-xs-12'}),
         }
-
-    def clean_slug(self):
-        slug = self.cleaned_data["slug"]
-        if Sections.objects.filter(slug=slug).exists():
-            raise forms.ValidationError("такой URL уже используется.")
-        return slug
 
 
 class ArticlesUpdateForm(forms.ModelForm):
@@ -55,6 +49,13 @@ class ArticlesUpdateForm(forms.ModelForm):
 class RieltorServiceForm(forms.ModelForm):
     class Meta:
         model = ServicesRieltor
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class RieltorServiceSEOForm(forms.ModelForm):
+    class Meta:
+        model = ServicesRieltor
         exclude = 'is_enable',
         fields = '__all__'
 
@@ -62,11 +63,25 @@ class RieltorServiceForm(forms.ModelForm):
 class ValuationForm(forms.ModelForm):
     class Meta:
         model = ServicesRieltor
-        exclude = 'is_enable',
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class ValuationSEOForm(forms.ModelForm):
+    class Meta:
+        model = ServicesRieltor
+        exclude = ('is_enable',)
         fields = '__all__'
 
 
 class RepairForm(forms.ModelForm):
+    class Meta:
+        model = Repair
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class RepairSEOForm(forms.ModelForm):
     class Meta:
         model = Repair
         exclude = 'is_enable',
@@ -76,11 +91,25 @@ class RepairForm(forms.ModelForm):
 class InsuranceForm(forms.ModelForm):
     class Meta:
         model = Insurance
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class InsuranceSEOForm(forms.ModelForm):
+    class Meta:
+        model = Insurance
         exclude = 'is_enable',
         fields = '__all__'
 
 
 class CleaningForm(forms.ModelForm):
+    class Meta:
+        model = Cleaning
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class CleaningSEOForm(forms.ModelForm):
     class Meta:
         model = Cleaning
         exclude = 'is_enable',
@@ -90,11 +119,25 @@ class CleaningForm(forms.ModelForm):
 class InstallationWaterForm(forms.ModelForm):
     class Meta:
         model = InstallationWater
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class InstallationWaterSEOForm(forms.ModelForm):
+    class Meta:
+        model = InstallationWater
         exclude = 'is_enable',
         fields = '__all__'
 
 
 class UniversalServiceForm(forms.ModelForm):
+    class Meta:
+        model = UniversalService
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        fields = '__all__'
+
+
+class UniversalServiceSEOForm(forms.ModelForm):
     class Meta:
         model = UniversalService
         exclude = 'is_enable',

@@ -111,9 +111,11 @@
                                         </div>
                                     </div>
                                 {% endfor %}
-								<div class="load_more_wrap">
-									<div class="read_more load_more"><a href="#">Загрузить еще <span>45</span> объектов</a></div>
-								</div>
+                                {% if object_list.has_next %}
+                                    <div class="load_more_wrap">
+                                        <div class="read_more load_more"><a href="#">Загрузить еще <span>45</span> объектов</a></div>
+                                    </div>
+                                {% endif %}
 							</div>
 						</div>
 					</div>

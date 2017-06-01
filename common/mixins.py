@@ -120,6 +120,7 @@ class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
     video_form = None
     advantage_form = None
     partner_form = None
+    seo_form = None
 
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk')
@@ -130,6 +131,7 @@ class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ServicesMixin, self).get_context_data(**kwargs)
         context['video_form'] = self.video_form(instance=self.get_object())
+        context['seo_form'] = self.seo_form(instance=self.get_object())
         try:
             context['advantage_form'] = self.advantage_form(instance=self.get_object())
         except TypeError:

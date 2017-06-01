@@ -128,6 +128,9 @@
                                         <li role="presentation" class="">
                                             <a href="#partners_tab" id="partners-tab" role="tab" data-toggle="tab" aria-expanded="false">Партнеры</a>
                                         </li>
+                                        <li role="presentation" class="">
+                                            <a href="#seo_tab" id="seo-tab" role="tab" data-toggle="tab" aria-expanded="false">SEO</a>
+                                        </li>
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -170,33 +173,6 @@
                                                     </div>
                                                     {% if form.description.errors %}
                                                         <span class="error-label">{{ form.description.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOTitle.label }}</label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.SEOTitle|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
-                                                    </div>
-                                                    {% if form.SEOTitle.errors %}
-                                                        <span class="error-label">{{ form.SEOTitle.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEOKeywords.label }}</label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.SEOKeywords|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
-                                                    </div>
-                                                    {% if form.SEOKeywords.errors %}
-                                                        <span class="error-label">{{ form.SEOKeywords.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.SEODescription.label }}</label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.SEODescription|addcss:'form-control col-md-7 col-xs-12'|addrows:'3'|safe }}
-                                                    </div>
-                                                    {% if form.SEODescription.errors %}
-                                                        <span class="error-label">{{ form.SEODescription.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -245,6 +221,7 @@
                                         {% include 'admin2/services/include/packets.html' with service=cleaning %}
                                         {% include 'admin2/services/include/gallery.html' with service=cleaning %}
                                         {% include 'admin2/services/include/partners.html' with service=cleaning %}
+                                        {% include 'admin2/services/include/seo.html' with service=cleaning %}
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +240,7 @@
     <script src="{% static 'js/packets_status.js' %}"></script>
     <script src="{% static 'js/gallery.js' %}"></script>
     <script src="{% static 'js/partners.js' %}"></script>
+    <script src="{% static 'js/seo.js' %}"></script>
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -282,11 +260,23 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah3').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
         $("#imgInp").change(function(){
             readURL(this);
         });
         $("#imgInp2").change(function(){
             readURL2(this);
+        });
+        $("#imgInp3").change(function(){
+            readURL3(this);
         });
 
     </script>

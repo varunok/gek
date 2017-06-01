@@ -3,11 +3,15 @@
 {% for object in object_list %}
     <div class="views_row">
         <div class="title">{{ object.address|default:'' }}</div>
-        {% if object.image %}
-            <div class="field_image">
-                <img src="{{ object.image|thumbnail_url:'gallery_image_370' }}" width="100%" alt="">
-            </div>
-        {% endif %}
+        <div class="field_image" style="transition: .3s">
+            <a href="{{ object.get_absolute_url }}">
+            {% with images=object.images.all %}
+                {% if  images %}
+                    <img src="{{ images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
+                {% endif %}
+            {% endwith %}
+            </a>
+        </div>
         <div class="views_body">
             <div class="star {{ object|fav_is_active:request }}">
                 <input type="hidden" name="content_type" value="{{ object.get_content_type }}">

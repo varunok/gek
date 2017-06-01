@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import resolve, Resolver404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import TemplateView, DetailView
 
 from landing.helpers import query_landing, get_seo
@@ -31,6 +32,15 @@ def redirect_view(request, slug):
     try:
         object = Landing.objects.get(slug=slug)
         object_list = query_landing(object)
+
+        paginator = Paginator(object_list, 30)
+        page = request.GET.get('page')
+        try:
+            object_list = paginator.page(page)
+        except PageNotAnInteger:
+            object_list = paginator.page(1)
+        except EmptyPage:
+            object_list = paginator.page(paginator.num_pages)
 
         context = {
             'object': object,

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import uuid
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
@@ -134,6 +135,20 @@ class ServicesRieltor(SingletonModel):
         null=True,
         default='Услуги риелторские'
     )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
     videos = GenericRelation(Video, related_query_name='services_rieltor')
     fag = GenericRelation(FAQ, related_query_name='services_rieltor')
     partners = GenericRelation(Partner, related_query_name='services_rieltor')
@@ -212,6 +227,20 @@ class Valuation(SingletonModel):
         blank=True,
         null=True,
         default='Оценка недвижимости'
+    )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
     videos = GenericRelation(Video, related_query_name='valuation')
     fag = GenericRelation(FAQ, related_query_name='valuation')
@@ -312,6 +341,20 @@ class Repair(SingletonModel):
         null=True,
         default='Ремонт помещения'
     )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
     videos = GenericRelation(Video, related_query_name='repair')
     repairs = GenericRelation(TableRepair, related_query_name='repair')
     images = GenericRelation(Photo, related_query_name='repair')
@@ -392,6 +435,20 @@ class Insurance(SingletonModel):
         null=True,
         default='Страхование недвижимости'
     )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
     videos = GenericRelation(Video, related_query_name='insurance')
     images = GenericRelation(Photo, related_query_name='insurance')
     fag = GenericRelation(FAQ, related_query_name='insurance')
@@ -464,6 +521,20 @@ class Cleaning(SingletonModel):
         verbose_name='Описание главная услуги',
         blank=True,
         null=True
+    )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
     videos = GenericRelation(Video, related_query_name='cleaning')
     images = GenericRelation(Photo, related_query_name='cleaning')
@@ -578,6 +649,20 @@ class InstallationWater(SingletonModel):
         blank=True,
         null=True
     )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
+    )
     videos = GenericRelation(Video, related_query_name='installation_water')
     images = GenericRelation(Photo, related_query_name='installation_water')
     fag = GenericRelation(FAQ, related_query_name='installation_water')
@@ -691,6 +776,20 @@ class UniversalService(models.Model):
         verbose_name='Описание главная услуги',
         blank=True,
         null=True
+    )
+    title_seo = models.TextField(
+        verbose_name='Заголовок',
+        blank=True,
+        null=True
+    )
+    image_seo = models.ImageField(
+        verbose_name='Фото',
+        upload_to='seo/%Y/%m/%d/',
+        blank=True
+    )
+    content = RichTextUploadingField(
+        blank=True,
+        verbose_name='Контент'
     )
     videos = GenericRelation(Video, related_query_name='universal')
     images = GenericRelation(Photo, related_query_name='universal')

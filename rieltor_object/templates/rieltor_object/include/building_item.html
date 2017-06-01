@@ -1,5 +1,6 @@
 {% load favorites_tag %}
 {% load base_tag %}
+{% load thumbnail %}
 {% for object in object_list %}
     <div class="views_row vip_row">
         {% if object.is_vip %}
@@ -8,11 +9,11 @@
         <div class="title">{{ object.title|default_if_none:'' }}</div>
         <div class="field_image" style="transition: .3s">
             <a href="{{ object.get_absolute_url }}">
-                {% if  object.image %}
-                    <img src="{{ object.image.url }}" alt="" width="100%">
-                {% else %}
-                    <img src="{{ object.images.all.first.image.url }}" alt="" width="100%">
+            {% with images=object.images.all %}
+                {% if  images %}
+                    <img src="{{ images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
                 {% endif %}
+            {% endwith %}
             </a>
         </div>
         <div class="views_body">
@@ -21,7 +22,11 @@
                 <input type="hidden" name="object_id" value="{{ object.id }}">
             </div>
             <div class="address">{{ object.address|default_if_none:'' }}</div>
-            <div class="text" style="word-break: break-all;">{{ object.description|truncatewords:'15'|safe }}</div>
+            {% if not object.is_short %}
+                <div class="text" style="word-break: break-all;">{{ object.description|truncatechars_html:'200'|safe }}</div>
+            {% else %}
+                <div class="text" style="word-break: break-all;">{{ object.description|safe }}</div>
+            {% endif %}
             <div class="top_wrap">
                 {% if object.rooms %}
                     <div class="info">
@@ -45,6 +50,7 @@
             <div class="bottom_wrap">
                 <div class="statistics">{{ object.views }}</div>
                 <div class="read_more preview submit-add-inspection-modal"><a href="/">Заказать просмотр</a></div>
+                <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
                 {% if not object.is_short %}
                     <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
                 {% endif %}

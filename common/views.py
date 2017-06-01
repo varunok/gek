@@ -50,6 +50,24 @@ def save_video(request):
     return HttpResponse(status=500)
 
 
+def save_seo(request):
+    object_id = request.POST.get('object_id')
+    content_type_id = request.POST.get('content_type')
+    model = ContentType.objects.get_for_id(content_type_id).model_class().objects.get(id=object_id)
+    print (request.FILES)
+    for image in request.FILES.getlist('image_seo'):
+        model.image_seo = image
+    model.title_seo=request.POST.get('title_seo')
+    model.content=request.POST.get('content')
+    model.title_seo=request.POST.get('title_seo')
+    model.SEOTitle=request.POST.get('SEOTitle')
+    model.SEOKeywords=request.POST.get('SEOKeywords')
+    model.SEODescription=request.POST.get('SEODescription')
+    model.save()
+    print(request.POST)
+    return HttpResponse()
+
+
 def save_advantage(request):
     if request.method == 'POST':
         content_type_id = request.POST.get('content_type', None)
