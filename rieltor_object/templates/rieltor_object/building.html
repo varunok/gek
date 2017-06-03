@@ -32,11 +32,11 @@
                     <input type="hidden" name="object_id" value="{{ object.custom_id }}">
                 </div>
 			</div>
-			<h1 class="slider_title page_title">{{ object.get_title }} , {{ object.address }}. <br>({{ object.price }} {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %})</h1>
+			<h1 class="slider_title page_title">{{ object.get_title }} , {{ object.address|default_if_none:'' }}. <br>({{ object.price }} {{ object.get_current }})</h1>
 			<div class="webform_client_form">
 				<div class="form_actions">
 					<input  class="form-submit submit-add-inspection-modal" type="submit" value="Заказать осмотр">
-                    <div class="read_more" style="display: none"><a href="{{ object.custom_id }}">Подробнее</a></div>
+                    <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
 				</div>
 			</div>
 		</div>
@@ -87,7 +87,7 @@
 										</div>
 										<div class="item">
 											<div class="label">Площадь:</div>
-											<div class="field_item">{{ object.footage|default_if_none:'' }} кв.м.</div>
+											<div class="field_item">{{ object.footage|default_if_none:'--' }} кв.м.</div>
 										</div>
 										<div class="item">
 											<div class="label">Комнат:</div>
@@ -177,12 +177,12 @@
         {% if object.video %}
             <div class="block block_video">
                 <div class="block_content">
-                    {{ object.video|convert_to_frame|safe }}
+                    {{ object.video|get_video_code|convert_to_frame|safe }}
                 </div>
             </div>
         {% endif %}
         {% with object.newbuilding as newbuilding %}
-            {% if newbuilding %}
+            {% if newbuilding.is_enable %}
                 <div class="block new_buildings">
                     <div class="block_content">
                         <div class="block_title">Квартира продается в новострое</div>
@@ -190,7 +190,7 @@
                             <div class="views_row">
                                 <div class="title">{{ newbuilding.title|default_if_none:'' }}</div>
                                 <div class="field_image">
-                                    <img src="{% static 'images/new_1.png' %}" alt="">
+                                    <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
                                 </div>
                                 <div class="views_body">
                                     <div class="star {{ newbuilding|fav_is_active:request }}">

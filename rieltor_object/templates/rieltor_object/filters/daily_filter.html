@@ -1,0 +1,45 @@
+{% load rieltor_tag %}
+<div class="filters">
+	{% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
+        <div name="price" class="item">
+            {% if filter_form.form.price__gt.data %}
+                {% if not filter_form.form.price__lt.data %}
+                    От {{ filter_form.form.price__gt.data }}
+                    {% else %}
+                    {{ filter_form.form.price__gt.data }}
+                {% endif %}
+            {% endif %}
+            {% if filter_form.form.price__lt.data %}
+                {% if not filter_form.form.price__gt.data %}
+                    До {{ filter_form.form.price__lt.data }}
+                    {% else %}
+                    -{{ filter_form.form.price__lt.data }}
+                {% endif %}
+            {% endif %} {{ nac_carrency }}
+            <div class="close close-item" data-href="
+                 {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
+                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                    {% elif filter_form.form.price__gt.data %}
+                        {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
+                    {% elif filter_form.form.price__lt.data %}
+                        {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                 {% endif %}
+            "></div>
+        </div>
+    {% endif %}
+	{% for district in filter_form.form.district %}
+        {% if district.data.selected and '-' not in district.choice_label %}
+            <div name="district" class="item">{{ district.choice_label }}<div class="close close-item" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+    {% for rooms in filter_form.form.rooms %}
+        {% if rooms.data.selected and rooms.data.value %}
+            <div name="rooms" class="item">{{ rooms.data.value }}<div class="close close-item" data-href="{% filterpath request.path rooms.data.name rooms.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+    {% for sleeping_places in filter_form.form.sleeping_places %}
+        {% if sleeping_places.data.selected and sleeping_places.data.value  %}
+            <div name="sleeping_places" class="item">{{ sleeping_places.data.value }}<div class="close close-item" data-href="{% filterpath request.path sleeping_places.data.name sleeping_places.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+</div>

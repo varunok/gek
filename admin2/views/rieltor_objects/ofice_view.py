@@ -29,13 +29,10 @@ class OficeEditView(SuccesMixin, MessageMixin, OfficesStatusMixin, UpdateView):
     model = Ofice
     template_name = 'admin2/rieltor_object/ofice/ofice_edit.html'
     form_class = OficeEditForm
-    video_form = VideoServiceSet
 
     def get_context_data(self, **kwargs):
         context = super(OficeEditView, self).get_context_data(**kwargs)
         context['content_type'] = ContentType.objects.get_for_model(self.model).id
-        context['video_form'] = self.video_form(instance=self.get_object())
-        context['video_check'] = self.get_object().videos.all().order_by('id')
         context['verbose_name'] = self.model._meta.verbose_name
         return context
 

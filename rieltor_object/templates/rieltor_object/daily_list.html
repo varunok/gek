@@ -77,7 +77,11 @@
                                 <select name="{{ filter_form.form.rooms.name }}" id="{{ filter_form.form.rooms.id_for_label }}">
                                     {% for rooms in filter_form.form.rooms %}
                                         {% if rooms.data.value %}
-                                            <option value="{{ rooms.data.value }}">{{ rooms.data.value }}</option>
+                                            <option value="{{ rooms.data.value }}"
+                                            {% if rooms.data.selected %}
+                                                selected
+                                            {% endif %}
+                                            >{{ rooms.data.value }}</option>
                                         {% endif %}
                                     {% endfor %}
 								</select>
@@ -87,7 +91,11 @@
 								<select name="{{ filter_form.form.sleeping_places.name }}" id="{{ filter_form.form.sleeping_places.id_for_label }}">
                                     {% for sleeping_places in filter_form.form.sleeping_places %}
                                         {% if sleeping_places.data.value %}
-                                            <option value="{{ sleeping_places.data.value }}">{{ sleeping_places.data.value }}</option>
+                                            <option value="{{ sleeping_places.data.value }}"
+                                            {% if sleeping_places.data.selected %}
+                                                selected
+                                            {% endif %}
+                                            >{{ sleeping_places.data.value }}</option>
                                         {% endif %}
                                     {% endfor %}
 								</select>
@@ -96,7 +104,7 @@
 								<div class="links">
 									<div class="search_clear"><a href="{% url 'objects:dailys' %}">очистить</a></div>
 								</div>
-								<input type="submit" value="Поиск" class="searh-click">
+								<input type="submit" value="Поиск" class="search-click">
 							</div>
 						</form>
 						<div class="top_wrap">
@@ -130,52 +138,9 @@
 							</div>
 						</div>
 						<div class="bottom_wrap">
-							<div class="filters">
-								{% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
-                                    <div class="item">
-                                        {% if filter_form.form.price__gt.data %}
-                                            {% if not filter_form.form.price__lt.data %}
-                                                От {{ filter_form.form.price__gt.data }}
-                                                {% else %}
-                                                {{ filter_form.form.price__gt.data }}
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if filter_form.form.price__lt.data %}
-                                            {% if not filter_form.form.price__gt.data %}
-                                                До {{ filter_form.form.price__lt.data }}
-                                                {% else %}
-                                                -{{ filter_form.form.price__lt.data }}
-                                            {% endif %}
-                                        {% endif %} грн
-                                        <div class="close" data-href="
-                                             {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
-                                                {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
-                                                {% elif filter_form.form.price__gt.data %}
-                                                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
-                                                {% elif filter_form.form.price__lt.data %}
-                                                    {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
-                                             {% endif %}
-                                        "></div>
-                                    </div>
-                                {% endif %}
-								{% for district in filter_form.form.district %}
-                                    {% if district.data.selected and '-' not in district.choice_label %}
-                                        <div class="item">{{ district.choice_label }}<div class="close" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
-                                    {% endif %}
-                                {% endfor %}
-                                {% for rooms in filter_form.form.rooms %}
-                                    {% if rooms.data.selected  %}
-                                        <div class="item">{{ rooms.data.value }}<div class="close" data-href="{% filterpath request.path rooms.data.name rooms.data.value %}"></div></div>
-                                    {% endif %}
-                                {% endfor %}
-                                {% for sleeping_places in filter_form.form.sleeping_places %}
-                                    {% if sleeping_places.data.selected  %}
-                                        <div class="item">{{ sleeping_places.data.value }}<div class="close" data-href="{% filterpath request.path sleeping_places.data.name sleeping_places.data.value %}"></div></div>
-                                    {% endif %}
-                                {% endfor %}
-							</div>
+                            {% include 'rieltor_object/filters/daily_filter.html' %}
 							<div class="form_actions">
-								<input type="submit" value="Подобрать квартиру">
+								<input type="submit" value="Подобрать квартиру" class="open-object-parameter">
 							</div>
 						</div>
 					</div>
@@ -193,6 +158,7 @@
 		{% include 'common/include/vip.html' %}
 		{% downbanner %}
         {% include 'common/application/modal_booking.html' %}
+        {% include 'common/application/modal_object_parameter.html' with daily=True %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}

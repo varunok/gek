@@ -9,11 +9,7 @@
         <div class="title">{{ object.title|default_if_none:'' }}</div>
         <div class="field_image" style="transition: .3s">
             <a href="{{ object.get_absolute_url }}">
-            {% with images=object.images.all %}
-                {% if  images %}
-                    <img src="{{ images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
-                {% endif %}
-            {% endwith %}
+                <img src="{{ object.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
             </a>
         </div>
         <div class="views_body">

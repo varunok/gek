@@ -18,7 +18,7 @@ from rieltor_object.models.common_objects import *
 
 class OficeManager(models.Manager):
     def vips(self, *args, **kwargs):
-        kwargs['status'] = TypeStatus.VIP
+        kwargs['is_vip'] = True
         return self.filter(*args, **kwargs)
 
 
@@ -119,13 +119,6 @@ class Ofice(models.Model):
         blank=True,
         null=True
     )
-    status = models.CharField(
-        verbose_name='Статус',
-        max_length=20,
-        choices=TypeStatus.CHOICES,
-        blank=True,
-        null=True
-    )
     district = models.ForeignKey(
         District,
         verbose_name='Район',
@@ -158,10 +151,6 @@ class Ofice(models.Model):
         verbose_name='Панорама',
         blank=True
     )
-    geo = models.TextField(
-        verbose_name='На карте',
-        blank=True
-    )
     views = models.IntegerField(
         verbose_name='Просмотры',
         default=0
@@ -175,7 +164,18 @@ class Ofice(models.Model):
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
-    videos = GenericRelation(Video, related_query_name='ofice')
+    is_vip = models.BooleanField(
+        verbose_name='VIP',
+        default=False
+    )
+    is_short = models.BooleanField(
+        verbose_name='Краткое',
+        default=False
+    )
+    video = models.TextField(
+        verbose_name='Код видео',
+        blank=True
+    )
     images = GenericRelation(Photo, related_query_name='ofice')
 
     objects = OficeManager()
@@ -229,6 +229,10 @@ class Ofice(models.Model):
         except AttributeError:
             pass
         return text
+
+    def get_title(self):
+        appointment = self.normalize_SEO(self.get_appointment_display())
+        return '{0} {1}'.format(self.get_type_deal_display() or '', appointment or '')
 
     def footage_price(self):
         if self.footage and self.price:

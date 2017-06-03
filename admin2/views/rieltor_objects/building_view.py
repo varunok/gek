@@ -36,7 +36,6 @@ class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateVie
     template_name = 'admin2/rieltor_object/building/building_edit.html'
     success_url = reverse_lazy('admin2:buildings')
     form_class = BuildingEditForm
-    video_form = VideoServiceSet
 
     def get_context_data(self, **kwargs):
         context = super(BuildingEditView, self).get_context_data(**kwargs)

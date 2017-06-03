@@ -7,9 +7,23 @@
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Подборка обьектов.{{ seo }}">
-                <input type="hidden" name="text" value="" class="hid-name">
+                <input type="hidden" name="text" value=""
+                       {% if building %}
+                            class="hid-name-building"
+                       {% elif office %}
+                            class="hid-name-office"
+                       {% elif daily %}
+                            class="hid-name-daily"
+                       {% endif %}
+                >
 				<div class="bottom_wrap">
-					{% include 'rieltor_object/filters/building_filters.html' %}
+                    {% if building %}
+                        {% include 'rieltor_object/filters/building_filters.html' %}
+                    {% elif office %}
+                        {% include 'rieltor_object/filters/office_filter.html' %}
+                    {% elif daily %}
+                        {% include 'rieltor_object/filters/daily_filter.html' %}
+                    {% endif %}
 					<div class="form_item phone">
 						<input name="phone" type="text" placeholder="Номер телефона">
 					</div>

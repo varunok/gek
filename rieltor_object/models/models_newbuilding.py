@@ -16,6 +16,12 @@ from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 
 
+class NewBuildingManager(models.Manager):
+    def is_enable(self, *args, **kwargs):
+        kwargs['is_enable'] = True
+        return self.filter(*args, **kwargs)
+
+
 class NewBuilding(models.Model):
     custom_id = models.PositiveIntegerField(
         verbose_name='ID',
@@ -173,6 +179,7 @@ class NewBuilding(models.Model):
         blank=True,
         null=True
     )
+    objects = NewBuildingManager()
     infrastructures = models.ManyToManyField(Infrastructure,
                                              related_name='newbuilding',
                                              blank=True
