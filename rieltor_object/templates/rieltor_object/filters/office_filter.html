@@ -10,31 +10,6 @@
             <div name="appointment" class="item">{{ appointment.choice_label }}<div class="close close-item" data-href="{% filterpath request.path appointment.data.name appointment.data.value %}"></div></div>
         {% endif %}
     {% endfor %}
-    {% for period in filter_form.form.period %}
-        {% if period.data.selected and '-' not in period.choice_label %}
-            <div name="period" class="item">{{ period.choice_label }}<div class="close close-item" data-href="{% filterpath request.path period.data.name period.data.value %}"></div></div>
-        {% endif %}
-    {% endfor %}
-    {% for period in filter_form.form.proposal %}
-        {% if proposal.data.selected and '-' not in proposal.choice_label %}
-            <div name="proposal" class="item">{{ proposal.choice_label }}<div class="close close-item" data-href="{% filterpath request.path proposal.data.name proposal.data.value %}"></div></div>
-        {% endif %}
-    {% endfor %}
-    {% for district in filter_form.form.district %}
-        {% if district.data.selected and '-' not in district.choice_label %}
-            <div name="district" class="item">{{ district.choice_label }}<div class="close close-item" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
-        {% endif %}
-    {% endfor %}
-    {% for layout in filter_form.form.layout %}
-        {% if layout.data.selected and '-' not in layout.choice_label %}
-            <div name="layout" class="item">{{ layout.choice_label }}<div class="close close-item" data-href="{% filterpath request.path layout.data.name layout.data.value %}"></div></div>
-        {% endif %}
-    {% endfor %}
-    {% for rooms in filter_form.form.rooms %}
-        {% if rooms.data.selected and '------' not in rooms.choice_label %}
-            <div name="rooms" class="item">{{ rooms.choice_label }}<div class="close close-item" data-href="{% filterpath request.path rooms.data.name rooms.data.value %}"></div></div>
-        {% endif %}
-    {% endfor %}
     {% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
         <div name="price" class="item">
             {% if filter_form.form.price__gt.data %}
@@ -50,7 +25,7 @@
                     {% else %}
                     -{{ filter_form.form.price__lt.data }}
                 {% endif %}
-            {% endif %}
+            {% endif %} грн
             <div class="close close-item" data-href="
                  {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
                     {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
@@ -63,7 +38,7 @@
         </div>
     {% endif %}
     {% if filter_form.form.footage__gt.data or filter_form.form.footage__lt.data %}
-        <div name="footage" class="item">
+        <div name="footage" class="item close-item">
             {% if filter_form.form.footage__gt.data %}
                 {% if not filter_form.form.footage__lt.data %}
                     От {{ filter_form.form.footage__gt.data }}
@@ -77,7 +52,7 @@
                     {% else %}
                     -{{ filter_form.form.footage__lt.data }}
                 {% endif %}
-            {% endif %} м.кв
+            {% endif %}
             <div class="close close-item" data-href="
                  {% if filter_form.form.footage__gt.data and filter_form.form.footage__lt.data %}
                     {% filterpath request.path filter_form.form.footage__gt.name filter_form.form.footage__gt.data filter_form.form.footage__lt.name filter_form.form.footage__lt.data %}
@@ -89,31 +64,19 @@
             "></div>
         </div>
     {% endif %}
-    {% if filter_form.form.floor__gte.data or filter_form.form.floor__lte.data %}
-        <div name="floor" class="item">
-            {% if filter_form.form.floor__gte.data %}
-                {% if not filter_form.form.floor__lte.data %}
-                    От {{ filter_form.form.floor__gte.data }}
-                    {% else %}
-                    {{ filter_form.form.floor__gte.data }}
-                {% endif %}
-            {% endif %}
-            {% if filter_form.form.floor__lte.data %}
-                {% if not filter_form.form.floor__gte.data %}
-                    До {{ filter_form.form.floor__lte.data }}
-                    {% else %}
-                    -{{ filter_form.form.floor__lte.data }}
-                {% endif %}
-            {% endif %}
-            <div class="close close-item" data-href="
-                 {% if filter_form.form.floor__gte.data and filter_form.form.floor__lte.data %}
-                    {% filterpath request.path filter_form.form.floor__gte.name filter_form.form.floor__gte.data filter_form.form.floor__lte.name filter_form.form.floor__lte.data %}
-                    {% elif filter_form.form.floor__gte.data %}
-                        {% filterpath request.path filter_form.form.floor__gte.name filter_form.form.floor__gte.data %}
-                    {% elif filter_form.form.footage__lt.data %}
-                        {% filterpath request.path filter_form.form.floor__lte.name filter_form.form.floor__lte.data %}
-                 {% endif %}
-            "></div>
-        </div>
-    {% endif %}
+    {% for location in filter_form.form.location %}
+        {% if location.data.selected %}
+            <div name="location" class="item">{{ location.choice_label }}<div class="close close-item" data-href="{% filterpath request.path location.data.name location.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+    {% for floor in filter_form.form.floor %}
+        {% if floor.data.selected %}
+            <div name="floor" class="item">{{ floor.choice_label }}<div class="close close-item" data-href="{% filterpath request.path floor.data.name floor.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+    {% for entrance in filter_form.form.entrance %}
+        {% if entrance.data.selected %}
+            <div name="entrance" class="item">{{ entrance.choice_label }}<div class="close close-item" data-href="{% filterpath request.path entrance.data.name entrance.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
 </div>

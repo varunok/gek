@@ -32,8 +32,6 @@ class BuildingListSiteView(DinamicPageMixin, SEOMixin, BuildingStatusMixin, List
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            # context['object_list'] = FilterBuilding(queryFilter, queryset=self.object_list).qs
-            # self.object_list = FilterBuilding(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterBuilding(queryFilter, queryset=self.object_list)
         else:
             context['filter_form'] = FilterBuilding(self.request.GET, queryset=self.object_list)
@@ -66,9 +64,10 @@ class BuildingDetailSiteView(SEOMixin, BuildingStatusMixin, ViewsCountMixin, Det
         return self.template_name
 
 
-class OficeListSiteView(SEOMixin, OfficeStatusMixin, ListView):
+class OficeListSiteView(DinamicPageMixin, SEOMixin, OfficeStatusMixin, ListView):
     model = Ofice
     template_name = 'rieltor_object/ofice_list.html'
+    dinamic_template_name = 'rieltor_object/include/building_item.html'
     paginate_by = PAGINATE_OBJ
     seo_model = OfisPageModel
     
@@ -76,7 +75,6 @@ class OficeListSiteView(SEOMixin, OfficeStatusMixin, ListView):
         context = super(OficeListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            context['object_list'] = FilterOfise(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterOfise(queryFilter, queryset=self.object_list)
         else:
             context['filter_form'] = FilterOfise(self.request.GET, queryset=self.object_list)
@@ -85,6 +83,13 @@ class OficeListSiteView(SEOMixin, OfficeStatusMixin, ListView):
         context['clear_filter'] = reverse_lazy('objects:ofices')
         context['ofispagemodel'] = self.seo_model.get_solo()
         return context
+
+    def get_queryset(self):
+        self.object_list = self.model.objects.order_by('-is_vip', 'point')
+        queryFilter = HelperFilter(self.request).qd
+        if queryFilter:
+            self.object_list = FilterOfise(queryFilter, queryset=self.object_list).qs
+        return self.object_list
 
 
 class OficeDetailSiteView(SEOMixin, OfficeStatusMixin, ViewsCountMixin, DetailView):
@@ -102,7 +107,6 @@ class NewBuildingListSiteView(SEOMixin, NewBuildingStatusMixin, ListView):
         context = super(NewBuildingListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            context['object_list'] = FilterNewBuilding(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterNewBuilding(queryFilter, queryset=self.object_list)
         else:
             context['filter_form'] = FilterNewBuilding(self.request.GET, queryset=self.object_list)
@@ -110,8 +114,14 @@ class NewBuildingListSiteView(SEOMixin, NewBuildingStatusMixin, ListView):
         context['BASE_URL'] = '/objects/newbuildings'
         context['clear_filter'] = reverse_lazy('objects:newbuildings')
         context['newbuildingpagemodel'] = self.seo_model.get_solo()
-        # context['filter_form'] = FilterNewBuilding(self.request.GET, queryset=self.model.objects.all())
         return context
+
+    def get_queryset(self):
+        self.object_list = NewBuilding.objects.is_enable()
+        queryFilter = HelperFilter(self.request).qd
+        if queryFilter:
+            self.object_list = FilterNewBuilding(queryFilter, queryset=self.object_list).qs
+        return self.object_list
 
 
 class NewBuildingDetailSiteView(SEOMixin, NewBuildingStatusMixin, ViewsCountMixin, DetailView):
@@ -130,7 +140,6 @@ class DailyListSiteView(DinamicPageMixin, SEOMixin, DailyStatusMixin, ListView):
         context = super(DailyListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            # context['object_list'] = FilterDaily(queryFilter, queryset=self.object_list).qs
             context['filter_form'] = FilterDaily(queryFilter, queryset=self.object_list)
         else:
             context['filter_form'] = FilterDaily(self.request.GET, queryset=self.object_list)
@@ -144,7 +153,7 @@ class DailyListSiteView(DinamicPageMixin, SEOMixin, DailyStatusMixin, ListView):
         self.object_list = self.model.objects.order_by('point')
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
-            self.object_list = FilterBuilding(queryFilter, queryset=self.object_list).qs
+            self.object_list = FilterDaily(queryFilter, queryset=self.object_list).qs
         return self.object_list
 
 

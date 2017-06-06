@@ -115,9 +115,6 @@
                                         </li>
                                         {% if object.when_create %}
                                         <li role="presentation" class="">
-                                            <a href="#tab_content2" id="video-tab" role="tab" data-toggle="tab" aria-expanded="false">Видео</a>
-                                        </li>
-                                        <li role="presentation" class="">
                                             <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
                                         </li>
                                         {% endif %}
@@ -147,13 +144,23 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.status.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.is_vip.label }}:
                                                     </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.status|addcss:'form-control' }}
+                                                    <div class="col-md-7 col-sm-7 col-xs-12" style="padding-top: 8px;">
+                                                        {{ form.is_vip|addcss:'form-control flat' }}
                                                     </div>
-                                                    {% if form.status.errors %}
-                                                        <span class="error-label">{{ form.status.errors }}</span>
+                                                    {% if form.is_vip.errors %}
+                                                        <span class="error-label">{{ form.is_vip.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.is_short.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12" style="padding-top: 8px;">
+                                                        {{ form.is_short|addcss:'form-control flat' }}
+                                                    </div>
+                                                    {% if form.is_short.errors %}
+                                                        <span class="error-label">{{ form.is_short.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -334,12 +341,12 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.geo.label }}</label>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.video.label }}</label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.geo|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
+                                                        {{ form.video|addcss:'form-control col-md-7 col-xs-12'|addrows:'5'|safe }}
                                                     </div>
-                                                    {% if form.geo.errors %}
-                                                        <span class="error-label">{{ form.geo.errors }}</span>
+                                                    {% if form.video.errors %}
+                                                        <span class="error-label">{{ form.video.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -368,7 +375,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        {% include 'admin2/services/include/videos.html' with service=object %}
                                         {% include 'admin2/services/include/packets.html' with service=object %}
                                         {% include 'admin2/services/include/gallery.html' with service=object %}
                                     </div>
@@ -385,7 +391,6 @@
 
 {% block js %}
     <script src="{% static 'js/service_status.js' %}"></script>
-    <script src="{% static 'js/video_status.js' %}"></script>
     <script src="{% static 'js/packets_status.js' %}"></script>
     <script src="{% static 'js/gallery.js' %}"></script>
     <script>

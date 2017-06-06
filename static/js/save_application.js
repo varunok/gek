@@ -2,7 +2,7 @@
  * Created by varunok on 13.05.17.
  */
 
-var parameter_list = {
+var parameter_list_building = {
     type_deal: $('div[name="type_deal"]').eq(0).text() || '--',
     appointment: $('div[name="appointment"]').eq(0).text() || '--',
     district: $('div[name="district"]').eq(0).text() || '--',
@@ -12,13 +12,45 @@ var parameter_list = {
     footage: $('div[name="footage"]').eq(0).text() || '--',
     floor: $('div[name="floor"]').eq(0).text() || '--'
 };
-var string_parameter_list = new String(
-    'Тип: ' + parameter_list.type_deal+'.'+' Назначение: ' + parameter_list.appointment+'.'+' Район: ' + parameter_list.district+'.'+' Планировка: ' + parameter_list.layout+'.'+
-    ' Комнат: ' + parameter_list.rooms+'.'+' Стоимость: ' + parameter_list.price+'.'+' Площадь: ' + parameter_list.footage+'.'+' Этаж: ' + parameter_list.floor+'.'
+var string_parameter_list_building = new String(
+    'Тип: ' + parameter_list_building.type_deal+'.'+' Назначение: ' + parameter_list_building.appointment+'.'+' Район: ' + parameter_list_building.district+'.'+' Планировка: ' + parameter_list_building.layout+'.'+
+    ' Комнат: ' + parameter_list_building.rooms+'.'+' Стоимость: ' + parameter_list_building.price+'.'+' Площадь: ' + parameter_list_building.footage+'.'+' Этаж: ' + parameter_list_building.floor+'.'
 
 );
 
-$('.hid-name, input[name="text"]').val(string_parameter_list);
+$('.hid-name-building, input[name="text"]').val(string_parameter_list_building);
+
+var parameter_list_office = {
+    type_deal: $('div[name="type_deal"]').eq(0).text() || '--',
+    appointment: $('div[name="appointment"]').eq(0).text() || '--',
+    // district: $('div[name="district"]').eq(0).text() || '--',
+    location: $('div[name="location"]').eq(0).text() || '--',
+    entrance: $('div[name="entrance"]').eq(0).text() || '--',
+    price: $('div[name="price"]').eq(0).text() || '--',
+    footage: $('div[name="footage"]').eq(0).text() || '--',
+    floor: $('div[name="floor"]').eq(0).text() || '--'
+};
+var string_parameter_list_office = new String(
+    'Тип: ' + parameter_list_office.type_deal+'.'+' Назначение: ' + parameter_list_office.appointment+'.'+' Расположение: ' + parameter_list_office.location+'.'+
+    ' Вход: ' + parameter_list_office.entrance+'.'+' Стоимость: ' + parameter_list_office.price+'.'+' Площадь: ' + parameter_list_office.footage+'.'+' Этаж: ' + parameter_list_office.floor+'.'
+
+);
+
+$('.hid-name-office, input[name="text"]').val(string_parameter_list_office);
+
+
+var parameter_list_daily = {
+    district: $('div[name="district"]').eq(0).text() || '--',
+    sleeping_places: $('div[name="sleeping_places"]').eq(0).text() || '--',
+    price: $('div[name="price"]').eq(0).text() || '--',
+    rooms: $('div[name="rooms"]').eq(0).text() || '--'
+};
+var string_parameter_list_daily = new String(
+    'Район: ' + parameter_list_daily.district+'.'+' Стоимость: ' + parameter_list_daily.price+'.'+' Спальных мест: ' + parameter_list_daily.sleeping_places+'.'+' Кол-во комнат: ' + parameter_list_daily.rooms+'.'
+
+);
+
+$('.hid-name-daily, input[name="text"]').val(string_parameter_list_daily);
 
 $(document).ready(function () {
     $('.add_advert').livequery('click', function () {

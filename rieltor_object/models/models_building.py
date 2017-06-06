@@ -272,7 +272,7 @@ class Building(models.Model):
 
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())
-        return '{0} {1}'.format(self.get_type_deal_display(), appointment)
+        return '{0} {1}'.format(self.get_type_deal_display() or '', appointment or '')
 
     def get_phuket_title(self):
         proposal = self.normalize_SEO(self.get_proposal_display())
