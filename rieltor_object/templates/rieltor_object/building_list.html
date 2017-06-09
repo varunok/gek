@@ -17,9 +17,9 @@
 <main class="middle">
 		<div class="slider_main slider_notfront" {% if buildingpagemodel.image %}style="background: url({{ buildingpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="slider_title">{{ seo.title|default:'Аренда коммерческой недвижимости' }}</div>
-			<form class="webform_client_form">
+			<form action="#" class="webform_client_form">
 				<div class="form_item search">
-					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="Искать в тексте объявления">
+					<input type="text" placeholder="Искать в тексте объявления">
 				</div>
 				<div class="form_actions">
 					<input class="form-submit" type="submit" value="Найти">
@@ -69,8 +69,18 @@
 					</div>
 					<div class="block block_shops block_search_results">
 						<div class="block_content">
-							<div class="view_content list-more">
+							<div class="view_content list-building">
                                 {% include 'rieltor_object/include/building_item.html' %}
+                                <div class="load_more_wrap">
+                                    {% if count_next %}
+                                        <div class="load_more read_more">
+                                            <a href="#">
+                                                Загрузить еще
+                                                <span>{{ count_next }}</span> объектов
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -93,47 +103,28 @@
                             {% endfor %}
 						</div>
 						<div class="form_item form_select form_wrapper">
-                            {{ filter_form.form.appointment.label_tag }}
-                            {{ filter_form.form.appointment }}
+                            {{ filter_form.form.proposal.label_tag }}
+                            {{ filter_form.form.proposal }}
+						</div>
+						<div class="form_item form_select form_wrapper">
+                            {{ filter_form.form.period.label_tag }}
+                            {{ filter_form.form.period }}
 						</div>
 						<div class="form_item form_select form_wrapper">
                             {{ filter_form.form.district.label_tag }}
                             {{ filter_form.form.district }}
 						</div>
                         <div class="form_item group form_wrapper">
-							{{ filter_form.form.layout.label_tag }}
-                            {{ filter_form.form.layout }}
-						</div>
-                        <div class="form_item group form_wrapper">
 							{{ filter_form.form.rooms.label_tag }}
                             {{ filter_form.form.rooms }}
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Стоимость, <span id="currency_nac">{{ nac_carrency }}</span><span id="currency_dol" style="display: none">$</span>:</label>
+							<label>Стоимость,<span id="per_long" style="display: none">долгосрочный</span><span id="per_short" style="display: none">месяц</span> <span id="currency_nac">{{ nac_carrency }}</span><span id="currency_dol" style="display: none">$</span>:</label>
 							<div class="form_number">
                                 {{ filter_form.form.price__gt }}
 							</div>
 							<div class="form_number">
 								{{ filter_form.form.price__lt}}
-							</div>
-						</div>
-
-						<div class="form_item group form_wrapper">
-							<label>Площадь, м. кв.:</label>
-							<div class="form_number">
-								{{ filter_form.form.footage__gt }}
-							</div>
-							<div class="form_number">
-								{{ filter_form.form.footage__lt }}
-							</div>
-						</div>
-						<div class="form_item group form_wrapper">
-							<label>Этаж:</label>
-							<div class="form_number">
-								{{ filter_form.form.floor__gte }}
-							</div>
-							<div class="form_number">
-								{{ filter_form.form.floor__lte }}
 							</div>
 						</div>
 						<div class="form_actions">
@@ -152,7 +143,7 @@
 		</div>
 		{% include 'seo/seo.html' %}
 		{% include 'common/application/block_presentation.html' with source=seo %}
-		{% include 'common/application/modal_object_parameter.html' with building=True %}
+		{% include 'common/application/modal_object_parameter.html' %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}
@@ -172,6 +163,23 @@
                     $('#currency_dol').fadeIn();
                 }
             });
+            $(document).on('change', '#id_period', function () {
+                var period = $(this).val();
+                var type_deal = $( 'input[name="type_deal"]:checked' ).val();
+                if(type_deal==='rent'){
+                    if(period==='month'){
+                        $('#per_long').fadeOut();
+                        $('#per_short').fadeIn();
+                    }else if(period==='long'){
+                        $('#per_short').fadeOut();
+                        $('#per_long').fadeIn();
+                    }
+                    else{
+                        $('#per_short').fadeOut();
+                        $('#per_long').fadeOut();
+                    }
+                }
+            })
 
         })
     </script>

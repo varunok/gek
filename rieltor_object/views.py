@@ -59,10 +59,10 @@ class BuildingListSiteView(DinamicPageMixin, BuildingStatusMixin, ListView):
             self.object_list = self.object_list.filter(description__icontains=self.request.GET.get('q'))
         return self.object_list
 
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'rieltor_object/special/building_list.html'
-        return self.template_name
+    # def get_template_names(self):
+    #     if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
+    #         return 'rieltor_object/special/building_list.html'
+    #     return self.template_name
 
 
 class BuildingDetailSiteView(SEOMixin, BuildingStatusMixin, ViewsCountMixin, DetailView):

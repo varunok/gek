@@ -143,7 +143,8 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12 currency-type" for="name">{{ form.price.label }},
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12 currency-type" for="name">
+                                                    {% if object.type_deal == 'sale' %}Цена {% else %}{{ form.price.label }}{% endif %},
                                                         {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %}
                                                         :
                                                     </label>
@@ -152,6 +153,18 @@
                                                     </div>
                                                     {% if form.price.errors %}
                                                         <span class="error-label">{{ form.price.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group" {% if object.type_deal == 'sale' %}style="display: none" {% endif %}>
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12 currency-type-short" for="name">{{ form.price_short.label }},
+                                                        {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %}
+                                                        :
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.price_short|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.price_short.errors %}
+                                                        <span class="error-label">{{ form.price_short.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -165,23 +178,33 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.appointment.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.sessons.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.appointment|addcss:'form-control' }}
+                                                        {{ form.sessons|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.appointment.errors %}
-                                                        <span class="error-label">{{ form.appointment.errors }}</span>
+                                                    {% if form.sessons.errors %}
+                                                        <span class="error-label">{{ form.sessons.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.footage.label }}:
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.period.label }}:
                                                     </label>
                                                     <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.footage|addcss:'form-control' }}
+                                                        {{ form.period|addcss:'form-control' }}
                                                     </div>
-                                                    {% if form.footage.errors %}
-                                                        <span class="error-label">{{ form.footage.errors }}</span>
+                                                    {% if form.period.errors %}
+                                                        <span class="error-label">{{ form.period.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.proposal.label }}:
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.proposal|addcss:'form-control' }}
+                                                    </div>
+                                                    {% if form.proposal.errors %}
+                                                        <span class="error-label">{{ form.proposal.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -192,26 +215,6 @@
                                                     </div>
                                                     {% if form.rooms.errors %}
                                                         <span class="error-label">{{ form.rooms.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.layout.label }}:
-                                                    </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.layout|addcss:'form-control' }}
-                                                    </div>
-                                                    {% if form.layout.errors %}
-                                                        <span class="error-label">{{ form.layout.errors }}</span>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="item form-group">
-                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.floor.label }}:
-                                                    </label>
-                                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                                        {{ form.floor|addcss:'form-control' }}
-                                                    </div>
-                                                    {% if form.floor.errors %}
-                                                        <span class="error-label">{{ form.floor.errors }}</span>
                                                     {% endif %}
                                                 </div>
                                                 <div class="item form-group">
@@ -334,9 +337,12 @@
         $(document).ready(function() {
             $('.type-deal').change(function () {
                 if($('.type-deal option:selected').val()==='sale'){
-                    $('.currency-type').text('Цена, $');
+                    $('.currency-type').text('Цена , $');
+                    $('.currency-type-short').parent('.item').fadeOut();
                 }else{
-                    $('.currency-type').text('Цена, ' + carrency);
+                    $('.currency-type-short').parent('.item').fadeIn();
+                    $('.currency-type').text('Цена Долгосрочная, ' + carrency);
+                    $('.currency-type-short').text('Цена месяц, ' + carrency);
                 }
             })
         });

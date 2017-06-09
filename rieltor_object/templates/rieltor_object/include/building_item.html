@@ -38,8 +38,14 @@
                 {% endif %}
                 {% if object.price %}
                     <div class="price info">
-                        <div class="label">{{ object.get_type_deal_display }}:</div>
+                        <div class="label">{{ object.get_type_deal_display }} {{ object.get_dolgo|default_if_none:'' }}:</div>
                         {{ object.price }} {{ object.get_current }}
+                    </div>
+                {% endif %}
+                {% if object.price_short %}
+                    <div class="price info">
+                        <div class="label">{{ object.get_type_deal_display }} {{ object.get_month }}:</div>
+                        {{ object.price_short }} {{ object.get_current }}
                     </div>
                 {% endif %}
             </div>

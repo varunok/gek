@@ -50,7 +50,7 @@
                                     <div class="star"></div>
                                     <div class="address">{{ office.address|default:'' }}</div>
                                     <div class="text">{{ office.description|default:''|truncatechars:'200'|safe }}</div>
-                                    <div class="price">${{ office.price|default:'' }}</div>
+                                    <div class="price">{{ office.get_current }}{{ office.price|default:'' }}</div>
                                     <div class="statistics">{{ office.views }}</div>
                                     <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
                                     <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="address">{{ building.address|default:'' }}</div>
                                     <div class="text" style="word-break: break-all">{{ building.description|default:''|truncatechars:'200'|safe }}</div>
-                                    <div class="price">${{ building.price|default:'' }}</div>
+                                    <div class="price">{{ building.get_current|default_if_none:'' }}{{ building.price|default_if_none:'' }}</div>
                                     <div class="statistics">{{ building.views }}</div>
                                     <div class="area"><div class="count">{{ building.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
                                     <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>

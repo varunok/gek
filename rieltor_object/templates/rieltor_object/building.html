@@ -29,14 +29,14 @@
 				<div class="icon stat">{{ object.views }}</div>
 				<div class="icon favorite {{ object|fav_is_active:request }}">
                     <input type="hidden" name="content_type" value="{{ object.get_content_type }}">
-                    <input type="hidden" name="object_id" value="{{ object.custom_id }}">
+                    <input type="hidden" name="object_id" value="{{ object.id }}">
                 </div>
 			</div>
-			<h1 class="slider_title page_title">{{ object.get_title }} , {{ object.address|default_if_none:'' }}. <br>({{ object.price }} {{ object.get_current }})</h1>
+			<h1 class="slider_title page_title">{{ object.get_phuket_title }} , {{ object.address|default_if_none:'' }}. <br>({{ object.price }} {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %})</h1>
 			<div class="webform_client_form">
 				<div class="form_actions">
 					<input  class="form-submit submit-add-inspection-modal" type="submit" value="Заказать осмотр">
-                    <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
+                    <div class="read_more" style="display: none"><a href="{% url 'objects:daily_detail' object.id %}">Подробнее</a></div>
 				</div>
 			</div>
 		</div>
@@ -72,8 +72,9 @@
 							<div class="left_wrap information">
 								<div class="title">Информация: {{ seo.SEOKeywords }}</div>
 								<div class="price_wrapper">
-									<div class="first_price">{{ object.price|default_if_none:'--' }} {{ object.get_current }}</div><span></span>
-                                    <div class="second_price">{{ object.footage_price|default_if_none:'--' }} {{ object.get_current }}/м<sup>2</sup></div>
+									<div class="first_price">{{ object.price|default_if_none:'--' }} {{ object.get_current }}</div>
+{#                                    <span></span>#}
+{#                                    <div class="second_price">{{ object.footage_price|default_if_none:'--' }} {{ object.get_current }}/м<sup>2</sup></div>#}
 								</div>
 								<div class="char_wrapper">
 									<div class="group">
@@ -86,20 +87,16 @@
 											<div class="field_item">{{ object.district|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
-											<div class="label">Площадь:</div>
-											<div class="field_item">{{ object.footage|default_if_none:'--' }} кв.м.</div>
+											<div class="label">Период:</div>
+											<div class="field_item">{{ object.get_period_display|default_if_none:'' }}</div>
 										</div>
 										<div class="item">
 											<div class="label">Комнат:</div>
 											<div class="field_item">{{ object.rooms|default_if_none:'' }}</div>
 										</div>
-										<div class="item">
-											<div class="label">Этаж:</div>
-											<div class="field_item">{{ object.floor|default_if_none:'' }}</div>
-										</div>
-										<div class="item">
-											<div class="label">Планировка:</div>
-											<div class="field_item">{{ object.get_layout_display|default_if_none:'' }}</div>
+                                        <div class="item">
+											<div class="label">Сезон:</div>
+											<div class="field_item">{{ object.get_sessons_display|default_if_none:'' }}</div>
 										</div>
 									</div>
 {#									<div class="group">#}
@@ -138,7 +135,7 @@
 								</div>
 								<div class="contacts_person phone">
 									<div class="label">Телефон:</div>
-									<div class="field_item"><a href="tel:+{{ object.phone|default_if_none:'' }}">{{ object.phone|default_if_none:'' }}</a></div>
+									<div class="field_item"><a href="tel:+380694546241">{{ object.phone|default_if_none:'' }}</a></div>
 								</div>
 								<div class="social_share">
 								<div class="label">Поделиться с друзьями:</div>
@@ -177,12 +174,13 @@
         {% if object.video %}
             <div class="block block_video">
                 <div class="block_content">
-                    {{ object.video|get_video_code|convert_to_frame|safe }}
+{#                    <div class="block_title">{{ object.title }}</div>#}
+                    {{ object.video|convert_to_frame|safe }}
                 </div>
             </div>
         {% endif %}
         {% with object.newbuilding as newbuilding %}
-            {% if newbuilding.is_enable %}
+            {% if newbuilding %}
                 <div class="block new_buildings">
                     <div class="block_content">
                         <div class="block_title">Квартира продается в новострое</div>
@@ -190,7 +188,7 @@
                             <div class="views_row">
                                 <div class="title">{{ newbuilding.title|default_if_none:'' }}</div>
                                 <div class="field_image">
-                                    <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
+                                    <img src="{% static 'images/new_1.png' %}" alt="">
                                 </div>
                                 <div class="views_body">
                                     <div class="star {{ newbuilding|fav_is_active:request }}">
@@ -235,37 +233,28 @@
 {% endblock content %}
 {% block js %}
     <script>
-        $(document).ready(function(){
-                    try {
+    $(document).ready(function(){
+                    ymaps.ready(init);
 
-                      ymaps.ready(init);
+                function init() {
+                    var myMap = new ymaps.Map('map', {
+                        center: [55.753994, 37.622093],
+                        zoom: 9
+                    });
 
-                    } catch (err) {
+                    ymaps.geocode('{% city %}, {{ object.address }}', {
+                        results: 1
+                    }).then(function (res) {
+                        var firstGeoObject = res.geoObjects.get(0),
+                        coords = firstGeoObject.geometry.getCoordinates(),
+                        bounds = firstGeoObject.properties.get('boundedBy');
 
-                      // обработка ошибки
-
-                    }
-
-
-                    function init() {
-                        var myMap = new ymaps.Map('map', {
-                            center: [55.753994, 37.622093],
-                            zoom: 9
+                        myMap.geoObjects.add(firstGeoObject);
+                        myMap.setBounds(bounds, {
+                            checkZoomRange: true
                         });
-
-                        ymaps.geocode('{% city %}, {{ object.address }}', {
-                            results: 1
-                        }).then(function (res) {
-                            var firstGeoObject = res.geoObjects.get(0),
-                            coords = firstGeoObject.geometry.getCoordinates(),
-                            bounds = firstGeoObject.properties.get('boundedBy');
-
-                            myMap.geoObjects.add(firstGeoObject);
-                            myMap.setBounds(bounds, {
-                                checkZoomRange: true
-                            });
-                        });
-                    }
-        });
-    </script>
+                    });
+                }
+    });
+</script>
 {% endblock js %}

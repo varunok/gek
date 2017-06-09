@@ -18,13 +18,13 @@ from rieltor_object.models.models_newbuilding import NewBuilding
 
 
 class Period(object):
-    SHORT = 'short'
+    # SHORT = 'short'
     MONTH = 'month'
     LONG = 'long'
     CHOICES = (
-        (SHORT, 'короткий'),
+        # (SHORT, 'короткий'),
         (MONTH, 'месяц'),
-        (LONG, 'долгий срок (6мес)'),
+        (LONG, 'долгий срок'),
     )
 
 
@@ -39,6 +39,20 @@ class Proposal(object):
     )
 
 
+class Sessons(object):
+    # Низкий сезон
+    # Высокий сезон
+    # Пик сезона
+    LOW = 'low'
+    UP = 'up'
+    PIC = 'pic'
+    CHOICES = (
+        (LOW, 'Низкий сезон'),
+        (UP, 'Высокий сезон'),
+        (PIC, 'Пик сезона'),
+    )
+
+
 class BuildingManager(models.Manager):
     def vips(self, *args, **kwargs):
         kwargs['is_vip'] = True
@@ -50,7 +64,8 @@ class BuildingManager(models.Manager):
 
 
 class Building(models.Model):
-    custom_id = models.PositiveIntegerField(
+    custom_id = models.CharField(
+        max_length=100,
         verbose_name='ID',
         unique=True,
         blank=True,
@@ -84,7 +99,12 @@ class Building(models.Model):
         null=True
     )
     price = models.IntegerField(
-        verbose_name='Цена',
+        verbose_name='Цена Долгосрочная',
+        blank=True,
+        null=True
+    )
+    price_short = models.IntegerField(
+        verbose_name='Цена месяц',
         blank=True,
         null=True
     )
@@ -210,6 +230,13 @@ class Building(models.Model):
         blank=True,
         null=True
     )
+    sessons = models.CharField(
+        verbose_name='Сезон',
+        choices=Sessons.CHOICES,
+        max_length=50,
+        blank=True,
+        null=True
+    )
     proposal = models.CharField(
         verbose_name='Предложение',
         choices=Proposal.CHOICES,
@@ -275,12 +302,12 @@ class Building(models.Model):
         return text
 
     def get_title(self):
-        appointment = self.normalize_SEO(self.get_appointment_display())
-        return '{0} {1}'.format(self.get_type_deal_display() or '', appointment or '')
+        # appointment = self.normalize_SEO(self.get_appointment_display())
+        return '{0} {1}'.format(self.get_type_deal_display() or '', self.get_proposal_display() or '')
 
     def get_phuket_title(self):
-        proposal = self.normalize_SEO(self.get_proposal_display())
-        return '{0} {1}'.format(self.get_type_deal_display(), proposal)
+        # proposal = self.normalize_SEO(self.get_proposal_display())
+        return '{0} {1}'.format(self.get_type_deal_display() or '', self.get_proposal_display() or '')
 
     def footage_price(self):
         if self.footage and self.price:
@@ -291,3 +318,23 @@ class Building(models.Model):
             return '$'
         elif self.type_deal == TypeDeal.RENT:
             return Settings.get_solo().get_currency_display()
+
+    def get_sufix(self):
+        if self.type_deal == TypeDeal.SALE:
+            return ''
+        elif self.type_deal == TypeDeal.RENT:
+            dict_period = dict(Period.CHOICES)
+            # if self.period == Period.MONTH:
+            return dict_period.get(self.period)
+
+    def get_dolgo(self):
+        if self.type_deal == TypeDeal.SALE:
+            return ''
+        elif self.type_deal == TypeDeal.RENT:
+            return 'Долгосрочно'
+
+    def get_month(self):
+        if self.type_deal == TypeDeal.SALE:
+            return ''
+        elif self.type_deal == TypeDeal.RENT:
+            return 'Месяц'
