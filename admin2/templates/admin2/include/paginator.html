@@ -5,7 +5,17 @@
                 {% ifequal p page_obj.number  %}
                     <a class="btn btn-danger">{{ p }}</a>
                 {% else %}
-                    <a class="btn btn-default" href="?page={{ p }}">{{ p }}</a>
+                    {% if request.GET.search == 'Поиск' %}
+                        {% if request.GET.page %}
+                            {% with pag='page='|add:request.GET.page  %}
+                                <a class="btn btn-default" href="?page={{ p }}&{{ request.GET.urlencode|cut:pag }}">{{ p }}</a>
+                            {% endwith %}
+                        {% else %}
+                            <a class="btn btn-default" href="?page={{ p }}&{{ request.GET.urlencode }}">{{ p }}</a>
+                        {% endif %}
+                    {% else %}
+                        <a class="btn btn-default" href="?page={{ p }}">{{ p }}</a>
+                    {% endif %}
                 {% endifequal %}
             {% endfor %}
         </div>

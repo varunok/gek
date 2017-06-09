@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
@@ -10,7 +11,7 @@ from admin2.models import ContactPageModel
 from common.mixins import FormSetMixin
 
 
-class ContactUpdate(UpdateView):
+class ContactUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'admin2/contact/contact.html'
     context_object_name = 'contact'
     slug_field = 'slug'
@@ -26,7 +27,7 @@ class ContactUpdate(UpdateView):
         return context
 
 
-class ContactSchedule(FormSetMixin, UpdateView):
+class ContactSchedule(LoginRequiredMixin, FormSetMixin, UpdateView):
     model = ContactPageModel
     template_name = 'admin2/contact/contact_shedule.html'
     fields = '__all__'

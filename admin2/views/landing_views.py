@@ -13,7 +13,7 @@ from common.mixins import MessageMixin, SuccesMixin
 from landing.models import Landing
 
 
-class LandingMixin(MessageMixin, ContextMixin):
+class LandingMixin(LoginRequiredMixin, MessageMixin, ContextMixin):
     model = None
     def get_context_data(self, **kwargs):
         context = super(LandingMixin, self).get_context_data(**kwargs)
@@ -21,7 +21,7 @@ class LandingMixin(MessageMixin, ContextMixin):
         return context
 
 
-class LandingList(ListView):
+class LandingList(LoginRequiredMixin, ListView):
     model = Landing
     paginate_by = 10
     template_name = 'admin2/landing/landing_list.html'
@@ -54,7 +54,7 @@ class LandingEditForm(LandingMixin, UpdateView):
         return reverse_lazy('admin2:landing_edit_form', args=[self.object.id])
 
 
-class LandingCreate(SuccesMixin, CreateView):
+class LandingCreate(LoginRequiredMixin, SuccesMixin, CreateView):
     model = Landing
     template_name = 'admin2/landing/landing_edit.html'
     form_class = LandingForm

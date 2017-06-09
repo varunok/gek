@@ -1,0 +1,67 @@
+{% load rieltor_tag %}
+<div class="filters">
+    {% for district in filter_form.form.district %}
+        {% if district.data.selected and '-' not in district.choice_label %}
+            <div class="item" name="district">{{ district.choice_label }}<div class="close close-item" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+    {% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
+        <div class="item" name="price">
+            {% if filter_form.form.price__gt.data %}
+                {% if not filter_form.form.price__lt.data %}
+                    От {{ filter_form.form.price__gt.data }}
+                    {% else %}
+                    {{ filter_form.form.price__gt.data }}
+                {% endif %}
+            {% endif %}
+            {% if filter_form.form.price__lt.data %}
+                {% if not filter_form.form.price__gt.data %}
+                    До {{ filter_form.form.price__lt.data }}
+                    {% else %}
+                    -{{ filter_form.form.price__lt.data }}
+                {% endif %}
+            {% endif %}
+            <div class="close close-item" data-href="
+                 {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
+                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                    {% elif filter_form.form.price__gt.data %}
+                        {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
+                    {% elif filter_form.form.price__lt.data %}
+                        {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
+                 {% endif %}
+            "></div>
+        </div>
+    {% endif %}
+    {% if filter_form.form.area__gt.data or filter_form.form.area__lt.data %}
+        <div class="item" name="area">
+            {% if filter_form.form.area__gt.data %}
+                {% if not filter_form.form.area__lt.data %}
+                    От {{ filter_form.form.area__gt.data }}
+                    {% else %}
+                    {{ filter_form.form.area__gt.data }}
+                {% endif %}
+            {% endif %}
+            {% if filter_form.form.area__lt.data %}
+                {% if not filter_form.form.area__gt.data %}
+                    До {{ filter_form.form.area__lt.data }}
+                    {% else %}
+                    -{{ filter_form.form.area__lt.data }}
+                {% endif %}
+            {% endif %}
+            <div class="close close-item" data-href="
+                 {% if filter_form.form.area__gt.data and filter_form.form.area__lt.data %}
+                    {% filterpath request.path filter_form.form.area__gt.name filter_form.form.area__gt.data filter_form.form.area__lt.name filter_form.form.area__lt.data %}
+                    {% elif filter_form.form.area__gt.data %}
+                        {% filterpath request.path filter_form.form.area__gt.name filter_form.form.area__gt.data %}
+                    {% elif filter_form.form.area__lt.data %}
+                        {% filterpath request.path filter_form.form.area__lt.name filter_form.form.area__lt.data %}
+                 {% endif %}
+            "></div>
+        </div>
+    {% endif %}
+    {% for type_area in filter_form.form.type_area %}
+        {% if type_area.data.selected and '-' not in type_area.choice_label %}
+            <div class="item" name="type_area">{{ type_area.choice_label }}<div class="close close-item" data-href="{% filterpath request.path type_area.data.name type_area.data.value %}"></div></div>
+        {% endif %}
+    {% endfor %}
+</div>

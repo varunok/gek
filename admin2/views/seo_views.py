@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -10,19 +11,19 @@ from common.mixins import SuccesMixin, MessageMixin
 from seo.models import SEO
 
 
-class SEOList(ListView):
+class SEOList(LoginRequiredMixin, ListView):
     model = SEO
     paginate_by = 10
     template_name = 'admin2/seo/seo_list.html'
 
 
-class SeoCreate(SuccesMixin, MessageMixin, CreateView):
+class SeoCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):
     model = SEO
     template_name = 'admin2/seo/seo_detail.html'
     fields = '__all__'
 
 
-class SEOEdit(SuccesMixin, MessageMixin, UpdateView):
+class SEOEdit(LoginRequiredMixin, SuccesMixin, MessageMixin, UpdateView):
     model = SEO
     template_name = 'admin2/seo/seo_detail.html'
     fields = '__all__'
@@ -34,7 +35,7 @@ class SEOEdit(SuccesMixin, MessageMixin, UpdateView):
         return context
 
 
-class SeoDelete(DeleteView):
+class SeoDelete(LoginRequiredMixin, DeleteView):
     model = SEO
     pk_url_kwarg = 'pk'
     template_name = 'admin2/common/delete_confirm.html'

@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, OficeEditForm
+from admin2.helpers import BuildingFilterClass
 from admin2.mixins import OfficesStatusMixin
 from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
 from rieltor_object.models import Ofice
@@ -14,9 +15,15 @@ from rieltor_object.models import Ofice
 
 class OficeListView(OfficesStatusMixin, ListView):
     model = Ofice
-    template_name = 'admin2/rieltor_object/building/building_list.html'
+    template_name = 'admin2/rieltor_object/ofice/ofice_list.html'
     paginate_by = 10
     ordering = ['point']
+
+    def get_queryset(self):
+        qs = self.model.objects.order_by('point')
+        if self.request.GET.get('search') == 'Поиск':
+            qs = BuildingFilterClass(self.request, self.model).qs
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(OficeListView, self).get_context_data(**kwargs)

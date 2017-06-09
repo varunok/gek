@@ -14,6 +14,10 @@
                             class="hid-name-office"
                        {% elif daily %}
                             class="hid-name-daily"
+                       {% elif newbuilding %}
+                            class="hid-name-newbuilding"
+                       {% elif earth %}
+                            class="hid-name-earth"
                        {% endif %}
                 >
 				<div class="bottom_wrap">
@@ -23,6 +27,10 @@
                         {% include 'rieltor_object/filters/office_filter.html' %}
                     {% elif daily %}
                         {% include 'rieltor_object/filters/daily_filter.html' %}
+                    {% elif newbuilding %}
+                        {% include 'rieltor_object/filters/newbuilding_filter.html' %}
+                    {% elif earth %}
+                        {% include 'rieltor_object/filters/earth_filter.html' %}
                     {% endif %}
 					<div class="form_item phone">
 						<input name="phone" type="text" placeholder="Номер телефона">

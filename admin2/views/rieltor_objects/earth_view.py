@@ -7,9 +7,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import EarthEditForm
+from admin2.helpers import BuildingFilterClass
 from admin2.mixins import EarthStatusMixin
 from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
-from rieltor_object.models import Earth
+from rieltor_object.models import Earth, EarthDistrict
 
 
 class EarthListView(EarthStatusMixin, ListView):
@@ -17,10 +18,17 @@ class EarthListView(EarthStatusMixin, ListView):
     template_name = 'admin2/rieltor_object/earth/earth_list.html'
     paginate_by = 10
 
+    def get_queryset(self):
+        qs = self.model.objects.all()
+        if self.request.GET.get('search') == 'Поиск':
+            qs = BuildingFilterClass(self.request, self.model).qs
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super(EarthListView, self).get_context_data(**kwargs)
         context['page_title'] = 'Земля'
         context['create_url'] = reverse_lazy('admin2:earth_create')
+        context['districts'] = EarthDistrict.objects.all()
         return context
 
 

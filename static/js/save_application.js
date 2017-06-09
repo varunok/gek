@@ -52,6 +52,35 @@ var string_parameter_list_daily = new String(
 
 $('.hid-name-daily, input[name="text"]').val(string_parameter_list_daily);
 
+
+
+var parameter_list_newbuilding = {
+    district: $('div[name="district"]').eq(0).text() || '--',
+    price: $('div[name="price"]').eq(0).text() || '--',
+    total_area: $('div[name="total_area"]').eq(0).text() || '--'
+};
+var string_parameter_list_newbuilding = new String(
+    'Район: ' + parameter_list_newbuilding.district+'.'+' Стоимость: ' + parameter_list_newbuilding.price+'.'+' Площадь квартиры: ' + parameter_list_newbuilding.total_area+'.'
+
+);
+
+$('.hid-name-newbuilding, input[name="text"]').val(string_parameter_list_newbuilding);
+
+
+
+var parameter_list_earth = {
+    district: $('div[name="district"]').eq(0).text() || '--',
+    price: $('div[name="price"]').eq(0).text() || '--',
+    area: $('div[name="area"]').eq(0).text() || '--',
+    type_area: $('div[name="type_area"]').eq(0).text() || '--'
+};
+var string_parameter_list_earth = new String(
+    'Район: ' + parameter_list_earth.district+'.'+' Стоимость: ' + parameter_list_earth.price+'.'+' Площадь: ' + parameter_list_earth.area+'.'+' Тип участка: ' + parameter_list_earth.type_area+'.'
+
+);
+
+$('.hid-name-earth, input[name="text"]').val(string_parameter_list_earth);
+
 $(document).ready(function () {
     $('.add_advert').livequery('click', function () {
         $('body').addClass('popup');

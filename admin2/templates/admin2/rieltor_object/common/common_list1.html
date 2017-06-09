@@ -19,6 +19,7 @@
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
                             <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> Поиск</a>
                         </div>
                     </div>
                 </div>
@@ -30,6 +31,74 @@
                         <div class="x_title">
                             <h2>Все {{ page_title }}</h2>
                             <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content search-form" {% if not request.GET.search %} style="display: none" {% endif %}>
+                            <form class="form-horizontal form-label-left" method="get" enctype="multipart/form-data" name="serviceForm">
+                                <div class="item form-group">
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">ID:</label>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                        <input name="custom_id__gt" type="text" placeholder="От" value="{{ request.GET.custom_id__gt }}" style="width: 100%; margin-bottom: 10px;">
+                                        <input name="custom_id__lt" type="text" placeholder="До" value="{{ request.GET.custom_id__lt }}" style="width: 100%">
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Балл:</label>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                        <input name="point__gt" type="text" placeholder="От" value="{{ request.GET.point__gt }}" style="width: 100%; margin-bottom: 10px;">
+                                        <input name="point__lt" type="text" placeholder="До" value="{{ request.GET.point__lt }}" style="width: 100%">
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Цена:</label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <input name="price__gt" type="text" placeholder="От" value="{{ request.GET.price__gt }}" style="width: 100%; margin-bottom: 10px;">
+                                        <input name="price__lt" type="text" placeholder="До" value="{{ request.GET.price__lt }}" style="width: 100%">
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Статус:</label>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                        <select name="status" id="">
+                                            <option value="">-----</option>
+                                            <option {% if request.GET.status == 'vip' %} selected {% endif %} value="vip">VIP</option>
+                                            <option {% if request.GET.status == 'short' %} selected {% endif %} value="short">Краткое</option>
+                                            <option {% if request.GET.status == 'default' %} selected {% endif %} value="default">Обичное</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Адресс:</label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <input name="address__icontains" type="text" placeholder="" value="{{ request.GET.address__icontains }}" style="width: 100%">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Тип:</label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <select name="type_deal" id="">
+                                            <option value="">-----</option>
+                                            <option {% if request.GET.type_deal == 'rent' %} selected {% endif %} value="rent">Аренда</option>
+                                            <option {% if request.GET.statype_dealtus == 'sale' %} selected {% endif %} value="sale">Продажа</option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-2">Назначение: </label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <select name="appointment" id="">
+                                            <option value="">-----</option>
+                                            <option {% if request.GET.appointment == 'apartment' %} selected {% endif %} value="apartment">Квартира</option>
+                                            <option {% if request.GET.appointment == 'house' %} selected {% endif %} value="house">Дом</option>
+                                            <option {% if request.GET.appointment == 'room' %} selected {% endif %} value="room">Комната</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="float: right;">
+                                    <input type="submit" name="search" placeholder="Поиск" value="Поиск" class="btn btn-primary">
+                                    <a class="btn btn-success" href="{% url 'admin2:buildings' %}">Отмена</a>
+                                </div>
+                            </form>
+{#                            <table class="table table-striped projects">#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td style="width: 5%">ID: <input type="text" placeholder="От"> <br>#}
+{#                                        <input type="text" placeholder="До">#}
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                </tbody>#}
+{#                            </table>#}
                         </div>
                         <div class="x_content">
                             <table class="table table-striped projects">
@@ -87,4 +156,5 @@
 {% endblock content %}
 
 {% block js %}
+    <script src="{% static 'js/search_admin.js' %}"></script>
 {% endblock js %}

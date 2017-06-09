@@ -61,109 +61,18 @@
 							</div>
 						</div>
 						<div class="bottom_wrap">
-							<div class="filters">
-                                {% for district in filter_form.form.district %}
-                                    {% if district.data.selected and '-' not in district.choice_label %}
-                                        <div class="item">{{ district.choice_label }}<div class="close" data-href="{% filterpath request.path district.data.name district.data.value %}"></div></div>
-                                    {% endif %}
-                                {% endfor %}
-								{% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}
-                                    <div class="item">
-                                        {% if filter_form.form.price__gt.data %}
-                                            {% if not filter_form.form.price__lt.data %}
-                                                От {{ filter_form.form.price__gt.data }}
-                                                {% else %}
-                                                {{ filter_form.form.price__gt.data }}
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if filter_form.form.price__lt.data %}
-                                            {% if not filter_form.form.price__gt.data %}
-                                                До {{ filter_form.form.price__lt.data }}
-                                                {% else %}
-                                                -{{ filter_form.form.price__lt.data }}
-                                            {% endif %}
-                                        {% endif %} грн
-                                        <div class="close" data-href="
-                                             {% if filter_form.form.price__gt.data and filter_form.form.price__lt.data %}
-                                                {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data filter_form.form.price__lt.name filter_form.form.price__lt.data %}
-                                                {% elif filter_form.form.price__gt.data %}
-                                                    {% filterpath request.path filter_form.form.price__gt.name filter_form.form.price__gt.data %}
-                                                {% elif filter_form.form.price__lt.data %}
-                                                    {% filterpath request.path filter_form.form.price__lt.name filter_form.form.price__lt.data %}
-                                             {% endif %}
-                                        "></div>
-                                    </div>
-                                {% endif %}
-                                {% if filter_form.form.price_object__gt.data or filter_form.form.price_object__lt.data %}
-                                    <div class="item">
-                                        {% if filter_form.form.price_object__gt.data %}
-                                            {% if not filter_form.form.price_object__lt.data %}
-                                                От {{ filter_form.form.price_object__gt.data }}
-                                                {% else %}
-                                                {{ filter_form.form.price_object__gt.data }}
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if filter_form.form.price_object__lt.data %}
-                                            {% if not filter_form.form.price_object__gt.data %}
-                                                До {{ filter_form.form.price_object__lt.data }}
-                                                {% else %}
-                                                -{{ filter_form.form.price_object__lt.data }}
-                                            {% endif %}
-                                        {% endif %} грн
-                                        <div class="close" data-href="
-                                             {% if filter_form.form.price_object__gt.data and filter_form.form.price_object__lt.data %}
-                                                {% filterpath request.path filter_form.form.price_object__gt.name filter_form.form.price_object__gt.data filter_form.form.price_object__lt.name filter_form.form.price_object__lt.data %}
-                                                {% elif filter_form.form.price_object__gt.data %}
-                                                    {% filterpath request.path filter_form.form.price_object__gt.name filter_form.form.price_object__gt.data %}
-                                                {% elif filter_form.form.price_object__lt.data %}
-                                                    {% filterpath request.path filter_form.form.price_object__lt.name filter_form.form.price_object__lt.data %}
-                                             {% endif %}
-                                        "></div>
-                                    </div>
-                                {% endif %}
-                                {% if filter_form.form.total_area__gt.data or filter_form.form.total_area__lt.data %}
-                                    <div class="item">
-                                        {% if filter_form.form.total_area__gt.data %}
-                                            {% if not filter_form.form.total_area__lt.data %}
-                                                От {{ filter_form.form.total_area__gt.data }}
-                                                {% else %}
-                                                {{ filter_form.form.total_area__gt.data }}
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if filter_form.form.total_area__lt.data %}
-                                            {% if not filter_form.form.total_area__gt.data %}
-                                                До {{ filter_form.form.total_area__lt.data }}
-                                                {% else %}
-                                                -{{ filter_form.form.total_area__lt.data }}
-                                            {% endif %}
-                                        {% endif %} м.кв
-                                        <div class="close" data-href="
-                                             {% if filter_form.form.total_area__gt.data and filter_form.form.total_area__lt.data %}
-                                                {% filterpath request.path filter_form.form.total_area__gt.name filter_form.form.total_area__gt.data filter_form.form.total_area__lt.name filter_form.form.total_area__lt.data %}
-                                                {% elif filter_form.form.total_area__gt.data %}
-                                                    {% filterpath request.path filter_form.form.total_area__gt.name filter_form.form.total_area__gt.data %}
-                                                {% elif filter_form.form.total_area__lt.data %}
-                                                    {% filterpath request.path filter_form.form.total_area__lt.name filter_form.form.total_area__lt.data %}
-                                             {% endif %}
-                                        "></div>
-                                    </div>
-                                {% endif %}
-
-							</div>
+                            {% include 'rieltor_object/filters/newbuilding_filter.html' %}
 							<div class="form_actions">
-								<input type="submit" value="Подобрать объект">
+								<input type="submit" value="Подобрать объект" class="open-object-parameter">
 							</div>
 						</div>
 					</div>
 					<div class="block block_shops block_search_results block_newbuilding_row">
 						<div class="block_content">
-							<div class="view_content">
+							<div class="view_content list-more">
                                 {% for object in object_list %}
                                     {% include 'rieltor_object/include/newbuilding_item.html' %}
                                 {% endfor %}
-								<div class="load_more_wrap">
-									<div class="read_more load_more"><a href="#">Загрузить еще 45 объектов</a></div>									
-								</div>
 							</div>
 						</div>
 					</div>
@@ -218,7 +127,7 @@
 							</div>
 						</div>
 						<div class="form_actions">
-							<input type="submit" value="Поиск" class="searh-click">
+							<input type="submit" value="Поиск" class="search-click">
 							<div class="links">
 								<div class="search_clear"><a href="{% url 'objects:newbuildings' %}">очистить</a></div>
 							</div>
@@ -232,6 +141,7 @@
 		</div>
 		{% include 'seo/seo.html' %}
         {% include 'common/application/block_presentation.html' with source=seo %}
+        {% include 'common/application/modal_object_parameter.html' with newbuilding=True %}
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}

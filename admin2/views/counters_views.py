@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
@@ -8,7 +9,7 @@ from admin2.models import Counters
 from common.mixins import MessageMixin
 
 
-class CounterView(MessageMixin, UpdateView):
+class CounterView(LoginRequiredMixin, MessageMixin, UpdateView):
     model = Counters
     template_name = 'admin2/counters/counters_edit.html'
     fields = '__all__'
