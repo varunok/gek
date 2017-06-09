@@ -15,6 +15,12 @@ class VideosList(SEOMixin, ListView):
     model = Videos
     template_name = 'videos/video_list.html'
 
+    def get_queryset(self):
+        self.object_list = self.model.objects.all()
+        if self.request.GET.get('q'):
+            self.object_list = self.object_list.filter(description__icontains=self.request.GET.get('q'))
+        return self.object_list
+
 
 class VideosDetail(SEOMixin, ViewsCountMixin, DetailView):
     model = Videos

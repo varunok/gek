@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
@@ -24,6 +27,12 @@ class ArticlesSiteView(SEOMixin, ListView):
         context['sections'] = Sections.objects.all().order_by('name')
         return context
 
+    def get_queryset(self):
+        self.object_list = Articles.objects.all()
+        if self.request.GET.get('q'):
+            self.object_list = self.object_list.filter(content__icontains=self.request.GET.get('q'))
+        return self.object_list
+
 
 class SectionsDetailView(SEOMixin, DetailView):
     model = Sections
@@ -35,12 +44,9 @@ class SectionsDetailView(SEOMixin, DetailView):
         context = super(SectionsDetailView, self).get_context_data(**kwargs)
         context['sections'] = Sections.objects.all().order_by('name')
         context['article_count'] = Articles.objects.count()
-        # try:
         context['articles'] = Articles.objects.filter(sections=self.object)
-        #     count_next = Articles.objects.filter(sections=self.object).count() - PAGINATE_ARTICLE
-        #     context['count_next'] = 0 if count_next <= 0 else count_next
-        # except:
-        #     pass
+        if self.request.GET.get('q'):
+            context['articles'] = context['articles'].filter(content__icontains=self.request.GET.get('q'))
         return context
 
 

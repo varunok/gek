@@ -15,9 +15,9 @@
     <main class="middle">
 		<div class="slider_main slider_notfront">
 			<div class="slider_title">{{ seo.title|default:'Видео передачи' }}</div>
-			<form action="#" class="webform_client_form">
+			<form class="webform_client_form">
 				<div class="form_item search">
-					<input type="text" placeholder="Поиск видео передач">
+                    <input name="q" value="{{ request.GET.q }}" type="text" placeholder="Поиск видео передач">
 				</div>
 				<div class="form_actions">
 					<input class="form-submit" type="submit" value="Найти">

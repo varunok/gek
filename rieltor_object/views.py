@@ -55,6 +55,8 @@ class BuildingListSiteView(DinamicPageMixin, BuildingStatusMixin, ListView):
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
             self.object_list = FilterBuilding(queryFilter, queryset=self.object_list).qs
+        if self.request.GET.get('q'):
+            self.object_list = self.object_list.filter(description__icontains=self.request.GET.get('q'))
         return self.object_list
 
     def get_template_names(self):
@@ -107,6 +109,8 @@ class OficeListSiteView(DinamicPageMixin, SEOMixin, OfficeStatusMixin, ListView)
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
             self.object_list = FilterOfise(queryFilter, queryset=self.object_list).qs
+        if self.request.GET.get('q'):
+            self.object_list = self.object_list.filter(description__icontains=self.request.GET.get('q'))
         return self.object_list
 
 
@@ -139,6 +143,8 @@ class NewBuildingListSiteView(SEOMixin, NewBuildingStatusMixin, ListView):
         queryFilter = HelperFilter(self.request).qd
         if queryFilter:
             self.object_list = FilterNewBuilding(queryFilter, queryset=self.object_list).qs
+        if self.request.GET.get('q'):
+            self.object_list = self.object_list.filter(description__icontains=self.request.GET.get('q'))
         return self.object_list
 
 
