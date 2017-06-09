@@ -17,9 +17,9 @@
 <main class="middle">
 		<div class="slider_main slider_notfront" {% if buildingpagemodel.image %}style="background: url({{ buildingpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="slider_title">{{ seo.title|default:'Аренда коммерческой недвижимости' }}</div>
-			<form action="#" class="webform_client_form">
+			<form class="webform_client_form">
 				<div class="form_item search">
-					<input type="text" placeholder="Искать в тексте объявления">
+					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="Искать в тексте объявления">
 				</div>
 				<div class="form_actions">
 					<input class="form-submit" type="submit" value="Найти">

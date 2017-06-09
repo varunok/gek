@@ -20,14 +20,16 @@
 			<div class="slider_subtitle">{{ object_list|length }} объекта по вашим параметрам</div>
 			<div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
 			<form action="#" class="webform_client_form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Лендинг.{{ object }}">
 				<div class="form_item name">
-					<input type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="Введите имя">
 				</div>
 				<div class="form_item phone">
-					<input type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="Введите телефон">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Отправить заявку">
+					<input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
 				</div>
 			</form>
 		</div>
@@ -44,24 +46,18 @@
 									<input type="text" id="metro">
 								</div>
 								<div class="form_item group form_wrapper">
-									<label>Стоимость</label>
+									<label>Стоимость, {% if object.type_deal == 'sale' %}${% else %}{{ nac_carrency }}{% endif %}</label>
 									<div class="form_number">
 										<input type="number" placeholder="От">
 									</div>
 									<div class="form_number">
 										<input type="number" placeholder="До">
 									</div>
-									<div class="form_select currency">
-										<select>
-											<option value="11">грн.</option>
-											<option value="12">руб.</option>
-										</select>
-									</div>
 								</div>
 								<div class="form_actions">
 									<input type="submit" value="Поиск">
 									<div class="links">
-										<div class="search_clear"><a href="#">очистить</a></div>
+										<div class="search_clear"><a href="{% url 'landings:landing' object.slug %}">очистить</a></div>
 									</div>
 								</div>
 							</form>

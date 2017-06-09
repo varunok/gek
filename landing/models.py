@@ -14,11 +14,11 @@ from rieltor_object.models import District
 class TypeDeal(object):
     RENT = 'rent'
     SALE = 'sale'
-    RENT_SALE = 'rent_sale'
+    # RENT_SALE = 'rent_sale'
     CHOICES = (
         (RENT, 'Аренда'),
         (SALE, 'Продажа'),
-        (RENT_SALE, 'Аренда/Продажа')
+        # (RENT_SALE, 'Аренда/Продажа')
     )
 
 class TypeAppointment(object):
