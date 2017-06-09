@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
 from django.http import HttpResponseRedirect
@@ -10,13 +11,13 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from admin2.forms import RedirectForm
 
 
-class RedrectList(ListView):
+class RedrectList(LoginRequiredMixin, ListView):
     model = Redirect
     paginate_by = 10
     template_name = 'admin2/redirect/redirect_list.html'
 
 
-class RedirectCreate(CreateView):
+class RedirectCreate(LoginRequiredMixin, CreateView):
     model = Redirect
     template_name = 'admin2/redirect/redirect_edit.html'
     fields = '__all__'
@@ -25,7 +26,7 @@ class RedirectCreate(CreateView):
         return reverse_lazy('admin2:redirect_edit', args=[self.object.id])
 
 
-class RedirectEdit(UpdateView):
+class RedirectEdit(LoginRequiredMixin, UpdateView):
     model = Redirect
     template_name = 'admin2/redirect/redirect_edit.html'
     pk_url_kwarg = 'pk'
@@ -35,7 +36,7 @@ class RedirectEdit(UpdateView):
         return reverse_lazy('admin2:redirect_edit', args=[self.object.id])
 
 
-class RedirectDelete(DeleteView):
+class RedirectDelete(LoginRequiredMixin, DeleteView):
     model = Redirect
     pk_url_kwarg = 'pk'
 

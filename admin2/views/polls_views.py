@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -11,7 +12,7 @@ from admin2.forms import QuestionForm, ChoicesForm, PollsForm
 from polls.models import Polls, Question, Choice, Result
 
 
-class PollsMixin(ContextMixin):
+class PollsMixin(LoginRequiredMixin, ContextMixin):
     kwargs = None
     model = None
 
@@ -26,13 +27,13 @@ class PollsMixin(ContextMixin):
         return context
 
 
-class PollsList(ListView):
+class PollsList(LoginRequiredMixin, ListView):
     model = Polls
     paginate_by = 10
     template_name = 'admin2/polls/polls_list.html'
 
 
-class PollEdit(UpdateView):
+class PollEdit(LoginRequiredMixin, UpdateView):
     model = Polls
     template_name = 'admin2/polls/polls_edit.html'
     pk_url_kwarg = 'pk'
@@ -42,7 +43,7 @@ class PollEdit(UpdateView):
         return reverse_lazy('admin2:poll_edit', args=[self.kwargs.get('pk')])
 
 
-class PollCreate(CreateView):
+class PollCreate(LoginRequiredMixin, CreateView):
     model = Polls
     template_name = 'admin2/polls/polls_edit.html'
     form_class = PollsForm
@@ -150,7 +151,7 @@ class ResultCreate(PollsMixin, CreateView):
         return super(ResultCreate, self).form_valid(form)
 
 
-class DeletePoll(DeleteView):
+class DeletePoll(LoginRequiredMixin, DeleteView):
     model = Polls
 
     def get(self, request, *args, **kwargs):
@@ -162,7 +163,7 @@ class DeletePoll(DeleteView):
         return HttpResponseRedirect(reverse_lazy('admin2:polls'))
 
 
-class QuestionDelete(DeleteView):
+class QuestionDelete(LoginRequiredMixin, DeleteView):
     model = Question
     pk_url_kwarg = 'pk_m'
 
@@ -175,7 +176,7 @@ class QuestionDelete(DeleteView):
         return HttpResponseRedirect(reverse_lazy('admin2:poll_edit_question', args=[self.kwargs.get('pk')]))
 
 
-class ChoicesDelete(DeleteView):
+class ChoicesDelete(LoginRequiredMixin, DeleteView):
     model = Choice
     pk_url_kwarg = 'pk_c'
 
@@ -189,7 +190,7 @@ class ChoicesDelete(DeleteView):
                                                  args=[self.kwargs.get('pk'), self.kwargs.get('pk_m')]))
 
 
-class ResultDelete(DeleteView):
+class ResultDelete(LoginRequiredMixin, DeleteView):
     model = Result
     pk_url_kwarg = 'pk_r'
 

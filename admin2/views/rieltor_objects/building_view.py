@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, BuildingEditForm
+from admin2.helpers import BuildingFilterClass
 from admin2.mixins import BuildingStatusMixin
 from common.mixins import DeleteAjaxMixin, MessageMixin, SuccesMixin
 from rieltor_object.models import Building
@@ -17,7 +18,12 @@ class BuildingListView(BuildingStatusMixin, ListView):
     model = Building
     template_name = 'admin2/rieltor_object/building/building_list.html'
     paginate_by = 10
-    ordering = ['point']
+
+    def get_queryset(self):
+        qs = self.model.objects.order_by('point')
+        if self.request.GET.get('search') == 'Поиск':
+            qs = BuildingFilterClass(self.request, self.model).qs
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(BuildingListView, self).get_context_data(**kwargs)

@@ -29,10 +29,12 @@
             if(parseInt(source)>0){
                 $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр объекта. ID:"+source);
                 $('.submit-save-application').val("Заказать осмотр объекта ID "+source);
+                $('.earth-no').val("Подобрать участок");
                 $('input[name="custom_id"]').val(source);
             }else {
                 $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр объекта.<a target='_blank' href='"+source+"'>Объект</a>");
                 $('.submit-save-application').val("Заказать осмотр объекта ID ");
+                $('.earth-no').val("Подобрать участок");
             }
             $('body').addClass('popup');
             $('.block-add-inspection').fadeIn();

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, DetailView
@@ -11,7 +12,7 @@ from admin2.models import TrustPageModel
 from common.mixins import FormSetMixin, MessageMixin
 
 
-class TrustMixin(ContextMixin):
+class TrustMixin(LoginRequiredMixin, ContextMixin):
     def get_context_data(self, **kwargs):
         context = super(TrustMixin, self).get_context_data(**kwargs)
         context['content_type'] = ContentType.objects.get_for_model(TrustPageModel).id

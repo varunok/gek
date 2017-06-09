@@ -11,7 +11,7 @@ from common.mixins import FormSetMixin, DeleteAjaxMixin, SuccesMixin, MessageMix
 from videos.models import Videos
 
 
-class VideosList(ListView):
+class VideosList(LoginRequiredMixin, ListView):
     template_name = 'admin2/videos/videos_list.html'
     model = Videos
     paginate_by = 10
@@ -23,7 +23,7 @@ class VideosList(ListView):
         return context
 
 
-class VideosEdit(SuccesMixin, MessageMixin, UpdateView):
+class VideosEdit(LoginRequiredMixin, SuccesMixin, MessageMixin, UpdateView):
     model = Videos
     form_class = VideosCreateForm
     pk_url_kwarg = 'pk'
@@ -35,7 +35,7 @@ class VideosEdit(SuccesMixin, MessageMixin, UpdateView):
         return context
 
 
-class VideosCreate(SuccesMixin, MessageMixin, CreateView):
+class VideosCreate(LoginRequiredMixin, SuccesMixin, MessageMixin, CreateView):
     model = Videos
     template_name = 'admin2/videos/videos_edit.html'
     form_class = VideosCreateForm
@@ -46,7 +46,7 @@ class VideosCreate(SuccesMixin, MessageMixin, CreateView):
         return context
 
 
-class VideosKnowsEdit(FormSetMixin):
+class VideosKnowsEdit(LoginRequiredMixin, FormSetMixin):
     model = Videos
     fields = '__all__'
     pk_url_kwarg = 'pk'

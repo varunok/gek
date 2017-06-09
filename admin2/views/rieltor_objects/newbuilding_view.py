@@ -8,9 +8,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 from admin2.forms import VideoServiceSet, BuildingEditForm, NewBuildingEditForm
+from admin2.helpers import BuildingFilterClass
 from admin2.mixins import NewBuildingStatusMixin
 from common.mixins import DeleteAjaxMixin, SuccesMixin, MessageMixin
-from rieltor_object.models import NewBuilding, Building, Infrastructure, Accommodations
+from rieltor_object.models import NewBuilding, Building, Infrastructure, Accommodations, District
 
 
 class NewBuildingListView(NewBuildingStatusMixin, ListView):
@@ -19,10 +20,17 @@ class NewBuildingListView(NewBuildingStatusMixin, ListView):
     paginate_by = 10
     ordering = ['point']
 
+    def get_queryset(self):
+        qs = self.model.objects.order_by('point')
+        if self.request.GET.get('search') == 'Поиск':
+            qs = BuildingFilterClass(self.request, self.model).qs
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super(NewBuildingListView, self).get_context_data(**kwargs)
         context['page_title'] = 'Новострои'
         context['create_url'] = reverse_lazy('admin2:newbuilding_create')
+        context['districts'] = District.objects.all()
         return context
 
 

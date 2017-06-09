@@ -19,6 +19,7 @@
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
                             <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> Поиск</a>
                         </div>
                     </div>
                 </div>
@@ -30,6 +31,47 @@
                         <div class="x_title">
                             <h2>Все {{ page_title }}</h2>
                             <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content search-form" {% if not request.GET.search %} style="display: none" {% endif %}>
+                            <form class="form-horizontal form-label-left" method="get" enctype="multipart/form-data" name="serviceForm">
+                                <div class="item form-group">
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">ID:</label>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                        <input name="custom_id__gt" type="text" placeholder="От" value="{{ request.GET.custom_id__gt }}" style="width: 100%; margin-bottom: 10px;">
+                                        <input name="custom_id__lt" type="text" placeholder="До" value="{{ request.GET.custom_id__lt }}" style="width: 100%">
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Балл:</label>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                        <input name="point__gt" type="text" placeholder="От" value="{{ request.GET.point__gt }}" style="width: 100%; margin-bottom: 10px;">
+                                        <input name="point__lt" type="text" placeholder="До" value="{{ request.GET.point__lt }}" style="width: 100%">
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Цена:</label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <input name="price__gt" type="text" placeholder="От" value="{{ request.GET.price__gt }}" style="width: 100%; margin-bottom: 10px;">
+                                        <input name="price__lt" type="text" placeholder="До" value="{{ request.GET.price__lt }}" style="width: 100%">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-2">Район: </label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <select name="district" id="">
+                                            <option value="">-----</option>
+                                            {% for district in districts %}
+                                                <option {% if request.GET.district|floatformat == district.id|floatformat %} selected {% endif %} value="{{ district.id }}">{{ district }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Адресс:</label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <input name="address__icontains" type="text" placeholder="" value="{{ request.GET.address__icontains }}" style="width: 100%">
+                                    </div>
+                                </div>
+                                <div style="float: right;">
+                                    <input type="submit" name="search" placeholder="Поиск" value="Поиск" class="btn btn-primary">
+                                    <a class="btn btn-success" href="{% url 'admin2:newbuildings' %}">Отмена </a>
+                                </div>
+                            </form>
                         </div>
                         <div class="x_content">
                             <table class="table table-striped projects">
@@ -50,8 +92,8 @@
                                 <tbody>
                                 {% for object in object_list %}
                                     <tr>
-                                        <td>{{ object.custom_id|default_if_none:'' }}</td>
-                                        <td>{{ object.point|default_if_none:'' }}</td>
+                                        <td>{{ object.custom_id|default_if_none:'--' }}</td>
+                                        <td>{{ object.point|default_if_none:'--' }}</td>
                                         {% with object.images.all.first as image %}
                                             {% if image %}
                                                 <td><img src="{{ image.image|thumbnail_url:'article_image_60' }}" alt=""></td>
@@ -59,10 +101,10 @@
                                                 <td><img src="{% static 'images/no_photo.png' %}" alt="" width="60px"></td>
                                             {% endif %}
                                         {% endwith %}
-                                        <td>{{ object.address }}</td>
-                                        <td>{{ object.price }}</td>
-                                        <td>{{ object.building.count }}</td>
-                                        <td>{{ object.district|default:'неуказан' }}</td>
+                                        <td>{{ object.address|default_if_none:'--' }}</td>
+                                        <td>{{ object.price|default_if_none:'--' }}</td>
+                                        <td>{{ object.building.count|default_if_none:'--' }}</td>
+                                        <td>{{ object.district|default_if_none:'--' }}</td>
                                         <td>{{ object.date_delivery|date:'d.m.Y' }}</td>
                                         <td>
                                             <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
@@ -83,4 +125,6 @@
     <!-- /page content -->
 {% endblock content %}
 
-{% block js %}{% endblock js %}
+{% block js %}
+    <script src="{% static 'js/search_admin.js' %}"></script>
+{% endblock js %}

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -31,7 +32,8 @@ class PlanMixin(ContextMixin):
             pass
         return context
 
-class PlanView(PlanMixin, UpdateView):
+
+class PlanView(LoginRequiredMixin, PlanMixin, UpdateView):
     model = PlanPage
     template_name = 'admin2/plan/plan_edit.html'
     fields = '__all__'
@@ -45,7 +47,7 @@ class GalleryPlanView(PlanView):
     template_name = 'admin2/plan/plan_gallery.html'
 
 
-class TemplatesPlanView(PlanMixin, TemplateView):
+class TemplatesPlanView(LoginRequiredMixin, PlanMixin, TemplateView):
     model = PlanPage
     template_name = 'admin2/plan/plan_templates.html'
 
@@ -62,7 +64,7 @@ class TemplatesPlanView(PlanMixin, TemplateView):
         return PlanPage.get_solo()
 
 
-class EditPlanTemplates(PlanMixin, UpdateView):
+class EditPlanTemplates(LoginRequiredMixin, PlanMixin, UpdateView):
     fields = '__all__'
     template_name = 'admin2/plan/plan_templates_edit.html'
 
@@ -82,7 +84,7 @@ class EditPlanTemplates(PlanMixin, UpdateView):
         return self.model.get_solo()
 
 
-class EditPlansItem(PlanMixin, FormSetMixin):
+class EditPlansItem(LoginRequiredMixin, PlanMixin, FormSetMixin):
     fields = '__all__'
     template_name = 'admin2/plan/plan_templates_preparations.html'
 

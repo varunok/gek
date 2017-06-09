@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, UpdateView
@@ -24,7 +25,7 @@ class BannersMixin(ContextMixin):
         return context
 
 
-class Banners(AccesMixin, TemplateView):
+class Banners(LoginRequiredMixin, AccesMixin, TemplateView):
     template_name = 'admin2/banners/banners_list.html'
 
     def get_context_data(self, **kwargs):
@@ -34,7 +35,7 @@ class Banners(AccesMixin, TemplateView):
         return context
 
 
-class EditBannerImage(AccesMixin, BannersMixin, MessageMixin, UpdateView):
+class EditBannerImage(LoginRequiredMixin, AccesMixin, BannersMixin, MessageMixin, UpdateView):
     template_name = 'admin2/banners/banners_image_edit.html'
 
     def get_form_class(self):
@@ -50,7 +51,7 @@ class EditBannerImage(AccesMixin, BannersMixin, MessageMixin, UpdateView):
         return succes_url
 
 
-class EditBannerCode(AccesMixin, BannersMixin, MessageMixin, UpdateView):
+class EditBannerCode(LoginRequiredMixin, AccesMixin, BannersMixin, MessageMixin, UpdateView):
     template_name = 'admin2/banners/banners_code_edit.html'
 
     def get_form_class(self):

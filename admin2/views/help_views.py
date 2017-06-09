@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
@@ -8,7 +9,7 @@ from admin2.models import Help
 from common.mixins import MessageMixin
 
 
-class HelpWatchView(ListView):
+class HelpWatchView(LoginRequiredMixin, ListView):
     model = Help
     template_name = 'admin2/helps/help_watch.html'
 
@@ -16,12 +17,12 @@ class HelpWatchView(ListView):
         return self.model.objects.is_enable()
 
 
-class HelpListEditView(ListView):
+class HelpListEditView(LoginRequiredMixin, ListView):
     model = Help
     template_name = 'admin2/helps/help_list.html'
 
 
-class HelpEdit(MessageMixin, UpdateView):
+class HelpEdit(LoginRequiredMixin, MessageMixin, UpdateView):
     model = Help
     template_name = 'admin2/helps/help_edit.html'
     pk_url_kwarg = 'pk'
@@ -31,7 +32,7 @@ class HelpEdit(MessageMixin, UpdateView):
         return reverse_lazy('admin2:help_edit', args=[self.object.id])
 
 
-class HelpCreate(MessageMixin, CreateView):
+class HelpCreate(LoginRequiredMixin, MessageMixin, CreateView):
     model = Help
     template_name = 'admin2/helps/help_edit.html'
     fields = '__all__'
@@ -40,7 +41,7 @@ class HelpCreate(MessageMixin, CreateView):
         return reverse_lazy('admin2:help_edit', args=[self.object.id])
 
 
-class HelpDelete(DeleteView):
+class HelpDelete(LoginRequiredMixin, DeleteView):
     model = Help
     pk_url_kwarg = 'pk'
     template_name = 'admin2/common/delete_confirm.html'

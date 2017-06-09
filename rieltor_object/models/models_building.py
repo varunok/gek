@@ -44,6 +44,10 @@ class BuildingManager(models.Manager):
         kwargs['is_vip'] = True
         return self.filter(*args, **kwargs)
 
+    def shorts(self, *args, **kwargs):
+        kwargs['is_short'] = True
+        return self.filter(*args, **kwargs)
+
 
 class Building(models.Model):
     custom_id = models.PositiveIntegerField(
