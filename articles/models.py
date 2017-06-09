@@ -83,7 +83,8 @@ class Sections(models.Model):
 
     def save(self, *args, **kwargs):
         # if not self.slug and not Sections.objects.filter(slug=self.title).exists():
-        self.slug = trans_slugify(self.title)
+        if not self.slug:
+            self.slug = trans_slugify(self.title)
         # elif not self.slug and not Sections.objects.filter(slug=self.name).exists():
         #     self.slug = slugify(self.name, allow_unicode=True)
         if not self.slug and not self.title and not self.name:
@@ -176,7 +177,8 @@ class Articles(models.Model):
         return reverse('admin2:articles')
 
     def save(self, *args, **kwargs):
-        self.slug = trans_slugify(self.title)
+        if not self.slug:
+            self.slug = trans_slugify(self.title)
         # if not self.slug and not Articles.objects.filter(slug=self.title).exists():
         #     self.slug = slugify(translit(str(self.title), str('en'), reversed=True))
         # elif not self.slug and not Articles.objects.filter(slug=self.title).exists():
