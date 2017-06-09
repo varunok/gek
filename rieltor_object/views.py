@@ -69,11 +69,6 @@ class BuildingDetailSiteView(SEOMixin, BuildingStatusMixin, ViewsCountMixin, Det
     model = Building
     template_name = 'rieltor_object/building.html'
 
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'rieltor_object/special/building.html'
-        return self.template_name
-
 
 class OficeListSiteView(DinamicPageMixin, SEOMixin, OfficeStatusMixin, ListView):
     model = Ofice
