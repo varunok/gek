@@ -222,7 +222,6 @@ class AdvantageForm(forms.ModelForm):
 AdvantageSet = generic_inlineformset_factory(
     Advantage,
     form=AdvantageForm,
-    can_delete=False,
     extra=4,
     min_num=4,
     max_num=4,

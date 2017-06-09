@@ -9,6 +9,7 @@
             {% csrf_token %}
             {% for fields in advantage_form %}
                 <h3>Преимущество {{ forloop.counter }}:</h3>
+                <label class="" for="name">{{ fields.DELETE.label }}: {{ fields.DELETE|addcss:'style-del flat' }}</label>
                 {{ fields.id }}
                 <div class="clearfix"></div>
                 <br>
