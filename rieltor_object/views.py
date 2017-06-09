@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView
 from admin2.models import OfisPageModel, BuildingPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel
 from common.mixins import ViewsCountMixin, DinamicPageMixin
 from rieltor_object.filters import FilterBuilding, FilterOfise, FilterNewBuilding, FilterDaily, FilterEarth
-from rieltor_object.helpers import HelperFilter
+from rieltor_object.helpers import HelperFilter, SeoHelper
 from rieltor_object.mixins import BuildingStatusMixin, OfficeStatusMixin, DailyStatusMixin, NewBuildingStatusMixin, \
     EarthStatusMixin
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth
@@ -20,7 +20,7 @@ from seo.models import SEO
 PAGINATE_OBJ = 20
 
 
-class BuildingListSiteView(DinamicPageMixin, SEOMixin, BuildingStatusMixin, ListView):
+class BuildingListSiteView(DinamicPageMixin, BuildingStatusMixin, ListView):
     model = Building
     template_name = 'rieltor_object/building_list.html'
     paginate_by = PAGINATE_OBJ
@@ -31,6 +31,15 @@ class BuildingListSiteView(DinamicPageMixin, SEOMixin, BuildingStatusMixin, List
     def get_context_data(self, **kwargs):
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
+        path = str(Site.objects.get_current()) + self.request.get_full_path()
+        if SEO.objects.filter(url=path).exists():
+            context['seo'] = SEO.objects.filter(url=path).first()
+        else:
+            seo = SeoHelper(self.model, queryFilter)
+            if seo.has_data :
+                context['seo'] = seo
+            else:
+                context['seo'] = self.seo_model.get_solo()
         if queryFilter:
             context['filter_form'] = FilterBuilding(queryFilter, queryset=self.object_list)
         else:
@@ -74,6 +83,15 @@ class OficeListSiteView(DinamicPageMixin, SEOMixin, OfficeStatusMixin, ListView)
     def get_context_data(self, **kwargs):
         context = super(OficeListSiteView, self).get_context_data(**kwargs)
         queryFilter = HelperFilter(self.request).qd
+        path = str(Site.objects.get_current()) + self.request.get_full_path()
+        if SEO.objects.filter(url=path).exists():
+            context['seo'] = SEO.objects.filter(url=path).first()
+        else:
+            seo = SeoHelper(self.model, queryFilter)
+            if seo.has_data:
+                context['seo'] = seo
+            else:
+                context['seo'] = self.seo_model.get_solo()
         if queryFilter:
             context['filter_form'] = FilterOfise(queryFilter, queryset=self.object_list)
         else:
