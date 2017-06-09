@@ -14,8 +14,11 @@ def vips():
     building = Building.objects.vips().order_by('?')
     result = list(chain(building, office))
     list_vip = []
-    for i in range(0, 3):
-        rand_item = random.choice(result)
-        list_vip.append(rand_item)
-        result.remove(rand_item)
+    if len(result) == 1:
+        return result
+    if len(result) > 1:
+        for i in range(0, 3):
+            rand_item = random.choice(result)
+            list_vip.append(rand_item)
+            result.remove(rand_item)
     return list_vip
