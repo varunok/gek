@@ -31,11 +31,6 @@ class BuildingListView(BuildingStatusMixin, ListView):
         context['create_url'] = reverse_lazy('admin2:building_create')
         return context
 
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'admin2/special/rieltor_object/building/building_list.html'
-        return self.template_name
-
 
 class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateView):
     model = Building
@@ -49,11 +44,6 @@ class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateVie
         context['verbose_name'] = self.model._meta.verbose_name
         return context
 
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'admin2/special/rieltor_object/building/building_edit.html'
-        return self.template_name
-
 
 class BuildingCreateView(SuccesMixin, MessageMixin, BuildingStatusMixin, CreateView):
     model = Building
@@ -66,11 +56,6 @@ class BuildingCreateView(SuccesMixin, MessageMixin, BuildingStatusMixin, CreateV
         context['verbose_name'] = self.model._meta.verbose_name
         context['list_url'] = reverse_lazy('admin2:buildings')
         return context
-
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'admin2/special/rieltor_object/building/building_edit.html'
-        return self.template_name
 
 
 class BuildingDeleteView(BuildingStatusMixin, LoginRequiredMixin, DeleteView):
