@@ -225,31 +225,33 @@
                 <div class="region_footer">
                     <div class="logo_wrapper">
                         <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt="">{{ domen|safe }}</a>
-                        <div class="copyright">Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством.</div>
+                        <div class="copyright">Все права на материалы, находящиеся на сайте, защищены в соответсвии с законодательством.</div>
                     </div>
                     <div class="footer_center">
                         <div class="menu_footer">
                             <ul>
                                 <li class="group_item">
                                     <ul>
-                                        <li class="leaf"><a href="{% url 'contacts:contact' %}">Контакти</a></li>
-                                        <li class="leaf"><a href="http://rieltory.biz/franshiza" target="_blank">Франшиза</a></li>
+                                        <li class="leaf"><a href="{% url 'contacts:contact' %}">Контакты</a></li>
+{#                                        <li class="leaf"><a href="http://rieltory.biz/franshiza" target="_blank">Франшиза</a></li>#}
                                         <li class="leaf"><a href="{% url 'services:services' %}">Услуги</a></li>
+                                        <li class="leaf expanded"><a href="/" class="expanded_btn" id="expanded_btn">Выбрать</a>
                                     </ul>
                                 </li>
                                 <li class="group_item">
                                     <ul>
-                                        <li class="leaf expanded"><a href="/" class="expanded_btn" id="expanded_btn">Выбрать</a>
+
                                         </li>
                                         <li class="leaf"><a href="{% url 'articles:articles' %}">Статьи</a></li>
                                         <li class="leaf"><a href="{% url 'trust:trust' %}">Доверие</a></li>
+
                                     </ul>
                                 </li>
                                 <li class="group_item">
                                     <ul>
                                         <li class="leaf"><a href="{% url 'videos:video' %}">Смотреть видео передачи</a></li>
                                         <li class="leaf"><a href="{% url 'polls:test' %}">Пройти тест</a></li>
-                                        <li class="leaf"><a href="https://knin.com.ua/techplan" target="_blank">Нарисовать Тех План</a></li>
+{#                                        <li class="leaf"><a href="https://knin.com.ua/techplan" target="_blank">Нарисовать Тех План</a></li>#}
                                     </ul>
                                 </li>
                             </ul>
