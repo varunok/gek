@@ -72,7 +72,7 @@
                                         <select name="type_deal" id="">
                                             <option value="">-----</option>
                                             <option {% if request.GET.type_deal == 'rent' %} selected {% endif %} value="rent">Аренда</option>
-                                            <option {% if request.GET.statype_dealtus == 'sale' %} selected {% endif %} value="sale">Продажа</option>
+                                            <option {% if request.GET.type_deal == 'sale' %} selected {% endif %} value="sale">Продажа</option>
                                         </select>
                                     </div>
                                     <label class="control-label col-md-2 col-sm-2 col-xs-2">Назначение: </label>
