@@ -6,6 +6,8 @@ from django.db import models
 
 # Create your models here.
 from django.urls import reverse
+from django.utils.crypto import get_random_string
+from django.utils.text import slugify
 
 
 class Question(models.Model):
@@ -68,6 +70,35 @@ class Result(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class URLResult(models.Model):
+    slug = models.SlugField(
+        verbose_name='URL',
+        unique=True,
+        allow_unicode=True
+    )
+    result = models.ForeignKey(
+        Result,
+        on_delete=models.PROTECT
+    )
+    ball = models.IntegerField(
+        verbose_name='Результат'
+    )
+
+    class Meta:
+        verbose_name='Тест'
+        verbose_name_plural='Тесты'
+
+    def __unicode__(self):
+        return '{0} => {1}'.format(self.slug, self.result)
+
+    def get_absolute_url(self):
+        return reverse('polls:url_result', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(get_random_string(length=8), allow_unicode=True)
+        super(URLResult, self).save(*args, **kwargs)
 
 
 class Polls(models.Model):

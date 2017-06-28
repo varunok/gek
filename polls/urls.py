@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from polls.views import TestList, StartTest, ResultTest
+from polls.views import TestList, StartTest, ResultTest, ResultUrl
 
 urlpatterns = [
     # polls
@@ -10,4 +10,5 @@ urlpatterns = [
     url('^(?P<pk>[\w-]+)/$', StartTest.as_view(), name='test_start'),
     url('^(?P<pk>[\w-]+)/next-question/(?P<pk_q>[\w-]+)$', StartTest.as_view(), name='next_question'),
     url('^(?P<pk>[\w-]+)/get-result/(?P<result>[\w-]+)$', ResultTest.as_view(), name='get_result'),
+    url('^(?P<result>[\w-]+)$', ResultUrl.as_view(), name='url_result'),
 ]
