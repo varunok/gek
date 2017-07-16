@@ -133,7 +133,8 @@ class InstallationWaterSEOForm(forms.ModelForm):
 class UniversalServiceForm(forms.ModelForm):
     class Meta:
         model = UniversalService
-        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo')
+        exclude = ('is_enable', 'title_seo', 'SEOTitle', 'SEOKeywords', 'SEODescription', 'content', 'image_seo',
+                   'partners', 'base_packet', 'midle_packet', 'expert_packet', 'packet_enable')
         fields = '__all__'
 
 
