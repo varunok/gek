@@ -33,7 +33,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="middle_inner">		
+		<div class="middle_inner">
 			<div class="container">
 				<div id="content">
 
@@ -73,10 +73,10 @@
                                             <div class="vip"></div>
                                         {% endif %}
                                         <div class="title">{{ result.title|default:'' }}</div>
-                                        <div class="field_image" {% if not result.images.count %}style="height: 210px"{% endif %}>
-                                            {% if result.images.count %}
-                                                    <img src="{{ result.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
-                                            {% endif %}
+                                        <div class="field_image" style="transition: .3s">
+                                            <a href="{{ result.get_absolute_url }}">
+                                                <img src="{{ result.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
+                                            </a>
                                         </div>
                                         <div class="views_body">
                                             <div class="star {{ result|fav_is_active:request }}">
@@ -86,10 +86,12 @@
                                             <div class="address">{{ object.address|default_if_none:'' }}</div>
                                             <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
                                             <div class="top_wrap">
-                                                <div class="info">
-                                                    <div class="label">ID:</div>
-                                                    <div class="item">{{ result.id }}</div>
-                                                </div>
+                                                {% if object.rooms %}
+                                                    <div class="info">
+                                                        <div class="label">Комнат:</div>
+                                                        <div class="item">{{ object.rooms }}</div>
+                                                    </div>
+                                                {% endif %}
                                                 <div class="info">
                                                     <div class="label">{{ result.get_appointment_display }}:</div>
                                                     <div class="item">{{ result.footage|default_if_none:'' }} м<sup>2</sup></div>
@@ -101,7 +103,8 @@
                                             </div>
                                             <div class="bottom_wrap">
                                                 <div class="statistics">{{ result.views }}</div>
-                                                <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
+                                                <div class="read_more preview submit-add-inspection-modal"><a href="/">Заказать просмотр</a></div>
+                                                <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
                                                 <div class="read_more"><a href="{{ result.get_absolute_url }}">Подробнее</a></div>
                                             </div>
                                         </div>
@@ -116,7 +119,7 @@
 						</div>
 					</div>
 				</div><!-- #content-->
-				
+
 			</div>
 		</div>
 		{% include 'seo/seo.html' %}
