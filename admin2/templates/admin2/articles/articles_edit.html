@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load admin_tags %}
+{% load i18n %}
 
-{% block title %}Редактирование Статьи{% endblock title %}
+{% block title %}{% trans 'Редактирование Статьи' %}{% endblock title %}
 
 {% block css %}
 
@@ -15,12 +16,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Статьи</h3>
+                    <h3>{% trans 'Статьи' %}</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:articles' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            <a href="{% url 'admin2:articles' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> {% trans 'Назад' %}</a>
                         </div>
                     </div>
                 </div>
@@ -30,18 +31,18 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{% if article.created %}Изменить{% else %}Создать{% endif %} Статью</h2>
+                            <h2>{% if article.created %}{% trans 'Изменить' %}{% else %}{% trans 'Создать' %}{% endif %} {% trans 'Статью' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             {% if article.created %}
                                 <ul class="stats-overview">
                                     <li>
-                                        <span class="name"> Дата создания </span>
+                                        <span class="name"> {% trans 'Дата создания' %} </span>
                                         <span class="value text-success"> {{ article.created }} </span>
                                     </li>
                                     <li>
-                                        <span class="name"> Дата редактирования </span>
+                                        <span class="name"> {% trans 'Дата редактирования' %} </span>
                                         <span class="value text-success"> {{ article.updated }} </span>
                                     </li>
                                     <li class="hidden-phone">

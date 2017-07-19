@@ -1,9 +1,10 @@
+{% load i18n %}
 <li role="presentation" {% if 'preparations' in request.GET %}class="active"{% endif %}>
-    <a href="{% url 'admin2:buy_build_items_plan' %}?preparations"   role="tab">Подготовка</a>
+    <a href="{% url 'admin2:buy_build_items_plan' %}?preparations"   role="tab">{% trans 'Подготовка' %}</a>
 </li>
 <li role="presentation" {% if 'process' in request.GET %}class="active"{% endif %}>
-    <a href="{% url 'admin2:buy_build_items_plan' %}?process"   role="tab">Процесс</a>
+    <a href="{% url 'admin2:buy_build_items_plan' %}?process"   role="tab">{% trans 'Процесс' %}</a>
 </li>
 <li role="presentation" {% if 'finish' in request.GET %}class="active"{% endif %}>
-    <a href="{% url 'admin2:buy_build_items_plan' %}?finish"   role="tab">Завершение</a>
+    <a href="{% url 'admin2:buy_build_items_plan' %}?finish"   role="tab">{% trans 'Завершение' %}</a>
 </li>

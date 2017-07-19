@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редактирование {{ verbose_name }}{% endblock title %}
+{% block title %}{% trans 'Редактирование' %} {{ verbose_name }}{% endblock title %}
 
 {% block css %}
 {% endblock css %}
@@ -18,7 +19,7 @@
                     <h3>{{ verbose_name }}</h3>
                 </div>
                 <div style="float: right">
-                    <a href="{% url 'admin2:polls' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-circle-left"></i> Назад</a>
+                    <a href="{% url 'admin2:polls' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-circle-left"></i> {% trans 'Назад' %}</a>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -26,7 +27,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить {{ object }}</h2>
+                            <h2>{% trans 'Изменить' %} {{ object }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -34,7 +35,7 @@
                                 <ul class="stats-overview">
                                     <li >
                                         <span class="name"> URL </span>
-                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">{% trans 'просмотр' %}</a></span>
                                     </li>
                                 </ul>
                             {% endif %}
@@ -76,7 +77,7 @@
                                                         {% endif %}
                                                         " alt="" width="100%" />
                                                         {% if object.image %}
-                                                            <input id="delete-image" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input id="delete-image" type="button" value="{% trans 'Удалить фото' %}" class="btn btn-danger" style="float: right">
                                                             <input type="hidden" value="{{ content_type }}">
                                                             <input type="hidden" value="{{ object.id }}">
                                                         {% endif %}
@@ -85,7 +86,7 @@
                                                 <div class="ln_solid"></div>
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">
-                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                                     </div>
                                                 </div>
                                             </form>

@@ -16,9 +16,8 @@ from django.views.generic import UpdateView
 from common.models import BasePacket, MidlePacket, ExpertPacket
 
 
-
 class MessageMixin(SuccessMessageMixin):
-    success_message = "Сохранено"
+    success_message = _("Сохранено")
 
 
 class SuccesMixin():
@@ -166,7 +165,7 @@ class Select2QuerySetViewCustom(Select2QuerySetView):
         if display_create_option and self.has_add_permission(self.request):
             create_option = [{
                 'id': q,
-                'text': _('Создать "%(new_value)s"') % {'new_value': q},
+                'text': _('Создать') + ('"%(new_value)s"') % {'new_value': q},
                 'create_id': True,
             }]
         return create_option

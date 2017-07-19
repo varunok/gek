@@ -4,6 +4,7 @@
 {% load favorites_tag %}
 {% load base_tag %}
 {% load video_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -18,15 +19,15 @@
                 style="background: url({{ indexpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
 			<h1 class="slider_title page_title">{{ seo.title|default:'Коммерческая недвижимость' }}</h1>
 			<div class="slider_subtitle">{{ indexpagemodel.subtitle|default:'<u>Нужно решить проблемы</u>  c коммерческой недвижимостью?' }}</div>
-			<div class="text">Помогаем с любой операцией по недвижимости за <u>30 минут</u></div>
+			<div class="text">{% trans 'Помогаем с любой операцией по недвижимости за' %} <u>30 {% trans 'минут' %}</u></div>
 			<form action="#" class="webform_client_form" id="index-form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заказать бесплатную консультацию.Главная">
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Заказать бесплатную консультацию">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Заказать бесплатную консультацию' %}">
 				</div>
 			</form>
 		</div>
@@ -34,7 +35,7 @@
         {% if ofices_is_enable %}
             <div class="block block_shops">
                 <div class="block_content">
-                    <div class="block_title">Офисы и магазины / Горячие предложения</div>
+                    <div class="block_title">{% trans 'Офисы и магазины' %} / {% trans 'Горячие предложения' %}</div>
                     <div class="view_content">
                         {% for office in offices %}
                             <div class="views_row">
@@ -53,7 +54,7 @@
                                     <div class="price">${{ office.price|default:'' }}</div>
                                     <div class="statistics">{{ office.views }}</div>
                                     <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                    <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
+                                    <div class="read_more submit-add-inspection-modal"><a href="/">{% trans 'Оставить заявку' %}</a></div>
                                     <div class="read_more" style="display: none"><a href="{{ office.custom_id }}"></a></div>
                                 </div>
                             </div>
@@ -66,7 +67,7 @@
         {% if building_is_enable %}
             <div class="block block_shops hot_deals">
                 <div class="block_content">
-                    <div class="block_title">Квартиры и дома/ Горячие предложения</div>
+                    <div class="block_title">{% trans 'Квартиры и дома' %} / {% trans 'Горячие предложения' %}</div>
                     <div class="view_content">
                         {% for building in buildings %}
                             <div class="views_row">
@@ -87,7 +88,7 @@
                                     <div class="price">${{ building.price|default:'' }}</div>
                                     <div class="statistics">{{ building.views }}</div>
                                     <div class="area"><div class="count">{{ building.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                    <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
+                                    <div class="read_more submit-add-inspection-modal"><a href="/">{% trans 'Оставить заявку' %}</a></div>
                                     <div class="read_more" style="display: none"><a href="{{ building.custom_id }}"></a></div>
                                 </div>
                             </div>
@@ -100,7 +101,7 @@
         {% if newbuilding_is_enable %}
             <div class="block new_buildings">
                 <div class="block_content">
-                    <div class="block_title">Новостройки</div>
+                    <div class="block_title">{% trans 'Новостройки' %}</div>
                     <div class="view_content">
                         {% for newbuilding in newbuildings %}
                             <div class="views_row">
@@ -118,11 +119,11 @@
                                     <div class="left_wrap">
                                         <div class="address">{{ newbuilding.address|default:'' }}</div>
                                         <div class="info">
-                                            <div class="label">Район:</div>
+                                            <div class="label">{% trans 'Район' %}:</div>
                                             <div class="item">{{ newbuilding.district|default:'' }}</div>
                                         </div>
                                         <div class="info">
-                                            <div class="label">Сдаваемых помещений:</div>
+                                            <div class="label">{% trans 'Сдаваемых помещений' %}:</div>
                                             <div class="item">{{ newbuilding.building.count }}</div>
                                         </div>
                                         <div class="price">${{ newbuilding.price|default:'' }}</div>
@@ -130,12 +131,12 @@
                                     <div class="right_wrap">
                                         <div class="statistics">{{ newbuilding.views }}</div>
                                         <div class="info">
-                                            <div class="label">Сдаётся с    </div><div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
+                                            <div class="label">{% trans 'Сдаётся с ' %}   </div><div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
                                         </div>
                                         <div class="info">
-                                            <div class="label">Общая площадь:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
+                                            <div class="label">{% trans 'Общая площадь' %}:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
                                         </div>
-                                        <div class="read_more submit-add-inspection-modal"><a href="/">Оставить заявку</a></div>
+                                        <div class="read_more submit-add-inspection-modal"><a href="/">{% trans 'Оставить заявку' %}</a></div>
                                         <div class="read_more" style="display: none"><a href="{{ newbuilding.get_absolute_url }}"></a></div>
                                     </div>
                                 </div>
@@ -149,38 +150,38 @@
         {% include 'services/include/services_downbar.html' %}
 		<div class="block block_presentation">
 			<div class="block_content">
-				<div class="block_title">Любая операция с недвижимостью за 30 минут</div>
+				<div class="block_title">{% trans 'Любая операция с недвижимостью за 30 минут' %}</div>
 				<div class="view_content">
 					<div class="present_wrap">
-						<div class="see_present">Посмотреть<br> видеопрезентацию</div>
+						<div class="see_present">{% trans 'Посмотреть' %}<br> {% trans 'видеопрезентацию' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="field_image"><img src="{% static 'images/why_1.png' %}" alt=""></div>
-						<div class="title">Оказание помощи<br> при заключении договора</div>
+						<div class="title">{% trans 'Оказание помощи' %}<br> {% trans 'при заключении договора' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="field_image"><img src="{% static 'images/why_2.png' %}" alt=""></div>
-						<div class="title">Подборка помещений<br> на почту за 2 часа</div>
+						<div class="title">{% trans 'Подборка помещений' %}<br> {% trans 'на почту за 2 часа' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="field_image"><img src="{% static 'images/why_3.png' %}" alt=""></div>
-						<div class="title">Договорённость<br> на осмотр помещения</div>
+						<div class="title">{% trans 'Договорённость' %}<br> {% trans 'на осмотр помещения' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="field_image"><img src="{% static 'images/why_4.png' %}" alt=""></div>
-						<div class="title">Бесплатное размещение<br> объявлений на сайте</div>
+						<div class="title">{% trans 'Бесплатное размещение' %}<br> {% trans 'объявлений на сайте' %}</div>
 					</div>
 					<form action="#" class="webform_client_form" id="index-form-down">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="Связаться с агентством. Главная">
 						<div class="form_item user_name">
-							<input name="name" type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 						</div>
 						<div class="form_item phone">
-							<input name="phone" type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Связаться с агентством">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Связаться с агентством' %}">
 						</div>
 					</form>
 				</div>

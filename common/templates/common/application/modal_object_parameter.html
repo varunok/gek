@@ -1,7 +1,8 @@
+{% load i18n %}
 <div id="block-webform" class="block block_webform webform_object object-parameter" style="display: none">
 	<div class="block_content">
-		<div class="block_title">Подберем вам объект по вашим <br>параметрам за 30 минут</div>
-		<div class="text">Более 1000 объектов в базе и большой опыт в работе поможет нам решить вашу проблему <br>в поиске подходящего</div>
+		<div class="block_title">{% trans 'Подберем вам объект по вашим' %} <br>{% trans 'параметрам за' %} 30 {% trans 'минут' %}</div>
+		<div class="text">{% trans 'Более 1000 объектов в базе и большой опыт в работе поможет нам решить вашу проблему' %} <br>{% trans 'в поиске подходящего' %}</div>
 		<div class="close"></div>
 		<div class="view_content">
 			<form action="#" class="webform_client_form">
@@ -33,10 +34,10 @@
                         {% include 'rieltor_object/filters/earth_filter.html' %}
                     {% endif %}
 					<div class="form_item phone">
-						<input name="phone" type="text" placeholder="Номер телефона">
+						<input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
 					</div>
 					<div class="form_actions">
-						<input type="submit" value="Подобрать объект" class="submit-save-application">
+						<input type="submit" value="{% trans 'Подобрать объект' %}" class="submit-save-application">
 					</div>
 				</div>
 			</form>

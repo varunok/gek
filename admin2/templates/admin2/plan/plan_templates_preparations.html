@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редактирование {{ verbose_name }}{% endblock title %}
+{% block title %}{% trans 'Редактирование' %} {{ verbose_name }}{% endblock title %}
 
 {% block css %}
     <style>
@@ -39,7 +40,7 @@
                     prefix: 'common-{{ prefix }}-content_type-object_id',
                     containerSel: '.tab-content',
                     deleteTriggerSel: 'input[name$="-DELETE"]',
-                    addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</a>'
+                    addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans "Создать" %}</a>'
                 })
             })
 

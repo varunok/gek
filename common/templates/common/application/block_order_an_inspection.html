@@ -1,19 +1,20 @@
+{% load i18n %}
 <div class="block block_presentation order_block">
 	<div class="block_content">
-		<div class="block_title">Заказать осмотр объекта ID {{ object.custom_id|default_if_none:'' }}</div>
+		<div class="block_title">{% trans 'Заказать осмотр объекта' %} ID {{ object.custom_id|default_if_none:'' }}</div>
 		<div class="view_content">
 			<form action="#" class="webform_client_form" id="form_order_block">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заказать осмотр объекта.<a target='_blank' href='{{ object.get_absolute_url }}'>Объект</a>">
                 <input type="hidden" name="custom_id" value="{{ object.custom_id|default:object.id }}">
 				<div class="form_item user_name">
-					<input name="name" type="text" placeholder="Введите ваше имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 				</div>
 				<div class="form_actions">
-					<input id="submit_order_block" type="submit" class="form_submit" value="Отправить">
+					<input id="submit_order_block" type="submit" class="form_submit" value="{% trans 'Отправить' %}">
 				</div>
 			</form>
 		</div>
@@ -27,13 +28,13 @@
                     $.post('/save-application/', data)
                         .then(function(response) {
                             $('body').addClass('popup');
-                            $('#webform_confirmation_text').text('Спасибо! Ваша заявка отправлена!');
+                            $('#webform_confirmation_text').text('{% trans 'Спасибо! Ваша заявка отправлена!' %}');
                             $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
                                 $('body').removeClass('popup');
                             });
                         }, function(err) {
                             $('body').addClass('popup');
-                            $('#webform_confirmation_text').text('Ошибка. Попробуйте позже.');
+                            $('#webform_confirmation_text').text('{% trans 'Ошибка. Попробуйте позже.' %}');
                             $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
                                 $('body').removeClass('popup');
                             });

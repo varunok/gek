@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Мультилендинг{% endblock title %}
+{% block title %}{% trans 'Мультилендинг' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,12 +14,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Мультилендинг</h3>
+                    <h3>{% trans 'Мультилендинг' %}</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:landing_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="{% url 'admin2:landing_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
                         </div>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Все Мультилендинги</h2>
+                            <h2>{% trans 'Все Мультилендинги' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -37,8 +38,8 @@
                                 <tr>
                                     <th style="width: 1%">ID</th>
                                     <th style="width: 40%">URL</th>
-                                    <th style="width: 40%">Заголовок</th>
-                                    <th style="width: 10%">Тип</th>
+                                    <th style="width: 40%">{% trans 'Заголовок' %}</th>
+                                    <th style="width: 10%">{% trans 'Тип' %}</th>
                                     <th style="width: 5%"></th>
                                 </tr>
                                 </thead>

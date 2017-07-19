@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Районы{% endblock title %}
+{% block title %}{% trans 'Районы' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,7 +14,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Районы</h3>
+                    <h3>{% trans 'Районы' %}</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -27,16 +28,16 @@
                             <table class="table table-striped projects">
                                 <tbody>
                                     <tr>
-                                        <td>Районы</td>
-                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ District }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a></td>
+                                        <td>{% trans 'Районы' %}</td>
+                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ District }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a></td>
                                     </tr>
                                     <tr>
-                                        <td>Районы для посуточно</td>
-                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ DailyDistrict }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a></td>
+                                        <td>{% trans 'Районы для посуточно' %}</td>
+                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ DailyDistrict }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a></td>
                                     </tr>
                                     <tr>
-                                        <td>Районы для земля</td>
-                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ EarthDistrict }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a></td>
+                                        <td>{% trans 'Районы для земля' %}</td>
+                                        <td style="float: right"><a href="{% url 'admin2:district_list' %}?model={{ EarthDistrict }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a></td>
                                     </tr>
                                 </tbody>
                             </table>

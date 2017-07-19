@@ -1,11 +1,12 @@
 {% load thumbnail %}
 {% load staticfiles %}
 {% load services_tag %}
+{% load i18n %}
 {% service_list_downbar as service_list %}
 {% if service_list %}
     <div class="block block_services">
         <div class="block_content">
-            <div class="block_title">Услуги агентства недвижимости</div>
+            <div class="block_title">{% trans 'Услуги агентства недвижимости' %}</div>
             <div class="view_content">
                 {% for service in service_list %}
                     <div class="views_row">

@@ -1,9 +1,10 @@
 {% load thumbnail %}
 {% load article_tag %}
+{% load i18n %}
 {% articles as articles %}
 <div class="block block_articles">
 	<div class="block_content">
-		<div class="block_title">Полезные статьи </div>
+		<div class="block_title">{% trans 'Полезные статьи' %} </div>
 		<div class="view_content">
 			<div class="view_content_inner">
                 {% for article in articles %}
@@ -22,7 +23,7 @@
                 {% endfor %}
 			</div>
             {% if not sections %}
-                <div class="read_more"><a href="{% url 'articles:articles' %}">Читать все статьи</a></div>
+                <div class="read_more"><a href="{% url 'articles:articles' %}">{% trans 'Читать все статьи' %}</a></div>
             {% endif %}
 		</div>
 	</div>

@@ -1,6 +1,7 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
     <!-- page content -->
     <div class="right_col" role="main">
         <div class="">
@@ -11,7 +12,7 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:plan_templates' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            <a href="{% url 'admin2:plan_templates' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> {% trans 'Назад' %}</a>
                         </div>
                     </div>
                 </div>
@@ -21,7 +22,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить {{ verbose_name }}</h2>
+                            <h2>{% trans 'Изменить' %} {{ verbose_name }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -29,7 +30,7 @@
                                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                     <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                         <li role="presentation" >
-                                            <a href="{{ object.get_edit_url }}"  id="home-tab" role="tab">Редактировать</a>
+                                            <a href="{{ object.get_edit_url }}"  id="home-tab" role="tab">{% trans 'Редактировать' %}</a>
                                         </li>
                                         {{ nav|safe }}
                                     </ul>
@@ -67,7 +68,7 @@
                                                     </div>
                                                 {% endfor %}
                                             </fieldset>
-                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                         </form>
 
                                         <div class="empty-form" style="display: none;">

@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load i18n %}
 {% if seo.title_seo or seo.content  %}
     <div class="block block_seo">
         <div class="block_content">
@@ -16,7 +17,7 @@
                         </div>
                     </div>
                 {% if seo.content|length > 100 %}
-                    <div class="read_more"><a href="/">Читать всю статью</a></div>
+                    <div class="read_more"><a href="/">{% trans 'Читать всю статью' %}</a></div>
                 {% endif %}
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block title %}{{ page_title }}{% endblock title %}
 
@@ -18,8 +19,8 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
-                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> Поиск</a>
+                            <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
+                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> {% trans 'Поиск' %}</a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +30,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Все {{ page_title }}</h2>
+                            <h2>{% trans 'Все' %} {{ page_title }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content search-form" {% if not request.GET.search %} style="display: none" {% endif %}>
@@ -55,13 +56,13 @@
                                         <select name="status" id="">
                                             <option value="">-----</option>
                                             <option {% if request.GET.status == 'vip' %} selected {% endif %} value="vip">VIP</option>
-                                            <option {% if request.GET.status == 'short' %} selected {% endif %} value="short">Краткое</option>
-                                            <option {% if request.GET.status == 'default' %} selected {% endif %} value="default">Обичное</option>
+                                            <option {% if request.GET.status == 'short' %} selected {% endif %} value="short">{% trans 'Краткое' %}</option>
+                                            <option {% if request.GET.status == 'default' %} selected {% endif %} value="default">{% trans 'Обичное' %}</option>
                                         </select>
                                     </div>
                                     <br>
                                     <br>
-                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Адресс:</label>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">{% trans 'Адресс' %}:</label>
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <input name="address__icontains" type="text" placeholder="" value="{{ request.GET.address__icontains }}" style="width: 100%">
                                     </div>
@@ -71,23 +72,23 @@
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <select name="type_deal" id="">
                                             <option value="">-----</option>
-                                            <option {% if request.GET.type_deal == 'rent' %} selected {% endif %} value="rent">Аренда</option>
-                                            <option {% if request.GET.type_deal == 'sale' %} selected {% endif %} value="sale">Продажа</option>
+                                            <option {% if request.GET.type_deal == 'rent' %} selected {% endif %} value="rent">{% trans 'Аренда' %}</option>
+                                            <option {% if request.GET.type_deal == 'sale' %} selected {% endif %} value="sale">{% trans 'Продажа' %}</option>
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-2 col-xs-2">Назначение: </label>
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-2">{% trans 'Назначение' %}: </label>
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <select name="appointment" id="">
                                             <option value="">-----</option>
-                                            <option {% if request.GET.appointment == 'apartment' %} selected {% endif %} value="apartment">Квартира</option>
-                                            <option {% if request.GET.appointment == 'house' %} selected {% endif %} value="house">Дом</option>
-                                            <option {% if request.GET.appointment == 'room' %} selected {% endif %} value="room">Комната</option>
+                                            <option {% if request.GET.appointment == 'apartment' %} selected {% endif %} value="apartment">{% trans 'Квартира' %}</option>
+                                            <option {% if request.GET.appointment == 'house' %} selected {% endif %} value="house">{% trans 'Дом' %}</option>
+                                            <option {% if request.GET.appointment == 'room' %} selected {% endif %} value="room">{% trans 'Комната' %}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div style="float: right;">
                                     <input type="submit" name="search" placeholder="Поиск" value="Поиск" class="btn btn-primary">
-                                    <a class="btn btn-success" href="{% url 'admin2:buildings' %}">Отмена</a>
+                                    <a class="btn btn-success" href="{% url 'admin2:buildings' %}">{% trans 'Отмена' %}</a>
                                 </div>
                             </form>
 {#                            <table class="table table-striped projects">#}
@@ -105,14 +106,14 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%">ID</th>
-                                    <th style="width: 1%">Балл</th>
-                                    <th style="width: 15%">Фото</th>
-                                    <th style="width: 5%">Статус</th>
-                                    <th style="width: 20%">Адресс</th>
-                                    <th style="width: 10%">Цена</th>
-                                    <th style="width: 10%">Тип</th>
-                                    <th style="width: 10%">Назначение</th>
-                                    <th style="width: 20%">Опубликована</th>
+                                    <th style="width: 1%">{% trans 'Балл' %}</th>
+                                    <th style="width: 15%">{% trans 'Фото' %}</th>
+                                    <th style="width: 5%">{% trans 'Статус' %}</th>
+                                    <th style="width: 20%">{% trans 'Адресс' %}</th>
+                                    <th style="width: 10%">{% trans 'Цена' %}</th>
+                                    <th style="width: 10%">{% trans 'Тип' %}</th>
+                                    <th style="width: 10%">{% trans 'Назначение' %}</th>
+                                    <th style="width: 20%">{% trans 'Опубликована' %}</th>
                                     <th style="width: 5%">
                                     </th>
                                 </tr>
@@ -137,9 +138,9 @@
                                         <td>{{ object.get_appointment_display|default_if_none:'--' }}</td>
                                         <td>{{ object.when_create|date:'d.m.Y H:i' }}</td>
                                         <td>
-                                            <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                            <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                            <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
+                                            <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                            <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

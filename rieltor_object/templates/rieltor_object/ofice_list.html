@@ -5,6 +5,7 @@
 {% load thumbnail %}
 {% load banners_tag %}
 {% load rieltor_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -19,10 +20,10 @@
 			<div class="slider_title">{{ seo.title|default:'Аренда коммерческой недвижимости' }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
-					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="Искать в тексте объявления">
+					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="{% trans 'Искать в тексте объявления' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Найти">
+					<input class="form-submit" type="submit" value="{% trans 'Найти' %}">
 				</div>
 			</form>
 		</div>
@@ -39,7 +40,7 @@
                                         {% if object_list.count < 10 %}
                                             1-{{ object_list.count }} из {{ object_list.count }}
                                             {% else %}
-                                            1-10 из
+                                            1-10 {% trans 'из' %}
                                             {% if count_obj %}
                                                 {{ count_obj }}
                                                 {% else %}
@@ -47,15 +48,15 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
-                                     результатов
+                                     {% trans 'результатов' %}
                                 </div>
 							</div>
 							<div class="right_wrap">
 								<div class="sortable">
-									<label for="sort">Сортировка:</label>
+									<label for="sort">{% trans 'Сортировка' %}:</label>
 									<select name="sort" id="sort">
-										<option value="1">Новые наверху</option>
-										<option value="2">Новые внизу</option>
+										<option value="1">{% trans 'Новые наверху' %}</option>
+										<option value="2">{% trans 'Новые внизу' %}</option>
 									</select>
 								</div>
 							</div>
@@ -63,7 +64,7 @@
 						<div class="bottom_wrap">
                             {% include 'rieltor_object/filters/office_filter.html' %}
 							<div class="form_actions">
-								<input type="submit" value="Подобрать объект" class="open-object-parameter">
+								<input type="submit" value="{% trans 'Подобрать объект' %}" class="open-object-parameter">
 							</div>
 						</div>
 					</div>
@@ -79,7 +80,7 @@
 			</div>
 			<div class="left_sidebar">
 				<div class="block property_search">
-					<div class="form_title">Поиск недвижимости {{ filter_result }}</div>
+					<div class="form_title">{% trans 'Поиск недвижимости' %} {{ filter_result }}</div>
 					<form action="." method="get" class="webform_client_form search-form">
                         {% csrf_token %}
 						<div class="form_item form_checkboxes">
@@ -97,7 +98,7 @@
                             {{ filter_form.form.appointment }}
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Стоимость, <span id="currency_nac">{{ nac_carrency }}</span><span id="currency_dol" style="display: none">$</span>:</label>
+							<label>{% trans 'Стоимость' %}, <span id="currency_nac">{{ nac_carrency }}</span><span id="currency_dol" style="display: none">$</span>:</label>
 							<div class="form_number">
                                 {{ filter_form.form.price__gt }}
 							</div>
@@ -107,7 +108,7 @@
 						</div>
 
 						<div class="form_item group form_wrapper">
-							<label>Площадь, м. кв.:</label>
+							<label>{% trans 'Площадь' %}, м. кв.:</label>
 							<div class="form_number">
 								{{ filter_form.form.footage__gt }}
 							</div>
@@ -116,7 +117,7 @@
 							</div>
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Расположение:</label>
+							<label>{% trans 'Расположение' %}:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
                                     {% for location in filter_form.form.location %}
@@ -131,7 +132,7 @@
 							</div>
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Этаж:</label>
+							<label>{% trans 'Этаж' %}:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
                                     {% for floor in filter_form.form.floor %}
@@ -146,7 +147,7 @@
 							</div>
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Вход:</label>
+							<label>{% trans 'Вход' %}:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
                                     {% for entrance in filter_form.form.entrance %}
@@ -161,10 +162,10 @@
 							</div>
 						</div>
 						<div class="form_actions">
-							<input type="button" value="Поиск" class="search-click">
+							<input type="button" value="{% trans 'Поиск' %}" class="search-click">
 							<div class="links">
 {#								<div class="search_full"><a href="#">Расширенный поиск</a></div>#}
-								<div class="search_clear"><a href="{{ clear_filter }}">очистить</a></div>
+								<div class="search_clear"><a href="{{ clear_filter }}">{% trans 'очистить' %}</a></div>
 							</div>
 						</div>
 					</form>

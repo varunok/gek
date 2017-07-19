@@ -1,0 +1,1789 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-19 02:29+0300\n"
+"PO-Revision-Date: 2017-07-19 03:25+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: admin2/templates/admin2/articles/articles_edit.html:7
+msgid "Редактирование Статьи"
+msgstr ""
+
+#: admin2/templates/admin2/articles/articles_edit.html:19
+#: admin2/templates/admin2/articles/articles_list.html:7
+#: admin2/templates/admin2/articles/articles_list.html:17
+#: admin2/templates/admin2/base.html:66 admin2/templates/admin2/base.html:68
+#: articles/templates/articles/article_detail.html:20 templates/base.html:140
+#: templates/base.html:245
+msgid "Статьи"
+msgstr "Статті"
+
+#: admin2/templates/admin2/articles/articles_edit.html:24
+#: admin2/templates/admin2/articles/section_edit.html:22
+#: admin2/templates/admin2/banners/banners_code_edit.html:22
+#: admin2/templates/admin2/banners/banners_image_edit.html:22
+#: admin2/templates/admin2/districts/district_edit.html:24
+#: admin2/templates/admin2/districts/district_list.html:21
+#: admin2/templates/admin2/helps/help_edit.html:24
+#: admin2/templates/admin2/helps/help_list.html:21
+#: admin2/templates/admin2/landing/landing_edit.html:22
+#: admin2/templates/admin2/landing/landing_form.html:22
+#: admin2/templates/admin2/landing/landing_seo.html:22
+#: admin2/templates/admin2/plan/include/preparations.html:15
+#: admin2/templates/admin2/plan/plan_templates_edit.html:24
+#: admin2/templates/admin2/polls/choices_create.html:44
+#: admin2/templates/admin2/polls/polls_edit.html:22
+#: admin2/templates/admin2/polls/question_create.html:43
+#: admin2/templates/admin2/polls/result_edit.html:22
+#: admin2/templates/admin2/redirect/redirect_edit.html:22
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:27
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:29
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:79
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:81
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:79
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:81
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:81
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:83
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:78
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:80
+msgid "Назад"
+msgstr "Назад"
+
+#: admin2/templates/admin2/articles/articles_edit.html:34
+#: admin2/templates/admin2/articles/section_edit.html:32
+#: admin2/templates/admin2/banners/banners_code_edit.html:30
+#: admin2/templates/admin2/banners/banners_image_edit.html:30
+#: admin2/templates/admin2/districts/district_edit.html:7
+#: admin2/templates/admin2/districts/district_edit.html:34
+#: admin2/templates/admin2/helps/help_edit.html:7
+#: admin2/templates/admin2/helps/help_edit.html:34
+#: admin2/templates/admin2/landing/landing_edit.html:30
+#: admin2/templates/admin2/landing/landing_form.html:30
+#: admin2/templates/admin2/landing/landing_seo.html:30
+#: admin2/templates/admin2/plan/include/preparations.html:25
+#: admin2/templates/admin2/plan/plan_edit.html:27
+#: admin2/templates/admin2/plan/plan_gallery.html:27
+#: admin2/templates/admin2/plan/plan_templates.html:27
+#: admin2/templates/admin2/plan/plan_templates_edit.html:34
+#: admin2/templates/admin2/polls/choices_create.html:27
+#: admin2/templates/admin2/polls/choices_list.html:27
+#: admin2/templates/admin2/polls/polls_edit.html:30
+#: admin2/templates/admin2/polls/question_create.html:27
+#: admin2/templates/admin2/polls/question_list.html:27
+#: admin2/templates/admin2/polls/result_edit.html:30
+#: admin2/templates/admin2/polls/result_list.html:27
+#: admin2/templates/admin2/redirect/redirect_edit.html:30
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:40
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:92
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:92
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:94
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:91
+msgid "Изменить"
+msgstr "Змінити"
+
+#: admin2/templates/admin2/articles/articles_edit.html:34
+#: admin2/templates/admin2/articles/articles_list.html:22
+#: admin2/templates/admin2/articles/section_edit.html:32
+#: admin2/templates/admin2/articles/sections_list.html:21
+#: admin2/templates/admin2/contact/contact.html:8
+#: admin2/templates/admin2/contact/contact_shedule.html:8
+#: admin2/templates/admin2/contact/contact_shedule.html:185
+#: admin2/templates/admin2/districts/district_list.html:22
+#: admin2/templates/admin2/helps/help_list.html:22
+#: admin2/templates/admin2/landing/landing_list.html:22
+#: admin2/templates/admin2/plan/plan_templates_preparations.html:43
+#: admin2/templates/admin2/polls/choices_list.html:48
+#: admin2/templates/admin2/polls/polls_list.html:22
+#: admin2/templates/admin2/polls/polls_nav.html:4
+#: admin2/templates/admin2/polls/question_list.html:47
+#: admin2/templates/admin2/polls/result_list.html:47
+#: admin2/templates/admin2/redirect/redirect_list.html:22
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:9
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:40
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:64
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:22
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:22
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:8
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:92
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:22
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:8
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:92
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:116
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:22
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:8
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:94
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:22
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:9
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:91
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:115
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:22
+#: common/mixins.py:168
+msgid "Создать"
+msgstr "Створити"
+
+#: admin2/templates/admin2/articles/articles_edit.html:34
+msgid "Статью"
+msgstr "Статтю"
+
+#: admin2/templates/admin2/articles/articles_edit.html:41
+#: admin2/templates/admin2/articles/section_edit.html:39
+#: admin2/templates/admin2/articles/sections_list.html:39
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:47
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:99
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:99
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:101
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:98
+msgid "Дата создания"
+msgstr "Дата створення"
+
+#: admin2/templates/admin2/articles/articles_edit.html:45
+#: admin2/templates/admin2/articles/section_edit.html:43
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:51
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:103
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:103
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:105
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:102
+msgid "Дата редактирования"
+msgstr "Дата редагування"
+
+#: admin2/templates/admin2/articles/articles_list.html:32
+#: articles/templates/articles/article_detail.html:61
+#: articles/templates/articles/articles.html:52
+#: articles/templates/articles/sections.html:53
+msgid "Все статьи"
+msgstr "Усі статті"
+
+#: admin2/templates/admin2/articles/articles_list.html:40
+#: admin2/templates/admin2/plan/plan_templates.html:47
+#: admin2/templates/admin2/polls/polls_list.html:40
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:110
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:110
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:83
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:82
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:83
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:100
+msgid "Фото"
+msgstr "Фото"
+
+#: admin2/templates/admin2/articles/articles_list.html:41
+#: admin2/templates/admin2/helps/help_list.html:35
+#: admin2/templates/admin2/landing/landing_list.html:41
+#: admin2/templates/admin2/plan/plan_templates.html:48
+#: admin2/templates/admin2/polls/result_list.html:57
+#: admin2/templates/admin2/rieltor_object/common/related_items.html:25
+#: admin2/templates/admin2/rieltor_object/common/related_items.html:55
+msgid "Заголовок"
+msgstr "Заголовок"
+
+#: admin2/templates/admin2/articles/articles_list.html:42
+msgid "Рубрика"
+msgstr "Рубрика"
+
+#: admin2/templates/admin2/articles/articles_list.html:43
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:116
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:116
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:88
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:87
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:106
+msgid "Опубликована"
+msgstr "Опублікована"
+
+#: admin2/templates/admin2/articles/articles_list.html:57
+#: admin2/templates/admin2/articles/sections_list.html:52
+#: admin2/templates/admin2/districts/district_list.html:44
+#: admin2/templates/admin2/helps/help_list.html:44
+#: admin2/templates/admin2/main.html:60
+#: admin2/templates/admin2/polls/choices_list.html:70
+#: admin2/templates/admin2/polls/polls_list.html:62
+#: admin2/templates/admin2/polls/question_list.html:66
+#: admin2/templates/admin2/polls/result_list.html:74
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:141
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:141
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:109
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:107
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:111
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:131
+msgid "Удалить"
+msgstr "Видалити"
+
+#: admin2/templates/admin2/articles/articles_list.html:58
+#: admin2/templates/admin2/articles/sections_list.html:53
+#: admin2/templates/admin2/banners/banners_list.html:40
+#: admin2/templates/admin2/banners/banners_list.html:46
+#: admin2/templates/admin2/contact/contact_nav.html:4
+#: admin2/templates/admin2/districts/district_list.html:45
+#: admin2/templates/admin2/districts/district_nav.html:32
+#: admin2/templates/admin2/districts/district_nav.html:36
+#: admin2/templates/admin2/districts/district_nav.html:40
+#: admin2/templates/admin2/helps/help_list.html:45
+#: admin2/templates/admin2/helps/help_watch.html:23
+#: admin2/templates/admin2/landing/landing_nav.html:4
+#: admin2/templates/admin2/plan/include/preparations.html:33
+#: admin2/templates/admin2/plan/plan_nav.html:4
+#: admin2/templates/admin2/plan/plan_templates.html:62
+#: admin2/templates/admin2/plan/plan_templates.html:74
+#: admin2/templates/admin2/plan/plan_templates.html:86
+#: admin2/templates/admin2/plan/plan_templates.html:98
+#: admin2/templates/admin2/plan/plan_templates.html:110
+#: admin2/templates/admin2/plan/plan_templates_edit.html:42
+#: admin2/templates/admin2/polls/choices_list.html:71
+#: admin2/templates/admin2/polls/polls_list.html:63
+#: admin2/templates/admin2/polls/polls_nav.html:4
+#: admin2/templates/admin2/polls/question_list.html:67
+#: admin2/templates/admin2/polls/result_list.html:75
+#: admin2/templates/admin2/redirect/redirect_list.html:53
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:64
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:142
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:142
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:110
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:116
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:108
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:118
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:112
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:115
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:132
+msgid "Редактировать"
+msgstr "Редагувати"
+
+#: admin2/templates/admin2/articles/articles_list.html:59
+#: admin2/templates/admin2/articles/sections_list.html:54
+#: admin2/templates/admin2/polls/polls_list.html:64
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:143
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:143
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:111
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:113
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:133
+msgid "На сайте"
+msgstr "На сайті"
+
+#: admin2/templates/admin2/articles/section_edit.html:7
+msgid "Редактирование рубрики"
+msgstr "Редагування рубрики"
+
+#: admin2/templates/admin2/articles/section_edit.html:17
+#: admin2/templates/admin2/articles/sections_list.html:6
+#: admin2/templates/admin2/articles/sections_list.html:16
+msgid "Рубрики"
+msgstr "Рубрики"
+
+#: admin2/templates/admin2/articles/section_edit.html:32
+msgid "Рубрику"
+msgstr "Рубрику"
+
+#: admin2/templates/admin2/articles/section_edit.html:56
+msgid "Навзвание"
+msgstr "Назва"
+
+#: admin2/templates/admin2/articles/section_edit.html:111
+#: admin2/templates/admin2/banners/banners_code_edit.html:75
+#: admin2/templates/admin2/banners/banners_image_edit.html:90
+#: admin2/templates/admin2/contact/contact.html:162
+#: admin2/templates/admin2/contact/contact_shedule.html:96
+#: admin2/templates/admin2/counters/counters_edit.html:86
+#: admin2/templates/admin2/districts/district_edit.html:55
+#: admin2/templates/admin2/helps/help_edit.html:74
+#: admin2/templates/admin2/landing/landing_edit.html:161
+#: admin2/templates/admin2/landing/landing_form.html:83
+#: admin2/templates/admin2/landing/landing_seo.html:112
+#: admin2/templates/admin2/plan/include/preparations.html:71
+#: admin2/templates/admin2/plan/plan_edit.html:187
+#: admin2/templates/admin2/plan/plan_templates_edit.html:80
+#: admin2/templates/admin2/polls/choices_create.html:72
+#: admin2/templates/admin2/polls/polls_edit.html:89
+#: admin2/templates/admin2/polls/question_create.html:61
+#: admin2/templates/admin2/polls/result_edit.html:126
+#: admin2/templates/admin2/redirect/redirect_edit.html:81
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:296
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:316
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:314
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:358
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:374
+msgid "Сохранить"
+msgstr "Зберегти"
+
+#: admin2/templates/admin2/articles/sections_list.html:31
+msgid "Все рубрики"
+msgstr "Усі рубрики"
+
+#: admin2/templates/admin2/articles/sections_list.html:40
+#: admin2/templates/admin2/banners/banners_list.html:32
+#: admin2/templates/admin2/plan/plan_templates.html:46
+#: admin2/templates/admin2/polls/polls_list.html:41
+msgid "Название"
+msgstr "Назва"
+
+#: admin2/templates/admin2/banners/banners_code_edit.html:8
+#: admin2/templates/admin2/banners/banners_image_edit.html:8
+#: admin2/templates/admin2/contact/contact.html:8
+#: admin2/templates/admin2/contact/contact_shedule.html:8
+#: admin2/templates/admin2/landing/landing_edit.html:8
+#: admin2/templates/admin2/landing/landing_form.html:8
+#: admin2/templates/admin2/landing/landing_seo.html:8
+#: admin2/templates/admin2/plan/plan_edit.html:8
+#: admin2/templates/admin2/plan/plan_gallery.html:8
+#: admin2/templates/admin2/plan/plan_templates.html:8
+#: admin2/templates/admin2/plan/plan_templates_edit.html:8
+#: admin2/templates/admin2/plan/plan_templates_preparations.html:8
+#: admin2/templates/admin2/polls/choices_create.html:8
+#: admin2/templates/admin2/polls/choices_list.html:8
+#: admin2/templates/admin2/polls/polls_edit.html:8
+#: admin2/templates/admin2/polls/question_create.html:8
+#: admin2/templates/admin2/polls/question_list.html:8
+#: admin2/templates/admin2/polls/result_edit.html:8
+#: admin2/templates/admin2/polls/result_list.html:8
+#: admin2/templates/admin2/redirect/redirect_edit.html:8
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:9
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:8
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:8
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:8
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:9
+msgid "Редактирование"
+msgstr "Редагування"
+
+#: admin2/templates/admin2/banners/banners_code_edit.html:38
+msgid "Картинка"
+msgstr "Зображення"
+
+#: admin2/templates/admin2/banners/banners_code_edit.html:47
+#: admin2/templates/admin2/banners/banners_image_edit.html:47
+msgid "Код баннера"
+msgstr "Код банера"
+
+#: admin2/templates/admin2/banners/banners_list.html:7
+#: admin2/templates/admin2/banners/banners_list.html:17
+#: admin2/templates/admin2/base.html:108
+msgid "Баннеры"
+msgstr "Банери"
+
+#: admin2/templates/admin2/banners/banners_list.html:25
+msgid "Все Баннеры"
+msgstr "Усі Банери"
+
+#: admin2/templates/admin2/base.html:65
+#: articles/templates/articles/article_detail.html:18
+#: rieltor_object/templates/rieltor_object/building.html:23
+#: rieltor_object/templates/rieltor_object/daily.html:25
+#: rieltor_object/templates/rieltor_object/ofice.html:23 templates/base.html:65
+msgid "Главная"
+msgstr "Головна"
+
+#: admin2/templates/admin2/base.html:69
+msgid " Рубрики статей"
+msgstr "Рубрики статтів"
+
+#: admin2/templates/admin2/base.html:73
+msgid "Страницы "
+msgstr "Сторінки"
+
+#: admin2/templates/admin2/base.html:74 templates/base.html:100
+#: templates/base.html:238
+msgid "Услуги"
+msgstr "Послуги"
+
+#: admin2/templates/admin2/base.html:77
+msgid "Объекты"
+msgstr "Обєкти"
+
+#: admin2/templates/admin2/base.html:85 templates/index.html:70
+msgid "Квартиры и дома"
+msgstr "Квартири і дома"
+
+#: admin2/templates/admin2/base.html:88 templates/base.html:80
+#: templates/index.html:38
+msgid "Офисы и магазины"
+msgstr "Офіси і магазини"
+
+#: admin2/templates/admin2/base.html:91
+#: rieltor_object/templates/rieltor_object/daily.html:25 templates/base.html:85
+msgid "Посуточно"
+msgstr "Подобово"
+
+#: admin2/templates/admin2/base.html:94 templates/base.html:90
+msgid "Новострои"
+msgstr "Новострої"
+
+#: admin2/templates/admin2/base.html:97 templates/base.html:95
+msgid "Земля"
+msgstr "Земля"
+
+#: admin2/templates/admin2/base.html:102 templates/base.html:141
+#: templates/base.html:246
+msgid "Доверие"
+msgstr "Довіра"
+
+#: admin2/templates/admin2/base.html:103
+#: admin2/templates/admin2/contact/contact.html:73
+#: admin2/templates/admin2/contact/contact_shedule.html:25
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:86
+#: rieltor_object/templates/rieltor_object/building.html:135
+#: rieltor_object/templates/rieltor_object/daily.html:128
+#: rieltor_object/templates/rieltor_object/ofice.html:135
+#: templates/base.html:142 templates/base.html:236
+msgid "Контакты"
+msgstr "Контакти"
+
+#: admin2/templates/admin2/base.html:104
+#: admin2/templates/admin2/helps/help_edit.html:19
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:122
+msgid "Видео"
+msgstr "Відео"
+
+#: admin2/templates/admin2/base.html:105
+msgid "Планы"
+msgstr "Планування"
+
+#: admin2/templates/admin2/base.html:106
+#: admin2/templates/admin2/polls/polls_list.html:7
+#: admin2/templates/admin2/polls/polls_list.html:17
+msgid "Тесты"
+msgstr "Тести"
+
+#: admin2/templates/admin2/base.html:110
+msgid "Лэндинги"
+msgstr "Лендінги"
+
+#: admin2/templates/admin2/base.html:113
+#: admin2/templates/admin2/redirect/redirect_list.html:7
+#: admin2/templates/admin2/redirect/redirect_list.html:17
+#: admin2/templates/admin2/redirect/redirect_list.html:41
+msgid "Редирект"
+msgstr "Редірект"
+
+#: admin2/templates/admin2/base.html:114
+msgid "Администраторы"
+msgstr "Адміністратори"
+
+#: admin2/templates/admin2/base.html:115
+msgid "Настройки сайта"
+msgstr "Налаштування сайту"
+
+#: admin2/templates/admin2/base.html:118
+msgid "Параметры"
+msgstr "Параметри"
+
+#: admin2/templates/admin2/base.html:120
+msgid "Почта для рассылки"
+msgstr "Пошта для розсилки"
+
+#: admin2/templates/admin2/base.html:121
+#: admin2/templates/admin2/districts/district_nav.html:7
+#: admin2/templates/admin2/districts/district_nav.html:17
+#: admin2/templates/admin2/districts/district_nav.html:31
+msgid "Районы"
+msgstr "Райони"
+
+#: admin2/templates/admin2/base.html:125
+#: admin2/templates/admin2/counters/counters_edit.html:29
+msgid "Счетчики"
+msgstr "Лічильники"
+
+#: admin2/templates/admin2/base.html:128
+#: admin2/templates/admin2/helps/help_watch.html:7
+#: admin2/templates/admin2/helps/help_watch.html:17
+msgid "Справка"
+msgstr "Довідка"
+
+#: admin2/templates/admin2/base.html:167
+msgid "Профиль"
+msgstr "Профіль"
+
+#: admin2/templates/admin2/base.html:168
+msgid "Виход"
+msgstr "Вихід"
+
+#: admin2/templates/admin2/base.html:175
+msgid "Новые заявки"
+msgstr "Нові заявки"
+
+#: admin2/templates/admin2/base.html:182 templates/base.html:237
+msgid "Франшиза"
+msgstr "Франшиза"
+
+#: admin2/templates/admin2/base.html:194
+msgid "осталось"
+msgstr "залишилось"
+
+#: admin2/templates/admin2/base.html:196
+msgid "день"
+msgstr "день"
+
+#: admin2/templates/admin2/base.html:198
+msgid "дня"
+msgstr "дня"
+
+#: admin2/templates/admin2/base.html:200
+msgid "дней"
+msgstr "днів"
+
+#: admin2/templates/admin2/base.html:204
+msgid "неактивна"
+msgstr "нективна"
+
+#: admin2/templates/admin2/common/delete_confirm.html:7
+#: admin2/templates/admin2/common/delete_confirm.html:16
+#: admin2/templates/admin2/common/delete_confirm.html:24
+msgid "Удаление"
+msgstr "Видалення"
+
+#: admin2/templates/admin2/common/delete_confirm.html:29
+msgid "Уверени что хотите удалить"
+msgstr "Впевнені, що хочете видалити"
+
+#: admin2/templates/admin2/common/delete_confirm.html:31
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:91
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:91
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:73
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:73
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:73
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:90
+msgid "Отмена"
+msgstr "Відміна"
+
+#: admin2/templates/admin2/contact/contact.html:82
+#: admin2/templates/admin2/contact/contact_shedule.html:34
+msgid "Изменить Контакты"
+msgstr "Змінити Контакти"
+
+#: admin2/templates/admin2/contact/contact.html:151
+#: admin2/templates/admin2/landing/landing_edit.html:152
+#: admin2/templates/admin2/landing/landing_form.html:73
+#: admin2/templates/admin2/landing/landing_seo.html:102
+#: admin2/templates/admin2/plan/plan_edit.html:176
+#: admin2/templates/admin2/plan/plan_templates_edit.html:71
+#: admin2/templates/admin2/polls/polls_edit.html:80
+#: admin2/templates/admin2/polls/result_edit.html:100
+#: admin2/templates/admin2/polls/result_edit.html:116
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:285
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:305
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:363
+msgid "Удалить фото"
+msgstr "Видалити фото"
+
+#: admin2/templates/admin2/contact/contact_nav.html:7
+msgid "График работы"
+msgstr "Графік роботи"
+
+#: admin2/templates/admin2/counters/counters_edit.html:8
+#: admin2/templates/admin2/counters/counters_edit.html:21
+msgid "Настройки"
+msgstr "Налаштування"
+
+#: admin2/templates/admin2/districts/district_edit.html:7
+#: admin2/templates/admin2/districts/district_edit.html:34
+msgid "Создать Район"
+msgstr "Створити район"
+
+#: admin2/templates/admin2/districts/district_edit.html:19
+#: admin2/templates/admin2/districts/district_list.html:35
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:56
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:56
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:87
+#: rieltor_object/templates/rieltor_object/building.html:86
+#: rieltor_object/templates/rieltor_object/building.html:204
+#: rieltor_object/templates/rieltor_object/daily.html:105
+#: rieltor_object/templates/rieltor_object/daily_list.html:73
+#: rieltor_object/templates/rieltor_object/ofice.html:90
+#: templates/index.html:122
+msgid "Район"
+msgstr "Район"
+
+#: admin2/templates/admin2/districts/district_nav.html:35
+msgid "Районы для посуточно"
+msgstr "Райони для Подобово"
+
+#: admin2/templates/admin2/districts/district_nav.html:39
+msgid "Районы для земля"
+msgstr "Райони для Земля"
+
+#: admin2/templates/admin2/helps/help_edit.html:7
+#: admin2/templates/admin2/helps/help_edit.html:34
+msgid "Создать Видео"
+msgstr "Створити Відео"
+
+#: admin2/templates/admin2/helps/help_list.html:6
+#: admin2/templates/admin2/helps/help_list.html:16
+msgid "Редактировать Справку"
+msgstr "Редагувати довідку"
+
+#: admin2/templates/admin2/landing/landing_edit.html:19
+#: admin2/templates/admin2/landing/landing_form.html:19
+#: admin2/templates/admin2/landing/landing_list.html:7
+#: admin2/templates/admin2/landing/landing_list.html:17
+#: admin2/templates/admin2/landing/landing_seo.html:19
+msgid "Мультилендинг"
+msgstr "Мультилендінг"
+
+#: admin2/templates/admin2/landing/landing_list.html:32
+msgid "Все Мультилендинги"
+msgstr "Усі мультилендінги"
+
+#: admin2/templates/admin2/landing/landing_list.html:42
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:114
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:71
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:114
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:71
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:104
+msgid "Тип"
+msgstr "Тип"
+
+#: admin2/templates/admin2/landing/landing_nav.html:11
+msgid "Форма"
+msgstr "Форма"
+
+#: admin2/templates/admin2/login.html:13
+msgid "Вход для администратора"
+msgstr "Вхід для адміністратора"
+
+#: admin2/templates/admin2/login.html:35
+#: rieltor_object/templates/rieltor_object/ofice.html:102
+#: rieltor_object/templates/rieltor_object/ofice_list.html:150
+msgid "Вход"
+msgstr "Вхід"
+
+#: admin2/templates/admin2/login.html:37
+msgid "Логин"
+msgstr "Логін"
+
+#: admin2/templates/admin2/login.html:40
+msgid "Пароль"
+msgstr "Пароль"
+
+#: admin2/templates/admin2/login.html:43
+msgid "Войти"
+msgstr "Увійти"
+
+#: admin2/templates/admin2/login.html:47
+msgid "Запомнить меня"
+msgstr "Запамʼятати мене"
+
+#: admin2/templates/admin2/main.html:16
+msgid "Заявки"
+msgstr "Заявки"
+
+#: admin2/templates/admin2/main.html:24
+msgid "Последние заявки"
+msgstr "Останні заявки"
+
+#: admin2/templates/admin2/main.html:33
+msgid "Дата"
+msgstr "Дата"
+
+#: admin2/templates/admin2/main.html:34
+msgid "Источник"
+msgstr "Джерело"
+
+#: admin2/templates/admin2/main.html:35
+#: rieltor_object/templates/rieltor_object/building.html:137
+#: rieltor_object/templates/rieltor_object/daily.html:130
+#: rieltor_object/templates/rieltor_object/ofice.html:137
+msgid "Имя"
+msgstr "Імя"
+
+#: admin2/templates/admin2/main.html:36
+#: rieltor_object/templates/rieltor_object/building.html:141
+#: rieltor_object/templates/rieltor_object/daily.html:134
+#: rieltor_object/templates/rieltor_object/ofice.html:141
+msgid "Телефон"
+msgstr "Телефон"
+
+#: admin2/templates/admin2/main.html:38
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:65
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:112
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:65
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:112
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:66
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:84
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:66
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:83
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:66
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:84
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:65
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:102
+msgid "Адресс"
+msgstr "Адрес"
+
+#: admin2/templates/admin2/main.html:39
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:113
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:49
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:113
+#: admin2/templates/admin2/rieltor_object/common/related_items.html:28
+#: admin2/templates/admin2/rieltor_object/common/related_items.html:58
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:49
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:85
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:49
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:84
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:414
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:416
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:103
+#: templates/base.html:173
+msgid "Цена"
+msgstr "Ціна"
+
+#: admin2/templates/admin2/main.html:40
+msgid "Комментарий"
+msgstr "Коментарій"
+
+#: admin2/templates/admin2/main.html:42
+msgid "Удалить все"
+msgstr "Видалити все"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:17
+#: admin2/templates/admin2/pay/pay_done.html:17
+#: admin2/templates/admin2/pay/pay_list.html:8
+#: admin2/templates/admin2/pay/pay_list.html:27
+msgid "Оплата франшизы"
+msgstr "Оплата франшизи"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:25
+msgid "Подтверждение оплаты"
+msgstr "Підтвердження оплати"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:35
+#: admin2/templates/admin2/pay/pay_done.html:35
+msgid "Шаг 1"
+msgstr "Крок 1"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:37
+#: admin2/templates/admin2/pay/pay_done.html:36
+msgid "Шаг 1 подтверждение"
+msgstr "Крок 1 підтвердження"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:45
+#: admin2/templates/admin2/pay/pay_done.html:44
+msgid "Шаг 2"
+msgstr "Крок 2"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:46
+#: admin2/templates/admin2/pay/pay_done.html:45
+msgid "Шаг 2 подтверждено"
+msgstr "Крок 2 підтвердження"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:54
+msgid "Сумма платежа"
+msgstr "Сума платежу"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:61
+msgid "Назначение платежа"
+msgstr "Призначення платежу"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:68
+msgid "Метод платежа"
+msgstr "Метод платежу"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:75
+msgid "Дней"
+msgstr "Днів"
+
+#: admin2/templates/admin2/pay/pay_confirm.html:98
+msgid "Перейти к оплате"
+msgstr "Перейти до оплати"
+
+#: admin2/templates/admin2/pay/pay_done.html:25
+msgid "Оплата проведена"
+msgstr "Оплата проведена"
+
+#: admin2/templates/admin2/pay/pay_list.html:19
+msgid "Оплата"
+msgstr "Оплата"
+
+#: admin2/templates/admin2/plan/navs/buy_build_nav.html:3
+#: admin2/templates/admin2/plan/navs/pass_build_nav.html:3
+#: admin2/templates/admin2/plan/navs/rent_build_nav.html:3
+#: admin2/templates/admin2/plan/navs/repair_build_nav.html:3
+#: admin2/templates/admin2/plan/navs/sale_build_nav.html:3
+msgid "Подготовка"
+msgstr "Приготування"
+
+#: admin2/templates/admin2/plan/navs/buy_build_nav.html:6
+#: admin2/templates/admin2/plan/navs/pass_build_nav.html:6
+#: admin2/templates/admin2/plan/navs/rent_build_nav.html:6
+#: admin2/templates/admin2/plan/navs/repair_build_nav.html:6
+#: admin2/templates/admin2/plan/navs/sale_build_nav.html:6
+msgid "Процесс"
+msgstr "Процес"
+
+#: admin2/templates/admin2/plan/navs/buy_build_nav.html:9
+#: admin2/templates/admin2/plan/navs/pass_build_nav.html:9
+#: admin2/templates/admin2/plan/navs/rent_build_nav.html:9
+#: admin2/templates/admin2/plan/navs/repair_build_nav.html:9
+#: admin2/templates/admin2/plan/navs/sale_build_nav.html:9
+msgid "Завершение"
+msgstr "Завершення"
+
+#: admin2/templates/admin2/plan/plan_edit.html:34
+#: admin2/templates/admin2/plan/plan_gallery.html:34
+#: admin2/templates/admin2/plan/plan_templates.html:34
+#: admin2/templates/admin2/polls/choices_create.html:34
+#: admin2/templates/admin2/polls/choices_list.html:34
+#: admin2/templates/admin2/polls/polls_edit.html:38
+#: admin2/templates/admin2/polls/question_create.html:34
+#: admin2/templates/admin2/polls/question_list.html:34
+#: admin2/templates/admin2/polls/result_edit.html:38
+#: admin2/templates/admin2/polls/result_list.html:34
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:56
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:108
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:110
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:107
+msgid "просмотр"
+msgstr "перегляд"
+
+#: admin2/templates/admin2/plan/plan_nav.html:7
+#: admin2/templates/admin2/rieltor_object/building/building_edit.html:68
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:123
+#: admin2/templates/admin2/rieltor_object/earth/earth_edit.html:120
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:125
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:119
+msgid "Галерея"
+msgstr "Галерея"
+
+#: admin2/templates/admin2/plan/plan_nav.html:10
+msgid "Шаблоны планов"
+msgstr "Шаблони планів"
+
+#: admin2/templates/admin2/polls/choices_create.html:41
+#: admin2/templates/admin2/polls/choices_list.html:46
+#: admin2/templates/admin2/polls/question_list.html:56
+msgid "Вопрос"
+msgstr "Питання"
+
+#: admin2/templates/admin2/polls/choices_list.html:53
+#: admin2/templates/admin2/polls/question_list.html:68
+msgid "Варианты"
+msgstr "Варіанти"
+
+#: admin2/templates/admin2/polls/choices_list.html:58
+msgid "Вариант"
+msgstr "Варіант"
+
+#: admin2/templates/admin2/polls/choices_list.html:59
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:109
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:44
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:109
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:44
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:82
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:99
+msgid "Балл"
+msgstr "Бал"
+
+#: admin2/templates/admin2/polls/polls_list.html:32
+msgid "Все Тесты"
+msgstr "Усі Тести"
+
+#: admin2/templates/admin2/polls/polls_list.html:42
+msgid "Тест прошло"
+msgstr "Тест пройшло"
+
+#: admin2/templates/admin2/polls/polls_list.html:43
+msgid "Вопросов"
+msgstr "Питань"
+
+#: admin2/templates/admin2/polls/polls_nav.html:8
+msgid "Вопросы"
+msgstr "Питання"
+
+#: admin2/templates/admin2/polls/polls_nav.html:11
+msgid "Результат прохождения"
+msgstr "Результат проходження"
+
+#: admin2/templates/admin2/polls/result_list.html:56
+msgid "Фото Заголовок"
+msgstr "Фото загаловок"
+
+#: admin2/templates/admin2/polls/result_list.html:58
+msgid "Баллов От - До"
+msgstr "Балів Від - До"
+
+#: admin2/templates/admin2/redirect/redirect_list.html:32
+msgid "Все Редиректы"
+msgstr "Усі Редіректи"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:23
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:23
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:23
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:23
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:23
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:23
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:89
+#: rieltor_object/templates/rieltor_object/building_list.html:141
+#: rieltor_object/templates/rieltor_object/daily_list.html:108
+#: rieltor_object/templates/rieltor_object/ofice_list.html:165
+msgid "Поиск"
+msgstr "Пошук"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:33
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:33
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:33
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:33
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:33
+msgid "Все"
+msgstr "Усі"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:59
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:59
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:59
+msgid "Краткое"
+msgstr "Коротке"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:60
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:60
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:60
+msgid "Обичное"
+msgstr "Звичайне"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:75
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:75
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:75
+msgid "Аренда"
+msgstr "Аренда"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:76
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:76
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:76
+msgid "Продажа"
+msgstr "Продаж"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:79
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:115
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:79
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:115
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:79
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:105
+msgid "Назначение"
+msgstr "Призначення"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:83
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:83
+msgid "Квартира"
+msgstr "Квартира"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:84
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:84
+msgid "Дом"
+msgstr "Дім"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:85
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:85
+msgid "Комната"
+msgstr "Кімната"
+
+#: admin2/templates/admin2/rieltor_object/building/building_list.html:111
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:54
+#: admin2/templates/admin2/rieltor_object/common/common_list1.html:111
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:54
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:101
+msgid "Статус"
+msgstr "Статус"
+
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:126
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:131
+msgid "Инфраструктура"
+msgstr "Інфраструктура"
+
+#: admin2/templates/admin2/rieltor_object/daily/daily_edit.html:129
+#: rieltor_object/templates/rieltor_object/daily.html:194
+msgid "Рядом с квартирой"
+msgstr "Поруч з квартирою"
+
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:54
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:86
+#: rieltor_object/templates/rieltor_object/daily.html:97
+#: rieltor_object/templates/rieltor_object/daily_list.html:91
+#: rieltor_object/templates/rieltor_object/include/daily_item.html:37
+msgid "Спальных мест"
+msgstr "Спальних місць"
+
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:61
+#: admin2/templates/admin2/rieltor_object/daily/daily_list.html:87
+#: rieltor_object/templates/rieltor_object/building.html:94
+#: rieltor_object/templates/rieltor_object/include/building_item.html:30
+#: rieltor_object/templates/rieltor_object/include/building_item.html:36
+#: rieltor_object/templates/rieltor_object/include/daily_item.html:28
+msgid "Комнат"
+msgstr "Кімнат"
+
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:33
+msgid "Вся"
+msgstr "Уся"
+
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:44
+#: rieltor_object/templates/rieltor_object/building.html:90
+#: rieltor_object/templates/rieltor_object/building_list.html:123
+#: rieltor_object/templates/rieltor_object/ofice.html:86
+#: rieltor_object/templates/rieltor_object/ofice_list.html:111
+msgid "Площадь"
+msgstr "Площа"
+
+#: admin2/templates/admin2/rieltor_object/earth/earth_list.html:85
+msgid "Площадь, соток"
+msgstr "Площа, соток"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:128
+msgid "Связанные объекты"
+msgstr "Пов'язані об'єкти"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_edit.html:134
+#: rieltor_object/templates/rieltor_object/daily.html:182
+msgid "Условия проживания"
+msgstr "Умови проживання"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:41
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:46
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:51
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:41
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:46
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:51
+msgid "От"
+msgstr "Від"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:42
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:47
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:52
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:42
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:47
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:52
+msgid "До"
+msgstr "До"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:82
+msgid "Балы"
+msgstr "Бали"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:85
+msgid "Цена м.кв"
+msgstr "Ціна м.кв"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:86
+msgid "Связаних обектов"
+msgstr "Пов'язаних об'єктів"
+
+#: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:88
+msgid "Дата сдачи"
+msgstr "Дата здачі"
+
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:83
+msgid "Офис"
+msgstr "Офіс"
+
+#: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:84
+msgid "Магазин"
+msgstr "Магазин"
+
+#: articles/templates/articles/article_detail.html:32
+msgid "Расскажите друзьям"
+msgstr "Розповісти друзям"
+
+#: articles/templates/articles/articles.html:19
+#: articles/templates/articles/sections.html:19
+msgid "Поиск статьей"
+msgstr "Пошук статей"
+
+#: articles/templates/articles/articles.html:22
+#: articles/templates/articles/sections.html:22
+#: rieltor_object/templates/rieltor_object/building_list.html:26
+#: rieltor_object/templates/rieltor_object/ofice_list.html:26
+msgid "Найти"
+msgstr "Знайти"
+
+#: articles/templates/articles/articles.html:37
+#: articles/templates/articles/sections.html:38
+#: rieltor_object/templates/rieltor_object/include/building_item.html:62
+#: rieltor_object/templates/rieltor_object/include/daily_item.html:53
+msgid "Загрузить еще"
+msgstr "Завантажити ще"
+
+#: articles/templates/articles/articles.html:38
+#: articles/templates/articles/sections.html:39
+msgid "статей"
+msgstr "статей"
+
+#: articles/templates/articles/include/article_prop.html:7
+msgid "Полезные статьи"
+msgstr "Корисні статті"
+
+#: articles/templates/articles/include/article_prop.html:26
+msgid "Читать все статьи"
+msgstr "Читати усі статті"
+
+#: common/mixins.py:20
+msgid "Сохранено"
+msgstr "Збережено"
+
+#: common/templates/common/application/block_order_an_inspection.html:4
+msgid "Заказать осмотр объекта"
+msgstr "Замовити огляд обєкту"
+
+#: common/templates/common/application/block_order_an_inspection.html:11
+#: common/templates/common/application/block_presentation.html:11
+#: common/templates/common/application/modal_booking.html:11
+#: rieltor_object/templates/rieltor_object/daily.html:164
+#: services/templates/services/rieltor_service.html:27
+#: services/templates/services/rieltor_service.html:170 templates/base.html:164
+#: templates/base.html:208 templates/index.html:178
+msgid "Введите ваше имя"
+msgstr "Введіть Ваше імя"
+
+#: common/templates/common/application/block_order_an_inspection.html:14
+#: common/templates/common/application/block_presentation.html:14
+#: rieltor_object/templates/rieltor_object/daily.html:167
+#: services/templates/services/rieltor_service.html:30
+#: services/templates/services/rieltor_service.html:173 templates/index.html:27
+#: templates/index.html:181
+msgid "Введите ваш телефон"
+msgstr "Введіть Ваш телефон"
+
+#: common/templates/common/application/block_order_an_inspection.html:17
+#: rieltor_object/templates/rieltor_object/daily.html:170
+#: services/templates/services/rieltor_service.html:176
+msgid "Отправить"
+msgstr "Відправити"
+
+#: common/templates/common/application/block_order_an_inspection.html:31
+msgid "Спасибо! Ваша заявка отправлена!"
+msgstr "Дякуємо! Ваша заявка відправлена!"
+
+#: common/templates/common/application/block_order_an_inspection.html:37
+msgid "Ошибка. Попробуйте позже."
+msgstr "Помилка. Спробуйте пізніше."
+
+#: common/templates/common/application/block_presentation.html:4
+msgid "Подберем вам необходимый объект за 30 минут"
+msgstr "Підберем необхідний Вам об'єкт за 30 хвилин"
+
+#: common/templates/common/application/block_presentation.html:6
+msgid "В базе более 1000 объектов"
+msgstr "В базі більше 1000 об'єктів"
+
+#: common/templates/common/application/block_presentation.html:17
+msgid "Введите ваше сообщение"
+msgstr "Введіть Ваше повідомлення"
+
+#: common/templates/common/application/block_presentation.html:20
+msgid "Связаться со специалистом"
+msgstr "Зв'язатися зі спеціалістом"
+
+#: common/templates/common/application/modal_booking.html:14
+#: common/templates/common/application/modal_object_parameter.html:37
+#: templates/base.html:167 templates/base.html:211
+msgid "Номер телефона"
+msgstr "Номер телефону"
+
+#: common/templates/common/application/modal_booking.html:18
+msgid "Забронировать объект"
+msgstr "Забронювати об'єкт"
+
+#: common/templates/common/application/modal_object_parameter.html:4
+msgid "Подберем вам объект по вашим"
+msgstr "Підбере Вам об'єкт по Вашиш"
+
+#: common/templates/common/application/modal_object_parameter.html:4
+msgid "параметрам за"
+msgstr "параметрах за"
+
+#: common/templates/common/application/modal_object_parameter.html:4
+#: templates/index.html:22
+msgid "минут"
+msgstr "хвилин"
+
+#: common/templates/common/application/modal_object_parameter.html:5
+msgid ""
+"Более 1000 объектов в базе и большой опыт в работе поможет нам решить вашу "
+"проблему"
+msgstr ""
+"Більше 1000 об'єктів в базі і великий досвід в роботі допоможе нам вирішити "
+"Вашу проблему"
+
+#: common/templates/common/application/modal_object_parameter.html:5
+msgid "в поиске подходящего"
+msgstr "в пошуку схожого"
+
+#: common/templates/common/application/modal_object_parameter.html:40
+#: rieltor_object/templates/rieltor_object/building_list.html:67
+#: rieltor_object/templates/rieltor_object/ofice_list.html:67
+msgid "Подобрать объект"
+msgstr "Підібрати об'єкт"
+
+#: common/templates/common/include/vip_left_sidebar.html:32
+#: rieltor_object/templates/rieltor_object/daily.html:39
+#: rieltor_object/templates/rieltor_object/daily.html:171
+#: rieltor_object/templates/rieltor_object/include/building_item.html:52
+#: rieltor_object/templates/rieltor_object/include/daily_item.html:44
+msgid "Подробнее"
+msgstr "Детальніше"
+
+#: gek/settings.py:117
+msgid "An error has occurred"
+msgstr ""
+
+#: gek/settings.py:120
+msgid "Русский"
+msgstr "Російська"
+
+#: gek/settings.py:121
+msgid "Украинский"
+msgstr "Українська"
+
+#: privat24/models.py:12
+msgid "amount"
+msgstr ""
+
+#: privat24/models.py:13
+msgid "ccy"
+msgstr ""
+
+#: privat24/models.py:14
+msgid "details"
+msgstr ""
+
+#: privat24/models.py:15
+msgid "pay way"
+msgstr ""
+
+#: privat24/models.py:16
+msgid "order"
+msgstr ""
+
+#: privat24/models.py:17
+msgid "merchant"
+msgstr ""
+
+#: privat24/models.py:18
+msgid "state"
+msgstr ""
+
+#: privat24/models.py:19
+msgid "date"
+msgstr ""
+
+#: privat24/models.py:20
+msgid "signature"
+msgstr ""
+
+#: privat24/models.py:21
+msgid "ext details"
+msgstr ""
+
+#: privat24/models.py:22
+msgid "reference"
+msgstr ""
+
+#: privat24/models.py:24
+msgid "sender phone"
+msgstr ""
+
+#: privat24/models.py:25
+msgid "raw data"
+msgstr ""
+
+#: privat24/models.py:28
+msgid "privat24 transaction"
+msgstr ""
+
+#: privat24/models.py:29
+msgid "privat24 transactions"
+msgstr ""
+
+#: privat24/models.py:32
+#, python-format
+msgid "Transaction #(%s)"
+msgstr ""
+
+#: rieltor_object/templates/rieltor_object/building.html:23
+#: rieltor_object/templates/rieltor_object/ofice.html:23 templates/base.html:66
+msgid "Недвижимость"
+msgstr "Нерухомість"
+
+#: rieltor_object/templates/rieltor_object/building.html:39
+#: rieltor_object/templates/rieltor_object/ofice.html:39
+msgid "Заказать осмотр"
+msgstr "Замовити огляд"
+
+#: rieltor_object/templates/rieltor_object/building.html:74
+#: rieltor_object/templates/rieltor_object/daily.html:76
+#: rieltor_object/templates/rieltor_object/ofice.html:74
+msgid "Информация"
+msgstr "Інформація"
+
+#: rieltor_object/templates/rieltor_object/building.html:98
+#: rieltor_object/templates/rieltor_object/building_list.html:132
+#: rieltor_object/templates/rieltor_object/daily.html:85
+#: rieltor_object/templates/rieltor_object/ofice.html:94
+#: rieltor_object/templates/rieltor_object/ofice_list.html:135
+msgid "Этаж"
+msgstr "Поверх"
+
+#: rieltor_object/templates/rieltor_object/building.html:102
+#, fuzzy
+#| msgid "Планы"
+msgid "Планировка"
+msgstr "Планування"
+
+#: rieltor_object/templates/rieltor_object/building.html:145
+#: rieltor_object/templates/rieltor_object/daily.html:138
+#: rieltor_object/templates/rieltor_object/ofice.html:145
+msgid "Поделиться с друзьями"
+msgstr "Поділитися з друзями"
+
+#: rieltor_object/templates/rieltor_object/building.html:154
+#: rieltor_object/templates/rieltor_object/daily.html:147
+#: rieltor_object/templates/rieltor_object/ofice.html:154
+msgid "Описание"
+msgstr "Опис"
+
+#: rieltor_object/templates/rieltor_object/building.html:166
+#: rieltor_object/templates/rieltor_object/daily.html:212
+#: rieltor_object/templates/rieltor_object/ofice.html:166
+msgid "На карте"
+msgstr "На карті"
+
+#: rieltor_object/templates/rieltor_object/building.html:172
+#: rieltor_object/templates/rieltor_object/daily.html:218
+#: rieltor_object/templates/rieltor_object/ofice.html:172
+msgid "Панорама"
+msgstr "Панорама"
+
+#: rieltor_object/templates/rieltor_object/building.html:189
+msgid "Квартира продается в новострое"
+msgstr "Квартира продається в новострої"
+
+#: rieltor_object/templates/rieltor_object/building.html:208
+#: templates/index.html:126
+msgid "Сдаваемых помещений"
+msgstr "Приміщень"
+
+#: rieltor_object/templates/rieltor_object/building.html:216
+msgid "Сдаётся с"
+msgstr "Здається з"
+
+#: rieltor_object/templates/rieltor_object/building.html:219
+#: templates/index.html:137
+msgid "Общая площадь"
+msgstr "Загальна площа"
+
+#: rieltor_object/templates/rieltor_object/building.html:221
+#: templates/base.html:57 templates/base.html:215 templates/base.html:284
+#: templates/index.html:57 templates/index.html:91 templates/index.html:139
+msgid "Оставить заявку"
+msgstr "Залишити заявку"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:23
+#: rieltor_object/templates/rieltor_object/ofice_list.html:23
+msgid "Искать в тексте объявления"
+msgstr "Шукати в тексті об'яви"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:43
+#: rieltor_object/templates/rieltor_object/daily_list.html:118
+#: rieltor_object/templates/rieltor_object/daily_list.html:120
+#: rieltor_object/templates/rieltor_object/ofice_list.html:43
+msgid "из"
+msgstr "із"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:56
+#: rieltor_object/templates/rieltor_object/daily_list.html:133
+#: rieltor_object/templates/rieltor_object/ofice_list.html:56
+msgid "Сортировка"
+msgstr "Сортування"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:58
+#: rieltor_object/templates/rieltor_object/daily_list.html:135
+#: rieltor_object/templates/rieltor_object/ofice_list.html:58
+msgid "Новые наверху"
+msgstr "Нові спочатку"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:59
+#: rieltor_object/templates/rieltor_object/daily_list.html:136
+#: rieltor_object/templates/rieltor_object/ofice_list.html:59
+msgid "Новые внизу"
+msgstr "Нові знизу"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:83
+#: rieltor_object/templates/rieltor_object/ofice_list.html:83
+msgid "Поиск недвижимости"
+msgstr "Пошук нерухомості"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:113
+#: rieltor_object/templates/rieltor_object/daily_list.html:64
+#: rieltor_object/templates/rieltor_object/ofice_list.html:101
+msgid "Стоимость"
+msgstr "Вартість"
+
+#: rieltor_object/templates/rieltor_object/building_list.html:144
+#: rieltor_object/templates/rieltor_object/daily_list.html:106
+#: rieltor_object/templates/rieltor_object/ofice_list.html:168
+msgid "очистить"
+msgstr "очистити"
+
+#: rieltor_object/templates/rieltor_object/daily.html:26
+msgid "Аренда квартиры посуточно"
+msgstr "Оренда квартири посуточно"
+
+#: rieltor_object/templates/rieltor_object/daily.html:38
+#: rieltor_object/templates/rieltor_object/include/daily_item.html:43
+msgid "Забронировать"
+msgstr "Забронювати"
+
+#: rieltor_object/templates/rieltor_object/daily.html:79
+msgid "сутки"
+msgstr "сутки"
+
+#: rieltor_object/templates/rieltor_object/daily.html:89
+msgid "Комнаты"
+msgstr "Кімнати"
+
+#: rieltor_object/templates/rieltor_object/daily.html:93
+msgid "Гостей"
+msgstr "Гостей"
+
+#: rieltor_object/templates/rieltor_object/daily.html:113
+msgid "В квартире есть"
+msgstr "В квартирі є"
+
+#: rieltor_object/templates/rieltor_object/daily.html:158
+msgid "Бронировать квартиру"
+msgstr "Бронювати квартиру"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:25
+msgid "Оформите заявку"
+msgstr "Оформити заявку"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:25
+msgid "на странице"
+msgstr "на сторінці"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:29
+msgid "Получите подтверждение наличие квартиры"
+msgstr "Отримайте підтвердження наявності квартири"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:33
+msgid "Заселения"
+msgstr "Заселення"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:33
+msgid "в квартиру"
+msgstr "в квартиру"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:40
+msgid "Введите имя"
+msgstr "Введіть імя"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:43
+msgid "Введите телефон"
+msgstr "Введіть телефон"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:46
+msgid "Заезд"
+msgstr "Заїзд"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:49
+msgid "Отъезд"
+msgstr "Відїзд"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:52
+#: services/templates/services/rieltor_service.html:118
+msgid "Отправить заявку"
+msgstr "Відправити заявку"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:61
+msgid "Найти квартиру"
+msgstr "Знайти квартиру"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:77
+msgid "Кол-во комнат"
+msgstr "Кіль-ть кімнат"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:128
+#: rieltor_object/templates/rieltor_object/ofice_list.html:51
+msgid "результатов"
+msgstr "результатів"
+
+#: rieltor_object/templates/rieltor_object/daily_list.html:144
+msgid "Подобрать квартиру"
+msgstr "Підібрати квартиру"
+
+#: rieltor_object/templates/rieltor_object/include/building_item.html:49
+msgid "Заказать просмотр"
+msgstr "Заказати огляд"
+
+#: rieltor_object/templates/rieltor_object/include/building_item.html:63
+#: rieltor_object/templates/rieltor_object/include/daily_item.html:54
+msgid "объектов"
+msgstr "об'єктів"
+
+#: rieltor_object/templates/rieltor_object/ofice.html:98
+#: rieltor_object/templates/rieltor_object/ofice_list.html:120
+msgid "Расположение"
+msgstr "Розміщення"
+
+#: seo/templates/seo/seo.html:20
+msgid "Читать всю статью"
+msgstr "Читати статтю повністю"
+
+#: services/templates/services/include/services_downbar.html:9
+msgid "Услуги агентства недвижимости"
+msgstr "Послуги агенства нерухомості"
+
+#: services/templates/services/include/services_sidebar.html:9
+msgid "Наши услуги"
+msgstr "Наші послуги"
+
+#: services/templates/services/rieltor_service.html:33
+msgid "Введите вашу почту"
+msgstr "Введіть Вашу пошту"
+
+#: services/templates/services/rieltor_service.html:36
+msgid "Ваши пожелания"
+msgstr "Ваші побажання"
+
+#: services/templates/services/rieltor_service.html:39
+#: services/templates/services/rieltor_service.html:124
+msgid "Получить подборку"
+msgstr "Отримати підбірку"
+
+#: services/templates/services/rieltor_service.html:49
+msgid "Нам доверяют"
+msgstr "Нам довіряють"
+
+#: services/templates/services/rieltor_service.html:57
+msgid "Лучшие цены"
+msgstr "Найкращі ціни"
+
+#: services/templates/services/rieltor_service.html:63
+msgid "Опытные специалисты"
+msgstr "Досвідчені спеціалісти"
+
+#: services/templates/services/rieltor_service.html:69
+msgid "Оперативность"
+msgstr "Оперативність"
+
+#: services/templates/services/rieltor_service.html:75
+msgid "Гарантии"
+msgstr "Гарантії"
+
+#: services/templates/services/rieltor_service.html:83
+msgid "Более 9 лет работы"
+msgstr "Більше 9 років роботи"
+
+#: services/templates/services/rieltor_service.html:89
+msgid "Конфиденциальность"
+msgstr "Конфідеційність"
+
+#: services/templates/services/rieltor_service.html:95
+msgid "Работа без предоплаты"
+msgstr "Робота без передоплати"
+
+#: services/templates/services/rieltor_service.html:101
+msgid "Пакетные рекламные"
+msgstr "Пакетні рекламні"
+
+#: services/templates/services/rieltor_service.html:101
+msgid "инструменты"
+msgstr "інструменти"
+
+#: services/templates/services/rieltor_service.html:110
+msgid "Как получить свой объект недвижимости?"
+msgstr "Як отримати свій об'єкт нерухомості?"
+
+#: services/templates/services/rieltor_service.html:118
+msgid "на подбор недвижимости"
+msgstr "на підбір нерухомості"
+
+#: services/templates/services/rieltor_service.html:124
+msgid "за 30 мин на почту или SMS"
+msgstr "за 30 хв. на пошту чи SMS"
+
+#: services/templates/services/rieltor_service.html:130
+msgid "Осмотр интерисующих вариантов"
+msgstr "Огляд варіантів"
+
+#: services/templates/services/rieltor_service.html:130
+msgid "и выбор подходящего"
+msgstr "і вибір відповідного"
+
+#: services/templates/services/rieltor_service.html:135
+msgid "Подготовка документов"
+msgstr "Підготовка документів"
+
+#: services/templates/services/rieltor_service.html:135
+msgid "и условий"
+msgstr " і умов"
+
+#: services/templates/services/rieltor_service.html:141
+msgid "Оформление задатка"
+msgstr "Оформлення завдатку"
+
+#: services/templates/services/rieltor_service.html:141
+msgid "и передача ключей"
+msgstr "і передача ключів"
+
+#: services/templates/services/rieltor_service.html:147
+msgid "Расчет с Агенством"
+msgstr "Розрахунок з Агенством"
+
+#: services/templates/services/rieltor_service.html:147
+msgid "недвижимости"
+msgstr "нерухомості"
+
+#: services/templates/services/rieltor_service.html:162
+msgid "Отправить заявку на подбор недвижимости"
+msgstr "Відправити заявку на підбір нерухомості"
+
+#: templates/404.html:22
+msgid "Страница не найдена"
+msgstr "Сторінку не знайдено"
+
+#: templates/404.html:27
+msgid "На главную"
+msgstr "На головну"
+
+#: templates/base.html:51
+msgid "Пройди тест"
+msgstr "Пройти тест"
+
+#: templates/base.html:52
+msgid "Смотреть видео"
+msgstr "Дивитися відео"
+
+#: templates/base.html:53
+msgid "Составить план"
+msgstr "Скласти план"
+
+#: templates/base.html:54
+msgid "Избранное"
+msgstr "Вибране"
+
+#: templates/base.html:58 templates/base.html:161 templates/base.html:285
+msgid "Добавить объявление"
+msgstr "Додати оголошення"
+
+#: templates/base.html:75
+#, fuzzy
+#| msgid "Квартиры и дома"
+msgid "Квартиры и Дома"
+msgstr "Квартири і дома"
+
+#: templates/base.html:155
+msgid "Заполните заявку и мы приведем Вам клиента с деньгами!"
+msgstr "Заповніть заявку і ми приведемо Вам клієнта з грошима!"
+
+#: templates/base.html:156
+msgid "По возможности пришлите фотографии объекта на почту"
+msgstr "По можливості надішліть фотографії об'єкта на пошту"
+
+#: templates/base.html:170
+msgid "Адрес"
+msgstr "Адрес"
+
+#: templates/base.html:178
+msgid "Максимально подробно опишите ваш объект"
+msgstr "Максимально детально опишіть Ваш об'єкт"
+
+#: templates/base.html:182
+msgid "Добавить"
+msgstr "Додати"
+
+#: templates/base.html:229
+msgid ""
+"Все права на материалы, находящиеся на сайте, охраняются в соответствии с "
+"законодательством."
+msgstr ""
+"Усі права на матеріали, які знаходяться на сайті, охороняються у "
+"відповідності з законодавством."
+
+#: templates/base.html:243
+msgid "Выбрать"
+msgstr "Вибрати"
+
+#: templates/base.html:251
+msgid "Смотреть видео передачи"
+msgstr "Дивитися відео передачі"
+
+#: templates/base.html:252
+msgid "Пройти тест"
+msgstr "Пройти тест"
+
+#: templates/base.html:253
+msgid "Нарисовать Тех План"
+msgstr "Намалювати Тех План"
+
+#: templates/index.html:22
+msgid "Помогаем с любой операцией по недвижимости за"
+msgstr "Допомагаємо з будь якою операцією по нерухомості за"
+
+#: templates/index.html:30
+msgid "Заказать бесплатную консультацию"
+msgstr "Замовити безкоштовну консультацію"
+
+#: templates/index.html:38 templates/index.html:70
+msgid "Горячие предложения"
+msgstr "Гарячі пропозиції"
+
+#: templates/index.html:104
+#, fuzzy
+#| msgid "Новострои"
+msgid "Новостройки"
+msgstr "Новострої"
+
+#: templates/index.html:134
+msgid "Сдаётся с "
+msgstr "Здається з"
+
+#: templates/index.html:153
+msgid "Любая операция с недвижимостью за 30 минут"
+msgstr "Будь яка операція з нерухомістю за 30 хвилин"
+
+#: templates/index.html:156
+msgid "Посмотреть"
+msgstr "Переглянути"
+
+#: templates/index.html:156
+msgid "видеопрезентацию"
+msgstr "відеопрезентацію"
+
+#: templates/index.html:160
+msgid "Оказание помощи"
+msgstr "Надання допомоги"
+
+#: templates/index.html:160
+msgid "при заключении договора"
+msgstr "при укладенні договору"
+
+#: templates/index.html:164
+msgid "Подборка помещений"
+msgstr "Підбір приміщень"
+
+#: templates/index.html:164
+msgid "на почту за 2 часа"
+msgstr "на пошту за 2 години"
+
+#: templates/index.html:168
+msgid "Договорённость"
+msgstr "Домовленність"
+
+#: templates/index.html:168
+msgid "на осмотр помещения"
+msgstr "на огляд приміщення"
+
+#: templates/index.html:172
+msgid "Бесплатное размещение"
+msgstr "Безкоштовне розміщення"
+
+#: templates/index.html:172
+msgid "объявлений на сайте"
+msgstr "оголошень на сайті"
+
+#: templates/index.html:184
+msgid "Связаться с агентством"
+msgstr "Зв'язатися з агенством"

@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load base_tag %}
+{% load i18n %}
 {% domen_admin as domain %}
 {% franchise as franchise %}
 {% franchise_day as franchise_day %}
@@ -61,19 +62,19 @@
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <ul class="nav side-menu">
-                                    <li class="{% if request.path == '/admin/' %} active {% endif %}"><a href="{% url 'admin2:main' %}"><i class="fa fa-home"></i> Главная </a></li>
-                                    <li><a><i class="fa fa-edit"></i> Статьи <span class="fa fa-chevron-down"></span></a>
+                                    <li class="{% if request.path == '/admin/' %} active {% endif %}"><a href="{% url 'admin2:main' %}"><i class="fa fa-home"></i> {% trans 'Главная' %}  </a></li>
+                                    <li><a><i class="fa fa-edit"></i> {% trans 'Статьи' %} <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="{% url 'admin2:articles' %}"><i class="fa fa-pencil"></i>Статьи</a></li>
-                                            <li><a href="{% url 'admin2:sections' %}"><i class="fa fa-outdent"></i> Рубрики статей</a></li>
+                                            <li><a href="{% url 'admin2:articles' %}"><i class="fa fa-pencil"></i>{% trans 'Статьи' %}</a></li>
+                                            <li><a href="{% url 'admin2:sections' %}"><i class="fa fa-outdent"></i>{% trans ' Рубрики статей' %}</a></li>
                                         </ul>
                                     </li>
 {#                                    {% if request.user.is_superuser %}#}
-                                    <li><a href="{% url 'admin2:static_pages' %}"><i class="fa fa-file-text"></i> Страницы </a></li>
-                                    <li><a href="{% url 'admin2:services' %}"><i class="fa fa-suitcase"></i> Услуги </a></li>
+                                    <li><a href="{% url 'admin2:static_pages' %}"><i class="fa fa-file-text"></i>{% trans 'Страницы ' %}</a></li>
+                                    <li><a href="{% url 'admin2:services' %}"><i class="fa fa-suitcase"></i> {% trans 'Услуги' %} </a></li>
 {#                                    {% endif %}#}
 {#                                    <li><a href="#"><i class="fa fa-users"></i> Партнеры </a></li>#}
-                                    <li><a><i class="fa fa-server"></i> Объекты <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-server"></i> {% trans 'Объекты' %} <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             {% building_is_enable as building_is_enable %}
                                             {% ofices_is_enable as ofices_is_enable %}
@@ -81,50 +82,50 @@
                                             {% newbuilding_is_enable as newbuilding_is_enable %}
                                             {% earth_is_enable as earth_is_enable %}
                                             {% if building_is_enable %}
-                                                <li><a href="{% url 'admin2:buildings' %} "><i class="fa fa-home"></i>Квартиры и дома</a></li>
+                                                <li><a href="{% url 'admin2:buildings' %} "><i class="fa fa-home"></i>{% trans 'Квартиры и дома' %}</a></li>
                                             {% endif %}
                                             {% if ofices_is_enable %}
-                                                <li><a href="{% url 'admin2:ofices' %}"><i class="fa fa-money"></i>Офисы и магазины</a></li>
+                                                <li><a href="{% url 'admin2:ofices' %}"><i class="fa fa-money"></i>{% trans 'Офисы и магазины' %}</a></li>
                                             {% endif %}
                                             {% if daily_is_enable %}
-                                                <li><a href="{% url 'admin2:dailys' %}"><i class="fa fa-calendar"></i>Посуточно</a></li>
+                                                <li><a href="{% url 'admin2:dailys' %}"><i class="fa fa-calendar"></i>{% trans 'Посуточно' %}</a></li>
                                             {% endif %}
                                             {% if newbuilding_is_enable %}
-                                                <li><a href="{% url 'admin2:newbuildings' %}"><i class="fa fa-building"></i>Новострои</a></li>
+                                                <li><a href="{% url 'admin2:newbuildings' %}"><i class="fa fa-building"></i>{% trans 'Новострои' %}</a></li>
                                             {% endif %}
                                             {% if earth_is_enable %}
-                                                <li><a href="{% url 'admin2:earth' %}"><i class="fa fa-globe"></i>Земля</a></li>
+                                                <li><a href="{% url 'admin2:earth' %}"><i class="fa fa-globe"></i>{% trans 'Земля' %}</a></li>
                                             {% endif %}
 
                                         </ul>
                                     </li>
-                                    <li><a href="{% url 'admin2:trust' %}"><i class="fa fa-address-card-o"></i> Доверие </a></li>
-                                    <li><a href="{% url 'admin2:contact' %}"><i class="fa fa-user"></i> Контакты </a></li>
-                                    <li><a href="{% url 'admin2:videos' %}"><i class="fa fa-youtube-play"></i> Видео </a></li>
-                                    <li><a href="{% url 'admin2:plan' %}"><i class="fa fa-calendar-check-o"></i> Планы </a></li>
-                                    <li><a href="{% url 'admin2:polls' %}"><i class="fa fa-indent"></i> Тесты </a></li>
+                                    <li><a href="{% url 'admin2:trust' %}"><i class="fa fa-address-card-o"></i> {% trans 'Доверие' %} </a></li>
+                                    <li><a href="{% url 'admin2:contact' %}"><i class="fa fa-user"></i> {% trans 'Контакты' %} </a></li>
+                                    <li><a href="{% url 'admin2:videos' %}"><i class="fa fa-youtube-play"></i> {% trans 'Видео' %}</a></li>
+                                    <li><a href="{% url 'admin2:plan' %}"><i class="fa fa-calendar-check-o"></i> {% trans 'Планы' %} </a></li>
+                                    <li><a href="{% url 'admin2:polls' %}"><i class="fa fa-indent"></i> {% trans 'Тесты' %} </a></li>
                                     {% if request.user.is_superuser %}
-                                        <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> Баннеры </a></li>
+                                        <li><a href="{% url 'admin2:banners' %}"><i class="fa fa-picture-o"></i> {% trans 'Баннеры' %}</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'admin2:landings' %}"><i class="fa fa-calendar-check-o"></i> Лэндинги </a></li>
+                                    <li><a href="{% url 'admin2:landings' %}"><i class="fa fa-calendar-check-o"></i> {% trans 'Лэндинги' %} </a></li>
 {#                                    <li><a href="#"><i class="fa fa-cloud-upload"></i> Файлы </a></li>#}
                                     <li><a href="{% url 'admin2:seo' %}"><i class="fa fa-ravelry"></i> SEO </a></li>
-                                    <li><a href="{% url 'admin2:redirects' %}"><i class="fa fa-reply-all"></i> Редирект </a></li>
-                                    <li><a href="{% url 'users:admins' %}"><i class="fa fa-lock"></i> Администраторы </a></li>
-                                    <li><a><i class="fa fa-cogs"></i> Настройки сайта <span class="fa fa-chevron-down"></span></a>
+                                    <li><a href="{% url 'admin2:redirects' %}"><i class="fa fa-reply-all"></i> {% trans 'Редирект' %} </a></li>
+                                    <li><a href="{% url 'users:admins' %}"><i class="fa fa-lock"></i> {% trans 'Администраторы' %} </a></li>
+                                    <li><a><i class="fa fa-cogs"></i> {% trans 'Настройки сайта' %} <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             {% if request.user.is_superuser %}
-                                                <li><a href="{% url 'admin2:settings' %}"><i class="fa fa-cog"></i>Параметры</a></li>
+                                                <li><a href="{% url 'admin2:settings' %}"><i class="fa fa-cog"></i>{% trans 'Параметры' %}</a></li>
                                             {% endif %}
-                                            <li><a href="{% url 'admin2:email_forward' %}"><i class="fa fa-mail-forward"></i>Почта для рассылки</a></li>
-                                            <li><a href="{% url 'admin2:districts_nav' %}"><i class="fa fa-map-marker"></i>Районы</a></li>
+                                            <li><a href="{% url 'admin2:email_forward' %}"><i class="fa fa-mail-forward"></i>{% trans 'Почта для рассылки' %}</a></li>
+                                            <li><a href="{% url 'admin2:districts_nav' %}"><i class="fa fa-map-marker"></i>{% trans 'Районы' %}</a></li>
 {#                                            <li><a href="#"><i class="fa fa-user"></i>Сотрудники</a></li>#}
 {#                                            <li><a href="#"><i class="fa fa-trophy"></i>Награды</a></li>#}
 {#                                            <li><a href="#"><i class="fa fa-comment"></i>Отзывы клиентов</a></li>#}
-                                            <li><a href="{% url 'admin2:counter' %}"><i class="fa fa-bar-chart"></i>Счетчики</a></li>
+                                            <li><a href="{% url 'admin2:counter' %}"><i class="fa fa-bar-chart"></i>{% trans 'Счетчики' %}</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{% url 'admin2:helps_watch' %}"><i class="fa fa-question"></i> Справка </a></li>
+                                    <li><a href="{% url 'admin2:helps_watch' %}"><i class="fa fa-question"></i> {% trans 'Справка' %} </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -163,22 +164,22 @@
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                        <li><a href="{{ request.user.get_absolute_url }}"> Профиль</a></li>
-                                        <li><a href="{% url 'admin2:auth_logout' %}"><i class="fa fa-sign-out pull-right"></i> Виход</a></li>
+                                        <li><a href="{{ request.user.get_absolute_url }}"> {% trans 'Профиль' %}</a></li>
+                                        <li><a href="{% url 'admin2:auth_logout' %}"><i class="fa fa-sign-out pull-right"></i> {% trans 'Виход' %}</a></li>
                                     </ul>
                                 </li>
 
 
                                 <li role="presentation" class="dropdown">
                                     <a href="{% url 'admin2:main' %}" class="dropdown-toggle info-number" >
-                                        Новые заявки
+                                        {% trans 'Новые заявки' %}
                                         <i class="fa fa-envelope-o"></i>
                                         <span class="badge bg-green notify"></span>
                                     </a>
                                 </li>
                                 <li role="presentation" class="dropdown">
                                     <a href="{% url 'admin2:paylist' %}" class="dropdown-toggle info-number" >
-                                        Франшиза
+                                        {% trans 'Франшиза' %}
                                         {% if franchise %}
                                             <i class="fa fa-check" style="color: green"></i>
                                             {% else %}
@@ -190,17 +191,17 @@
 
                                 <li role="presentation" class="dropdown">
                                 {% if franchise %}
-                                    <span class="badge {% if franchise_day < 3 %} bg-orange {% else %} bg-blue {% endif %}" style="margin-top: 20px">осталось: {{ franchise_day }}
+                                    <span class="badge {% if franchise_day < 3 %} bg-orange {% else %} bg-blue {% endif %}" style="margin-top: 20px">{% trans 'осталось' %}: {{ franchise_day }}
                                         {% if franchise_day == 1 %}
-                                            день
+                                            {% trans 'день' %}
                                         {% elif franchise_day == 2 %}
-                                            дня
+                                            {% trans 'дня' %}
                                             {% else %}
-                                            дней
+                                            {% trans 'дней' %}
                                         {% endif %}
                                     </span>
                                 {% else %}
-                                    <span class="badge bg-red" style="margin-top: 20px">неактивна</span>
+                                    <span class="badge bg-red" style="margin-top: 20px">{% trans 'неактивна' %}</span>
                                 {% endif %}
 
 

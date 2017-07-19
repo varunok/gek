@@ -1,13 +1,14 @@
+{% load i18n %}
 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
     <li role="presentation" {% if not 'seo' in request.path and not 'form' in request.path %}class="active"{% endif %} >
-        <a href="{{ object.get_edit_url }}">Редактировать</a>
+        <a href="{{ object.get_edit_url }}">{% trans 'Редактировать' %}</a>
     </li>
     {% if object.id %}
         <li role="presentation" {% if 'seo' in request.path %}class="active"{% endif %}>
             <a href="{% url 'admin2:landing_edit_seo' object.id %}">SEO</a>
         </li>
         <li role="presentation" {% if 'form' in request.path %}class="active"{% endif %}>
-            <a href="{% url 'admin2:landing_edit_form' object.id %}">Форма</a>
+            <a href="{% url 'admin2:landing_edit_form' object.id %}">{% trans 'Форма' %}</a>
         </li>
     {% endif %}
 </ul>

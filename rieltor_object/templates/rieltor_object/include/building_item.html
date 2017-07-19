@@ -1,6 +1,7 @@
 {% load favorites_tag %}
 {% load base_tag %}
 {% load thumbnail %}
+{% load i18n %}
 {% for object in object_list %}
     <div class="views_row vip_row">
         {% if object.is_vip %}
@@ -26,13 +27,13 @@
             <div class="top_wrap">
                 {% if object.rooms %}
                     <div class="info">
-                        <div class="label">Комнат:</div>
+                        <div class="label">{% trans 'Комнат' %}:</div>
                         <div class="item">{{ object.rooms }}</div>
                     </div>
                 {% endif %}
                 {% if object.footage %}
                     <div class="info">
-                        <div class="label">Площадь:</div>
+                        <div class="label">{% trans 'Комнат' %}:</div>
                         <div class="item">{{ object.footage|default_if_none:'' }} м<sup>2</sup></div>
                     </div>
                 {% endif %}
@@ -45,10 +46,10 @@
             </div>
             <div class="bottom_wrap">
                 <div class="statistics">{{ object.views }}</div>
-                <div class="read_more preview submit-add-inspection-modal"><a href="/">Заказать просмотр</a></div>
+                <div class="read_more preview submit-add-inspection-modal"><a href="/">{% trans 'Заказать просмотр' %}</a></div>
                 <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
                 {% if not object.is_short %}
-                    <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
+                    <div class="read_more"><a href="{{ object.get_absolute_url }}">{% trans 'Подробнее' %}</a></div>
                 {% endif %}
             </div>
         </div>
@@ -58,8 +59,8 @@
     <div class="load_more_wrap">
         <div class="load_more read_more">
             <a href="#">
-                Загрузить еще
-                <span>{{ count_next }}</span> объектов
+                {% trans 'Загрузить еще' %}
+                <span>{{ count_next }}</span> {% trans 'объектов' %}
             </a>
         </div>
     </div>

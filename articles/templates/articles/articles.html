@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -15,10 +16,10 @@
 			<div class="slider_title">{{ seo.title|default:'Статьи' }}</div>
 			<form class="webform_client_form">
 				<div class="form_item search">
-                    <input name="q" value="{{ request.GET.q }}" type="text" placeholder="Поиск статьей">
+                    <input name="q" value="{{ request.GET.q }}" type="text" placeholder="{% trans 'Поиск статьей' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Найти">
+					<input class="form-submit" type="submit" value="{% trans 'Найти' %}">
 				</div>
 			</form>
 		</div>
@@ -33,8 +34,8 @@
                             {% if count_next %}
                                 <div class="load_more read_more">
                                     <a href="#">
-                                        Загрузить еще
-                                        <span>{{ count_next }}</span> статей
+                                        {% trans 'Загрузить еще' %}
+                                        <span>{{ count_next }}</span> {% trans 'статей' %}
                                     </a>
                                 </div>
                             {% endif %}
@@ -48,7 +49,7 @@
 					<div class="menu_wrap">
 						<ul>
 							<li>
-                                <a href="#" class="active">Все статьи <span class="count">{{ object_list.count }}</span></a>
+                                <a href="#" class="active">{% trans 'Все статьи' %} <span class="count">{{ object_list.count }}</span></a>
                             </li>
                             {% for section in sections %}
                                 {% if section.articles.count %}

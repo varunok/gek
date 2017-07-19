@@ -15,9 +15,9 @@
 		<div class="slider_main slider_notfront" {% if object.title_image %}style="background: url({{ object.title_image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="top_inner_content">
 				<div class="main_breadcrumbs">
-                    <a href="/">Главная</a>
+                    <a href="/">{% trans 'Главная' %}</a>
                     <span class="delimiter">/</span>
-                    <a href="{% url 'articles:articles' %}">Статьи</a>
+                    <a href="{% url 'articles:articles' %}">{% trans 'Статьи' %}</a>
                     <span class="delimiter">/</span>
                     <a href="{% url 'articles:sections_detail' article.sections.slug %}">{{ article.sections.name }}</a>
                     <span class="delimiter">/</span>
@@ -29,7 +29,7 @@
 					<div class="icon stat">{{ article.views }}</div>
 				</div>
 			<div class="social_likes_wrapper">
-				<div class="label">Расскажите друзьям:</div>
+				<div class="label">{% trans 'Расскажите друзьям' %}:</div>
 				<div class="social-likes social-likes_vertical" data-counters="no">
 					<div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
 					<div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
@@ -58,7 +58,7 @@
 					<div class="menu_wrap">
 						<ul>
 							<li>
-                                <a href="{% url 'articles:articles' %}" >Все статьи <span class="count">{{ article_count }}</span></a>
+                                <a href="{% url 'articles:articles' %}" >{% trans 'Все статьи' %} <span class="count">{{ article_count }}</span></a>
                             </li>
                             {% for section in sections %}
                                 {% if section.articles.count %}
