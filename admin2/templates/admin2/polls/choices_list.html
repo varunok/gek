@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редактирование {{ verbose_name }}{% endblock title %}
+{% block title %}{% trans 'Редактирование' %} {{ verbose_name }}{% endblock title %}
 
 {% block css %}
 {% endblock css %}
@@ -23,14 +24,14 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить {{ object }}</h2>
+                            <h2>{% trans 'Изменить' %} {{ object }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <ul class="stats-overview">
                                 <li >
                                     <span class="name"> URL </span>
-                                    <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                    <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">{% trans 'просмотр' %}</a></span>
                                 </li>
                             </ul>
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -42,20 +43,20 @@
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                                     <div class="x_panel">
                                                         <div class="x_title">
-                                                            Вопрос: {{ question }}
+                                                            {% trans 'Вопрос' %}: {{ question }}
                                                             <div style="float: right">
-                                                                <a href="{% url 'admin2:create_choices' object.id question.id  %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                                                                <a href="{% url 'admin2:create_choices' object.id question.id  %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
                                                             </div>
                                                             <div class="clearfix"></div>
                                                         </div>
                                                         <div class="x_content">
-                                                        <h4>Варианты</h4>
+                                                        <h4>{% trans 'Варианты' %}</h4>
                                                             <table class="table table-striped projects">
                                                                 <thead>
                                                                 <tr>
                                                                     <th style="width: 1%">#</th>
-                                                                    <th style="width: 20%">Вариант</th>
-                                                                    <th style="width: 20%">Балл</th>
+                                                                    <th style="width: 20%">{% trans 'Вариант' %}</th>
+                                                                    <th style="width: 20%">{% trans 'Балл' %}</th>
                                                                     <th style="width: 10%"></th>
                                                                 </tr>
                                                                 </thead>
@@ -66,8 +67,8 @@
                                                                         <td>{{ var.choice_text }}</td>
                                                                         <td>{{ var.ball }}</td>
                                                                         <td>
-                                                                            <a href="{% url 'admin2:delete_choices' object.id question.id var.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить </a>
-                                                                            <a href="{% url 'admin2:edit_choices' object.id question.id var.id %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                                            <a href="{% url 'admin2:delete_choices' object.id question.id var.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
+                                                                            <a href="{% url 'admin2:edit_choices' object.id question.id var.id %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                                                         </td>
                                                                     </tr>
                                                                 {% endfor %}

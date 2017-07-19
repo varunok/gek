@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block title %}{{ title }}{% endblock title %}
 
@@ -13,7 +14,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Оплата франшизы</h3>
+                    <h3>{% trans 'Оплата франшизы' %}</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -21,7 +22,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Подтверждение оплаты</h2>
+                            <h2>{% trans 'Подтверждение оплаты' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -31,8 +32,9 @@
                                         <a href="#step-1" class="selected">
                                             <span class="step_no">1</span>
                                             <span class="step_descr">
-                                                Шаг 1<br />
-                                                <small>Шаг 1 подтверждение</small>
+                                                {% trans 'Шаг 1' %}
+                                                <br/>
+                                                <small>{% trans 'Шаг 1 подтверждение' %}</small>
                                             </span>
                                         </a>
                                     </li>
@@ -40,8 +42,8 @@
                                     <a href="#step-2" class="disabled">
                                         <span class="step_no">2</span>
                                         <span class="step_descr">
-                                            Шаг 2<br />
-                                            <small>Шаг 2 подтверждено</small>
+                                            {% trans 'Шаг 2' %}<br />
+                                            <small>{% trans 'Шаг 2 подтверждено' %}</small>
                                         </span>
                                     </a>
                                     </li>
@@ -49,28 +51,28 @@
                                 <div id="step-1">
                                     <div class="form-horizontal form-label-left">
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Сумма платежа: <span class="required"></span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{% trans 'Сумма платежа' %}: <span class="required"></span>
                                             </label>
                                             <div class="col-md-7 col-sm-7 col-xs-12">
                                                 <input type="text" disabled value="{{ price }} {{ currency }}" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Назначение платежа: <span class="required"></span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{% trans 'Назначение платежа' %}: <span class="required"></span>
                                             </label>
                                             <div class="col-md-7 col-sm-7 col-xs-12">
                                                 <input type="text" disabled value="Продление франшизы {{ request.get_host }}" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Метод платежа: <span class="required"></span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{% trans 'Метод платежа' %}: <span class="required"></span>
                                             </label>
                                             <div class="col-md-7 col-sm-7 col-xs-12">
                                                 <input type="text" disabled value="{{ method }}" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Дней: <span class="required"></span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{% trans 'Дней' %}: <span class="required"></span>
                                             </label>
                                             <div class="col-md-7 col-sm-7 col-xs-12">
                                                 <input type="text" disabled value="{{ days }}" class="form-control col-md-7 col-xs-12">
@@ -93,7 +95,7 @@
                                             <input type="hidden" name="server_url" value="{{ fields.server_url }}">
     {#                                        <input type="hidden" name="signature" value="{{ fields.signature }}">#}
                                             <div class="form-group" style="float: right">
-                                                <input type="submit" class="btn btn-success" value="Перейти к оплате">
+                                                <input type="submit" class="btn btn-success" value="{% trans 'Перейти к оплате' %}">
                                             </div>
                                         </form>
                                     {% endif %}

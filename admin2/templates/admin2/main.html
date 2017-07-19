@@ -1,6 +1,7 @@
 {% extends 'admin2/base.html' %}
 
 {% load static from staticfiles %}
+{% load i18n %}
 
 {% block title %}{% endblock title %}
 
@@ -12,7 +13,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Заявки</h3>
+                    <h3>{% trans 'Заявки' %}</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -20,7 +21,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Последние заявки</h2>
+                            <h2>{% trans 'Последние заявки' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -29,16 +30,16 @@
                                 <tr>
                                     <th style="width: 1%">#</th>
                                     <th style="width: 1%">ID</th>
-                                    <th style="width: 10%">Дата</th>
-                                    <th style="width: 10%">Источник</th>
-                                    <th style="width: 10%">Имя</th>
-                                    <th style="width: 10%">Телефон</th>
+                                    <th style="width: 10%">{% trans 'Дата' %}</th>
+                                    <th style="width: 10%">{% trans 'Источник' %}</th>
+                                    <th style="width: 10%">{% trans 'Имя' %}</th>
+                                    <th style="width: 10%">{% trans 'Телефон' %}</th>
                                     <th style="width: 10%">Email</th>
-                                    <th style="width: 10%">Адресс</th>
-                                    <th style="width: 10%">Цена</th>
-                                    <th>Комментарий</th>
+                                    <th style="width: 10%">{% trans 'Адресс' %}</th>
+                                    <th style="width: 10%">{% trans 'Цена' %}</th>
+                                    <th>{% trans 'Комментарий' %}</th>
                                     <th style="width: 5%">
-                                        <a href="#" class="btn btn-danger btn-xs" id="del-all-app"><i class="fa fa-trash-o"></i> Удалить все </a>
+                                        <a href="#" class="btn btn-danger btn-xs" id="del-all-app"><i class="fa fa-trash-o"></i> {% trans 'Удалить все' %} </a>
                                     </th>
                                 </tr>
                                 </thead>
@@ -56,7 +57,7 @@
                                         <td>{{ app.price|default_if_none:'---' }}</td>
                                         <td>{{ app.text|default_if_none:'---' }}</td>
                                         <td>
-                                            <a href="{{ app.id }}" class="btn btn-danger btn-xs del-app"><i class="fa fa-trash-o"></i> Удалить </a>
+                                            <a href="{{ app.id }}" class="btn btn-danger btn-xs del-app"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

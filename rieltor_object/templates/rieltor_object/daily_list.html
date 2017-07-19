@@ -6,6 +6,7 @@
 {% load thumbnail %}
 {% load banners_tag %}
 {% load rieltor_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -21,34 +22,34 @@
 			<div class="slider_list">
 				<div class="item">
 					<div class="li">1</div>
-					<div class="field_item">Оформите заявку <br>на странице</div>
+					<div class="field_item">{% trans 'Оформите заявку' %} <br>{% trans 'на странице' %}</div>
 				</div>
 				<div class="item">
 					<div class="li">2</div>
-					<div class="field_item">Получите подтверждение наличие квартиры</div>
+					<div class="field_item">{% trans 'Получите подтверждение наличие квартиры' %}</div>
 				</div>
 				<div class="item">
 					<div class="li">3</div>
-					<div class="field_item">Заселения <br>в квартиру</div>
+					<div class="field_item">{% trans 'Заселения' %} <br>{% trans 'в квартиру' %}</div>
 				</div>
 			</div>
 			<form action="#" class="webform_client_form" id="form-page-daily">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Оставить заявку. Страница посуточно.">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
 				</div>
 				<div class="form_item date">
-					<input name="comming" type="text" id="datepicker" placeholder="Заезд">
+					<input name="comming" type="text" id="datepicker" placeholder="{% trans 'Заезд' %}">
 				</div>
 				<div class="form_item date">
-					<input name="go" type="text" id="datepicker2" placeholder="Отъезд">
+					<input name="go" type="text" id="datepicker2" placeholder="{% trans 'Отъезд' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить заявку' %}">
 				</div>
 			</form>
 
@@ -57,10 +58,10 @@
 			<div class="container">
 				<div id="content">
 					<div class="block search_results search_products">
-						<div class="form_title">Найти квартиру</div>
+						<div class="form_title">{% trans 'Найти квартиру' %}</div>
 						<form action="." method="get" class="webform_client_form search-form">
 							<div class="form_item group form_wrapper">
-								<label>Стоимость, {{ nac_carrency }}:</label>
+								<label>{% trans 'Стоимость' %}, {{ nac_carrency }}:</label>
 								<div class="form_number">
 									{{ filter_form.form.price__gt }}
 								</div>
@@ -69,11 +70,11 @@
 								</div>
 							</div>
 							<div class="form_item form_select form_wrapper area_select">
-								<label for="{{ filter_form.form.district.id_for_label }}">Район:</label>
+								<label for="{{ filter_form.form.district.id_for_label }}">{% trans 'Район' %}:</label>
 								{{ filter_form.form.district }}
 							</div>
 							<div class="form_item form_select form_wrapper">
-								<label for="{{ filter_form.form.rooms.id_for_label }}">Кол-во комнат:</label>
+								<label for="{{ filter_form.form.rooms.id_for_label }}">{% trans 'Кол-во комнат' %}:</label>
                                 <select name="{{ filter_form.form.rooms.name }}" id="{{ filter_form.form.rooms.id_for_label }}">
                                     {% for rooms in filter_form.form.rooms %}
                                         {% if rooms.data.value %}
@@ -87,7 +88,7 @@
 								</select>
 							</div>
 							<div class="form_item form_select form_wrapper">
-								<label for="{{ filter_form.form.sleeping_places.id_for_label }}">Спальных мест:</label>
+								<label for="{{ filter_form.form.sleeping_places.id_for_label }}">{% trans 'Спальных мест' %}:</label>
 								<select name="{{ filter_form.form.sleeping_places.name }}" id="{{ filter_form.form.sleeping_places.id_for_label }}">
                                     {% for sleeping_places in filter_form.form.sleeping_places %}
                                         {% if sleeping_places.data.value %}
@@ -102,9 +103,9 @@
 							</div>
 							<div class="form_actions">
 								<div class="links">
-									<div class="search_clear"><a href="{% url 'objects:dailys' %}">очистить</a></div>
+									<div class="search_clear"><a href="{% url 'objects:dailys' %}">{% trans 'очистить' %}</a></div>
 								</div>
-								<input type="submit" value="Поиск" class="search-click">
+								<input type="submit" value="{% trans 'Поиск' %}" class="search-click">
 							</div>
 						</form>
 						<div class="top_wrap">
@@ -114,9 +115,9 @@
                                         {{ object_list.count }}
                                         {% else %}
                                         {% if object_list.count < 10 %}
-                                            1-{{ object_list.count }} из {{ object_list.count }}
+                                            1-{{ object_list.count }} {% trans 'из' %} {{ object_list.count }}
                                             {% else %}
-                                            1-10 из
+                                            1-10 {% trans 'из' %}
                                             {% if count_obj %}
                                                 {{ count_obj }}
                                                 {% else %}
@@ -124,15 +125,15 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
-                                     результатов
+                                     {% trans 'результатов' %}
                                 </div>
 							</div>
 							<div class="right_wrap">
 								<div class="sortable">
-									<label for="sort">Сортировка:</label>
+									<label for="sort">{% trans 'Сортировка' %}:</label>
 									<select name="sort" id="sort">
-										<option value="1">Новые наверху</option>
-										<option value="2">Новые внизу</option>
+										<option value="1">{% trans 'Новые наверху' %}</option>
+										<option value="2">{% trans 'Новые внизу' %}</option>
 									</select>
 								</div>
 							</div>
@@ -140,7 +141,7 @@
 						<div class="bottom_wrap">
                             {% include 'rieltor_object/filters/daily_filter.html' %}
 							<div class="form_actions">
-								<input type="submit" value="Подобрать квартиру" class="open-object-parameter">
+								<input type="submit" value="{% trans 'Подобрать квартиру' %}" class="open-object-parameter">
 							</div>
 						</div>
 					</div>

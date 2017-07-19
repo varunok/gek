@@ -2,6 +2,7 @@
 {% load favorites_tag %}
 {% load vip_tag %}
 {% load thumbnail %}
+{% load i18n %}
 {% vips as vips %}
 <div class="block block_vip">
     <div class="block_title">Vip</div>
@@ -28,7 +29,7 @@
                     {% endif %}
                 </div>
                 <div class="statistics">{{ object.views }}</div>
-                <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
+                <div class="read_more"><a href="{{ object.get_absolute_url }}">{% trans 'Подробнее' %}</a></div>
             </div>
         </div>
         {% endfor %}

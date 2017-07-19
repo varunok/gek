@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редактирование {{ verbose_name }}{% endblock title %}
+{% block title %}{% trans 'Редактирование' %} {{ verbose_name }}{% endblock title %}
 
 {% block css %}
 {% endblock css %}
@@ -23,14 +24,14 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить {{ verbose_name }}</h2>
+                            <h2>{% trans 'Изменить' %} {{ verbose_name }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <ul class="stats-overview">
                                 <li >
                                     <span class="name"> URL </span>
-                                    <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                    <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">{% trans 'просмотр' %}</a></span>
                                 </li>
                             </ul>
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -42,9 +43,9 @@
                                                 <table class="table table-striped projects">
                                                     <thead>
                                                     <tr>
-                                                        <th style="width: 20%">Название</th>
-                                                        <th style="width: 20%">Фото</th>
-                                                        <th style="width: 20%">Заголовок</th>
+                                                        <th style="width: 20%">{% trans 'Название' %}</th>
+                                                        <th style="width: 20%">{% trans 'Фото' %}</th>
+                                                        <th style="width: 20%">{% trans 'Заголовок' %}</th>
                                                         <th style="width: 20%"></th>
                                                     </tr>
                                                     </thead>
@@ -58,7 +59,7 @@
                                                             {% endif %}
                                                             <td>{{ salebuildplan.title }}</td>
                                                             <td>
-                                                                <a href="{{ salebuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                                <a href="{{ salebuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -70,7 +71,7 @@
                                                             {% endif %}
                                                             <td>{{ buybuildplan.title }}</td>
                                                             <td>
-                                                                <a href="{{ buybuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                                <a href="{{ buybuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -82,7 +83,7 @@
                                                             {% endif %}
                                                             <td>{{ rentbuildplan.title }}</td>
                                                             <td>
-                                                                <a href="{{ rentbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                                <a href="{{ rentbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -94,7 +95,7 @@
                                                             {% endif %}
                                                             <td>{{ passbuildplan.title }}</td>
                                                             <td>
-                                                                <a href="{{ passbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                                <a href="{{ passbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -106,7 +107,7 @@
                                                             {% endif %}
                                                             <td>{{ repairbuildplan.title }}</td>
                                                             <td>
-                                                                <a href="{{ repairbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                                <a href="{{ repairbuildplan.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                                             </td>
                                                         </tr>
                                                     </tbody>

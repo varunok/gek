@@ -4,6 +4,7 @@
 {% load favorites_tag %}
 {% load base_tag %}
 {% load video_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -18,12 +19,12 @@
             404
         </div>
         <div style="font-size: 3em; text-align: center; text-transform: uppercase">
-            Страница не найдена
+            {% trans 'Страница не найдена' %}
         </div>
         <br>
         <br>
         <div style="text-align: center; font-size: 2em; text-transform: uppercase; font-weight: 900;">
-            <a href="/">На главную</a>
+            <a href="/">{% trans 'На главную' %}</a>
         </div>
     </main>
 

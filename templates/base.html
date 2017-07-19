@@ -1,6 +1,7 @@
 {% load static from staticfiles %}
 {% load base_tag %}
 {% load banners_tag %}
+{% load i18n %}
 {% domen as domen %}
 {% franchise as franchise %}
 
@@ -47,22 +48,22 @@
                             </div>
                         {% endif %}
                         <div class="benefits">
-                            <div class="item test"><a href="{% url 'polls:test' %}">Пройди тест</a></div>
-                            <div class="item video"><a href="{% url 'videos:video' %}">Смотреть видео</a></div>
-                            <div class="item plan"><a href="{% url 'plan:plan' %}">Составить план</a></div>
-                            <div class="item favorite"><a href="{% url 'favorites:favorites' %}">Избранное</a></div>
+                            <div class="item test"><a href="{% url 'polls:test' %}">{% trans 'Пройди тест' %}</a></div>
+                            <div class="item video"><a href="{% url 'videos:video' %}">{% trans 'Смотреть видео' %}</a></div>
+                            <div class="item plan"><a href="{% url 'plan:plan' %}">{% trans 'Составить план' %}</a></div>
+                            <div class="item favorite"><a href="{% url 'favorites:favorites' %}">{% trans 'Избранное' %}</a></div>
                         </div>
                         <div class="buttons_header">
-                            <div  class="application">Оставить заявку</div>
-                            <div id="open-modal" class="add_advert">Добавить объявление</div>
+                            <div  class="application">{% trans 'Оставить заявку' %}</div>
+                            <div id="open-modal" class="add_advert">{% trans 'Добавить объявление' %}</div>
                         </div>
                     </div>
                 </div>
                 <div class="block_main_menu">
                     <div class="block_content">
                         <ul class="menu">
-                            <li class="leaf"><a href="{% url 'main' %}" {% if request.path == '/' %} class="active" {% endif %}>Главная</a></li>
-                            <li class="leaf expanded"><a href="#">Недвижимость</a>
+                            <li class="leaf"><a href="{% url 'main' %}" {% if request.path == '/' %} class="active" {% endif %}>{% trans 'Главная' %}</a></li>
+                            <li class="leaf expanded"><a href="#">{% trans 'Недвижимость' %}</a>
                                 <ul class="menu_child">
                                     {% building_is_enable as building_is_enable %}
                                     {% ofices_is_enable as ofices_is_enable %}
@@ -71,32 +72,32 @@
                                     {% earth_is_enable as earth_is_enable %}
                                     {% if building_is_enable %}
                                         <li>
-                                            <a href="{% url 'objects:buildings' %}">Квартиры и Дома</a>
+                                            <a href="{% url 'objects:buildings' %}">{% trans 'Квартиры и Дома' %}</a>
                                         </li>
                                     {% endif %}
                                     {% if ofices_is_enable %}
                                         <li>
-                                            <a href="{% url 'objects:ofices' %}">Офисы и магазины</a>
+                                            <a href="{% url 'objects:ofices' %}">{% trans 'Офисы и магазины' %}</a>
                                         </li>
                                     {% endif %}
                                     {% if daily_is_enable %}
                                         <li>
-                                            <a href="{% url 'objects:dailys' %}">Посуточно</a>
+                                            <a href="{% url 'objects:dailys' %}">{% trans 'Посуточно' %}</a>
                                         </li>
                                     {% endif %}
                                     {% if newbuilding_is_enable %}
                                         <li>
-                                            <a href="{% url 'objects:newbuildings' %}">Новострои</a>
+                                            <a href="{% url 'objects:newbuildings' %}">{% trans 'Новострои' %}</a>
                                         </li>
                                     {% endif %}
                                     {% if earth_is_enable %}
                                         <li>
-                                            <a href="{% url 'objects:earth' %}">Земля</a>
+                                            <a href="{% url 'objects:earth' %}">{% trans 'Земля' %}</a>
                                         </li>
                                     {% endif %}
                                 </ul>
                             </li>
-                            <li class="leaf expanded"><a href="{% url 'services:services' %}" {% if 'services' in request.path  %} class="active" {% endif %}>Услуги</a>
+                            <li class="leaf expanded"><a href="{% url 'services:services' %}" {% if 'services' in request.path  %} class="active" {% endif %}>{% trans 'Услуги' %}</a>
                                 <ul class="menu_child">
                                     {% service_rieltor_is_active as is_active_rs %}
                                     {% service_rieltor_slug as service_rieltor_slug %}
@@ -136,9 +137,9 @@
                                     {% endfor %}
                                 </ul>
                             </li>
-                            <li class="leaf"><a href="{% url 'articles:articles' %}" {% if 'articles' in request.path  %} class="active" {% endif %}>Статьи</a></li>
-                            <li class="leaf"><a href="{% url 'trust:trust' %}">Доверие</a></li>
-                            <li class="leaf"><a href="{% url 'contacts:contact' %}">Контакты</a></li>
+                            <li class="leaf"><a href="{% url 'articles:articles' %}" {% if 'articles' in request.path  %} class="active" {% endif %}>{% trans 'Статьи' %}</a></li>
+                            <li class="leaf"><a href="{% url 'trust:trust' %}">{% trans 'Доверие' %}</a></li>
+                            <li class="leaf"><a href="{% url 'contacts:contact' %}">{% trans 'Контакты' %}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -151,34 +152,34 @@
 
         <div id="block-webform" class="block block_webform webform_client" style="display: none">
 			<div class="block_content">
-				<div class="block_title">Заполните заявку и мы приведем Вам клиента с деньгами!</div>
-				<div class="text">По возможности пришлите фотографии объекта на почту: <a href="mailto:ofis@gek.od.ua">{% email %}</a></div>
+				<div class="block_title">{% trans 'Заполните заявку и мы приведем Вам клиента с деньгами!' %}</div>
+				<div class="text">{% trans 'По возможности пришлите фотографии объекта на почту' %}: <a href="mailto:ofis@gek.od.ua">{% email %}</a></div>
 				<div class="close"></div>
 				<div class="view_content">
 					<form action="#" class="webform_client_form" id="base-form">
                         {% csrf_token %}
-                        <input type="hidden" name="source" value="Добавить объявление">
+                        <input type="hidden" name="source" value="{% trans 'Добавить объявление' %}">
 						<div class="top_wrap">
 							<div class="form_item name">
-								<input name="name"  type="text" placeholder="Введите ваше имя">
+								<input name="name"  type="text" placeholder="{% trans 'Введите ваше имя' %}">
 							</div>
 							<div class="form_item phone">
-								<input name="phone" type="text" placeholder="Номер телефона">
+								<input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
 							</div>
 							<div class="form_item address">
-								<input name="address" type="text" placeholder="Адрес">
+								<input name="address" type="text" placeholder="{% trans 'Адрес' %}">
 							</div>
 							<div class="form_item price">
-								<input name="price" type="text" placeholder="Цена">
+								<input name="price" type="text" placeholder="{% trans 'Цена' %}">
 							</div>
 						</div>
 						<div class="bottom_wrap">
 							<div class="form_item textarea">
-								<textarea name="text" placeholder="Максимально подробно опишите ваш объект"></textarea>
+								<textarea name="text" placeholder="{% trans 'Максимально подробно опишите ваш объект' %}"></textarea>
 							</div>
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Добавить">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Добавить' %}">
 						</div>
 					</form>
 				</div>
@@ -204,14 +205,14 @@
                         <input type="hidden" name="source" value="Оставить заявку. Хидер.">
 						<div class="top_wrap">
 							<div class="form_item name">
-								<input name="name"  type="text" placeholder="Введите ваше имя">
+								<input name="name"  type="text" placeholder="{% trans 'Введите ваше имя' %}">
 							</div>
 							<div class="form_item phone">
-								<input name="phone" type="text" placeholder="Номер телефона">
+								<input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
 							</div>
                         </div>
                         <div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Оставить заявку">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Оставить заявку' %}">
 						</div>
                     </form>
 				</div>
@@ -225,31 +226,31 @@
                 <div class="region_footer">
                     <div class="logo_wrapper">
                         <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt="">{{ domen|safe }}</a>
-                        <div class="copyright">Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством.</div>
+                        <div class="copyright">{% trans 'Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством.' %}</div>
                     </div>
                     <div class="footer_center">
                         <div class="menu_footer">
                             <ul>
                                 <li class="group_item">
                                     <ul>
-                                        <li class="leaf"><a href="{% url 'contacts:contact' %}">Контакты</a></li>
-                                        <li class="leaf"><a href="http://rieltory.biz/franshiza" target="_blank">Франшиза</a></li>
-                                        <li class="leaf"><a href="{% url 'services:services' %}">Услуги</a></li>
+                                        <li class="leaf"><a href="{% url 'contacts:contact' %}">{% trans 'Контакты' %}</a></li>
+                                        <li class="leaf"><a href="http://rieltory.biz/franshiza" target="_blank">{% trans 'Франшиза' %}</a></li>
+                                        <li class="leaf"><a href="{% url 'services:services' %}">{% trans 'Услуги' %}</a></li>
                                     </ul>
                                 </li>
                                 <li class="group_item">
                                     <ul>
-                                        <li class="leaf expanded"><a href="/" class="expanded_btn" id="expanded_btn">Выбрать</a>
+                                        <li class="leaf expanded"><a href="/" class="expanded_btn" id="expanded_btn">{% trans 'Выбрать' %}</a>
                                         </li>
-                                        <li class="leaf"><a href="{% url 'articles:articles' %}">Статьи</a></li>
-                                        <li class="leaf"><a href="{% url 'trust:trust' %}">Доверие</a></li>
+                                        <li class="leaf"><a href="{% url 'articles:articles' %}">{% trans 'Статьи' %}</a></li>
+                                        <li class="leaf"><a href="{% url 'trust:trust' %}">{% trans 'Доверие' %}</a></li>
                                     </ul>
                                 </li>
                                 <li class="group_item">
                                     <ul>
-                                        <li class="leaf"><a href="{% url 'videos:video' %}">Смотреть видео передачи</a></li>
-                                        <li class="leaf"><a href="{% url 'polls:test' %}">Пройти тест</a></li>
-                                        <li class="leaf"><a href="https://knin.com.ua/techplan" target="_blank">Нарисовать Тех План</a></li>
+                                        <li class="leaf"><a href="{% url 'videos:video' %}">{% trans 'Смотреть видео передачи' %}</a></li>
+                                        <li class="leaf"><a href="{% url 'polls:test' %}">{% trans 'Пройти тест' %}</a></li>
+                                        <li class="leaf"><a href="https://knin.com.ua/techplan" target="_blank">{% trans 'Нарисовать Тех План' %}</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -280,8 +281,8 @@
                             </div>
                         {% endif %}
                         <div class="buttons_header">
-                            <div class="application">Оставить заявку</div>
-                            <div class="add_advert">Добавить объявление</div>
+                            <div class="application">{% trans 'Оставить заявку' %}</div>
+                            <div class="add_advert">{% trans 'Добавить объявление' %}</div>
                         </div>
                     </div>
 {#                    <div class="social_links">#}

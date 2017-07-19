@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Django settings for gek project.
 
@@ -12,6 +14,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from django.contrib.messages import constants as messages
+from django.utils.translation import ugettext_lazy as _
 
 try:
     from common_settings import *
@@ -100,7 +103,8 @@ DEFAULT_FROM_EMAIL = 'Server <server@whatever.com>'
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'ru-RU'
+# LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'Europe/Kiev'
 
@@ -109,6 +113,17 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+DEFAULT_ERROR_MESSAGE = _("An error has occurred")
+
+LANGUAGES = (
+    ('ru', _('Русский')),
+    ('uk', _('Украинский')),
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 TEMPLATES = [
     {

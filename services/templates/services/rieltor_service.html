@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load video_tag %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -23,19 +24,19 @@
                 <input type="hidden" name="content_type" value="{{ content_type }}">
                 <input type="hidden" name="object_id" value="{{ service_rieltor.id }}">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите ваше имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 				</div>
 				<div class="form_item email">
-					<input name="email" type="text" placeholder="Введите вашу почту">
+					<input name="email" type="text" placeholder="{% trans 'Введите вашу почту' %}">
 				</div>
 				<div class="form_item textarea comment">
-					<textarea name="text" placeholder="Ваши пожелания"></textarea>
+					<textarea name="text" placeholder="{% trans 'Ваши пожелания' %}"></textarea>
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Получить подборку">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Получить подборку' %}">
 				</div>
 			</form>
 		</div>
@@ -45,7 +46,7 @@
 					<div class="block_benefits">
 						<div class="block_content">
 							<div class="block_title">
-								Нам доверяют
+								{% trans 'Нам доверяют' %}
 							</div>
 							<div class="view_content">
 								<div class="group">
@@ -53,25 +54,25 @@
 										<div class="field_img">
 											<img src="{% static 'images/a_3.png' %}" alt="">
 										</div>
-										<div class="text">Лучшие цены</div>
+										<div class="text">{% trans 'Лучшие цены' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/pr_5.png' %}" alt="">
 										</div>
-										<div class="text">Опытные специалисты</div>
+										<div class="text">{% trans 'Опытные специалисты' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/i_2.png' %}" alt="">
 										</div>
-										<div class="text">Оперативность</div>
+										<div class="text">{% trans 'Оперативность' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/i_4.png' %}" alt="">
 										</div>
-										<div class="text">Гарантии</div>
+										<div class="text">{% trans 'Гарантии' %}</div>
 									</div>
 								</div>
 								<div class="group">
@@ -79,25 +80,25 @@
 										<div class="field_img">
 											<img src="{% static 'images/i_7.png' %}" alt="">
 										</div>
-										<div class="text">Более 9 лет работы</div>
+										<div class="text">{% trans 'Более 9 лет работы' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/i_6.png' %}" alt="">
 										</div>
-										<div class="text">Конфиденциальность</div>
+										<div class="text">{% trans 'Конфиденциальность' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/i_8.png' %}" alt="">
 										</div>
-										<div class="text">Работа без предоплаты</div>
+										<div class="text">{% trans 'Работа без предоплаты' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/i_9.png' %}" alt="">
 										</div>
-										<div class="text">Пакетные рекламные <br>инструменты</div>
+										<div class="text">{% trans 'Пакетные рекламные' %} <br>{% trans 'инструменты' %}</div>
 									</div>
 								</div>
 							</div>
@@ -106,7 +107,7 @@
 					<div class="block_benefits steps">
 						<div class="block_content">
 							<div class="block_title">
-								Как получить свой объект недвижимости?
+								{% trans 'Как получить свой объект недвижимости?' %}
 							</div>
 							<div class="view_content">
 								<div class="group">
@@ -114,36 +115,36 @@
 										<div class="field_img">
 											<img src="{% static 'images/m_1.png' %}" alt="">
 										</div>
-										<div class="text">Отправить заявку <br>на подбор недвижимости</div>
+										<div class="text">{% trans 'Отправить заявку' %} <br>{% trans 'на подбор недвижимости' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/re_1.png' %}" alt="">
 										</div>
-										<div class="text">Получить подборку <br>за 30 мин на почту или SMS</div>
+										<div class="text">{% trans 'Получить подборку' %} <br>{% trans 'за 30 мин на почту или SMS' %}</div>
 									</div>
 									<div class="views_row">
 										<div class="field_img">
 											<img src="{% static 'images/re_2.png' %}" alt="">
 										</div>
-										<div class="text">Осмотр интерисующих вариантов <br>и выбор подходящего</div>
+										<div class="text">{% trans 'Осмотр интерисующих вариантов' %} <br>{% trans 'и выбор подходящего' %}</div>
 									</div>
 								</div>
 								<div class="group">
 									<div class="views_row">
-										<div class="text">Подготовка документов <br>и условий</div>
+										<div class="text">{% trans 'Подготовка документов' %} <br>{% trans 'и условий' %}</div>
 										<div class="field_img">
 											<img src="{% static 'images/m_3.png' %}" alt="">
 										</div>
 									</div>
 									<div class="views_row">
-										<div class="text">Оформление задатка <br>и передача ключей</div>
+										<div class="text">{% trans 'Оформление задатка' %} <br>{% trans 'и передача ключей' %}</div>
 										<div class="field_img">
 											<img src="{% static 'images/re_3.png' %}" alt="">
 										</div>
 									</div>
 									<div class="views_row">
-										<div class="text">Расчет с Агенством <br>недвижимости</div>
+										<div class="text">{% trans 'Расчет с Агенством' %} <br>{% trans 'недвижимости' %}</div>
 										<div class="field_img">
 											<img src="{% static 'images/m_6.png' %}" alt="">
 										</div>
@@ -158,7 +159,7 @@
 		</div>
 		<div class="block block_presentation order_block">
 			<div class="block_content">
-				<div class="block_title">Отправить заявку на подбор недвижимости</div>
+				<div class="block_title">{% trans 'Отправить заявку на подбор недвижимости' %}</div>
 				<div class="view_content">
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
@@ -166,13 +167,13 @@
                         <input type="hidden" name="content_type" value="{{ content_type }}">
                         <input type="hidden" name="object_id" value="{{ service_rieltor.id }}">
 						<div class="form_item user_name">
-							<input name="name" type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 						</div>
 						<div class="form_item phone">
-							<input name="phone" type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Отправить">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Отправить' %}">
 						</div>
 					</form>
 				</div>

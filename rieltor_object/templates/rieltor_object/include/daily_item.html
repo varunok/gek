@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load favorites_tag %}
+{% load i18n %}
 {% for object in object_list %}
     <div class="views_row">
         <div class="title">{{ object.address|default:'' }}</div>
@@ -24,7 +25,7 @@
                     <div class="item">{{ object.custom_id|default_if_none:'' }}</div>
                 </div>
                 <div class="info">
-                    <div class="label">Комнат:</div>
+                    <div class="label">{% trans 'Комнат' %}:</div>
                     <div class="item">{{ object.rooms|default:'' }}</div>
                 </div>
                 {% if object.price %}
@@ -33,14 +34,14 @@
                     </div>
                 {% endif %}
                 <div class="info">
-                    <div class="label">Спальных мест:</div>
+                    <div class="label">{% trans 'Спальных мест' %}:</div>
                     <div class="item">{{ object.sleeping_places|default:'' }}</div>
                 </div>
             </div>
             <div class="bottom_wrap">
                 <div class="statistics">{{ object.views }}</div>
-                <div class="read_more preview submit-add-booking-modal"><a href="/">Забронировать</a></div>
-                <div class="read_more"><a href="{% url 'objects:daily_detail' object.id %}">Подробнее</a></div>
+                <div class="read_more preview submit-add-booking-modal"><a href="/">{% trans 'Забронировать' %}</a></div>
+                <div class="read_more"><a href="{% url 'objects:daily_detail' object.id %}">{% trans 'Подробнее' %}</a></div>
             </div>
         </div>
     </div>
@@ -49,8 +50,8 @@
     <div class="load_more_wrap">
         <div class="load_more read_more">
             <a href="#">
-                Загрузить еще
-                <span>{{ count_next }}</span> объектов
+                {% trans 'Загрузить еще' %}
+                <span>{{ count_next }}</span> {% trans 'объектов' %}
             </a>
         </div>
     </div>

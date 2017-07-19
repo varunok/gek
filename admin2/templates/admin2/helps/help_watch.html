@@ -2,8 +2,9 @@
 {% load video_tag %}
 
 {% load static from staticfiles %}
+{% load i18n %}
 
-{% block title %}Справка{% endblock title %}
+{% block title %}{% trans 'Справка' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,13 +14,13 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Справка</h3>
+                    <h3>{% trans 'Справка' %}</h3>
                 </div>
                 {% if request.user.is_superuser %}
                     <div class="title_right">
                         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                             <div style="float: right">
-                                <a href="{% url 'admin2:helps_list' %}" class="btn btn-round btn-primary"><i class="fa fa-pencil"></i> Редактировать</a>
+                                <a href="{% url 'admin2:helps_list' %}" class="btn btn-round btn-primary"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %}</a>
                             </div>
                         </div>
                     </div>
@@ -30,14 +31,14 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_content">
-                        <diw class="row">
+                        <div class="row">
                             {% for object in object_list %}
                                 <div class="col-md-5 col-sm-12 col-xs-12" style="margin-right: 65px">
                                     <h3>{{ object.title }}</h3>
                                     {{ object.video|get_video_code|convert_to_frame_help|safe }}
                                 </div>
                             {% endfor %}
-                        </diw>
+                        </div>
 
                         </div>
                         {% include 'admin2/include/paginator.html' %}

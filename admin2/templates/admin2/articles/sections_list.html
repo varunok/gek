@@ -1,8 +1,9 @@
 {% extends 'admin2/base.html' %}
 
 {% load static from staticfiles %}
+{% load i18n %}
 
-{% block title %}Рубрики{% endblock title %}
+{% block title %}{% trans 'Рубрики' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -12,12 +13,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Рубрики</h3>
+                    <h3>{% trans 'Рубрики' %}</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:sections_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="{% url 'admin2:sections_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +28,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Все рубрики</h2>
+                            <h2>{% trans 'Все рубрики' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -35,8 +36,8 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%">#</th>
-                                    <th style="width: 20%">Дата создания</th>
-                                    <th style="width: 50%">Название</th>
+                                    <th style="width: 20%">{% trans 'Дата создания' %}</th>
+                                    <th style="width: 50%">{% trans 'Название' %}</th>
                                     <th style="width: 5%">
                                     </th>
                                 </tr>
@@ -48,9 +49,9 @@
                                         <td>{{ section.created|date:'d.m.Y H:i' }}</td>
                                         <td>{{ section.name }}</td>
                                         <td>
-                                            <a href="{{ section.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{{ section.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                            <a href="{{ section.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                            <a href="{{ section.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
+                                            <a href="{{ section.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                            <a href="{{ section.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block title %}{{ page_title }}{% endblock title %}
 
@@ -18,8 +19,8 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
-                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> Поиск</a>
+                            <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
+                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> {% trans 'Поиск' %}</a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +30,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Все {{ page_title }}</h2>
+                            <h2>{% trans 'Все' %} {{ page_title }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content search-form" {% if not request.GET.search %} style="display: none" {% endif %}>
@@ -40,36 +41,36 @@
                                         <input name="custom_id__gt" type="text" placeholder="От" value="{{ request.GET.custom_id__gt }}" style="width: 100%; margin-bottom: 10px;">
                                         <input name="custom_id__lt" type="text" placeholder="До" value="{{ request.GET.custom_id__lt }}" style="width: 100%">
                                     </div>
-                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Балл:</label>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">{% trans 'Балл' %}:</label>
                                     <div class="col-md-1 col-sm-1 col-xs-1">
                                         <input name="point__gt" type="text" placeholder="От" value="{{ request.GET.point__gt }}" style="width: 100%; margin-bottom: 10px;">
                                         <input name="point__lt" type="text" placeholder="До" value="{{ request.GET.point__lt }}" style="width: 100%">
                                     </div>
-                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Цена:</label>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">{% trans 'Цена' %}:</label>
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <input name="price__gt" type="text" placeholder="От" value="{{ request.GET.price__gt }}" style="width: 100%; margin-bottom: 10px;">
                                         <input name="price__lt" type="text" placeholder="До" value="{{ request.GET.price__lt }}" style="width: 100%">
                                     </div>
-                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Спальных мест:</label>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">{% trans 'Спальных мест' %}:</label>
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <input name="sleeping_places__gt" type="text" placeholder="От" value="{{ request.GET.sleeping_places__gt }}" style="width: 100%; margin-bottom: 10px;">
                                         <input name="sleeping_places__lt" type="text" placeholder="До" value="{{ request.GET.sleeping_places__lt }}" style="width: 100%">
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Комнат:</label>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">{% trans 'Комнат' %}:</label>
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <input name="rooms__gt" type="text" placeholder="От" value="{{ request.GET.rooms__gt }}" style="width: 100%; margin-bottom: 10px;">
                                         <input name="rooms__lt" type="text" placeholder="До" value="{{ request.GET.rooms__lt }}" style="width: 100%">
                                     </div>
-                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Адресс:</label>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">{% trans 'Адресс' %}:</label>
                                     <div class="col-md-2 col-sm-2 col-xs-2">
                                         <input name="address__icontains" type="text" placeholder="" value="{{ request.GET.address__icontains }}" style="width: 100%">
                                     </div>
                                 </div>
                                 <div style="float: right;">
                                     <input type="submit" name="search" placeholder="Поиск" value="Поиск" class="btn btn-primary">
-                                    <a class="btn btn-success" href="{% url 'admin2:dailys' %}">Отмена </a>
+                                    <a class="btn btn-success" href="{% url 'admin2:dailys' %}">{% trans 'Отмена' %} </a>
                                 </div>
                             </form>
                         </div>
@@ -78,13 +79,13 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%">ID</th>
-                                    <th style="width: 1%">Балл</th>
-                                    <th style="width: 20%">Фото</th>
-                                    <th style="width: 20%">Адресс</th>
-                                    <th style="width: 10%">Цена</th>
-                                    <th style="width: 10%">Спальных мест</th>
-                                    <th style="width: 10%">Комнат</th>
-                                    <th style="width: 20%">Опубликована</th>
+                                    <th style="width: 1%">{% trans 'Балл' %}</th>
+                                    <th style="width: 20%">{% trans 'Фото' %}</th>
+                                    <th style="width: 20%">{% trans 'Адресс' %}</th>
+                                    <th style="width: 10%">{% trans 'Цена' %}</th>
+                                    <th style="width: 10%">{% trans 'Спальных мест' %}</th>
+                                    <th style="width: 10%">{% trans 'Комнат' %}</th>
+                                    <th style="width: 20%">{% trans 'Опубликована' %}</th>
                                     <th style="width: 5%">
                                     </th>
                                 </tr>
@@ -105,9 +106,9 @@
                                         <td>{{ object.rooms|default_if_none:'--' }}</td>
                                         <td>{{ object.when_create|date:'d.m.Y H:i' }}</td>
                                         <td>
-                                            <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                            <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                            <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
+                                            <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                            <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

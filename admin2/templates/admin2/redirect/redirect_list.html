@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редирект{% endblock title %}
+{% block title %}{% trans 'Редирект' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,12 +14,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Редирект</h3>
+                    <h3>{% trans 'Редирект' %}</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:redirect_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="{% url 'admin2:redirect_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
                         </div>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Все Редиректы</h2>
+                            <h2>{% trans 'Все Редиректы' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -37,7 +38,7 @@
                                 <tr>
                                     <th style="width: 1%">ID</th>
                                     <th style="width: 45%">URL</th>
-                                    <th style="width: 45%">Редирект</th>
+                                    <th style="width: 45%">{% trans 'Редирект' %}</th>
                                     <th style="width: 5%"></th>
                                 </tr>
                                 </thead>
@@ -49,7 +50,7 @@
                                             <td>{{ object.new_path }}</td>
                                             <td>
 {#                                                <a href="{% url 'admin2:redirect_delete' object.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить </a>#}
-                                                <a href="{% url 'admin2:redirect_edit' object.id %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                <a href="{% url 'admin2:redirect_edit' object.id %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
                                             </td>
                                         </tr>
                                     {% endfor %}
