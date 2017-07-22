@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Почта для рассылки{% endblock title %}
+{% block title %}{% trans 'Почта для рассылки' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,12 +14,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Почта для рассылки</h3>
+                    <h3>{% trans 'Почта для рассылки' %}</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:email_forward_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="{% url 'admin2:email_forward_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
                         </div>
                     </div>
                 </div>
@@ -28,14 +29,14 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Вся Почта для рассылки</h2>
+                            <h2>{% trans 'Вся Почта для рассылки' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
-                                    <th style="width: 30%">Название</th>
+                                    <th style="width: 30%">{% trans 'Название' %}</th>
                                     <th style="width: 5%"></th>
                                 </tr>
                                 </thead>
@@ -44,8 +45,8 @@
                                         <tr>
                                             <td>{{ object }}</td>
                                             <td>
-                                                <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить </a>
-                                                <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
+                                                <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
+                                                <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans Редактировать'' %} </a>
                                             </td>
                                         </tr>
                                     {% endfor %}

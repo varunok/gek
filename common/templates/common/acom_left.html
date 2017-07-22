@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load staticfiles %}
+{% load i18n %}
 <div class="row item-acom" style="">
     <input type="hidden" value="{{ accommodation.id }}" name="acom_id">
     <input type="hidden" value="{{ content_type }}" name="content_type">
@@ -13,10 +14,10 @@
     </div>
     <div class="col-md-6 col-sm-6 col-xs-6">
         <p>
-            Заголовок: {{ accommodation.title }}
+            {% trans 'Заголовок' %}: {{ accommodation.title }}
         </p>
         <p>
-            Описание: {{ accommodation.description }}
+            {% trans 'Описание' %}: {{ accommodation.description }}
         </p>
     </div>
     <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">

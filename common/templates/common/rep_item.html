@@ -1,20 +1,21 @@
+{% load i18n %}
 <div class="rep-quant">
     <div class="ln_solid"></div>
     <div class="form-group" style="float: right">
         <div class="col-md-12">
-            <button id="delete-rep-0" name="del_rep" type="submit" class="btn btn-warning delete-rep"><i class="fa fa-minus"></i> Удалить</button>
+            <button id="delete-rep-0" name="del_rep" type="submit" class="btn btn-warning delete-rep"><i class="fa fa-minus"></i> {% trans 'Удалить' %}</button>
             <input type="hidden" name="del-rep" value="{{ rep.id }}">
         </div>
     </div>
     <div class="item form-group">
-        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Наименование работ:</label>
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{% trans 'Наименование работ' %}:</label>
             <div class="col-md-7 col-sm-7 col-xs-12">
                 <input type="text" name="rep-name-{{ rep.id }}" value="" class="form-control col-md-7 col-xs-12">
             </div>
     </div>
     <div class="clearfix"></div><br>
         <div class="item form-group">
-            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">Стоимость:</label>
+            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{% trans 'Стоимость' %}:</label>
             <div class="col-md-7 col-sm-7 col-xs-12">
                 <input type="text" name="rep-price-{{ rep.id }}" id="" style="width: 100%" value="">
             </div>

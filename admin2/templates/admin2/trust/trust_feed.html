@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+{% block title %}{% if object.when_create %}{% trans 'Редактирование' %} {{ object.SEODescription }}{% else %}{% trans 'Создать' %} {{ verbose_name }}{% endif %}{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
@@ -22,7 +23,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Доверие</h3>
+                    <h3>{% trans 'Доверие' %}</h3>
                 </div>
 
             </div>
@@ -31,7 +32,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить Доверие</h2>
+                            <h2>{% trans 'Изменить Доверие' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -92,7 +93,7 @@
                                                     </div>
                                                 {% endfor %}
                                             </fieldset>
-                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                         </form>
 
                                         <div class="empty-form" style="display: none;">
@@ -177,7 +178,7 @@
                     prefix: 'common-feed-content_type-object_id',
                     containerSel: '.tab-content',
                     deleteTriggerSel: 'input[name$="-DELETE"]',
-                    addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> Создать</a>'
+                    addTrigger:'<a  type="submit"  title="add" class="btn btn-primary"><i class="fa fa-plus"></i> {% trans "Создать" %}</a>'
                 })
             })
 

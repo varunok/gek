@@ -4,6 +4,7 @@
 {% load thumbnail %}
 {% load banners_tag %}
 {% load base_tag %}
+{% load i18n %}
 {% block css %}
     <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 {% endblock css %}
@@ -19,22 +20,22 @@
 		<div class="slider_main slider_notfront" {% if object.image %}style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
 			<h1 class="slider_title page_title">{{ seo.title|default:'Свяжитесь с нами' }}</h1>
 			<div class="top_inner_content">
-				<div class="title">Бесплатная консультация по всем вопросам 24/7</div>
+				<div class="title">{% trans 'Бесплатная консультация по всем вопросам 24/7' %}</div>
 			</div>
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Связаться со специалистом.Контакти">
+                <input type="hidden" name="source" value="{% trans 'Связаться со специалистом.Контакти' %}">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите ваше имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите ваш телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 				</div>
 				<div class="form_textarea">
-					<textarea name="text" placeholder="Введите ваше сообщение"></textarea>
+					<textarea name="text" placeholder="{% trans 'Введите ваше сообщение' %}"></textarea>
 				</div>				
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Связаться со специалистом">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Связаться со специалистом' %}">
 				</div>
 			</form>
 		</div>
@@ -43,10 +44,10 @@
 				<div id="content">
 					<div class="block_work_client">
 						<div class="block_content">
-							<div class="title">ОТДЕЛ ПО РАБОТЕ С КЛИЕНТАМИ:</div>
+							<div class="title">{% trans 'ОТДЕЛ ПО РАБОТЕ С КЛИЕНТАМИ' %}:</div>
 							<div class="view_content">
 								<div class="views_row">
-									<div class="label">Наш адрес:</div>
+									<div class="label">{% trans 'Наш адрес' %}:</div>
 									<div class="field_item">{{ object.our_address|default:'' }}</div>
 								</div>
 								<div class="views_row">
@@ -54,7 +55,7 @@
 									<div class="field_item"><a href="mailto:image2007@bk.ru">{{ object.our_email|default:'' }}</a></div>
 								</div>
 								<div class="views_row">
-									<div class="label">График работы:</div>
+									<div class="label">{% trans 'График работы' %}:</div>
 									<div class="field_item">
                                         {% for schedule in object.schedules.all reversed %}
                                             {% if schedule.special %}
@@ -67,14 +68,14 @@
                                     </div>
 								</div>
 								<div class="views_row">
-									<div class="label">По любому вопросу вы можете позвонить по телефонам:</div>
+									<div class="label">{% trans 'По любому вопросу вы можете позвонить по телефонам' %}:</div>
 									<div class="field_item"><a href="tel:+380972443790">{{ object.phone }}</a></div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="block_contacts_specialists">
-						<div class="block_title">Наши специалисты:</div>	
+						<div class="block_title">{% trans 'Наши специалисты' %}:</div>
 						<div class="block_content">
 							<div class="view_contet">
                                 {% for user in object.users.all %}
@@ -91,7 +92,7 @@
                                                 <div class="name">{{ user.first_name }}</div>
                                                 <div class="about_block">
                                                     <div class="field_item">
-                                                        <div class="label">Специализация:</div>
+                                                        <div class="label">{% trans 'Специализация' %}:</div>
                                                         <div class="text">{{ user.specialization|default:'' }}</div>
                                                     </div>
                                                     <div class="field_item">
@@ -99,7 +100,7 @@
                                                         <div class="text">{{ user.skype|default:'' }}</div>
                                                     </div>
                                                     <div class="field_item">
-                                                        <div class="label">Номер телефона:</div>
+                                                        <div class="label">{% trans 'Номер телефона' %}:</div>
                                                         <div class="text"><a href="tel:{{ user.phone|default:'' }}">{{ user.phone|default:'' }}</a></div>
                                                     </div>
                                                     <div class="field_item">
@@ -112,7 +113,7 @@
                                                 </div>
                                                 {% if user.video %}
                                                     <div class="video">
-                                                        <div class="title">Видеопрезентация:</div>
+                                                        <div class="title">{% trans 'Видеопрезентация' %}:</div>
                                                         <div class="video_field">
                                                             <div>
                                                                 {{ user.video|convert_to_frame|safe }}

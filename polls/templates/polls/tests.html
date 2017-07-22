@@ -4,6 +4,7 @@
 {% load favorites_tag %}
 {% load video_tag %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -19,15 +20,15 @@
 			<div class="slider_list">
 				<div class="item">
 					<div class="li">1</div>
-					<div class="field_item">Результат сразу <br>после прохождения</div>
+					<div class="field_item">{% trans 'Результат сразу' %} <br>{% trans 'после прохождения' %}</div>
 				</div>
 				<div class="item">
 					<div class="li">2</div>
-					<div class="field_item">Тесты прошли <br>более 6000 человек</div>
+					<div class="field_item">{% trans 'Тесты прошли' %} <br>{% trans 'более 6000 человек' %}</div>
 				</div>
 				<div class="item">
 					<div class="li">3</div>
-					<div class="field_item">Профессиональные <br>рекомендации по результату теста</div>
+					<div class="field_item">{% trans 'Профессиональные' %} <br>{% trans 'рекомендации по результату теста' %}</div>
 				</div>
 			</div>			
 		</div>
@@ -42,10 +43,10 @@
                                         <div class="view_row_inner">
                                             <div class="left_wrap">
                                                 <div class="title">{{ polls.title }}</div>
-                                                <div class="subtitle">Рассмотрим такие вопросы:</div>
+                                                <div class="subtitle">{% trans 'Рассмотрим такие вопросы' %}:</div>
                                                 {{ polls.content|safe }}
-                                                <div class="read_more"><a href="{{ polls.get_absolute_url }}">Начать тест</a></div>
-                                                <div class="totals">Тест прошло: <div class="count">{{ polls.test_end }}</div></div>
+                                                <div class="read_more"><a href="{{ polls.get_absolute_url }}">{% trans 'Начать тест' %}</a></div>
+                                                <div class="totals">{% trans 'Тест прошло' %}: <div class="count">{{ polls.test_end }}</div></div>
                                             </div>
                                             <div class="right_wrap">
                                                 <img src="{{ polls.image|thumbnail_url:'test_427' }}" alt="">

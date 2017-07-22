@@ -1,6 +1,7 @@
+{% load i18n %}
 <div class="block block_package">
     <div class="block_content" style="text-align: center">
-        <div class="block_title">Выберите подходящий пакет:</div>
+        <div class="block_title">{% trans 'Выберите подходящий пакет' %}:</div>
         <div class="view_content">
             {% if service.base_packet %}
                     <div class="views_row beginner">
@@ -14,7 +15,7 @@
                             <form action="#" class="">
                                 {% csrf_token %}
                                 <input type="hidden" name="source" value="Заявка.{{ universal }}. Пакет: {{ service.base_packet.title }}">
-                                <div class="submit submit-save-packet"><a href="#">Отправить заявку</a></div>
+                                <div class="submit submit-save-packet"><a href="#">{% trans 'Отправить заявку' %}</a></div>
                             </form>
                         </div>
                     </div>
@@ -31,7 +32,7 @@
                         <form action="#" class="">
                             {% csrf_token %}
                             <input type="hidden" name="source" value="Заявка.{{ universal }}. Пакет: {{ service.midle_packet.title }}">
-                            <div class="submit submit-save-packet"><a href="#">Отправить заявку</a></div>
+                            <div class="submit submit-save-packet"><a href="#">{% trans 'Отправить заявку' %}</a></div>
                         </form>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
                         <form action="#" class="">
                             {% csrf_token %}
                             <input type="hidden" name="source" value="Заявка.{{ universal }}. Пакет: {{ service.expert_packet.title }}">
-                            <div class="submit submit-save-packet"><a href="#">Отправить заявку</a></div>
+                            <div class="submit submit-save-packet"><a href="#">{% trans 'Отправить заявку' %}</a></div>
                         </form>
                     </div>
                 </div>
@@ -63,17 +64,17 @@
         <div class="view_content">
             <form action="#" class="webform_client_form" id="form-add-packet">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Оставить заявку. Хидер.">
+                <input type="hidden" name="source" value="{% trans 'Оставить заявку. Хидер.' %}">
                 <div class="top_wrap">
                     <div class="form_item name">
-                        <input name="name"  type="text" placeholder="Введите ваше имя">
+                        <input name="name"  type="text" placeholder="{% trans 'Введите ваше имя' %}">
                     </div>
                     <div class="form_item phone">
-                        <input name="phone" type="text" placeholder="Номер телефона">
+                        <input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
                     </div>
                 </div>
                 <div class="form_actions">
-                    <input type="submit" class="form_submit submit-save-application" value="Оставить заявку">
+                    <input type="submit" class="form_submit submit-save-application" value="{% trans 'Оставить заявку' %}">
                 </div>
             </form>
         </div>

@@ -11,13 +11,15 @@ from django.db import models
 from django.urls import reverse, reverse_lazy
 from django.utils.text import slugify
 from solo.models import SingletonModel
+from django.utils.translation import ugettext_lazy as _
+
 
 from common.models import Video, FAQ, Photo, TableRepair, BasePacket, MidlePacket, ExpertPacket, Advantage
 
 
 class Partner(models.Model):
     name = models.CharField(
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         max_length=500,
         blank=True,
         null=True
@@ -28,25 +30,25 @@ class Partner(models.Model):
         null=True
     )
     phone = models.CharField(
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         blank=True,
         null=True,
         max_length=250
     )
     is_phone_confirmed = models.BooleanField(
-        verbose_name='Телефон подтвержден?',
+        verbose_name=_('Телефон подтвержден?'),
         default=False
     )
     comment = models.TextField(
-        verbose_name='Коментарий',
+        verbose_name=_('Коментарий'),
         blank=True
     )
     application_count = models.IntegerField(
-        verbose_name='Число заявок',
+        verbose_name=_('Число заявок'),
         default=0
     )
     create_date = models.DateTimeField(
-        verbose_name='Дата создания',
+        verbose_name=_('Дата создания'),
         auto_now_add=True
     )
     content_type = models.ForeignKey(
@@ -58,8 +60,8 @@ class Partner(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Партнер'
-        verbose_name_plural = 'Партнери'
+        verbose_name = _('Партнер')
+        verbose_name_plural = _('Партнери')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.name if self.name else self.id)
@@ -81,7 +83,7 @@ class ServicesRieltor(SingletonModel):
         validators=[slug_validator]
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -102,21 +104,21 @@ class ServicesRieltor(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     uuid = models.UUIDField(
@@ -124,30 +126,30 @@ class ServicesRieltor(SingletonModel):
         editable=False
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         blank=True,
         null=True,
-        default='Услуги риелторские'
+        default=_('Услуги риелторские')
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='services_rieltor')
     fag = GenericRelation(FAQ, related_query_name='services_rieltor')
@@ -174,7 +176,7 @@ class Valuation(SingletonModel):
         validators=[slug_validator]
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -195,21 +197,21 @@ class Valuation(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     uuid = models.UUIDField(
@@ -217,30 +219,30 @@ class Valuation(SingletonModel):
         editable=False
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         blank=True,
         null=True,
-        default='Оценка недвижимости'
+        default=_('Оценка недвижимости')
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='valuation')
     fag = GenericRelation(FAQ, related_query_name='valuation')
@@ -267,19 +269,19 @@ class Repair(SingletonModel):
         validators=[slug_validator]
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     subtitle = models.CharField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     help_subtitle = models.CharField(
-        verbose_name='Под-под-заголовок',
+        verbose_name=_('Под-под-заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -300,29 +302,29 @@ class Repair(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     image_enable = models.BooleanField(
-        verbose_name='Влючени ли фото?',
+        verbose_name=_('Влючени ли фото?'),
         default=True
     )
     repairs_enable = models.BooleanField(
-        verbose_name='Влючена ли Стоимость ремонта?',
+        verbose_name=_('Влючена ли Стоимость ремонта?'),
         default=True
     )
     uuid = models.UUIDField(
@@ -330,30 +332,30 @@ class Repair(SingletonModel):
         editable=False
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         blank=True,
         null=True,
-        default='Ремонт помещения'
+        default=_('Ремонт помещения')
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='repair')
     repairs = GenericRelation(TableRepair, related_query_name='repair')
@@ -381,7 +383,7 @@ class Insurance(SingletonModel):
         validators=[slug_validator]
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -402,21 +404,21 @@ class Insurance(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     uuid = models.UUIDField(
@@ -424,30 +426,30 @@ class Insurance(SingletonModel):
         editable=False
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         blank=True,
         null=True,
-        default='Страхование недвижимости'
+        default=_('Страхование недвижимости')
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='insurance')
     images = GenericRelation(Photo, related_query_name='insurance')
@@ -475,7 +477,7 @@ class Cleaning(SingletonModel):
         validators=[slug_validator]
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -496,21 +498,21 @@ class Cleaning(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     packet_enable = models.BooleanField(
-        verbose_name='Влючен ли пакет?',
+        verbose_name=_('Влючен ли пакет?'),
         default=True
     )
     uuid = models.UUIDField(
@@ -518,23 +520,23 @@ class Cleaning(SingletonModel):
         editable=False
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='cleaning')
     images = GenericRelation(Photo, related_query_name='cleaning')
@@ -542,7 +544,7 @@ class Cleaning(SingletonModel):
     base_packet = models.OneToOneField(
         BasePacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет начинающий',
+        verbose_name=_('Пакет начинающий'),
         related_query_name='cleaning',
         blank=True,
         null=True
@@ -550,7 +552,7 @@ class Cleaning(SingletonModel):
     midle_packet = models.OneToOneField(
         MidlePacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет Продвинутый',
+        verbose_name=_('Пакет Продвинутый'),
         related_query_name='cleaning',
         blank=True,
         null=True
@@ -558,17 +560,17 @@ class Cleaning(SingletonModel):
     expert_packet = models.OneToOneField(
         ExpertPacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет Эксперт',
+        verbose_name=_('Пакет Эксперт'),
         related_query_name='cleaning',
         blank=True,
         null=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         blank=True,
         null=True,
-        default='Уборка квартир'
+        default=_('Уборка квартир')
     )
 
     class Meta:
@@ -592,13 +594,13 @@ class InstallationWater(SingletonModel):
         validators=[slug_validator]
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     subtitle = models.CharField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -619,12 +621,12 @@ class InstallationWater(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
@@ -633,35 +635,35 @@ class InstallationWater(SingletonModel):
         editable=False
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     packet_enable = models.BooleanField(
-        verbose_name='Влючен ли пакет?',
+        verbose_name=_('Влючен ли пакет?'),
         default=True
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='installation_water')
     images = GenericRelation(Photo, related_query_name='installation_water')
@@ -670,7 +672,7 @@ class InstallationWater(SingletonModel):
     base_packet = models.OneToOneField(
         BasePacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет начинающий',
+        verbose_name=_('Пакет начинающий'),
         related_query_name='installation_water',
         blank=True,
         null=True
@@ -678,7 +680,7 @@ class InstallationWater(SingletonModel):
     midle_packet = models.OneToOneField(
         MidlePacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет Продвинутый',
+        verbose_name=_('Пакет Продвинутый'),
         related_query_name='installation_water',
         blank=True,
         null=True
@@ -686,17 +688,17 @@ class InstallationWater(SingletonModel):
     expert_packet = models.OneToOneField(
         ExpertPacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет Эксперт',
+        verbose_name=_('Пакет Эксперт'),
         related_query_name='installation_water',
         blank=True,
         null=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         blank=True,
         null=True,
-        default='Установка водомера'
+        default=_('Установка водомера')
     )
 
     class Meta:
@@ -721,12 +723,12 @@ class UniversalService(models.Model):
         unique=True
     )
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         unique=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -747,12 +749,12 @@ class UniversalService(models.Model):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото аватар',
+        verbose_name=_('Фото аватар'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
     image_avatar = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='services/%Y/%m/%d/',
         blank=True
     )
@@ -761,35 +763,35 @@ class UniversalService(models.Model):
         editable=False
     )
     is_enable = models.BooleanField(
-        verbose_name='Влючен ли?',
+        verbose_name=_('Влючен ли?'),
         default=True
     )
     packet_enable = models.BooleanField(
-        verbose_name='Влючен ли пакет?',
+        verbose_name=_('Влючен ли пакет?'),
         default=True
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     description = models.TextField(
-        verbose_name='Описание главная услуги',
+        verbose_name=_('Описание главная услуги'),
         blank=True,
         null=True
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     videos = GenericRelation(Video, related_query_name='universal')
     images = GenericRelation(Photo, related_query_name='universal')
@@ -799,7 +801,7 @@ class UniversalService(models.Model):
     base_packet = models.OneToOneField(
         BasePacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет начинающий',
+        verbose_name=_('Пакет начинающий'),
         related_query_name='universal',
         blank=True,
         null=True
@@ -807,7 +809,7 @@ class UniversalService(models.Model):
     midle_packet = models.OneToOneField(
         MidlePacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет Продвинутый',
+        verbose_name=_('Пакет Продвинутый'),
         related_query_name='universal',
         blank=True,
         null=True
@@ -815,7 +817,7 @@ class UniversalService(models.Model):
     expert_packet = models.OneToOneField(
         ExpertPacket,
         on_delete=models.SET_NULL,
-        verbose_name='Пакет Эксперт',
+        verbose_name=_('Пакет Эксперт'),
         related_query_name='installation_water',
         blank=True,
         null=True

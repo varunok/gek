@@ -4,6 +4,7 @@
 {% load favorites_tag %}
 {% load video_tag %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -17,19 +18,19 @@
 		<div class="slider_main slider_notfront"{% if object.image %}
                 style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="slider_title">{{ seo.title|default:'Коммерческая недвижимость' }}</div>
-			<div class="slider_subtitle">{{ object_list|length }} объекта по вашим параметрам</div>
-			<div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
+			<div class="slider_subtitle">{{ object_list|length }} {% trans 'объекта по вашим параметрам' %}</div>
+			<div class="title_text">{% trans 'Оставьте свои контакты и мы поможем Вам подобрать нужный объект!' %}</div>
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Лендинг.{{ object }}">
+                <input type="hidden" name="source" value="{% trans 'Лендинг' %}.{{ object }}">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить заявку' %}">
 				</div>
 			</form>
 		</div>
@@ -38,26 +39,26 @@
 				<div id="content">
 
 					<div class="block search_results">
-						<div class="form_title">ПОиск недвижимости</div>
+						<div class="form_title">{% trans 'Поиск недвижимости' %}</div>
 						<div class="top_wrap">
 							<form action="#" class="webform_client_form">
 								<div class="form_item metro">
-									<label for="metro">Введите район, метро, шоссе или город:</label>
+									<label for="metro">{% trans 'Введите район, метро, шоссе или город' %}:</label>
 									<input type="text" id="metro">
 								</div>
 								<div class="form_item group form_wrapper">
-									<label>Стоимость, {% if object.type_deal == 'sale' %}${% else %}{{ nac_carrency }}{% endif %}</label>
+									<label>{% trans 'Стоимость' %}, {% if object.type_deal == 'sale' %}${% else %}{{ nac_carrency }}{% endif %}</label>
 									<div class="form_number">
-										<input type="number" placeholder="От">
+										<input type="number" placeholder="{% trans 'От' %}">
 									</div>
 									<div class="form_number">
-										<input type="number" placeholder="До">
+										<input type="number" placeholder="{% trans 'До' %}">
 									</div>
 								</div>
 								<div class="form_actions">
-									<input type="submit" value="Поиск">
+									<input type="submit" value="{% trans 'Поиск' %}">
 									<div class="links">
-										<div class="search_clear"><a href="{% url 'landings:landing' object.slug %}">очистить</a></div>
+										<div class="search_clear"><a href="{% url 'landings:landing' object.slug %}">{% trans 'очистить' %}</a></div>
 									</div>
 								</div>
 							</form>
@@ -84,11 +85,11 @@
                                                 <input type="hidden" name="object_id" value="{{ result.id }}">
                                             </div>
                                             <div class="address">{{ object.address|default_if_none:'' }}</div>
-                                            <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!</div>
+                                            <div class="text">{% trans '3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!' %}</div>
                                             <div class="top_wrap">
                                                 {% if object.rooms %}
                                                     <div class="info">
-                                                        <div class="label">Комнат:</div>
+                                                        <div class="label">{% trans 'Комнат' %}:</div>
                                                         <div class="item">{{ object.rooms }}</div>
                                                     </div>
                                                 {% endif %}
@@ -103,16 +104,16 @@
                                             </div>
                                             <div class="bottom_wrap">
                                                 <div class="statistics">{{ result.views }}</div>
-                                                <div class="read_more preview submit-add-inspection-modal"><a href="/">Заказать просмотр</a></div>
+                                                <div class="read_more preview submit-add-inspection-modal"><a href="/">{% trans 'Заказать просмотр' %}</a></div>
                                                 <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
-                                                <div class="read_more"><a href="{{ result.get_absolute_url }}">Подробнее</a></div>
+                                                <div class="read_more"><a href="{{ result.get_absolute_url }}">{% trans 'Подробнее' %}</a></div>
                                             </div>
                                         </div>
                                     </div>
                                 {% endfor %}
                                 {% if object_list.has_next %}
                                     <div class="load_more_wrap">
-                                        <div class="read_more load_more"><a href="#">Загрузить еще <span>45</span> объектов</a></div>
+                                        <div class="read_more load_more"><a href="#">{% trans 'Загрузить еще' %} <span>45</span> {% trans 'объектов' %}</a></div>
                                     </div>
                                 {% endif %}
 							</div>
@@ -127,21 +128,23 @@
 		<div class="block block_presentation"{% if object.image_form %}
                 style="background: url({{ object.image_form.url }}) no-repeat center/cover"{% endif %}>
 			<div class="block_content">
-				<div class="block_title">{{ object.title_form|default:'Подберем вам необходимый объект за 30 минут' }}</div>
+                {% trans 'Подберем вам необходимый объект за 30 минут' as pod %}
+				<div class="block_title">{{ object.title_form|default:pod }}</div>
 				<div class="view_content">
-					<div class="sub_title">{{ object.subtitle_form|default:'В базе более 1000 объектов' }}</div>
+                    {% trans 'В базе более 1000 объектов' as ob %}
+					<div class="sub_title">{{ object.subtitle_form|default:ob }}</div>
 					<form action="#" class="webform_client_form">
 						<div class="form_item user_name">
-							<input type="text" placeholder="Введите ваше имя">
+							<input type="text" placeholder="{% trans 'Введите ваше имя' %}">
 						</div>
 						<div class="form_item phone">
-							<input type="text" placeholder="Введите ваш телефон">
+							<input type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 						</div>
 						<div class="form_item form_textarea">
-							<textarea placeholder="Введите ваше сообщение"></textarea>
+							<textarea placeholder="{% trans 'Введите ваше сообщение' %}"></textarea>
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit" value="Связаться со специалистом">
+							<input type="submit" class="form_submit" value="{% trans 'Связаться со специалистом' %}">
 						</div>
 					</form>
 				</div>

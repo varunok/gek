@@ -4,8 +4,9 @@
 {% load admin_tags %}
 {% load video_tag %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
+{% block title %}{% if object.when_create %}{% trans 'Редактирование' %} {{ object.SEODescription }}{% else %}{% trans 'Создать' %} {{ verbose_name }}{% endif %}{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/accomodation.css' %}">
@@ -23,7 +24,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Доверие</h3>
+                    <h3>{% trans 'Доверие' %}</h3>
                 </div>
 
             </div>
@@ -32,7 +33,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить Доверие</h2>
+                            <h2>{% trans 'Изменить Доверие' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -48,7 +49,7 @@
                                                     <label class="" for="name">{{ fields.DELETE.label }}: {{ fields.DELETE|addcss:'style-del' }}
                                                             </label>
                                                     <div class="dynamic-form">
-                                                        <h4>Видео№{{ forloop.counter }}</h4>
+                                                        <h4>{% trans 'Видео' %}№{{ forloop.counter }}</h4>
                                                         {{ fields.id }}
                                                         <div class="item form-group">
                                                             <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ fields.video.label }}:
@@ -60,7 +61,7 @@
                                                                 <span class="error-label">{{ fields.video.errors }}</span>
                                                             {% endif %}
                                                         </div>
-                                                        <button style="float: right" type="button" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-lg-{{ forloop.counter }}">Просмотр</button>
+                                                        <button style="float: right" type="button" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-lg-{{ forloop.counter }}">{% trans 'Просмотр' %}</button>
                                                         <div class="modal fade modal-lg-{{ forloop.counter }}" tabindex="-1" role="dialog" aria-hidden="true">
                                                             <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
@@ -84,12 +85,12 @@
                                                     </div>
                                                 {% endfor %}
                                             </fieldset>
-                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                         </form>
 
                                         <div class="empty-form" style="display: none;">
                                             <div class="dynamic-form">
-                                            <h4>Добавить Видео</h4>
+                                            <h4>{% trans 'Добавить Видео' %}</h4>
                                                 {{ formset.empty_form.id }}
                                                 <div class="item form-group">
                                                     <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ formset.empty_form.video.label }}:

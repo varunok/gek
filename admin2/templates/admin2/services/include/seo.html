@@ -1,4 +1,5 @@
 {% load admin_tags %}
+{% load i18n %}
 <div role="tabpanel" class="tab-pane" id="seo_tab" aria-labelledby="seo-tab">
     <form class="form-horizontal form-label-left" enctype="multipart/form-data" name="seoForm" id="seoForm">
         {% csrf_token %}
@@ -71,7 +72,7 @@
         <div class="ln_solid"></div>
         <div class="form-group" style="float: right">
             <div class="col-md-12">
-                <button id="btn-seo-save" name="btn-seo-save" type="submit" class="btn btn-success">Сохранить</button>
+                <button id="btn-seo-save" name="btn-seo-save" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
             </div>
         </div>
     </form>

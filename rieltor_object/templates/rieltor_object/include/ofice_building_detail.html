@@ -4,11 +4,12 @@
 {% load favorites_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
-{% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
-{% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
-{% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+{% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
+{% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
+{% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
 
 {% block class_body %}  class="not-front apartment" {% endblock %}
 
@@ -16,7 +17,7 @@
 	<main class="middle">
 		<div class="slider_main slider_notfront">
 			<div class="top_inner_content">
-				<div class="main_breadcrumbs"><a href="/">Главная</a> / <span>Недвижимость</span></div>
+				<div class="main_breadcrumbs"><a href="/">{% trans 'Главная' %}</a> / <span>{% trans 'Недвижимость' %}</span></div>
 				<div class="title"></div>
 			</div>
 			<div class="icons_wrap">
@@ -33,7 +34,7 @@
 			<div class="webform_client_form">				
 				<div class="form_actions">
 					<input  class="form-submit submit-add-inspection-modal" type="submit" value="Заказать осмотр">
-                    <div class="read_more" style="display: none"><a href="{% url 'objects:daily_detail' object.id %}">Подробнее</a></div>
+                    <div class="read_more" style="display: none"><a href="{% url 'objects:daily_detail' object.id %}">{% trans 'Подробнее' %}</a></div>
 				</div>
 			</div>
 		</div>
@@ -67,7 +68,7 @@
 					<div class="block block_inform_appartament">
 						<div class="block_content">										
 							<div class="left_wrap information">
-								<div class="title">Информация:</div>
+								<div class="title">{% trans 'Информация' %}:</div>
 								<div class="price_wrapper">
 									<div class="first_price">762 000 грн</div><span></span><div class="second_price">600 грн/м<sup>2</sup></div>
 								</div>

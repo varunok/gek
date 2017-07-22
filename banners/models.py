@@ -7,10 +7,12 @@ from django.db import models
 from django.urls import reverse
 from solo.models import SingletonModel
 
+from django.utils.translation import ugettext_lazy as _
+
 
 class DownBanner(SingletonModel):
     code = models.TextField(
-        verbose_name='Код баннера',
+        verbose_name=_('Код баннера'),
         blank=True,
         null=True
     )
@@ -18,22 +20,22 @@ class DownBanner(SingletonModel):
         default=False
     )
     image = models.ImageField(
-        verbose_name='Картинка',
+        verbose_name=_('Картинка'),
         upload_to='banner/%Y/%m/%d/',
         blank=True
     )
     link = models.URLField(
-        verbose_name='Ссылка',
+        verbose_name=_('Ссылка'),
         help_text='http://example.com',
         blank=True,
         null=True
     )
 
     class Meta:
-        verbose_name = 'Нижний баннер'
+        verbose_name = _('Нижний баннер')
 
     def __unicode__(self):
-        return 'Нижний баннер (970х250)'
+        return _('Нижний баннер (970х250)')
 
     def get_edit_image_url(self):
         return reverse('admin2:downbanners_image')
@@ -44,7 +46,7 @@ class DownBanner(SingletonModel):
 
 class SideBanner(SingletonModel):
     code = models.TextField(
-        verbose_name='Код баннера',
+        verbose_name=_('Код баннера'),
         blank=True,
         null=True
     )
@@ -52,22 +54,22 @@ class SideBanner(SingletonModel):
         default=False
     )
     image = models.ImageField(
-        verbose_name='Картинка',
+        verbose_name=_('Картинка'),
         upload_to='banner/%Y/%m/%d/',
         blank=True
     )
     link = models.URLField(
-        verbose_name='Ссылка',
+        verbose_name=_('Ссылка'),
         help_text='http://example.com',
         blank=True,
         null=True
     )
 
     class Meta:
-        verbose_name = 'Боковой баннер'
+        verbose_name = _('Боковой баннер')
 
     def __unicode__(self):
-        return 'Боковой баннер (240х400)'
+        return _('Боковой баннер (240х400)')
 
     def get_edit_image_url(self):
         return reverse('admin2:sidebanners_image')

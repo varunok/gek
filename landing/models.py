@@ -10,14 +10,16 @@ from multiselectfield import MultiSelectField
 
 from rieltor_object.models import District
 
+from django.utils.translation import ugettext_lazy as _
+
 
 class TypeDeal(object):
     RENT = 'rent'
     SALE = 'sale'
     # RENT_SALE = 'rent_sale'
     CHOICES = (
-        (RENT, 'Аренда'),
-        (SALE, 'Продажа'),
+        (RENT, _('Аренда')),
+        (SALE, _('Продажа')),
         # (RENT_SALE, 'Аренда/Продажа')
     )
 
@@ -27,10 +29,10 @@ class TypeAppointment(object):
     OFFICE = 'office'
     SHOP = 'shop'
     CHOICES = (
-        (APARTMENT, 'Квартира'),
-        (HOUSE, 'Дом'),
-        (OFFICE, 'Офис'),
-        (SHOP, 'Магазин')
+        (APARTMENT, _('Квартира')),
+        (HOUSE, _('Дом')),
+        (OFFICE, _('Офис')),
+        (SHOP, _('Магазин'))
     )
 
 
@@ -43,45 +45,45 @@ class Landing(models.Model):
         allow_unicode=True
     )
     type_deal = models.CharField(
-        verbose_name='Аренда \ продажа',
+        verbose_name=_('Аренда \ продажа'),
         choices=TypeDeal.CHOICES,
         max_length=50,
     )
     type_property = MultiSelectField(
-        verbose_name='Тип недвижимости',
+        verbose_name=_('Тип недвижимости'),
         max_length=50,
         choices=TypeAppointment.CHOICES,
         blank=True,
         null=True
     )
     price_gt = models.IntegerField(
-        verbose_name='Цена от',
+        verbose_name=_('Цена от'),
         blank=True,
         null=True
     )
     price_lt = models.IntegerField(
-        verbose_name='Цена до',
+        verbose_name=_('Цена до'),
         blank=True,
         null=True
     )
     footage_gt = models.IntegerField(
-        verbose_name='Площадь от',
+        verbose_name=_('Площадь от'),
         blank=True,
         null=True
     )
     footage_lt = models.IntegerField(
-        verbose_name='Площадь до',
+        verbose_name=_('Площадь до'),
         blank=True,
         null=True
     )
     rooms = models.IntegerField(
-        verbose_name='Комнат',
+        verbose_name=_('Комнат'),
         blank=True,
         null=True
     )
     district = models.ForeignKey(
         District,
-        verbose_name='Район',
+        verbose_name=_('Район'),
         on_delete=models.SET_NULL,
         related_name='landing',
         null=True,
@@ -103,55 +105,55 @@ class Landing(models.Model):
         null=True
     )
     title_seo = models.TextField(
-        verbose_name='SEO Заголовок',
+        verbose_name=_('SEO Заголовок'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент SEO'
+        verbose_name=_('Контент SEO')
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='landing/%Y/%m/%d/',
         blank=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='landing/%Y/%m/%d/',
         blank=True
     )
     title_footer = models.CharField(
-        verbose_name='Название для футера',
+        verbose_name=_('Название для футера'),
         max_length=200,
         blank=True,
         null=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
     )
     title_form = models.CharField(
-        verbose_name='Заголовок форма',
+        verbose_name=_('Заголовок форма'),
         max_length=200,
         blank=True,
         null=True
     )
     subtitle_form = models.CharField(
-        verbose_name='Подзаголовок форма',
+        verbose_name=_('Подзаголовок форма'),
         max_length=200,
         blank=True,
         null=True
     )
     image_form = models.ImageField(
-        verbose_name='Фото форма',
+        verbose_name=_('Фото форма'),
         upload_to='landing/%Y/%m/%d/',
         blank=True
     )
 
     class Meta:
-        verbose_name = 'Мультилендинг'
-        verbose_name_plural = 'Мультилендинги'
+        verbose_name = _('Мультилендинг')
+        verbose_name_plural = _('Мультилендинги')
 
     def __unicode__(self):
         return self.slug

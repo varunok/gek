@@ -11,10 +11,12 @@ from transliterate import slugify as trans_slugify
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
+from django.utils.translation import ugettext_lazy as _
+
 
 class Sections(models.Model):
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=150
     )
     slug = models.SlugField(
@@ -41,26 +43,26 @@ class Sections(models.Model):
         null=True
     )
     title = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     created = models.DateTimeField(
-        verbose_name='Дата создания',
+        verbose_name=_('Дата создания'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
 
     class Meta:
-        verbose_name = 'Рубрика'
-        verbose_name_plural = 'Рубрики'
+        verbose_name = _('Рубрика')
+        verbose_name_plural = _('Рубрики')
         ordering = 'id',
 
     def __unicode__(self):
@@ -95,16 +97,16 @@ class Sections(models.Model):
 class Articles(models.Model):
     sections = models.ForeignKey(
         Sections,
-        verbose_name='Рубрика',
+        verbose_name=_('Рубрика'),
         on_delete=models.CASCADE,
         related_name='articles'
     )
     created = models.DateTimeField(
-        verbose_name='Дата создания',
+        verbose_name=_('Дата создания'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     slug = models.SlugField(
@@ -131,30 +133,30 @@ class Articles(models.Model):
         null=True
     )
     title = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='articles/%Y/%m/%d/',
         blank=True
     )
     title_image = models.ImageField(
-        verbose_name='Фото Заголовок',
+        verbose_name=_('Фото Заголовок'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     views = models.IntegerField(
-        verbose_name='Просмотры',
+        verbose_name=_('Просмотры'),
         default=0
     )
 
@@ -189,6 +191,6 @@ class Articles(models.Model):
 
 
     class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
+        verbose_name = _('Статья')
+        verbose_name_plural = _('Статьи')
         ordering = '-id',

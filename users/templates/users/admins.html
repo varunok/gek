@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Администраторы{% endblock title %}
+{% block title %}{% trans 'Администраторы' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,7 +14,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Администраторы</h3>
+                    <h3>{% trans 'Администраторы' %}</h3>
                 </div>
                 {% if request.user.is_superuser %}
                     <div class="title_right">
@@ -41,10 +42,10 @@
                                             <h5 class="brief"><i>{{ admin.extra|default:'' }}</i></h5>
                                             <div class="left col-xs-7">
                                                 <h2>{{ admin.get_full_name }}</h2>
-                                                <p><strong>Група: </strong> {{ admin.get_group_display }} </p>
+                                                <p><strong>{% trans 'Група' %}: </strong> {{ admin.get_group_display }} </p>
                                                 <ul class="list-unstyled">
                                                     <li><i class="fa fa-envelope"></i> Email: {{ admin.email }}</li>
-                                                    <li><i class="fa fa-phone"></i> Телефон: {{ admin.phone|default:'' }}</li>
+                                                    <li><i class="fa fa-phone"></i> {% trans 'Телефон' %}: {{ admin.phone|default:'' }}</li>
                                                 </ul>
                                             </div>
                                             <div class="right col-xs-5 text-center">
@@ -60,14 +61,14 @@
                                             {% if request.user.is_superuser or request.user.id == admin.id %}
                                                 <div class="col-xs-12 col-sm-3 emphasis">
                                                     <a href="{% url 'users:profile' admin.id %}" class="btn btn-primary btn-xs">
-                                                        <i class="fa fa-user"> </i> Просмотр
+                                                        <i class="fa fa-user"> </i> {% trans 'Просмотр' %}
                                                     </a>
                                                 </div>
                                             {% endif %}
                                             {% if request.user.is_superuser %}
                                                 <div class="col-xs-12 col-sm-3 emphasis">
                                                     <a href="{{ admin.id }}" class="btn btn-danger btn-xs del-admin">
-                                                        <i class="fa fa-user"> </i> Удалить
+                                                        <i class="fa fa-user"> </i> {% trans 'Удалить' %}
                                                     </a>
                                                 </div>
                                             {% endif %}

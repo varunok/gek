@@ -1,21 +1,22 @@
+{% load i18n %}
 <div  class="block block_webform webform_client block-add-inspection" style="max-width: 500px; top: 40%; left: 75%; display: none">
     <div class="block_content">
         <div class="close" style="top: -20px; right: -25px"></div>
         <div class="view_content">
             <form action="#" class="webform_client_form" id="form-add-inspection">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Заказать осмотр объекта.<a target='_blank' href='{{ object.get_absolute_url }}'>Объект</a>">
+                <input type="hidden" name="source" value="{% trans 'Заказать осмотр объекта' %}.<a target='_blank' href='{{ object.get_absolute_url }}'>{% trans 'Объект' %}</a>">
                 <input type="hidden" name="custom_id" value="{{ object.custom_id }}">
                 <div class="top_wrap">
                     <div class="form_item name">
-                        <input name="name"  type="text" placeholder="Введите ваше имя">
+                        <input name="name"  type="text" placeholder="{% trans 'Введите ваше имя' %}">
                     </div>
                     <div class="form_item phone">
-                        <input name="phone" type="text" placeholder="Номер телефона">
+                        <input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
                     </div>
                 </div>
                 <div class="form_actions">
-                    <input type="submit" class="form_submit submit-save-application" value="Заказать осмотр объекта ID{{ object.custom_id }}">
+                    <input type="submit" class="form_submit submit-save-application" value="{% trans 'Заказать осмотр объекта' %} ID{{ object.custom_id }}">
                 </div>
             </form>
         </div>
@@ -27,14 +28,14 @@
             event.preventDefault();
             var source = $(this).next().children('a').attr('href');
             if(parseInt(source)>0){
-                $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр объекта. ID:"+source);
-                $('.submit-save-application').val("Заказать осмотр объекта ID "+source);
-                $('.earth-no').val("Подобрать участок");
+                $('#form-add-inspection').children('input[name="source"]').val("{% trans 'Заказать осмотр объекта' %}. ID:"+source);
+                $('.submit-save-application').val("{% trans 'Заказать осмотр объекта' %} ID "+source);
+                $('.earth-no').val("{% trans 'Подобрать участок' %}");
                 $('input[name="custom_id"]').val(source);
             }else {
-                $('#form-add-inspection').children('input[name="source"]').val("Заказать осмотр объекта.<a target='_blank' href='"+source+"'>Объект</a>");
-                $('.submit-save-application').val("Заказать осмотр объекта ID ");
-                $('.earth-no').val("Подобрать участок");
+                $('#form-add-inspection').children('input[name="source"]').val("{% trans 'Заказать осмотр объекта' %}.<a target='_blank' href='"+source+"'>{% trans 'Объект' %}</a>");
+                $('.submit-save-application').val("{% trans 'Заказать осмотр объекта' %} ID ");
+                $('.earth-no').val("{% trans 'Подобрать участок' %}");
             }
             $('body').addClass('popup');
             $('.block-add-inspection').fadeIn();

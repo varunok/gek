@@ -5,6 +5,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
@@ -48,8 +49,8 @@ class User(AbstractUser):
         SA = 1
         AD = 2
         CHOICES = (
-            (SA, 'Супер администратор'),
-            (AD, 'Администратор')
+            (SA, _('Супер администратор')),
+            (AD, _('Администратор'))
         )
 
     username = models.CharField(
@@ -58,44 +59,44 @@ class User(AbstractUser):
         null=True
     )
     email = models.EmailField(
-        verbose_name='Электронная почта',
+        verbose_name=_('Электронная почта'),
         max_length=255,
         unique=True,
         db_index=True
     )
     avatar = models.ImageField(
-        verbose_name='Аватар',
+        verbose_name=_('Аватар'),
         blank=True,
         upload_to="user/avatar"
     )
     first_name = models.CharField(
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         max_length=40,
         blank=True
     )
     last_name = models.CharField(
-        verbose_name='Фамилия',
+        verbose_name=_('Фамилия'),
         max_length=40,
         blank=True
     )
     middle_name = models.CharField(
-        verbose_name='Отчество',
+        verbose_name=_('Отчество'),
         max_length=40,
         blank=True
     )
     about_self = models.TextField(
-        verbose_name='О сотруднике',
+        verbose_name=_('О сотруднике'),
         blank=True,
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=250,
         null=True,
         blank=True
     )
     phone = models.CharField(
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         max_length=250,
         null=True,
         blank=True
@@ -107,24 +108,24 @@ class User(AbstractUser):
         blank=True
     )
     specialization = models.CharField(
-        verbose_name='Специализация',
+        verbose_name=_('Специализация'),
         max_length=250,
         null=True,
         blank=True
     )
     extra = models.CharField(
-        verbose_name='Дополнительно',
+        verbose_name=_('Дополнительно'),
         max_length=250,
         null=True,
         blank=True
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True,
         null=True
     )
     group = models.IntegerField(
-        verbose_name='Група',
+        verbose_name=_('Група'),
         choices=Group.CHOICES
     )
 
@@ -134,8 +135,8 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['group']
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = _('Пользователь')
+        verbose_name_plural = _('Пользователи')
 
     def __unicode__(self):
         return self.email

@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load video_tag %}
 {% load thumbnail %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -13,20 +14,20 @@
 {% block content %}
 	<main class="middle">
 		<div class="slider_main slider_notfront" {% if object.image %}style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title|default:'Как можно зарабатывать на недвижимости ?' }}</div>
-			<div class="slider_subtitle">Бесплатная консультация по телефону</div>
-			<div class="title_text">Просто запоните поля и мы вам перезвоним</div>
+			<div class="slider_title">{{ seo.title|default:_('Как можно зарабатывать на недвижимости ?') }}</div>
+			<div class="slider_subtitle">{% trans 'Бесплатная консультация по телефону' %}</div>
+			<div class="title_text">{% trans 'Просто запоните поля и мы вам перезвоним' %}</div>
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заявка.{{ object }}">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить заявку' %}">
 				</div>
 			</form>
 		</div>
@@ -36,7 +37,7 @@
 					<div class="block_benefits">
 						<div class="block_content">
 							<div class="block_title">
-								Наши преимущества
+								{% trans 'Наши преимущества' %}
 							</div>
 							<div class="view_content">
 								
@@ -44,31 +45,31 @@
 									<div class="field_img">
 										<img src="{% static 'images/ben_1.png' %}" alt="">
 									</div>
-									<div class="text">Индивидуальный подход</div>
+									<div class="text">{% trans 'Индивидуальный подход' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/ben_2.png' %}" alt="">
 									</div>
-									<div class="text">Открытость</div>
+									<div class="text">{% trans 'Открытость' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/ben_3.png' %}" alt="">
 									</div>
-									<div class="text">Профессионализм</div>
+									<div class="text">{% trans 'Профессионализм' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/ben_4.png' %}" alt="">
 									</div>
-									<div class="text">Тактичность</div>
+									<div class="text">{% trans 'Тактичность' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/ben_5.png' %}" alt="">
 									</div>
-									<div class="text">Богатый опыт</div>
+									<div class="text">{% trans 'Богатый опыт' %}</div>
 								</div>
 							</div>
 						</div>
@@ -79,39 +80,39 @@
 		</div>
 		<div class="block_numbers">
 			<div class="block_content">
-				<div class="block_title">О нас в цифрах</div>
+				<div class="block_title">{% trans 'О нас в цифрах' %}</div>
 				<div class="view_content">
 					<div class="views_row">
 						<div class="count">127</div>
-						<div class="text">Рекламируем объектов</div>
+						<div class="text">{% trans 'Рекламируем объектов' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="count">3150</div>
-						<div class="text">Объектов в базе</div>
+						<div class="text">{% trans 'Объектов в базе' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="count">682</div>
-						<div class="text">Оставлено заявок</div>
+						<div class="text">{% trans 'Оставлено заявок' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="count">165</div>
-						<div class="text">Успешных сделок</div>
+						<div class="text">{% trans 'Успешных сделок' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="count">6</div>
-						<div class="text">Отработано месяцев:</div>
+						<div class="text">{% trans 'Отработано месяцев' %}:</div>
 					</div>
 					<div class="views_row">
 						<div class="count">3150</div>
-						<div class="text">Составлено планов</div>
+						<div class="text">{% trans 'Составлено планов' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="count">7</div>
-						<div class="text">Пройдено тестов</div>
+						<div class="text">{% trans 'Пройдено тестов' %}</div>
 					</div>
 					<div class="views_row">
 						<div class="count">3</div>
-						<div class="text">Снято передач</div>
+						<div class="text">{% trans 'Снято передач' %}</div>
 					</div>
 				</div>
 			</div>
@@ -125,7 +126,7 @@
             {% endif %}
 		<div class="block_diplomas">
 			<div class="block_content">
-				<div class="block_title">Наши дипломы и регалии, доказательство</div>
+				<div class="block_title">{% trans 'Наши дипломы и регалии, доказательство' %}</div>
 				<div class="view_content">
                     {% for image in object.images.all %}
                         <div class="views_row">
@@ -139,7 +140,7 @@
 		</div>
 		<div class="block_reviews">
 			<div class="block_content">
-				<div class="block_title">Отзывы наших клиентов и успешние сделки</div>
+				<div class="block_title">{% trans 'Отзывы наших клиентов и успешние сделки' %}</div>
 				<div class="view_content">
                     <div class="slider_video" id="slider_video">
                         {% for video in object.videos.all %}

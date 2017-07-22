@@ -7,7 +7,7 @@
 		<div class="view_content">
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Подборка обьектов.{{ seo }}">
+                <input type="hidden" name="source" value="{% trans 'Подборка обьектов' %}.{{ seo }}">
                 <input type="hidden" name="text" value=""
                        {% if building %}
                             class="hid-name-building"

@@ -1,4 +1,5 @@
 {% load admin_tags %}
+{% load i18n %}
 <form class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" name="partnerForm">
     {% csrf_token %}
     <input type="hidden" name="content_type" value="{{ content_type }}">
@@ -47,7 +48,7 @@
     <div class="ln_solid"></div>
     <div class="form-group" style="float: right">
         <div class="col-md-12">
-            <button name="save-partner" type="submit" class="btn btn-success btn-save-partner">Сохранить</button>
+            <button name="save-partner" type="submit" class="btn btn-success btn-save-partner">{% trans 'Сохранить' %}</button>
         </div>
     </div>
 </form>

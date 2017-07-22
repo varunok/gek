@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load admin_tags %}
 <div role="tabpanel" class="tab-pane" id="tab_content2" aria-labelledby="video-tab">
     <div class="row">
@@ -13,7 +14,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <br>
-                <h3>Видео №{{ forloop.counter }}</h3>
+                <h3>{% trans 'Видео' %} №{{ forloop.counter }}</h3>
                 {{ fields.id }}
                 <div class="clearfix"></div>
                 <br>
@@ -44,7 +45,7 @@
             <div class="ln_solid"></div>
             <div class="form-group" style="float: right">
                 <div class="col-md-12">
-                    <button id="send-video" name="save_video" type="submit" class="btn btn-success">Сохранить</button>
+                    <button id="send-video" name="save_video" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                 </div>
             </div>
         </form>
@@ -53,7 +54,7 @@
         <div class="clearfix" style="margin-top: 80px"></div><br>
         {% for video in video_check %}
             <div style="text-align: center">
-                <button type="button" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-lg-{{ video.id }}">Просмотр</button>
+                <button type="button" class="btn btn-primary btn-video" data-toggle="modal" data-target=".modal-lg-{{ video.id }}">{% trans 'Просмотр' %}</button>
                 <input type="hidden" class="video-id" value="{{ video.id }}">
                 <div class="modal fade modal-lg-{{ video.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">

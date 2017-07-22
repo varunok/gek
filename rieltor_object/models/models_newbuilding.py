@@ -9,11 +9,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 # Create your models here.
-from django.urls import reverse
+# from django.urls import reverse
 
 from admin2.models import SettingsAddress
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
+from django.utils.translation import ugettext_lazy as _
 
 
 class NewBuildingManager(models.Manager):
@@ -35,15 +36,15 @@ class NewBuilding(models.Model):
         allow_unicode=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Статус',
+        verbose_name=_('Статус'),
         default=True,
-        help_text='нужно сохранять'
+        help_text=_('нужно сохранять')
     )
     SEOTitle = models.TextField(
         verbose_name='SEO Title',
@@ -61,29 +62,29 @@ class NewBuilding(models.Model):
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=250,
         blank=True,
         null=True
     )
     price = models.IntegerField(
-        verbose_name='Цена за м.кв',
+        verbose_name=_('Цена за м.кв'),
         blank=True,
         null=True
     )
     price_object = models.IntegerField(
-        verbose_name='Цена за объект',
+        verbose_name=_('Цена за объект'),
         blank=True,
         null=True
     )
     date_delivery = models.DateField(
-        verbose_name='Дата сдачи',
+        verbose_name=_('Дата сдачи'),
         blank=True,
         null=True
     )
     district = models.ForeignKey(
         District,
-        verbose_name='Район',
+        verbose_name=_('Район'),
         on_delete=models.SET_NULL,
         related_name='newbuilding',
         null=True,
@@ -91,7 +92,7 @@ class NewBuilding(models.Model):
     )
     name = models.ForeignKey(
         Name,
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         on_delete=models.SET_NULL,
         related_name='newbuilding',
         null=True,
@@ -99,31 +100,31 @@ class NewBuilding(models.Model):
     )
     phone = models.ForeignKey(
         Phone,
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         on_delete=models.SET_NULL,
         related_name='newbuilding',
         null=True,
         blank=True
     )
     point = models.IntegerField(
-        verbose_name='Балы',
+        verbose_name=_('Балы'),
         blank=True,
         null=True
     )
     description = RichTextUploadingField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         blank=True
     )
     panorama = models.TextField(
-        verbose_name='Панорама',
+        verbose_name=_('Панорама'),
         blank=True
     )
     geo = models.TextField(
-        verbose_name='На карте',
+        verbose_name=_('На карте'),
         blank=True
     )
     views = models.IntegerField(
-        verbose_name='Просмотры',
+        verbose_name=_('Просмотры'),
         default=0
     )
     uuid = models.UUIDField(
@@ -131,51 +132,51 @@ class NewBuilding(models.Model):
         editable=False
     )
     when_create = models.DateTimeField(
-        verbose_name='Дата публикации',
+        verbose_name=_('Дата публикации'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     parade = models.PositiveSmallIntegerField(
-        verbose_name='Парадных',
+        verbose_name=_('Парадных'),
         blank=True,
         null=True
     )
     storeys = models.PositiveSmallIntegerField(
-        verbose_name='Этажность',
+        verbose_name=_('Этажность'),
         blank=True,
         null=True
     )
     parking_places = models.PositiveSmallIntegerField(
-        verbose_name='Парковочных мест',
+        verbose_name=_('Парковочных мест'),
         blank=True,
         null=True
     )
     total_area = models.PositiveSmallIntegerField(
-        verbose_name='Общая площадь',
+        verbose_name=_('Общая площадь'),
         blank=True,
         null=True
     )
     class_house = models.CharField(
-        verbose_name='Клас дома',
+        verbose_name=_('Клас дома'),
         max_length=20,
         blank=True,
         null=True
     )
     start_construction = models.DateField(
-        verbose_name='Начало строительства',
+        verbose_name=_('Начало строительства'),
         blank=True,
         null=True
     )
     end_construction = models.DateField(
-        verbose_name='Конец строительства',
+        verbose_name=_('Конец строительства'),
         blank=True,
         null=True
     )
@@ -192,8 +193,8 @@ class NewBuilding(models.Model):
     images = GenericRelation(Photo, related_query_name='newbuilding')
 
     class Meta:
-        verbose_name = 'Новострои'
-        verbose_name_plural = 'Новострои'
+        verbose_name = _('Новострои')
+        verbose_name_plural = _('Новострои')
         ordering = ['-when_create']
 
     def __unicode__(self):

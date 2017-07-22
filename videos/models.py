@@ -5,6 +5,7 @@ import uuid
 
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 from django.urls import reverse
@@ -29,30 +30,30 @@ class Videos(models.Model):
         null=True
     )
     title = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     time = models.TimeField(
-        verbose_name='Время',
+        verbose_name=_('Время'),
         blank=True,
         null=True,
         help_text='формат 00:11:22'
     )
     views = models.IntegerField(
-        verbose_name='Просмотры',
+        verbose_name=_('Просмотры'),
         default=0
     )
     description = models.TextField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         blank=True,
         null=True
     )
@@ -61,18 +62,18 @@ class Videos(models.Model):
         editable=False
     )
     when_create = models.DateTimeField(
-        verbose_name='Дата публикации',
+        verbose_name=_('Дата публикации'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     what_you_knowns = GenericRelation(WhatYouKnown, related_query_name='videos')
 
     class Meta:
-        verbose_name = 'Видео'
-        verbose_name_plural = 'Видео'
+        verbose_name = _('Видео')
+        verbose_name_plural = _('Видео')
         ordering = ['-when_create']
 
     def __unicode__(self):

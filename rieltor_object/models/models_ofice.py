@@ -9,11 +9,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 # Create your models here.
-from django.urls import reverse
+# from django.urls import reverse
 
 from admin2.models import SettingsAddress, Settings
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
+from django.utils.translation import ugettext_lazy as _
 
 
 class OficeManager(models.Manager):
@@ -30,7 +31,7 @@ class Ofice(models.Model):
         null=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -51,69 +52,69 @@ class Ofice(models.Model):
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=250,
         blank=True,
         null=True
     )
     price = models.IntegerField(
-        verbose_name='Цена',
+        verbose_name=_('Цена'),
         blank=True,
         null=True
     )
     type_deal = models.CharField(
-        verbose_name='Тип',
+        verbose_name=_('Тип'),
         max_length=20,
         choices=TypeDeal.CHOICES,
         blank=True,
         null=True
     )
     appointment = models.CharField(
-        verbose_name='Назначение',
+        verbose_name=_('Назначение'),
         max_length=20,
         choices=TypeAppointmentOffice.CHOICES,
         blank=True,
         null=True
     )
     footage = models.IntegerField(
-        verbose_name='Площадь',
+        verbose_name=_('Площадь'),
         blank=True,
         null=True
     )
     rooms = models.IntegerField(
-        verbose_name='Комнат',
+        verbose_name=_('Комнат'),
         blank=True,
         null=True
     )
     point = models.IntegerField(
-        verbose_name='Балы',
+        verbose_name=_('Балы'),
         blank=True,
         null=True
     )
     when_create = models.DateTimeField(
-        verbose_name='Дата публикации',
+        verbose_name=_('Дата публикации'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     location = models.CharField(
-        verbose_name='Расположение',
+        verbose_name=_('Расположение'),
         max_length=20,
         choices=TypeLocation.CHOICES,
         blank=True,
         null=True
     )
     floor = models.CharField(
-        verbose_name='Этаж',
+        verbose_name=_('Этаж'),
         max_length=20,
         choices=TypeFloor.CHOICES,
         blank=True,
         null=True
     )
     entrance = models.CharField(
-        verbose_name='Вход',
+        verbose_name=_('Вход'),
         max_length=20,
         choices=TypeEntrance.CHOICES,
         blank=True,
@@ -121,7 +122,7 @@ class Ofice(models.Model):
     )
     district = models.ForeignKey(
         District,
-        verbose_name='Район',
+        verbose_name=_('Район'),
         on_delete=models.SET_NULL,
         related_name='ofice',
         null=True,
@@ -129,7 +130,7 @@ class Ofice(models.Model):
     )
     name = models.ForeignKey(
         Name,
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         on_delete=models.SET_NULL,
         related_name='ofice',
         null=True,
@@ -137,22 +138,22 @@ class Ofice(models.Model):
     )
     phone = models.ForeignKey(
         Phone,
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         on_delete=models.SET_NULL,
         related_name='ofice',
         null=True,
         blank=True
     )
     description = RichTextUploadingField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         blank=True
     )
     panorama = models.TextField(
-        verbose_name='Панорама',
+        verbose_name=_('Панорама'),
         blank=True
     )
     views = models.IntegerField(
-        verbose_name='Просмотры',
+        verbose_name=_('Просмотры'),
         default=0
     )
     uuid = models.UUIDField(
@@ -160,7 +161,7 @@ class Ofice(models.Model):
         editable=False
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
@@ -169,11 +170,11 @@ class Ofice(models.Model):
         default=False
     )
     is_short = models.BooleanField(
-        verbose_name='Краткое',
+        verbose_name=_('Краткое'),
         default=False
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     images = GenericRelation(Photo, related_query_name='ofice')
@@ -181,8 +182,8 @@ class Ofice(models.Model):
     objects = OficeManager()
 
     class Meta:
-        verbose_name = 'Офисы и магазины'
-        verbose_name_plural = 'Офисы и магазины'
+        verbose_name = _('Офисы и магазины')
+        verbose_name_plural = _('Офисы и магазины')
         ordering = ['-when_create']
 
     def __unicode__(self):
@@ -224,8 +225,8 @@ class Ofice(models.Model):
 
     def normalize_SEO(self, text):
         try:
-            text = text.replace('Офис', 'офиса')
-            text = text.replace('Магазин', 'магазина')
+            text = text.replace(_('Офис'), _('офиса'))
+            text = text.replace(_('Магазин'), _('магазина'))
         except AttributeError:
             pass
         return text

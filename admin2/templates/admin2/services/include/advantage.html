@@ -1,4 +1,5 @@
 {% load admin_tags %}
+{% load i18n %}
 <div role="tabpanel" class="tab-pane" id="advantage_tab_content" aria-labelledby="video-tab">
     <div class="row">
         <div class=" col-md-12 col-sm-12 col-xs-12">
@@ -8,7 +9,7 @@
             <input type="hidden" name="uuid" value="{{ service.uuid }}">
             {% csrf_token %}
             {% for fields in advantage_form %}
-                <h3>Преимущество {{ forloop.counter }}:</h3>
+                <h3>{% trans 'Преимущество' %} {{ forloop.counter }}:</h3>
                 <label class="" for="name">{{ fields.DELETE.label }}: {{ fields.DELETE|addcss:'style-del flat' }}</label>
                 {{ fields.id }}
                 <div class="clearfix"></div>
@@ -50,7 +51,7 @@
             <div class="ln_solid"></div>
             <div class="form-group" style="float: right">
                 <div class="col-md-12">
-                    <button id="send-advantage" name="save_advantage" type="submit" class="btn btn-success">Сохранить</button>
+                    <button id="send-advantage" name="save_advantage" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                 </div>
             </div>
         </form>

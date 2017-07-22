@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -13,9 +14,9 @@
     <main class="middle">
 		<div class="slider_main slider_notfront">
 			<div class="top_inner_content">
-				<div class="main_breadcrumbs"><a href="/">Главная</a> / <span>Услуги</span></div>
+				<div class="main_breadcrumbs"><a href="/">{% trans 'Главная' %}</a> / <span>{% trans 'Услуги' %}</span></div>
 			</div>
-			<h1 class="slider_title page_title">{{ seo.title|default:'Услуги агентства недвижимости' }}</h1>
+			<h1 class="slider_title page_title">{{ seo.title|default:_('Услуги агентства недвижимости') }}</h1>
 		</div>
 		<div class="middle_inner">
 			<div class="container">

@@ -4,6 +4,7 @@
 {% load favorites_tag %}
 {% load video_tag %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -17,15 +18,15 @@
 		<div class="slider_main slider_notfront"{% if object.image %}
                 style="background: url({{ result.title_image.url }}) no-repeat center/cover"{% endif %}>
 			<div class="top_inner_content">
-				<div class="title">Спасибо, что прошли наш тест!</div>
+				<div class="title">{% trans 'Спасибо, что прошли наш тест!' %}</div>
 			</div>
 			<h1 class="slider_title page_title">{{ result.title }}</h1>
 			<div class="icons_wrap">
-				<div class="title">Ваш результат:</div>
+				<div class="title">{% trans 'Ваш результат' %}:</div>
 				<div class="icon result">{{ ball }}</div>
 			</div>
 			<div class="social_likes_wrapper">
-				<div class="label">Поделитесь с друзьями результатом:</div>
+				<div class="label">{% trans 'Поделитесь с друзьями результатом' %}:</div>
 				<div class="social-likes social-likes_vertical" data-counters="no">
 					<div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
 					<div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
@@ -42,7 +43,7 @@
 								<div class="views_row">
 									<div class="view_row_inner">									
 										<div class="left_wrap">
-											<div class="title">Комментарий к результату</div>
+											<div class="title">{% trans 'Комментарий к результату' %}</div>
 											<div class="field_image">
 												<img src="{{ result.image|thumbnail_url:'test_427' }}" alt="">
 											</div>
@@ -55,7 +56,7 @@
 									</div>
 								</div>	
 								<div class="load_more_wrap">
-									<div class="read_more"><a href="{% url 'polls:test' %}">Пройти другой тест</a></div>
+									<div class="read_more"><a href="{% url 'polls:test' %}">{% trans 'Пройти другой тест' %}</a></div>
 								</div>
 							</div>
 						</div>

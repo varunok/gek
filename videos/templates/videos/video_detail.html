@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -15,7 +16,7 @@
 	<main class="middle">
 		<div class="slider_main slider_notfront">
 			<div class="block_content">	
-				<div class="come_back"><a href="{% url 'videos:video' %}">Вернуться назад</a></div>
+				<div class="come_back"><a href="{% url 'videos:video' %}">{% trans 'Вернуться назад' %}</a></div>
 				<h1 class="slider_title page_title">{{ seo.title|default:'' }}</h1>
 				<div class="icons_wrap">
 					<div class="icon stat">{{ object.views }}</div>
@@ -35,7 +36,7 @@
                     {% endif %}
 					<div class="block block_body" style="min-height: 200px">
 						<div class="left_wrap">
-							<div class="title">Что вы узнаете:</div>
+							<div class="title">{% trans 'Что вы узнаете' %}:</div>
                             <ul>
                                 {% for known in object.what_you_knowns.all %}
                                     <li>{{ known.text }}</li>

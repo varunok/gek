@@ -1,1 +1,1 @@
-<tr><td>{{ next.name }}</td><td>{{ next.value }}</td><td><a href="apartment-next/{{ next.id }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a></td></tr>
+{% load i18n %}<tr><td>{{ next.name }}</td><td>{{ next.value }}</td><td><a href="apartment-next/{{ next.id }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a></td></tr>

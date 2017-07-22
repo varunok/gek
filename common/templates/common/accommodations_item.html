@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load staticfiles %}
+{% load i18n %}
 <div role="tabpanel" class="tab-pane" id="tab_accommodations" aria-labelledby="accommodations-tab">
     <form action="" id="accommodationsForm" class="accommodationsForm" enctype="multipart/form-data">
         {% csrf_token %}
@@ -10,10 +11,10 @@
                 <input type="file" name="image">
             </div>
             <div class=" col-md-3 col-sm-3 col-xs-12">
-                <input type="text" name="title" placeholder="Заголовок">
+                <input type="text" name="title" placeholder="{% trans 'Заголовок' %}">
             </div>
             <div class=" col-md-3 col-sm-3 col-xs-12">
-                <input type="text" name="description" placeholder="Описание">
+                <input type="text" name="description" placeholder="{% trans 'Описание' %}">
             </div>
             <div class=" col-md-2 col-sm-2 col-xs-12">
                 <label>Добавить
@@ -21,7 +22,7 @@
                 </label>
             </div>
             <div class=" col-md-2 col-sm-2 col-xs-12">
-                <button id="send_accommodations" name="send-accommodations" type="submit" class="btn btn-success">Сохранить</button>
+                <button id="send_accommodations" name="send-accommodations" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
             </div>
         </div>
     </form>
@@ -31,10 +32,10 @@
             <input type="hidden" value="{{ object.id }}" id="object-id">
             <div class="row">
                 <div class="col-md-5 col-sm-5 col-xs-5" style="margin-left: 35px">
-                    <h4>Общий список</h4>
+                    <h4>{% trans 'Общий список' %}</h4>
                 </div>
                 <div class="col-md-5 col-sm-5 col-xs-5" style="margin-left: 40px">
-                    <h4>Прикреплено</h4>
+                    <h4>{% trans 'Прикреплено' %}</h4>
                 </div>
             </div>
             <div class="row">
@@ -53,10 +54,10 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <p>
-                                    Заголовок: {{ accommodation.title }}
+                                    {% trans 'Заголовок' %}: {{ accommodation.title }}
                                 </p>
                                 <p>
-                                    Описание: {{ accommodation.description }}
+                                    {% trans 'Описание' %}: {{ accommodation.description }}
                                 </p>
                             </div>
                             <div class="col-md-1 col-sm-1 col-xs-1 arrow-block">
@@ -82,10 +83,10 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <p>
-                                    Заголовок: {{ accommodation.title }}
+                                    {% trans 'Заголовок' %}: {{ accommodation.title }}
                                 </p>
                                 <p>
-                                    Описание: {{ accommodation.description }}
+                                    {% trans 'Описание' %}: {{ accommodation.description }}
                                 </p>
                             </div>
                         </div>

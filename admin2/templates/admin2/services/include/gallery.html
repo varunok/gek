@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load i18n %}
 <div role="tabpanel" {% if 'trust' not in request.path and 'plan' not in request.path %}class="tab-pane"{% endif %} id="tab_content4" aria-labelledby="galery-tab">
     <form action="" id="galleryForm" class="galleryForm" enctype="multipart/form-data">
         {% csrf_token %}
@@ -9,7 +10,7 @@
                 <input type="file" name="image" multiple>
             </div>
             <div class=" col-md-6 col-sm-6 col-xs-12">
-                <button id="send_photo" name="send-photo" type="submit" class="btn btn-success">Сохранить</button>
+                <button id="send_photo" name="send-photo" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
             </div>
         </div>
     </form>

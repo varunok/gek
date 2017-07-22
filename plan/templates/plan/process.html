@@ -5,6 +5,7 @@
 {% load video_tag %}
 {% load admin_tags %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -18,7 +19,7 @@
         <form action="{% url 'plan:plan_done' %}" method="post">
             {% csrf_token %}
             <div class="slider_main slider_notfront">
-                <div class="slider_title">{{ seo.title|default:'Составьте свой план' }}</div>
+                <div class="slider_title">{{ seo.title|default:_('Составьте свой план') }}</div>
                 <div class="webform_client_form">
                     <div class="form_item">
                        {{ title_form.name }}
@@ -27,7 +28,7 @@
                         {{ title_form.list_plan }}
                     </div>
                     <div class="form_actions">
-                        <input class="form-submit" type="submit" value="Создать">
+                        <input class="form-submit" type="submit" value="{% trans 'Создать' %}">
     {#                    <button class="form-submit">Создать</button>#}
                     </div>
                 </div>
@@ -37,8 +38,8 @@
                     <div id="content">
                         <div class="block block_process block_preparations">
                             <div class="block_content">
-                                <div class="block_title">Подготовка</div>
-                                <div class="read_more create create_prep"><a href="#">Создать задачу</a></div>
+                                <div class="block_title">{% trans 'Подготовка' %}</div>
+                                <div class="read_more create create_prep"><a href="#">{% trans 'Создать задачу' %}</a></div>
                                 <div class="view_content preparations">
 
                                 </div>
@@ -46,8 +47,8 @@
                         </div>
                         <div class="block block_process during">
                             <div class="block_content">
-                                <div class="block_title">Процесс</div>
-                                <div class="read_more create create_processes"><a href="#">Создать задачу</a></div>
+                                <div class="block_title">{% trans 'Процесс' %}</div>
+                                <div class="read_more create create_processes"><a href="#">{% trans 'Создать задачу' %}</a></div>
                                 <div class="view_content processes">
 
                                 </div>
@@ -56,8 +57,8 @@
                         {% downbanner %}
                         <div class="block block_process done">
                             <div class="block_content">
-                                <div class="block_title">Завершение</div>
-                                <div class="read_more create create_finish"><a href="#">Создать задачу</a></div>
+                                <div class="block_title">{% trans 'Завершение' %}</div>
+                                <div class="read_more create create_finish"><a href="#">{% trans 'Создать задачу' %}</a></div>
                                 <div class="view_content finish">
 
                                 </div>
@@ -74,11 +75,11 @@
             </div>
             <div class="block block_presentation">
                 <div class="block_content">
-                    <div class="block_title">Нужно достигать своих целей по плану!</div>
+                    <div class="block_title">{% trans 'Нужно достигать своих целей по плану!' %}</div>
                     <div class="view_content">
                         <div  class="webform_client_form">
                             <div class="form_actions">
-                                <input type="submit" class="form_submit" value="Создать план">
+                                <input type="submit" class="form_submit" value="{% trans 'Создать план' %}">
                             </div>
                         </div>
                     </div>
@@ -95,7 +96,7 @@
     <div class="dynamic-form">
         <div class="views_row">
             <div class="left_wrap">
-                <div class="read_more"><a href="#">Сделаю</a></div>
+                <div class="read_more"><a href="#">{% trans 'Сделаю' %}</a></div>
             </div>
             <div class="right_wrap">
                 {{ form__preparations.empty_form.id }}
@@ -109,23 +110,23 @@
                 </div>
                 <div class="webform_client_form">
                     <div class="form_textarea">
-                        <label for="comment">Свой комментарий:</label>
+                        <label for="comment">{% trans 'Свой комментарий' %}:</label>
                         {{ form__preparations.empty_form.comment }}
                     </div>
                     <div class="group">
                         <div class="form_item form_select status">
-                            <label for="status">Приоритет задания:</label>
+                            <label for="status">{% trans 'Приоритет задания' %}:</label>
                             <div class="status_wrap red">
                                 <span></span>
                                 {{ form__preparations.empty_form.priority }}
                             </div>
                         </div>
                         <div class="form_item date">
-                            <label for="">Когда приступите?</label>
+                            <label for="">{% trans 'Когда приступите?' %}</label>
                             {{ form__preparations.empty_form.when_do|addcss:'datepicker1' }}
                         </div>
                         <div class="form_item date">
-                            <label for="">Планируете выполнить:</label>
+                            <label for="">{% trans 'Планируете выполнить' %}:</label>
                             {{ form__preparations.empty_form.plan_do|addcss:'datepicker1' }}
                         </div>
                     </div>
@@ -138,7 +139,7 @@
     <div class="dynamic-form">
         <div class="views_row">
             <div class="left_wrap">
-                <div class="read_more"><a href="#">Сделаю</a></div>
+                <div class="read_more"><a href="#">{% trans 'Сделаю' %}</a></div>
             </div>
             <div class="right_wrap">
                 {{ form__process.empty_form.id }}
@@ -152,23 +153,23 @@
                 </div>
                 <div class="webform_client_form">
                     <div class="form_textarea">
-                        <label for="comment">Свой комментарий:</label>
+                        <label for="comment">{% trans 'Свой комментарий' %}:</label>
                         {{ form__process.empty_form.comment }}
                     </div>
                     <div class="group">
                         <div class="form_item form_select status">
-                            <label for="status">Приоритет задания:</label>
+                            <label for="status">{% trans 'Приоритет задания' %}:</label>
                             <div class="status_wrap red">
                                 <span></span>
                                 {{ form__process.empty_form.priority }}
                             </div>
                         </div>
                         <div class="form_item date">
-                            <label for="datepicker">Когда приступите?</label>
+                            <label for="datepicker">{% trans 'Когда приступите?' %}</label>
                             {{ form__process.empty_form.when_do|addcss:'datepicker1' }}
                         </div>
                         <div class="form_item date">
-                            <label for="datepicker2">Планируете выполнить:</label>
+                            <label for="datepicker2">{% trans 'Планируете выполнить' %}:</label>
                             {{ form__process.empty_form.plan_do|addcss:'datepicker1' }}
                         </div>
                     </div>
@@ -181,7 +182,7 @@
     <div class="dynamic-form">
         <div class="views_row">
             <div class="left_wrap">
-                <div class="read_more"><a href="#">Сделаю</a></div>
+                <div class="read_more"><a href="#">{% trans 'Сделаю' %}</a></div>
             </div>
             <div class="right_wrap">
                 {{ form__finish.empty_form.id }}
@@ -195,23 +196,23 @@
                 </div>
                 <div class="webform_client_form">
                     <div class="form_textarea">
-                        <label for="comment">Свой комментарий:</label>
+                        <label for="comment">{% trans 'Свой комментарий' %}:</label>
                         {{ form__finish.empty_form.comment }}
                     </div>
                     <div class="group">
                         <div class="form_item form_select status">
-                            <label for="status">Приоритет задания:</label>
+                            <label for="status">{% trans 'Приоритет задания' %}:</label>
                             <div class="status_wrap red">
                                 <span></span>
                                 {{ form__finish.empty_form.priority }}
                             </div>
                         </div>
                         <div class="form_item date">
-                            <label for="datepicker">Когда приступите?</label>
+                            <label for="datepicker">{% trans 'Когда приступите?' %}</label>
                             {{ form__finish.empty_form.when_do|addcss:'datepicker1' }}
                         </div>
                         <div class="form_item date">
-                            <label for="datepicker2">Планируете выполнить:</label>
+                            <label for="datepicker2">{% trans 'Планируете выполнить' %}:</label>
                             {{ form__finish.empty_form.plan_do|addcss:'datepicker1' }}
                         </div>
                     </div>

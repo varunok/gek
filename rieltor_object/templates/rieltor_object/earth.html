@@ -6,6 +6,7 @@
 {% load banners_tag %}
 {% load rieltor_tag %}
 {% load base_tag %}
+{% load i18n %}
 {% block css %}
     <script type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 {% endblock css %}
@@ -19,17 +20,17 @@
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront"  {% if earthpagemodel.image %}style="background: url({{ earthpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title|default:'Оформление и проверка земли за 1 день' }}</div>
-			<div class="slider_subtitle">{{ seo.subtitle|default:'Вам нужен хороший участок?' }}</div>
-			<div class="text">Поможем в выборе земельного участка для строительства или бизнеса</div>
+			<div class="slider_title">{{ seo.title|default:_('Оформление и проверка земли за 1 день') }}</div>
+			<div class="slider_subtitle">{{ seo.subtitle|default:_('Вам нужен хороший участок?') }}</div>
+			<div class="text">{% trans 'Поможем в выборе земельного участка для строительства или бизнеса' %}</div>
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Подобрать участок">
+                <input type="hidden" name="source" value="{% trans 'Подобрать участок' %}">
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите номер телефона">
+					<input name="phone" type="text" placeholder="{% trans 'Введите номер телефона' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application earth-no" type="submit" value="Подобрать участок">
+					<input class="form-submit submit-save-application earth-no" type="submit" value="{% trans 'Подобрать участок' %}">
 				</div>
 			</form>
 		</div>
@@ -37,39 +38,39 @@
 			<div class="container">
 				<div id="content">
 					<div class="block search_results search_products">
-						<div class="form_title">Найти участок</div>
+						<div class="form_title">{% trans 'Найти участок' %}</div>
 						<form action="." method="get" class="webform_client_form search-form" >
 							<div class="form_item group form_wrapper form_wrapper_earth">
-								<label>Стоимость, USD:</label>
+								<label>{% trans 'Стоимость' %}, USD:</label>
 								<div class="form_number">
-                                    <input value="{{ filter_form.form.price__gt.data }}" class="price_gt" type="number" name="{{ filter_form.form.price__gt.name }}" id="{{ filter_form.form.price__gt.id_for_label }}" placeholder="От">
+                                    <input value="{{ filter_form.form.price__gt.data }}" class="price_gt" type="number" name="{{ filter_form.form.price__gt.name }}" id="{{ filter_form.form.price__gt.id_for_label }}" placeholder="{% trans 'От' %}">
 								</div>
 								<div class="form_number">
-									<input value="{{ filter_form.form.price__lt.data }}" class="price_lt" type="number" name="{{ filter_form.form.price__lt.name }}" id="{{ filter_form.form.price__lt.id_for_label }}" placeholder="До">
+									<input value="{{ filter_form.form.price__lt.data }}" class="price_lt" type="number" name="{{ filter_form.form.price__lt.name }}" id="{{ filter_form.form.price__lt.id_for_label }}" placeholder="{% trans 'До' %}">
 								</div>
 							</div>
 							<div class="form_item group form_wrapper form_wrapper_earth">
 								<label>Площадь, соток:</label>
 								<div class="form_number">
-									<input value="{{ filter_form.form.area__gt.data }}" class="price_lt" type="number" name="{{ filter_form.form.area__gt.name }}" id="{{ filter_form.form.area__gt.id_for_label }}" placeholder="От">
+									<input value="{{ filter_form.form.area__gt.data }}" class="price_lt" type="number" name="{{ filter_form.form.area__gt.name }}" id="{{ filter_form.form.area__gt.id_for_label }}" placeholder="{% trans 'От' %}">
 								</div>
 								<div class="form_number">
-                                    <input value="{{ filter_form.form.area__lt.data }}" class="price_lt" type="number" name="{{ filter_form.form.area__lt.name }}" id="{{ filter_form.form.area__lt.id_for_label }}" placeholder="До">
+                                    <input value="{{ filter_form.form.area__lt.data }}" class="price_lt" type="number" name="{{ filter_form.form.area__lt.name }}" id="{{ filter_form.form.area__lt.id_for_label }}" placeholder="{% trans 'До' %}">
 								</div>
 							</div>
 							<div class="form_item form_select form_wrapper form_wrapper_earth area_select">
-								<label for="type_ads">Район:</label>
+								<label for="type_ads">{% trans 'Район' %}:</label>
 								{{ filter_form.form.district }}
 							</div>
 							<div class="form_item form_select form_wrapper form_wrapper_earth">
-								<label for="type_ads2">Тип участка:</label>
+								<label for="type_ads2">{% trans 'Тип участка' %}:</label>
 								{{ filter_form.form.type_area }}
 							</div>
 							<div class="form_actions">
 								<div class="links">
-									<div class="search_clear"><a href="{% url 'objects:earth' %}">очистить</a></div>
+									<div class="search_clear"><a href="{% url 'objects:earth' %}">{% trans 'очистить' %}</a></div>
 								</div>
-								<input type="submit" value="Поиск" class="search-click">
+								<input type="submit" value="{% trans 'Поиск' %}" class="search-click">
 							</div>
 						</form>
 						<div class="top_wrap">
@@ -90,16 +91,16 @@
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
-                                         результатов
+                                         {% trans 'результатов' %}
                                     </div>
                                 </div>
 							</div>
 							<div class="right_wrap">
 								<div class="sortable">
-									<label for="sort">Сортировка:</label>
+									<label for="sort">{% trans 'Сортировка' %}:</label>
 									<select name="sort" id="sort">
-										<option value="1">Новые наверху</option>
-										<option value="2">Новые внизу</option>
+										<option value="1">{% trans 'Новые наверху' %}</option>
+										<option value="2">{% trans 'Новые внизу' %}</option>
 									</select>
 								</div>
 							</div>
@@ -107,7 +108,7 @@
 						<div class="bottom_wrap">
                             {% include 'rieltor_object/filters/earth_filter.html' %}
 							<div class="form_actions">
-								<input type="submit" value="Подобрать землю" class="open-object-parameter">
+								<input type="submit" value="{% trans 'Подобрать землю' %}" class="open-object-parameter">
 							</div>
 						</div>
 					</div>
@@ -136,15 +137,15 @@
                                         <div class="bottom_wrap">
                                             <div class="left_wrap">
                                                 <div class="char_item">
-                                                    <div class="label">Тип участка:</div>
+                                                    <div class="label">{% trans 'Тип участка' %}:</div>
                                                     <div class="item">{{ object.get_type_area_display|default:'' }}</div>
                                                 </div>
                                                 <div class="char_item">
-                                                    <div class="label">Район:</div>
+                                                    <div class="label">{% trans 'Район' %}:</div>
                                                     <div class="item">{{ object.district|default:'' }}</div>
                                                 </div>
                                                 <div class="char_item">
-                                                    <div class="label">До города:</div>
+                                                    <div class="label">{% trans 'До города' %}:</div>
                                                     <div class="item">{{ object.to_city|default:'----' }} км</div>
                                                 </div>
                                                 <div class="char_item">
@@ -152,7 +153,7 @@
                                                     <div class="item">{{ object.custom_id }}</div>
                                                 </div>
                                                 <div class="char_item">
-                                                    <div class="label">Коммуникации:</div>
+                                                    <div class="label">{% trans 'Коммуникации' %}:</div>
                                                         <div class="item">
                                                             {% for communication in object.communication %}
                                                                 {{ communication }} {% if not forloop.last %},{% endif %}
@@ -160,7 +161,7 @@
                                                         </div>
                                                 </div>
                                                 <div class="char_item">
-                                                    <div class="label">Строение дома:</div>
+                                                    <div class="label">{% trans 'Строение дома' %}:</div>
                                                         <div class="item">
                                                             {% for structure_house in object.structure_house %}
                                                                 {{ structure_house }} {% if not forloop.last %},{% endif %}
@@ -175,25 +176,25 @@
                                             <div class="right_wrap">
                                                 <div class="info_wrap">
                                                     <div class="item">
-                                                        <div class="label">Участок:</div>
+                                                        <div class="label">{% trans 'Участок' %}:</div>
                                                         <div class="count">{{ object.area|default:'' }} соток</div>
                                                     </div>
                                                     <div class="item">
-                                                        <div class="label">Цена:</div>
+                                                        <div class="label">{% trans 'Цена' %}:</div>
                                                         <div class="count">$ {{ object.price|default:'' }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="contacts">
-                                                    <div class="title">Контакты:</div>
+                                                    <div class="title">{% trans 'Контакты' %}:</div>
                                                     <div class="item field_name">
-                                                        <div class="label">Имя:</div>
+                                                        <div class="label">{% trans 'Имя' %}:</div>
                                                         <div class="field_item">{{ object.name|default:'' }}</div>
                                                     </div>
                                                     <div class="item field_phone">
-                                                        <div class="label">Телефон:</div>
+                                                        <div class="label">{% trans 'Телефон' %}:</div>
                                                         <div class="field_item">{{ object.phone|default:'' }}</div>
                                                     </div>
-                                                    <div class="btn submit-add-inspection-modal">Заказать просмотр</div>
+                                                    <div class="btn submit-add-inspection-modal">{% trans 'Заказать просмотр' %}</div>
                                                     <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
                                                 </div>
                                             </div>

@@ -1,9 +1,10 @@
+{% load i18n %}
 <div role="tabpanel" class="tab-pane" id="partners_tab" aria-labelledby="partners-tab">
     <div class="table-partners">
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div style="float: right">
-                    <a href="#" class="btn btn-round btn-primary btn-partner-create"><i class="fa fa-plus"></i> Создать</a>
+                    <a href="#" class="btn btn-round btn-primary btn-partner-create"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
                 </div>
             </div>
         </div>
@@ -11,12 +12,12 @@
             <table class="table table-striped projects">
                 <thead>
                     <tr>
-                        <th style="width: 20%">Имя</th>
-                        <th style="width: 20%">Почта</th>
-                        <th style="width: 10%">Телефон</th>
-                        <th style="width: 25%">Коментарий</th>
-                        <th style="width: 5%">Заявок</th>
-                        <th style="width: 15%">Дата создания</th>
+                        <th style="width: 20%">{% trans 'Имя' %}</th>
+                        <th style="width: 20%">{% trans 'Почта' %}</th>
+                        <th style="width: 10%">{% trans 'Телефон' %}</th>
+                        <th style="width: 25%">{% trans 'Коментарий' %}</th>
+                        <th style="width: 5%">{% trans 'Заявок' %}</th>
+                        <th style="width: 15%">{% trans 'Дата создания' %}</th>
                         <th style="width: 5%"></th>
                     </tr>
                 </thead>
@@ -30,7 +31,7 @@
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div style="float: right">
-                    <a href="#" class="btn btn-round btn-primary btn-partner-list"><i class="fa fa-chevron-left"></i> Назад</a>
+                    <a href="#" class="btn btn-round btn-primary btn-partner-list"><i class="fa fa-chevron-left"></i> {% trans 'Назад' %}</a>
                 </div>
             </div>
         </div>
