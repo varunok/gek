@@ -35,7 +35,7 @@ class DownBanner(SingletonModel):
         verbose_name = _('Нижний баннер')
 
     def __unicode__(self):
-        return _('Нижний баннер (970х250)')
+        return 'Нижний баннер (970х250)'
 
     def get_edit_image_url(self):
         return reverse('admin2:downbanners_image')
@@ -69,7 +69,7 @@ class SideBanner(SingletonModel):
         verbose_name = _('Боковой баннер')
 
     def __unicode__(self):
-        return _('Боковой баннер (240х400)')
+        return 'Боковой баннер (240х400)'
 
     def get_edit_image_url(self):
         return reverse('admin2:sidebanners_image')
