@@ -225,11 +225,11 @@ class Ofice(models.Model):
 
     def normalize_SEO(self, text):
         try:
-            text = text.replace(_('Офис'), _('офиса'))
-            text = text.replace(_('Магазин'), _('магазина'))
+            text = text.replace('Офис', 'офиса')
+            text = text.replace('Магазин', 'магазина')
         except AttributeError:
             pass
-        return text
+        return _(text)
 
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())

@@ -195,10 +195,10 @@ class Daily(models.Model):
     def normalize_SEO(self, text):
         if self.rooms > 1:
             try:
-                text = text.replace(_('комнаты'), _('комнат'))
+                text = text.replace('комнаты', 'комнат')
             except AttributeError:
                 pass
-        return text
+        return _(text)
 
     def get_title(self):
         return '{0}{2} {1}'.format(self.title or '', self.address or '', '.' if self.title else '' )

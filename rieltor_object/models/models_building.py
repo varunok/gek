@@ -267,13 +267,15 @@ class Building(models.Model):
         return self._meta
 
     def normalize_SEO(self, text):
+        if not text:
+            return ''
         try:
-            text = text.replace(_('Дом'), _('дома'))
-            text = text.replace(_('Квартира'), _('квартиры'))
-            text = text.replace(_('Комната'), _('комнаты'))
+            text = text.replace('Дом', 'дома')
+            text = text.replace('Квартира', 'квартиры')
+            text = text.replace('Комната', 'комнаты')
         except AttributeError:
-            return text
-        return text
+            return _(text)
+        return _(text)
 
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())
