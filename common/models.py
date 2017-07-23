@@ -7,6 +7,7 @@ from django.db import models
 
 # Create your models here.
 from django.urls import reverse_lazy, reverse
+from django.utils.translation import ugettext_lazy as _
 
 
 class ModelInService(object):
@@ -25,20 +26,20 @@ class ModelInService(object):
 
 class Application(models.Model):
     created = models.DateTimeField(
-        verbose_name='Дата создания',
+        verbose_name=_('Дата создания'),
         auto_now_add=True
     )
     source = models.TextField(
-        verbose_name='Источник'
+        verbose_name=_('Источник')
     )
     name = models.CharField(
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         max_length=100,
         blank=True,
         null=True
     )
     phone = models.CharField(
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         max_length=50,
         blank=True,
         null=True
@@ -50,29 +51,29 @@ class Application(models.Model):
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=300,
         blank=True,
         null=True
     )
     price = models.CharField(
-        verbose_name='Цена',
+        verbose_name=_('Цена'),
         max_length=300,
         blank=True,
         null=True
     )
     text = models.TextField(
-        verbose_name='Комментарий',
+        verbose_name=_('Комментарий'),
         blank=True,
         null=True
     )
     comming = models.TextField(
-        verbose_name='Заезд',
+        verbose_name=_('Заезд'),
         blank=True,
         null=True
     )
     go = models.TextField(
-        verbose_name='Отьезд',
+        verbose_name=_('Отьезд'),
         blank=True,
         null=True
     )
@@ -109,20 +110,20 @@ class Application(models.Model):
         super(Application, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Заявка'
-        verbose_name_plural = 'Заявки'
+        verbose_name = _('Заявка')
+        verbose_name_plural = _('Заявки')
         ordering = ['-created']
 
 
 class Video(models.Model):
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     content_type = models.ForeignKey(
@@ -131,15 +132,15 @@ class Video(models.Model):
         limit_choices_to={'model__in': ModelInService.model_in}
     )
     is_enable = models.BooleanField(
-        verbose_name='Включен ли?',
+        verbose_name=_('Включен ли?'),
         default=True
     )
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Видео'
-        verbose_name_plural = 'Видео'
+        verbose_name = _('Видео')
+        verbose_name_plural = _('Видео')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
@@ -147,13 +148,13 @@ class Video(models.Model):
 
 class FAQ(models.Model):
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     text = models.TextField(
-        verbose_name='Текст',
+        verbose_name=_('Текст'),
         blank=True
     )
     content_type = models.ForeignKey(
@@ -165,8 +166,8 @@ class FAQ(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ'
-        verbose_name_plural = 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ'
+        verbose_name = _('ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ')
+        verbose_name_plural = _('ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
@@ -174,13 +175,13 @@ class FAQ(models.Model):
 
 class TableRepair(models.Model):
     name = models.CharField(
-        verbose_name='Наименование работ',
+        verbose_name=_('Наименование работ'),
         max_length=250,
         blank=True,
         null=True
     )
     price = models.CharField(
-        verbose_name='Стоимость',
+        verbose_name=_('Стоимость'),
         max_length=250,
         blank=True,
         null=True
@@ -194,8 +195,8 @@ class TableRepair(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Стоимость ремонта'
-        verbose_name_plural = 'Стоимость ремонта'
+        verbose_name = _('Стоимость ремонта')
+        verbose_name_plural = _('Стоимость ремонта')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.name if self.name else self.id)
@@ -203,13 +204,13 @@ class TableRepair(models.Model):
 
 class Photo(models.Model):
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='photos/%Y/%m/%d/',
         blank=True
     )
@@ -222,8 +223,8 @@ class Photo(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Фото'
-        verbose_name_plural = 'Фото'
+        verbose_name = _('Фото')
+        verbose_name_plural = _('Фото')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.title if self.title else self.id)
@@ -244,8 +245,8 @@ class TextPacket(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Текст пакета'
-        verbose_name_plural = 'Текст пакетов'
+        verbose_name = _('Текст пакета')
+        verbose_name_plural = _('Текст пакетов')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.id)
@@ -254,16 +255,16 @@ class TextPacket(models.Model):
 class BasePacket(models.Model):
     __name_packet__ = 'base_packet'
     title = models.CharField(
-        verbose_name='Начинающий',
+        verbose_name=_('Начинающий'),
         max_length=250,
-        default='Начинающий',
+        default=_('Начинающий'),
         blank=True
     )
     text = GenericRelation(TextPacket, related_query_name='basepacket')
 
     class Meta:
-        verbose_name = 'Пакет Начинающий'
-        verbose_name_plural = 'Пакет Начинающий'
+        verbose_name = _('Пакет Начинающий')
+        verbose_name_plural = _('Пакет Начинающий')
 
     def __unicode__(self):
         return '{} - ID:{}'.format(self.title, self.id)
@@ -272,16 +273,16 @@ class BasePacket(models.Model):
 class MidlePacket(models.Model):
     __name_packet__ = 'midle_packet'
     title = models.CharField(
-        verbose_name='Продвинутый',
+        verbose_name=_('Продвинутый'),
         max_length=250,
-        default='Продвинутый',
+        default=_('Продвинутый'),
         blank=True
     )
     text = GenericRelation(TextPacket, related_query_name='midlepacket')
 
     class Meta:
-        verbose_name = 'Пакет Продвинутый'
-        verbose_name_plural = 'Пакет Продвинутый'
+        verbose_name = _('Пакет Продвинутый')
+        verbose_name_plural = _('Пакет Продвинутый')
 
     def __unicode__(self):
         return '{} - ID:{}'.format(self.title, self.id)
@@ -290,16 +291,16 @@ class MidlePacket(models.Model):
 class ExpertPacket(models.Model):
     __name_packet__ = 'expert_packet'
     title = models.CharField(
-        verbose_name='Эксперт',
+        verbose_name=_('Эксперт'),
         max_length=250,
-        default='Эксперт',
+        default=_('Эксперт'),
         blank=True
     )
     text = GenericRelation(TextPacket, related_query_name='expertpacket')
 
     class Meta:
-        verbose_name = 'Пакет Эксперт'
-        verbose_name_plural = 'Пакет Эксперт'
+        verbose_name = _('Пакет Эксперт')
+        verbose_name_plural = _('Пакет Эксперт')
 
     def __unicode__(self):
         return '{} - ID:{}'.format(self.title, self.id)
@@ -307,10 +308,10 @@ class ExpertPacket(models.Model):
 
 class Advantage(models.Model):
     description = models.TextField(
-        verbose_name='Описание'
+        verbose_name=_('Описание')
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='photos/%Y/%m/%d/',
         blank=True
     )
@@ -323,8 +324,8 @@ class Advantage(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = "Преимущество"
-        verbose_name_plural = "Преимущества"
+        verbose_name = _("Преимущество")
+        verbose_name_plural = _("Преимущества")
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.id)
@@ -332,11 +333,11 @@ class Advantage(models.Model):
 
 class ApartmentNext(models.Model):
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250
     )
     value = models.IntegerField(
-        verbose_name='Значение',
+        verbose_name=_('Значение'),
     )
 
     content_type = models.ForeignKey(
@@ -349,8 +350,8 @@ class ApartmentNext(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Рядом с квартирой'
-        verbose_name_plural = 'Рядом с квартирой'
+        verbose_name = _('Рядом с квартирой')
+        verbose_name_plural = _('Рядом с квартирой')
         ordering = ['-id']
 
     def __unicode__(self):
@@ -359,24 +360,24 @@ class ApartmentNext(models.Model):
 
 class Feed(models.Model):
     name = models.CharField(
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         max_length=250,
         blank=True,
         null=True
     )
     city = models.CharField(
-        verbose_name='Город',
+        verbose_name=_('Город'),
         max_length=250,
         blank=True,
         null=True
     )
     feed = models.TextField(
-        verbose_name='Отзив',
+        verbose_name=_('Отзив'),
         blank=True,
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='feed/%Y/%m/%d/',
         blank=True
     )
@@ -390,49 +391,49 @@ class Feed(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Отзив'
-        verbose_name_plural = 'Отзивы'
+        verbose_name = _('Отзив')
+        verbose_name_plural = _('Отзивы')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.name if self.name else self.id)
 
 
 class Schedule(models.Model):
-    MO = 'Понедельник'
-    TU = 'Вторник'
-    WE = 'Среда'
-    TH = 'Четверг'
-    FR = 'Пятница'
-    SA = 'Суббота'
-    SU = 'Воскресенье'
+    MO = _('Понедельник')
+    TU = _('Вторник')
+    WE = _('Среда')
+    TH = _('Четверг')
+    FR = _('Пятница')
+    SA = _('Суббота')
+    SU = _('Воскресенье')
     CHOICES = (
-        (MO, 'Понедельник'),
-        (TU, 'Вторник'),
-        (WE, 'Среда'),
-        (TH, 'Четверг'),
-        (FR, 'Пятница'),
-        (SA, 'Суббота'),
-        (SU, 'Воскресенье'),
+        (MO, _('Понедельник')),
+        (TU, _('Вторник')),
+        (WE, _('Среда')),
+        (TH, _('Четверг')),
+        (FR, _('Пятница')),
+        (SA, _('Суббота')),
+        (SU, _('Воскресенье')),
     )
     day = models.CharField(
-        verbose_name='День недели',
+        verbose_name=_('День недели'),
         max_length=25,
         choices=CHOICES,
         blank=True, null=True
     )
     open_from = models.TimeField(
-        verbose_name='Часов От',
+        verbose_name=_('Часов От'),
         blank=True, null=True
     )
     open_to = models.TimeField(
-        verbose_name='Часов До',
+        verbose_name=_('Часов До'),
         blank=True, null=True
     )
     special = models.CharField(
-        verbose_name='Cобственное значение',
+        verbose_name=_('Cобственное значение'),
         max_length=250,
         blank=True, null=True,
-        help_text='Другое будет игнорироватся'
+        help_text=_('Другое будет игнорироватся')
     )
     content_type = models.ForeignKey(
         ContentType,
@@ -444,8 +445,8 @@ class Schedule(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'График работы'
-        verbose_name_plural = 'График работы'
+        verbose_name = _('График работы')
+        verbose_name_plural = _('График работы')
         # ordering = ['-id']
 
     def __unicode__(self):
@@ -456,7 +457,7 @@ class Schedule(models.Model):
 
 class WhatYouKnown(models.Model):
     text = models.TextField(
-        verbose_name='Текст',
+        verbose_name=_('Текст'),
         blank=True,
         null=True
     )
@@ -470,21 +471,21 @@ class WhatYouKnown(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Что вы узнаете'
-        verbose_name_plural = 'Что вы узнаете'
+        verbose_name = _('Что вы узнаете')
+        verbose_name_plural = _('Что вы узнаете')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.text)
 
 
 class PriorityChoices(object):
-    HARD = 'Сложное'
-    LOW = 'Простое'
-    MIDDLE = 'Среднее'
+    HARD = _('Сложное')
+    LOW = _('Простое')
+    MIDDLE = _('Среднее')
     CHOICES = (
-        (HARD, 'Сложное'),
-        (LOW, 'Простое'),
-        (MIDDLE, 'Среднее'),
+        (HARD, _('Сложное')),
+        (LOW, _('Простое')),
+        (MIDDLE, _('Среднее')),
     )
 
     model__in = ('salebuildplan',)
@@ -492,30 +493,30 @@ class PriorityChoices(object):
 
 class Preparation(models.Model):
     title = models.TextField(
-        verbose_name='Заголовок'
+        verbose_name=_('Заголовок')
     )
     description = models.TextField(
-        verbose_name='Описание'
+        verbose_name=_('Описание')
     )
     comment = models.TextField(
-        verbose_name='Комментарий',
+        verbose_name=_('Комментарий'),
         blank=True,
         null=True
     )
     priority = models.CharField(
-        verbose_name='Приоритет задания',
+        verbose_name=_('Приоритет задания'),
         choices=PriorityChoices.CHOICES,
         max_length=20,
         blank=True,
         null=True
     )
     when_do = models.DateField(
-        verbose_name='Когда приступите?',
+        verbose_name=_('Когда приступите?'),
         blank=True,
         null=True
     )
     plan_do = models.DateField(
-        verbose_name='Планируете выполнить',
+        verbose_name=_('Планируете выполнить'),
         blank=True,
         null=True
     )
@@ -529,8 +530,8 @@ class Preparation(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Подготовка'
-        verbose_name_plural = 'Подготовки'
+        verbose_name = _('Подготовка')
+        verbose_name_plural = _('Подготовки')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.title)
@@ -541,30 +542,30 @@ class Preparation(models.Model):
 
 class Process(models.Model):
     title = models.TextField(
-        verbose_name='Заголовок'
+        verbose_name=_('Заголовок')
     )
     description = models.TextField(
-        verbose_name='Описание'
+        verbose_name=_('Описание')
     )
     comment = models.TextField(
-        verbose_name='Комментарий',
+        verbose_name=_('Комментарий'),
         blank=True,
         null=True
     )
     priority = models.CharField(
-        verbose_name='Приоритет задания',
+        verbose_name=_('Приоритет задания'),
         choices=PriorityChoices.CHOICES,
         max_length=20,
         blank=True,
         null=True
     )
     when_do = models.DateField(
-        verbose_name='Когда приступите?',
+        verbose_name=_('Когда приступите?'),
         blank=True,
         null=True
     )
     plan_do = models.DateField(
-        verbose_name='Планируете выполнить',
+        verbose_name=_('Планируете выполнить'),
         blank=True,
         null=True
     )
@@ -578,8 +579,8 @@ class Process(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Процесс'
-        verbose_name_plural = 'Процесс'
+        verbose_name = _('Процесс')
+        verbose_name_plural = _('Процесс')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.title)
@@ -590,30 +591,30 @@ class Process(models.Model):
 
 class Finish(models.Model):
     title = models.TextField(
-        verbose_name='Заголовок'
+        verbose_name=_('Заголовок')
     )
     description = models.TextField(
-        verbose_name='Описание'
+        verbose_name=_('Описание')
     )
     comment = models.TextField(
-        verbose_name='Комментарий',
+        verbose_name=_('Комментарий'),
         blank=True,
         null=True
     )
     priority = models.CharField(
-        verbose_name='Приоритет задания',
+        verbose_name=_('Приоритет задания'),
         choices=PriorityChoices.CHOICES,
         max_length=20,
         blank=True,
         null=True
     )
     when_do = models.DateField(
-        verbose_name='Когда приступите?',
+        verbose_name=_('Когда приступите?'),
         blank=True,
         null=True
     )
     plan_do = models.DateField(
-        verbose_name='Планируете выполнить',
+        verbose_name=_('Планируете выполнить'),
         blank=True,
         null=True
     )
@@ -627,8 +628,8 @@ class Finish(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Завершение'
-        verbose_name_plural = 'Завершение'
+        verbose_name = _('Завершение')
+        verbose_name_plural = _('Завершение')
 
     def __unicode__(self):
         return '{} - {}'.format(self.content_type, self.title)

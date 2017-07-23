@@ -3,14 +3,15 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 
 class TypeDeal(object):
     RENT = 'rent'
     SALE = 'sale'
     CHOICES = (
-        (RENT, 'Аренда'),
-        (SALE, 'Продажа')
+        (RENT, _('Аренда')),
+        (SALE, _('Продажа'))
     )
 
 
@@ -19,9 +20,9 @@ class TypeAppointment(object):
     HOUSE = 'house'
     ROOM = 'room'
     CHOICES = (
-        (APARTMENT, 'Квартира'),
-        (HOUSE, 'Дом'),
-        (ROOM, 'Комната'),
+        (APARTMENT, _('Квартира')),
+        (HOUSE, _('Дом')),
+        (ROOM, _('Комната')),
     )
 
 
@@ -29,8 +30,8 @@ class TypeAppointmentOffice(object):
     OFFICE = 'office'
     SHOP = 'shop'
     CHOICES = (
-        (OFFICE, 'Офис'),
-        (SHOP, 'Магазин')
+        (OFFICE, _('Офис')),
+        (SHOP, _('Магазин'))
     )
 
 
@@ -40,8 +41,8 @@ class TypeStatus(object):
     SHORT = 'short'
     CHOICES = (
         (VIP, 'VIP'),
-        (DEFAULT, 'Обычное'),
-        (SHORT, 'Краткое'),
+        (DEFAULT, _('Обычное')),
+        (SHORT, _('Краткое')),
     )
 
 
@@ -51,10 +52,10 @@ class TypeLocation(object):
     BISNESS = 'business_center'
     ALONEBUILD = 'alonebuild'
     CHOICES = (
-        (FACADE, 'Фасад'),
-        (COURTYARD, 'Дворовой'),
-        (BISNESS, 'Бизнес-центр'),
-        (ALONEBUILD, 'Отдельное здание'),
+        (FACADE, _('Фасад')),
+        (COURTYARD, _('Дворовой')),
+        (BISNESS, _('Бизнес-центр')),
+        (ALONEBUILD, _('Отдельное здание')),
     )
 
 
@@ -63,9 +64,9 @@ class TypeLayout(object):
     SEPARATE = 'separate'
     RELATED_SEPARATE = 'related-separate'
     CHOICES = (
-        (RELATED, 'Смежные'),
-        (SEPARATE, 'Раздельные'),
-        (RELATED_SEPARATE, 'Смежно-раздельные'),
+        (RELATED, _('Смежные')),
+        (SEPARATE, _('Раздельные')),
+        (RELATED_SEPARATE, _('Смежно-раздельные')),
     )
 
 
@@ -75,10 +76,10 @@ class TypeFloor(object):
     BELTAG = 'mezzanine'
     TWOFIVE = 'twofive'
     CHOICES = (
-        (FIRST, '1-й'),
-        (BASE, 'Цоколь'),
-        (BELTAG, 'Бельэтаж'),
-        (TWOFIVE, '2-5 этаж'),
+        (FIRST, _('1-й')),
+        (BASE, _('Цоколь')),
+        (BELTAG, _('Бельэтаж')),
+        (TWOFIVE, _('2-5 этаж')),
     )
 
 
@@ -87,9 +88,9 @@ class TypeEntrance(object):
     COURTYARD = 'from_yard'
     PARAD = 'with_grand'
     CHOICES = (
-        (FACADE, 'Фасад'),
-        (COURTYARD, 'Со двора'),
-        (PARAD, 'С парадной'),
+        (FACADE, _('Фасад')),
+        (COURTYARD, _('Со двора')),
+        (PARAD, _('С парадной')),
     )
 
 
@@ -99,10 +100,10 @@ class TypeArea(object):
     COMMERCIAL = 'commercial'
     HANDED = 'handed'
     CHOICES = (
-        (FOR_BUILDING, 'Под застройку'),
-        (GARDENING, 'Садоводство'),
-        (COMMERCIAL, 'Комерческая'),
-        (HANDED, 'Дом сдан'),
+        (FOR_BUILDING, _('Под застройку')),
+        (GARDENING, _('Садоводство')),
+        (COMMERCIAL, _('Комерческая')),
+        (HANDED, _('Дом сдан')),
     )
 
 
@@ -112,10 +113,10 @@ class Communications(object):
     SEWERAGE = 'sewage'
     ELECTRICITY = 'electricity'
     CHOICES = (
-        (WATER, 'Вода'),
-        (GAS, 'Газ'),
-        (SEWERAGE, 'Канализация'),
-        (ELECTRICITY, 'Электричество'),
+        (WATER, _('Вода')),
+        (GAS, _('Газ')),
+        (SEWERAGE, _('Канализация')),
+        (ELECTRICITY, _('Электричество')),
     )
 
 
@@ -125,10 +126,10 @@ class StructureHouse(object):
     BARN = 'barn'
     POOL = 'pool'
     CHOICES = (
-        (HOUSE, 'Дом'),
-        (CUISINE, 'Летная кухня'),
-        (BARN, 'Сарай'),
-        (POOL, 'Бассейн'),
+        (HOUSE, _('Дом')),
+        (CUISINE, _('Летная кухня')),
+        (BARN, _('Сарай')),
+        (POOL, _('Бассейн')),
     )
 
 
@@ -139,7 +140,7 @@ class DistrictManager(models.Manager):
 
 class District(models.Model):
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         unique=True
     )
@@ -147,8 +148,8 @@ class District(models.Model):
     objects = DistrictManager()
 
     class Meta:
-        verbose_name = 'Район'
-        verbose_name_plural = 'Районы'
+        verbose_name = _('Район')
+        verbose_name_plural = _('Районы')
 
     def __unicode__(self):
         return self.name
@@ -164,14 +165,14 @@ class District(models.Model):
 
 class Name(models.Model):
     name = models.CharField(
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         max_length=250,
         unique=True
     )
 
     class Meta:
-        verbose_name = 'Имя'
-        verbose_name_plural = 'Имена'
+        verbose_name = _('Имя')
+        verbose_name_plural = _('Имена')
 
     def __unicode__(self):
         return self.name
@@ -179,14 +180,14 @@ class Name(models.Model):
 
 class Phone(models.Model):
     phone = models.CharField(
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         max_length=250,
         unique=True
     )
 
     class Meta:
-        verbose_name = 'Телефон'
-        verbose_name_plural = 'Телефон'
+        verbose_name = _('Телефон')
+        verbose_name_plural = _('Телефон')
 
     def __unicode__(self):
         return self.phone
@@ -199,7 +200,7 @@ class DailyDistrictManager(models.Manager):
 
 class DailyDistrict(models.Model):
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         unique=True
     )
@@ -207,8 +208,8 @@ class DailyDistrict(models.Model):
     objects = DailyDistrictManager()
 
     class Meta:
-        verbose_name = 'Район для посуточно'
-        verbose_name_plural = 'Районы для посуточно'
+        verbose_name = _('Район для посуточно')
+        verbose_name_plural = _('Районы для посуточно')
 
     def __unicode__(self):
         return self.name
@@ -230,7 +231,7 @@ class EarthDistrictManager(models.Manager):
 
 class EarthDistrict(models.Model):
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         unique=True
     )
@@ -238,8 +239,8 @@ class EarthDistrict(models.Model):
     objects = EarthDistrictManager()
 
     class Meta:
-        verbose_name = 'Район для земля'
-        verbose_name_plural = 'Районы для земля'
+        verbose_name = _('Район для земля')
+        verbose_name_plural = _('Районы для земля')
 
     def __unicode__(self):
         return self.name
@@ -256,14 +257,14 @@ class EarthDistrict(models.Model):
 
 class ApartmentHas(models.Model):
     name = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250,
         unique=True
     )
 
     class Meta:
-        verbose_name = 'В квартире есть'
-        verbose_name_plural = 'В квартире есть'
+        verbose_name = _('В квартире есть')
+        verbose_name_plural = _('В квартире есть')
 
     def __unicode__(self):
         return self.name
@@ -281,13 +282,13 @@ class Infrastructure(models.Model):
         upload_to='icons/%Y/%m/%d/',
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
     )
 
     class Meta:
-        verbose_name = 'Инфраструктура'
-        verbose_name_plural = 'Инфраструктура'
+        verbose_name = _('Инфраструктура')
+        verbose_name_plural = _('Инфраструктура')
         ordering = ['-id']
 
     def __unicode__(self):
@@ -296,21 +297,21 @@ class Infrastructure(models.Model):
 
 class Accommodations(models.Model):
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='icons/%Y/%m/%d/',
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
     )
     description = models.CharField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         max_length=250,
     )
 
     class Meta:
-        verbose_name = 'Условия проживания'
-        verbose_name_plural = 'Условия проживания'
+        verbose_name = _('Условия проживания')
+        verbose_name_plural = _('Условия проживания')
 
     def __unicode__(self):
         return '{}'.format(self.title)

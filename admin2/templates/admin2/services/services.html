@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Услуги{% endblock title %}
+{% block title %}{% trans 'Услуги' %}{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/vCheck.css' %}">
@@ -15,12 +16,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Услуги</h3>
+                    <h3>{% trans 'Услуги' %}</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:universal_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать универсальную услугу</a>
+                            <a href="{% url 'admin2:universal_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать универсальную услугу' %}</a>
                         </div>
                     </div>
                 </div>
@@ -30,17 +31,17 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Все услуги</h2>
+                            <h2>{% trans 'Все услуги' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
-                                    <th style="width: 20%">Фото</th>
-                                    <th style="width: 50%">Название</th>
+                                    <th style="width: 20%">{% trans 'Фото' %}</th>
+                                    <th style="width: 50%">{% trans 'Название' %}</th>
                                     {% if request.user.is_superuser %}
-                                        <th style="width: 20%">Вкл/Викл</th>
+                                        <th style="width: 20%">{% trans 'Вкл/Викл' %}</th>
                                     {% endif %}
                                     <th style="width: 5%"></th>
                                 </tr>
@@ -63,8 +64,8 @@
                                     </td>
                                     {% endif %}
                                     <td>
-                                        <a href="{% url 'admin2:rieltor_service_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                        <a href="{{ rieltor_service.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                        <a href="{% url 'admin2:rieltor_service_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                        <a href="{{ rieltor_service.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -85,8 +86,8 @@
                                     </td>
                                     {% endif %}
                                     <td>
-                                        <a href="{% url 'admin2:valuation_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                        <a href="{{ valuation.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                        <a href="{% url 'admin2:valuation_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                        <a href="{{ valuation.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -107,8 +108,8 @@
                                     </td>
                                     {% endif %}
                                     <td>
-                                        <a href="{% url 'admin2:repair_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                        <a href="{{ repair.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                        <a href="{% url 'admin2:repair_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                        <a href="{{ repair.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -129,8 +130,8 @@
                                     </td>
                                     {% endif %}
                                     <td>
-                                        <a href="{% url 'admin2:insurence_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                        <a href="{{ insurence.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                        <a href="{% url 'admin2:insurence_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                        <a href="{{ insurence.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -151,8 +152,8 @@
                                     </td>
                                     {% endif %}
                                     <td>
-                                        <a href="{% url 'admin2:cleaning_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                        <a href="{{ cleaning.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                        <a href="{% url 'admin2:cleaning_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                        <a href="{{ cleaning.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -173,8 +174,8 @@
                                     </td>
                                     {% endif %}
                                     <td>
-                                        <a href="{% url 'admin2:installation_water_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                        <a href="{{ installation_water.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                        <a href="{% url 'admin2:installation_water_edit' %}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                        <a href="{{ installation_water.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                     </td>
                                 </tr>
                                 {% endif %}
@@ -196,9 +197,9 @@
                                         </td>
                                         {% endif %}
                                         <td>
-                                            <a href="{{ universal.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> Удалить </a>
-                                            <a href="{{ universal.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>
-                                            <a href="{{ universal.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>
+                                            <a href="{{ universal.get_delete_url }}" class="btn btn-danger btn-xs del-section"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
+                                            <a href="{{ universal.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
+                                            <a href="{{ universal.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

@@ -17,7 +17,7 @@
 {% block content %}
 <main class="middle">
 		<div class="slider_main slider_notfront" {% if buildingpagemodel.image %}style="background: url({{ buildingpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title|default:'Аренда коммерческой недвижимости' }}</div>
+			<div class="slider_title">{{ seo.title|default:_('Аренда коммерческой недвижимости') }}</div>
 			<form class="webform_client_form">
 				<div class="form_item search">
 					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="{% trans 'Искать в тексте объявления' %}">
@@ -48,7 +48,7 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
-                                     результатов
+                                     {% trans 'результатов' %}
                                 </div>
 							</div>
 							<div class="right_wrap">

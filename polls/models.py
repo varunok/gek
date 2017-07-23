@@ -8,17 +8,18 @@ from django.db import models
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
 
 class Question(models.Model):
     question_text = models.CharField(
-        verbose_name='Вопрос',
+        verbose_name=_('Вопрос'),
         max_length=200
     )
 
     class Meta:
-        verbose_name = 'Вопрос'
-        verbose_name_plural = 'Вопросы'
+        verbose_name = _('Вопрос')
+        verbose_name_plural = _('Вопросы')
         ordering = ['id']
 
     def __unicode__(self):
@@ -29,12 +30,12 @@ class Question(models.Model):
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, blank=True, null=True)
-    choice_text = models.CharField(verbose_name='Вариант',max_length=200)
-    ball = models.IntegerField(verbose_name='Балл',default=0)
+    choice_text = models.CharField(verbose_name=_('Вариант'),max_length=200)
+    ball = models.IntegerField(verbose_name=_('Балл'),default=0)
 
     class Meta:
-        verbose_name = 'Вариант'
-        verbose_name_plural = 'Варианты'
+        verbose_name = _('Вариант')
+        verbose_name_plural = _('Варианты')
 
     def __unicode__(self):
         return self.choice_text
@@ -42,31 +43,31 @@ class Choice(models.Model):
 
 class Result(models.Model):
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250
     )
     description = RichTextUploadingField(
-        verbose_name='Комментарий'
+        verbose_name=_('Комментарий')
     )
     title_image = models.ImageField(
-        verbose_name='Фото Заголовок',
+        verbose_name=_('Фото Заголовок'),
         upload_to='result/%Y/%m/%d/',
         blank=True
     )
     image = models.ImageField(
-        verbose_name='Фото Результат',
+        verbose_name=_('Фото Результат'),
         upload_to='result/%Y/%m/%d/',
         blank=True
     )
     ball_from = models.IntegerField(
-        verbose_name='Баллов От'
+        verbose_name=_('Баллов От')
     )
     ball_to = models.IntegerField(
-        verbose_name='Баллов До'
+        verbose_name=_('Баллов До')
     )
     class Meta:
-        verbose_name='Результат'
-        verbose_name_plural='Результаты'
+        verbose_name = _('Результат')
+        verbose_name_plural = _('Результаты')
 
     def __unicode__(self):
         return self.title
@@ -83,7 +84,7 @@ class URLResult(models.Model):
         on_delete=models.PROTECT
     )
     ball = models.IntegerField(
-        verbose_name='Результат'
+        verbose_name=_('Результат')
     )
 
     class Meta:
@@ -103,37 +104,37 @@ class URLResult(models.Model):
 
 class Polls(models.Model):
     title = models.CharField(
-        verbose_name='Название',
+        verbose_name=_('Название'),
         max_length=250
     )
     test_end = models.IntegerField(
-        verbose_name='Тест прошло',
+        verbose_name=_('Тест прошло'),
         default=0
     )
     questions = models.ManyToManyField(
         Question,
-        verbose_name='Вопросы',
+        verbose_name=_('Вопросы'),
         related_name='polls'
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='polls/%Y/%m/%d/',
         blank=True
     )
     results = models.ManyToManyField(
         Result,
-        verbose_name='Результаты',
+        verbose_name=_('Результаты'),
         related_name='polls'
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
 
 
     class Meta:
-        verbose_name='Тест'
-        verbose_name_plural='Тесты'
+        verbose_name = _('Тест')
+        verbose_name_plural = _('Тесты')
 
     def __unicode__(self):
         return self.title

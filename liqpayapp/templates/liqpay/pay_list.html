@@ -2,8 +2,9 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редирект{% endblock title %}
+{% block title %}{% trans 'Редирект' %}{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -13,7 +14,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Оплата</h3>
+                    <h3>{% trans 'Оплата' %}</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -21,7 +22,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Оплата франшизы</h2>
+                            <h2>{% trans 'Оплата франшизы' %}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">

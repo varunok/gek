@@ -17,6 +17,8 @@ from solo.models import SingletonModel
 from common.models import Photo, Video, FAQ, Feed, Schedule
 from users.models import User
 
+from django.utils.translation import ugettext_lazy as _
+
 
 class CurrencyChoice(object):
     UAH = 'UAH'
@@ -49,18 +51,18 @@ class HelpManager(models.Manager):
 
 class Help(models.Model):
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=500,
         blank=True,
         null=True
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True,
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включено?',
+        verbose_name=_('Включено?'),
         default=True
     )
 
@@ -70,8 +72,8 @@ class Help(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = 'Видео'
-        verbose_name = 'Видео'
+        verbose_name_plural = _('Видео')
+        verbose_name = _('Видео')
 
     def get_edit_url(self):
         return reverse('admin2:help_edit', args=[self.id])
@@ -86,19 +88,19 @@ class Help(models.Model):
 class Settings(SingletonModel):
 
     currency = models.CharField(
-        verbose_name='Валюта',
+        verbose_name=_('Валюта'),
         choices=CurrencyChoice.CARRENCY,
         max_length=3,
         blank=True
     )
     dollar_rate = models.FloatField(
-        verbose_name='Курс доллара',
+        verbose_name=_('Курс доллара'),
         blank=True,
         null=True
     )
 
     def __unicode__(self):
-        return "Валюта"
+        return _("Валюта")
 
     class Meta:
         verbose_name = "Валюта"
@@ -106,25 +108,25 @@ class Settings(SingletonModel):
 
 class SettingsAddress(SingletonModel):
     phone = models.CharField(
-        verbose_name=' Телефон',
+        verbose_name=_('Телефон'),
         max_length=50,
         blank=True,
         null=True
     )
     city = models.CharField(
-        verbose_name='Город',
+        verbose_name=_('Город'),
         max_length=50,
         blank=True,
         null=True
     )
     city_plural = models.CharField(
-        verbose_name='Город (родительный)',
+        verbose_name=_('Город (родительный)'),
         max_length=50,
         blank=True,
         null=True
     )
     address = models.CharField(
-        verbose_name='Улица',
+        verbose_name=_('Улица'),
         max_length=50,
         blank=True,
         null=True
@@ -138,10 +140,10 @@ class SettingsAddress(SingletonModel):
 
 
     def __unicode__(self):
-        return "Адреса"
+        return _("Адреса")
 
     class Meta:
-        verbose_name = "Адреса"
+        verbose_name = _("Адреса")
 
 
 def slug_validator(value):
@@ -154,37 +156,37 @@ def slug_validator(value):
 
 class SettingsFranchise(SingletonModel):
     price_30 = models.PositiveIntegerField(
-        verbose_name='Стоимость 30 дней',
+        verbose_name=_('Стоимость 30 дней'),
         default=0
     )
     price_90 = models.PositiveIntegerField(
-        verbose_name='Стоимость 90 дней',
+        verbose_name=_('Стоимость 90 дней'),
         default=0
     )
     price_180 = models.PositiveIntegerField(
-        verbose_name='Стоимость 180 дней',
+        verbose_name=_('Стоимость 180 дней'),
         default=0
     )
     currency = models.CharField(
-        verbose_name='Валюта',
+        verbose_name=_('Валюта'),
         choices=CurrencyPayChoice.CARRENCY,
         max_length=3,
         blank=True
     )
 
     class Meta:
-        verbose_name = 'Стоимость франшизы'
-        verbose_name_plural = 'Стоимость франшизы'
+        verbose_name = _('Стоимость франшизы')
+        verbose_name_plural = _('Стоимость франшизы')
 
 
 class SettingsPrivate24(SingletonModel):
     merchant = models.IntegerField(
-        verbose_name='Приват24 merchant ID',
+        verbose_name=_('Приват24 merchant ID'),
         blank=True,
         null=True
     )
     signature = models.CharField(
-        verbose_name='Приват24 signature',
+        verbose_name=_('Приват24 signature'),
         blank=True,
         null=True,
         max_length=250
@@ -208,7 +210,7 @@ class SettingsLiqpay(SingletonModel):
 
 class ActiveFranchise(SingletonModel):
     active_franchise = models.DateField(
-        verbose_name='Франшиза активна до',
+        verbose_name=_('Франшиза активна до'),
         default=timezone.now
     )
 
@@ -221,12 +223,12 @@ class ActiveFranchise(SingletonModel):
 
 class EmailForward(models.Model):
     email = models.EmailField(
-        verbose_name='Почта'
+        verbose_name=_('Почта')
     )
 
     class Meta:
-        verbose_name_plural = 'Почта для рассылки'
-        verbose_name  = 'Почта для рассылки'
+        verbose_name_plural = _('Почта для рассылки')
+        verbose_name = _('Почта для рассылки')
 
     def __unicode__(self):
         return self.email
@@ -243,22 +245,22 @@ class EmailForward(models.Model):
 
 class Counters(SingletonModel):
     counter_1 = models.TextField(
-        verbose_name='Счетчик №1',
+        verbose_name=_('Счетчик №1'),
         blank=True,
         null=True
     )
     counter_2 = models.TextField(
-        verbose_name='Счетчик №2',
+        verbose_name=_('Счетчик №2'),
         blank=True,
         null=True
     )
     counter_3 = models.TextField(
-        verbose_name='Счетчик №3',
+        verbose_name=_('Счетчик №3'),
         blank=True,
         null=True
     )
     counter_4 = models.TextField(
-        verbose_name='Счетчик №4',
+        verbose_name=_('Счетчик №4'),
         blank=True,
         null=True
     )
@@ -266,8 +268,8 @@ class Counters(SingletonModel):
 
 class IndexPageModel(SingletonModel):
     name = models.CharField(
-        default='Главная',
-        verbose_name='Название',
+        default=_('Главная'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -275,17 +277,17 @@ class IndexPageModel(SingletonModel):
     slug = models.SlugField(
         verbose_name='URL',
         allow_unicode=True,
-        default=slugify('Главная', allow_unicode=True),
+        default=slugify(_('Главная'), allow_unicode=True),
         validators=[slug_validator],
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -305,31 +307,31 @@ class IndexPageModel(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
 
     class Meta:
-        verbose_name = 'Главная'
+        verbose_name = _('Главная')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -340,8 +342,8 @@ class IndexPageModel(SingletonModel):
 
 class NewBuildingPageModel(SingletonModel):
     name = models.CharField(
-        default='Новострои',
-        verbose_name='Название',
+        default=_('Новострои'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -354,12 +356,12 @@ class NewBuildingPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -379,27 +381,27 @@ class NewBuildingPageModel(SingletonModel):
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включена ли страница?',
+        verbose_name=_('Включена ли страница?'),
         default=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
 
     class Meta:
@@ -414,8 +416,8 @@ class NewBuildingPageModel(SingletonModel):
 
 class DailyPageModel(SingletonModel):
     name = models.CharField(
-        default='Посуточна',
-        verbose_name='Название',
+        default=_('Посуточна'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -428,12 +430,12 @@ class DailyPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -453,27 +455,27 @@ class DailyPageModel(SingletonModel):
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включена ли страница?',
+        verbose_name=_('Включена ли страница?'),
         default=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
 
     class Meta:
@@ -488,8 +490,8 @@ class DailyPageModel(SingletonModel):
 
 class BuildingPageModel(SingletonModel):
     name = models.CharField(
-        default='Квартиры и Дома',
-        verbose_name='Название',
+        default=_('Квартиры и Дома'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -502,12 +504,12 @@ class BuildingPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='SEO Заголовок',
+        verbose_name=_('SEO Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -527,27 +529,27 @@ class BuildingPageModel(SingletonModel):
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включена ли страница?',
+        verbose_name=_('Включена ли страница?'),
         default=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
 
     class Meta:
@@ -562,8 +564,8 @@ class BuildingPageModel(SingletonModel):
 
 class EarthPageModel(SingletonModel):
     name = models.CharField(
-        default='Земля',
-        verbose_name='Название',
+        default=_('Земля'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -576,12 +578,12 @@ class EarthPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='SEO Заголовок',
+        verbose_name=_('SEO Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -601,27 +603,27 @@ class EarthPageModel(SingletonModel):
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включена ли страница?',
+        verbose_name=_('Включена ли страница?'),
         default=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
 
     class Meta:
@@ -636,8 +638,8 @@ class EarthPageModel(SingletonModel):
 
 class OfisPageModel(SingletonModel):
     name = models.CharField(
-        default='Офисы и магазины',
-        verbose_name='Название',
+        default=_('Офисы и магазины'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -650,12 +652,12 @@ class OfisPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -675,27 +677,27 @@ class OfisPageModel(SingletonModel):
         null=True
     )
     is_enable = models.BooleanField(
-        verbose_name='Включена ли страница?',
+        verbose_name=_('Включена ли страница?'),
         default=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
 
     class Meta:
@@ -710,8 +712,8 @@ class OfisPageModel(SingletonModel):
 
 class TrustPageModel(SingletonModel):
     name = models.CharField(
-        default='Доверее',
-        verbose_name='Название',
+        default=_('Доверее'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -724,12 +726,12 @@ class TrustPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -749,12 +751,12 @@ class TrustPageModel(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     uuid = models.UUIDField(
@@ -762,21 +764,21 @@ class TrustPageModel(SingletonModel):
         editable=False
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     faq_enable = models.BooleanField(
-        verbose_name='Влючен ли FAQ?',
+        verbose_name=_('Влючен ли FAQ?'),
         default=True
     )
     images = GenericRelation(Photo, related_query_name='trust')
@@ -796,8 +798,8 @@ class TrustPageModel(SingletonModel):
 
 class ContactPageModel(SingletonModel):
     name = models.CharField(
-        default='Контакты',
-        verbose_name='Название',
+        default=_('Контакты'),
+        verbose_name=_('Название'),
         max_length=30,
         unique=True,
         editable=False
@@ -810,12 +812,12 @@ class ContactPageModel(SingletonModel):
         editable=False
     )
     title_seo = models.TextField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         blank=True,
         null=True
     )
     subtitle = models.TextField(
-        verbose_name='Подзаголовок',
+        verbose_name=_('Подзаголовок'),
         blank=True,
         null=True
     )
@@ -835,30 +837,30 @@ class ContactPageModel(SingletonModel):
         null=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     image_seo = models.ImageField(
-        verbose_name='Фото SEO',
+        verbose_name=_('Фото SEO'),
         upload_to='seo/%Y/%m/%d/',
         blank=True
     )
     title = models.TextField(
-        verbose_name='Заголовок H1',
+        verbose_name=_('Заголовок H1'),
         blank=True,
         null=True
     )
     content = RichTextUploadingField(
         blank=True,
-        verbose_name='Контент'
+        verbose_name=_('Контент')
     )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False
     )
     our_address = models.CharField(
-        verbose_name='Наш адрес',
+        verbose_name=_('Наш адрес'),
         max_length=250,
         blank=True,
         null=True
@@ -869,7 +871,7 @@ class ContactPageModel(SingletonModel):
         null=True
     )
     phone = models.CharField(
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         max_length=100,
         blank=True,
         null=True
@@ -878,7 +880,7 @@ class ContactPageModel(SingletonModel):
     users = models.ManyToManyField(User,
                                    related_name='contact',
                                    blank=True,
-                                   verbose_name='Наши специалисты')
+                                   verbose_name=_('Наши специалисты'))
 
     class Meta:
         verbose_name = 'Контакты'

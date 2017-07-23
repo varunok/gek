@@ -18,7 +18,7 @@
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront" {% if dailypagemodel.image %}style="background: url({{ dailypagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ seo.title|default:'Доступные квартиры посуточно' }}</h1>
+			<h1 class="slider_title page_title">{{ seo.title|default:_('Доступные квартиры посуточно') }}</h1>
 			<div class="slider_list">
 				<div class="item">
 					<div class="li">1</div>

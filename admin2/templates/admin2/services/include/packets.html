@@ -1,3 +1,4 @@
+{% load i18n %}
 <div role="tabpanel" class="tab-pane" id="packet_tab_content" aria-labelledby="packet-tab">
     <div class="form-group" style="float: right">
         <div class="col-md-12">
@@ -53,7 +54,7 @@
                         <div class="pricing_footer">
                             <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
                             <p>
-                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
+                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">{% trans 'Сохранить' %}</a>
                             </p>
                         </div>
                     </div>
@@ -70,7 +71,7 @@
                             <input type="hidden" name="model_id" value="{{ service.id }}">
                         </form>
                         <a href="" style="color:white;" class="add-packet">
-                            <h1>Создать</h1>
+                            <h1>{% trans 'Создать' %}</h1>
                         </a>
                     </div>
                     </div>
@@ -104,7 +105,7 @@
                         <div class="pricing_footer">
                             <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
                             <p>
-                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
+                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">{% trans 'Сохранить' %}</a>
                             </p>
                         </div>
                     </div>
@@ -121,7 +122,7 @@
                             <input type="hidden" name="model_id" value="{{ service.id }}">
                         </form>
                         <a href="" style="color:white;" class="add-packet">
-                            <h1>Создать</h1>
+                            <h1>{% trans 'Создать' %}</h1>
                         </a>
                     </div>
                     </div>
@@ -155,7 +156,7 @@
                         <div class="pricing_footer">
                             <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
                             <p>
-                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
+                                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">{% trans 'Сохранить' %}</a>
                             </p>
                         </div>
                     </div>
@@ -172,7 +173,7 @@
                             <input type="hidden" name="model_id" value="{{ service.id }}">
                         </form>
                         <a href="" style="color:white;" class="add-packet">
-                            <h1>Создать</h1>
+                            <h1>{% trans 'Создать' %}</h1>
                         </a>
                     </div>
                     </div>

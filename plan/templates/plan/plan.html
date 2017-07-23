@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load favorites_tag %}
 {% load video_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -15,31 +16,31 @@
 	<main class="middle">
 		<div class="slider_main slider_notfront"{% if object.image %}
                 style="background: url({{ object.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ seo.title|default:'План работы по недвижимости всего за 3 минуты' }}</h1>
-			<div class="top_inner_content"><div class="title">{{ object.subtitle|default:'По вашему запросу мы составим план действий' }}</div></div>
+			<h1 class="slider_title page_title">{{ seo.title|default:_('План работы по недвижимости всего за 3 минуты') }}</h1>
+			<div class="top_inner_content"><div class="title">{{ object.subtitle|default:_('По вашему запросу мы составим план действий') }}</div></div>
 			<div class="slider_list">
 				<div class="item">
 					<div class="li">1</div>
-					<div class="field_item">{{ object.point1|default:'Купить квартиру' }}</div>
+					<div class="field_item">{{ object.point1|default:_('Купить квартиру') }}</div>
 				</div>
 				<div class="item">
 					<div class="li">2</div>
-					<div class="field_item">{{ object.point2|default:'Продать дом' }}</div>
+					<div class="field_item">{{ object.point2|default:_('Продать дом') }}</div>
 				</div>
 				<div class="item">
 					<div class="li">3</div>
-					<div class="field_item">{{ object.point3|default:'Арендовать квартиру' }}</div>
+					<div class="field_item">{{ object.point3|default:_('Арендовать квартиру') }}</div>
 				</div>
 				<div class="item">
 					<div class="li">4</div>
-					<div class="field_item">{{ object.point4|default:'Сдать квартиру' }}</div>
+					<div class="field_item">{{ object.point4|default:_('Сдать квартиру') }}</div>
 				</div>
 				<div class="item">
 					<div class="li">5</div>
-					<div class="field_item">{{ object.point5|default:'Ремонт квартиры' }}</div>
+					<div class="field_item">{{ object.point5|default:_('Ремонт квартиры') }}</div>
 				</div>
 			</div>			
-			<div class="submit"><a href="{% url 'plan:plan_create' %}">Создать план</a></div>
+			<div class="submit"><a href="{% url 'plan:plan_create' %}">{% trans 'Создать план' %}</a></div>
 		</div>
 		<div class="middle_inner">		
 			<div class="container">
@@ -51,25 +52,25 @@
 									<div class="field_img">
 										<img src="{% static 'images/pl_1.png' %}" alt="">
 									</div>
-									<div class="text">Бесплатное <Br>пользование</div>
+									<div class="text">{% trans 'Бесплатное' %} <br>{% trans 'пользование' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/pl_2.png' %}" alt="">
 									</div>
-									<div class="text">Готовый чек лист <br>по важным вопросам</div>
+									<div class="text">{% trans 'Готовый чек лист' %} <br>{% trans 'по важным вопросам' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/pl_3.png' %}" alt="">
 									</div>
-									<div class="text">Стимул достигнуть <Br>цели</div>
+									<div class="text">{% trans 'Стимул достигнуть' %} <br>{% trans 'цели' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_img">
 										<img src="{% static 'images/pl_4.png' %}" alt="">
 									</div>
-									<div class="text">Уже создано 677 <br>планов</div>
+									<div class="text">{% trans 'Уже создано' %} 677 <br>{% trans 'планов' %}</div>
 								</div>								
 							</div>
 						</div>
@@ -83,7 +84,7 @@
                     {% endif %}
 					<div class="block block_photo">
 						<div class="block_content">
-							<div class="block_title">Примеры готовых планов работы <br>по недвижимости</div>
+							<div class="block_title">{% trans 'Примеры готовых планов работы' %} <br>{% trans 'по недвижимости' %}</div>
 							<div class="view_content">
                                 {% for image in object.images.all %}
                                     <div class="views_row">
@@ -102,7 +103,7 @@
 		{% include 'seo/seo.html' %}
 		<div class="block block_presentation">
 			<div class="block_content">
-				<div class="block_title">Начните создавать свой план работы <br>по недвижимости уже сейчас</div>
+				<div class="block_title">{% trans 'Начните создавать свой план работы' %} <br>{% trans 'по недвижимости уже сейчас' %}</div>
 				<div class="view_content">								
 					<form action="{% url 'plan:plan_create' %}" class="webform_client_form">
 						<div class="form_actions">

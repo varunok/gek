@@ -1,18 +1,19 @@
+{% load i18n %}
 <ul class="nav nav-tabs tabs-left">
     <li {% if 'currency' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'admin2:settings' %}" >Валюта</a>
+        <a href="{% url 'admin2:settings' %}" >{% trans 'Валюта' %}</a>
     </li>
     <li {% if 'site' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'admin2:settings_site' %}" >Сайт</a>
+        <a href="{% url 'admin2:settings_site' %}" >{% trans 'Сайт' %}</a>
     </li>
     <li {% if 'franchise' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'admin2:settings_franchise' %}" >Франшиза</a>
+        <a href="{% url 'admin2:settings_franchise' %}" >{% trans 'Франшиза' %}</a>
     </li>
     <li {% if 'address' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'admin2:settings_address' %}" >Адреса</a>
+        <a href="{% url 'admin2:settings_address' %}" >{% trans 'Адреса' %}</a>
     </li>
     <li {% if 'date' in request.path %} class="active" {% endif %}>
-        <a href="{% url 'admin2:settings_franchise_add' %}" >Добавить время</a>
+        <a href="{% url 'admin2:settings_franchise_add' %}" >{% trans 'Добавить время' %}</a>
     </li>
     <li {% if 'private' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_private24' %}" >Privat24</a>

@@ -3,6 +3,7 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block title %}{% if object.when_create %}Редактирование {{ object.SEODescription }}{% else %}Создать {{ verbose_name }}{% endif %}{% endblock title %}
 
@@ -28,9 +29,9 @@
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
                             {% if object.when_create %}
-                                <a href="{{ object.get_list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                                <a href="{{ object.get_list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> {% trans 'Назад' %}</a>
                             {% else %}
-                                <a href="{{ list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                                <a href="{{ list_url }}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> {% trans 'Назад' %}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -41,23 +42,23 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{% if object.when_create %}Изменить{% else %}Создать{% endif %} {{ object.SEODescription }}</h2>
+                            <h2>{% if object.when_create %}{% trans 'Изменить' %}{% else %}{% trans 'Создать' %}{% endif %} {{ object.SEODescription }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             {% if object.when_create %}
                                 <ul class="stats-overview">
                                     <li>
-                                        <span class="name"> Дата создания </span>
+                                        <span class="name"> {% trans 'Дата создания' %} </span>
                                         <span class="value text-success"> {{ object.when_create }} </span>
                                     </li>
                                     <li>
-                                        <span class="name"> Дата редактирования </span>
+                                        <span class="name"> {% trans 'Дата редактирования' %} </span>
                                         <span class="value text-success"> {{ object.updated }} </span>
                                     </li>
                                     <li >
                                         <span class="name"> URL </span>
-                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">просмотр</a></span>
+                                        <span class="value text-success"> <a href="{{ object.get_absolute_url }}" target="_blank">{% trans 'просмотр' %}</a></span>
                                     </li>
                                 </ul>
                             {% endif %}
@@ -88,7 +89,7 @@
                                                     </div>
                                                 {% endfor %}
                                             </fieldset>
-                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">Сохранить</button>
+                                        <button id="send-faq" name="save_faq" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                         </form>
 
                                         <div class="empty-form" style="display: none;">

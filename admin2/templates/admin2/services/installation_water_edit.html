@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block title %}Редактирование {{ installation_water }}{% endblock title %}
+{% block title %}{% trans 'Редактирование' %} {{ installation_water }}{% endblock title %}
 
 {% block css %}
     <style>
@@ -72,7 +73,7 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:services' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
+                            <a href="{% url 'admin2:services' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> {% trans 'Назад' %}</a>
                         </div>
                     </div>
                 </div>
@@ -82,7 +83,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Изменить {{ installation_water }}</h2>
+                            <h2>{% trans 'Изменить' %} {{ installation_water }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -114,22 +115,22 @@
                                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                     <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                         <li role="presentation" class="active">
-                                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Редактировать</a>
+                                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">{% trans 'Редактировать' %}</a>
                                         </li>
                                         <li role="presentation" class="">
-                                            <a href="#tab_content2" id="video-tab" role="tab" data-toggle="tab" aria-expanded="false">Видео</a>
+                                            <a href="#tab_content2" id="video-tab" role="tab" data-toggle="tab" aria-expanded="false">{% trans 'Видео' %}</a>
                                         </li>
                                         <li role="presentation" class="">
-                                            <a href="#packet_tab_content" id="packet-tab" role="tab" data-toggle="tab" aria-expanded="false">Пакети</a>
+                                            <a href="#packet_tab_content" id="packet-tab" role="tab" data-toggle="tab" aria-expanded="false">{% trans 'Пакети' %}</a>
                                         </li>
                                         <li role="presentation" class="">
                                             <a href="#tab_content3" id="faq-tab" role="tab" data-toggle="tab" aria-expanded="false">FAQ</a>
                                         </li>
                                         <li role="presentation" class="">
-                                            <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">Галерея</a>
+                                            <a href="#tab_content4" id="galery-tab" role="tab" data-toggle="tab" aria-expanded="false">{% trans 'Галерея' %}</a>
                                         </li>
                                         <li role="presentation" class="">
-                                            <a href="#partners_tab" id="partners-tab" role="tab" data-toggle="tab" aria-expanded="false">Партнеры</a>
+                                            <a href="#partners_tab" id="partners-tab" role="tab" data-toggle="tab" aria-expanded="false">{% trans 'Партнеры' %}</a>
                                         </li>
                                         <li role="presentation" class="">
                                             <a href="#seo_tab" id="seo-tab" role="tab" data-toggle="tab" aria-expanded="false">SEO</a>
@@ -213,7 +214,7 @@
                                                         {% endif %}
                                                         " alt="" width="100%" />
                                                         {% if installation_water.image_avatar %}
-                                                            <input id="delete-image2" type="button" value="Удалить фото" class="btn btn-danger" style="float: right">
+                                                            <input id="delete-image2" type="button" value="{% trans 'Удалить фото' %}" class="btn btn-danger" style="float: right">
                                                             <input type="hidden" value="{{ content_type }}">
                                                             <input type="hidden" value="">
                                                             <input type="hidden" value="image_avatar">
@@ -223,7 +224,7 @@
                                                 <div class="ln_solid"></div>
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">
-                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">Сохранить</button>
+                                                        <button id="send-service" name="save-service" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                                     </div>
                                                 </div>
                                             </form>

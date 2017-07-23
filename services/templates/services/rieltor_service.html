@@ -189,32 +189,32 @@
         {% endif %}
 		<div class="block block_presentation">
 			<div class="block_content">
-				<div class="block_title">Продажа Вашей недвижимости за 90 дней</div>
-				<div class="sub_title">Без предоплаты и с гарантией результата!</div>
-				<div class="title_text">Заполните заявку за 2 мин и мы приведем Вам клиента! </div>
+				<div class="block_title">{% trans 'Продажа Вашей недвижимости за 90 дней' %}</div>
+				<div class="sub_title">{% trans 'Без предоплаты и с гарантией результата!' %}</div>
+				<div class="title_text">{% trans 'Заполните заявку за 2 мин и мы приведем Вам клиента!' %} </div>
 				<div class="view_content">
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
-                        <input type="hidden" name="source" value="Заявка.Риелторские услуги.">
+                        <input type="hidden" name="source" value="{% trans 'Заявка.Риелторские услуги.' %}">
                         <input type="hidden" name="content_type" value="{{ content_type }}">
                         <input type="hidden" name="object_id" value="{{ service_rieltor.id }}">
 						<div class="form_item user_name">
-							<input name="name" type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 						</div>
 						<div class="form_item phone">
-							<input name="phone" type="text" placeholder="Номер телефона">
+							<input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
 						</div>
 						<div class="form_item address">
-							<input name="address" type="text" placeholder="Адрес">
+							<input name="address" type="text" placeholder="{% trans 'Адрес' %}">
 						</div>
 						<div class="form_item price">
-							<input name="price" type="text" placeholder="Цена">
+							<input name="price" type="text" placeholder="{% trans 'Цена' %}">
 						</div>
 						<div class="form_textarea">
-							<textarea name="text" placeholder="Описание"></textarea>
+							<textarea name="text" placeholder="{% trans 'Описание' %}"></textarea>
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Добавить">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Добавить' %}">
 						</div>
 					</form>
 				</div>
@@ -223,7 +223,7 @@
 		<div class="block_benefits steps second">
 			<div class="block_content">
 				<div class="block_title">
-					7 шагов к успешной продаже Вашего объекта:
+					{% trans '7 шагов к успешной продаже Вашего объекта:' %}
 				</div>
 				<div class="view_content">
 					<div class="group">
@@ -231,42 +231,42 @@
 							<div class="field_img">
 								<img src="{% static 'images/m_1.png' %}" alt="">
 							</div>
-							<div class="text">Оставьте заявку <br>на консультацию</div>
+							<div class="text">{% trans 'Оставьте заявку' %} <br>{% trans 'на консультацию' %}</div>
 						</div>
 						<div class="views_row">
 							<div class="field_img">
 								<img src="{% static 'images/re_4.png' %}" alt="">
 							</div>
-							<div class="text">Эксперт выезжает на <br>объект и проводит анализ</div>
+							<div class="text">{% trans 'Эксперт выезжает на ' %}<br>{% trans 'объект и проводит анализ' %}</div>
 						</div>
 						<div class="views_row">
 							<div class="field_img">
 								<img src="{% static 'images/re_5.png' %}" alt="">
 							</div>
-							<div class="text">Согласовываем цену и <br>подписываем договор о <br>сотрудничестве</div>
+							<div class="text">{% trans 'Согласовываем цену и ' %}<br>{% trans 'подписываем договор о ' %}<br>{% trans 'сотрудничестве' %}</div>
 						</div>
 					</div>
 					<div class="group">
 						<div class="views_row">
-							<div class="text">Проводим многоканальную <br>рекламную кампанию</div>
+							<div class="text">{% trans 'Проводим многоканальную' %} <br>{% trans 'рекламную кампанию' %}</div>
 							<div class="field_img">
 								<img src="{% static 'images/re_6.png' %}" alt="">
 							</div>
 						</div>
 						<div class="views_row">
-							<div class="text">Берем на себя организацию <br>просмотров и ведение <br>переговоров</div>
+							<div class="text">{% trans 'Берем на себя организацию' %} <br>{% trans 'просмотров и ведение' %} <br>{% trans 'переговоров' %}</div>
 							<div class="field_img">
 								<img src="{% static 'images/re_7.png' %}" alt="">
 							</div>
 						</div>
 						<div class="views_row">
-							<div class="text">Самостоятельно <br>готовим все <br>документы</div>
+							<div class="text">{% trans 'Самостоятельно' %} <br>{% trans 'готовим все' %} <br>{% trans 'документы' %}</div>
 							<div class="field_img">
 								<img src="{% static 'images/re_8.png' %}" alt="">
 							</div>
 						</div>
 						<div class="views_row">
-							<div class="text">Закрываем сделку на <br>максимально выгодных <br>для Вас условиях</div>
+							<div class="text">{% trans 'Закрываем сделку на' %} <br>{% trans 'максимально выгодных' %} <br>{% trans 'для Вас условиях' %}</div>
 							<div class="field_img">
 								<img src="{% static 'images/re_9.png' %}" alt="">
 							</div>

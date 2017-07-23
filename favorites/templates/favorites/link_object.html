@@ -1,24 +1,25 @@
+{% load i18n %}
 {% if buildings %}
-    Квартиры и Дома:
+    {% trans 'Квартиры и Дома' %}:
     {% for building in buildings %}
-        <a href='{{ building.get_absolute_url }}'>Обект ID: {{ building.id }}</a>
+        <a href='{{ building.get_absolute_url }}'>{% trans 'Обект' %} ID: {{ building.id }}</a>
     {% endfor %}
 {% endif %}
 {% if ofices %}
-    Офисы и магазины:
+    {% trans 'Офисы и магазины' %}:
     {% for ofice in ofices %}
-        <a href='{{ ofice.get_absolute_url }}'>Обект ID: {{ ofice.id }}</a>
+        <a href='{{ ofice.get_absolute_url }}'>{% trans 'Обект' %} ID: {{ ofice.id }}</a>
     {% endfor %}
 {% endif %}
 {% if dailys %}
-    Посуточно:
+    {% trans 'Посуточно' %}:
     {% for daily in dailys %}
-        <a href='{{ daily.get_absolute_url }}'>Обект ID: {{ daily.id }}</a>
+        <a href='{{ daily.get_absolute_url }}'>{% trans 'Обект' %} ID: {{ daily.id }}</a>
     {% endfor %}
 {% endif %}
 {% if newbuildings %}
-    Новострои:
+    {% trans 'Новострои' %}:
     {% for newbuilding in newbuildings %}
-        <a href='{{ newbuilding.get_absolute_url }}'>Обект ID: {{ newbuilding.id }}</a>
+        <a href='{{ newbuilding.get_absolute_url }}'>{% trans 'Обект' %} ID: {{ newbuilding.id }}</a>
     {% endfor %}
 {% endif %}

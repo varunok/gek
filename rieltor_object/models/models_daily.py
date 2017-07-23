@@ -12,6 +12,7 @@ from admin2.models import SettingsAddress
 from common.models import Photo, Video, ApartmentNext
 # from django.db import models
 from rieltor_object.models.common_objects import *
+from django.utils.translation import ugettext_lazy as _
 
 
 class Daily(models.Model):
@@ -22,7 +23,7 @@ class Daily(models.Model):
         null=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -43,43 +44,43 @@ class Daily(models.Model):
         null=True
     )
     price = models.IntegerField(
-        verbose_name='Цена',
+        verbose_name=_('Цена'),
         blank=True,
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=250,
         blank=True,
         null=True
     )
     floor = models.IntegerField(
-        verbose_name='Этаж',
+        verbose_name=_('Этаж'),
         blank=True,
         null=True
     )
     guest = models.IntegerField(
-        verbose_name='Гостей',
+        verbose_name=_('Гостей'),
         blank=True,
         null=True
     )
     sleeping_places = models.IntegerField(
-        verbose_name='Спальных мест',
+        verbose_name=_('Спальных мест'),
         blank=True,
         null=True
     )
     rooms = models.IntegerField(
-        verbose_name='Комнат',
+        verbose_name=_('Комнат'),
         blank=True,
         null=True
     )
     description = RichTextUploadingField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         blank=True
     )
     district = models.ForeignKey(
         DailyDistrict,
-        verbose_name='Район',
+        verbose_name=_('Район'),
         on_delete=models.SET_NULL,
         related_name='daily',
         null=True,
@@ -87,7 +88,7 @@ class Daily(models.Model):
     )
     name = models.ForeignKey(
         Name,
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         on_delete=models.SET_NULL,
         related_name='daily',
         null=True,
@@ -95,22 +96,22 @@ class Daily(models.Model):
     )
     phone = models.ForeignKey(
         Phone,
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         on_delete=models.SET_NULL,
         related_name='daily',
         null=True,
         blank=True
     )
     panorama = models.TextField(
-        verbose_name='Панорама',
+        verbose_name=_('Панорама'),
         blank=True
     )
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     views = models.IntegerField(
-        verbose_name='Просмотры',
+        verbose_name=_('Просмотры'),
         default=0
     )
     uuid = models.UUIDField(
@@ -118,20 +119,20 @@ class Daily(models.Model):
         editable=False
     )
     when_create = models.DateTimeField(
-        verbose_name='Дата публикации',
+        verbose_name=_('Дата публикации'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     point = models.IntegerField(
-        verbose_name='Балы',
+        verbose_name=_('Балы'),
         blank=True,
         null=True
     )
@@ -142,16 +143,16 @@ class Daily(models.Model):
     apartment_has = models.ManyToManyField(ApartmentHas,
                                            related_name='daily',
                                            blank=True,
-                                           verbose_name='В квартире есть',
-                                           help_text='Для создания значения начните набирать текст'
+                                           verbose_name=_('В квартире есть'),
+                                           help_text=_('Для создания значения начните набирать текст')
                                            )
     apartment_next = GenericRelation(ApartmentNext, related_query_name='daily')
     images = GenericRelation(Photo, related_query_name='daily')
     videos = GenericRelation(Video, related_query_name='daily')
 
     class Meta:
-        verbose_name = 'Посуточно'
-        verbose_name_plural = 'Посуточно'
+        verbose_name = _('Посуточно')
+        verbose_name_plural = _('Посуточно')
         ordering = ['-when_create']
 
     def __unicode__(self):
@@ -197,7 +198,7 @@ class Daily(models.Model):
                 text = text.replace('комнаты', 'комнат')
             except AttributeError:
                 pass
-        return text
+        return _(text)
 
     def get_title(self):
         return '{0}{2} {1}'.format(self.title or '', self.address or '', '.' if self.title else '' )

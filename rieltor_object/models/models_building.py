@@ -15,6 +15,7 @@ from admin2.models import SettingsAddress, Settings
 from common.models import Photo, Video
 from rieltor_object.models.common_objects import *
 from rieltor_object.models.models_newbuilding import NewBuilding
+from django.utils.translation import ugettext_lazy as _
 
 
 class Period(object):
@@ -22,9 +23,9 @@ class Period(object):
     MONTH = 'month'
     LONG = 'long'
     CHOICES = (
-        (SHORT, 'короткий'),
-        (MONTH, 'месяц'),
-        (LONG, 'долгий срок (6мес)'),
+        (SHORT, _('короткий')),
+        (MONTH, _('месяц')),
+        (LONG, _('долгий срок (6мес)')),
     )
 
 
@@ -33,9 +34,9 @@ class Proposal(object):
     APARTMENT = 'appartment'
     VILLAS = 'villas'
     CHOICES = (
-        (CONDO, 'кондо'),
-        (APARTMENT, 'квартиры'),
-        (VILLAS, 'виллы'),
+        (CONDO, _('кондо')),
+        (APARTMENT, _('квартиры')),
+        (VILLAS, _('виллы')),
     )
 
 
@@ -57,7 +58,7 @@ class Building(models.Model):
         null=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -78,62 +79,62 @@ class Building(models.Model):
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=250,
         blank=True,
         null=True
     )
     price = models.IntegerField(
-        verbose_name='Цена',
+        verbose_name=_('Цена'),
         blank=True,
         null=True
     )
     type_deal = models.CharField(
-        verbose_name='Тип',
+        verbose_name=_('Тип'),
         max_length=20,
         choices=TypeDeal.CHOICES,
         blank=True,
         null=True
     )
     appointment = models.CharField(
-        verbose_name='Назначение',
+        verbose_name=_('Назначение'),
         max_length=20,
         choices=TypeAppointment.CHOICES,
         blank=True,
         null=True
     )
     footage = models.IntegerField(
-        verbose_name='Площадь',
+        verbose_name=_('Площадь'),
         blank=True,
         null=True
     )
     rooms = models.IntegerField(
-        verbose_name='Комнат',
+        verbose_name=_('Комнат'),
         blank=True,
         null=True
     )
     point = models.IntegerField(
-        verbose_name='Балы',
+        verbose_name=_('Балы'),
         blank=True,
         null=True
     )
     when_create = models.DateTimeField(
-        verbose_name='Дата публикации',
+        verbose_name=_('Дата публикации'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     layout = models.CharField(
-        verbose_name='Планировка',
+        verbose_name=_('Планировка'),
         max_length=20,
         choices=TypeLayout.CHOICES,
         blank=True,
         null=True
     )
     floor = models.IntegerField(
-        verbose_name='Этаж',
+        verbose_name=_('Этаж'),
         blank=True,
         null=True
     )
@@ -142,12 +143,12 @@ class Building(models.Model):
         default=False
     )
     is_short = models.BooleanField(
-        verbose_name='Краткое',
+        verbose_name=_('Краткое'),
         default=False
     )
     district = models.ForeignKey(
         District,
-        verbose_name='Район',
+        verbose_name=_('Район'),
         on_delete=models.SET_NULL,
         related_name='building',
         null=True,
@@ -155,7 +156,7 @@ class Building(models.Model):
     )
     name = models.ForeignKey(
         Name,
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         on_delete=models.SET_NULL,
         related_name='building',
         null=True,
@@ -163,7 +164,7 @@ class Building(models.Model):
     )
     phone = models.ForeignKey(
         Phone,
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         on_delete=models.SET_NULL,
         related_name='building',
         null=True,
@@ -171,22 +172,22 @@ class Building(models.Model):
     )
     newbuilding = models.ForeignKey(
         NewBuilding,
-        verbose_name='Новострои',
+        verbose_name=_('Новострои'),
         on_delete=models.SET_NULL,
         related_name='building',
         null=True,
         blank=True
     )
     description = RichTextUploadingField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         blank=True
     )
     panorama = models.TextField(
-        verbose_name='Панорама',
+        verbose_name=_('Панорама'),
         blank=True
     )
     views = models.IntegerField(
-        verbose_name='Просмотры',
+        verbose_name=_('Просмотры'),
         default=0
     )
     uuid = models.UUIDField(
@@ -195,23 +196,23 @@ class Building(models.Model):
     )
 
     video = models.TextField(
-        verbose_name='Код видео',
+        verbose_name=_('Код видео'),
         blank=True
     )
     image = models.ImageField(
-        verbose_name='Фото',
+        verbose_name=_('Фото'),
         upload_to='background/%Y/%m/%d/',
         blank=True
     )
     period = models.CharField(
-        verbose_name='Период',
+        verbose_name=_('Период'),
         choices=Period.CHOICES,
         max_length=50,
         blank=True,
         null=True
     )
     proposal = models.CharField(
-        verbose_name='Предложение',
+        verbose_name=_('Предложение'),
         choices=Proposal.CHOICES,
         max_length=50,
         blank=True,
@@ -222,8 +223,8 @@ class Building(models.Model):
     objects = BuildingManager()
 
     class Meta:
-        verbose_name = 'Квартиры и Дома'
-        verbose_name_plural = 'Квартиры и Дома'
+        verbose_name = _('Квартиры и Дома')
+        verbose_name_plural = _('Квартиры и Дома')
         ordering = ['-when_create']
 
     def __unicode__(self):
@@ -266,13 +267,15 @@ class Building(models.Model):
         return self._meta
 
     def normalize_SEO(self, text):
+        if not text:
+            return ''
         try:
             text = text.replace('Дом', 'дома')
             text = text.replace('Квартира', 'квартиры')
             text = text.replace('Комната', 'комнаты')
         except AttributeError:
-            return text
-        return text
+            return _(text)
+        return _(text)
 
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())

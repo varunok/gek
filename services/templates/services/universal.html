@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -16,21 +17,21 @@
         <div class="slider_main slider_notfront"{% if universal.image_avatar %}
                 style="background: url({{ universal.image_avatar.url }}) no-repeat center/cover"
              {% endif %}>
-            <div class="slider_title">{{ seo.title|default:'Поможем с договорами пром\быт и другими<br> вопросами' }}</div>
-            <div class="title_text">Отправить заявку прямо сейчас!</div>
+            <div class="slider_title">{{ seo.title|default:_('Поможем с договорами пром\быт и другими<br> вопросами') }}</div>
+            <div class="title_text">{% trans 'Отправить заявку прямо сейчас!' %}</div>
             <form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Заявка.{{ universal }}">
+                <input type="hidden" name="source" value="{% trans 'Заявка' %}.{{ universal }}">
                 <input type="hidden" name="content_type" value="{{ content_type }}">
                 <input type="hidden" name="object_id" value="{{ object.id }}">
                 <div class="form_item name">
-                    <input name="name" type="text" placeholder="Введите имя">
+                    <input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
                 </div>
                 <div class="form_item phone">
-                    <input name="phone" type="text" placeholder="Введите телефон">
+                    <input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
                 </div>
                 <div class="form_actions">
-                    <input class="form-submit submit-save-application" type="submit" value="Отправить">
+                    <input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить' %}">
                 </div>
             </form>
         </div>
@@ -39,7 +40,7 @@
                 <div id="content">
                     <div class="block block_advantages_1">
                         <div class="block_content">
-                            <div class="block_title">Наши преимущества</div>
+                            <div class="block_title">{% trans 'Наши преимущества' %}</div>
                             <div class="view_content">
                                 {% for advantage in universal.advantages.all %}
                                     <div class="views_row">
@@ -55,7 +56,7 @@
                     </div>
                     <div class="block block_photo">
                         <div class="block_content">
-                            <div class="block_title">Фото наших услуг</div>
+                            <div class="block_title">{% trans 'Фото наших услуг' %}</div>
                             <div class="view_content">
                                 {% for image in images %}
                                     <div class="views_row">

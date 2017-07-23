@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -18,22 +19,22 @@
                 {% else %}
                     style="background: url({% static "images/banner_25.jpg" %}) no-repeat center/cover"
              {% endif %}>
-            <div class="slider_title">{{ seo.title|default:'Установка водомера с узаконением' }}</div>
-            <div class="slider_subtitle">{{ installation_water.subtitle|default:'за один день, от 500 грн'}}</div>
-            <div class="title_text">Отправить заявку прямо сейчас!</div>
+            <div class="slider_title">{{ seo.title|default:_('Установка водомера с узаконением') }}</div>
+            <div class="slider_subtitle">{{ installation_water.subtitle|default:_('за один день, от 500 грн')}}</div>
+            <div class="title_text">{% trans 'Отправить заявку прямо сейчас!' %}</div>
             <form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Заявка.Установка водомеров.">
+                <input type="hidden" name="source" value="{% trans 'Заявка.Установка водомеров.' %}">
                 <input type="hidden" name="content_type" value="{{ content_type }}">
                 <input type="hidden" name="object_id" value="{{ object.id }}">
                 <div class="form_item name">
-                    <input name="name" type="text" placeholder="Введите имя">
+                    <input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
                 </div>
                 <div class="form_item phone">
-                    <input name="phone" type="text" placeholder="Введите телефон">
+                    <input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
                 </div>
                 <div class="form_actions">
-                    <input class="form-submit submit-save-application" type="submit" value="Отправить">
+                    <input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить' %}">
                 </div>
             </form>
         </div>
@@ -43,32 +44,32 @@
                     <div class="block_benefits">
                         <div class="block_content">
                             <div class="block_title">
-                                Преимущества установки счетчиков
+                                {% trans 'Преимущества установки счетчиков' %}
                             </div>
                             <div class="view_content">
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/i_1.png" %}" alt="">
                                     </div>
-                                    <div class="text">Экономия средств</div>
+                                    <div class="text">{% trans 'Экономия средств' %}</div>
                                 </div>
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/i_2.png" %} " alt="">
                                     </div>
-                                    <div class="text">Оперативность</div>
+                                    <div class="text">{% trans 'Оперативность' %}</div>
                                 </div>
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/i_3.png" %} " alt="">
                                     </div>
-                                    <div class="text">Профессиональная <br>установка</div>
+                                    <div class="text">{% trans 'Профессиональная' %} <br>{% trans 'установка' %}</div>
                                 </div>
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/i_4.png" %} " alt="">
                                     </div>
-                                    <div class="text">Гарантия качества</div>
+                                    <div class="text">{% trans 'Гарантия качества' %}</div>
                                 </div>
                             </div>
                         </div>
@@ -76,26 +77,26 @@
                     <div class="block_benefits steps">
                         <div class="block_content">
                             <div class="block_title">
-                                Установления счетчика в 3 шага
+                                {% trans 'Установления счетчика в 3 шага' %}
                             </div>
                             <div class="view_content">
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/step_1.png" %} " alt="">
                                     </div>
-                                    <div class="text">Оставьте заявку <br>на консультацию</div>
+                                    <div class="text">{% trans 'Оставьте заявку' %} <br>{% trans 'на консультацию' %}</div>
                                 </div>
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/step_2.png" %}" alt="">
                                     </div>
-                                    <div class="text">Эксперт выезжает на <br>объект и проводит анализ</div>
+                                    <div class="text">{% trans 'Эксперт выезжает на' %} <br>{% trans 'объект и проводит анализ' %}</div>
                                 </div>
                                 <div class="views_row">
                                     <div class="field_img">
                                         <img src="{% static "images/step_3.png" %}" alt="">
                                     </div>
-                                    <div class="text">Согласовываем цену и <br>подписываем договор о <br>сотрудничестве</div>
+                                    <div class="text">{% trans 'Согласовываем цену и' %} <br>{% trans 'подписываем договор о' %} <br>{% trans 'сотрудничестве' %}</div>
                                 </div>
                             </div>
                         </div>
@@ -105,21 +106,21 @@
         </div>
         <div class="block block_presentation">
             <div class="block_content">
-                <div class="block_title">Отправить заявку на консультацию</div>
+                <div class="block_title">{% trans 'Отправить заявку на консультацию' %}</div>
                 <div class="view_content">
                     <form action="#" class="webform_client_form">
                         {% csrf_token %}
-                        <input type="hidden" name="source" value="Заявка.Установка водомеров.">
+                        <input type="hidden" name="source" value="{% trans 'Заявка.Установка водомеров.' %}">
                         <input type="hidden" name="content_type" value="{{ content_type }}">
                         <input type="hidden" name="object_id" value="{{ object.id }}">
                         <div class="form_item user_name">
-                            <input name="name" type="text" placeholder="Введите ваше имя">
+                            <input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
                         </div>
                         <div class="form_item phone">
-                            <input name="phone" type="text" placeholder="Введите ваш телефон">
+                            <input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
                         </div>
                         <div class="form_actions">
-                            <input type="submit" class="form_submit submit-save-application" value="Отправить">
+                            <input type="submit" class="form_submit submit-save-application" value="{% trans 'Отправить' %}">
                         </div>
                     </form>
                 </div>
@@ -127,30 +128,30 @@
         </div>
         <div class="block block_hydrometers">
             <div class="block_content">
-                <div class="block_title">Мы установим водомеры</div>
+                <div class="block_title">{% trans 'Мы установим водомеры' %}</div>
                 <div class="view_content">
                     <div class="views_row">
                         <div class="field_img"><img src="{% static "images/h_1.png" %}" alt=""></div>
-                        <div class="title">Квартиры</div>
+                        <div class="title">{% trans 'Квартиры' %}</div>
                     </div>
                     <div class="views_row">
                         <div class="field_img"><img src="{% static "images/h_2.png" %}" alt=""></div>
-                        <div class="title">Дома</div>
+                        <div class="title">{% trans 'Дома' %}</div>
                     </div>
                     <div class="views_row">
                         <div class="field_img"><img src="{% static "images/h_3.png" %}" alt=""></div>
-                        <div class="title">Офисы</div>
+                        <div class="title">{% trans 'Офисы' %}</div>
                     </div>
                     <div class="views_row">
                         <div class="field_img"><img src="{% static "images/h_4.png" %}" alt=""></div>
-                        <div class="title">Магазины</div>
+                        <div class="title">{% trans 'Магазины' %}</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="block block_photo">
             <div class="block_content">
-                <div class="block_title">Что может произойти с вашей недвижимостью?</div>
+                <div class="block_title">{% trans 'Что может произойти с вашей недвижимостью?' %}</div>
                 <div class="view_content">
                 {% for image in images %}
                     <div class="views_row">

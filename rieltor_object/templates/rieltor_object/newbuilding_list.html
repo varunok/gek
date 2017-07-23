@@ -5,6 +5,7 @@
 {% load thumbnail %}
 {% load banners_tag %}
 {% load rieltor_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -16,10 +17,10 @@
 {% block content %}
 	<main class="middle">
 		<div class="slider_main slider_notfront" {% if newbuildingpagemodel.image %}style="background: url({{ newbuildingpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title|default:'Продажа квартир в новостроях' }}</div>
+			<div class="slider_title">{{ seo.title|default:_('Продажа квартир в новостроях') }}</div>
 			<form action="#" class="webform_client_form">
 				<div class="form_item search">
-					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="Искать в тексте объявления">
+					<input name="q" value="{{ request.GET.q }}" type="text" placeholder="{% trans 'Искать в тексте объявления' %}">
 				</div>
 				<div class="form_actions">
 					<input class="form-submit" type="submit" value="Найти">
@@ -47,15 +48,15 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
-                                     результатов
+                                     {% trans 'результатов' %}
                                 </div>
 							</div>
 							<div class="right_wrap">
 								<div class="sortable">								
-									<label for="sort">Сортировка:</label>
+									<label for="sort">{% trans 'Сортировка' %}:</label>
 									<select name="sort" id="sort">
-										<option value="1">Новые наверху</option> 
-										<option value="2">Новые внизу</option> 
+										<option value="1">{% trans 'Новые наверху' %}</option>
+										<option value="2">{% trans 'Новые внизу' %}</option>
 									</select>
 								</div>
 							</div>
@@ -63,7 +64,7 @@
 						<div class="bottom_wrap">
                             {% include 'rieltor_object/filters/newbuilding_filter.html' %}
 							<div class="form_actions">
-								<input type="submit" value="Подобрать объект" class="open-object-parameter">
+								<input type="submit" value="{% trans 'Подобрать объект' %}" class="open-object-parameter">
 							</div>
 						</div>
 					</div>
@@ -81,10 +82,10 @@
 			</div>
 			<div class="left_sidebar">
 				<div class="block property_search">
-					<div class="form_title">Поиск новостроек</div>
+					<div class="form_title">{% trans 'Поиск новостроек' %}</div>
 					<form action="." method="get" class="webform_client_form search-form">
 						<div class="form_item form_select form_wrapper">
-							<label for="type_ads">Район:</label>
+							<label for="type_ads">{% trans 'Район' %}:</label>
                             {{ filter_form.form.district }}
 						</div>
                         <div class="form_item form_wrapper">
@@ -95,7 +96,7 @@
 						</div>
                         <br>
 						<div class="form_item group form_wrapper">
-							<label>Стоимость:</label>
+							<label>{% trans 'Стоимость' %}:</label>
 							<div class="form_number" style="width:32%">
                                 {% if filter_form.form.price__gt.data %}
                                         <input value="{{ filter_form.form.price__gt.data }}" class="price_gt" type="number" name="{{ filter_form.form.price__gt.name }}" id="{{ filter_form.form.price__gt.id_for_label }}" placeholder="От" style="width: 100%">
@@ -113,12 +114,12 @@
                             <div class="form_number">
                                 <select name="" id="item_value">
                                     <option value="1" {% if filter_form.form.price__gt.data or filter_form.form.price__lt.data %}selected{% endif %}>м.кв</option>
-                                    <option value="2" {% if filter_form.form.price_object__gt.data or filter_form.form.price_object__lt.data %}selected{% endif %}>обьект</option>
+                                    <option value="2" {% if filter_form.form.price_object__gt.data or filter_form.form.price_object__lt.data %}selected{% endif %}>{% trans 'обьект' %}</option>
                                 </select>
                             </div>
 						</div>
 						<div class="form_item group form_wrapper">
-							<label>Площадь квартиры:</label>
+							<label>{% trans 'Площадь квартиры' %}:</label>
 							<div class="form_number">
                                 <input value="{{ filter_form.form.total_area__gt.data }}" type="number" name="{{ filter_form.form.total_area__gt.name }}" id="{{ filter_form.form.total_area__gt.id_for_label }}" placeholder="От">
 							</div>
@@ -129,7 +130,7 @@
 						<div class="form_actions">
 							<input type="submit" value="Поиск" class="search-click">
 							<div class="links">
-								<div class="search_clear"><a href="{% url 'objects:newbuildings' %}">очистить</a></div>
+								<div class="search_clear"><a href="{% url 'objects:newbuildings' %}">{% trans 'очистить' %}</a></div>
 							</div>
 						</div>
 					</form>

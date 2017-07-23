@@ -1,29 +1,30 @@
-    <div class="pricing">
-        <div class="title" style="background-color:{{color}}">
-            <h1>{{ packet.title }}</h1>
-            <i class="fa fa-pencil"></i>
+{% load i18n %}
+<div class="pricing">
+    <div class="title" style="background-color:{{color}}">
+        <h1>{{ packet.title }}</h1>
+        <i class="fa fa-pencil"></i>
+    </div>
+    <div class="x_content">
+        <div class="">
+            <div class="pricing_features">
+                <ul class="list-unstyled text-left">
+                    {% for text in packet.text.all %}
+                        <li> {{ text.text }} </li>
+                    {% endfor %}
+                </ul>
+                <form action="" class="packetForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="packet_content_type" value="{{ packet_content_type }}">
+                    <input type="hidden" name="packet_id" value="{{ packet.id }}">
+                    <input type="hidden" name="name" value="">
+                </form>
+            </div>
         </div>
-        <div class="x_content">
-            <div class="">
-                <div class="pricing_features">
-                    <ul class="list-unstyled text-left">
-                        {% for text in packet.text.all %}
-                            <li> {{ text.text }} </li>
-                        {% endfor %}
-                    </ul>
-                    <form action="" class="packetForm" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="hidden" name="packet_content_type" value="{{ packet_content_type }}">
-                        <input type="hidden" name="packet_id" value="{{ packet.id }}">
-                        <input type="hidden" name="name" value="">
-                    </form>
-                </div>
-            </div>
-            <div class="pricing_footer">
-                <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
-                <p>
-                    <a class="btn btn-success btn-block save-input" href="javascript:void(0);">Сохранить</a>
-                </p>
-            </div>
+        <div class="pricing_footer">
+        <a href="javascript:void(0);" class="btn btn-primary btn-block add-input" role="button"><i class="fa fa-plus"></i></a>
+            <p>
+                <a class="btn btn-success btn-block save-input" href="javascript:void(0);">{% trans 'Сохранить' %}</a>
+            </p>
         </div>
     </div>
+</div>

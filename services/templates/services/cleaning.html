@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -15,22 +16,22 @@
     <main class="middle">
 		<div class="slider_main slider_notfront"{% if cleaning.image_avatar %}
                 style="background: url({{ cleaning.image_avatar.url }}) no-repeat center/cover"{% endif %}>
-			<div class="slider_title">{{ seo.title|default:'ПРОФЕССИОНАЛЬНАЯ УБОРКА КВАРТИР' }}</div>
-			<div class="slider_subtitle">от ведущих клининговых компаний</div>
-			<div class="title_text">Отправить заявку прямо сейчас!</div>
+			<div class="slider_title">{{ seo.title|default:_('ПРОФЕССИОНАЛЬНАЯ УБОРКА КВАРТИР') }}</div>
+			<div class="slider_subtitle">{% trans 'от ведущих клининговых компаний' %}</div>
+			<div class="title_text">{% trans 'Отправить заявку прямо сейчас!' %}</div>
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Заявка.Уборка квартир.">
+                <input type="hidden" name="source" value="{% trans 'Заявка.Уборка квартир.' %}">
                 <input type="hidden" name="content_type" value="{{ content_type }}">
                 <input type="hidden" name="object_id" value="{{ object.id }}">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Отправить">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить' %}">
 				</div>
 			</form>
 		</div>
@@ -39,37 +40,37 @@
 				<div id="content">
 					<div class="block block_should_use">
 						<div class="block_content">
-							<div class="block_title">Кому стоит воспользоваться услугой </div>
-							<div class="subtitle">профессиональной уборки квартир?</div>
-							<div class="title_text">Обратиться к нам стоит, если вы:</div>
+							<div class="block_title">{% trans 'Кому стоит воспользоваться услугой' %} </div>
+							<div class="subtitle">{% trans 'профессиональной уборки квартир?' %}</div>
+							<div class="title_text">{% trans 'Обратиться к нам стоит, если вы' %}:</div>
 							<div class="view_content">
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/us_1.png' %}" alt="">
 										<div class="icon"><img src="{% static 'images/icon_1.png' %}" alt=""></div>
 									</div>
-									<div class="text">Живете в просторной квартире, <br>которую <strong>сложно поддерживать <br>в чистоте</strong> самостоятельно <br>из-за большой площади</div>
+									<div class="text">{% trans 'Живете в просторной квартире, ' %}<br>{% trans 'которую' %} <strong>{% trans 'сложно поддерживать' %} <br>{% trans 'в чистоте' %}</strong> {% trans 'самостоятельно' %} <br>{% trans 'из-за большой площади' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/us_2.png' %}" alt="">
 										<div class="icon"><img src="{% static 'images/icon_2.png' %}" alt=""></div>
 									</div>
-									<div class="text">Проводите много времени на <br>работе и <strong>не имеете возможности <br>уделять достаточно внимания</strong><br>домашним делам</div>
+									<div class="text">{% trans 'Проводите много времени на ' %}<br>{% trans 'работе и ' %}<strong>{% trans 'не имеете возможности' %} <br>{% trans 'уделять достаточно внимания' %}</strong><br>{% trans 'домашним делам' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/us_3.png' %}" alt="">
 										<div class="icon"><img src="{% static 'images/icon_3.png' %}" alt=""></div>
 									</div>
-									<div class="text">Только завершили ремонт <br>в квартире <strong>и хотите быстро <br>избавиться</strong> от огромного<br>количества  оставшегося мусора</div>
+									<div class="text">{% trans 'Только завершили ремонт ' %}<br>{% trans 'в квартире' %} <strong>{% trans 'и хотите быстро' %} <br>{% trans 'избавиться' %}</strong> {% trans 'от огромного' %}<br>{% trans 'количества  оставшегося мусора' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/us_4.png' %}" alt="">
 										<div class="icon"><img src="{% static 'images/icon_4.png' %}" alt=""></div>
 									</div>
-									<div class="text">Готовитесь к <strong>важному мероприятию<br>на дому,</strong> приему гостей и хотите,<br>чтобы везде была идеальная чистот</div>
+									<div class="text">{% trans 'Готовитесь к ' %}<strong>{% trans 'важному мероприятию' %}<br>{% trans 'на дому,' %}</strong> {% trans 'приему гостей и хотите,' %}<br>{% trans 'чтобы везде была идеальная чистот' %}</div>
 								</div>
 							</div>
 						</div>
@@ -79,39 +80,39 @@
 		</div>
 		<div class="block block_we_have">
 			<div class="block_content">
-				<div class="block_title">В нашем арсенале есть:</div>
+				<div class="block_title">{% trans 'В нашем арсенале есть' %}:</div>
 				<div class="view_content">
 					<div class="group">
 						<ul>
-							<li>Полотеры</li>
-							<li>Профессиональные пылесосы </li>
-							<li>Парогенераторы</li>
-							<li>Мопы, швабры, скребки</li>
+							<li>{% trans 'Полотеры' %}</li>
+							<li>{% trans 'Профессиональные пылесосы' %}</li>
+							<li>{% trans 'Парогенераторы' %}</li>
+							<li>{% trans 'Мопы, швабры, скребки' %}</li>
 						</ul>
 					</div>
 					<div class="group">
 						<ul>
-							<li>Профессиональные моющие средства для твердых полов</li>
-							<li>Для окон</li>
-							<li>Средства для удаления жира</li>
-							<li>Срества для удаления водного камня и др.</li>
+							<li>{% trans 'Профессиональные моющие средства для твердых полов' %}</li>
+							<li>{% trans 'Для окон' %}</li>
+							<li>{% trans 'Средства для удаления жира' %}</li>
+							<li>{% trans 'Срества для удаления водного камня и др.' %}</li>
 						</ul>
 					</div>
 					<div class="bottom_wrap">
-						<div class="title">Мы используем только профессиональное оборудование европейских производителей</div>
+						<div class="title">{% trans 'Мы используем только профессиональное оборудование европейских производителей' %}</div>
 						<form action="#" class="webform_client_form">
                             {% csrf_token %}
-                            <input type="hidden" name="source" value="Заявка.Уборка квартир.">
+                            <input type="hidden" name="source" value="{% trans 'Заявка.Уборка квартир.' %}">
                             <input type="hidden" name="content_type" value="{{ content_type }}">
                             <input type="hidden" name="object_id" value="{{ object.id }}">
 							<div class="form_item name">
-								<input name="name" type="text" placeholder="Введите ваше имя">
+								<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 							</div>
 							<div class="form_item phone">
-								<input name="phone" type="text" placeholder="Введите ваш телефон">
+								<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 							</div>
 							<div class="form_actions">
-								<input class="form-submit submit-save-application" type="submit" value="Отправить заявку на консультацию">
+								<input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить заявку на консультацию' %}">
 							</div>
 						</form>
 					</div>
@@ -133,7 +134,7 @@
 		{% endif %}
 		<div class="block block_photo">
 			<div class="block_content">
-				<div class="block_title">Что может произойти с вашей недвижимостью?</div>
+				<div class="block_title">{% trans 'Что может произойти с вашей недвижимостью?' %}</div>
 				<div class="view_content">
                 {% for image in images %}
                 	<div class="views_row">

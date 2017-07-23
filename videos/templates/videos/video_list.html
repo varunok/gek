@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -14,13 +15,13 @@
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront">
-			<div class="slider_title">{{ seo.title|default:'Видео передачи' }}</div>
+			<div class="slider_title">{{ seo.title|default:_('Видео передачи') }}</div>
 			<form class="webform_client_form">
 				<div class="form_item search">
-                    <input name="q" value="{{ request.GET.q }}" type="text" placeholder="Поиск видео передач">
+                    <input name="q" value="{{ request.GET.q }}" type="text" placeholder="{% trans 'Поиск видео передач' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit" type="submit" value="Найти">
+					<input class="form-submit" type="submit" value="{% trans 'Найти' %}">
 				</div>
 			</form>			
 		</div>

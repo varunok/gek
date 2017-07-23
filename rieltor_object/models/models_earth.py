@@ -12,6 +12,7 @@ from multiselectfield import MultiSelectField
 from admin2.models import SettingsAddress
 from common.models import Photo
 from rieltor_object.models.common_objects import *
+from django.utils.translation import ugettext_lazy as _
 
 
 class Earth(models.Model):
@@ -22,7 +23,7 @@ class Earth(models.Model):
         null=True
     )
     title = models.CharField(
-        verbose_name='Заголовок',
+        verbose_name=_('Заголовок'),
         max_length=250,
         blank=True,
         null=True
@@ -43,61 +44,61 @@ class Earth(models.Model):
         null=True
     )
     price = models.IntegerField(
-        verbose_name='Цена',
+        verbose_name=_('Цена'),
         blank=True,
         null=True
     )
     address = models.CharField(
-        verbose_name='Адрес',
+        verbose_name=_('Адрес'),
         max_length=250,
         blank=True,
         null=True
     )
     district = models.ForeignKey(
         EarthDistrict,
-        verbose_name='Район',
+        verbose_name=_('Район'),
         on_delete=models.SET_NULL,
         related_name='earth',
         null=True,
         blank=True
     )
     type_area = models.CharField(
-        verbose_name='Тип Участка',
+        verbose_name=_('Тип Участка'),
         max_length=50,
         choices=TypeArea.CHOICES,
         blank=True,
         null=True
     )
     to_city = models.IntegerField(
-        verbose_name='До города, км',
+        verbose_name=_('До города, км'),
         blank=True,
         null=True
     )
     communication = MultiSelectField(
-        verbose_name='Коммуникации',
+        verbose_name=_('Коммуникации'),
         max_length=50,
         choices=Communications.CHOICES,
         blank=True,
         null=True
     )
     structure_house = MultiSelectField(
-        verbose_name='Строение дома',
+        verbose_name=_('Строение дома'),
         max_length=50,
         choices=StructureHouse.CHOICES,
         blank=True,
         null=True
     )
     area = models.IntegerField(
-        verbose_name='Площадь',
+        verbose_name=_('Площадь'),
         blank=True,
         null=True
     )
     description = RichTextUploadingField(
-        verbose_name='Описание',
+        verbose_name=_('Описание'),
         blank=True
     )
     geo = models.TextField(
-        verbose_name='На карте',
+        verbose_name=_('На карте'),
         blank=True
     )
     uuid = models.UUIDField(
@@ -105,16 +106,16 @@ class Earth(models.Model):
         editable=False
     )
     when_create = models.DateTimeField(
-        verbose_name='Дата публикации',
+        verbose_name=_('Дата публикации'),
         auto_now_add=True
     )
     updated = models.DateTimeField(
-        verbose_name='Дата редактирования',
+        verbose_name=_('Дата редактирования'),
         auto_now=True
     )
     name = models.ForeignKey(
         Name,
-        verbose_name='Имя',
+        verbose_name=_('Имя'),
         on_delete=models.SET_NULL,
         related_name='earth',
         null=True,
@@ -122,7 +123,7 @@ class Earth(models.Model):
     )
     phone = models.ForeignKey(
         Phone,
-        verbose_name='Телефон',
+        verbose_name=_('Телефон'),
         on_delete=models.SET_NULL,
         related_name='earth',
         null=True,
@@ -131,8 +132,8 @@ class Earth(models.Model):
     images = GenericRelation(Photo, related_query_name='earth')
 
     class Meta:
-        verbose_name = 'Земля'
-        verbose_name_plural = 'Земля'
+        verbose_name = _('Земля')
+        verbose_name_plural = _('Земля')
         ordering = ['-when_create']
 
     def __unicode__(self):

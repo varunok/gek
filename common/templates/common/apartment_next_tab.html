@@ -1,14 +1,15 @@
 {% load thumbnail %}
 {% load staticfiles %}
+{% load i18n %}
 <div role="tabpanel" class="tab-pane" id="tab_apartment_next" aria-labelledby="apartment_next-tab">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Добавить</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">{% trans 'Добавить' %}</button>
     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel2">Добавить Рядом с квартирой</h4>
+                    <h4 class="modal-title" id="myModalLabel2">{% trans 'Добавить Рядом с квартирой' %}</h4>
                 </div>
                 <div class="modal-body">
                     <form action="" name="apartment_nextForm" id="apartment_nextForm">
@@ -16,21 +17,21 @@
                         <input type="hidden" value="{{ content_type }}" name="content_type">
                         <input type="hidden" value="{{ object.id }}" name="object_id">
                         <div>
-                            <label>Название:
+                            <label>{% trans 'Название' %}:
                                 <input type="text" name="name">
                             </label>
                         </div>
                         <div class="ln_solid"></div>
                         <div>
-                            <label>Значение:
+                            <label>{% trans 'Значение' %}:
                                 <input type="number" name="value">
                             </label>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                    <button id="btn_an" type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Отмена' %}</button>
+                    <button id="btn_an" type="button" class="btn btn-primary">{% trans 'Сохранить' %}</button>
                 </div>
             </div>
         </div>
@@ -40,8 +41,8 @@
         <table class="table table-striped projects">
             <thead>
                 <tr>
-                    <th style="width: 33%">Название</th>
-                    <th style="width: 33%">Значение, м</th>
+                    <th style="width: 33%">{% trans 'Название' %}</th>
+                    <th style="width: 33%">{% trans 'Значение' %}, м</th>
                     <th style="width: 33%"></th>
                 </tr>
             </thead>

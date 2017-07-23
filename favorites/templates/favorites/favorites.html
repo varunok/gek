@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
@@ -18,19 +19,19 @@
 			<div class="block_favorites">
 				<div class="block_content">
 					<div class="views_row">
-						<div class="label">Квартиры и дома:  </div>
+						<div class="label">{% trans 'Квартиры и дома' %}:  </div>
 						<div class="count">{{ buildings.count }}</div>
 					</div>
 					<div class="views_row">
-						<div class="label">Магазины и офисы </div>
+						<div class="label">{% trans 'Магазины и офисы' %} </div>
 						<div class="count">{{ ofices.count }}</div>
 					</div>
 					<div class="views_row">
-						<div class="label">Посуточная аренда:</div>
+						<div class="label">{% trans 'Посуточная аренда' %}:</div>
 						<div class="count">{{ dailys.count }}</div>
 					</div>
 					<div class="views_row">
-						<div class="label">Новострои:</div>
+						<div class="label">{% trans 'Новострои' %}:</div>
 						<div class="count">{{ newbuildings.count }}</div>
 					</div>
 {#					<div class="views_row">#}
@@ -45,7 +46,7 @@
 				<div id="content">
 					<div class="block block_shops block_search_results">
 						<div class="block_content">
-							<div class="block_title">Квартиры и дома</div>
+							<div class="block_title">{% trans 'Квартиры и дома' %}</div>
 							<div class="view_content">
                                 {% include 'rieltor_object/include/building_item.html' with object_list=buildings %}
 							</div>
@@ -53,14 +54,14 @@
 					</div>
 					<div class="block block_shops block_search_results">
 						<div class="block_content">
-							<div class="block_title">Магазины и офисы</div>
+							<div class="block_title">{% trans 'Магазины и офисы' %}</div>
 							<div class="view_content">
 								{% include 'rieltor_object/include/building_item.html' with object_list=ofices %}
 							</div>
 						</div>
 					</div>
 					<div class="block block_shops block_search_results block_daily_products">
-						<div class="block_title">Посуточна аренда</div>
+						<div class="block_title">{% trans 'Посуточна аренда' %}</div>
 						<div class="block_content">
 							<div class="view_content">
 								{% include 'rieltor_object/include/daily_item.html' with objects=dailys %}
@@ -70,7 +71,7 @@
                     {% if newbuildings %}
                         <div class="block block_shops block_search_results block_newbuilding_row">
                             <div class="block_content">
-                                <div class="block_title">Новострои</div>
+                                <div class="block_title">{% trans 'Новострои' %}</div>
                                 <div class="view_content">
                                     {% for newbuilding in newbuildings %}
                                         {% include 'rieltor_object/include/newbuilding_item.html' with object=newbuilding %}
@@ -161,19 +162,19 @@
 		</div>
 		<div class="block block_presentation">
 			<div class="block_content">
-				<div class="block_title">Хотите посмотреть все {{ all_objects }} объектов?</div>
+				<div class="block_title">{% trans 'Хотите посмотреть все' %} {{ all_objects }} {% trans 'объектов' %}?</div>
 				<div class="view_content">								
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="Избранное.{{ link_objects }}">
 						<div class="form_item user_name">
-							<input name="name" type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 						</div>
 						<div class="form_item phone">
-							<input name="phone" type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Отправить">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Отправить' %}">
 						</div>
 					</form>
 				</div>

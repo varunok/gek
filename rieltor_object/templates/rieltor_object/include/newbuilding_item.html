@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load favorites_tag %}
+{% load i18n %}
 <div class="views_row">
     <div class="left_wrap">
         <div class="title">{{ object.title }}</div>
@@ -20,7 +21,7 @@
         </div>
     </div>
     <div class="right_wrap">
-        <div class="title">Свободные объекты</div>
+        <div class="title">{% trans 'Свободные объекты' %}</div>
         {% for build in object.building.all|slice:':2' %}
             <div class="views_row">
                 <div class="field_img">
@@ -34,24 +35,24 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <div class="see_more"><a href="{% url 'objects:buildings' %}">Смотреть больше</a></div>
+        <div class="see_more"><a href="{% url 'objects:buildings' %}">{% trans 'Смотреть больше' %}</a></div>
     </div>
     <div class="bottom_wrap">
         <div class="top_wrap">
             <div class="left_wrap">
                 <div class="price info">
-                    <div class="label">Цена за м2:</div>
+                    <div class="label">{% trans 'Цена за м2' %}:</div>
                     <div class="item">{{ object.price }} грн</div>
                 </div>
                 <div class="info">
-                    <div class="label">Дата сдачи:</div>
+                    <div class="label">{% trans 'Дата сдачи' %}:</div>
                     <div class="item">{{ object.end_construction|date:'d.m.Y' }}</div>
                 </div>
             </div>
             <div class="right_wrap">
                 <div class="statistics">{{ object.views }}</div>
-                <div class="read_more preview submit-add-inspection-modal"><a href="/">Заказать просмотр</a></div>
-                <div class="read_more"><a href="{{ object.get_absolute_url }}">Подробнее</a></div>
+                <div class="read_more preview submit-add-inspection-modal"><a href="/">{% trans 'Заказать просмотр' %}</a></div>
+                <div class="read_more"><a href="{{ object.get_absolute_url }}">{% trans 'Подробнее' %}</a></div>
             </div>
         </div>
     </div>
@@ -60,8 +61,8 @@
     <div class="load_more_wrap">
         <div class="load_more read_more">
             <a href="#">
-                Загрузить еще
-                <span>{{ count_next }}</span> объектов
+                {% trans 'Загрузить еще' %}
+                <span>{{ count_next }}</span> {% trans 'объектов' %}
             </a>
         </div>
     </div>

@@ -3,8 +3,9 @@
 {% load static from staticfiles %}
 {% load admin_tags %}
 {% load solo_tags %}
+{% load i18n %}
 
-{% block title %}Настройки{% endblock title %}
+{% block title %}{% trans 'Настройки' %}{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
@@ -18,7 +19,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Настройки</h3>
+                    <h3>{% trans 'Настройки' %}</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -26,7 +27,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2><i class="fa fa-bars"></i> Параметры <small></small></h2>
+                            <h2><i class="fa fa-bars"></i> {% trans 'Параметры' %} <small></small></h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -68,7 +69,7 @@
 
                                                 <div class="form-group" style="float: right">
                                                     <div class="col-md-12">
-                                                        <button id="send" type="submit" class="btn btn-success">Сохранить</button>
+                                                        <button id="send" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
                                                     </div>
                                                 </div>
                                             </form>

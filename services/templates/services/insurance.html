@@ -3,6 +3,7 @@
 {% load video_tag %}
 {% load thumbnail %}
 {% load banners_tag %}
+{% load i18n %}
 {% block css %}{% endblock css %}
 
 {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
@@ -17,22 +18,22 @@
             {% if insurance.image_avatar %}
                 style="background: url({{ insurance.image_avatar.url }}) no-repeat center/cover"
              {% endif %}>
-			<div class="slider_title">{{ seo.title|default:'Страхование недвижимости' }}</div>
-			<div class="slider_subtitle">от ведущих компаний, за 2 часа!</div>
-			<div class="title_text">Отправить заявку прямо сейчас!</div>
+			<div class="slider_title">{{ seo.title|default:_('Страхование недвижимости') }}</div>
+			<div class="slider_subtitle">{% trans 'от ведущих компаний, за 2 часа!' %}</div>
+			<div class="title_text">{% trans 'Отправить заявку прямо сейчас!' %}</div>
 			<form action="#" class="webform_client_form">
                 {% csrf_token %}
-                <input type="hidden" name="source" value="Заявка.Страхование недвижимости.">
+                <input type="hidden" name="source" value="{% trans 'Заявка.Страхование недвижимости.' %}">
                 <input type="hidden" name="content_type" value="{{ content_type }}">
                 <input type="hidden" name="object_id" value="{{ insurance.id }}">
 				<div class="form_item name">
-					<input name="name" type="text" placeholder="Введите имя">
+					<input name="name" type="text" placeholder="{% trans 'Введите имя' %}">
 				</div>
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="Введите телефон">
+					<input name="phone" type="text" placeholder="{% trans 'Введите телефон' %}">
 				</div>
 				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="Отправить">
+					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Отправить' %}">
 				</div>
 			</form>
 		</div>
@@ -41,77 +42,77 @@
 				<div id="content">
 					<div class="block block_compensate">
 						<div class="block_content">
-							<div class="block_title">В каких случаях возместим Вам ущерб?</div>
+							<div class="block_title">{% trans 'В каких случаях возместим Вам ущерб?' %}</div>
 							<div class="view_content">
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_1.png' %}" alt="">
 									</div>
-									<div class="title">Кража</div>
+									<div class="title">{% trans 'Кража' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_2.png' %}" alt="">
 									</div>
-									<div class="title">Пожар</div>
+									<div class="title">{% trans 'Пожар' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_3.png' %}" alt="">
 									</div>
-									<div class="title">Повреждение <br>водой</div>
+									<div class="title">{% trans 'Повреждение' %} <br>{% trans 'водой' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_4.png' %}" alt="">
 									</div>
-									<div class="title">Потоп</div>
+									<div class="title">{% trans 'Потоп' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_5.png' %}" alt="">
 									</div>
-									<div class="title">Стихийные <br>бедствия</div>
+									<div class="title">{% trans 'Стихийные' %} <br>{% trans 'бедствия' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_6.png' %}" alt="">
 									</div>
-									<div class="title">Потеря <br>арендной платы</div>
+									<div class="title">{% trans 'Потеря' %} <br>{% trans 'арендной платы' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/co_7.png' %}" alt="">
 									</div>
-									<div class="title">Действия <br>животных</div>
+									<div class="title">{% trans 'Действия' %} <br>{% trans 'животных' %}</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="block block_our_advantages">
 						<div class="block_content">
-							<div class="block_title">Наши преимущества:</div>
+							<div class="block_title">{% trans 'Наши преимущества' %}:</div>
 							<div class="view_content">
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/a_1.png' %}" alt="">
 									</div>
-									<div class="title">Удобно</div>
-									<div class="subtitle">На почту Вы получите <br> все варианты расчета <br>стоимости страховки</div>
+									<div class="title">{% trans 'Удобно' %}</div>
+									<div class="subtitle">{% trans 'На почту Вы получите' %} <br> {% trans 'все варианты расчета' %} <br>{% trans 'стоимости страховки' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/a_2.png' %}" alt="">
 									</div>
-									<div class="title">Быстро</div>
-									<div class="subtitle">Все страховые компании <br> будут заинтересованы  как можно быстрее заключить  договор</div>
+									<div class="title">{% trans 'Быстро' %}</div>
+									<div class="subtitle">{% trans 'Все страховые компании' %} <br> {% trans 'будут заинтересованы  как можно быстрее заключить  договор' %}</div>
 								</div>
 								<div class="views_row">
 									<div class="field_image">
 										<img src="{% static 'images/a_3.png' %}" alt="">
 									</div>
-									<div class="title">Низкая цена</div>
-									<div class="subtitle">Получите дополнительную <br>скидку от нашего сервиса</div>
+									<div class="title">{% trans 'Низкая цена' %}</div>
+									<div class="subtitle">{% trans 'Получите дополнительную' %} <br>{% trans 'скидку от нашего сервиса' %}</div>
 								</div>
 							</div>
 						</div>
@@ -126,7 +127,7 @@
                     {% endif %}
 					<div class="block block_photo">
 						<div class="block_content">
-							<div class="block_title">Что может произойти с вашей недвижимостью?</div>
+							<div class="block_title">{% trans 'Что может произойти с вашей недвижимостью?' %}</div>
 							<div class="view_content">
                                 {% for image in images %}
                                     <div class="views_row">
@@ -148,21 +149,21 @@
 		{% include 'seo/seo.html' %}
 		<div class="block block_presentation order_block">
 			<div class="block_content">
-				<div class="block_title">Вы еще сомневаетесь страховать квартиру?</div>
+				<div class="block_title">{% trans 'Вы еще сомневаетесь страховать квартиру?' %}</div>
 				<div class="view_content">								
 					<form action="#" class="webform_client_form">
                         {% csrf_token %}
-                        <input type="hidden" name="source" value="Заявка.Страхование недвижимости.">
+                        <input type="hidden" name="source" value="{% trans 'Заявка.Страхование недвижимости.' %}">
                         <input type="hidden" name="content_type" value="{{ content_type }}">
                         <input type="hidden" name="object_id" value="{{ insurance.id }}">
 						<div class="form_item user_name">
-							<input name="name" type="text" placeholder="Введите ваше имя">
+							<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
 						</div>
 						<div class="form_item phone">
-							<input name="phone" type="text" placeholder="Введите ваш телефон">
+							<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
 						</div>
 						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="Отправить">
+							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Отправить' %}">
 						</div>
 					</form>
 				</div>

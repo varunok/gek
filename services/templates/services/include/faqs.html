@@ -1,6 +1,7 @@
+{% load i18n %}
 <div class="block_questions">
     <div class="block_content">
-        <div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ </div>
+        <div class="block_title">{% trans 'ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ' %} </div>
         <div class="view_content">
             {% for faq in faqs %}
                 <div class="views_row">
