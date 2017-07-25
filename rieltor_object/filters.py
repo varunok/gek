@@ -3,11 +3,10 @@ from __future__ import unicode_literals
 
 
 import django_filters
-from ckeditor import widgets
 from django import forms
-from django.forms import CheckboxSelectMultiple, NumberInput, SelectDateWidget, Select, TextInput
-from django.utils.timezone import now
+from django.forms import Select, TextInput
 from django_filters import STRICTNESS
+from django.utils.translation import ugettext_lazy as _
 
 from rieltor_object.models import Building, Ofice, NewBuilding, TypeEntrance, TypeLocation, TypeDeal, TypeFloor, Daily, \
     DailyDistrict, District, Earth, EarthDistrict
@@ -61,11 +60,11 @@ class FilterObjectMixin(django_filters.FilterSet):
 
 class FilterBuilding(django_filters.FilterSet):
     ROOMS_CHOICES = (
-        (1, '1-но комнатные'),
-        (2, '2-но комнатные'),
-        (3, '3-но комнатные'),
-        (4, '4-но комнатные'),
-        (5, 'Многокомнатные'),
+        (1, _('1-но комнатные')),
+        (2, _('2-но комнатные')),
+        (3, _('3-но комнатные')),
+        (4, _('4-но комнатные')),
+        (5, _('Многокомнатные')),
     )
     type_deal = django_filters.MultipleChoiceFilter(
         choices=TypeDeal.CHOICES,

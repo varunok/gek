@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 00:41+0300\n"
-"PO-Revision-Date: 2017-07-23 02:31+0300\n"
+"POT-Creation-Date: 2017-07-25 23:14+0300\n"
+"PO-Revision-Date: 2017-07-25 23:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -46,11 +46,11 @@ msgstr ""
 #: plan/models.py:229 plan/models.py:266 polls/models.py:46
 #: rieltor_object/models/common_objects.py:285
 #: rieltor_object/models/common_objects.py:304
-#: rieltor_object/models/models_building.py:61
+#: rieltor_object/models/models_building.py:62
 #: rieltor_object/models/models_daily.py:26
 #: rieltor_object/models/models_earth.py:26
 #: rieltor_object/models/models_newbuilding.py:39
-#: rieltor_object/models/models_ofice.py:34 seo/models.py:12
+#: rieltor_object/models/models_ofice.py:35 seo/models.py:12
 #: services/models.py:86 services/models.py:141 services/models.py:179
 #: services/models.py:234 services/models.py:272 services/models.py:347
 #: services/models.py:386 services/models.py:441 services/models.py:480
@@ -61,9 +61,9 @@ msgstr "Заголовок"
 
 #: admin2/models.py:60 admin2/models.py:329 admin2/models.py:759
 #: articles/models.py:145 common/models.py:126 plan/models.py:54
-#: rieltor_object/models/models_building.py:199
+#: rieltor_object/models/models_building.py:200
 #: rieltor_object/models/models_daily.py:110
-#: rieltor_object/models/models_ofice.py:177 users/models.py:123
+#: rieltor_object/models/models_ofice.py:178 users/models.py:123
 #: videos/models.py:42
 msgid "Код видео"
 msgstr "Код Відео"
@@ -104,11 +104,11 @@ msgstr "Курс долара"
 #: common/models.py:42 rieltor_object/models/common_objects.py:183
 #: rieltor_object/models/common_objects.py:189
 #: rieltor_object/models/common_objects.py:190
-#: rieltor_object/models/models_building.py:167
+#: rieltor_object/models/models_building.py:168
 #: rieltor_object/models/models_daily.py:99
 #: rieltor_object/models/models_earth.py:126
 #: rieltor_object/models/models_newbuilding.py:103
-#: rieltor_object/models/models_ofice.py:141
+#: rieltor_object/models/models_ofice.py:142
 #: rieltor_object/templates/rieltor_object/building.html:141
 #: rieltor_object/templates/rieltor_object/daily.html:134
 #: rieltor_object/templates/rieltor_object/earth.html:194
@@ -132,10 +132,8 @@ msgstr "Вулиця"
 
 #: admin2/models.py:143 admin2/models.py:146
 #: admin2/templates/admin2/settings/settings_nav.html:13
-#, fuzzy
-#| msgid "Адрес"
 msgid "Адреса"
-msgstr "Адрес"
+msgstr "Адреса"
 
 #: admin2/models.py:159
 msgid "Стоимость 30 дней"
@@ -257,10 +255,10 @@ msgstr "Підзаголовок"
 #: plan/models.py:49 plan/models.py:123 plan/models.py:160 plan/models.py:197
 #: plan/models.py:234 plan/models.py:271 polls/models.py:120
 #: rieltor_object/models/common_objects.py:300
-#: rieltor_object/models/models_building.py:203
+#: rieltor_object/models/models_building.py:204
 #: rieltor_object/models/models_daily.py:130
 #: rieltor_object/models/models_newbuilding.py:143
-#: rieltor_object/models/models_ofice.py:164 seo/models.py:46
+#: rieltor_object/models/models_ofice.py:165 seo/models.py:46
 #: services/models.py:112 services/models.py:146 services/models.py:205
 #: services/models.py:239 services/models.py:310 services/models.py:352
 #: services/models.py:412 services/models.py:446 services/models.py:506
@@ -295,11 +293,11 @@ msgstr "Контент"
 #: favorites/templates/favorites/favorites.html:34
 #: favorites/templates/favorites/favorites.html:74
 #: favorites/templates/favorites/link_object.html:21
-#: rieltor_object/models/models_building.py:175
+#: rieltor_object/models/models_building.py:176
 #: rieltor_object/models/models_newbuilding.py:196
 #: rieltor_object/models/models_newbuilding.py:197 templates/base.html:90
 msgid "Новострои"
-msgstr "Новострої"
+msgstr "Новобудови"
 
 #: admin2/models.py:384 admin2/models.py:458 admin2/models.py:532
 #: admin2/models.py:606 admin2/models.py:680
@@ -307,18 +305,14 @@ msgid "Включена ли страница?"
 msgstr "Чи увімкнена сторінка?"
 
 #: admin2/models.py:419
-#, fuzzy
-#| msgid "Посуточно"
 msgid "Посуточна"
 msgstr "Подобово"
 
 #: admin2/models.py:493 favorites/templates/favorites/link_object.html:3
-#: rieltor_object/models/models_building.py:226
-#: rieltor_object/models/models_building.py:227 templates/base.html:75
-#, fuzzy
-#| msgid "Квартиры и дома"
+#: rieltor_object/models/models_building.py:227
+#: rieltor_object/models/models_building.py:228 templates/base.html:75
 msgid "Квартиры и Дома"
-msgstr "Квартири і дома"
+msgstr "Квартири і будинки"
 
 #: admin2/models.py:507 admin2/models.py:581 landing/models.py:108
 msgid "SEO Заголовок"
@@ -332,15 +326,13 @@ msgstr "Земля"
 
 #: admin2/models.py:641 admin2/templates/admin2/base.html:88
 #: favorites/templates/favorites/link_object.html:9
-#: rieltor_object/models/models_ofice.py:185
-#: rieltor_object/models/models_ofice.py:186 templates/base.html:80
+#: rieltor_object/models/models_ofice.py:186
+#: rieltor_object/models/models_ofice.py:187 templates/base.html:80
 #: templates/index.html:38
 msgid "Офисы и магазины"
 msgstr "Офіси і магазини"
 
 #: admin2/models.py:715
-#, fuzzy
-#| msgid "Доверие"
 msgid "Доверее"
 msgstr "Довіра"
 
@@ -380,7 +372,9 @@ msgstr "Редагування статті"
 #: admin2/templates/admin2/articles/articles_list.html:17
 #: admin2/templates/admin2/base.html:66 admin2/templates/admin2/base.html:68
 #: articles/models.py:195 articles/templates/articles/article_detail.html:21
-#: templates/base.html:140 templates/base.html:245
+#: articles/templates/articles/articles.html:16
+#: articles/templates/articles/sections.html:16 templates/base.html:140
+#: templates/base.html:245
 msgid "Статьи"
 msgstr "Статті"
 
@@ -573,11 +567,11 @@ msgstr "Дата створення"
 #: admin2/templates/admin2/special/rieltor_object/building/building_edit.html:51
 #: admin2/templates/admin2/videos/videos_edit.html:103
 #: admin2/templates/admin2/videos/videos_knows.html:56 articles/models.py:59
-#: articles/models.py:109 rieltor_object/models/models_building.py:126
+#: articles/models.py:109 rieltor_object/models/models_building.py:127
 #: rieltor_object/models/models_daily.py:126
 #: rieltor_object/models/models_earth.py:113
 #: rieltor_object/models/models_newbuilding.py:139
-#: rieltor_object/models/models_ofice.py:99 videos/models.py:69
+#: rieltor_object/models/models_ofice.py:100 videos/models.py:69
 msgid "Дата редактирования"
 msgstr "Дата редагування"
 
@@ -685,6 +679,7 @@ msgstr "Видалити"
 #: admin2/templates/admin2/services/services.html:201
 #: admin2/templates/admin2/services/universal_edit.html:125
 #: admin2/templates/admin2/services/valuation_edit.html:117
+#: admin2/templates/admin2/settings/email_forward_list.html:49
 #: admin2/templates/admin2/special/rieltor_object/building/building_edit.html:64
 #: admin2/templates/admin2/special/rieltor_object/building/building_list.html:68
 #: admin2/templates/admin2/static_pages/static_pages.html:58
@@ -887,13 +882,13 @@ msgstr "Послуги"
 
 #: admin2/templates/admin2/base.html:77
 msgid "Объекты"
-msgstr "Обєкти"
+msgstr "Об'єкти"
 
 #: admin2/templates/admin2/base.html:85
 #: favorites/templates/favorites/favorites.html:22
 #: favorites/templates/favorites/favorites.html:49 templates/index.html:70
 msgid "Квартиры и дома"
-msgstr "Квартири і дома"
+msgstr "Квартири і будинки"
 
 #: admin2/templates/admin2/base.html:91
 #: favorites/templates/favorites/link_object.html:15
@@ -1097,11 +1092,11 @@ msgstr "Створити район"
 #: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:56
 #: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:87
 #: landing/models.py:86 rieltor_object/models/common_objects.py:151
-#: rieltor_object/models/models_building.py:151
+#: rieltor_object/models/models_building.py:152
 #: rieltor_object/models/models_daily.py:83
 #: rieltor_object/models/models_earth.py:59
 #: rieltor_object/models/models_newbuilding.py:87
-#: rieltor_object/models/models_ofice.py:125
+#: rieltor_object/models/models_ofice.py:126
 #: rieltor_object/templates/rieltor_object/building.html:86
 #: rieltor_object/templates/rieltor_object/building.html:204
 #: rieltor_object/templates/rieltor_object/daily.html:105
@@ -1155,8 +1150,8 @@ msgstr "Усі мультилендінги"
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:71
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:104
 #: admin2/templates/admin2/special/rieltor_object/building/building_list.html:44
-#: rieltor_object/models/models_building.py:93
-#: rieltor_object/models/models_ofice.py:66
+#: rieltor_object/models/models_building.py:94
+#: rieltor_object/models/models_ofice.py:67
 msgid "Тип"
 msgstr "Тип"
 
@@ -1169,7 +1164,7 @@ msgid "Вход для администратора"
 msgstr "Вхід для адміністратора"
 
 #: admin2/templates/admin2/login.html:35
-#: rieltor_object/models/models_ofice.py:117
+#: rieltor_object/models/models_ofice.py:118
 #: rieltor_object/templates/rieltor_object/ofice.html:102
 #: rieltor_object/templates/rieltor_object/ofice_list.html:150
 msgid "Вход"
@@ -1212,11 +1207,11 @@ msgstr "Джерело"
 #: common/models.py:36 common/models.py:363
 #: rieltor_object/models/common_objects.py:168
 #: rieltor_object/models/common_objects.py:174
-#: rieltor_object/models/models_building.py:159
+#: rieltor_object/models/models_building.py:160
 #: rieltor_object/models/models_daily.py:91
 #: rieltor_object/models/models_earth.py:118
 #: rieltor_object/models/models_newbuilding.py:95
-#: rieltor_object/models/models_ofice.py:133
+#: rieltor_object/models/models_ofice.py:134
 #: rieltor_object/templates/rieltor_object/building.html:137
 #: rieltor_object/templates/rieltor_object/daily.html:130
 #: rieltor_object/templates/rieltor_object/earth.html:190
@@ -1224,7 +1219,7 @@ msgstr "Джерело"
 #: rieltor_object/templates/rieltor_object/ofice.html:137 services/models.py:22
 #: users/models.py:73
 msgid "Имя"
-msgstr "Імя"
+msgstr "Ім'я"
 
 #: admin2/templates/admin2/main.html:38
 #: admin2/templates/admin2/rieltor_object/building/building_list.html:65
@@ -1241,7 +1236,7 @@ msgstr "Імя"
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:102
 #: admin2/templates/admin2/special/rieltor_object/building/building_list.html:42
 msgid "Адресс"
-msgstr "Адрес"
+msgstr "Адреса"
 
 #: admin2/templates/admin2/main.html:39
 #: admin2/templates/admin2/rieltor_object/building/building_list.html:113
@@ -1257,10 +1252,10 @@ msgstr "Адрес"
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_edit.html:416
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:103
 #: admin2/templates/admin2/special/rieltor_object/building/building_list.html:43
-#: common/models.py:60 rieltor_object/models/models_building.py:88
+#: common/models.py:60 rieltor_object/models/models_building.py:89
 #: rieltor_object/models/models_daily.py:47
 #: rieltor_object/models/models_earth.py:47
-#: rieltor_object/models/models_ofice.py:61
+#: rieltor_object/models/models_ofice.py:62
 #: rieltor_object/templates/rieltor_object/earth.html:183
 #: services/templates/services/rieltor_service.html:211 templates/base.html:173
 msgid "Цена"
@@ -1511,8 +1506,8 @@ msgstr "Усі"
 #: admin2/templates/admin2/rieltor_object/common/common_list1.html:59
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:59
 #: rieltor_object/models/common_objects.py:45
-#: rieltor_object/models/models_building.py:146
-#: rieltor_object/models/models_ofice.py:173
+#: rieltor_object/models/models_building.py:147
+#: rieltor_object/models/models_ofice.py:174
 msgid "Краткое"
 msgstr "Коротке"
 
@@ -1527,7 +1522,7 @@ msgstr "Звичайне"
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:75
 #: landing/models.py:21 rieltor_object/models/common_objects.py:13
 msgid "Аренда"
-msgstr "Аренда"
+msgstr "Оренда"
 
 #: admin2/templates/admin2/rieltor_object/building/building_list.html:76
 #: admin2/templates/admin2/rieltor_object/common/common_list1.html:76
@@ -1542,15 +1537,14 @@ msgstr "Продаж"
 #: admin2/templates/admin2/rieltor_object/common/common_list1.html:115
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:79
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:105
-#: rieltor_object/models/models_building.py:100
-#: rieltor_object/models/models_ofice.py:73
+#: rieltor_object/models/models_building.py:101
+#: rieltor_object/models/models_ofice.py:74
 msgid "Назначение"
 msgstr "Призначення"
 
 #: admin2/templates/admin2/rieltor_object/building/building_list.html:83
 #: admin2/templates/admin2/rieltor_object/common/common_list1.html:83
 #: landing/models.py:32 rieltor_object/models/common_objects.py:23
-#: rieltor_object/models/models_building.py:272
 msgid "Квартира"
 msgstr "Квартира"
 
@@ -1558,14 +1552,12 @@ msgstr "Квартира"
 #: admin2/templates/admin2/rieltor_object/common/common_list1.html:84
 #: landing/models.py:33 rieltor_object/models/common_objects.py:24
 #: rieltor_object/models/common_objects.py:129
-#: rieltor_object/models/models_building.py:271
 msgid "Дом"
-msgstr "Дім"
+msgstr "Будинок"
 
 #: admin2/templates/admin2/rieltor_object/building/building_list.html:85
 #: admin2/templates/admin2/rieltor_object/common/common_list1.html:85
 #: rieltor_object/models/common_objects.py:25
-#: rieltor_object/models/models_building.py:273
 msgid "Комната"
 msgstr "Кімната"
 
@@ -1604,12 +1596,11 @@ msgstr "Спальних місць"
 #: admin2/templates/admin2/rieltor_object/daily/daily_list.html:61
 #: admin2/templates/admin2/rieltor_object/daily/daily_list.html:87
 #: landing/models.py:80 landing/templates/landing/multilending.html:92
-#: rieltor_object/models/models_building.py:112
+#: rieltor_object/models/models_building.py:113
 #: rieltor_object/models/models_daily.py:73
-#: rieltor_object/models/models_ofice.py:85
+#: rieltor_object/models/models_ofice.py:86
 #: rieltor_object/templates/rieltor_object/building.html:94
 #: rieltor_object/templates/rieltor_object/include/building_item.html:30
-#: rieltor_object/templates/rieltor_object/include/building_item.html:36
 #: rieltor_object/templates/rieltor_object/include/daily_item.html:28
 #: rieltor_object/templates/rieltor_object/newbuilding.html:244
 msgid "Комнат"
@@ -1620,11 +1611,12 @@ msgid "Вся"
 msgstr "Уся"
 
 #: admin2/templates/admin2/rieltor_object/earth/earth_list.html:44
-#: rieltor_object/models/models_building.py:107
+#: rieltor_object/models/models_building.py:108
 #: rieltor_object/models/models_earth.py:92
-#: rieltor_object/models/models_ofice.py:80
+#: rieltor_object/models/models_ofice.py:81
 #: rieltor_object/templates/rieltor_object/building.html:90
 #: rieltor_object/templates/rieltor_object/building_list.html:123
+#: rieltor_object/templates/rieltor_object/include/building_item.html:36
 #: rieltor_object/templates/rieltor_object/newbuilding.html:254
 #: rieltor_object/templates/rieltor_object/ofice.html:86
 #: rieltor_object/templates/rieltor_object/ofice_list.html:111
@@ -1632,6 +1624,7 @@ msgid "Площадь"
 msgstr "Площа"
 
 #: admin2/templates/admin2/rieltor_object/earth/earth_list.html:85
+#: rieltor_object/templates/rieltor_object/earth.html:53
 msgid "Площадь, соток"
 msgstr "Площа, соток"
 
@@ -1672,10 +1665,10 @@ msgid "До"
 msgstr "До"
 
 #: admin2/templates/admin2/rieltor_object/new_building/new_building_list.html:82
-#: rieltor_object/models/models_building.py:117
+#: rieltor_object/models/models_building.py:118
 #: rieltor_object/models/models_daily.py:135
 #: rieltor_object/models/models_newbuilding.py:110
-#: rieltor_object/models/models_ofice.py:90
+#: rieltor_object/models/models_ofice.py:91
 msgid "Балы"
 msgstr "Бали"
 
@@ -1696,13 +1689,11 @@ msgstr "Дата здачі"
 
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:83
 #: landing/models.py:34 rieltor_object/models/common_objects.py:33
-#: rieltor_object/models/models_ofice.py:228
 msgid "Офис"
 msgstr "Офіс"
 
 #: admin2/templates/admin2/rieltor_object/ofice/ofice_list.html:84
 #: landing/models.py:35 rieltor_object/models/common_objects.py:34
-#: rieltor_object/models/models_ofice.py:229
 msgid "Магазин"
 msgstr "Магазин"
 
@@ -1739,10 +1730,8 @@ msgid "Коментарий"
 msgstr "Коментар"
 
 #: admin2/templates/admin2/services/include/partners.html:19
-#, fuzzy
-#| msgid "Заявки"
 msgid "Заявок"
-msgstr "Заявки"
+msgstr "Заявок"
 
 #: admin2/templates/admin2/services/include/repair.html:34 common/models.py:178
 #: common/templates/common/rep_item.html:11
@@ -1802,7 +1791,7 @@ msgid "Добавить время"
 msgstr "Додати час"
 
 #: admin2/templates/admin2/special/rieltor_object/building/building_list.html:45
-#: rieltor_object/models/models_building.py:215
+#: rieltor_object/models/models_building.py:216
 msgid "Предложение"
 msgstr "Пропозиція"
 
@@ -1820,8 +1809,6 @@ msgstr "Сторінку"
 
 #: admin2/templates/admin2/static_pages/static_pages.html:7
 #: admin2/templates/admin2/static_pages/static_pages.html:19
-#, fuzzy
-#| msgid "Страницы "
 msgid "Страницы"
 msgstr "Сторінки"
 
@@ -1843,7 +1830,7 @@ msgstr "Додати Відео"
 
 #: admin2/templates/admin2/trust/trust_nav.html:7
 msgid "Галерея(Дипломы и регалии)"
-msgstr "Галерея(Дипломи і регалії)"
+msgstr "Галерея(НАШІ ВІДЗНАКИ І НАГОРОДИ)"
 
 #: admin2/templates/admin2/trust/trust_nav.html:10
 msgid "Отзывы"
@@ -1858,10 +1845,10 @@ msgid "Время"
 msgstr "Час"
 
 #: admin2/templates/admin2/videos/videos_list.html:43 articles/models.py:159
-#: rieltor_object/models/models_building.py:190
+#: rieltor_object/models/models_building.py:191
 #: rieltor_object/models/models_daily.py:114
 #: rieltor_object/models/models_newbuilding.py:127
-#: rieltor_object/models/models_ofice.py:156 videos/models.py:52
+#: rieltor_object/models/models_ofice.py:157 videos/models.py:52
 msgid "Просмотры"
 msgstr "Перегляди"
 
@@ -1878,6 +1865,26 @@ msgstr "Стаття"
 #: plan/templates/plan/final.html:39
 msgid "Расскажите друзьям"
 msgstr "Розповісти друзям"
+
+#: articles/templates/articles/article_detail.html:35 templates/base.html:295
+msgid "Поделиться ссылкой на Фейсбуке"
+msgstr "Поділитися посиланням з друзями на Фейсбук"
+
+#: articles/templates/articles/article_detail.html:36 templates/base.html:296
+msgid "Поделиться ссылкой в Твиттере"
+msgstr "Поділитися посиланням з друзями на Твітер"
+
+#: articles/templates/articles/article_detail.html:37
+msgid "Поделиться ссылкой в Моём мире"
+msgstr "Поділитися посиланням з друзями на Мій Світ"
+
+#: articles/templates/articles/article_detail.html:38 templates/base.html:297
+msgid "Поделиться ссылкой в Гугл-плюсе"
+msgstr "Поділитися посиланням з друзями на Гугл-плюс"
+
+#: articles/templates/articles/article_detail.html:39 templates/base.html:298
+msgid "Поделиться ссылкой во Вконтакте"
+msgstr "Поділитися посиланням з друзями на Вконтакті"
 
 #: articles/templates/articles/articles.html:19
 #: articles/templates/articles/sections.html:19
@@ -1922,31 +1929,23 @@ msgstr "Посилання"
 msgid "Нижний баннер"
 msgstr "Нижній банер"
 
-#: banners/models.py:38
-msgid "Нижний баннер (970х250)"
-msgstr "Нижній банер (970х250)"
-
 #: banners/models.py:69
 msgid "Боковой баннер"
 msgstr "Боковий банер"
-
-#: banners/models.py:72
-msgid "Боковой баннер (240х400)"
-msgstr "Боковий банер (240х400)"
 
 #: common/mixins.py:20
 msgid "Сохранено"
 msgstr "Збережено"
 
-#: common/models.py:54 rieltor_object/models/models_building.py:82
+#: common/models.py:54 rieltor_object/models/models_building.py:83
 #: rieltor_object/models/models_daily.py:52
 #: rieltor_object/models/models_earth.py:52
 #: rieltor_object/models/models_newbuilding.py:65
-#: rieltor_object/models/models_ofice.py:55
+#: rieltor_object/models/models_ofice.py:56
 #: services/templates/services/rieltor_service.html:208 templates/base.html:170
 #: users/models.py:93
 msgid "Адрес"
-msgstr "Адрес"
+msgstr "Адреса"
 
 #: common/models.py:71
 #: rieltor_object/templates/rieltor_object/daily_list.html:46
@@ -1958,10 +1957,8 @@ msgid "Отьезд"
 msgstr "Відїзд"
 
 #: common/models.py:113 services/templates/services/universal.html:24
-#, fuzzy
-#| msgid "Заявки"
 msgid "Заявка"
-msgstr "Заявки"
+msgstr "Заявка"
 
 #: common/models.py:135
 msgid "Включен ли?"
@@ -2021,11 +2018,11 @@ msgstr "Пакет Експерт"
 #: common/templates/common/acom_left.html:20
 #: common/templates/common/acom_right.html:22
 #: rieltor_object/models/common_objects.py:308
-#: rieltor_object/models/models_building.py:182
+#: rieltor_object/models/models_building.py:183
 #: rieltor_object/models/models_daily.py:78
 #: rieltor_object/models/models_earth.py:97
 #: rieltor_object/models/models_newbuilding.py:115
-#: rieltor_object/models/models_ofice.py:148
+#: rieltor_object/models/models_ofice.py:149
 #: rieltor_object/templates/rieltor_object/building.html:154
 #: rieltor_object/templates/rieltor_object/daily.html:147
 #: rieltor_object/templates/rieltor_object/newbuilding.html:128
@@ -2040,8 +2037,6 @@ msgstr "Переваги"
 
 #: common/models.py:340 common/templates/common/apartment_next_tab.html:26
 #: common/templates/common/apartment_next_tab.html:45
-#, fuzzy
-#| msgid "Назначение"
 msgid "Значение"
 msgstr "Призначення"
 
@@ -2134,8 +2129,6 @@ msgid "Планируете выполнить"
 msgstr "Плануєте виконати"
 
 #: common/models.py:534
-#, fuzzy
-#| msgid "Подготовка"
 msgid "Подготовки"
 msgstr "Приготування"
 
@@ -2167,7 +2160,7 @@ msgstr "Додати Поруч з квартирою"
 #: common/templates/common/application/modal_order_in_ispection.html:36
 #: common/templates/common/application/modal_order_in_ispection.html:37
 msgid "Заказать осмотр объекта"
-msgstr "Замовити огляд обєкту"
+msgstr "Замовити огляд об'єкту"
 
 #: common/templates/common/application/block_order_an_inspection.html:11
 #: common/templates/common/application/block_presentation.html:11
@@ -2190,7 +2183,7 @@ msgstr "Замовити огляд обєкту"
 #: services/templates/services/valuation.html:109 templates/base.html:164
 #: templates/base.html:208 templates/index.html:178
 msgid "Введите ваше имя"
-msgstr "Введіть Ваше імя"
+msgstr "Введіть Ваше ім'я"
 
 #: common/templates/common/application/block_order_an_inspection.html:14
 #: common/templates/common/application/block_presentation.html:14
@@ -2208,7 +2201,7 @@ msgstr "Введіть Ваше імя"
 #: services/templates/services/valuation.html:112 templates/index.html:27
 #: templates/index.html:181
 msgid "Введите ваш телефон"
-msgstr "Введіть Ваш телефон"
+msgstr "Введіть ваш номер телефону"
 
 #: common/templates/common/application/block_order_an_inspection.html:17
 #: favorites/templates/favorites/favorites.html:177
@@ -2237,7 +2230,7 @@ msgstr "Помилка. Спробуйте пізніше."
 #: common/templates/common/application/block_presentation.html:4
 #: landing/templates/landing/multilending.html:131
 msgid "Подберем вам необходимый объект за 30 минут"
-msgstr "Підберем необхідний Вам об'єкт за 30 хвилин"
+msgstr "Підберемо необхідний Вам об'єкт за 30 хвилин"
 
 #: common/templates/common/application/block_presentation.html:6
 #: landing/templates/landing/multilending.html:134
@@ -2283,7 +2276,7 @@ msgstr "Номер телефону"
 
 #: common/templates/common/application/modal_object_parameter.html:4
 msgid "Подберем вам объект по вашим"
-msgstr "Підбере Вам об'єкт по Вашиш"
+msgstr "Підберемо Вам об'єкт по Ваших"
 
 #: common/templates/common/application/modal_object_parameter.html:4
 msgid "параметрам за"
@@ -2455,7 +2448,7 @@ msgstr "Мультилендінги"
 
 #: landing/templates/landing/multilending.html:21
 msgid "объекта по вашим параметрам"
-msgstr "об'єкта по Ваших запитах"
+msgstr "об'єкту по Ваших запитах"
 
 #: landing/templates/landing/multilending.html:22
 msgid "Оставьте свои контакты и мы поможем Вам подобрать нужный объект!"
@@ -2530,7 +2523,7 @@ msgstr ""
 #: rieltor_object/templates/rieltor_object/include/newbuilding_item.html:54
 #: rieltor_object/templates/rieltor_object/newbuilding.html:261
 msgid "Заказать просмотр"
-msgstr "Заказати огляд"
+msgstr "Замовити огляд"
 
 #: liqpayapp/templates/liqpay/pay_confirm.html:63
 #: liqpayapp/templates/liqpay/pay_confirm.html:80
@@ -2631,7 +2624,7 @@ msgstr "Купити квартиру"
 
 #: plan/templates/plan/plan.html:28
 msgid "Продать дом"
-msgstr "Продати дім"
+msgstr "Продати будинок"
 
 #: plan/templates/plan/plan.html:32
 msgid "Арендовать квартиру"
@@ -2645,7 +2638,8 @@ msgstr "Здати квартиру"
 msgid "Ремонт квартиры"
 msgstr "Ремонт квартири"
 
-#: plan/templates/plan/plan.html:43 plan/templates/plan/process.html:82
+#: plan/templates/plan/plan.html:43 plan/templates/plan/plan.html:110
+#: plan/templates/plan/process.html:82
 msgid "Создать план"
 msgstr "Створити план"
 
@@ -2768,10 +2762,8 @@ msgid "после прохождения"
 msgstr "після проходження"
 
 #: polls/templates/polls/tests.html:27
-#, fuzzy
-#| msgid "Тест прошло"
 msgid "Тесты прошли"
-msgstr "Тест пройшло"
+msgstr "Тести пройшли"
 
 #: polls/templates/polls/tests.html:27
 msgid "более 6000 человек"
@@ -2858,9 +2850,27 @@ msgstr ""
 msgid "Transaction #(%s)"
 msgstr ""
 
+#: rieltor_object/filters.py:63
+msgid "1-но комнатные"
+msgstr "1-но кімнатні"
+
+#: rieltor_object/filters.py:64
+msgid "2-но комнатные"
+msgstr "2-х кімнатні"
+
+#: rieltor_object/filters.py:65
+msgid "3-но комнатные"
+msgstr "3-х кімнатні"
+
+#: rieltor_object/filters.py:66
+msgid "4-но комнатные"
+msgstr "4-х кімнатні"
+
+#: rieltor_object/filters.py:67
+msgid "Многокомнатные"
+msgstr "Багатокімнатні"
+
 #: rieltor_object/models/common_objects.py:44
-#, fuzzy
-#| msgid "Обичное"
 msgid "Обычное"
 msgstr "Звичайне"
 
@@ -2911,11 +2921,11 @@ msgstr "2-5 поверх"
 
 #: rieltor_object/models/common_objects.py:92
 msgid "Со двора"
-msgstr "Зі двору"
+msgstr "З двору"
 
 #: rieltor_object/models/common_objects.py:93
 msgid "С парадной"
-msgstr "З парадного"
+msgstr "спільний"
 
 #: rieltor_object/models/common_objects.py:103
 msgid "Под застройку"
@@ -2980,49 +2990,46 @@ msgstr "Район для Земля"
 msgid "В квартире есть"
 msgstr "В квартирі є"
 
-#: rieltor_object/models/models_building.py:26
+#: rieltor_object/models/models_building.py:27
 msgid "короткий"
 msgstr "короткий"
 
-#: rieltor_object/models/models_building.py:27
+#: rieltor_object/models/models_building.py:28
 msgid "месяц"
 msgstr "місяць"
 
-#: rieltor_object/models/models_building.py:28
+#: rieltor_object/models/models_building.py:29
 msgid "долгий срок (6мес)"
 msgstr "довгий період (6міс)"
 
-#: rieltor_object/models/models_building.py:37
+#: rieltor_object/models/models_building.py:38
 msgid "кондо"
 msgstr "кондо"
 
-#: rieltor_object/models/models_building.py:38
-#: rieltor_object/models/models_building.py:272
+#: rieltor_object/models/models_building.py:39
 msgid "квартиры"
 msgstr "квартири"
 
-#: rieltor_object/models/models_building.py:39
+#: rieltor_object/models/models_building.py:40
 msgid "виллы"
 msgstr "вілли"
 
-#: rieltor_object/models/models_building.py:122
+#: rieltor_object/models/models_building.py:123
 #: rieltor_object/models/models_daily.py:122
 #: rieltor_object/models/models_earth.py:109
 #: rieltor_object/models/models_newbuilding.py:135
-#: rieltor_object/models/models_ofice.py:95 videos/models.py:65
+#: rieltor_object/models/models_ofice.py:96 videos/models.py:65
 msgid "Дата публикации"
 msgstr "Дата публікації"
 
-#: rieltor_object/models/models_building.py:130
+#: rieltor_object/models/models_building.py:131
 #: rieltor_object/templates/rieltor_object/building.html:102
-#, fuzzy
-#| msgid "Планы"
 msgid "Планировка"
 msgstr "Планування"
 
-#: rieltor_object/models/models_building.py:137
+#: rieltor_object/models/models_building.py:138
 #: rieltor_object/models/models_daily.py:58
-#: rieltor_object/models/models_ofice.py:110
+#: rieltor_object/models/models_ofice.py:111
 #: rieltor_object/templates/rieltor_object/building.html:98
 #: rieltor_object/templates/rieltor_object/building_list.html:132
 #: rieltor_object/templates/rieltor_object/daily.html:85
@@ -3031,10 +3038,10 @@ msgstr "Планування"
 msgid "Этаж"
 msgstr "Поверх"
 
-#: rieltor_object/models/models_building.py:186
+#: rieltor_object/models/models_building.py:187
 #: rieltor_object/models/models_daily.py:106
 #: rieltor_object/models/models_newbuilding.py:119
-#: rieltor_object/models/models_ofice.py:152
+#: rieltor_object/models/models_ofice.py:153
 #: rieltor_object/templates/rieltor_object/building.html:172
 #: rieltor_object/templates/rieltor_object/daily.html:218
 #: rieltor_object/templates/rieltor_object/newbuilding.html:205
@@ -3042,20 +3049,9 @@ msgstr "Поверх"
 msgid "Панорама"
 msgstr "Панорама"
 
-#: rieltor_object/models/models_building.py:208
+#: rieltor_object/models/models_building.py:209
 msgid "Период"
 msgstr "Період"
-
-#: rieltor_object/models/models_building.py:271
-msgid "дома"
-msgstr "будинки"
-
-#: rieltor_object/models/models_building.py:273
-#: rieltor_object/models/models_daily.py:198
-#, fuzzy
-#| msgid "Комнаты"
-msgid "комнаты"
-msgstr "Кімнати"
 
 #: rieltor_object/models/models_daily.py:63
 #: rieltor_object/templates/rieltor_object/daily.html:93
@@ -3065,12 +3061,6 @@ msgstr "Гостей"
 #: rieltor_object/models/models_daily.py:147
 msgid "Для создания значения начните набирать текст"
 msgstr "Для створення значення почніть вводити текст"
-
-#: rieltor_object/models/models_daily.py:198
-#, fuzzy
-#| msgid "Комнат"
-msgid "комнат"
-msgstr "Кімнат"
 
 #: rieltor_object/models/models_earth.py:66
 msgid "Тип Участка"
@@ -3145,19 +3135,11 @@ msgstr "Початок будівництва"
 msgid "Конец строительства"
 msgstr "Завершення будівництва"
 
-#: rieltor_object/models/models_ofice.py:103
+#: rieltor_object/models/models_ofice.py:104
 #: rieltor_object/templates/rieltor_object/ofice.html:98
 #: rieltor_object/templates/rieltor_object/ofice_list.html:120
 msgid "Расположение"
 msgstr "Розміщення"
-
-#: rieltor_object/models/models_ofice.py:228
-msgid "офиса"
-msgstr "офісу"
-
-#: rieltor_object/models/models_ofice.py:229
-msgid "магазина"
-msgstr "магазину"
 
 #: rieltor_object/templates/rieltor_object/building.html:23
 #: rieltor_object/templates/rieltor_object/include/ofice_building_detail.html:20
@@ -3188,7 +3170,7 @@ msgstr "Поділитися з друзями"
 
 #: rieltor_object/templates/rieltor_object/building.html:189
 msgid "Квартира продается в новострое"
-msgstr "Квартира продається в новострої"
+msgstr "Квартира продається в новобудові"
 
 #: rieltor_object/templates/rieltor_object/building.html:208
 #: templates/index.html:126
@@ -3215,7 +3197,7 @@ msgstr "Оренда комерційної нерухомості"
 #: rieltor_object/templates/rieltor_object/newbuilding_list.html:23
 #: rieltor_object/templates/rieltor_object/ofice_list.html:23
 msgid "Искать в тексте объявления"
-msgstr "Шукати в тексті об'яви"
+msgstr "Шукати в тексті оголошення"
 
 #: rieltor_object/templates/rieltor_object/building_list.html:43
 #: rieltor_object/templates/rieltor_object/daily_list.html:118
@@ -3330,10 +3312,8 @@ msgid "Поможем в выборе земельного участка для
 msgstr "Допоможемо в виборі земельної ділянки для будівництва і бізнесу"
 
 #: rieltor_object/templates/rieltor_object/earth.html:30
-#, fuzzy
-#| msgid "Введите ваш телефон"
 msgid "Введите номер телефона"
-msgstr "Введіть Ваш телефон"
+msgstr "Введіть ваш номер телефону"
 
 #: rieltor_object/templates/rieltor_object/earth.html:41
 msgid "Найти участок"
@@ -3370,7 +3350,7 @@ msgstr "Ціна за м.кв"
 
 #: rieltor_object/templates/rieltor_object/newbuilding.html:24
 msgid "Квартиры в новострое"
-msgstr "Квартира  в новострої"
+msgstr "Квартира  в новобудові"
 
 #: rieltor_object/templates/rieltor_object/newbuilding.html:92
 msgid "Одесса"
@@ -3390,7 +3370,7 @@ msgstr "Продаж квартир в новостроях"
 
 #: rieltor_object/templates/rieltor_object/newbuilding_list.html:85
 msgid "Поиск новостроек"
-msgstr "Пошук новостроїв"
+msgstr "Пошук новобудов"
 
 #: rieltor_object/templates/rieltor_object/newbuilding_list.html:117
 msgid "обьект"
@@ -3650,8 +3630,6 @@ msgstr "Ми використовуємо тільки професійне об
 
 #: services/templates/services/cleaning.html:115
 #: services/templates/services/installation_water.html:109
-#, fuzzy
-#| msgid "Заказать бесплатную консультацию"
 msgid "Отправить заявку на консультацию"
 msgstr "Замовити безкоштовну консультацію"
 
@@ -4009,8 +3987,6 @@ msgid "Вызвать замерщика бесплатно"
 msgstr "Викликати замірщика безкоштовно"
 
 #: services/templates/services/repair.html:173
-#, fuzzy
-#| msgid "Заказать бесплатную консультацию"
 msgid "заказать бесплатную консультацию"
 msgstr "Замовити безкоштовну консультацію"
 
@@ -4382,10 +4358,8 @@ msgid "Конечная"
 msgstr "Кінцева"
 
 #: services/templates/services/valuation.html:195
-#, fuzzy
-#| msgid "Оплата"
 msgid "оплата"
-msgstr "Оплата"
+msgstr "оплата"
 
 #: templates/404.html:22
 msgid "Страница не найдена"
@@ -4421,7 +4395,7 @@ msgstr "Заповніть заявку і ми приведемо Вам клі
 
 #: templates/base.html:156
 msgid "По возможности пришлите фотографии объекта на почту"
-msgstr "По можливості надішліть фотографії об'єкта на пошту"
+msgstr "По можливості надішліть фотографії об'єкту на пошту"
 
 #: templates/base.html:178
 msgid "Максимально подробно опишите ваш объект"
@@ -4460,10 +4434,8 @@ msgid "Горячие предложения"
 msgstr "Гарячі пропозиції"
 
 #: templates/index.html:104
-#, fuzzy
-#| msgid "Новострои"
 msgid "Новостройки"
-msgstr "Новострої"
+msgstr "Новобудови"
 
 #: templates/index.html:134
 msgid "Сдаётся с "
@@ -4515,7 +4487,7 @@ msgstr "оголошень на сайті"
 
 #: templates/index.html:184
 msgid "Связаться с агентством"
-msgstr "Зв'язатися з агенством"
+msgstr "Зв'язатися з компанією"
 
 #: trust/templates/trust/trust.html:17
 msgid "Как можно зарабатывать на недвижимости ?"
@@ -4587,7 +4559,7 @@ msgstr "Знято передач"
 
 #: trust/templates/trust/trust.html:129
 msgid "Наши дипломы и регалии, доказательство"
-msgstr "Наші дипломи та регалії, доказ"
+msgstr "НАШІ ВІДЗНАКИ І НАГОРОДИ"
 
 #: trust/templates/trust/trust.html:143
 msgid "Отзывы наших клиентов и успешние сделки"
@@ -4664,3 +4636,21 @@ msgstr "Відео передачі"
 #: videos/templates/videos/video_list.html:21
 msgid "Поиск видео передач"
 msgstr "Пошук відео передач"
+
+#~ msgid "Нижний баннер (970х250)"
+#~ msgstr "Нижній банер (970х250)"
+
+#~ msgid "Боковой баннер (240х400)"
+#~ msgstr "Боковий банер (240х400)"
+
+#~ msgid "дома"
+#~ msgstr "будинки"
+
+#~ msgid "комнат"
+#~ msgstr "кімнат"
+
+#~ msgid "офиса"
+#~ msgstr "офісу"
+
+#~ msgid "магазина"
+#~ msgstr "магазину"

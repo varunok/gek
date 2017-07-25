@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import uuid
 
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -225,8 +226,12 @@ class Ofice(models.Model):
 
     def normalize_SEO(self, text):
         try:
-            text = text.replace('Офис', 'офиса')
-            text = text.replace('Магазин', 'магазина')
+            if settings.LANGUAGE_CODE == 'uk':
+                text = text.replace('Офіс', 'офісу')
+                text = text.replace('Магазин', 'магазину')
+            elif settings.LANGUAGE_CODE == 'ru':
+                text = text.replace('Офис', 'офиса')
+                text = text.replace('Магазин', 'магазина')
         except AttributeError:
             pass
         return _(text)

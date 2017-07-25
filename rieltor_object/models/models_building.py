@@ -6,6 +6,7 @@ import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 from django.db import models
 
 # Create your models here.
@@ -243,7 +244,7 @@ class Building(models.Model):
                                                              self.get_appointment_display() or '',
                                                              self.address or '',
                                                              self.district or ''))
-        self.SEOKeywords = self.SEODescription
+        self.SEOKeywords = _(self.SEODescription)
         super(Building, self).save(*args, **kwargs)
 
 
@@ -270,12 +271,17 @@ class Building(models.Model):
         if not text:
             return ''
         try:
-            text = text.replace('Дом', 'дома')
-            text = text.replace('Квартира', 'квартиры')
-            text = text.replace('Комната', 'комнаты')
+            if settings.LANGUAGE_CODE == 'uk':
+                text = text.replace('Будинок', 'будинку')
+                text = text.replace('Квартира', 'квартири')
+                text = text.replace('Кімната', 'кімнати')
+            elif settings.LANGUAGE_CODE == 'ru':
+                text = text.replace('Дом', 'дома')
+                text = text.replace('Квартира', 'квартиры')
+                text = text.replace('Комната', 'комнаты')
         except AttributeError:
-            return _(text)
-        return _(text)
+            return text
+        return text
 
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())
