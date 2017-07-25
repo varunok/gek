@@ -18,7 +18,7 @@
 				<div class="main_breadcrumbs">
                     <a href="/">{% trans 'Главная' %}</a>
                     <span class="delimiter">/</span>
-                    <a href="{% url 'articles:articles' %}">{% trans 'Статьи' %}</a>
+                    <a href="{% url 'articles:articles' %}">{% trans _('Статьи') %}</a>
                     <span class="delimiter">/</span>
                     <a href="{% url 'articles:sections_detail' article.sections.slug %}">{{ article.sections.name }}</a>
                     <span class="delimiter">/</span>
@@ -32,11 +32,11 @@
 			<div class="social_likes_wrapper">
 				<div class="label">{% trans 'Расскажите друзьям' %}:</div>
 				<div class="social-likes social-likes_vertical" data-counters="no">
-					<div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
-					<div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
-					<div class="mailru" title="Поделиться ссылкой в Моём мире">Мой мир</div>
-					<div class="plusone" title="Поделиться ссылкой в Гугл-плюсе">Google+</div>
-					<div class="vkontakte" title="Поделиться ссылкой во Вконтакте">Вконтакте</div>
+					<div class="facebook" title="{% trans 'Поделиться ссылкой на Фейсбуке' %}">Facebook</div>
+					<div class="twitter" title="{% trans 'Поделиться ссылкой в Твиттере' %}">Twitter</div>
+					<div class="mailru" title="{% trans 'Поделиться ссылкой в Моём мире' %}">Мой мир</div>
+					<div class="plusone" title="{% trans 'Поделиться ссылкой в Гугл-плюсе' %}">Google+</div>
+					<div class="vkontakte" title="{% trans 'Поделиться ссылкой во Вконтакте' %}">Вконтакте</div>
 				</div>
 			</div>
 		</div>

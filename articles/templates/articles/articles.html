@@ -13,7 +13,7 @@
 {% block content %}
     <main class="middle">
 		<div class="slider_main slider_notfront">
-			<div class="slider_title">{{ seo.title|default:'Статьи' }}</div>
+			<div class="slider_title">{{ seo.title|default:_('Статьи') }}</div>
 			<form class="webform_client_form">
 				<div class="form_item search">
                     <input name="q" value="{{ request.GET.q }}" type="text" placeholder="{% trans 'Поиск статьей' %}">
