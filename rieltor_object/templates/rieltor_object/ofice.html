@@ -33,7 +33,7 @@
                     <input type="hidden" name="object_id" value="{{ object.id }}">
                 </div>
 			</div>
-			<h1 class="slider_title page_title">{{ object.get_title|add:','|default:'' }} {{ object.address|add:'.'|default_if_none:'' }} <br>({{ object.price }} {{ object.get_current }})</h1>
+			<h1 class="slider_title page_title">{{ object.get_title|add:','|default:'' }} {{ object.address|default_if_none:'' }} <br>({{ object.price }} {{ object.get_current }})</h1>
 			<div class="webform_client_form">
 				<div class="form_actions">
 					<input  class="form-submit submit-add-inspection-modal" type="submit" value="{% trans 'Заказать осмотр' %}">
