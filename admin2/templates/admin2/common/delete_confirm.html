@@ -27,7 +27,7 @@
                         <div class="x_content">
                             <form action="" method="post">{% csrf_token %}
                                 <p><i class="fa fa-trash"></i> {% trans 'Уверени что хотите удалить' %} "{{ object }}"? </p>
-                                <input type="submit" value="Подтвердит" class="btn btn-danger" />
+                                <input type="submit" value="{% trans 'Подтвердить' %}" class="btn btn-danger" />
                                 <a href="{{ object.get_list_url }}?model={{ model_name }}" class="btn btn-success">{% trans 'Отмена' %}</a>
                             </form>
                         </div>
