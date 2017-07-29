@@ -883,7 +883,7 @@ class ContactPageModel(SingletonModel):
                                    verbose_name=_('Наши специалисты'))
 
     class Meta:
-        verbose_name = 'Контакты'
+        verbose_name = _('Контакты')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -894,17 +894,17 @@ class ContactPageModel(SingletonModel):
 
 class Notes(models.Model):
     note = models.TextField(
-        verbose_name='Задача'
+        verbose_name=_('Задача')
     )
     date_do = models.DateTimeField(
-        verbose_name='До какого числа?',
+        verbose_name=_('До какого числа?'),
         blank=True,
         null=True
     )
 
     class Meta:
-        verbose_name = 'Задача'
-        verbose_name_plural = 'Задачи'
+        verbose_name = _('Задача')
+        verbose_name_plural = _('Задачи')
         ordering = ['date_do']
 
     def __unicode__(self):
