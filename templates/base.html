@@ -302,35 +302,13 @@
             <div class="footer_bottom">
                 <div class="region_footer">
                     <div class="menu_footer">
-                        <ul>
-                            <li class="group_item">
-                                <ul>
-                                    <li class="leaf"><a href="/">Продажа офисов</a></li>
-                                    <li class="leaf"><a href="/">Продажа коммерческой недвижимости</a></li>
-                                    <li class="leaf"><a href="/">Продажа гаражей</a></li>
-                                </ul>
-                            </li>
-                            <li class="group_item">
-                                <ul>
-                                    <li class="leaf"><a href="/">Аренда недвижимости</a></li>
-                                    <li class="leaf"><a href="/">Аренда квартир</a></li>
-                                    <li class="leaf"><a href="/">Аренда домов</a></li>
-                                </ul>
-                            </li>
-                            <li class="group_item">
-                                <ul>
-                                    <li class="leaf"><a href="/">Аренда земельных участков</a></li>
-                                    <li class="leaf"><a href="/">Аренда офисов</a></li>
-                                    <li class="leaf"><a href="/">Аренда коммерческой недвижимости</a></li>
-                                </ul>
-                            </li>
-                            <li class="group_item">
-                                <ul>
-                                    <li class="leaf"><a href="/">Аренда недвижимости посуточно</a></li>
-                                    <li class="leaf"><a href="/">Аренда квартир посуточно</a></li>
-                                    <li class="leaf"><a href="/">Аренда комнат посуточно</a></li>
-                                </ul>
-                            </li>
+                        <ul>{% for landing in landings %}
+                                <li class="group_item">
+                                    <ul>
+                                        <li class="leaf"><a href="{{ landing.landing.slug }}">{{ landing }}</a></li>
+                                    </ul>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
