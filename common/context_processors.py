@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from admin2.models import Counters, Settings
+from landing.models import LandingFutor
 
 
 def counter(request):
@@ -12,5 +13,7 @@ def counter(request):
         'counter_2': counters.counter_2,
         'counter_3': counters.counter_3,
         'counter_4': counters.counter_4,
-        'nac_carrency': carrency
+        'nac_carrency': carrency,
+        'landings': LandingFutor.objects.all()
+
     }

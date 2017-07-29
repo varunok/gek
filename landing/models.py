@@ -167,3 +167,17 @@ class Landing(models.Model):
 
     def get_list_url(self):
         return reverse('admin2:landings')
+
+
+class LandingFutor(models.Model):
+    landing = models.OneToOneField(
+        Landing,
+        related_name='landing_futor',
+
+    )
+
+    def __unicode__(self):
+        return self.landing.title
+
+    def get_delete_url(self):
+        return reverse('admin2:landing_futor_delete', args=[self.id])
