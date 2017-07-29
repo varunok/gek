@@ -11,11 +11,11 @@ from django.forms.widgets import TextInput, Textarea, FileInput, Select, SelectM
 from ckeditor.widgets import CKEditorWidget
 from django.urls import reverse_lazy
 
-from admin2.models import ContactPageModel, ActiveFranchise
+from admin2.models import ContactPageModel, ActiveFranchise, Notes
 from articles.models import Sections, Articles
 from banners.models import DownBanner, SideBanner
 from common.models import Video, Photo, Advantage, Feed, Schedule, WhatYouKnown, Preparation, Process, Finish
-from landing.models import Landing
+from landing.models import Landing, LandingFutor
 from polls.models import Question, Choice, Polls
 from rieltor_object.models import Building, Ofice, NewBuilding, Daily, Earth, District
 from services.models import ServicesRieltor, Repair, Insurance, Cleaning, InstallationWater, UniversalService, Partner
@@ -478,4 +478,22 @@ class PartnerForm(forms.ModelForm):
     class Meta:
         model = Partner
         exclude = ('is_phone_confirmed', 'application_count',)
+        fields = '__all__'
+
+
+class LandingAddForm(forms.ModelForm):
+    class Meta:
+        model = LandingFutor
+        fields = '__all__'
+
+    def clean_landing(self):
+        data = self.cleaned_data['landing']
+        if self._meta.model.objects.filter(landing=data).exists():
+            raise forms.ValidationError('Уже в списке')
+        return data
+
+
+class NotesForm(forms.ModelForm):
+    class Meta:
+        model = Notes
         fields = '__all__'

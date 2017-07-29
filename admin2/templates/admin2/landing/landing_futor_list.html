@@ -2,9 +2,8 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
-{% load i18n %}
 
-{% block title %}{% trans 'Мультилендинг' %}{% endblock title %}
+{% block title %}Мультилендинг{% endblock title %}
 
 {% block css %}{% endblock css %}
 
@@ -14,12 +13,12 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>{% trans 'Мультилендинг' %}</h3>
+                    <h3>Мультилендинги в футоре</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{% url 'admin2:landing_create' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
+                            <a href="{% url 'admin2:landings' %}" class="btn btn-round btn-primary"><i class="fa fa-chevron-left"></i> Назад</a>
                         </div>
                     </div>
                 </div>
@@ -29,9 +28,9 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{% trans 'Все Мультилендинги' %}</h2>
+                            <h2>Все Мультилендинги</h2>
                             <div style="float: right">
-                                <a href="{% url 'admin2:landing_futor_list' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Добавить в футор' %}</a>
+                                <a href="{% url 'admin2:landing_futor_add' %}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Добавить</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -40,9 +39,9 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%">ID</th>
-                                    <th style="width: 40%">URL</th>
-                                    <th style="width: 40%">{% trans 'Заголовок' %}</th>
-                                    <th style="width: 10%">{% trans 'Тип' %}</th>
+{#                                    <th style="width: 40%">URL</th>#}
+                                    <th style="width: 40%">Заголовок</th>
+{#                                    <th style="width: 10%">Тип</th>#}
                                     <th style="width: 5%"></th>
                                 </tr>
                                 </thead>
@@ -50,13 +49,13 @@
                                     {% for object in object_list %}
                                         <tr>
                                             <td>{{ object.id }}</td>
-                                            <td>{{ object.slug }}</td>
-                                            <td>{{ object.title_h1|default_if_none:'' }}</td>
-                                            <td>{{ object.get_type_deal_display }}</td>
+{#                                            <td>{{ object.slug }}</td>#}
+                                            <td>{{ object|default_if_none:'' }}</td>
+{#                                            <td>{{ object.get_type_deal_display }}</td>#}
                                             <td>
-                                                <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> {% trans 'Удалить' %} </a>
-                                                <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> {% trans 'Редактировать' %} </a>
-                                                <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> {% trans 'На сайте' %} </a>
+                                                <a href="{{ object.get_delete_url }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Удалить </a>
+{#                                                <a href="{{ object.get_edit_url }}" class="btn btn-dark btn-xs"><i class="fa fa-pencil"></i> Редактировать </a>#}
+{#                                                <a href="{{ object.get_absolute_url }}" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-eye"></i> На сайте </a>#}
                                             </td>
                                         </tr>
                                     {% endfor %}

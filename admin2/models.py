@@ -883,10 +883,35 @@ class ContactPageModel(SingletonModel):
                                    verbose_name=_('Наши специалисты'))
 
     class Meta:
-        verbose_name = 'Контакты'
+        verbose_name = _('Контакты')
 
     def __unicode__(self):
         return '%s' % self.name
 
     def get_absolute_url(self):
         return reverse('contacts:contact')
+
+
+class Notes(models.Model):
+    note = models.TextField(
+        verbose_name=_('Задача')
+    )
+    date_do = models.DateTimeField(
+        verbose_name=_('До какого числа?'),
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        verbose_name = _('Задача')
+        verbose_name_plural = _('Задачи')
+        ordering = ['date_do']
+
+    def __unicode__(self):
+        return '{0}... до {1}'.format(self.note if len(self.note)<10 else self.note[:11], self.date_do)
+
+    def get_delete_url(self):
+        return reverse('admin2:notes_delete', args=[self.id])
+
+    def get_list_url(self):
+        return reverse('admin2:notes')

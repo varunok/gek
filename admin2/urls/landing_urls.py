@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import url
 
 from admin2.views.landing_views import LandingList, LandingEdit, LandingEditSeo, LandingEditForm, LandingCreate, \
-    LandingDelete
+    LandingDelete, LandingFutorList, LandingFutorAdd, LandingFutorDelete
 
 urlpatterns = [
     # landing
@@ -36,5 +36,20 @@ urlpatterns = [
         '^landings/delete/(?P<pk>[\d-]+)/$',
         LandingDelete.as_view(),
         name='landing_delete'
+    ),
+    url(
+        '^landingsfutor/delete/(?P<pk>[\d-]+)/$',
+        LandingFutorDelete.as_view(),
+        name='landing_futor_delete'
+    ),
+    url(
+        '^landings-futor/$',
+        LandingFutorList.as_view(),
+        name='landing_futor_list'
+    ),
+    url(
+        '^landings-futor/add$',
+        LandingFutorAdd.as_view(),
+        name='landing_futor_add'
     ),
 ]

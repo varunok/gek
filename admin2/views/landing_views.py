@@ -8,9 +8,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.views.generic.base import ContextMixin
 
-from admin2.forms import LandingForm, LandingSeoForm, LandingFormForm
+from admin2.forms import LandingForm, LandingSeoForm, LandingFormForm, LandingAddForm
 from common.mixins import MessageMixin, SuccesMixin
-from landing.models import Landing
+from landing.models import Landing, LandingFutor
 
 
 class LandingMixin(LoginRequiredMixin, MessageMixin, ContextMixin):
@@ -66,3 +66,22 @@ class LandingDelete(LoginRequiredMixin, DeleteView):
     template_name = 'admin2/common/delete_confirm.html'
     success_url = reverse_lazy('admin2:landings')
 
+
+class LandingFutorList(LoginRequiredMixin, ListView):
+    model = LandingFutor
+    template_name = 'admin2/landing/landing_futor_list.html'
+    paginate_by = 10
+
+
+class LandingFutorAdd(LoginRequiredMixin, CreateView):
+    model = LandingFutor
+    template_name = 'admin2/landing/landing_futor_add.html'
+    form_class = LandingAddForm
+    success_url = reverse_lazy('admin2:landing_futor_list')
+
+
+class LandingFutorDelete(LoginRequiredMixin, DeleteView):
+    model = LandingFutor
+    pk_url_kwarg = 'pk'
+    template_name = 'admin2/common/delete_confirm.html'
+    success_url = reverse_lazy('admin2:landing_futor_list')
