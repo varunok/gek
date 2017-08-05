@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load admin_tags %}
 
 {% block title %}{{ page_title }}{% endblock title %}
 
@@ -77,13 +78,13 @@
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
-                                    <th style="width: 1%">ID</th>
+                                    <th style="width: 5%">ID {% order_by custom_id %}</th>
                                     <th style="width: 10%">Фото</th>
                                     <th style="width: 20%">Адресс</th>
                                     <th style="width: 5%">Цена</th>
-                                    <th style="width: 15%">Площадь, соток</th>
+                                    <th style="width: 15%">Площадь, соток {% order_by area %}</th>
                                     <th style="width: 20%">Контакты</th>
-                                    <th style="width: 20%">Опубликована</th>
+                                    <th style="width: 20%">Опубликована {% order_by when_create %}</th>
                                     <th style="width: 5%">
                                     </th>
                                 </tr>

@@ -20,9 +20,10 @@ class BuildingListView(BuildingStatusMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        qs = self.model.objects.order_by('point')
+        order = self.get_ordering() or 'point'
+        qs = self.model.objects.order_by(order)
         if self.request.GET.get('search') == 'Поиск':
-            qs = BuildingFilterClass(self.request, self.model).qs
+            qs = BuildingFilterClass(self.request, self.model).qs.order_by(order)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -30,6 +31,13 @@ class BuildingListView(BuildingStatusMixin, ListView):
         context['page_title'] = 'Квартиры и Дома'
         context['create_url'] = reverse_lazy('admin2:building_create')
         return context
+
+    def get_ordering(self):
+        order = self.request.GET.get('order')
+        reverse = self.request.GET.get('reverse')
+        if reverse:
+            order = ''.join(('-', order))
+        return order
 
 
 class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateView):
