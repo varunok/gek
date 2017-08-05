@@ -19,9 +19,10 @@ class EarthListView(EarthStatusMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        qs = self.model.objects.all()
+        order = self.get_ordering() or 'custom_id'
+        qs = self.model.objects.order_by(order)
         if self.request.GET.get('search') == 'Поиск':
-            qs = BuildingFilterClass(self.request, self.model).qs
+            qs = BuildingFilterClass(self.request, self.model).qs.order_by(order)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -30,6 +31,13 @@ class EarthListView(EarthStatusMixin, ListView):
         context['create_url'] = reverse_lazy('admin2:earth_create')
         context['districts'] = EarthDistrict.objects.all()
         return context
+
+    def get_ordering(self):
+        order = self.request.GET.get('order')
+        reverse = self.request.GET.get('reverse')
+        if reverse:
+            order = ''.join(('-', order))
+        return order
 
 
 class EarthEditView(SuccesMixin, MessageMixin, EarthStatusMixin, UpdateView):

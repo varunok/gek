@@ -3,6 +3,7 @@
 {% load static from staticfiles %}
 {% load thumbnail %}
 {% load i18n %}
+{% load admin_tags %}
 
 {% block title %}{{ page_title }}{% endblock title %}
 
@@ -78,14 +79,14 @@
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
-                                    <th style="width: 1%">ID</th>
-                                    <th style="width: 1%">{% trans 'Балы' %}</th>
+                                    <th style="width: 1%">ID {% order_by custom_id %}</th>
+                                    <th style="width: 1%">{% trans 'Балы' %} {% order_by point %}</th>
                                     <th style="width: 20%">{% trans 'Фото' %}</th>
                                     <th style="width: 20%">{% trans 'Адресс' %}</th>
                                     <th style="width: 10%">{% trans 'Цена м.кв' %}</th>
                                     <th style="width: 10%">{% trans 'Связаних обектов' %}</th>
-                                    <th style="width: 10%">{% trans 'Район' %}</th>
-                                    <th style="width: 20%">{% trans 'Дата сдачи' %}</th>
+                                    <th style="width: 10%">{% trans 'Район' %} {% order_by district %}</th>
+                                    <th style="width: 20%">{% trans 'Дата сдачи' %} {% order_by date_delivery %}</th>
                                     <th style="width: 5%">
                                     </th>
                                 </tr>
