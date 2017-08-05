@@ -81,9 +81,9 @@ INSTALLED_APPS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gek',
-        'USER': 'gek',
-        'PASSWORD': 'gek',
+        'NAME': 'gekp',
+        'USER': 'gekp',
+        'PASSWORD': 'gekp',
         'HOST': 'localhost',
         'PORT': '5432',
     }
