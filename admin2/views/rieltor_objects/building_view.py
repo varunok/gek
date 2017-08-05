@@ -20,9 +20,10 @@ class BuildingListView(BuildingStatusMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        qs = self.model.objects.order_by('point')
+        order = self.get_ordering() or 'point'
+        qs = self.model.objects.order_by(order)
         if self.request.GET.get('search') == 'Поиск':
-            qs = BuildingFilterClass(self.request, self.model).qs
+            qs = BuildingFilterClass(self.request, self.model).qs.order_by(order)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -31,10 +32,12 @@ class BuildingListView(BuildingStatusMixin, ListView):
         context['create_url'] = reverse_lazy('admin2:building_create')
         return context
 
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'admin2/special/rieltor_object/building/building_list.html'
-        return self.template_name
+    def get_ordering(self):
+        order = self.request.GET.get('order')
+        reverse = self.request.GET.get('reverse')
+        if reverse:
+            order = ''.join(('-', order))
+        return order
 
 
 class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateView):
@@ -49,11 +52,6 @@ class BuildingEditView(SuccesMixin, MessageMixin, BuildingStatusMixin, UpdateVie
         context['verbose_name'] = self.model._meta.verbose_name
         return context
 
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'admin2/special/rieltor_object/building/building_edit.html'
-        return self.template_name
-
 
 class BuildingCreateView(SuccesMixin, MessageMixin, BuildingStatusMixin, CreateView):
     model = Building
@@ -66,11 +64,6 @@ class BuildingCreateView(SuccesMixin, MessageMixin, BuildingStatusMixin, CreateV
         context['verbose_name'] = self.model._meta.verbose_name
         context['list_url'] = reverse_lazy('admin2:buildings')
         return context
-
-    def get_template_names(self):
-        if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
-            return 'admin2/special/rieltor_object/building/building_edit.html'
-        return self.template_name
 
 
 class BuildingDeleteView(BuildingStatusMixin, LoginRequiredMixin, DeleteView):

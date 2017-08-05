@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load thumbnail %}
+{% load admin_tags %}
 {% load i18n %}
 
 {% block title %}{{ page_title }}{% endblock title %}
@@ -19,8 +20,8 @@
                 <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div style="float: right">
-                            <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> {% trans 'Создать' %}</a>
-                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> {% trans 'Поиск' %}</a>
+                            <a href="{{ create_url }}" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Создать</a>
+                            <a href="#" class="btn btn-round btn-primary search-admin"><i class="fa fa-search"></i> Поиск</a>
                         </div>
                     </div>
                 </div>
@@ -30,7 +31,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{% trans 'Все' %} {{ page_title }}</h2>
+                            <h2>Все {{ page_title }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content search-form" {% if not request.GET.search %} style="display: none" {% endif %}>
@@ -105,15 +106,15 @@
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
-                                    <th style="width: 1%">ID</th>
-                                    <th style="width: 1%">{% trans 'Балл' %}</th>
+                                    <th style="width: 5%">ID {% order_by custom_id %}</th>
+                                    <th style="width: 8%">{% trans 'Балл' %} {% order_by point %}</th>
                                     <th style="width: 15%">{% trans 'Фото' %}</th>
                                     <th style="width: 5%">{% trans 'Статус' %}</th>
                                     <th style="width: 20%">{% trans 'Адресс' %}</th>
                                     <th style="width: 10%">{% trans 'Цена' %}</th>
                                     <th style="width: 10%">{% trans 'Тип' %}</th>
                                     <th style="width: 10%">{% trans 'Назначение' %}</th>
-                                    <th style="width: 20%">{% trans 'Опубликована' %}</th>
+                                    <th style="width: 20%">{% trans 'Опубликована' %} {% order_by when_create %}</th>
                                     <th style="width: 5%">
                                     </th>
                                 </tr>

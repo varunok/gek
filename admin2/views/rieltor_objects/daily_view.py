@@ -17,12 +17,12 @@ class DailyListView(DailyStatusMixin, ListView):
     model = Daily
     template_name = 'admin2/rieltor_object/daily/daily_list.html'
     paginate_by = 10
-    ordering = ['point']
 
     def get_queryset(self):
-        qs = self.model.objects.order_by('point')
+        order = self.get_ordering() or 'point'
+        qs = self.model.objects.order_by(order)
         if self.request.GET.get('search') == 'Поиск':
-            qs = BuildingFilterClass(self.request, self.model).qs
+            qs = BuildingFilterClass(self.request, self.model).qs.order_by(order)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -30,6 +30,13 @@ class DailyListView(DailyStatusMixin, ListView):
         context['page_title'] = 'Посуточно'
         context['create_url'] = reverse_lazy('admin2:daily_create')
         return context
+
+    def get_ordering(self):
+        order = self.request.GET.get('order')
+        reverse = self.request.GET.get('reverse')
+        if reverse:
+            order = ''.join(('-', order))
+        return order
 
 
 class DailyEditView(SuccesMixin, MessageMixin, DailyStatusMixin, UpdateView):
