@@ -338,3 +338,9 @@ class Building(models.Model):
             return ''
         elif self.type_deal == TypeDeal.RENT:
             return 'Месяц'
+
+    def get_price(self):
+        if self.type_deal == TypeDeal.SALE:
+            return self.price
+        else:
+            return '{0}'.format(self.price or self.price_short)

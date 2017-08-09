@@ -32,7 +32,10 @@
                     <input type="hidden" name="object_id" value="{{ object.id }}">
                 </div>
 			</div>
-			<h1 class="slider_title page_title">{{ object.get_phuket_title }} , {{ object.address|default_if_none:'' }}. <br>({{ object.price }} {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %})</h1>
+			<h1 class="slider_title page_title">{{ object.get_phuket_title }} , {{ object.address|default_if_none:'' }}.
+                <br>(
+                    {{ object.get_price }} {% if object.type_deal == 'rent' %} {% carrency %}  {% else %} $ {% endif %}
+                )</h1>
 			<div class="webform_client_form">
 				<div class="form_actions">
 					<input  class="form-submit submit-add-inspection-modal" type="submit" value="Заказать осмотр">
@@ -72,8 +75,14 @@
 							<div class="left_wrap information">
 								<div class="title">Информация: {{ seo.SEOKeywords }}</div>
 								<div class="price_wrapper">
-									<div class="first_price">{{ object.price|default_if_none:'--' }} {{ object.get_current }}</div>
-{#                                    <span></span>#}
+                                    {% if object.type_deal == 'rent' %}
+									    <div class="first_price">Долгосрочная {{ object.price|default_if_none:'--' }} {{ object.get_current }}</div>
+                                        <br>
+									    <div class="first_price">Месяц {{ object.price_short|default_if_none:'--' }} {{ object.get_current }}</div>
+                                        {% else %}
+                                        <div class="first_price">{{ object.price|default_if_none:'--' }} {{ object.get_current }}</div>
+                                    {% endif %}
+                                    {#                                    <span></span>#}
 {#                                    <div class="second_price">{{ object.footage_price|default_if_none:'--' }} {{ object.get_current }}/м<sup>2</sup></div>#}
 								</div>
 								<div class="char_wrapper">
@@ -95,6 +104,10 @@
 											<div class="field_item">{{ object.rooms|default_if_none:'' }}</div>
 										</div>
                                         <div class="item">
+											<div class="label">Площадь:</div>
+											<div class="field_item">{{ object.footage|default_if_none:'' }} кв.м.</div>
+										</div>
+                                        <div class="item">
 											<div class="label">Сезон:</div>
 											<div class="field_item">{{ object.get_sessons_display|default_if_none:'' }}</div>
 										</div>
@@ -103,10 +116,6 @@
 {#										<div class="item">#}
 {#											<div class="label">ID:</div>#}
 {#											<div class="field_item">Магазин</div>#}
-{#										</div>#}
-{#										<div class="item">#}
-{#											<div class="label">Площадь:</div>#}
-{#											<div class="field_item">47 кв.м.</div>#}
 {#										</div>#}
 {#										<div class="item">#}
 {#											<div class="label">Расположение:</div>#}

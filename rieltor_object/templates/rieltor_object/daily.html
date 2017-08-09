@@ -88,6 +88,10 @@
 											<div class="label">Комнаты:</div>
 											<div class="field_item">{{ object.rooms|default_if_none:'' }}</div>
 										</div>
+                                        <div class="item">
+											<div class="label">Площадь:</div>
+											<div class="field_item">{{ object.footage|default_if_none:'' }} кв.м.</div>
+										</div>
 										<div class="item">
 											<div class="label">Гостей:</div>
 											<div class="field_item">{{ object.guest|default_if_none:'' }}</div>

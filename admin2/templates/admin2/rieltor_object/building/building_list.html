@@ -137,7 +137,7 @@
                                             {{ object.is_short|yesno:'Краткое, '}}
                                         </td>
                                         <td>{{ object.address|default_if_none:'--' }}</td>
-                                        <td>{{ object.price|default_if_none:'--' }}</td>
+                                        <td>{{ object.price|default_if_none:'--' }}<br>{{ object.price_short|default_if_none:'--' }}</td>
                                         <td>{{ object.get_type_deal_display|default_if_none:'--' }}</td>
                                         <td>{{ object.get_proposal_display|default_if_none:'--' }}</td>
                                         <td>{{ object.when_create|date:'d.m.Y H:i' }}</td>

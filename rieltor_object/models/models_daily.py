@@ -74,6 +74,11 @@ class Daily(models.Model):
         blank=True,
         null=True
     )
+    footage = models.IntegerField(
+        verbose_name='Площадь',
+        blank=True,
+        null=True
+    )
     description = RichTextUploadingField(
         verbose_name='Описание',
         blank=True
