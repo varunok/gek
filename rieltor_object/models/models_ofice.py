@@ -23,7 +23,8 @@ class OficeManager(models.Manager):
 
 
 class Ofice(models.Model):
-    custom_id = models.PositiveIntegerField(
+    custom_id = models.CharField(
+        max_length=100,
         verbose_name='ID',
         unique=True,
         blank=True,

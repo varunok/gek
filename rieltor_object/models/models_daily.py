@@ -15,7 +15,8 @@ from rieltor_object.models.common_objects import *
 
 
 class Daily(models.Model):
-    custom_id = models.PositiveIntegerField(
+    custom_id = models.CharField(
+        max_length=100,
         verbose_name='ID',
         unique=True,
         blank=True,

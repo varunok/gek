@@ -85,6 +85,10 @@
                                             <option {% if request.GET.appointment == 'room' %} selected {% endif %} value="room">Комната</option>
                                         </select>
                                     </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-1">Дата:</label>
+                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                        <input name="when_create" type="text" placeholder="От - До" value="{{ request.GET.when_create }}" style="width: 100%; margin-bottom: 10px;">
+                                    </div>
                                 </div>
                                 <div style="float: right;">
                                     <input type="submit" name="search" placeholder="Поиск" value="Поиск" class="btn btn-primary">
@@ -158,4 +162,7 @@
 
 {% block js %}
     <script src="{% static 'js/search_admin.js' %}"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <script src="{% static 'js/custom_datepicker.js' %}"></script>
 {% endblock js %}
