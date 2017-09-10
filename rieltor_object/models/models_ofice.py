@@ -234,7 +234,9 @@ class Ofice(models.Model):
                 text = text.replace('Магазин', 'магазина')
         except AttributeError:
             pass
-        return _(text)
+        if text:
+            return _(text)
+        return ''
 
     def get_title(self):
         appointment = self.normalize_SEO(self.get_appointment_display())
