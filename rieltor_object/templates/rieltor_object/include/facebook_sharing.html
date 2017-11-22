@@ -1,6 +1,5 @@
-{% load thumbnail %}
-<meta property="og:url"                content="{% url "objects:buildings_detail" object.id %}" />
+<meta property="og:url"                content="http://{{ request.get_host }}{% url "objects:buildings_detail" object.id %}" />
 <meta property="og:type"               content="article" />
 <meta property="og:title"              content="{{ object.title }}" />
-<meta property="og:description"        content="{{ object.description|safe }}" />
-<meta property="og:image"              content="{% if object.image %}{{ image.image|thumbnail_url:'slider_image_166' }}{% endif %}" />
+<meta property="og:description"        content="{{ object.description|striptags|safe }}" />
+<meta property="og:image"              content="{% if object.image %}http://{{ request.get_host }}{{ object.image.url }}{% endif %}" />
