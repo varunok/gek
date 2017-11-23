@@ -49,6 +49,24 @@ class HelpManager(models.Manager):
         return self.filter(*args, **kwargs)
 
 
+class EmailSettings(SingletonModel):
+    name = models.CharField(
+        max_length=20,
+        verbose_name=_('Имя'),
+        default='notify'
+    )
+    domen = models.CharField(
+        max_length=30,
+        verbose_name=_('Доменное имя')
+    )
+
+    def __unicode__(self):
+        return '{0}@{1}'.format(self.name, self.domen)
+
+    class Meta:
+        verbose_name = _('Настройки почты')
+
+
 class Help(models.Model):
     title = models.CharField(
         verbose_name=_('Заголовок'),

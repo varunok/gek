@@ -1,0 +1,91 @@
+{% extends 'admin2/base.html' %}
+
+{% load static from staticfiles %}
+{% load admin_tags %}
+{% load solo_tags %}
+{% load i18n %}
+
+{% block title %}{% trans 'Настройки' %}{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropzone.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>{% trans 'Настройки' %}</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><i class="fa fa-bars"></i> {% trans 'Параметры' %} <small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-xs-2">
+                                <!-- required for floating -->
+                                <!-- Nav tabs -->
+                                {% include 'admin2/settings/settings_nav.html' %}
+                            </div>
+                            <div class="col-xs-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" >
+                                        <p class="lead"></p>
+                                        <p>
+                                            <form class="form-horizontal form-label-left" method="post">
+                                                {{ form.media }}
+                                                {{ form.errors }}
+                                                {% csrf_token %}
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.name.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.name|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.name.errors %}
+                                                        <span class="error-label">{{ form.name.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="name">{{ form.domen.label }} <span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                                        {{ form.domen|addcss:'form-control col-md-7 col-xs-12' }}
+                                                    </div>
+                                                    {% if form.domen.errors %}
+                                                        <span class="error-label">{{ form.domen.errors }}</span>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="form-group" style="float: right">
+                                                    <div class="col-md-12">
+                                                        <button id="send" type="submit" class="btn btn-success">{% trans 'Сохранить' %}</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/select2.full.js' %}"></script>
+{% endblock js %}

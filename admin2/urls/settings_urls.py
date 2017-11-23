@@ -17,6 +17,11 @@ urlpatterns = [
         name='settings_site'
     ),
     url(
+        r'^settings/email/$',
+        settings_views.SettingsEmail.as_view(),
+        name='settings_email'
+    ),
+    url(
         r'^settings/address/$',
         settings_views.SettingsAddressView.as_view(),
         name='settings_address'

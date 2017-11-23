@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 # from django.core.mail import send_mail
 from django.contrib.contenttypes.models import ContentType
 
-from admin2.models import EmailForward, ActiveFranchise
+from admin2.models import EmailForward, ActiveFranchise, EmailSettings
 from django.conf import settings
 
 from django.core.mail import send_mail as core_send_mail
@@ -48,7 +48,7 @@ def sending_email(obj):
         partners_emails = service.partners.all().values_list('email', flat=True)
     except AttributeError:
         partners_emails = None
-    from_email = settings.DEFAULT_FROM_EMAIL
+    from_email = get_from_email()
     subject = 'Новая Заявка'
     message = 'Дата создания: {created}, ' \
               'Источник: {source}, ' \
@@ -77,3 +77,10 @@ def sending_email(obj):
         message = 'Источник: {source}'.format(source=obj.source)
         send_mail(subject=subject, message=message, from_email=from_email, recipient_list=emails_to,
                   fail_silently=False, )
+
+
+def get_from_email():
+    email = EmailSettings.get_solo()
+    if not email.domen:
+        email = settings.DEFAULT_FROM_EMAIL
+    return email

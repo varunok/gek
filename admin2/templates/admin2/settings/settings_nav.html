@@ -6,6 +6,9 @@
     <li {% if 'site' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_site' %}" >{% trans 'Сайт' %}</a>
     </li>
+    <li {% if 'email' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:settings_email' %}" >{% trans 'Email' %}</a>
+    </li>
     <li {% if 'franchise' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_franchise' %}" >{% trans 'Франшиза' %}</a>
     </li>

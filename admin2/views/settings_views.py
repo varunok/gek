@@ -11,8 +11,9 @@ from django.views.generic import UpdateView
 
 from admin2.forms import SettingFranchiseAddForm
 from admin2.mixins import AccesMixin
-from admin2.models import Settings, SettingsAddress, SettingsFranchise, ActiveFranchise, SettingsPrivate24, \
-    SettingsLiqpay, EmailForward
+from admin2.models import Settings, SettingsAddress, SettingsFranchise, \
+    ActiveFranchise, SettingsPrivate24, \
+    SettingsLiqpay, EmailForward, EmailSettings
 from common.mixins import MessageMixin
 
 
@@ -34,6 +35,16 @@ class SettingsSite(LoginRequiredMixin, AccesMixin, MessageMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.model.objects.get(pk=1)
+
+
+class SettingsEmail(LoginRequiredMixin, AccesMixin, MessageMixin, UpdateView):
+    model = EmailSettings
+    template_name = 'admin2/settings/settings_email.html'
+    fields = '__all__'
+    success_url = reverse_lazy('admin2:settings_email')
+
+    def get_object(self, queryset=None):
+        return EmailSettings.get_solo()
 
 
 class SettingsAddressView(LoginRequiredMixin, AccesMixin, MessageMixin, UpdateView):

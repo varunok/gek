@@ -98,7 +98,7 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'Server <server@whatever.com>'
+DEFAULT_FROM_EMAIL = 'server@whatever.com'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
