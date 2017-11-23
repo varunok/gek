@@ -13,6 +13,7 @@
 {% block SEOTitle %} {{ seo.SEOTitle|default_if_none:'' }} {% endblock SEOTitle %}
 {% block SEOKeywords %}{{ seo.SEOKeywords|default_if_none:'' }}{% endblock SEOKeywords %}
 {% block SEODescription %}{{ seo.SEODescription|default_if_none:'' }}{% endblock SEODescription %}
+{% block facebook_share %} {% include "rieltor_object/include/facebook_sharing.html" %} {% endblock facebook_share %}
 
 {% block class_body %}  class="not-front apartment daily_inner" {% endblock %}
 
