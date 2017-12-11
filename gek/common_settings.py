@@ -1,3 +1,4 @@
+import json
 import os
 from django.contrib.messages import constants as messages
 
@@ -221,3 +222,6 @@ THUMBNAIL_ALIASES = {
         'slider_1110': {'size': (1110, 624), 'crop': 'zoom'},
     },
 }
+
+with open('media_path.json', 'w') as f:
+    f.write(json.dumps({'path': MEDIA_ROOT}))

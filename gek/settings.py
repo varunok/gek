@@ -158,8 +158,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-with open('media_path.json', 'w') as f:
-    f.write(json.dumps({'path': MEDIA_ROOT}))
 
 try:
     from local_settings import *
