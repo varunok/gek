@@ -163,6 +163,7 @@ class District(models.Model):
     def get_list_url(self):
         return reverse('admin2:district_list')
 
+
 class Name(models.Model):
     name = models.CharField(
         verbose_name=_('Имя'),
