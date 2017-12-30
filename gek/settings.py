@@ -37,7 +37,7 @@ SECRET_KEY = 'x92o^!)r-e&&_yhwk2-b%@!v#nz%uhha@jvkvhj)q*egv9&!lm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gek.com']
+ALLOWED_HOSTS = ['gek.com', 'localhost']
 
 
 # Application definition

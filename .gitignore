@@ -93,3 +93,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+/media_path.json
+/admin2/templates/admin2/common/media_path.json
