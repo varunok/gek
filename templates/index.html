@@ -24,7 +24,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заказать бесплатную консультацию.Главная">
 				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
+					<input name="phone" type="tel" placeholder="{% trans 'Введите ваш телефон' %}">
 				</div>
 				<div class="form_actions">
 					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Заказать бесплатную консультацию' %}">

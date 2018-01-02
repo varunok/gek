@@ -13,9 +13,8 @@ var parameter_list_building = {
     floor: $('div[name="floor"]').eq(0).text() || '--'
 };
 var string_parameter_list_building = new String(
-    'Тип: ' + parameter_list_building.type_deal+'.'+' Назначение: ' + parameter_list_building.appointment+'.'+' Район: ' + parameter_list_building.district+'.'+' Планировка: ' + parameter_list_building.layout+'.'+
-    ' Комнат: ' + parameter_list_building.rooms+'.'+' Стоимость: ' + parameter_list_building.price+'.'+' Площадь: ' + parameter_list_building.footage+'.'+' Этаж: ' + parameter_list_building.floor+'.'
-
+    'Тип: ' + parameter_list_building.type_deal + '.' + ' Назначение: ' + parameter_list_building.appointment + '.' + ' Район: ' + parameter_list_building.district + '.' + ' Планировка: ' + parameter_list_building.layout + '.' +
+    ' Комнат: ' + parameter_list_building.rooms + '.' + ' Стоимость: ' + parameter_list_building.price + '.' + ' Площадь: ' + parameter_list_building.footage + '.' + ' Этаж: ' + parameter_list_building.floor + '.'
 );
 
 $('.hid-name-building, input[name="text"]').val(string_parameter_list_building);
@@ -31,9 +30,8 @@ var parameter_list_office = {
     floor: $('div[name="floor"]').eq(0).text() || '--'
 };
 var string_parameter_list_office = new String(
-    'Тип: ' + parameter_list_office.type_deal+'.'+' Назначение: ' + parameter_list_office.appointment+'.'+' Расположение: ' + parameter_list_office.location+'.'+
-    ' Вход: ' + parameter_list_office.entrance+'.'+' Стоимость: ' + parameter_list_office.price+'.'+' Площадь: ' + parameter_list_office.footage+'.'+' Этаж: ' + parameter_list_office.floor+'.'
-
+    'Тип: ' + parameter_list_office.type_deal + '.' + ' Назначение: ' + parameter_list_office.appointment + '.' + ' Расположение: ' + parameter_list_office.location + '.' +
+    ' Вход: ' + parameter_list_office.entrance + '.' + ' Стоимость: ' + parameter_list_office.price + '.' + ' Площадь: ' + parameter_list_office.footage + '.' + ' Этаж: ' + parameter_list_office.floor + '.'
 );
 
 $('.hid-name-office, input[name="text"]').val(string_parameter_list_office);
@@ -46,12 +44,10 @@ var parameter_list_daily = {
     rooms: $('div[name="rooms"]').eq(0).text() || '--'
 };
 var string_parameter_list_daily = new String(
-    'Район: ' + parameter_list_daily.district+'.'+' Стоимость: ' + parameter_list_daily.price+'.'+' Спальных мест: ' + parameter_list_daily.sleeping_places+'.'+' Кол-во комнат: ' + parameter_list_daily.rooms+'.'
-
+    'Район: ' + parameter_list_daily.district + '.' + ' Стоимость: ' + parameter_list_daily.price + '.' + ' Спальных мест: ' + parameter_list_daily.sleeping_places + '.' + ' Кол-во комнат: ' + parameter_list_daily.rooms + '.'
 );
 
 $('.hid-name-daily, input[name="text"]').val(string_parameter_list_daily);
-
 
 
 var parameter_list_newbuilding = {
@@ -60,12 +56,10 @@ var parameter_list_newbuilding = {
     total_area: $('div[name="total_area"]').eq(0).text() || '--'
 };
 var string_parameter_list_newbuilding = new String(
-    'Район: ' + parameter_list_newbuilding.district+'.'+' Стоимость: ' + parameter_list_newbuilding.price+'.'+' Площадь квартиры: ' + parameter_list_newbuilding.total_area+'.'
-
+    'Район: ' + parameter_list_newbuilding.district + '.' + ' Стоимость: ' + parameter_list_newbuilding.price + '.' + ' Площадь квартиры: ' + parameter_list_newbuilding.total_area + '.'
 );
 
 $('.hid-name-newbuilding, input[name="text"]').val(string_parameter_list_newbuilding);
-
 
 
 var parameter_list_earth = {
@@ -75,8 +69,7 @@ var parameter_list_earth = {
     type_area: $('div[name="type_area"]').eq(0).text() || '--'
 };
 var string_parameter_list_earth = new String(
-    'Район: ' + parameter_list_earth.district+'.'+' Стоимость: ' + parameter_list_earth.price+'.'+' Площадь: ' + parameter_list_earth.area+'.'+' Тип участка: ' + parameter_list_earth.type_area+'.'
-
+    'Район: ' + parameter_list_earth.district + '.' + ' Стоимость: ' + parameter_list_earth.price + '.' + ' Площадь: ' + parameter_list_earth.area + '.' + ' Тип участка: ' + parameter_list_earth.type_area + '.'
 );
 
 $('.hid-name-earth, input[name="text"]').val(string_parameter_list_earth);
@@ -107,27 +100,37 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.submit-save-application', function (event) {
-                    event.preventDefault();
-                    var data = $(this).parents('form').serialize();
-                    send_app(data);
-            });
-        function send_app (data) {
-            // $('.block_webform').fadeOut();
-            $.post('/save-application/', data)
-                .then(function(response) {
-                    $('.block_webform').fadeOut();
-                    $('body').addClass('popup');
-                    $('#webform_confirmation_text').text('Спасибо! Ваша заявка отправлена!');
-                    $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
-                        $('body').removeClass('popup');
-                    });
-                }, function(err) {
-                    $('.block_webform').fadeOut();
-                    $('body').addClass('popup');
-                    $('#webform_confirmation_text').text('Ошибка. Попробуйте позже.');
-                    $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
-                        $('body').removeClass('popup');
-                    });
-                });
+        event.preventDefault();
+        var data = $(this).parents('form').serialize();
+        var phone = $(this).parents('form').find("input[name='phone']");
+        console.log(phone);
+        if (phone.val()){
+            phone.css('color', '#89919e');
+            phone.css('border', 'none');
+            send_app(data);
+        } else {
+            phone.css('color', 'red');
+            phone.css('border', '1px solid red')
         }
+    });
+
+    function send_app(data) {
+        // $('.block_webform').fadeOut();
+        $.post('/save-application/', data)
+            .then(function (response) {
+                $('.block_webform').fadeOut();
+                $('body').addClass('popup');
+                $('#webform_confirmation_text').text('Спасибо! Ваша заявка отправлена!');
+                $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
+                    $('body').removeClass('popup');
+                });
+            }, function (err) {
+                $('.block_webform').fadeOut();
+                $('body').addClass('popup');
+                $('#webform_confirmation_text').text('Ошибка. Попробуйте позже.');
+                $('#block-webform-confirm').fadeIn().delay(1000).fadeOut('300', function () {
+                    $('body').removeClass('popup');
+                });
+            });
+    }
 });
