@@ -105,6 +105,10 @@ class FilterBuilding(django_filters.FilterSet):
 
 
 class FilterOfise(FilterObjectMixin):
+    district = django_filters.ModelChoiceFilter(
+        widget=Select(),
+        queryset=District.objects.all()
+    )
     class Meta:
         model = Ofice
         fields = {

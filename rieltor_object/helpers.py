@@ -111,5 +111,7 @@ class SeoHelper(object):
         return ''
 
     def get_city(self):
-        return SettingsAddress.get_solo().city.strip('.г')
+        if SettingsAddress.get_solo().city:
+            return SettingsAddress.get_solo().city.strip('.г')
+        return ''
 
