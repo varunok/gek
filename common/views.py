@@ -401,6 +401,7 @@ def save_apartment_next(request):
         return HttpResponse(data)
     return HttpResponse(status=500)
 
+
 def delete_apartment_next(request, id):
     ApartmentNext.objects.get(id=id).delete()
     return HttpResponse()
