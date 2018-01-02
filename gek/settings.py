@@ -98,18 +98,18 @@ DATABASES = {
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = False
-# DEFAULT_FROM_EMAIL = 'server@whatever.com'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'server@whatever.com'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'varunok13@gmail.com'
-EMAIL_HOST_PASSWORD = 'varunokpython'
-EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'varunok13@gmail.com'
+# EMAIL_HOST_PASSWORD = 'varunokpython'
+# EMAIL_PORT = 587
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
