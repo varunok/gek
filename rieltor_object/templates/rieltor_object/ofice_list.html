@@ -116,7 +116,7 @@
 								{{ filter_form.form.footage__lt }}
 							</div>
 						</div>
-						<div class="form_item group form_wrapper">
+						<div class="form_item group form_wrapper hiden-shop">
 							<label>{% trans 'Расположение' %}:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
@@ -146,7 +146,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="form_item group form_wrapper">
+						<div class="form_item group form_wrapper hiden-shop">
 							<label>{% trans 'Вход' %}:</label>
 							<div class="form_checkboxes">
 								<div class="form_checkbox">
@@ -196,6 +196,22 @@
                 }else{
                     $('#currency_nac').fadeOut();
                     $('#currency_dol').fadeIn();
+                }
+            });
+
+            var ext_select_appointment = $('#id_appointment option:selected').val();
+            if (ext_select_appointment==='shop'){
+                    $('.hiden-shop').fadeOut();
+                } else {
+                    $('.hiden-shop').fadeIn();
+                }
+
+            $('#id_appointment').on('ready change', function () {
+                var select_appointment = $(this).val();
+                if (select_appointment==='shop'){
+                    $('.hiden-shop').fadeOut();
+                } else {
+                    $('.hiden-shop').fadeIn();
                 }
             })
         })
