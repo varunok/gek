@@ -66,4 +66,9 @@ urlpatterns = [
         settings_views.EmailForwardDelete.as_view(),
         name='email_forward_delete'
     ),
+    url(
+        r'^settings/superlending/$',
+        settings_views.SuperlendingSetting.as_view(),
+        name='setting_superlending'
+    ),
 ]

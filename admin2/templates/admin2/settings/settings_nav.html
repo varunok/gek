@@ -24,4 +24,7 @@
     <li {% if 'liqpay' in request.path %} class="active" {% endif %}>
         <a href="{% url 'admin2:settings_liqpay' %}" >Liqpay</a>
     </li>
+    <li {% if 'superlending' in request.path %} class="active" {% endif %}>
+        <a href="{% url 'admin2:setting_superlending' %}" >Суперлендинг</a>
+    </li>
 </ul>

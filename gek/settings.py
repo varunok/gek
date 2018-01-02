@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'landing',
     'privat24',
     'liqpayapp',
+    'landingpage',
 ]
 
 # Database
