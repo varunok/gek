@@ -15,22 +15,24 @@
 
 {% block content %}
     <main class="middle">
-		<div class="slider_front slider_main"{% if indexpagemodel.image %}
-                style="background: url({{ indexpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
-			<h1 class="slider_title page_title">{{ seo.title|default:'Коммерческая недвижимость' }}</h1>
-			<div class="slider_subtitle">{{ indexpagemodel.subtitle|default:'<u>Нужно решить проблемы</u>  c коммерческой недвижимостью?' }}</div>
-			<div class="text">{% trans 'Помогаем с любой операцией по недвижимости за' %} <u>30 {% trans 'минут' %}</u></div>
-			<form action="#" class="webform_client_form" id="index-form">
+        <div class="slider_front slider_main"{% if indexpagemodel.image %}
+             style="background: url({{ indexpagemodel.image.url }}) no-repeat center/cover"{% endif %}>
+            <h1 class="slider_title page_title">{{ seo.title|default:'Коммерческая недвижимость' }}</h1>
+            <div class="slider_subtitle">{{ indexpagemodel.subtitle|default:'<u>Нужно решить проблемы</u>  c коммерческой недвижимостью?' }}</div>
+            <div class="text">{% trans 'Помогаем с любой операцией по недвижимости за' %} <u>30 {% trans 'минут' %}</u>
+            </div>
+            <form action="#" class="webform_client_form" id="index-form">
                 {% csrf_token %}
                 <input type="hidden" name="source" value="Заказать бесплатную консультацию.Главная">
-				<div class="form_item phone">
-					<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
-				</div>
-				<div class="form_actions">
-					<input class="form-submit submit-save-application" type="submit" value="{% trans 'Заказать бесплатную консультацию' %}">
-				</div>
-			</form>
-		</div>
+                <div class="form_item phone">
+                    <input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
+                </div>
+                <div class="form_actions">
+                    <input class="form-submit submit-save-application" type="submit"
+                           value="{% trans 'Заказать бесплатную консультацию' %}">
+                </div>
+            </form>
+        </div>
         {% ofices_is_enable as ofices_is_enable %}
         {% if ofices_is_enable %}
             <div class="block block_shops">
@@ -41,7 +43,8 @@
                             <div class="views_row">
                                 <div class="field_image">
                                     <a href="{{ office.get_absolute_url }}">
-                                        <img src="{{ office.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                        <img src="{{ office.images.first.image|thumbnail_url:'gallery_image_370' }}"
+                                             alt="">
                                     </a>
                                     <div class="type">
                                         {{ office.get_title|default:'' }}
@@ -53,9 +56,14 @@
                                     <div class="text">{{ office.description|default:''|truncatechars:'200'|safe }}</div>
                                     <div class="price">{{ office.price|default:'' }}{{ office.get_current }}</div>
                                     <div class="statistics">{{ office.views }}</div>
-                                    <div class="area"><div class="count">{{ office.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                    <div class="read_more submit-add-inspection-modal"><a href="/">{% trans 'Оставить заявку' %}</a></div>
-                                    <div class="read_more" style="display: none"><a href="{{ office.custom_id }}"></a></div>
+                                    <div class="area">
+                                        <div class="count">{{ office.footage|default:'' }}</div>
+                                        <div class="units">м<sup>2</sup></div>
+                                    </div>
+                                    <div class="read_more submit-add-inspection-modal"><a
+                                            href="/">{% trans 'Оставить заявку' %}</a></div>
+                                    <div class="read_more" style="display: none"><a href="{{ office.custom_id }}"></a>
+                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -73,23 +81,31 @@
                             <div class="views_row">
                                 <div class="field_image">
                                     <a href="{{ building.get_absolute_url }}">
-                                        <img src="{{ building.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="">
+                                        <img src="{{ building.images.first.image|thumbnail_url:'gallery_image_370' }}"
+                                             alt="">
                                     </a>
                                     <div class="type">{{ building.get_title|default_if_none:'' }}
                                     </div>
                                 </div>
                                 <div class="views_body">
                                     <div class="star {{ building|fav_is_active:request }}">
-                                        <input type="hidden" name="content_type" value="{{ building.get_content_type }}">
+                                        <input type="hidden" name="content_type"
+                                               value="{{ building.get_content_type }}">
                                         <input type="hidden" name="object_id" value="{{ building.id }}">
                                     </div>
                                     <div class="address">{{ building.address|default:'' }}</div>
-                                    <div class="text" style="word-break: break-all">{{ building.description|default:''|truncatechars:'200'|safe }}</div>
+                                    <div class="text"
+                                         style="word-break: break-all">{{ building.description|default:''|truncatechars:'200'|safe }}</div>
                                     <div class="price">{{ building.price|default:'' }} {{ building.get_current }}</div>
                                     <div class="statistics">{{ building.views }}</div>
-                                    <div class="area"><div class="count">{{ building.footage|default:'' }}</div> <div class="units">м<sup>2</sup></div></div>
-                                    <div class="read_more submit-add-inspection-modal"><a href="/">{% trans 'Оставить заявку' %}</a></div>
-                                    <div class="read_more" style="display: none"><a href="{{ building.custom_id }}"></a></div>
+                                    <div class="area">
+                                        <div class="count">{{ building.footage|default:'' }}</div>
+                                        <div class="units">м<sup>2</sup></div>
+                                    </div>
+                                    <div class="read_more submit-add-inspection-modal"><a
+                                            href="/">{% trans 'Оставить заявку' %}</a></div>
+                                    <div class="read_more" style="display: none"><a href="{{ building.custom_id }}"></a>
+                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -108,12 +124,14 @@
                                 <div class="title">{{ newbuilding.title|default:'' }}</div>
                                 <a href="{{ newbuilding.get_absolute_url }}">
                                     <div class="field_image">
-                                        <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}" alt="">
+                                        <img src="{{ newbuilding.images.first.image|thumbnail_url:'newbuild_index_image_570' }}"
+                                             alt="">
                                     </div>
                                 </a>
                                 <div class="views_body">
                                     <div class="star {{ newbuilding|fav_is_active:request }}">
-                                        <input type="hidden" name="content_type" value="{{ newbuilding.get_content_type }}">
+                                        <input type="hidden" name="content_type"
+                                               value="{{ newbuilding.get_content_type }}">
                                         <input type="hidden" name="object_id" value="{{ newbuilding.id }}">
                                     </div>
                                     <div class="left_wrap">
@@ -131,13 +149,17 @@
                                     <div class="right_wrap">
                                         <div class="statistics">{{ newbuilding.views }}</div>
                                         <div class="info">
-                                            <div class="label">{% trans 'Сдаётся с ' %}   </div><div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
+                                            <div class="label">{% trans 'Сдаётся с ' %}   </div>
+                                            <div class="item"> {{ newbuilding.end_construction|date:'d.m.Y' }}</div>
                                         </div>
                                         <div class="info">
-                                            <div class="label">{% trans 'Общая площадь' %}:</div><div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
+                                            <div class="label">{% trans 'Общая площадь' %}:</div>
+                                            <div class="item"> {{ newbuilding.total_area|default:'--' }} м.кв.</div>
                                         </div>
-                                        <div class="read_more submit-add-inspection-modal"><a href="/">{% trans 'Оставить заявку' %}</a></div>
-                                        <div class="read_more" style="display: none"><a href="{{ newbuilding.get_absolute_url }}"></a></div>
+                                        <div class="read_more submit-add-inspection-modal"><a
+                                                href="/">{% trans 'Оставить заявку' %}</a></div>
+                                        <div class="read_more" style="display: none"><a
+                                                href="{{ newbuilding.get_absolute_url }}"></a></div>
                                     </div>
                                 </div>
                             </div>
@@ -148,91 +170,12 @@
             </div>
         {% endif %}
         {% include 'services/include/services_downbar.html' %}
-		<div class="block block_presentation">
-			<div class="block_content">
-				<div class="block_title">{% trans 'Любая операция с недвижимостью за 30 минут' %}</div>
-				<div class="view_content">
-					<div class="present_wrap">
-						<div class="see_present">{% trans 'Посмотреть' %}<br> {% trans 'видеопрезентацию' %}</div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/why_1.png' %}" alt=""></div>
-						<div class="title">{% trans 'Оказание помощи' %}<br> {% trans 'при заключении договора' %}</div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/why_2.png' %}" alt=""></div>
-						<div class="title">{% trans 'Подборка помещений' %}<br> {% trans 'на почту за 2 часа' %}</div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/why_3.png' %}" alt=""></div>
-						<div class="title">{% trans 'Договорённость' %}<br> {% trans 'на осмотр помещения' %}</div>
-					</div>
-					<div class="views_row">
-						<div class="field_image"><img src="{% static 'images/why_4.png' %}" alt=""></div>
-						<div class="title">{% trans 'Бесплатное размещение' %}<br> {% trans 'объявлений на сайте' %}</div>
-					</div>
-					<form action="#" class="webform_client_form" id="index-form-down">
-                        {% csrf_token %}
-                        <input type="hidden" name="source" value="Связаться с агентством. Главная">
-						<div class="form_item user_name">
-							<input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
-						</div>
-						<div class="form_item phone">
-							<input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
-						</div>
-						<div class="form_actions">
-							<input type="submit" class="form_submit submit-save-application" value="{% trans 'Связаться с агентством' %}">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-    <!-- MODAL VIDEO -->
-    <div id="index_video" class="block block_webform webform_client" style="top: 20%; display: none">
-			<div class="block_content">
-				<div class="close"></div>
-				<div class="view_content">
-                    <div id="player"></div>
-				</div>
-			</div>
-		</div>
-		{% include 'seo/seo.html' %}
+        {% include 'include/index_video.html' %}
+        {% include 'seo/seo.html' %}
         {% include 'articles/include/article_prop.html' %}
-	</main><!-- .content -->
+    </main><!-- .content -->
 {% endblock content %}
 
 {% block js %}
-    <script>
-        var tag = document.createElement('script');
 
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-            height: '480',
-            width: '853',
-            videoId: '{{ indexpagemodel.video|get_video_code }}',
-            });
-        }
-        $(document).ready(function () {
-            $('.see_present').livequery('click', function () {
-                $('body').addClass('popup');
-                $('#index_video').fadeIn();
-                player.playVideo()
-            });
-            $(document).on('click', '.close', function () {
-                $('body').removeClass('popup');
-                $('.block_webform').fadeOut();
-                player.pauseVideo()
-            });
-
-        })
-
-
-
-    </script>
 {% endblock js %}

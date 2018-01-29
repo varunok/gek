@@ -30,9 +30,10 @@ from landingpage.views import Superlending
 
 
 def redirect_view(request, slug):
-
-    if SuperlandingSettings.get_solo().enabled:
-        return Superlending
+    if False:
+        pass
+    # if SuperlandingSettings.get_solo().enabled:
+    #     return Superlending
     else:
         try:
             object = Landing.objects.get(slug=slug)

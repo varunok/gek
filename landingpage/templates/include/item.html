@@ -1,0 +1,79 @@
+{% load static %}
+{% load favorites_tag %}
+{% load base_tag %}
+{% load thumbnail %}
+{% load i18n %}
+{% for result in object_list %}
+    <div class="views_row vip_row">
+        {% if result.is_vip %}
+            <div class="vip"></div>
+        {% endif %}
+        <div class="title">{{ result.title|default_if_none:'' }}</div>
+        <div class="field_image" style="transition: .3s">
+            <a href="{{ result.get_absolute_url }}">
+                <img src="{{ result.images.first.image|thumbnail_url:'gallery_image_370' }}" alt="" width="100%">
+            </a>
+        </div>
+        <div class="views_body">
+            <div class="star {{ result|fav_is_active:request }}">
+                <input type="hidden" name="content_type" value="{{ result.get_content_type }}">
+                <input type="hidden" name="object_id" value="{{ result.id }}">
+            </div>
+            <div class="address">{{ result.address|default_if_none:'' }}</div>
+            {% if not result.is_short %}
+                <div class="text"
+                     style="word-break: break-all;">{{ result.description|truncatechars_html:'200'|safe }}</div>
+            {% else %}
+                <div class="text" style="word-break: break-all;">{{ result.description|safe }}</div>
+            {% endif %}
+            <div class="top_wrap">
+                {% if result.rooms %}
+                    <div class="info">
+                        <div class="label">{% trans 'Комнат' %}:</div>
+                        <div class="item">{{ result.rooms }}</div>
+                    </div>
+                {% endif %}
+                <div class="info">
+                    <div class="label">Район:</div>
+                    <div class="item">{{ result.district|default_if_none:'' }}</div>
+                </div>
+                {% if result.price %}
+                    <div class="price info">
+                        {% trans 'Посуточно' as daily %}
+                        <div class="label">{{ result.get_type_deal_display|default:daily }}:</div>
+                        {{ result.price }}
+                        {% if not result.get_type_deal_display %}
+                            {{ nac_carrency }}
+                        {% else %}
+                            {{ result.get_current }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="bottom_wrap">
+                <div class="statistics">{{ result.views }}</div>
+                <div class="read_more preview submit-add-inspection-modal">
+                    <a href="/">
+                        {% if not result.get_type_deal_display %}
+                            {% trans 'Забронировать' %}
+                        {% else %}
+                            {% trans 'Заказать просмотр' %}
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="read_more" style="display: none"><a href="{{ object.custom_id }}"></a></div>
+                <div class="read_more"><a href="/">Подробнее</a></div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% if is_paginated %}
+    <div class="load_more_wrap">
+        <div class="load_more read_more">
+            <a href="#">
+                {% trans 'Загрузить еще' %}
+                <span>{{ count_next }}</span> {% trans 'объектов' %}
+            </a>
+        </div>
+    </div>
+{% endif %}

@@ -4,6 +4,7 @@
 {% load i18n %}
 {% domen as domen %}
 {% franchise as franchise %}
+{% load thumbnail %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -12,15 +13,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
-    <title>Суперлендинг</title>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
+    {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
+    {% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
+    {% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/social-likes_flat.css' %}"/>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}"/>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.ico" type="image/png">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 </head>
 
@@ -54,18 +57,20 @@
 
     <main class="middle">
         <div class="slider_main slider_notfront">
-            <div class="slider_title">Жилая и коммерческая недвижимость в Житомире</div>
-            <div class="slider_subtitle">54 объекта по вашим параметрам</div>
+            <div class="slider_title">Жилая и коммерческая недвижимость {% if city_plural %} в {% endif %}{{ city_plural|default_if_none:'' }}</div>
+            <div class="slider_subtitle">{{ results|length }} объекта по вашим параметрам</div>
             <div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
-            <form action="#" class="webform_client_form">
+            <form action="#" class="webform_client_form" id="index-form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Заказать бесплатную консультацию.Главная">
                 <div class="form_item name">
-                    <input type="text" placeholder="Введите имя">
+                    <input name="name" type="text" placeholder="Введите имя">
                 </div>
                 <div class="form_item phone">
-                    <input type="text" placeholder="Введите телефон">
+                    <input name="phone" type="text" placeholder="Введите телефон">
                 </div>
                 <div class="form_actions">
-                    <input class="form-submit" type="submit" value="Отправить заявку">
+                    <input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
                 </div>
             </form>
         </div>
@@ -75,497 +80,109 @@
                     <div class="block search_results search_products">
                         <div class="form_title">Поиск недвижимости</div>
                         <form action="#" class="webform_client_form">
-						<div class="form_checkboxes">
-							<div class="form_item form_checkbox">
-								<input type="checkbox" id="arenda" checked>
-								<label for="arenda">Аренда</label>
-							</div>
-							<div class="form_item form_checkbox">
-								<input type="checkbox" id="prodazha">
-								<label for="prodazha">Продажа</label>
-							</div>
-						</div>
-                        <div class="form_item group form_wrapper">
-                            <label>Стоимость</label>
-                            <div class="form_number">
-                                <input type="number" placeholder="От" style="width: 102px;">
+                            <div class="form_checkboxes">
+                                <div class="form_item form_checkbox">
+                                    <input type="checkbox" id="arenda" checked>
+                                    <label for="arenda">Аренда</label>
+                                </div>
+                                <div class="form_item form_checkbox">
+                                    <input type="checkbox" id="prodazha">
+                                    <label for="prodazha">Продажа</label>
+                                </div>
                             </div>
-                            <div class="form_number">
-                                <input type="number" placeholder="До" style="width: 102px;">
-                            </div>
-                            <div class="form_select currency">
-                                <select>
-                                    <option value="10">грн.</option>
-                                    <option value="9">руб.</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form_item group form_wrapper area_wrap">
-                            <label>Площадь</label>
-                            <div class="form_number">
-                                <input type="number" placeholder="От" style="width: 102px;">
-                            </div>
-                            <div class="form_number">
-                                <input type="number" placeholder="До" style="width: 102px;">
-                            </div>
-                            <div class="form_select">
-                                <select>
-                                    <option value="sotok">соток</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form_item form_select form_wrapper area_select">
-                            <label for="type_ads">Район:</label>
-                            <select name="type_ads" id="type_ads">
-                                <option value="1">Выбрать</option>
-                                <option value="2">ИЖС</option>
-                                <option value="3">СНТ</option>
-                            </select>
-                        </div>
-                        <div class="form_item form_select form_wrapper">
-                            <label for="type_ads1">Тип недвижимости:</label>
-                            <select name="type_ads" id="type_ads1">
-                                <option value="1">Выбрать</option>
-                                <option value="2">1</option>
-                                <option value="3">2</option>
-                            </select>
-                        </div>
-
-                        <div class="form_actions">
-                            <div class="links">
-                                <div class="search_clear"><a href="#">очистить</a></div>
-                            </div>
-                            <input type="submit" value="Поиск">
-                        </div>
-						</form>
-                        <div class="top_wrap">
-                            <div class="left_wrap">
-                                <div class="count_result">1-20 из 128 результатов</div>
-                            </div>
-                            <div class="right_wrap">
-                                <div class="sortable">
-                                    <label for="sort">Сортировка:</label>
-                                    <select name="sort" id="sort">
-                                        <option value="1">Новые наверху</option>
-                                        <option value="2">Новые внизу</option>
+                            <div class="form_item group form_wrapper">
+                                <label>Стоимость</label>
+                                <div class="form_number">
+                                    <input type="number" placeholder="От" style="width: 102px;">
+                                </div>
+                                <div class="form_number">
+                                    <input type="number" placeholder="До" style="width: 102px;">
+                                </div>
+                                <div class="form_select currency">
+                                    <select>
+                                        <option value="10">грн.</option>
+                                        <option value="9">руб.</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="bottom_wrap">
-                            <div class="filters">
-                                <div class="item">Одесса
-                                    <div class="close"></div>
+                            <div class="form_item group form_wrapper area_wrap">
+                                <label>Площадь</label>
+                                <div class="form_number">
+                                    <input type="number" placeholder="От" style="width: 102px;">
                                 </div>
-                                <div class="item">Квартира
-                                    <div class="close"></div>
+                                <div class="form_number">
+                                    <input type="number" placeholder="До" style="width: 102px;">
                                 </div>
-                                <div class="item">4 спальных места
-                                    <div class="close"></div>
-                                </div>
-                                <div class="item">2 комнаты
-                                    <div class="close"></div>
+                                <div class="form_select">
+                                    <select>
+                                        <option value="sotok">соток</option>
+                                    </select>
                                 </div>
                             </div>
+                            <div class="form_item form_select form_wrapper area_select">
+                                <label for="type_ads">Район:</label>
+                                <select name="type_ads" id="type_ads">
+                                    <option value="1">Выбрать</option>
+                                    <option value="2">ИЖС</option>
+                                    <option value="3">СНТ</option>
+                                </select>
+                            </div>
+                            <div class="form_item form_select form_wrapper">
+                                <label for="type_ads1">Тип недвижимости:</label>
+                                <select name="type_ads" id="type_ads1">
+                                    <option value="1">Выбрать</option>
+                                    <option value="2">1</option>
+                                    <option value="3">2</option>
+                                </select>
+                            </div>
+
                             <div class="form_actions">
-                                <input type="submit" value="Подобрать объект">
+                                <div class="links">
+                                    <div class="search_clear"><a href="#">очистить</a></div>
+                                </div>
+                                <input type="submit" value="Поиск">
                             </div>
-                        </div>
+                        </form>
+                        {#                        <div class="top_wrap">#}
+                        {#                            <div class="left_wrap">#}
+                        {#                                <div class="count_result">1-20 из 128 результатов</div>#}
+                        {#                            </div>#}
+                        {#                            <div class="right_wrap">#}
+                        {#                                <div class="sortable">#}
+                        {#                                    <label for="sort">Сортировка:</label>#}
+                        {#                                    <select name="sort" id="sort">#}
+                        {#                                        <option value="1">Новые наверху</option>#}
+                        {#                                        <option value="2">Новые внизу</option>#}
+                        {#                                    </select>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="bottom_wrap">#}
+                        {#                            <div class="filters">#}
+                        {#                                <div class="item">Одесса#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="item">Квартира#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="item">4 спальных места#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="item">2 комнаты#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="form_actions">#}
+                        {#                                <input type="submit" value="Подобрать объект">#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                     </div>
                     <div class="block block_shops block_search_results">
                         <div class="block_content">
-                            <div class="view_content">
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="{% static 'images/shop_2.png' %}" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="{% static 'images/shop_2.png' %}" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="{% static 'images/shop_2.png' %}" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row no_image">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row no_image">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row no_image">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="images/shop_2.png" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="images/shop_2.png" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="images/shop_2.png" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="images/shop_2.png" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="images/shop_2.png" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="views_row vip_row">
-                                    <div class="vip"></div>
-                                    <div class="title">Складской комплекс “Vivaldi”</div>
-                                    <div class="field_image">
-                                        <img src="images/shop_2.png" alt="">
-                                    </div>
-                                    <div class="views_body">
-                                        <div class="star"></div>
-                                        <div class="address">Цветочная, 3</div>
-                                        <div class="text">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20
-                                            кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен торг!
-                                        </div>
-                                        <div class="top_wrap">
-                                            <div class="info">
-                                                <div class="label">ID:</div>
-                                                <div class="item">65458</div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="label">Склад:</div>
-                                                <div class="item">40 м<sup>2</sup></div>
-                                            </div>
-                                            <div class="price info">
-                                                <div class="label">Аренда:</div>
-                                                $577
-                                            </div>
-                                        </div>
-                                        <div class="bottom_wrap">
-                                            <div class="statistics">120</div>
-                                            <div class="read_more preview"><a href="/">Заказать просмотр</a></div>
-                                            <div class="read_more"><a href="/">Подробнее</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="load_more_wrap">
-                                    <div class="read_more load_more"><a href="#">Загрузить еще <span>45</span> объектов</a>
-                                    </div>
-                                </div>
+                            <div class="view_content list-more">
+
+                                {% include 'include/item.html' with results=results %}
+
                             </div>
                         </div>
                     </div>
@@ -573,43 +190,11 @@
 
             </div>
         </div>
-        <div class="block block_presentation">
-            <div class="block_content">
-                <div class="block_title">Любая операция с недвижимостью за 30 минут</div>
-                <div class="view_content">
-                    <div class="present_wrap">
-                        <div class="see_present">Посмотреть<br> видеопрезентацию</div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image"><img src="images/why_1.png" alt=""></div>
-                        <div class="title">Оказание помощи<br> при заключении договора</div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image"><img src="images/why_2.png" alt=""></div>
-                        <div class="title">Подборка помещений<br> на почту за 2 часа</div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image"><img src="images/why_3.png" alt=""></div>
-                        <div class="title">Договорённость<br> на осмотр помещения</div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image"><img src="images/why_4.png" alt=""></div>
-                        <div class="title">Бесплатное размещение<br> объявлений на сайте</div>
-                    </div>
-                    <form action="#" class="webform_client_form">
-                        <div class="form_item user_name">
-                            <input type="text" placeholder="Введите ваше имя">
-                        </div>
-                        <div class="form_item phone">
-                            <input type="text" placeholder="Введите ваш телефон">
-                        </div>
-                        <div class="form_actions">
-                            <input type="submit" class="form_submit" value="Связаться с агентством">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+        {% include 'include/index_video.html' %}
+        {% include 'include/all_index_modal.html' %}
+
+
         <div class="block_benefits">
             <div class="block_content">
                 <div class="block_title">
@@ -618,122 +203,72 @@
                 <div class="view_content">
                     <div class="views_row">
                         <div class="field_img">
-                            <img src="images/a_3.png" alt="">
+                            <img src="{% static 'images/a_3.png' %}" alt="">
                         </div>
                         <div class="text">Лучшие цены</div>
                     </div>
                     <div class="views_row">
                         <div class="field_img">
-                            <img src="images/t_3.png" alt="">
+                            <img src="{% static 'images/t_3.png' %}" alt="">
                         </div>
                         <div class="text">Опытные специалисты</div>
                     </div>
                     <div class="views_row">
                         <div class="field_img">
-                            <img src="images/u_3.png" alt="">
+                            <img src="{% static 'images/u_3.png' %}" alt="">
                         </div>
                         <div class="text">Оперативность</div>
                     </div>
                     <div class="views_row">
                         <div class="field_img">
-                            <img src="images/u_2.png" alt="">
+                            <img src="{% static 'images/u_2.png' %}" alt="">
                         </div>
                         <div class="text">Гарантии</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="block_diplomas">
-            <div class="block_content">
-                <div class="block_title">Наши дипломы и регалии, доказательство</div>
-                <div class="view_content">
-                    <div class="views_row">
-                        <div class="field_image">
-                            <img src="images/diplom.png" alt="">
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image">
-                            <img src="images/diplom.png" alt="">
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image">
-                            <img src="images/diplom.png" alt="">
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image">
-                            <img src="images/diplom.png" alt="">
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image">
-                            <img src="images/diplom.png" alt="">
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="field_image">
-                            <img src="images/diplom.png" alt="">
+        {% with trust.images.all as images_trust %}
+            {% if images_trust %}
+                <div class="block_diplomas">
+                    <div class="block_content">
+                        <div class="block_title">{% trans 'Наши дипломы и регалии, доказательство' %}</div>
+                        <div class="view_content">
+                            {% for image in images_trust %}
+                                <div class="views_row">
+                                    <div class="field_image">
+                                        <img src="{{ image.image|thumbnail_url:'trust_image_344' }}" alt="">
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="block_questions">
-            <div class="block_content">
-                <div class="block_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</div>
-                <div class="view_content">
-                    <div class="views_row">
-                        <div class="qty_text">
-                            <div class="item">Вопрос №1 в одну строку, жирный со вопросительным знаком в конце?</div>
-                            <span></span></div>
-                        <div class="body">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15
-                            кв.м. Хороший ремонт. в жилом фонде. Возможен торг! 3 раздельные комнаты, приёмная. 1
-                            комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен
-                            торг!
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="qty_text">
-                            <div class="item">Вопрос №1 в одну строку, жирный со вопросительным знаком в конце?</div>
-                            <span></span></div>
-                        <div class="body">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15
-                            кв.м. Хороший ремонт. в жилом фонде. Возможен торг! 3 раздельные комнаты, приёмная. 1
-                            комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен
-                            торг!
-                        </div>
-                    </div>
-                    <div class="views_row">
-                        <div class="qty_text">
-                            <div class="item">Вопрос №1 в одну строку, жирный со вопросительным знаком в конце?</div>
-                            <span></span></div>
-                        <div class="body">3 раздельные комнаты, приёмная. 1 комната в два уровня, 20 кв.м. и две по 15
-                            кв.м. Хороший ремонт. в жилом фонде. Возможен торг! 3 раздельные комнаты, приёмная. 1
-                            комната в два уровня, 20 кв.м. и две по 15 кв.м. Хороший ремонт. в жилом фонде. Возможен
-                            торг!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% endif %}
+        {% endwith %}
+        {% if faqs and service_rieltor.faq_enable %}
+            {% include 'services/include/faqs.html' %}
+        {% endif %}
         <div class="block block_presentation second">
             <div class="block_content">
-                <div class="block_title">Подберем вам необходимый объект за 30 минут</div>
+                <div class="block_title">{% trans 'Подберем вам необходимый объект за 30 минут' %}</div>
                 <div class="view_content">
-                    <div class="sub_title">В базе более 1000 объектов</div>
-                    <form action="#" class="webform_client_form">
+                    <div class="sub_title">{% trans 'В базе более 1000 объектов' %}</div>
+                    <form action="#" class="webform_client_form" id="form_block_presentation">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Связаться со специалистом. Суперлендинг">
                         <div class="form_item user_name">
-                            <input type="text" placeholder="Введите ваше имя">
+                            <input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
                         </div>
                         <div class="form_item phone">
-                            <input type="text" placeholder="Введите ваш телефон">
+                            <input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
                         </div>
                         <div class="form_item form_textarea">
-                            <textarea placeholder="Введите ваше сообщение"></textarea>
+                            <textarea name="text" placeholder="{% trans 'Введите ваше сообщение' %}"></textarea>
                         </div>
                         <div class="form_actions">
-                            <input type="submit" class="form_submit" value="Связаться со специалистом">
+                            <input type="submit" class="form_submit submit-save-application"
+                                   value="{% trans 'Связаться со специалистом' %}">
                         </div>
                     </form>
                 </div>
@@ -798,5 +333,6 @@
         });
     })
 </script>
+<script src="{% static 'js/save_application.js' %}"></script>
 </body>
 </html>

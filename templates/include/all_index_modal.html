@@ -1,0 +1,74 @@
+{% load i18n %}
+{% load static %}
+{% load base_tag %}
+{% include 'common/application/modal_order_in_ispection.html' %}
+<div id="block-webform" class="block block_webform webform_client" style="display: none">
+    <div class="block_content">
+        <div class="block_title">{% trans 'Заполните заявку и мы приведем Вам клиента с деньгами!' %}</div>
+        <div class="text">{% trans 'По возможности пришлите фотографии объекта на почту' %}: <a
+                href="mailto:ofis@gek.od.ua">{% email %}</a></div>
+        <div class="close"></div>
+        <div class="view_content">
+            <form action="#" class="webform_client_form" id="base-form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="{% trans 'Добавить объявление' %}">
+                <div class="top_wrap">
+                    <div class="form_item name">
+                        <input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
+                    </div>
+                    <div class="form_item phone">
+                        <input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
+                    </div>
+                    <div class="form_item address">
+                        <input name="address" type="text" placeholder="{% trans 'Адрес' %}">
+                    </div>
+                    <div class="form_item price">
+                        <input name="price" type="text" placeholder="{% trans 'Цена' %}">
+                    </div>
+                </div>
+                <div class="bottom_wrap">
+                    <div class="form_item textarea">
+                        <textarea name="text"
+                                  placeholder="{% trans 'Максимально подробно опишите ваш объект' %}"></textarea>
+                    </div>
+                </div>
+                <div class="form_actions">
+                    <input type="submit" class="form_submit submit-save-application" value="{% trans 'Добавить' %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="block block_webform webform_client block-add-application"
+     style="max-width: 500px; top: 40%; left: 75%; display: none">
+    <div class="block_content">
+        <div class="close" style="top: -20px; right: -25px"></div>
+        <div class="view_content">
+            <form action="#" class="webform_client_form" id="form-add-application">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Оставить заявку. Хидер.">
+                <div class="top_wrap">
+                    <div class="form_item name">
+                        <input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
+                    </div>
+                    <div class="form_item phone">
+                        <input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">
+                    </div>
+                </div>
+                <div class="form_actions">
+                    <input type="submit" class="form_submit submit-save-application"
+                           value="{% trans 'Оставить заявку' %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="block-webform-confirm" class="block block_webform" style="display: none">
+    <div class="block_content">
+        {#				<div class="close"></div>#}
+        <div class="view_content">
+            <div class="webform_confirmation" id="webform_confirmation_text" style="text-align: center">
+            </div>
+        </div>
+    </div>
+</div>
