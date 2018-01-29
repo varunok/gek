@@ -16,6 +16,8 @@ from common.forms import SaveApplicationForm
 from common.helpers import sending_email
 from common.mixins import DeleteAjaxMixin
 from common.models import Video, FAQ, TableRepair, Photo, TextPacket
+from landingpage.models import SuperlandingSettings
+from landingpage.views import Superlending
 from rieltor_object.models import Infrastructure, Accommodations, ApartmentNext, NewBuilding, Building, \
     Ofice
 from seo.mixins import SEOMixin
@@ -24,6 +26,12 @@ from seo.mixins import SEOMixin
 class MainView(SEOMixin, DetailView):
     template_name = 'index.html'
     seo_model = IndexPageModel
+    
+    def get(self, request, *args, **kwargs):
+        if SuperlandingSettings.get_solo().enabled:
+            return Superlending.as_view()(request, *args, **kwargs)
+        else:
+            return super(MainView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)

@@ -1,0 +1,338 @@
+{% load static from staticfiles %}
+{% load base_tag %}
+{% load banners_tag %}
+{% load i18n %}
+{% domen as domen %}
+{% franchise as franchise %}
+{% load thumbnail %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
+    {% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
+    {% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/social-likes_flat.css' %}"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+
+<body class="not-front superlending">
+
+<div class="wrapper">
+
+    <header class="header">
+        <div class="header_content">
+            <div class="logo_wrapper">
+                <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt="">{{ domen|safe }}</a>
+            </div>
+            <div class="region_header">
+                {% if franchise %}
+                    <div class="contacts_header" style="max-width: 270px">
+                        <div class="phone_number">
+                            <a href="tel:{% phone %}">{% phone %}</a>
+                        </div>
+                        {% address as address_if %}
+                        <div class="address">{% city %}{% if address_if %},{% endif %} {% address %}</div>
+                        <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
+                    </div>
+                {% endif %}
+                <div class="buttons_header">
+                    <div class="application">{% trans 'Оставить заявку' %}</div>
+                    <div id="open-modal" class="add_advert">{% trans 'Добавить объявление' %}</div>
+                </div>
+            </div>
+        </div>
+    </header><!-- .header-->
+
+    <main class="middle">
+        <div class="slider_main slider_notfront">
+            <div class="slider_title">Жилая и коммерческая недвижимость {% if city_plural %} в {% endif %}{{ city_plural|default_if_none:'' }}</div>
+            <div class="slider_subtitle">{{ results|length }} объекта по вашим параметрам</div>
+            <div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
+            <form action="#" class="webform_client_form" id="index-form">
+                {% csrf_token %}
+                <input type="hidden" name="source" value="Заказать бесплатную консультацию.Главная">
+                <div class="form_item name">
+                    <input name="name" type="text" placeholder="Введите имя">
+                </div>
+                <div class="form_item phone">
+                    <input name="phone" type="text" placeholder="Введите телефон">
+                </div>
+                <div class="form_actions">
+                    <input class="form-submit submit-save-application" type="submit" value="Отправить заявку">
+                </div>
+            </form>
+        </div>
+        <div class="middle_inner">
+            <div class="container">
+                <div id="content">
+                    <div class="block search_results search_products">
+                        <div class="form_title">Поиск недвижимости</div>
+                        <form action="#" class="webform_client_form">
+                            <div class="form_checkboxes">
+                                <div class="form_item form_checkbox">
+                                    <input type="checkbox" id="arenda" checked>
+                                    <label for="arenda">Аренда</label>
+                                </div>
+                                <div class="form_item form_checkbox">
+                                    <input type="checkbox" id="prodazha">
+                                    <label for="prodazha">Продажа</label>
+                                </div>
+                            </div>
+                            <div class="form_item group form_wrapper">
+                                <label>Стоимость</label>
+                                <div class="form_number">
+                                    <input type="number" placeholder="От" style="width: 102px;">
+                                </div>
+                                <div class="form_number">
+                                    <input type="number" placeholder="До" style="width: 102px;">
+                                </div>
+                                <div class="form_select currency">
+                                    <select>
+                                        <option value="10">грн.</option>
+                                        <option value="9">руб.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_item group form_wrapper area_wrap">
+                                <label>Площадь</label>
+                                <div class="form_number">
+                                    <input type="number" placeholder="От" style="width: 102px;">
+                                </div>
+                                <div class="form_number">
+                                    <input type="number" placeholder="До" style="width: 102px;">
+                                </div>
+                                <div class="form_select">
+                                    <select>
+                                        <option value="sotok">соток</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form_item form_select form_wrapper area_select">
+                                <label for="type_ads">Район:</label>
+                                <select name="type_ads" id="type_ads">
+                                    <option value="1">Выбрать</option>
+                                    <option value="2">ИЖС</option>
+                                    <option value="3">СНТ</option>
+                                </select>
+                            </div>
+                            <div class="form_item form_select form_wrapper">
+                                <label for="type_ads1">Тип недвижимости:</label>
+                                <select name="type_ads" id="type_ads1">
+                                    <option value="1">Выбрать</option>
+                                    <option value="2">1</option>
+                                    <option value="3">2</option>
+                                </select>
+                            </div>
+
+                            <div class="form_actions">
+                                <div class="links">
+                                    <div class="search_clear"><a href="#">очистить</a></div>
+                                </div>
+                                <input type="submit" value="Поиск">
+                            </div>
+                        </form>
+                        {#                        <div class="top_wrap">#}
+                        {#                            <div class="left_wrap">#}
+                        {#                                <div class="count_result">1-20 из 128 результатов</div>#}
+                        {#                            </div>#}
+                        {#                            <div class="right_wrap">#}
+                        {#                                <div class="sortable">#}
+                        {#                                    <label for="sort">Сортировка:</label>#}
+                        {#                                    <select name="sort" id="sort">#}
+                        {#                                        <option value="1">Новые наверху</option>#}
+                        {#                                        <option value="2">Новые внизу</option>#}
+                        {#                                    </select>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="bottom_wrap">#}
+                        {#                            <div class="filters">#}
+                        {#                                <div class="item">Одесса#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="item">Квартира#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="item">4 спальных места#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="item">2 комнаты#}
+                        {#                                    <div class="close"></div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="form_actions">#}
+                        {#                                <input type="submit" value="Подобрать объект">#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                    </div>
+                    <div class="block block_shops block_search_results">
+                        <div class="block_content">
+                            <div class="view_content list-more">
+
+                                {% include 'include/item.html' with results=results %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- #content-->
+
+            </div>
+        </div>
+
+        {% include 'include/index_video.html' %}
+        {% include 'include/all_index_modal.html' %}
+
+
+        <div class="block_benefits">
+            <div class="block_content">
+                <div class="block_title">
+                    Наши преимущества
+                </div>
+                <div class="view_content">
+                    <div class="views_row">
+                        <div class="field_img">
+                            <img src="{% static 'images/a_3.png' %}" alt="">
+                        </div>
+                        <div class="text">Лучшие цены</div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_img">
+                            <img src="{% static 'images/t_3.png' %}" alt="">
+                        </div>
+                        <div class="text">Опытные специалисты</div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_img">
+                            <img src="{% static 'images/u_3.png' %}" alt="">
+                        </div>
+                        <div class="text">Оперативность</div>
+                    </div>
+                    <div class="views_row">
+                        <div class="field_img">
+                            <img src="{% static 'images/u_2.png' %}" alt="">
+                        </div>
+                        <div class="text">Гарантии</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% with trust.images.all as images_trust %}
+            {% if images_trust %}
+                <div class="block_diplomas">
+                    <div class="block_content">
+                        <div class="block_title">{% trans 'Наши дипломы и регалии, доказательство' %}</div>
+                        <div class="view_content">
+                            {% for image in images_trust %}
+                                <div class="views_row">
+                                    <div class="field_image">
+                                        <img src="{{ image.image|thumbnail_url:'trust_image_344' }}" alt="">
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% if faqs and service_rieltor.faq_enable %}
+            {% include 'services/include/faqs.html' %}
+        {% endif %}
+        <div class="block block_presentation second">
+            <div class="block_content">
+                <div class="block_title">{% trans 'Подберем вам необходимый объект за 30 минут' %}</div>
+                <div class="view_content">
+                    <div class="sub_title">{% trans 'В базе более 1000 объектов' %}</div>
+                    <form action="#" class="webform_client_form" id="form_block_presentation">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="Связаться со специалистом. Суперлендинг">
+                        <div class="form_item user_name">
+                            <input name="name" type="text" placeholder="{% trans 'Введите ваше имя' %}">
+                        </div>
+                        <div class="form_item phone">
+                            <input name="phone" type="text" placeholder="{% trans 'Введите ваш телефон' %}">
+                        </div>
+                        <div class="form_item form_textarea">
+                            <textarea name="text" placeholder="{% trans 'Введите ваше сообщение' %}"></textarea>
+                        </div>
+                        <div class="form_actions">
+                            <input type="submit" class="form_submit submit-save-application"
+                                   value="{% trans 'Связаться со специалистом' %}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main><!-- .content -->
+
+</div><!-- .wrapper -->
+
+<footer class="footer">
+    <div class="footer_top">
+        <div class="region_footer">
+            <div class="logo_wrapper">
+                <a href="/" class="logo"><img src="{% static 'images/logo.png' %}" alt="">{{ domen|safe }}</a>
+                <div class="copyright">{% trans 'Все права на материалы, находящиеся на сайте, охраняются в соответствии с законодательством.' %}</div>
+            </div>
+
+            <div class="footer_right">
+                {% if franchise %}
+                    <div class="contacts_header" style="max-width: 195px">
+                        <div class="phone_number">
+                            <a href="tel:{% phone %}">{% phone %}</a>
+                        </div>
+                        <div class="email"><a href="mailto:{% email %}">{% email %}</a></div>
+                        <div class="address">{% city %}{% if address_if %},{% endif %} {% address %}</div>
+                    </div>
+                {% endif %}
+                <div class="buttons_header">
+                    <div class="application">{% trans 'Оставить заявку' %}</div>
+                    <div class="add_advert">{% trans 'Добавить объявление' %}</div>
+                </div>
+            </div>
+            <div class="social_links social-likes social-likes_vertical" data-counters="no">
+                <div class="facebook" title="{% trans 'Поделиться ссылкой на Фейсбуке' %}">Facebook</div>
+                <div class="twitter" title="{% trans 'Поделиться ссылкой в Твиттере' %}">Twitter</div>
+                <div class="plusone" title="{% trans 'Поделиться ссылкой в Гугл-плюсе' %}">Google+</div>
+                <div class="vkontakte" title="{% trans 'Поделиться ссылкой во Вконтакте' %}">Вконтакте</div>
+            </div>
+        </div>
+    </div>
+    <div class="popup_exit"></div>
+    <div class="to_up"></div>
+</footer><!-- .footer -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.scrollTo.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datepicker-ru.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/social-likes.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.livequery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/giz.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/favorites.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/load_more.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $("#expanded_btn").click(function () {
+            $('html, body').animate({
+                scrollTop: ($('.footer_bottom').offset().top)
+            }, 500);
+        });
+    })
+</script>
+<script src="{% static 'js/save_application.js' %}"></script>
+</body>
+</html>

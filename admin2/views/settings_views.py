@@ -15,6 +15,7 @@ from admin2.models import Settings, SettingsAddress, SettingsFranchise, \
     ActiveFranchise, SettingsPrivate24, \
     SettingsLiqpay, EmailForward, EmailSettings
 from common.mixins import MessageMixin
+from landingpage.models import SuperlandingSettings
 
 
 class SettingsCurrencyView(LoginRequiredMixin, AccesMixin, MessageMixin, UpdateView):
@@ -132,4 +133,13 @@ class EmailForwardDelete(LoginRequiredMixin, DeleteView):
     template_name = 'admin2/common/delete_confirm.html'
     success_url = reverse_lazy('admin2:email_forward')
 
+
+class SuperlendingSetting(LoginRequiredMixin, MessageMixin, UpdateView):
+    model = SuperlandingSettings
+    fields = '__all__'
+    template_name = 'admin2/settings/settings_superlanding.html'
+    success_url = reverse_lazy('admin2:setting_superlending')
+
+    def get_object(self, queryset=None):
+        return self.model.get_solo()
 

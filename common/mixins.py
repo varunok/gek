@@ -2,18 +2,19 @@
 from __future__ import unicode_literals
 
 from dal_select2.views import Select2QuerySetView
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import EmptyPage
-from django.utils.translation import ugettext as _
 from django.db.models import F
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.loader import render_to_string
-from django.views.generic.detail import SingleObjectMixin, BaseDetailView, DetailView
-from django.views.generic.list import BaseListView, MultipleObjectMixin
-from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext as _
 from django.views.generic import UpdateView
+from django.views.generic.detail import BaseDetailView, DetailView, \
+    SingleObjectMixin
+from django.views.generic.list import BaseListView, MultipleObjectMixin
 
-from common.models import BasePacket, MidlePacket, ExpertPacket
+from common.models import BasePacket, ExpertPacket, MidlePacket
 
 
 class MessageMixin(SuccessMessageMixin):
@@ -22,6 +23,7 @@ class MessageMixin(SuccessMessageMixin):
 
 class SuccesMixin():
     object = None
+
     def get_success_url(self):
         return self.object.get_edit_url()
 
@@ -48,6 +50,7 @@ class ViewsCountMixin(BaseDetailView):
 
 class DinamicPageMixin(BaseListView):
     dinamic_template_name = None
+
     # context_object_name = 'objects'
 
     def get_context_data(self, **kwargs):
@@ -57,12 +60,17 @@ class DinamicPageMixin(BaseListView):
 
     def get_count_next(self):
         page = self.request.GET.get('page')
+        paginator = self.get_paginator(self.get_queryset(),
+                                       self.paginate_by)
+        page = page or 1
         try:
-            paginator = self.get_paginator(self.get_queryset(), self.paginate_by)
-            page = page or 1
-            count_next = paginator.page(int(page)+1).object_list.count()
-        except:
-            count_next = 0
+
+            count_next = paginator.page(int(page) + 1).object_list.count()
+        except (TypeError, EmptyPage):
+            try:
+                count_next = len(paginator.page(int(page) + 1).object_list)
+            except EmptyPage:
+                count_next = 0
         return count_next
 
     def get(self, request, *args, **kwargs):
@@ -78,10 +86,12 @@ class DinamicPageMixin(BaseListView):
             data = JsonResponse({
                 'next': paginator.page(page).has_next(),
                 'html': render_to_string(self.dinamic_template_name,
-                                             {'request':self.request,
-                                              self.context_object_name: paginator.page(page).object_list,
-                                              'is_paginated':paginator.page(page).has_other_pages(),
-                                              'count_next': self.get_count_next()},),
+                                         {'request': self.request,
+                                          self.context_object_name: paginator.page(
+                                              page).object_list,
+                                          'is_paginated': paginator.page(
+                                              page).has_other_pages(),
+                                          'count_next': self.get_count_next()}),
                 'obj': len(paginator.page(page).object_list)
             })
             return HttpResponse(data)
@@ -97,7 +107,8 @@ class ServiceSiteMixin(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ServiceSiteMixin, self).get_context_data(**kwargs)
-        context['content_type'] = ContentType.objects.get_for_model(self.model).id
+        context['content_type'] = ContentType.objects.get_for_model(
+            self.model).id
         try:
             context['faqs'] = self.get_object().fag.all().order_by('id')
         except AttributeError:
@@ -132,7 +143,8 @@ class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
         context['video_form'] = self.video_form(instance=self.get_object())
         context['seo_form'] = self.seo_form(instance=self.get_object())
         try:
-            context['advantage_form'] = self.advantage_form(instance=self.get_object())
+            context['advantage_form'] = self.advantage_form(
+                instance=self.get_object())
         except TypeError:
             pass
         context['video_check'] = self.get_object().videos.all().order_by('id')
@@ -140,11 +152,15 @@ class ServicesMixin(SuccesMixin, MessageMixin, UpdateView):
             context['faqs'] = self.get_object().fag.all().order_by('id')
         except AttributeError:
             pass
-        context['content_type'] = ContentType.objects.get_for_model(self.model).id
+        context['content_type'] = ContentType.objects.get_for_model(
+            self.model).id
         try:
-            context['base_content_type'] = ContentType.objects.get_for_model(BasePacket).id
-            context['midle_content_type'] = ContentType.objects.get_for_model(MidlePacket).id
-            context['expert_content_type'] = ContentType.objects.get_for_model(ExpertPacket).id
+            context['base_content_type'] = ContentType.objects.get_for_model(
+                BasePacket).id
+            context['midle_content_type'] = ContentType.objects.get_for_model(
+                MidlePacket).id
+            context['expert_content_type'] = ContentType.objects.get_for_model(
+                ExpertPacket).id
         except AttributeError:
             pass
         context['partner_form'] = self.partner_form()
@@ -190,13 +206,14 @@ class FormSetMixin(UpdateView):
         formset = self.formset(instance=self.get_object())
         return self.render_to_response(
             self.get_context_data(
-                                  formset=formset))
+                formset=formset))
 
     def post(self, request, *args, **kwargs):
         self.object = None
         if not self.formset:
             self.formset = self.get_formset(request)
-        formset =  self.formset(self.request.POST, self.request.FILES, instance=self.get_object())
+        formset = self.formset(self.request.POST, self.request.FILES,
+                               instance=self.get_object())
         if formset.is_valid():
             return self.form_valid(formset)
         else:
@@ -211,6 +228,3 @@ class FormSetMixin(UpdateView):
     def form_invalid(self, formset):
         return self.render_to_response(
             self.get_context_data(formset=formset))
-
-
-
