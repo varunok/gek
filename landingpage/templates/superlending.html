@@ -13,9 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
-    {% block SEOTitle %} {{ seo.SEOTitle }} {% endblock SEOTitle %}
-    {% block SEOKeywords %}{{ seo.SEOKeywords }}{% endblock SEOKeywords %}
-    {% block SEODescription %}{{ seo.SEODescription }}{% endblock SEODescription %}
+
+    <title>{{ seo.SEOTitle }}</title>
+    <meta name="keywords" content="{{ seo.SEOKeywords }}"/>
+    <meta name="description" content="{{ seo.SEODescription }}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/social-likes_flat.css' %}"/>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -56,8 +57,14 @@
     </header><!-- .header-->
 
     <main class="middle">
-        <div class="slider_main slider_notfront">
-            <div class="slider_title">Жилая и коммерческая недвижимость {% if city_plural %} в {% endif %}{{ city_plural|default_if_none:'' }}</div>
+        <div class="slider_main slider_notfront"
+                {% if seo.image_seo %}
+             style="background: url('{{ seo.image_seo.url }}') no-repeat center/cover;"
+                {% else %}
+             style="background: url({% static 'images/banner_19.jpg' %}) no-repeat center/cover;"
+                {% endif %}
+        >
+            <div class="slider_title">{{ seo.title_seo|default:'Жилая и коммерческая недвижимость' }}</div>
             <div class="slider_subtitle">{{ results|length }} объекта по вашим параметрам</div>
             <div class="title_text">Оставьте свои контакты и мы поможем Вам подобрать нужный объект!</div>
             <form action="#" class="webform_client_form" id="index-form">

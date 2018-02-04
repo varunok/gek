@@ -15,6 +15,7 @@ class SEOMixin(ContextMixin):
         context = super(SEOMixin, self).get_context_data(**kwargs)
         path = str(Site.objects.get_current()) + self.request.get_full_path()
         if SEO.objects.filter(url=path).exists():
+
             context['seo'] = SEO.objects.filter(url=path).first()
         else:
             try:
