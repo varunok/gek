@@ -86,24 +86,24 @@
                 <div id="content">
                     <div class="block search_results search_products">
                         <div class="form_title">Поиск недвижимости</div>
-                        <form action="#" class="webform_client_form">
+                        <form action="." method="get" class="webform_client_form search-form">
                             <div class="form_checkboxes">
-                                <div class="form_item form_checkbox">
-                                    <input type="checkbox" id="arenda" checked>
-                                    <label for="arenda">Аренда</label>
-                                </div>
-                                <div class="form_item form_checkbox">
-                                    <input type="checkbox" id="prodazha">
-                                    <label for="prodazha">Продажа</label>
-                                </div>
+                                {% for type_deal in form.type_deal %}
+                                    <div class="form_item form_checkbox">
+                                        <input type="checkbox" name="{{ type_deal.data.name }}"
+                                               id="{{ type_deal.id_for_label }}" {% if type_deal.data.selected %}
+                                               checked {% endif %} value="{{ type_deal.data.value }}">
+                                        <label for="{{ type_deal.id_for_label }}">{{ type_deal.choice_label }}</label>
+                                    </div>
+                                {% endfor %}
                             </div>
                             <div class="form_item group form_wrapper">
                                 <label>Стоимость</label>
                                 <div class="form_number">
-                                    <input type="number" placeholder="От" style="width: 102px;">
+                                    <input type="number" name="{{ form.price__gt.name }}" value="{{ form.price__gt.value }}" placeholder="От" style="width: 102px;">
                                 </div>
                                 <div class="form_number">
-                                    <input type="number" placeholder="До" style="width: 102px;">
+                                    <input type="number" name="{{ form.price__lt.name }}" value="{{ form.price__lt.value }}" placeholder="До" style="width: 102px;">
                                 </div>
                                 <div class="form_select currency">
                                     <select>
@@ -115,10 +115,10 @@
                             <div class="form_item group form_wrapper area_wrap">
                                 <label>Площадь</label>
                                 <div class="form_number">
-                                    <input type="number" placeholder="От" style="width: 102px;">
+                                    <input type="number" name="{{ form.footage__gt.name }}" value="{{ form.footage__gt.value }}" placeholder="От" style="width: 102px;">
                                 </div>
                                 <div class="form_number">
-                                    <input type="number" placeholder="До" style="width: 102px;">
+                                    <input type="number" name="{{ form.footage__lt.name }}" value="{{ form.footage__lt.value }}" placeholder="До" style="width: 102px;">
                                 </div>
                                 <div class="form_select">
                                     <select>
@@ -128,7 +128,7 @@
                             </div>
                             <div class="form_item form_select form_wrapper area_select">
                                 <label for="type_ads">Район:</label>
-                                <select name="type_ads" id="type_ads">
+                                <select name="" id="type_ads">
                                     <option value="1">Выбрать</option>
                                     <option value="2">ИЖС</option>
                                     <option value="3">СНТ</option>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="form_item form_select form_wrapper">
                                 <label for="type_ads1">Тип недвижимости:</label>
-                                <select name="type_ads" id="type_ads1">
+                                <select name="" id="type_ads1">
                                     <option value="1">Выбрать</option>
                                     <option value="2">1</option>
                                     <option value="3">2</option>
@@ -145,9 +145,9 @@
 
                             <div class="form_actions">
                                 <div class="links">
-                                    <div class="search_clear"><a href="#">очистить</a></div>
+                                    <div class="search_clear"><a href="/">очистить</a></div>
                                 </div>
-                                <input type="submit" value="Поиск">
+                                <input type="submit" value="Поиск" class="search-click">
                             </div>
                         </form>
                         {#                        <div class="top_wrap">#}
@@ -341,5 +341,9 @@
     })
 </script>
 <script src="{% static 'js/save_application.js' %}"></script>
+<script>
+    var BASE_URL = '{{ BASE_URL }}';
+</script>
+<script src="{% static 'js/search_form.js' %}"></script>
 </body>
 </html>

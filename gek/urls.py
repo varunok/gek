@@ -23,6 +23,7 @@ from common.views import MainView, SaveApplication
 
 urlpatterns = [
     url(r'^$', MainView.as_view(), name='main'),
+    url(r'^search/[\w-]*$', MainView.as_view(), name='main'),
     url(r'^superadmin/', admin.site.urls),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^common/', include('common.urls', namespace='common')),
