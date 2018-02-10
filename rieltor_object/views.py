@@ -9,6 +9,8 @@ from django.views.generic import DetailView, ListView
 
 from admin2.models import OfisPageModel, BuildingPageModel, DailyPageModel, NewBuildingPageModel, EarthPageModel
 from common.mixins import ViewsCountMixin, DinamicPageMixin
+from landingpage.models import SuperlandingSettings
+from landingpage.views import SuperlendingInner
 from rieltor_object.filters import FilterBuilding, FilterOfise, FilterNewBuilding, FilterDaily, FilterEarth
 from rieltor_object.helpers import HelperFilter, SeoHelper
 from rieltor_object.mixins import BuildingStatusMixin, OfficeStatusMixin, DailyStatusMixin, NewBuildingStatusMixin, \
@@ -26,7 +28,6 @@ class BuildingListSiteView(DinamicPageMixin, BuildingStatusMixin, ListView):
     paginate_by = PAGINATE_OBJ
     seo_model = BuildingPageModel
     dinamic_template_name = 'rieltor_object/include/building_item.html'
-
 
     def get_context_data(self, **kwargs):
         context = super(BuildingListSiteView, self).get_context_data(**kwargs)
@@ -70,6 +71,8 @@ class BuildingDetailSiteView(SEOMixin, BuildingStatusMixin, ViewsCountMixin, Det
     template_name = 'rieltor_object/building.html'
 
     def get_template_names(self):
+        if SuperlandingSettings.get_solo().enabled:
+            return 'superlending_inner.html'
         if str(Site.objects.get_current()) == 'http://dom-phuket.biz':
             return 'rieltor_object/special/building.html'
         return self.template_name
@@ -117,6 +120,11 @@ class OficeListSiteView(DinamicPageMixin, SEOMixin, OfficeStatusMixin, ListView)
 class OficeDetailSiteView(SEOMixin, OfficeStatusMixin, ViewsCountMixin, DetailView):
     model = Ofice
     template_name = 'rieltor_object/ofice.html'
+
+    def get_template_names(self):
+        if SuperlandingSettings.get_solo().enabled:
+            return 'superlending_inner.html'
+        return self.template_name
 
 
 class NewBuildingListSiteView(SEOMixin, NewBuildingStatusMixin, ListView):
@@ -184,6 +192,11 @@ class DailyListSiteView(DinamicPageMixin, SEOMixin, DailyStatusMixin, ListView):
 class DailyDetailSiteView(SEOMixin, DailyStatusMixin, ViewsCountMixin, DetailView):
     model = Daily
     template_name = 'rieltor_object/daily.html'
+
+    def get_template_names(self):
+        if SuperlandingSettings.get_solo().enabled:
+            return 'superlending_inner.html'
+        return self.template_name
 
 
 class EarthSiteView(SEOMixin, EarthStatusMixin, ListView):

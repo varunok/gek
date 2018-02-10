@@ -49,3 +49,6 @@ class Superlending(SEOMixin, DinamicPageMixin, TemplateView):
         # shuffle(result)
         return result
 
+
+class SuperlendingInner(TemplateView):
+    template_name = 'superlending_inner.html'

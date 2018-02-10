@@ -18,8 +18,15 @@ def filterpath(url, name, value, *args):
     args = args or ()
     try:
         list_ele = []
-        empty, val1, val2, elements = url.split('/')
-        category = '/' + val1 + '/' + val2
+        all_elements = url.split('/')
+
+        if len(all_elements) == 4:
+            empty, val1, val2, elements = url.split('/')
+            category = '/' + val1 + '/' + val2
+        elif len(all_elements) == 3:
+            empty, val1, elements = url.split('/')
+            category = '/' + val1
+
         elements = group(elements.split('-'), 2)
         for ele in elements:
             if (name, value) != ele and args != ele:
