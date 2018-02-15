@@ -136,7 +136,8 @@
                                 <div class="price_wrapper">
                                     <div class="first_price">{{ object.price|default_if_none:'--' }} {{ object.get_current }}</div>
                                     <span></span>
-                                    <div class="second_price">{{ object.footage_price|default_if_none:'--' }} {{ object.get_current }}/м<sup>2</sup></div>
+                                    <div class="second_price">{{ object.footage_price|default_if_none:'--' }} {{ object.get_current }}/м<sup>2</sup>
+                                    </div>
                                 </div>
                                 <div class="char_wrapper">
                                     <div class="group">
@@ -214,7 +215,7 @@
             <div class="map">
                 <div class="title">На карте:</div>
                 <div class="field_image">
-                    <img src="images/map_2.png" alt="">
+                    <div id="map" style="width: 542px; height: 293px;"></div>
                 </div>
             </div>
             <div class="map">
@@ -286,5 +287,29 @@
 <script type="text/javascript" src="{% static 'js/favorites.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/load_more.js' %}"></script>
 <script src="{% static 'js/save_application.js' %}"></script>
+<script>
+    function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: uluru
+        });
+        var geocoder = new google.maps.Geocoder();
+        var address = '{% city %}, {{ object.address }}';
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQDJy6hpp7mVYtAjCtwHfIepMfFCAtY8&callback=initMap"></script>
 </body>
 </html>

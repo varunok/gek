@@ -235,29 +235,28 @@
 	</main><!-- .content -->
 {% endblock content %}
 {% block js %}
-    <script>
-        $(document).ready(function(){
-                        ymaps.ready(init);
-
-                    function init() {
-                        var myMap = new ymaps.Map('map', {
-                            center: [55.753994, 37.622093],
-                            zoom: 9
-                        });
-
-                        ymaps.geocode('{% city %}, {{ object.address }}', {
-                            results: 1
-                        }).then(function (res) {
-                            var firstGeoObject = res.geoObjects.get(0),
-                            coords = firstGeoObject.geometry.getCoordinates(),
-                            bounds = firstGeoObject.properties.get('boundedBy');
-
-                            myMap.geoObjects.add(firstGeoObject);
-                            myMap.setBounds(bounds, {
-                                checkZoomRange: true
-                            });
-                        });
-                    }
+<script>
+    function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: uluru
         });
-    </script>
+        var geocoder = new google.maps.Geocoder();
+        var address = '{% city %}, {{ object.address }}';
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQDJy6hpp7mVYtAjCtwHfIepMfFCAtY8&callback=initMap"></script>
 {% endblock js %}
