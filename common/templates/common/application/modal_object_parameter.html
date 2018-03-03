@@ -1,5 +1,5 @@
 {% load i18n %}
-<div id="block-webform" class="block block_webform webform_object object-parameter" style="display: none">
+<div id="block-webform" class="block block_webform webform_object object-parameter" style="display: none; {% if superlanding %}top: 20%;{% endif %}">
 	<div class="block_content">
 		<div class="block_title">{% trans 'Подберем вам объект по вашим' %} <br>{% trans 'параметрам за' %} 30 {% trans 'минут' %}</div>
 		<div class="text">{% trans 'Более 1000 объектов в базе и большой опыт в работе поможет нам решить вашу проблему' %} <br>{% trans 'в поиске подходящего' %}</div>
@@ -19,6 +19,8 @@
                             class="hid-name-newbuilding"
                        {% elif earth %}
                             class="hid-name-earth"
+                       {% elif superlanding %}
+                            class="hid-name-superlanding"
 {#                       {% elif landing %}#}
 {#                            class="hid-name-landing"#}
                        {% endif %}
@@ -34,6 +36,8 @@
                         {% include 'rieltor_object/filters/newbuilding_filter.html' %}
                     {% elif earth %}
                         {% include 'rieltor_object/filters/earth_filter.html' %}
+                    {% elif superlanding %}
+                        {% include 'include/filter.html' %}
                     {% endif %}
 					<div class="form_item phone">
 						<input name="phone" type="text" placeholder="{% trans 'Номер телефона' %}">

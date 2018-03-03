@@ -191,7 +191,6 @@ class Select2QuerySetViewCustom(Select2QuerySetView):
         if self.q:
             create_field = '{0}__icontains'.format(self.create_field)
             qs = qs.filter(**{create_field: self.q})
-            print(qs)
 
         return qs
 

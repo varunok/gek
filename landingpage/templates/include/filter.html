@@ -1,31 +1,32 @@
 {% load rieltor_tag %}
-<div class="bottom_wrap">
-    <div class="filters">
-        {% for type_deal in form.type_deal %}
-            {% if type_deal.data.selected %}
-                <div name="type_deal" class="item">{{ type_deal.choice_label }}
-                    <div class="close close-item"
-                         data-href="{% filterpath request.path type_deal.data.name type_deal.data.value %}"></div>
-                </div>
+{% load i18n %}
+
+<div class="filters">
+    {% for type_deal in form.type_deal %}
+        {% if type_deal.data.selected %}
+            <div name="type_deal" class="item">{{ type_deal.choice_label }}
+                <div class="close close-item"
+                     data-href="{% filterpath request.path type_deal.data.name type_deal.data.value %}"></div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% if form.price__gt.data or form.price__lt.data %}
+        <div name="price" class="item">
+            {% if form.price__gt.data %}
+                {% if not form.price__lt.data %}
+                    От {{ form.price__gt.data }}
+                {% else %}
+                    {{ form.price__gt.data }}
+                {% endif %}
             {% endif %}
-        {% endfor %}
-        {% if form.price__gt.data or form.price__lt.data %}
-            <div name="price" class="item">
-                {% if form.price__gt.data %}
-                    {% if not form.price__lt.data %}
-                        От {{ form.price__gt.data }}
-                    {% else %}
-                        {{ form.price__gt.data }}
-                    {% endif %}
+            {% if form.price__lt.data %}
+                {% if not form.price__gt.data %}
+                    До {{ form.price__lt.data }}
+                {% else %}
+                    -{{ form.price__lt.data }}
                 {% endif %}
-                {% if form.price__lt.data %}
-                    {% if not form.price__gt.data %}
-                        До {{ form.price__lt.data }}
-                    {% else %}
-                        -{{ form.price__lt.data }}
-                    {% endif %}
-                {% endif %}
-                <div class="close close-item" data-href="
+            {% endif %}
+            <div class="close close-item" data-href="
                  {% if form.price__gt.data and form.price__lt.data %}
                     {% filterpath request.path form.price__gt.name form.price__gt.data form.price__lt.name form.price__lt.data %}
                     {% elif form.price__gt.data %}
@@ -34,25 +35,25 @@
                         {% filterpath request.path form.price__lt.name form.price__lt.data %}
                  {% endif %}
             "></div>
-            </div>
-        {% endif %}
-        {% if form.footage__gt.data or form.footage__lt.data %}
-            <div name="footage" class="item">
-                {% if form.footage__gt.data %}
-                    {% if not form.footage__lt.data %}
-                        От {{ form.footage__gt.data }}
-                    {% else %}
-                        {{ form.footage__gt.data }}
-                    {% endif %}
+        </div>
+    {% endif %}
+    {% if form.footage__gt.data or form.footage__lt.data %}
+        <div name="footage" class="item">
+            {% if form.footage__gt.data %}
+                {% if not form.footage__lt.data %}
+                    От {{ form.footage__gt.data }}
+                {% else %}
+                    {{ form.footage__gt.data }}
                 {% endif %}
-                {% if form.footage__lt.data %}
-                    {% if not form.footage__gt.data %}
-                        До {{ form.footage__lt.data }}
-                    {% else %}
-                        -{{ form.footage__lt.data }}
-                    {% endif %}
-                {% endif %} м.кв
-                <div class="close close-item" data-href="
+            {% endif %}
+            {% if form.footage__lt.data %}
+                {% if not form.footage__gt.data %}
+                    До {{ form.footage__lt.data }}
+                {% else %}
+                    -{{ form.footage__lt.data }}
+                {% endif %}
+            {% endif %} м.кв
+            <div class="close close-item" data-href="
                  {% if form.footage__gt.data and form.footage__lt.data %}
                     {% filterpath request.path form.footage__gt.name form.footage__gt.data form.footage__lt.name form.footage__lt.data %}
                     {% elif form.footage__gt.data %}
@@ -61,10 +62,6 @@
                         {% filterpath request.path form.footage__lt.name form.footage__lt.data %}
                  {% endif %}
             "></div>
-            </div>
-        {% endif %}
-    </div>
-    <div class="form_actions">
-        <input type="submit" value="Подобрать объект">
-    </div>
+        </div>
+    {% endif %}
 </div>

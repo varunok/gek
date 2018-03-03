@@ -101,16 +101,16 @@
                                 <label>Стоимость</label>
                                 <div class="form_number">
                                     <input type="number" name="{{ form.price__gt.name }}"
-                                           value="{{ form.price__gt.value }}" placeholder="От" style="width: 102px;">
+                                           value="{{ form.price__gt.value }}" placeholder="От" style="width: 200px;">
                                 </div>
                                 <div class="form_number">
                                     <input type="number" name="{{ form.price__lt.name }}"
-                                           value="{{ form.price__lt.value }}" placeholder="До" style="width: 102px;">
+                                           value="{{ form.price__lt.value }}" placeholder="До" style="width: 200px;">
                                 </div>
                                 <div class="form_select currency">
-                                    <select>
-                                        <option value="10">грн.</option>
-                                        <option value="9">руб.</option>
+                                    <select disabled id="my_select">
+                                        <option value="1">грн.</option>
+                                        <option value="2">$</option>
                                     </select>
                                 </div>
                             </div>
@@ -118,34 +118,34 @@
                                 <label>Площадь</label>
                                 <div class="form_number">
                                     <input type="number" name="{{ form.footage__gt.name }}"
-                                           value="{{ form.footage__gt.value }}" placeholder="От" style="width: 102px;">
+                                           value="{{ form.footage__gt.value }}" placeholder="От" style="width: 200px;">
                                 </div>
                                 <div class="form_number">
                                     <input type="number" name="{{ form.footage__lt.name }}"
-                                           value="{{ form.footage__lt.value }}" placeholder="До" style="width: 102px;">
+                                           value="{{ form.footage__lt.value }}" placeholder="До" style="width: 200px;">
                                 </div>
-{#                                <div class="form_select">#}
-{#                                    <select>#}
-{#                                        <option value="sotok">соток</option>#}
-{#                                    </select>#}
-{#                                </div>#}
+                                {#                                <div class="form_select">#}
+                                {#                                    <select>#}
+                                {#                                        <option value="sotok">соток</option>#}
+                                {#                                    </select>#}
+                                {#                                </div>#}
                             </div>
-                            <div class="form_item form_select form_wrapper area_select">
-                                <label for="type_ads">Район:</label>
-                                <select name="" id="type_ads">
-                                    <option value="1">Выбрать</option>
-                                    <option value="2">ИЖС</option>
-                                    <option value="3">СНТ</option>
-                                </select>
-                            </div>
-                            <div class="form_item form_select form_wrapper">
-                                <label for="type_ads1">Тип недвижимости:</label>
-                                <select name="" id="type_ads1">
-                                    <option value="1">Выбрать</option>
-                                    <option value="2">1</option>
-                                    <option value="3">2</option>
-                                </select>
-                            </div>
+                            {#                            <div class="form_item form_select form_wrapper area_select">#}
+                            {#                                <label for="type_ads">Район:</label>#}
+                            {#                                <select name="" id="type_ads">#}
+                            {#                                    <option value="1">Выбрать</option>#}
+                            {#                                    <option value="2">ИЖС</option>#}
+                            {#                                    <option value="3">СНТ</option>#}
+                            {#                                </select>#}
+                            {#                            </div>#}
+                            {#                            <div class="form_item form_select form_wrapper">#}
+                            {#                                <label for="type_ads1">Тип недвижимости:</label>#}
+                            {#                                <select name="" id="type_ads1">#}
+                            {#                                    <option value="1">Выбрать</option>#}
+                            {#                                    <option value="2">1</option>#}
+                            {#                                    <option value="3">2</option>#}
+                            {#                                </select>#}
+                            {#                            </div>#}
 
                             <div class="form_actions">
                                 <div class="links">
@@ -168,13 +168,24 @@
                                 </div>
                             </div>
                         </div>
-                        {% include 'include/filter.html' %}
+                        <div class="bottom_wrap">
+                            {% include 'include/filter.html' %}
+                            <div class="form_actions">
+                                <input type="submit" value="{% trans 'Подобрать объект' %}"
+                                       class="open-object-parameter">
+                            </div>
+                        </div>
                     </div>
                     <div class="block block_shops block_search_results">
                         <div class="block_content">
                             <div class="view_content list-more">
 
-                                {% include 'include/item.html' with results=results %}
+                                {% if filtering %}
+                                    {% include 'include/item.html' with object_list=filter_results%}
+                                {% else %}
+                                    {% include 'include/item.html' with results=results %}
+                                {% endif %}
+
 
                             </div>
                         </div>
@@ -186,6 +197,8 @@
 
         {% include 'include/index_video.html' %}
         {% include 'include/all_index_modal.html' %}
+
+        {#        {% include 'common/application/block_presentation.html' with source=seo %}#}
 
 
         <div class="block_benefits">
@@ -267,6 +280,7 @@
                 </div>
             </div>
         </div>
+        {% include 'common/application/modal_object_parameter.html' with superlanding=True %}
     </main><!-- .content -->
 
 </div><!-- .wrapper -->
@@ -331,5 +345,36 @@
     var BASE_URL = '{{ BASE_URL }}';
 </script>
 <script src="{% static 'js/search_form.js' %}"></script>
+<script>
+    $('#id_type_deal_0').on('change', function () {
+        if (this.checked) {
+            $('#my_select option:selected').each(function () {
+                this.selected = false;
+            });
+
+            $("#my_select").val(1);
+
+            var input_1 = $('#id_type_deal_1');
+            if (input_1[0].checked) {
+                $('#id_type_deal_1').prop('checked', false)
+            }
+        }
+    });
+    $('#id_type_deal_1').on('change', function () {
+        if (this.checked) {
+            $('#my_select option:selected').each(function () {
+                this.selected = false;
+            });
+
+            $("#my_select").val(2);
+
+            var input_0 = $('#id_type_deal_0');
+            if (input_0[0].checked) {
+                $('#id_type_deal_0').prop('checked', false)
+            }
+        }
+    })
+</script>
+{#<script src="{% static 'js/save_application.js' %}"></script>#}
 </body>
 </html>
